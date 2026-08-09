@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página no encontrada (404) — AG Publicista</title>
+    <meta name="description" content="La página que buscas no existe o cambió de lugar. Vuelve al inicio y sigue explorando herramientas y recursos de diseño." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <main class="shell" style="min-height: 82vh; display: grid; place-items: center; text-align: center;">
+      <div>
+        <p class="eyebrow" style="justify-content: center;">Error 404</p>
+        <h1 style="font-size: clamp(3.4rem, 12vw, 7.5rem); margin-bottom: 0.2em;">
+          ¿Te <span style="font-style: italic; color: var(--violeta);">perdiste</span>?
+        </h1>
+        <p style="color: var(--muted); max-width: 44ch; margin-inline: auto;">
+          Esta página no existe o cambió de lugar. Pero tranquilo: las herramientas
+          y los recursos siguen donde siempre.
+        </p>
+        <div class="hero__cta" style="justify-content: center;">
+          <a class="btn btn--primary" href="/">Volver al inicio</a>
+          <a class="btn btn--ghost" href="/herramientas/">Ver herramientas</a>
+        </div>
+      </div>
+    </main>
+
+    <script src="/js/site.js" defer></script>
+  </body>
+</html>

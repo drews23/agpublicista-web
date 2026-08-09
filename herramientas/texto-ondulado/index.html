@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de texto ondulado animado (SVG) gratis — AG Publicista</title>
+    <meta
+      name="description"
+      content="Generador de texto ondulado animado: escribe tu texto, ajusta onda, color y velocidad, y copia el HTML con SVG listo para pegar en tu web. Gratis y en español."
+    />
+    <link rel="canonical" href="https://agpublicista.com/herramientas/texto-ondulado/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AG Publicista" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de texto ondulado animado (SVG) gratis" />
+    <meta property="og:description" content="Configura una marquesina de texto sobre una onda SVG y copia el componente HTML listo para tu web. Sin registro." />
+    <meta property="og:url" content="https://agpublicista.com/herramientas/texto-ondulado/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/herramientas/texto-ondulado/#app",
+          "name": "Generador de texto ondulado animado",
+          "url": "https://agpublicista.com/herramientas/texto-ondulado/",
+          "description": "Herramienta gratuita para crear una marquesina de texto animada sobre una onda SVG y copiar el componente HTML listo para cualquier web.",
+          "applicationCategory": "DesignApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "AG Publicista",
+            "url": "https://agpublicista.com/"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://agpublicista.com/herramientas/" },
+            { "@type": "ListItem", "position": 3, "name": "Texto ondulado", "item": "https://agpublicista.com/herramientas/texto-ondulado/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es un textPath SVG?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "textPath es un elemento nativo de SVG que hace que un texto siga la forma de un trazado (path). Esta herramienta genera una onda con curvas Bézier y desplaza el texto sobre ella con requestAnimationFrame, sin librerías externas ni GIFs pesados."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Funciona en móviles y en todos los navegadores?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. SVG y textPath tienen soporte en todos los navegadores modernos (Chrome, Firefox, Safari y Edge), incluidos los móviles. El componente se adapta al ancho de su contenedor con ResizeObserver y respeta la preferencia de movimiento reducido del sistema."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Afecta al SEO o a la accesibilidad de mi web?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. El componente es decorativo: el SVG se marca con aria-hidden, así que los lectores de pantalla lo ignoran y no interfiere con tu contenido indexable. Si el mensaje de la onda es importante para el SEO, inclúyelo también como texto normal en la página."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo cambiar la tipografía del texto?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Además de los controles del generador, el componente acepta los atributos data-font-family, data-font-weight y data-font-style, así que puedes usar cualquier fuente que ya esté cargada en tu web."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="AG Publicista — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__name">AG <em>Publicista</em></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Cabecera de página -->
+      <div class="page-head shell">
+        <nav class="breadcrumbs reveal" aria-label="Migas de pan">
+          <a href="/">Inicio</a> / <a href="/herramientas/">Herramientas</a> / <span aria-current="page">Texto ondulado</span>
+        </nav>
+        <p class="eyebrow reveal">Herramienta gratuita · SVG</p>
+        <h1 class="reveal" style="--reveal-delay: 80ms">Generador de texto ondulado animado</h1>
+        <p class="lede reveal" style="--reveal-delay: 160ms">
+          Escribe tu texto, ajusta la onda, el color y la velocidad, y copia el componente
+          HTML con SVG listo para pegar en cualquier web. Sin registro, sin librerías y
+          sin archivos que alojar.
+        </p>
+      </div>
+
+      <!-- Configurador -->
+      <section class="section shell" aria-labelledby="config-title">
+        <h2 id="config-title" class="sr-only">Configurador de texto ondulado</h2>
+
+        <div
+          class="text-path reveal"
+          data-preview
+          data-text-path
+          data-text="TU TEXTO AQUÍ"
+          data-separator="✦"
+          data-gap="2"
+          data-speed="30"
+          data-reversed="true"
+          data-wave-frequency="3"
+          data-wave-height="100"
+          data-text-color="#8b7bff"
+          data-font-size="30"
+          data-letter-spacing="1"
+        ></div>
+
+        <form class="controls reveal" data-controls style="--reveal-delay: 90ms">
+          <label class="controls__field controls__field--wide">
+            <span>Texto</span>
+            <input name="text" type="text" value="TU TEXTO AQUÍ" />
+          </label>
+
+          <label class="controls__field">
+            <span>Separador</span>
+            <input name="separator" type="text" value="✦" maxlength="20" />
+          </label>
+
+          <label class="controls__field">
+            <span>Espacio <output data-output="gap">2</output></span>
+            <input name="gap" type="range" min="0" max="20" step="1" value="2" />
+          </label>
+
+          <label class="controls__field">
+            <span>Velocidad <output data-output="speed">30</output></span>
+            <input name="speed" type="range" min="0" max="100" step="1" value="30" />
+          </label>
+
+          <label class="controls__field">
+            <span>Frecuencia de onda <output data-output="waveFrequency">3</output></span>
+            <input name="waveFrequency" type="range" min="1" max="10" step="1" value="3" />
+          </label>
+
+          <label class="controls__field">
+            <span>Altura de onda <output data-output="waveHeight">100</output> px</span>
+            <input name="waveHeight" type="range" min="0" max="180" step="1" value="100" />
+          </label>
+
+          <label class="controls__field">
+            <span>Color del texto</span>
+            <div class="controls__color-row">
+              <input name="textColor" type="color" value="#8b7bff" aria-label="Selector de color del texto" />
+              <input name="textColorText" type="text" value="#8b7bff" pattern="^#[0-9a-fA-F]{6}$" aria-label="Valor hexadecimal del color del texto" />
+            </div>
+          </label>
+
+          <label class="controls__field">
+            <span>Tamaño de fuente <output data-output="fontSize">30</output> px</span>
+            <input name="fontSize" type="range" min="8" max="96" step="1" value="30" />
+          </label>
+
+          <label class="controls__field">
+            <span>Espaciado de letras <output data-output="letterSpacing">1</output> px</span>
+            <input name="letterSpacing" type="range" min="-3" max="20" step="0.5" value="1" />
+          </label>
+
+          <label class="controls__field controls__checkbox">
+            <input name="reversed" type="checkbox" checked />
+            <span>Invertir dirección</span>
+          </label>
+        </form>
+
+        <section class="code-panel reveal" aria-labelledby="code-title" style="--reveal-delay: 160ms">
+          <div class="code-panel__header">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 0.4rem;">Componente generado</p>
+              <h2 id="code-title">Código HTML</h2>
+            </div>
+            <button class="btn btn--primary" type="button" data-copy-button>Copiar HTML</button>
+          </div>
+
+          <pre class="code-panel__code"><code data-code-output></code></pre>
+          <p class="copy-status" data-copy-status aria-live="polite"></p>
+        </section>
+      </section>
+
+      <!-- Cómo usarlo -->
+      <section class="section shell" aria-labelledby="como-usarlo">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Guía rápida</p>
+            <h2 id="como-usarlo">Cómo usarlo en tu web</h2>
+            <p>Tres pasos y la onda queda funcionando en tu sitio, sin dependencias externas.</p>
+          </div>
+        </div>
+
+        <ol class="how-steps">
+          <li class="reveal">
+            <span class="how-steps__num" aria-hidden="true">01</span>
+            <h3>Copia el HTML generado</h3>
+            <p>
+              Ajusta los controles hasta que la vista previa te convenza, pulsa
+              <strong>Copiar HTML</strong> y pega el bloque
+              <code>&lt;div class="text-path"&gt;</code> donde quieras que aparezca la onda.
+            </p>
+          </li>
+          <li class="reveal" style="--reveal-delay: 90ms">
+            <span class="how-steps__num" aria-hidden="true">02</span>
+            <h3>Incluye el script del componente</h3>
+            <p>
+              Descarga <a href="/js/text-path.js" download>text-path.js</a> a tu proyecto y
+              cárgalo antes de cerrar <code>&lt;/body&gt;</code> con
+              <code>&lt;script src="/js/text-path.js" defer&gt;&lt;/script&gt;</code>.
+              El script detecta cada elemento <code>[data-text-path]</code> y lo anima solo.
+              Añade también este CSS mínimo:
+            </p>
+            <pre><code>.text-path {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+.text-path svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}</code></pre>
+          </li>
+          <li class="reveal" style="--reveal-delay: 180ms">
+            <span class="how-steps__num" aria-hidden="true">03</span>
+            <h3>Personaliza con data-atributos</h3>
+            <p>
+              Cambia texto, color, onda o velocidad editando los atributos
+              <code>data-*</code> del bloque, sin volver al generador. También acepta
+              <code>data-font-family</code>, <code>data-font-weight</code> y
+              <code>data-font-style</code> para usar tu propia tipografía.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section shell" aria-labelledby="faq-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Dudas frecuentes</p>
+            <h2 id="faq-title">Preguntas frecuentes</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>¿Qué es un textPath SVG?</summary>
+            <p>
+              <code>textPath</code> es un elemento nativo de SVG que hace que un texto siga la
+              forma de un trazado (path). Esta herramienta genera una onda con curvas Bézier y
+              desplaza el texto sobre ella con <code>requestAnimationFrame</code>, sin librerías
+              externas ni GIFs pesados.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 60ms">
+            <summary>¿Funciona en móviles y en todos los navegadores?</summary>
+            <p>
+              Sí. SVG y <code>textPath</code> tienen soporte en todos los navegadores modernos
+              (Chrome, Firefox, Safari y Edge), incluidos los móviles. El componente se adapta
+              al ancho de su contenedor con <code>ResizeObserver</code> y respeta la preferencia
+              de movimiento reducido del sistema.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 120ms">
+            <summary>¿Afecta al SEO o a la accesibilidad de mi web?</summary>
+            <p>
+              No. El componente es decorativo: el SVG se marca con <code>aria-hidden</code>,
+              así que los lectores de pantalla lo ignoran y no interfiere con tu contenido
+              indexable. Si el mensaje de la onda es importante para el SEO, inclúyelo también
+              como texto normal en la página.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 180ms">
+            <summary>¿Puedo cambiar la tipografía del texto?</summary>
+            <p>
+              Sí. Además de los controles del generador, el componente acepta los atributos
+              <code>data-font-family</code>, <code>data-font-weight</code> y
+              <code>data-font-style</code>, así que puedes usar cualquier fuente que ya esté
+              cargada en tu web.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Más del sitio -->
+      <section class="section shell" aria-labelledby="mas-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue creando</p>
+            <h2 id="mas-title">Más herramientas y guías</h2>
+          </div>
+          <a class="more" href="/herramientas/">Ver todas las herramientas →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/herramientas/favicons/">
+            <span class="card__tag">SVG</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="40" y="17" width="34" height="34" rx="9" fill="#8b7bff" />
+                <text x="57" y="41" font-size="20" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-weight="700">A</text>
+                <rect x="84" y="17" width="34" height="34" rx="17" fill="#35d6c8" />
+                <circle cx="101" cy="34" r="8" fill="#0a0a12" />
+                <rect x="128" y="17" width="34" height="34" rx="9" fill="#ffb454" />
+                <text x="145" y="42" font-size="22" text-anchor="middle">🎯</text>
+                <rect x="40" y="60" width="122" height="12" rx="6" fill="currentColor" opacity="0.12" />
+              </svg>
+            </div>
+            <h3>Galería de favicons</h3>
+            <p>Más de 55 favicons SVG listos para copiar como etiqueta <code>&lt;link&gt;</code>, más generadores de emoji y monograma.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/herramientas/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="34" y="25" width="38" height="40" rx="10" fill="none" stroke="#8b7bff" stroke-width="3" />
+                <rect x="81" y="25" width="38" height="40" rx="10" fill="none" stroke="#35d6c8" stroke-width="3" />
+                <rect x="128" y="25" width="38" height="40" rx="10" fill="none" stroke="#ffb454" stroke-width="3" />
+                <path d="M46 45h14M89 38v14M93 45h14" stroke="#ff7a68" stroke-width="3" stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3>Todas las herramientas</h3>
+            <p>Generadores SVG gratuitos para tu web y tu marca: crea, copia y pega sin registrarte.</p>
+            <span class="card__meta">Catálogo · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 180ms" href="/blog/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="55" y="16" width="90" height="10" rx="5" fill="#8b7bff" />
+                <rect x="55" y="34" width="70" height="8" rx="4" fill="currentColor" opacity="0.25" />
+                <rect x="55" y="48" width="90" height="8" rx="4" fill="currentColor" opacity="0.25" />
+                <rect x="55" y="62" width="52" height="8" rx="4" fill="#35d6c8" />
+              </svg>
+            </div>
+            <h3>Guías del blog</h3>
+            <p>Tutoriales de diseño, SVG, motion y marketing digital que complementan cada video del canal.</p>
+            <span class="card__meta">Blog · Nuevas guías cada semana</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Publicidad -->
+      <div class="shell">
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="AG Publicista — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__name">AG <em>Publicista</em></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> AG Publicista · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/text-path.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="js/configurator.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AG Publicista — Herramientas gratis de diseño gráfico, web y marketing</title>
+    <meta
+      name="description"
+      content="Herramientas creativas gratis y en español: generador de favicons SVG, texto ondulado animado, plantillas, recursos de diseño gráfico, diseño web y marketing digital."
+    />
+    <link rel="canonical" href="https://agpublicista.com/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AG Publicista" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="AG Publicista — Herramientas gratis de diseño y marketing" />
+    <meta property="og:description" content="Generadores SVG, plantillas y recursos de diseño gráfico, web y marketing. Gratis y en español." />
+    <meta property="og:url" content="https://agpublicista.com/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://agpublicista.com/#website",
+          "url": "https://agpublicista.com/",
+          "name": "AG Publicista",
+          "description": "Herramientas y recursos gratis de diseño gráfico, diseño web y marketing digital, en español.",
+          "inLanguage": "es",
+          "publisher": { "@id": "https://agpublicista.com/#org" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://agpublicista.com/#org",
+          "name": "AG Publicista",
+          "url": "https://agpublicista.com/",
+          "logo": "https://agpublicista.com/favicon.svg",
+          "sameAs": ["https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg"]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="AG Publicista — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__name">AG <em>Publicista</em></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/" aria-current="page">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="shell">
+          <p class="eyebrow reveal">Diseño · Código · Dirección de arte</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">
+            Herramientas creativas para diseñar, programar y <span class="fancy">destacar</span>
+          </h1>
+          <p class="lede reveal" style="--reveal-delay: 160ms">
+            AG Publicista es tu caja de herramientas en español: generadores SVG listos para
+            copiar y pegar, plantillas gratuitas, guías de diseño web y recursos de marketing
+            que convierten ideas en resultados.
+          </p>
+          <div class="hero__cta reveal" style="--reveal-delay: 240ms">
+            <a class="btn btn--primary" href="/herramientas/">Explorar herramientas</a>
+            <a class="btn btn--ghost" href="/blog/">Leer el blog</a>
+          </div>
+        </div>
+
+        <div
+          class="wave-band"
+          data-text-path
+          data-text="DISEÑO · CÓDIGO · BRANDING · SVG · MARKETING"
+          data-separator="✦"
+          data-gap="3"
+          data-speed="14"
+          data-reversed="false"
+          data-wave-frequency="2"
+          data-wave-height="46"
+          data-font-size="26"
+          data-letter-spacing="4"
+          data-font-family="Fraunces, Georgia, serif"
+          data-font-style="italic"
+          data-font-weight="600"
+          aria-hidden="true"
+        ></div>
+      </section>
+
+      <!-- Herramientas -->
+      <section class="section shell" id="herramientas">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Herramientas gratis</p>
+            <h2>Crea, copia y pega. Sin registros.</h2>
+            <p>Generadores hechos con SVG puro: el resultado es tuyo, sin archivos que alojar.</p>
+          </div>
+          <a class="more" href="/herramientas/">Ver todas →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/herramientas/favicons/">
+            <span class="card__tag">SVG</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="18" y="17" width="34" height="34" rx="9" fill="#8b7bff" />
+                <text x="35" y="41" font-size="20" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-weight="700">A</text>
+                <rect x="62" y="17" width="34" height="34" rx="17" fill="#35d6c8" />
+                <circle cx="79" cy="34" r="8" fill="#0a0a12" />
+                <rect x="106" y="17" width="34" height="34" rx="9" fill="#ffb454" />
+                <text x="123" y="42" font-size="22" text-anchor="middle">🎯</text>
+                <rect x="150" y="17" width="34" height="34" rx="9" fill="#ff7a68" />
+                <path d="M159 41 167 25l8 16z" fill="#fff" />
+                <rect x="18" y="60" width="166" height="12" rx="6" fill="currentColor" opacity="0.12" />
+              </svg>
+            </div>
+            <h3>Galería de favicons</h3>
+            <p>Más de 55 favicons SVG listos para copiar como etiqueta <code>&lt;link&gt;</code>, más generadores de emoji y monograma.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/herramientas/texto-ondulado/">
+            <span class="card__tag">Animación</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <path d="M0 45 C 30 15, 60 15, 90 45 S 150 75, 200 45" fill="none" stroke="#8b7bff" stroke-width="3" stroke-linecap="round" />
+                <path d="M0 60 C 30 30, 60 30, 90 60 S 150 90, 200 60" fill="none" stroke="#35d6c8" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round" />
+                <circle cx="90" cy="45" r="5" fill="#ffb454" />
+              </svg>
+            </div>
+            <h3>Texto ondulado animado</h3>
+            <p>Configura una marquesina de texto sobre una onda SVG y copia el componente HTML listo para tu web.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <div class="card reveal" style="--reveal-delay: 180ms" aria-disabled="true">
+            <span class="card__tag" style="background: var(--turquesa)">Pronto</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="30" y="25" width="28" height="40" rx="8" fill="#8b7bff" />
+                <rect x="64" y="25" width="28" height="40" rx="8" fill="#6e5df2" />
+                <rect x="98" y="25" width="28" height="40" rx="8" fill="#35d6c8" />
+                <rect x="132" y="25" width="28" height="40" rx="8" fill="#ffb454" />
+              </svg>
+            </div>
+            <h3>Paletas de color</h3>
+            <p>Generador de paletas con exportación a CSS, Tailwind y Figma. En camino: suscríbete al canal para enterarte.</p>
+            <span class="card__meta">Próximamente</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recursos del canal -->
+      <section class="section shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Recursos descargables</p>
+            <h2>Gratis desde el canal de YouTube</h2>
+            <p>Packs de sonido, plantillas de After Effects y más recursos que acompañan cada video de Andy Publicista.</p>
+          </div>
+          <a class="more" href="/recursos/">Ver recursos →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/blog/transiciones-de-sonido-gratis/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <g fill="#8b7bff">
+                  <rect x="30" y="35" width="8" height="20" rx="4" />
+                  <rect x="44" y="25" width="8" height="40" rx="4" fill="#35d6c8" />
+                  <rect x="58" y="15" width="8" height="60" rx="4" />
+                  <rect x="72" y="30" width="8" height="30" rx="4" fill="#ffb454" />
+                  <rect x="86" y="20" width="8" height="50" rx="4" fill="#35d6c8" />
+                  <rect x="100" y="35" width="8" height="20" rx="4" />
+                  <rect x="114" y="25" width="8" height="40" rx="4" fill="#ff7a68" />
+                  <rect x="128" y="15" width="8" height="60" rx="4" fill="#35d6c8" />
+                  <rect x="142" y="30" width="8" height="30" rx="4" />
+                  <rect x="156" y="38" width="8" height="14" rx="4" fill="#ffb454" />
+                </g>
+              </svg>
+            </div>
+            <h3>16 transiciones de sonido</h3>
+            <p>Fuego, viento, magia y cibernética en WAV, listas para tus videos y reels.</p>
+            <span class="card__meta">Pack WAV · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/blog/plantillas-after-effects-gratis/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="55" y="18" width="90" height="54" rx="10" fill="none" stroke="#8b7bff" stroke-width="3" />
+                <path d="M88 33v24l22-12z" fill="#ffb454" />
+                <circle cx="55" cy="18" r="6" fill="#35d6c8" />
+                <circle cx="145" cy="72" r="6" fill="#ff7a68" />
+              </svg>
+            </div>
+            <h3>Plantillas After Effects</h3>
+            <p>Transiciones y títulos editables sin plugins, más intros para tu canal.</p>
+            <span class="card__meta">Plantilla AEP · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 180ms" href="/blog/efectos-de-sonido-glitch-gratis/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <g font-family="ui-monospace, monospace" font-weight="700" font-size="30">
+                  <text x="100" y="56" text-anchor="middle" fill="#ff7a68" opacity="0.85" transform="translate(-4 -2)">GLITCH</text>
+                  <text x="100" y="56" text-anchor="middle" fill="#35d6c8" opacity="0.85" transform="translate(4 2)">GLITCH</text>
+                  <text x="100" y="56" text-anchor="middle" fill="currentColor">GLITCH</text>
+                </g>
+              </svg>
+            </div>
+            <h3>13 efectos glitch</h3>
+            <p>Sonidos WAV de interferencia digital para intros, cortes y transiciones.</p>
+            <span class="card__meta">Pack WAV · Gratis</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Blog -->
+      <section class="section shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Blog</p>
+            <h2>Guías que complementan cada video</h2>
+            <p>Tutoriales de diseño, SVG, motion y marketing digital, escritos para que apliques todo hoy mismo.</p>
+          </div>
+          <a class="more" href="/blog/">Ver el blog →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/blog/como-crear-favicon-svg/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="70" y="15" width="60" height="60" rx="15" fill="#8b7bff" />
+                <text x="100" y="57" font-size="34" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-style="italic" font-weight="700">a</text>
+                <path d="M138 22l6-12 6 12 12 3-9 9 2 13-11-6-11 6 2-13-9-9z" fill="#ffb454" transform="scale(0.8) translate(38 -2)" />
+              </svg>
+            </div>
+            <h3>Cómo crear un favicon SVG</h3>
+            <p>La guía completa: data URIs, modo oscuro, emoji y compatibilidad entre navegadores.</p>
+            <span class="card__meta">Guía · 8 min de lectura</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/blog/transiciones-de-sonido-gratis/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <path d="M20 45 Q 45 10 70 45 T 120 45 T 170 45" fill="none" stroke="#35d6c8" stroke-width="3" stroke-linecap="round" />
+                <path d="M20 45 Q 45 80 70 45 T 120 45 T 170 45" fill="none" stroke="#8b7bff" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+              </svg>
+            </div>
+            <h3>Transiciones de sonido para tus videos</h3>
+            <p>Cómo usar los 16 sonidos del pack (fuego, viento, magia) para dar ritmo a tu edición.</p>
+            <span class="card__meta">Tutorial · 6 min de lectura</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 180ms" href="/blog/plantillas-after-effects-gratis/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="40" y="30" width="50" height="34" rx="7" fill="none" stroke="#ffb454" stroke-width="3" />
+                <rect x="70" y="20" width="50" height="34" rx="7" fill="none" stroke="#8b7bff" stroke-width="3" />
+                <rect x="100" y="38" width="50" height="34" rx="7" fill="none" stroke="#35d6c8" stroke-width="3" />
+              </svg>
+            </div>
+            <h3>Plantillas de After Effects sin plugins</h3>
+            <p>Instala, personaliza y exporta títulos y transiciones editables en minutos.</p>
+            <span class="card__meta">Tutorial · 7 min de lectura</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA YouTube -->
+      <section class="section shell">
+        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem);">
+          <p class="eyebrow" style="justify-content: center;">Andy Publicista en YouTube</p>
+          <h2 style="max-width: 22ch; margin-inline: auto;">Cada semana, recursos nuevos y procesos creativos reales</h2>
+          <p style="max-width: 52ch; margin-inline: auto; color: var(--muted);">
+            Diseño web, social media, motion graphics y packs descargables.
+            Suscríbete para no perderte ningún recurso gratuito.
+          </p>
+          <div class="hero__cta" style="justify-content: center;">
+            <a class="btn btn--primary" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg?sub_confirmation=1" target="_blank" rel="noopener">Suscribirme al canal</a>
+            <a class="btn btn--ghost" href="/recursos/">Ver todos los recursos</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="AG Publicista — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__name">AG <em>Publicista</em></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> AG Publicista · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/text-path.js" defer></script>
+    <script src="/js/site.js" defer></script>
+  </body>
+</html>

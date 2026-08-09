@@ -1,0 +1,311 @@
+/* ==================================================================== *\
+   AG Publicista — Herramienta: Generador de texto ondulado
+   Estilos de página. La base (tipografía, header, cards…) vive en /css/site.css.
+
+   1. Componente .text-path (estilos requeridos)
+   2. Configurador (.controls)
+   3. Panel de código (.code-panel)
+   4. Pasos "Cómo usarlo" (.how-steps)
+   5. FAQ (.faq)
+   6. Responsive
+\* ==================================================================== */
+
+/* 1. Componente .text-path (estilos requeridos) ----------------------- */
+
+.text-path {
+  position: relative;
+  width: 100%;
+  height: clamp(180px, 26vw, 260px);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(24rem 12rem at 22% 0%, color-mix(in oklab, var(--violeta) 14%, transparent), transparent 70%),
+    radial-gradient(20rem 12rem at 85% 100%, color-mix(in oklab, var(--turquesa) 10%, transparent), transparent 65%),
+    var(--bg-soft);
+}
+
+.text-path svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.text-path text {
+  user-select: none;
+}
+
+/* 2. Configurador ------------------------------------------------------ */
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.controls__field {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.controls__field--wide {
+  grid-column: 1 / -1;
+}
+
+.controls input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--panel);
+  color: var(--text);
+  font: 500 1rem var(--font-body);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.controls input[type="text"]:focus {
+  border-color: var(--violeta);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--violeta) 22%, transparent);
+}
+
+.controls input[type="range"] {
+  width: 100%;
+  accent-color: var(--violeta);
+}
+
+.controls input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--violeta);
+}
+
+.controls__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  align-self: end;
+  min-height: 42px;
+  cursor: pointer;
+}
+
+.controls__color-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0.6rem;
+}
+
+.controls input[type="color"] {
+  width: 48px;
+  height: 44px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  cursor: pointer;
+}
+
+.controls output {
+  color: var(--violeta);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 3. Panel de código --------------------------------------------------- */
+
+.code-panel {
+  margin-top: 1.8rem;
+  padding: clamp(1.1rem, 2.4vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.code-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.code-panel__header h2 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.code-panel__code {
+  max-height: 390px;
+  margin: 0;
+  padding: 1.1rem 1.3rem;
+  overflow: auto;
+  border-radius: var(--radius-sm);
+  background: var(--code-bg);
+  color: #e9e6ff;
+  font: 0.86rem/1.65 var(--font-mono);
+  white-space: pre;
+}
+
+.copy-status {
+  min-height: 1.4em;
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+/* 4. Pasos "Cómo usarlo" ----------------------------------------------- */
+
+.how-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.2rem;
+}
+
+.how-steps li {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+
+.how-steps__num {
+  font: italic 600 1rem var(--font-display);
+  color: var(--violeta);
+  letter-spacing: 0.08em;
+}
+
+.how-steps h3 {
+  font-size: 1.15rem;
+  margin: 0.5rem 0 0.4rem;
+}
+
+.how-steps p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0 0 0.8em;
+}
+
+.how-steps p:last-child {
+  margin-bottom: 0;
+}
+
+.how-steps a {
+  color: var(--violeta);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.how-steps code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+  overflow-wrap: anywhere;
+}
+
+.how-steps pre {
+  margin: 0;
+  padding: 0.9rem 1.1rem;
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  background: var(--code-bg);
+  color: #e9e6ff;
+  font: 0.82rem/1.6 var(--font-mono);
+}
+
+.how-steps pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  overflow-wrap: normal;
+}
+
+/* 5. FAQ --------------------------------------------------------------- */
+
+.faq {
+  max-width: 760px;
+}
+
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 1rem 1.3rem;
+  margin-bottom: 0.8rem;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.faq details[open] {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.06rem;
+  letter-spacing: -0.01em;
+}
+
+.faq summary::marker {
+  color: var(--violeta);
+}
+
+.faq details[open] summary {
+  color: var(--violeta);
+}
+
+.faq p {
+  color: var(--muted);
+  margin: 0.7em 0 0.2em;
+  font-size: 0.96rem;
+}
+
+.faq code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+}
+
+/* 6. Responsive -------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .controls__field--wide {
+    grid-column: auto;
+  }
+
+  .code-panel__header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .code-panel__header .btn {
+    justify-content: center;
+  }
+}

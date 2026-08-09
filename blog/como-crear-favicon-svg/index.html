@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cómo crear un favicon SVG: la guía completa (2026) — AG Publicista</title>
+    <meta
+      name="description"
+      content="Aprende a crear un favicon SVG paso a paso: data URI, emoji, monograma y modo oscuro con prefers-color-scheme. Guía completa con código listo para copiar."
+    />
+    <link rel="canonical" href="https://agpublicista.com/blog/como-crear-favicon-svg/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="AG Publicista" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Cómo crear un favicon SVG: la guía completa (2026)" />
+    <meta property="og:description" content="Data URI, emoji, monograma y modo oscuro con prefers-color-scheme: crea tu favicon SVG con código listo para copiar." />
+    <meta property="og:url" content="https://agpublicista.com/blog/como-crear-favicon-svg/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://agpublicista.com/blog/como-crear-favicon-svg/#article",
+          "headline": "Cómo crear un favicon SVG: la guía completa (2026)",
+          "description": "Aprende a crear un favicon SVG paso a paso: data URI, emoji, monograma y modo oscuro con prefers-color-scheme. Guía completa con código listo para copiar.",
+          "datePublished": "2026-08-08",
+          "dateModified": "2026-08-08",
+          "author": {
+            "@type": "Organization",
+            "name": "AG Publicista",
+            "url": "https://agpublicista.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "AG Publicista",
+            "url": "https://agpublicista.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://agpublicista.com/favicon.svg"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://agpublicista.com/blog/como-crear-favicon-svg/"
+          },
+          "image": "https://agpublicista.com/assets/og/og-home.png",
+          "inLanguage": "es"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://agpublicista.com/blog/como-crear-favicon-svg/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://agpublicista.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://agpublicista.com/blog/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Cómo crear un favicon SVG",
+              "item": "https://agpublicista.com/blog/como-crear-favicon-svg/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://agpublicista.com/blog/como-crear-favicon-svg/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Todos los navegadores soportan favicons SVG?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Chrome, Edge, Firefox y Opera los soportan sin problemas desde hace años. Safari los acepta desde la versión 15, aunque con limitaciones: puede ignorar los estilos internos del SVG, como la media query de modo oscuro. Para cubrir navegadores antiguos conviene declarar además un favicon.ico o PNG como respaldo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Necesito seguir usando favicon.ico?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No es obligatorio, pero sí recomendable como respaldo. Algunos navegadores antiguos, lectores de feeds y herramientas de terceros siguen pidiendo /favicon.ico en la raíz del dominio. Colocar ahí un .ico de 32×32 píxeles no cuesta nada y evita errores 404 en los registros del servidor."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué tamaño debe tener un favicon SVG?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Al ser vectorial, un favicon SVG no tiene tamaño fijo: se escala al espacio disponible. Lo importante es el viewBox, que define el lienzo de dibujo; un viewBox de 0 0 100 100 es cómodo para trabajar. Diseña formas simples que se lean bien a 16×16 píxeles, que es como se verá en la pestaña."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo usar cualquier emoji como favicon?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Basta con colocar el emoji dentro de un elemento text del SVG. Ten en cuenta que cada sistema operativo dibuja los emojis con su propio estilo, así que el favicon se verá ligeramente distinto en Windows, macOS o Android. Es la opción más rápida cuando no tienes logotipo."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="AG Publicista — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__name">AG <em>Publicista</em></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/blog/" aria-current="page">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <article class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Migas de pan">
+          <a href="/">Inicio</a> <span aria-hidden="true">›</span>
+          <a href="/blog/">Blog</a> <span aria-hidden="true">›</span>
+          <span aria-current="page">Cómo crear un favicon SVG</span>
+        </nav>
+
+        <header class="page-head reveal" style="--reveal-delay: 80ms">
+          <p class="eyebrow">Guías</p>
+          <h1>Cómo crear un favicon SVG: la guía completa (2026)</h1>
+          <p class="article-meta">8 de agosto de 2026 · Guías · 8 min de lectura</p>
+          <p class="lede">
+            Ese cuadrito diminuto junto al título de la pestaña es lo primero que tu marca
+            enseña en el navegador. Y llevas años resolviéndolo con un .ico borroso. En esta
+            guía aprenderás a crear un favicon SVG nítido en cualquier pantalla, con versión
+            emoji, monograma y modo oscuro incluidos. Todo con código que puedes copiar tal cual.
+          </p>
+        </header>
+
+        <div class="prose reveal" style="--reveal-delay: 160ms">
+          <h2>Qué es un favicon SVG y por qué usarlo</h2>
+          <p>
+            Un favicon SVG es el icono de tu sitio definido como gráfico vectorial en lugar de
+            mapa de bits. Donde un <code>.ico</code> o un <code>.png</code> guardan píxeles a
+            tamaños fijos (16×16, 32×32, 48×48…), el SVG guarda instrucciones de dibujo: formas,
+            colores y texto que el navegador escala al tamaño que necesite.
+          </p>
+          <p>Frente al clásico <code>.ico</code> y al <code>.png</code>, el SVG gana en casi todo:</p>
+          <ul>
+            <li><strong>Nitidez infinita.</strong> Se ve perfecto a 16 píxeles en la pestaña y a 512 en un acceso directo, sin generar diez tamaños distintos.</li>
+            <li><strong>Peso mínimo.</strong> Un favicon SVG típico pesa menos de 1&nbsp;KB; un .ico multirresolución puede superar los 15&nbsp;KB.</li>
+            <li><strong>Un solo archivo.</strong> Olvídate de exportar media docena de PNG para cada dispositivo.</li>
+            <li><strong>Es texto.</strong> Lo editas en cualquier editor de código: cambias un color y listo, sin abrir programas de diseño.</li>
+            <li><strong>Modo oscuro nativo.</strong> Puede incluir una media query interna y adaptarse al tema del sistema, algo imposible con .ico o .png.</li>
+          </ul>
+          <p>
+            La única ventaja real que conserva el <code>.ico</code> es la compatibilidad con
+            navegadores muy antiguos. Por eso la estrategia ganadora en 2026 es simple: SVG como
+            favicon principal y un .ico pequeño como respaldo.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+
+        <div class="prose reveal">
+          <h2>Cómo crear un favicon SVG desde cero</h2>
+          <p>
+            Empieza por el lienzo. Un <code>viewBox</code> de <code>0 0 100 100</code> es cómodo
+            para calcular posiciones. Dibuja una forma de fondo con esquinas redondeadas y encima
+            el elemento protagonista. Este SVG ya es un favicon completo:
+          </p>
+          <pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+  &lt;rect width="100" height="100" rx="22" fill="#8b7bff"/&gt;
+  &lt;text x="50" y="70" font-size="58" font-family="Georgia, serif"
+        font-weight="700" text-anchor="middle" fill="#fff"&gt;A&lt;/text&gt;
+&lt;/svg&gt;</code></pre>
+          <p>
+            Guárdalo como <code>favicon.svg</code> en la raíz de tu sitio y enlázalo en el
+            <code>&lt;head&gt;</code>:
+          </p>
+          <pre><code>&lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;</code></pre>
+          <p>
+            ¿No quieres ni subir un archivo? Incrusta el SVG directamente en la etiqueta con un
+            <strong>data URI</strong>. Así el favicon viaja dentro del propio HTML:
+          </p>
+          <pre><code>&lt;link rel="icon" type="image/svg+xml"
+  href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg'
+  viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='22'
+  fill='%238b7bff'/&gt;&lt;text x='50' y='70' font-size='58'
+  font-family='Georgia, serif' font-weight='700' text-anchor='middle'
+  fill='white'&gt;A&lt;/text&gt;&lt;/svg&gt;"&gt;</code></pre>
+          <p>
+            Fíjate en el detalle clave: el color no es <code>#8b7bff</code> sino
+            <code>%238b7bff</code>. Dentro de una URL, el carácter <code>#</code> marca el inicio
+            de un fragmento (como en <code>pagina.html#seccion</code>), así que el navegador
+            cortaría el data URI justo ahí y el favicon no cargaría. La solución es escribirlo
+            escapado como <code>%23</code>, su código percent-encoding. Cambia también las
+            comillas dobles internas por simples para no romper el atributo <code>href</code>.
+          </p>
+
+          <h2>Favicon con emoji en una línea</h2>
+          <p>
+            El truco favorito de quienes no tienen logotipo: usar un emoji como favicon. Solo
+            necesitas un elemento <code>&lt;text&gt;</code> centrado y con tamaño generoso:
+          </p>
+          <pre><code>&lt;link rel="icon" type="image/svg+xml"
+  href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg'
+  viewBox='0 0 100 100'&gt;&lt;text x='50' y='72' font-size='80'
+  text-anchor='middle'&gt;🚀&lt;/text&gt;&lt;/svg&gt;"&gt;</code></pre>
+          <p>
+            Funciona porque tu página ya declara <code>charset UTF-8</code>, así que el emoji
+            viaja tal cual dentro del data URI. Cada sistema operativo lo dibujará con su propio
+            estilo de emoji, pero siempre nítido: sigue siendo vectorial.
+          </p>
+        </div>
+
+        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(1.6rem, 4vw, 2.6rem); margin-block: 2rem;">
+          <p class="eyebrow" style="justify-content: center;">Atajo</p>
+          <h3 style="max-width: 26ch; margin-inline: auto;">¿Prefieres verlo antes de escribirlo?</h3>
+          <p style="max-width: 48ch; margin-inline: auto; color: var(--muted);">
+            En nuestra galería hay más de 55 favicons SVG listos, más generadores de emoji y
+            monograma con vista previa en vivo. Crea el tuyo en segundos con nuestra galería.
+          </p>
+          <div class="hero__cta" style="justify-content: center;">
+            <a class="btn btn--primary" href="/herramientas/favicons/">Abrir la galería de favicons</a>
+          </div>
+        </div>
+
+        <div class="prose reveal">
+          <h2>Favicon monograma: tu inicial como marca</h2>
+          <p>
+            El monograma es el favicon más profesional que puedes hacer en dos minutos: la
+            inicial de tu marca sobre un fondo de color. Es exactamente lo que usa AG Publicista.
+            La receta: fondo con <code>rx</code> generoso, tipografía con carácter y la letra
+            centrada con <code>text-anchor="middle"</code>.
+          </p>
+          <pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+  &lt;rect width="100" height="100" rx="26" fill="#35d6c8"/&gt;
+  &lt;text x="50" y="72" font-size="62" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="700" fill="#0a0a0f"&gt;g&lt;/text&gt;
+&lt;/svg&gt;</code></pre>
+          <p>
+            Dos consejos de diseño: usa solo fuentes del sistema (Georgia, Arial, Verdana…),
+            porque el favicon no puede cargar fuentes web; y ajusta la coordenada <code>y</code>
+            a ojo hasta que la letra quede ópticamente centrada, ya que cada tipografía tiene su
+            propia altura.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+
+        <div class="prose reveal">
+          <h2>Modo oscuro: un favicon que se adapta con prefers-color-scheme</h2>
+          <p>
+            Aquí el SVG hace algo que ningún .ico soñaría: cambiar de color según el tema del
+            sistema. Basta con incluir una etiqueta <code>&lt;style&gt;</code> dentro del propio
+            SVG con la media query <code>prefers-color-scheme</code>:
+          </p>
+          <pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+  &lt;style&gt;
+    rect { fill: #0a0a0f; }
+    text { fill: #ffffff; }
+    @media (prefers-color-scheme: light) {
+      rect { fill: #ffffff; }
+      text { fill: #0a0a0f; }
+    }
+  &lt;/style&gt;
+  &lt;rect width="100" height="100" rx="22"/&gt;
+  &lt;text x="50" y="70" font-size="58" text-anchor="middle"
+        font-family="Georgia, serif" font-weight="700"&gt;A&lt;/text&gt;
+&lt;/svg&gt;</code></pre>
+          <p>
+            Con esto, el favicon se dibuja oscuro con texto claro en modo oscuro, y se invierte
+            cuando el sistema usa tema claro. Un matiz importante: la media query responde al
+            tema del <em>sistema operativo o del navegador</em>, no al botón de tema de tu
+            página. Y es la mejor solución al problema clásico del favicon negro invisible sobre
+            la barra de pestañas oscura.
+          </p>
+
+          <h2>Compatibilidad de navegadores</h2>
+          <p>El soporte de favicons SVG en 2026 es muy amplio, con un matiz en Safari:</p>
+          <ul>
+            <li><strong>Chrome y Edge:</strong> soporte completo desde la versión 80, incluida la media query de modo oscuro.</li>
+            <li><strong>Firefox:</strong> el pionero; los soporta desde la versión 41 con soporte completo de estilos internos.</li>
+            <li><strong>Opera y navegadores basados en Chromium</strong> (Brave, Vivaldi, Arc): mismo comportamiento que Chrome.</li>
+            <li><strong>Safari:</strong> los acepta desde la versión 15, pero puede ignorar los estilos internos del SVG (incluido el modo oscuro) y en versiones antiguas prefería su propio formato de icono anclado.</li>
+            <li><strong>Navegadores antiguos:</strong> ignoran el SVG; si declaras además un <code>.ico</code> o <code>.png</code>, usarán ese respaldo automáticamente.</li>
+          </ul>
+          <p>La combinación segura es declarar ambos y dejar que cada navegador elija:</p>
+          <pre><code>&lt;link rel="icon" href="/favicon.svg" type="image/svg+xml"&gt;
+&lt;link rel="icon" href="/favicon.ico" sizes="32x32"&gt;</code></pre>
+
+          <h2>Errores comunes al crear un favicon SVG</h2>
+          <ul>
+            <li><strong>Olvidar el atributo <code>xmlns</code>.</strong> Sin <code>xmlns="http://www.w3.org/2000/svg"</code>, el SVG funciona incrustado en HTML pero falla como archivo o data URI independiente.</li>
+            <li><strong>Usar <code>#</code> sin escapar en un data URI.</strong> El navegador lo interpreta como fragmento de URL y corta el código. Siempre <code>%23</code>.</li>
+            <li><strong>Mezclar mal las comillas.</strong> Si el atributo <code>href</code> usa comillas dobles, todo lo interno del SVG debe ir con simples.</li>
+            <li><strong>Diseñar con demasiado detalle.</strong> A 16×16 píxeles, los trazos finos y los degradados sutiles desaparecen. Formas grandes y contraste alto.</li>
+            <li><strong>Depender de fuentes web.</strong> El favicon se renderiza aislado y no descarga tipografías externas: usa fuentes del sistema.</li>
+            <li><strong>No probar en ambos temas.</strong> Un favicon precioso en modo claro puede volverse invisible sobre una barra de pestañas oscura.</li>
+            <li><strong>Omitir <code>type="image/svg+xml"</code>.</strong> La mayoría de navegadores lo deducen, pero declararlo evita ambigüedades cuando hay varios favicons.</li>
+          </ul>
+
+          <h2>Preguntas frecuentes</h2>
+          <h3>¿Todos los navegadores soportan favicons SVG?</h3>
+          <p>
+            Chrome, Edge, Firefox y Opera los soportan sin problemas desde hace años. Safari los
+            acepta desde la versión 15, aunque puede ignorar los estilos internos del SVG, como
+            la media query de modo oscuro. Para cubrir navegadores antiguos, declara además un
+            <code>favicon.ico</code> o PNG como respaldo.
+          </p>
+          <h3>¿Necesito seguir usando favicon.ico?</h3>
+          <p>
+            No es obligatorio, pero sí recomendable. Algunos navegadores antiguos, lectores de
+            feeds y herramientas de terceros siguen pidiendo <code>/favicon.ico</code> en la raíz
+            del dominio. Colocar ahí un .ico de 32×32 no cuesta nada y evita errores 404 en los
+            registros del servidor.
+          </p>
+          <h3>¿Qué tamaño debe tener un favicon SVG?</h3>
+          <p>
+            Ninguno fijo: al ser vectorial, se escala al espacio disponible. Lo que importa es el
+            <code>viewBox</code>, que define el lienzo de dibujo; <code>0 0 100 100</code> es
+            cómodo para trabajar. Eso sí, diseña formas simples que se lean bien a 16×16, que es
+            como se verá en la pestaña.
+          </p>
+          <h3>¿Puedo usar cualquier emoji como favicon?</h3>
+          <p>
+            Sí. Basta con colocarlo dentro de un elemento <code>&lt;text&gt;</code> del SVG. Ten
+            en cuenta que cada sistema operativo dibuja los emojis con su propio estilo, así que
+            se verá ligeramente distinto en Windows, macOS o Android. Es la opción más rápida
+            cuando aún no tienes logotipo.
+          </p>
+        </div>
+
+        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem); margin-block: 2rem;">
+          <p class="eyebrow" style="justify-content: center;">Ponlo en práctica</p>
+          <h2 style="max-width: 24ch; margin-inline: auto;">Tu favicon nuevo está a un clic</h2>
+          <p style="max-width: 52ch; margin-inline: auto; color: var(--muted);">
+            Elige entre más de 55 diseños o genera tu emoji y tu monograma con vista previa en
+            vivo: crea el tuyo en segundos con nuestra galería y copia la etiqueta lista para
+            pegar. Y si te gustan los componentes SVG para copiar y pegar, mira también el
+            <a href="/herramientas/texto-ondulado/">generador de texto ondulado animado</a>.
+          </p>
+          <div class="hero__cta" style="justify-content: center;">
+            <a class="btn btn--primary" href="/herramientas/favicons/">Crear mi favicon ahora</a>
+            <a class="btn btn--ghost" href="/blog/">Más guías del blog</a>
+          </div>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+
+        <section class="section" style="padding-bottom: 0;">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue aprendiendo</p>
+              <h2>Más guías para tu caja de herramientas</h2>
+            </div>
+            <a class="more" href="/blog/">Ver el blog →</a>
+          </div>
+
+          <div class="card-grid">
+            <a class="card reveal" href="/blog/transiciones-de-sonido-gratis/">
+              <div class="card__art" aria-hidden="true">
+                <svg viewBox="0 0 200 90" width="200" height="90">
+                  <path d="M20 45 Q 45 10 70 45 T 120 45 T 170 45" fill="none" stroke="#35d6c8" stroke-width="3" stroke-linecap="round" />
+                  <path d="M20 45 Q 45 80 70 45 T 120 45 T 170 45" fill="none" stroke="#8b7bff" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+                </svg>
+              </div>
+              <h3>Transiciones de sonido para tus videos</h3>
+              <p>Cómo usar los 16 sonidos del pack (fuego, viento, magia) para dar ritmo a tu edición.</p>
+              <span class="card__meta">Tutorial · 6 min de lectura</span>
+            </a>
+
+            <a class="card reveal" style="--reveal-delay: 90ms" href="/blog/plantillas-after-effects-gratis/">
+              <div class="card__art" aria-hidden="true">
+                <svg viewBox="0 0 200 90" width="200" height="90">
+                  <rect x="40" y="30" width="50" height="34" rx="7" fill="none" stroke="#ffb454" stroke-width="3" />
+                  <rect x="70" y="20" width="50" height="34" rx="7" fill="none" stroke="#8b7bff" stroke-width="3" />
+                  <rect x="100" y="38" width="50" height="34" rx="7" fill="none" stroke="#35d6c8" stroke-width="3" />
+                </svg>
+              </div>
+              <h3>Plantillas de After Effects sin plugins</h3>
+              <p>Instala, personaliza y exporta títulos y transiciones editables en minutos.</p>
+              <span class="card__meta">Tutorial · 7 min de lectura</span>
+            </a>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="AG Publicista — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__name">AG <em>Publicista</em></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> AG Publicista · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+  </body>
+</html>
