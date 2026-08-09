@@ -1,0 +1,618 @@
+/* ==================================================================== *\
+   AG Publicista — Herramienta: Generador de paletas de colores
+   Estilos de página. La base (tipografía, header, cards…) vive en /css/site.css.
+
+   1. Panel de control (.picker)
+   2. Grupos de opciones (.segmented)
+   3. Paleta y muestras (.palette / .scale / .swatch)
+   4. Bloque de accesibilidad (.a11y)
+   5. Panel de exportación (.export)
+   6. FAQ
+   7. Responsive
+\* ==================================================================== */
+
+/* 1. Panel de control -------------------------------------------------- */
+
+.picker {
+  display: grid;
+  gap: 1.3rem;
+  padding: clamp(1.1rem, 2.4vw, 1.6rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+
+.picker__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.field__label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field__color {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.picker input[type="color"] {
+  width: 58px;
+  height: 46px;
+  flex: 0 0 auto;
+  padding: 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  cursor: pointer;
+}
+
+.picker input[type="text"] {
+  width: 11ch;
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--bg-soft);
+  color: var(--text);
+  font: 600 1rem var(--font-mono);
+  text-transform: lowercase;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.picker input[type="text"]:focus-visible {
+  border-color: var(--violeta);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--violeta) 24%, transparent);
+}
+
+.picker input[type="text"][aria-invalid="true"] {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--coral) 22%, transparent);
+}
+
+.picker__random {
+  min-height: 46px;
+}
+
+.kbd {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--bg-soft);
+  color: var(--faint);
+  font: 600 0.72rem var(--font-mono);
+  line-height: 1.5;
+}
+
+.picker__hint {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.picker__hint code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+}
+
+.status {
+  margin: 0;
+  color: var(--turquesa);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* 2. Grupos de opciones ------------------------------------------------ */
+
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.segmented__legend {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.segmented__item {
+  position: relative;
+  display: inline-flex;
+}
+
+.segmented__item input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.segmented__item span {
+  display: block;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.segmented__item input:hover + span {
+  background: var(--panel-hover);
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+.segmented__item input:checked + span {
+  background: var(--violeta);
+  border-color: var(--violeta);
+  color: #fff;
+}
+
+.segmented__item input:focus-visible + span {
+  outline: 3px solid var(--turquesa);
+  outline-offset: 2px;
+}
+
+/* 3. Paleta y muestras -------------------------------------------------- */
+
+.palette-note {
+  margin: 1.6rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.palette {
+  display: grid;
+  gap: 1rem;
+}
+
+.palette-card {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+
+.palette-card__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.6rem;
+  min-height: 132px;
+  padding: 1rem;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+  transition: transform 220ms var(--ease), box-shadow 220ms ease;
+}
+
+.palette-card__main:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.palette-card__main:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: -7px;
+}
+
+.palette-card__role {
+  font: 700 0.72rem/1 var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.palette-card__hex {
+  font: 600 1.32rem/1 var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.palette-card__hint {
+  font-size: 0.76rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.scale {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  gap: 4px;
+  align-content: stretch;
+}
+
+.swatch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.35rem;
+  min-height: 132px;
+  padding: 0.55rem 0.4rem;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  text-align: left;
+  transition: transform 200ms var(--ease);
+}
+
+.swatch:hover {
+  transform: translateY(-4px);
+}
+
+.swatch:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: -6px;
+}
+
+.swatch__step {
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.swatch__hex {
+  font-size: 0.66rem;
+  font-weight: 600;
+  opacity: 0.88;
+}
+
+.swatch__dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in oklab, currentColor 22%, transparent);
+}
+
+/* 4. Bloque de accesibilidad ------------------------------------------- */
+
+.a11y {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.a11y__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.a11y__color {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.a11y__chip {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+}
+
+.a11y__name {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.a11y__role {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.a11y__hex {
+  font: 600 0.98rem var(--font-mono);
+  color: var(--text);
+}
+
+.a11y__metric {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.a11y__label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.a11y__value {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.a11y__ratio {
+  font: 600 1.02rem var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.a11y__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.a11y__badge--ok {
+  color: var(--turquesa);
+  border-color: color-mix(in oklab, var(--turquesa) 45%, transparent);
+  background: color-mix(in oklab, var(--turquesa) 12%, transparent);
+}
+
+.a11y__badge--ko {
+  color: var(--coral);
+  border-color: color-mix(in oklab, var(--coral) 45%, transparent);
+  background: color-mix(in oklab, var(--coral) 12%, transparent);
+}
+
+/* 5. Panel de exportación ---------------------------------------------- */
+
+.export {
+  padding: clamp(1.1rem, 2.4vw, 1.6rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+
+.export__head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.export__head h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.export__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.export__controls {
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.export__code {
+  max-height: 420px;
+  margin: 0;
+  padding: 1.1rem 1.3rem;
+  overflow: auto;
+  border-radius: var(--radius-sm);
+  background: var(--code-bg);
+  color: #e9e6ff;
+  font: 0.86rem/1.65 var(--font-mono);
+  white-space: pre;
+  tab-size: 2;
+}
+
+.export__status {
+  min-height: 1.4em;
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+/* 6. FAQ ---------------------------------------------------------------- */
+
+.faq {
+  max-width: 760px;
+}
+
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 1rem 1.3rem;
+  margin-bottom: 0.8rem;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.faq details[open] {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.06rem;
+  letter-spacing: -0.01em;
+}
+
+.faq summary::marker {
+  color: var(--violeta);
+}
+
+.faq details[open] summary {
+  color: var(--violeta);
+}
+
+.faq p {
+  color: var(--muted);
+  margin: 0.7em 0 0.2em;
+  font-size: 0.96rem;
+}
+
+.faq code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+  overflow-wrap: anywhere;
+}
+
+/* 7. Responsive --------------------------------------------------------- */
+
+@media (max-width: 1040px) {
+  .palette-card {
+    grid-template-columns: 168px minmax(0, 1fr);
+  }
+
+  .swatch {
+    padding: 0.5rem 0.3rem;
+  }
+
+  .swatch__hex {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .palette-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .palette-card__main {
+    min-height: 96px;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+  }
+
+  .swatch {
+    min-height: 96px;
+  }
+
+  .a11y__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .scale {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .swatch {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 46px;
+    padding: 0.5rem 0.7rem;
+  }
+
+  .swatch__hex {
+    font-size: 0.76rem;
+  }
+
+  .swatch__step {
+    font-size: 0.76rem;
+  }
+
+  .swatch__dot {
+    position: static;
+    box-shadow: none;
+    order: -1;
+  }
+
+  .field,
+  .picker__random {
+    width: 100%;
+  }
+
+  .picker__random {
+    justify-content: center;
+  }
+
+  .picker input[type="text"] {
+    width: 100%;
+  }
+
+  .export__actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swatch,
+  .palette-card__main,
+  .segmented__item span {
+    transition: none;
+  }
+
+  .swatch:hover,
+  .palette-card__main:hover {
+    transform: none;
+  }
+}

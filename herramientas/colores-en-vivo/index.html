@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colores en vivo: prueba tu paleta en una web real — AG Publicista</title>
+    <meta
+      name="description"
+      content="Elige cinco colores por rol y míralos aplicados sobre una web real: texto, fondo, primario, superficie y acento, con test de contraste WCAG en vivo."
+    />
+    <link rel="canonical" href="https://agpublicista.com/herramientas/colores-en-vivo/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AG Publicista" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Colores en vivo: prueba tu paleta en una web real" />
+    <meta property="og:description" content="Cambia texto, fondo, primario, superficie y acento y mira el resultado sobre una maqueta de web real, con contraste WCAG al instante." />
+    <meta property="og:url" content="https://agpublicista.com/herramientas/colores-en-vivo/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/herramientas/colores-en-vivo/#app",
+          "name": "Colores en vivo",
+          "url": "https://agpublicista.com/herramientas/colores-en-vivo/",
+          "description": "Herramienta gratuita para elegir cinco colores por rol (texto, fondo, primario, superficie y acento) y verlos aplicados sobre una maqueta de web real, con verificación de contraste WCAG en tiempo real.",
+          "applicationCategory": "DesignApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "featureList": [
+            "Vista previa de una web completa con tus colores",
+            "Verificación de contraste WCAG AA y AAA en vivo",
+            "28 combinaciones curadas con un clic",
+            "Exportación a variables CSS, PNG y lista de hex"
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "name": "AG Publicista",
+            "url": "https://agpublicista.com/"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://agpublicista.com/herramientas/" },
+            { "@type": "ListItem", "position": 3, "name": "Colores en vivo", "item": "https://agpublicista.com/herramientas/colores-en-vivo/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es el ratio de contraste?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Es la relación entre la luminancia del texto y la del fondo, calculada con la fórmula oficial de la WCAG. Va de 1:1 (dos colores idénticos, texto invisible) a 21:1 (negro puro sobre blanco puro). No mide cuánto se diferencian los tonos, sino cuánta luz refleja cada uno: por eso dos colores muy distintos pueden dar un ratio bajísimo. Para texto normal el mínimo recomendado es 4.5:1."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuál es la diferencia entre AA y AAA?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AA es el nivel que se pide en la mayoría de normativas de accesibilidad: 4.5:1 para texto normal y 3:1 para texto grande (24 px o más, o 18.66 px en negrita). AAA es el nivel exigente: 7:1 para texto normal y 4.5:1 para texto grande. Apunta siempre a AA en toda la interfaz y reserva AAA para bloques de lectura larga, formularios y contenido crítico."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué mi color favorito no pasa el test?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque el contraste depende de la luminancia, no de la saturación ni del tono. Los amarillos, turquesas, verdes lima y naranjas son muy luminosos: sobre blanco casi nunca llegan a 4.5:1 por muy vibrantes que se vean. La solución no es renunciar al color, es cambiarle el trabajo: úsalo como fondo de un botón con etiqueta oscura, como acento o como superficie, y para el texto usa una versión más oscura del mismo tono."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo usar estos colores en un proyecto de cliente?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Un color hexadecimal es un dato, no una obra: no tiene derechos de autor ni licencia, y puedes usar cualquier combinación en proyectos personales o comerciales sin atribución. Lo único que conviene evitar es replicar la identidad completa de una marca existente (su color junto a su tipografía, su símbolo y su sector), porque ahí sí puede haber una marca registrada de por medio."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="AG Publicista — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__name">AG <em>Publicista</em></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Cabecera de página -->
+      <div class="page-head shell">
+        <nav class="breadcrumbs reveal" aria-label="Migas de pan">
+          <a href="/">Inicio</a> / <a href="/herramientas/">Herramientas</a> / <span aria-current="page">Colores en vivo</span>
+        </nav>
+        <p class="eyebrow reveal">Herramienta gratuita · Color</p>
+        <h1 class="reveal" style="--reveal-delay: 80ms">Colores en vivo</h1>
+        <p class="lede reveal" style="--reveal-delay: 160ms">
+          Elige cinco colores por rol y míralos aplicados sobre una web de verdad:
+          navegación, titular, botones, tarjetas y pie. Con el contraste WCAG
+          calculado al instante para que sepas si tu paleta se lee o solo se ve bonita.
+        </p>
+      </div>
+
+      <!-- Editor -->
+      <section class="section shell tool" aria-labelledby="editor-title">
+        <h2 id="editor-title" class="sr-only">Editor de colores</h2>
+
+        <form class="tool__panel reveal" data-form autocomplete="off">
+          <fieldset class="roles">
+            <legend class="roles__legend">Tus cinco colores</legend>
+
+            <div class="role">
+              <label class="role__name" for="pick-texto">Texto</label>
+              <p class="role__hint" id="hint-texto">Titulares, párrafos y todo lo que se lee.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-texto" data-pick="texto" value="#f4f3f8" aria-describedby="hint-texto" />
+                <label class="sr-only" for="hex-texto">Valor hexadecimal del color de texto</label>
+                <input class="role__hex" type="text" id="hex-texto" data-hex="texto" value="#f4f3f8" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-texto" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-fondo">Fondo</label>
+              <p class="role__hint" id="hint-fondo">El lienzo de la página. Manda en la sensación general.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-fondo" data-pick="fondo" value="#0a0a0f" aria-describedby="hint-fondo" />
+                <label class="sr-only" for="hex-fondo">Valor hexadecimal del color de fondo</label>
+                <input class="role__hex" type="text" id="hex-fondo" data-hex="fondo" value="#0a0a0f" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-fondo" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-primario">Primario</label>
+              <p class="role__hint" id="hint-primario">Botones y enlaces. Poco espacio, mucho peso.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-primario" data-pick="primario" value="#8b7bff" aria-describedby="hint-primario" />
+                <label class="sr-only" for="hex-primario">Valor hexadecimal del color primario</label>
+                <input class="role__hex" type="text" id="hex-primario" data-hex="primario" value="#8b7bff" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-primario" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-superficie">Superficie</label>
+              <p class="role__hint" id="hint-superficie">Tarjetas y paneles apoyados sobre el fondo.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-superficie" data-pick="superficie" value="#16161f" aria-describedby="hint-superficie" />
+                <label class="sr-only" for="hex-superficie">Valor hexadecimal del color de superficie</label>
+                <input class="role__hex" type="text" id="hex-superficie" data-hex="superficie" value="#16161f" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-superficie" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-acento">Acento</label>
+              <p class="role__hint" id="hint-acento">Detalles y destacados. Como mucho, el 10%.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-acento" data-pick="acento" value="#ffb454" aria-describedby="hint-acento" />
+                <label class="sr-only" for="hex-acento">Valor hexadecimal del color de acento</label>
+                <input class="role__hex" type="text" id="hex-acento" data-hex="acento" value="#ffb454" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-acento" />
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="tool__actions">
+            <button class="btn btn--primary" type="button" data-random>Combinación aleatoria</button>
+            <button class="btn btn--ghost" type="button" data-copy-css>Copiar variables CSS</button>
+            <button class="btn btn--ghost" type="button" data-download-png>Descargar PNG</button>
+            <button class="btn btn--ghost" type="button" data-copy-hex>Copiar lista de hex</button>
+          </div>
+
+          <p class="tool__note">
+            <span data-combo-name>Combinación personalizada</span> ·
+            Pulsa la <kbd>barra espaciadora</kbd> para probar otra ·
+            La URL guarda tus colores, cópiala para compartir la paleta.
+          </p>
+        </form>
+
+        <h3 class="tool__title reveal">Vista previa en una web real</h3>
+        <p class="tool__lede reveal">
+          Todo el texto de la maqueta usa tu color de texto al 100%, sin atenuar:
+          lo que ves aquí es exactamente lo que mide el test de contraste.
+        </p>
+
+        <div class="preview-scope reveal" data-preview role="group" aria-label="Vista previa de una web de ejemplo pintada con tus cinco colores">
+          <p class="sr-only">Maqueta de demostración: sus botones y enlaces no son funcionales.</p>
+
+          <div class="pv-chrome" aria-hidden="true">
+            <span class="pv-chrome__dots"><i></i><i></i><i></i></span>
+            <span class="pv-chrome__url">estudionara.com</span>
+          </div>
+
+          <div class="pv-site">
+            <div class="pv-nav">
+              <div class="pv-logo">
+                <span class="pv-logo__mark" aria-hidden="true">N</span>
+                <span class="pv-logo__name">Estudio Nara</span>
+              </div>
+              <div class="pv-links">
+                <span>Servicios</span>
+                <span>Trabajos</span>
+                <span>Estudio</span>
+              </div>
+              <span class="pv-btn pv-btn--primary pv-btn--sm">Cotizar</span>
+            </div>
+
+            <div class="pv-hero">
+              <span class="pv-chip">Agencia creativa</span>
+              <p class="pv-title">Marcas que se <span class="pv-mark">recuerdan</span>, no que se olvidan</p>
+              <p class="pv-lede">
+                Diseñamos identidad, sitios web y campañas para negocios que ya no
+                quieren parecerse a su competencia. Menos ruido, más criterio.
+              </p>
+              <div class="pv-cta">
+                <span class="pv-btn pv-btn--primary">Ver portafolio</span>
+                <span class="pv-btn pv-btn--ghost">Agendar una llamada</span>
+              </div>
+            </div>
+
+            <div class="pv-cards">
+              <div class="pv-card">
+                <span class="pv-card__mark" aria-hidden="true"></span>
+                <p class="pv-card__title">Identidad visual</p>
+                <p class="pv-card__text">Naming, logotipo y un sistema gráfico que aguanta el paso del tiempo.</p>
+              </div>
+              <div class="pv-card">
+                <span class="pv-card__mark" aria-hidden="true"></span>
+                <p class="pv-card__title">Diseño y desarrollo web</p>
+                <p class="pv-card__text">Sitios rápidos, accesibles y pensados para convertir, no solo para lucir.</p>
+              </div>
+              <div class="pv-card">
+                <span class="pv-card__mark" aria-hidden="true"></span>
+                <p class="pv-card__title">Campañas</p>
+                <p class="pv-card__text">Piezas para redes y anuncios con una dirección de arte que se sostiene.</p>
+              </div>
+            </div>
+
+            <div class="pv-footer">
+              <span class="pv-footer__brand">Estudio Nara</span>
+              <span class="pv-footer__legal">© 2026 · Todos los derechos reservados</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="tool__title reveal">Contraste WCAG</h3>
+        <p class="tool__lede reveal">
+          Los tres pares que deciden si tu web se lee. El mínimo para texto normal
+          es 4.5:1 (nivel AA); 7:1 alcanza AAA.
+        </p>
+
+        <div class="checks" data-checks aria-live="polite"></div>
+      </section>
+
+      <!-- Guía -->
+      <section class="section shell" aria-labelledby="guia-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Criterio, no suerte</p>
+            <h2 id="guia-title">Cómo elegir colores para una web</h2>
+          </div>
+        </div>
+
+        <div class="guide">
+          <p class="reveal">
+            Empieza por el fondo y el texto, siempre. Son el 90% de los píxeles de tu
+            web y definen la sensación antes de que nadie lea una palabra: claro y
+            aireado, u oscuro y editorial. Decide primero esa pareja y compruébala:
+            necesitas 4.5:1 como mínimo para texto normal, y 3:1 para texto grande
+            (24 px o más, o 18.66 px en negrita). Si esa base falla, ningún acento
+            bonito va a salvarla.
+          </p>
+          <p class="reveal">
+            El color primario ocupa poquísimo espacio y aun así manda. Vive en el
+            botón que quieres que pulsen, en el enlace importante y en el estado
+            activo del menú; por eso lo que importa no es cómo se ve en una muestra
+            grande, sino si su etiqueta se lee. Esta herramienta calcula sola el color
+            de texto del botón (blanco o negro, el que gane) y te enseña el ratio.
+            Si además vas a usar el primario para enlaces dentro de un párrafo,
+            comprueba también el primario sobre el fondo: es el error más común.
+          </p>
+          <p class="reveal">
+            La superficie es el color de las tarjetas y los paneles. Su trabajo es
+            separar bloques sin gritar: un 4-8% más claro o más oscuro que el fondo
+            suele bastar. Si la diferencia es tan sutil que no se distingue, no subas
+            el contraste, añade un borde de 1 px. Y ojo: el texto también tiene que
+            pasar el test encima de la superficie, no solo encima del fondo. Por eso
+            son dos comprobaciones separadas en el panel de arriba.
+          </p>
+          <p class="reveal">
+            El acento es el 10%. Etiquetas, subrayados, un icono, un dato destacado,
+            el estado de "nuevo". Si lo pones en todas partes deja de destacar nada y
+            la interfaz se vuelve ruido. Cuando tengas la combinación que te convence,
+            genera la escala completa de tonos en el
+            <a href="/herramientas/paletas/">generador de paletas</a>, guarda las
+            variables CSS y sigue con el resto del sistema: en el
+            <a href="/blog/">blog</a> hay guías de diseño web paso a paso, y en
+            <a href="/herramientas/">todas las herramientas</a> tienes generadores de
+            favicons y componentes SVG listos para pegar.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section shell" aria-labelledby="faq-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Dudas frecuentes</p>
+            <h2 id="faq-title">Preguntas frecuentes</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>¿Qué es el ratio de contraste?</summary>
+            <p>
+              Es la relación entre la luminancia del texto y la del fondo, calculada
+              con la fórmula oficial de la WCAG. Va de 1:1 (dos colores idénticos,
+              texto invisible) a 21:1 (negro puro sobre blanco puro). No mide cuánto
+              se diferencian los tonos, sino cuánta luz refleja cada uno: por eso dos
+              colores muy distintos pueden dar un ratio bajísimo. Para texto normal el
+              mínimo recomendado es <strong>4.5:1</strong>.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 60ms">
+            <summary>¿Cuál es la diferencia entre AA y AAA?</summary>
+            <p>
+              <strong>AA</strong> es el nivel que se pide en la mayoría de normativas
+              de accesibilidad: 4.5:1 para texto normal y 3:1 para texto grande (24 px
+              o más, o 18.66 px en negrita). <strong>AAA</strong> es el nivel exigente:
+              7:1 para texto normal y 4.5:1 para texto grande. Apunta siempre a AA en
+              toda la interfaz y reserva AAA para bloques de lectura larga,
+              formularios y contenido crítico.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 120ms">
+            <summary>¿Por qué mi color favorito no pasa el test?</summary>
+            <p>
+              Porque el contraste depende de la luminancia, no de la saturación ni del
+              tono. Los amarillos, turquesas, verdes lima y naranjas son muy
+              luminosos: sobre blanco casi nunca llegan a 4.5:1 por muy vibrantes que
+              se vean. La solución no es renunciar al color, es cambiarle el trabajo:
+              úsalo como fondo de un botón con etiqueta oscura, como acento o como
+              superficie, y para el texto usa una versión más oscura del mismo tono.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 180ms">
+            <summary>¿Puedo usar estos colores en un proyecto de cliente?</summary>
+            <p>
+              Sí. Un color hexadecimal es un dato, no una obra: no tiene derechos de
+              autor ni licencia, y puedes usar cualquier combinación en proyectos
+              personales o comerciales sin atribución. Lo único que conviene evitar es
+              replicar la identidad completa de una marca existente (su color junto a
+              su tipografía, su símbolo y su sector), porque ahí sí puede haber una
+              marca registrada de por medio.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Más del sitio -->
+      <section class="section shell" aria-labelledby="mas-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue creando</p>
+            <h2 id="mas-title">Más herramientas y guías</h2>
+          </div>
+          <a class="more" href="/herramientas/">Ver todas las herramientas →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/herramientas/paletas/">
+            <span class="card__tag">Color</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="30" y="25" width="28" height="40" rx="8" fill="#8b7bff" />
+                <rect x="64" y="25" width="28" height="40" rx="8" fill="#6e5df2" />
+                <rect x="98" y="25" width="28" height="40" rx="8" fill="#35d6c8" />
+                <rect x="132" y="25" width="28" height="40" rx="8" fill="#ffb454" />
+              </svg>
+            </div>
+            <h3>Generador de paletas</h3>
+            <p>Armonías, escala de tonos 50–950 y exportación a CSS, Tailwind y PNG desde un solo color.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/herramientas/favicons/">
+            <span class="card__tag">SVG</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="40" y="17" width="34" height="34" rx="9" fill="#8b7bff" />
+                <text x="57" y="41" font-size="20" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-weight="700">A</text>
+                <rect x="84" y="17" width="34" height="34" rx="17" fill="#35d6c8" />
+                <circle cx="101" cy="34" r="8" fill="#0a0a12" />
+                <rect x="128" y="17" width="34" height="34" rx="9" fill="#ffb454" />
+                <text x="145" y="42" font-size="22" text-anchor="middle">🎯</text>
+                <rect x="40" y="60" width="122" height="12" rx="6" fill="currentColor" opacity="0.12" />
+              </svg>
+            </div>
+            <h3>Galería de favicons</h3>
+            <p>Más de 55 favicons SVG listos para copiar como etiqueta <code>&lt;link&gt;</code>, más generadores de emoji y monograma.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 180ms" href="/blog/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="55" y="16" width="90" height="10" rx="5" fill="#8b7bff" />
+                <rect x="55" y="34" width="70" height="8" rx="4" fill="currentColor" opacity="0.25" />
+                <rect x="55" y="48" width="90" height="8" rx="4" fill="currentColor" opacity="0.25" />
+                <rect x="55" y="62" width="52" height="8" rx="4" fill="#35d6c8" />
+              </svg>
+            </div>
+            <h3>Guías del blog</h3>
+            <p>Tutoriales de diseño, SVG, motion y marketing digital que complementan cada video del canal.</p>
+            <span class="card__meta">Blog · Nuevas guías cada semana</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Publicidad -->
+      <div class="shell">
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="AG Publicista — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__name">AG <em>Publicista</em></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> AG Publicista · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/color-engine.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="js/colores-en-vivo.js" defer></script>
+  </body>
+</html>

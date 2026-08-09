@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de paletas de colores gratis — armonías y escalas</title>
+    <meta
+      name="description"
+      content="Generador de paletas de colores gratis: elige un color base, obtén armonías y escalas 50-950, revisa el contraste WCAG y exporta a CSS, Tailwind o SVG."
+    />
+    <link rel="canonical" href="https://agpublicista.com/herramientas/paletas/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AG Publicista" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de paletas de colores gratis — armonías y escalas" />
+    <meta property="og:description" content="Elige un color base y obtén armonías, escalas 50-950, contraste WCAG y exportación a CSS, Tailwind, SVG y PNG. Sin registro." />
+    <meta property="og:url" content="https://agpublicista.com/herramientas/paletas/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/herramientas/paletas/#app",
+          "name": "Generador de paletas de colores",
+          "url": "https://agpublicista.com/herramientas/paletas/",
+          "description": "Herramienta gratuita para generar paletas de color a partir de un color base: armonías, escalas de tono del 50 al 950, comprobación de contraste WCAG y exportación a variables CSS, Tailwind, SVG y PNG.",
+          "applicationCategory": "DesignApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "featureList": [
+            "Armonías: análoga, complementaria, complementaria dividida, tríada, tétrada y monocromática",
+            "Escala completa de tonos del 50 al 950 para cada color",
+            "Ratio de contraste y nivel WCAG contra blanco y negro",
+            "Exportación a variables CSS, Tailwind, lista de hex, SVG y PNG"
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "name": "AG Publicista",
+            "url": "https://agpublicista.com/"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://agpublicista.com/herramientas/" },
+            { "@type": "ListItem", "position": 3, "name": "Generador de paletas", "item": "https://agpublicista.com/herramientas/paletas/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es una armonía de color?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Es un grupo de colores que mantienen una relación fija en el círculo cromático. Partiendo de tu color base, la herramienta gira el matiz un número concreto de grados: 180° para la complementaria, ±30° para la análoga, 120° para la tríada, 90° para la tétrada. Esa relación es la que hace que los colores se vean elegidos a propósito y no al azar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué significan los números del 50 al 950?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Son los pasos de luminosidad de cada color, la misma convención que usan Tailwind y la mayoría de sistemas de diseño. El 50 es el tono más claro y el 950 el más oscuro; el paso marcado como base es el más cercano a tu color original. Tener la escala completa te ahorra inventar variantes a mano para fondos, bordes, estados hover o texto secundario."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo exporto la paleta a Tailwind?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Elige el formato Tailwind en el panel de exportación, pulsa Copiar código y pega el bloque dentro de theme.extend.colors en tu archivo tailwind.config.js. A partir de ahí puedes usar clases como bg-paleta-base-500 o text-paleta-acento-1-700 en tu HTML."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué importa el contraste de una paleta?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque un color bonito que no se lee no sirve. La WCAG 2.1 pide un ratio mínimo de 4,5:1 entre texto y fondo, o 3:1 si el texto es grande o va en negrita. El bloque de accesibilidad te indica, color por color, si funciona con texto blanco o negro encima, así eliges el par correcto antes de escribir una línea de CSS."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="AG Publicista — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__name">AG <em>Publicista</em></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Cabecera de página -->
+      <div class="page-head shell">
+        <nav class="breadcrumbs reveal" aria-label="Migas de pan">
+          <a href="/">Inicio</a> / <a href="/herramientas/">Herramientas</a> / <span aria-current="page">Generador de paletas</span>
+        </nav>
+        <p class="eyebrow reveal">Herramienta gratuita · Color</p>
+        <h1 class="reveal" style="--reveal-delay: 80ms">Generador de paletas de colores</h1>
+        <p class="lede reveal" style="--reveal-delay: 160ms">
+          Elige un color base y obtén al instante su armonía, la escala completa de tonos
+          del 50 al 950 y el contraste de cada color. Copia cualquier muestra con un clic
+          y exporta a variables CSS, Tailwind, SVG o PNG. Sin registro y sin librerías.
+        </p>
+      </div>
+
+      <!-- Generador -->
+      <section class="section shell" aria-labelledby="generador-title">
+        <h2 id="generador-title" class="sr-only">Generador de paletas</h2>
+
+        <div class="picker reveal">
+          <div class="picker__row">
+            <div class="field">
+              <span class="field__label" id="base-label">Color base</span>
+              <div class="field__color">
+                <label class="sr-only" for="base-color">Selector visual del color base</label>
+                <input id="base-color" type="color" value="#8b7bff" data-color-picker />
+                <label class="sr-only" for="base-hex">Código hexadecimal del color base</label>
+                <input
+                  id="base-hex"
+                  type="text"
+                  value="#8b7bff"
+                  data-hex-input
+                  spellcheck="false"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  maxlength="7"
+                  pattern="^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+                  aria-describedby="hex-help"
+                />
+              </div>
+            </div>
+
+            <button class="btn btn--ghost picker__random" type="button" data-random>
+              Color aleatorio
+              <kbd class="kbd">Espacio</kbd>
+            </button>
+          </div>
+
+          <p class="picker__hint" id="hex-help">
+            Escribe un hex (<code>#8b7bff</code> o <code>8b7bff</code>), usa el selector o pulsa la
+            barra espaciadora para probar suerte. La dirección de la página guarda tu color base:
+            cópiala para compartir la paleta.
+          </p>
+
+          <fieldset class="segmented" data-harmony-group>
+            <legend class="segmented__legend">Tipo de armonía</legend>
+
+            <label class="segmented__item">
+              <input type="radio" name="armonia" value="analoga" checked />
+              <span>Análoga</span>
+            </label>
+            <label class="segmented__item">
+              <input type="radio" name="armonia" value="complementaria" />
+              <span>Complementaria</span>
+            </label>
+            <label class="segmented__item">
+              <input type="radio" name="armonia" value="complementariaDividida" />
+              <span>Complementaria dividida</span>
+            </label>
+            <label class="segmented__item">
+              <input type="radio" name="armonia" value="triada" />
+              <span>Tríada</span>
+            </label>
+            <label class="segmented__item">
+              <input type="radio" name="armonia" value="tetrada" />
+              <span>Tétrada</span>
+            </label>
+            <label class="segmented__item">
+              <input type="radio" name="armonia" value="monocromatica" />
+              <span>Monocromática</span>
+            </label>
+          </fieldset>
+
+          <p class="status" data-status aria-live="polite">
+            Cargando la paleta…
+          </p>
+        </div>
+
+        <p class="palette-note">
+          Haz clic en cualquier muestra para copiar su hex. El círculo marca el paso más
+          cercano a tu color base.
+        </p>
+
+        <div class="palette" data-palette></div>
+      </section>
+
+      <!-- Exportación -->
+      <section class="section shell" aria-labelledby="export-title">
+        <div class="export reveal">
+          <div class="export__head">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 0.5rem;">Exportar</p>
+              <h2 id="export-title">Lleva la paleta a tu proyecto</h2>
+            </div>
+            <div class="export__actions">
+              <button class="btn btn--primary" type="button" data-copy-code>Copiar código</button>
+              <button class="btn btn--ghost" type="button" data-download-png>Descargar PNG</button>
+              <button class="btn btn--ghost" type="button" data-download-svg>Descargar SVG</button>
+            </div>
+          </div>
+
+          <div class="export__controls">
+            <fieldset class="segmented" data-format-group>
+              <legend class="segmented__legend">Formato</legend>
+
+              <label class="segmented__item">
+                <input type="radio" name="formato" value="css" checked />
+                <span>Variables CSS</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="formato" value="tailwind" />
+                <span>Tailwind</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="formato" value="lista" />
+                <span>Lista de hex</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="formato" value="svg" />
+                <span>SVG</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="segmented" data-scope-group>
+              <legend class="segmented__legend">Qué exportar</legend>
+
+              <label class="segmented__item">
+                <input type="radio" name="alcance" value="escalas" checked />
+                <span>Escalas completas</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="alcance" value="principales" />
+                <span>Solo colores principales</span>
+              </label>
+            </fieldset>
+          </div>
+
+          <pre class="export__code"><code data-code>/* Generando la paleta… */</code></pre>
+          <p class="export__status" data-export-status aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- Accesibilidad -->
+      <section class="section shell" aria-labelledby="contraste-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Accesibilidad</p>
+            <h2 id="contraste-title">Contraste de cada color</h2>
+            <p>
+              Ratio de contraste de cada color principal frente a texto blanco y negro,
+              con el nivel WCAG 2.1 que alcanza en texto normal. Con 4,5:1 apruebas AA;
+              con 7:1, AAA.
+            </p>
+          </div>
+        </div>
+
+        <ul class="a11y" data-a11y></ul>
+      </section>
+
+      <!-- Cómo usar una paleta -->
+      <section class="section shell" aria-labelledby="uso-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Guía práctica</p>
+            <h2 id="uso-title">Cómo usar una paleta en tu proyecto</h2>
+          </div>
+        </div>
+
+        <div class="prose reveal">
+          <p>
+            <strong>Empieza por el color base, no por la paleta.</strong> El base es el color
+            que la gente asocia con tu marca: el del logo, el del botón principal, el del enlace.
+            Elígelo con una luminosidad media (ni casi blanco ni casi negro) porque de ahí saldrán
+            luego los tonos claros y oscuros; si arrancas de un color extremo, media escala se te
+            queda plana. Cuando tengas un candidato, pruébalo en contexto con
+            <a href="/herramientas/colores-en-vivo/">Colores en vivo</a>: ver un color aislado en un
+            cuadrado engaña, verlo en una web completa no.
+          </p>
+          <p>
+            <strong>Las escalas son las que sostienen la interfaz.</strong> Un producto real no usa
+            tres colores, usa treinta variantes de tres colores. La convención 50-950 te da ese
+            reparto sin pensarlo: los pasos 50-200 sirven para fondos suaves, tarjetas y estados
+            seleccionados; los 300-400 para bordes, separadores y elementos deshabilitados; el 500-600
+            es tu color de acción (botones, enlaces, iconos activos); y del 700 al 950 sacas textos
+            sobre fondo claro, estados <em>hover</em> y superficies del modo oscuro. Exporta la escala
+            como variables CSS o como escala de Tailwind y deja de escribir hex sueltos en cada componente.
+          </p>
+          <p>
+            <strong>Análoga cuando quieres calma, complementaria cuando quieres contraste.</strong>
+            La armonía análoga toma vecinos del círculo cromático (±30°): produce paletas cohesionadas,
+            ideales para fondos, degradados e ilustraciones donde nada debe gritar. La complementaria
+            toma el color opuesto (180°) y sirve justo para lo contrario: destacar una sola cosa, un
+            botón de compra, una alerta, un dato clave. La complementaria dividida suaviza ese choque y
+            suele ser la opción más segura para una web entera; la tríada y la tétrada dan variedad para
+            gráficas, categorías o etiquetas; y la monocromática es el atajo cuando la marca ya tiene un
+            color fuerte y solo necesitas jerarquía.
+          </p>
+          <p>
+            <strong>Valida el contraste antes de maquetar, no después.</strong> Un texto necesita 4,5:1
+            respecto a su fondo (3:1 si es grande o va en negrita), así que decide desde el principio qué
+            pasos de la escala llevan texto blanco y cuáles texto negro. Un truco que ahorra horas: usa el
+            paso 600 o 700 para texto sobre fondos claros y reserva el 400-500 para superficies con texto
+            blanco encima. Con la paleta cerrada, aplícala al resto de tu identidad — por ejemplo generando
+            el icono del navegador con la <a href="/herramientas/favicons/">galería de favicons SVG</a> — y si
+            quieres profundizar en teoría de color, tipografía y sistemas de diseño, en el
+            <a href="/blog/">blog</a> vas encontrando guías nuevas cada semana.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section shell" aria-labelledby="faq-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Dudas frecuentes</p>
+            <h2 id="faq-title">Preguntas frecuentes</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>¿Qué es una armonía de color?</summary>
+            <p>
+              Es un grupo de colores que mantienen una relación fija en el círculo cromático.
+              Partiendo de tu color base, la herramienta gira el matiz un número concreto de
+              grados: 180° para la complementaria, ±30° para la análoga, 120° para la tríada,
+              90° para la tétrada. Esa relación es la que hace que los colores se vean elegidos
+              a propósito y no al azar.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 60ms">
+            <summary>¿Qué significan los números del 50 al 950?</summary>
+            <p>
+              Son los pasos de luminosidad de cada color, la misma convención que usan Tailwind
+              y la mayoría de sistemas de diseño. El 50 es el tono más claro y el 950 el más
+              oscuro; el paso marcado como base es el más cercano a tu color original. Tener la
+              escala completa te ahorra inventar variantes a mano para fondos, bordes, estados
+              <em>hover</em> o texto secundario.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 120ms">
+            <summary>¿Cómo exporto la paleta a Tailwind?</summary>
+            <p>
+              Elige el formato <strong>Tailwind</strong> en el panel de exportación, pulsa
+              <strong>Copiar código</strong> y pega el bloque dentro de
+              <code>theme.extend.colors</code> en tu archivo <code>tailwind.config.js</code>.
+              A partir de ahí puedes usar clases como <code>bg-paleta-base-500</code> o
+              <code>text-paleta-acento-1-700</code> en tu HTML.
+            </p>
+          </details>
+
+          <details class="reveal" style="--reveal-delay: 180ms">
+            <summary>¿Por qué importa el contraste de una paleta?</summary>
+            <p>
+              Porque un color bonito que no se lee no sirve. La WCAG 2.1 pide un ratio mínimo
+              de 4,5:1 entre texto y fondo, o 3:1 si el texto es grande o va en negrita. El
+              bloque de accesibilidad te indica, color por color, si funciona con texto blanco
+              o negro encima, así eliges el par correcto antes de escribir una línea de CSS.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Más del sitio -->
+      <section class="section shell" aria-labelledby="mas-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue creando</p>
+            <h2 id="mas-title">Más herramientas y guías</h2>
+          </div>
+          <a class="more" href="/herramientas/">Ver todas las herramientas →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/herramientas/colores-en-vivo/">
+            <span class="card__tag">Color</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="30" y="14" width="140" height="62" rx="10" fill="none" stroke="#8b7bff" stroke-width="3" />
+                <rect x="30" y="14" width="140" height="14" rx="7" fill="#8b7bff" opacity="0.35" />
+                <rect x="42" y="38" width="52" height="8" rx="4" fill="#35d6c8" />
+                <rect x="42" y="52" width="80" height="6" rx="3" fill="currentColor" opacity="0.25" />
+                <rect x="42" y="63" width="34" height="8" rx="4" fill="#ffb454" />
+                <circle cx="150" cy="52" r="14" fill="#ff7a68" />
+              </svg>
+            </div>
+            <h3>Colores en vivo</h3>
+            <p>Prueba tu paleta sobre una web real: fondo, texto, botones y tarjetas cambiando al instante.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/herramientas/favicons/">
+            <span class="card__tag">SVG</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="40" y="17" width="34" height="34" rx="9" fill="#8b7bff" />
+                <text x="57" y="41" font-size="20" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-weight="700">A</text>
+                <rect x="84" y="17" width="34" height="34" rx="17" fill="#35d6c8" />
+                <circle cx="101" cy="34" r="8" fill="#0a0a12" />
+                <rect x="128" y="17" width="34" height="34" rx="9" fill="#ffb454" />
+                <text x="145" y="42" font-size="22" text-anchor="middle">🎯</text>
+                <rect x="40" y="60" width="122" height="12" rx="6" fill="currentColor" opacity="0.12" />
+              </svg>
+            </div>
+            <h3>Galería de favicons</h3>
+            <p>Más de 55 favicons SVG listos para copiar como etiqueta <code>&lt;link&gt;</code>, más generadores de emoji y monograma.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 180ms" href="/blog/">
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="55" y="16" width="90" height="10" rx="5" fill="#8b7bff" />
+                <rect x="55" y="34" width="70" height="8" rx="4" fill="currentColor" opacity="0.25" />
+                <rect x="55" y="48" width="90" height="8" rx="4" fill="currentColor" opacity="0.25" />
+                <rect x="55" y="62" width="52" height="8" rx="4" fill="#35d6c8" />
+              </svg>
+            </div>
+            <h3>Guías del blog</h3>
+            <p>Tutoriales de diseño, color, SVG y marketing digital que complementan cada video del canal.</p>
+            <span class="card__meta">Blog · Nuevas guías cada semana</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Publicidad -->
+      <div class="shell">
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="AG Publicista — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__name">AG <em>Publicista</em></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> AG Publicista · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/color-engine.js" defer></script>
+    <script src="/js/site.js" defer></script>
+    <script src="js/paletas.js" defer></script>
+  </body>
+</html>

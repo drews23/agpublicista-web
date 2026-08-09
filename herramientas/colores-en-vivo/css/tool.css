@@ -1,0 +1,576 @@
+/* ==================================================================== *\
+   AG Publicista — Herramienta: Colores en vivo
+   Estilos de página. La base (tipografía, header, cards…) vive en /css/site.css.
+
+   1. Panel de control (.tool, .roles, .role)
+   2. Acciones y nota
+   3. Vista previa (.preview-scope + .pv-*)   ← scope propio de variables
+   4. Panel de contraste (.checks)
+   5. Guía (.guide)
+   6. FAQ (.faq)
+   7. Responsive
+\* ==================================================================== */
+
+/* 1. Panel de control -------------------------------------------------- */
+
+.tool__panel {
+  padding: clamp(1.1rem, 2.6vw, 1.7rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+
+.tool__title {
+  margin: 2.4rem 0 0.3rem;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+}
+
+.tool__lede {
+  margin: 0 0 1.2rem;
+  color: var(--muted);
+  font-size: 0.96rem;
+  max-width: 62ch;
+}
+
+.roles {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.roles__legend {
+  padding: 0;
+  margin-bottom: 0.9rem;
+  font: 700 0.78rem/1 var(--font-body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--turquesa);
+}
+
+.role {
+  min-width: 0;
+  padding: 0.9rem 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+}
+
+.role__name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+}
+
+.role__hint {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  min-height: 2.3em;
+}
+
+.role__inputs {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 0.5rem;
+}
+
+.role__pick {
+  width: 46px;
+  height: 42px;
+  padding: 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  cursor: pointer;
+}
+
+.role__hex {
+  width: 100%;
+  min-width: 0;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--panel);
+  color: var(--text);
+  font: 500 0.92rem var(--font-mono);
+  text-transform: lowercase;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.role__hex:focus {
+  border-color: var(--violeta);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--violeta) 22%, transparent);
+}
+
+.role__hex[aria-invalid="true"] {
+  border-color: var(--coral);
+}
+
+.tool :is(input, button):focus-visible {
+  outline: 2px solid var(--violeta);
+  outline-offset: 2px;
+}
+
+/* 2. Acciones y nota --------------------------------------------------- */
+
+.tool__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.3rem;
+}
+
+.tool__note {
+  margin: 1rem 0 0;
+  color: var(--faint);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.tool__note [data-combo-name] {
+  color: var(--violeta);
+  font-weight: 700;
+}
+
+.tool__note kbd {
+  font: 600 0.78rem var(--font-mono);
+  padding: 0.15em 0.45em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+/* 3. Vista previa ------------------------------------------------------ *\
+   Scope propio: las variables --pv-* solo existen aquí dentro, así que la
+   maqueta nunca toca el tema del sitio.
+\* ---------------------------------------------------------------------- */
+
+.preview-scope {
+  --pv-texto: #f4f3f8;
+  --pv-fondo: #0a0a0f;
+  --pv-primario: #8b7bff;
+  --pv-superficie: #16161f;
+  --pv-acento: #ffb454;
+  --pv-on-primario: #ffffff;
+  --pv-on-acento: #000000;
+
+  --pv-borde: color-mix(in oklab, var(--pv-texto) 16%, transparent);
+  --pv-tenue: color-mix(in oklab, var(--pv-texto) 72%, var(--pv-fondo));
+  --pv-font: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--pv-fondo);
+  color: var(--pv-texto);
+  font-family: var(--pv-font);
+  box-shadow: var(--shadow);
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+/* Barra de navegador falsa: vende el "esto es un sitio de verdad" */
+.pv-chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--pv-superficie);
+  border-bottom: 1px solid var(--pv-borde);
+  transition: background-color 240ms ease;
+}
+
+.pv-chrome__dots {
+  display: inline-flex;
+  gap: 0.35rem;
+  flex: 0 0 auto;
+}
+
+.pv-chrome__dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--pv-borde);
+}
+
+.pv-chrome__dots i:first-child { background: color-mix(in oklab, var(--pv-acento) 70%, var(--pv-superficie)); }
+
+.pv-chrome__url {
+  flex: 1 1 auto;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--pv-fondo) 60%, var(--pv-superficie));
+  color: var(--pv-tenue);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pv-site {
+  padding: clamp(1.1rem, 3.4vw, 2.4rem);
+}
+
+/* Navegación de la maqueta */
+.pv-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--pv-borde);
+}
+
+.pv-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex: 0 0 auto;
+}
+
+.pv-logo__mark {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--pv-primario);
+  color: var(--pv-on-primario);
+  font-weight: 800;
+  font-size: 0.95rem;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+.pv-logo__name {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.pv-links {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.pv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 650;
+  white-space: nowrap;
+  transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease;
+}
+
+.pv-btn--sm {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.84rem;
+}
+
+.pv-btn--primary {
+  background: var(--pv-primario);
+  color: var(--pv-on-primario);
+}
+
+.pv-btn--ghost {
+  border: 1px solid var(--pv-borde);
+  color: var(--pv-texto);
+}
+
+/* Hero de la maqueta */
+.pv-hero {
+  padding: clamp(1.6rem, 4vw, 2.8rem) 0 clamp(1.4rem, 3vw, 2.2rem);
+  max-width: 46rem;
+}
+
+.pv-chip {
+  display: inline-block;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: var(--pv-acento);
+  color: var(--pv-on-acento);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+.pv-title {
+  margin: 0.9rem 0 0.7rem;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  font-weight: 780;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.pv-mark {
+  text-decoration: underline;
+  text-decoration-color: var(--pv-acento);
+  text-decoration-thickness: 0.11em;
+  text-underline-offset: 0.1em;
+}
+
+.pv-lede {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  line-height: 1.6;
+  max-width: 52ch;
+}
+
+.pv-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+
+/* Tarjetas de la maqueta */
+.pv-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.pv-card {
+  padding: 1.15rem 1.15rem 1.25rem;
+  border: 1px solid var(--pv-borde);
+  border-radius: 14px;
+  background: var(--pv-superficie);
+  transition: background-color 240ms ease, border-color 240ms ease;
+}
+
+.pv-card__mark {
+  display: block;
+  width: 26px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--pv-primario);
+  transition: background-color 240ms ease;
+}
+
+.pv-card:nth-child(2) .pv-card__mark { background: var(--pv-acento); }
+.pv-card:nth-child(3) .pv-card__mark { background: color-mix(in oklab, var(--pv-primario) 55%, var(--pv-acento)); }
+
+.pv-card__title {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.pv-card__text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* Pie de la maqueta */
+.pv-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: clamp(1.4rem, 3vw, 2.2rem);
+  padding-top: 1.1rem;
+  border-top: 2px solid var(--pv-acento);
+  transition: border-color 240ms ease;
+}
+
+.pv-footer__brand {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.pv-footer__legal {
+  color: var(--pv-tenue);
+  font-size: 0.8rem;
+}
+
+/* 4. Panel de contraste ------------------------------------------------ */
+
+.checks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.check {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+  padding: 1rem 1.1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--faint);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.check[data-state="ok"] { border-left-color: var(--turquesa); }
+.check[data-state="warn"] { border-left-color: var(--ambar); }
+.check[data-state="fail"] { border-left-color: var(--coral); }
+
+.check__sample {
+  display: grid;
+  place-items: center;
+  height: 58px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font: 700 1.35rem/1 var(--font-display);
+}
+
+.check__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+}
+
+.check__note {
+  margin: 0.15rem 0 0.6rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.check__ratio {
+  font: 700 1.5rem/1 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.check__ratio span {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--faint);
+}
+
+.check__state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.5rem 0 0;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.check[data-state="ok"] .check__state { color: var(--turquesa); border-color: color-mix(in oklab, var(--turquesa) 45%, transparent); }
+.check[data-state="warn"] .check__state { color: var(--ambar); border-color: color-mix(in oklab, var(--ambar) 45%, transparent); }
+.check[data-state="fail"] .check__state { color: var(--coral); border-color: color-mix(in oklab, var(--coral) 45%, transparent); }
+
+.check__icon {
+  font-size: 0.95em;
+  line-height: 1;
+}
+
+/* 5. Guía --------------------------------------------------------------- */
+
+.guide {
+  max-width: 72ch;
+}
+
+.guide p {
+  color: color-mix(in oklab, var(--text) 84%, var(--muted));
+  margin-bottom: 1.15em;
+}
+
+.guide p:last-child { margin-bottom: 0; }
+
+.guide a {
+  color: var(--violeta);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+/* 6. FAQ ---------------------------------------------------------------- */
+
+.faq {
+  max-width: 760px;
+}
+
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 1rem 1.3rem;
+  margin-bottom: 0.8rem;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.faq details[open] {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.06rem;
+  letter-spacing: -0.01em;
+}
+
+.faq summary::marker { color: var(--violeta); }
+
+.faq details[open] summary { color: var(--violeta); }
+
+.faq p {
+  color: var(--muted);
+  margin: 0.7em 0 0.2em;
+  font-size: 0.96rem;
+}
+
+/* 7. Responsive --------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .pv-cards { grid-template-columns: 1fr; }
+  .pv-links { display: none; }
+}
+
+@media (max-width: 560px) {
+  .role__hint { min-height: 0; }
+
+  .tool__actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .check {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .check__sample { height: 46px; font-size: 1.1rem; }
+
+  .pv-cta .pv-btn { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-scope,
+  .preview-scope * {
+    transition: none !important;
+  }
+}

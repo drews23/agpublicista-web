@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teoría del color para diseño web: guía práctica — AG Publicista</title>
+    <meta
+      name="description"
+      content="Teoría del color aplicada al diseño web: armonías, regla 60-30-10, escalas de tono y contraste WCAG, con criterios claros y herramientas gratis para aplicarla."
+    />
+    <link rel="canonical" href="https://agpublicista.com/blog/teoria-del-color-para-web/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="AG Publicista" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Teoría del color para diseño web: guía práctica (2026)" />
+    <meta property="og:description" content="Armonías, regla 60-30-10, escalas de tono y contraste WCAG explicados con criterio para interfaces reales. Con herramientas gratis para aplicarlo." />
+    <meta property="og:url" content="https://agpublicista.com/blog/teoria-del-color-para-web/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://agpublicista.com/blog/teoria-del-color-para-web/#article",
+          "headline": "Teoría del color para diseño web: guía práctica (2026)",
+          "description": "Teoría del color aplicada al diseño web: armonías, regla 60-30-10, escalas de tono y contraste WCAG, con criterios claros y herramientas gratis para aplicarla.",
+          "datePublished": "2026-08-09",
+          "dateModified": "2026-08-09",
+          "author": {
+            "@type": "Organization",
+            "name": "AG Publicista",
+            "url": "https://agpublicista.com/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "AG Publicista",
+            "url": "https://agpublicista.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://agpublicista.com/favicon.svg"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://agpublicista.com/blog/teoria-del-color-para-web/"
+          },
+          "image": "https://agpublicista.com/assets/og/og-home.png",
+          "inLanguage": "es"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://agpublicista.com/blog/teoria-del-color-para-web/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://agpublicista.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://agpublicista.com/blog/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Teoría del color para diseño web",
+              "item": "https://agpublicista.com/blog/teoria-del-color-para-web/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://agpublicista.com/blog/teoria-del-color-para-web/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuántos colores debe tener una web?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Con tres familias basta: un neutro, el color de marca y un acento. Súmales los colores semánticos (éxito, aviso, error) solo si el producto los necesita. Lo importante no es el número de familias, sino que cada una tenga su escala completa de tonos: es preferible un solo color con once pasos que seis colores sueltos sin variantes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Sirve para web la teoría del color que se enseña en pintura?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En parte. El círculo tradicional RYB mezcla pigmentos y da complementarios distintos: el opuesto del rojo es el verde en RYB y el cian en RGB. La pantalla trabaja con luz, así que para diseño web conviene razonar en HSL sobre el círculo RGB. Los conceptos de armonía, proporción y jerarquía sí se trasladan tal cual."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo elijo el color principal de una marca?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mira primero el sector y la competencia: si todos son azules, el azul te vuelve invisible. Después comprueba dos cosas prácticas: que el tono aguante una escala completa sin volverse barro en los pasos oscuros, y que algún paso de esa escala supere 4.5:1 sobre blanco para poder usarlo en texto y enlaces."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Mi color corporativo no pasa el contraste, ¿tengo que cambiarlo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No hace falta. Un color de marca puede funcionar como fondo, con texto blanco o negro encima según cuál contraste mejor, aunque no sirva para texto pequeño. Para textos y enlaces usa un paso más oscuro de su misma escala: sigue siendo tu color y cumples el mínimo de 4.5:1 que exige el nivel AA."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="AG Publicista — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__name">AG <em>Publicista</em></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/blog/" aria-current="page">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <article class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Migas de pan">
+          <a href="/">Inicio</a> <span aria-hidden="true">›</span>
+          <a href="/blog/">Blog</a> <span aria-hidden="true">›</span>
+          <span aria-current="page">Teoría del color para diseño web</span>
+        </nav>
+
+        <header class="page-head reveal" style="--reveal-delay: 80ms">
+          <p class="eyebrow">Guías</p>
+          <h1>Teoría del color para diseño web: guía práctica (2026)</h1>
+          <p class="article-meta">9 de agosto de 2026 · Guías · 9 min de lectura</p>
+          <p class="lede">
+            Elegir colores a ojo funciona hasta que el proyecto crece: aparecen estados hover,
+            bordes, fondos sutiles y mensajes de error, y esa paleta de cinco tonos se queda
+            corta. Aquí tienes la teoría del color que de verdad se usa en una interfaz, con
+            criterios para decidir y herramientas para aplicarla en el mismo rato.
+          </p>
+        </header>
+
+        <div class="prose reveal" style="--reveal-delay: 160ms">
+          <h2>El círculo cromático, explicado rápido</h2>
+          <p>
+            Para diseñar en pantalla solo necesitas tres números, los mismos que usa el modelo
+            <strong>HSL</strong>:
+          </p>
+          <ul>
+            <li><strong>Tono</strong> (<em>hue</em>): la posición en el círculo, de 0 a 360 grados. 0 es rojo, 120 verde y 240 azul. El tono es la identidad del color: lo que llamas «violeta» o «turquesa».</li>
+            <li><strong>Saturación:</strong> cuánto color hay, del 0&nbsp;% (gris) al 100&nbsp;% (color puro). Es el volumen.</li>
+            <li><strong>Luminosidad:</strong> cuánta luz tiene, del 0&nbsp;% (negro) al 100&nbsp;% (blanco). Es lo que decide si un color sirve de fondo o de texto.</li>
+          </ul>
+          <p>
+            El hexadecimal (<code>#8b7bff</code>) es un formato de transporte: perfecto para
+            copiar, inútil para razonar. Nadie sabe qué sale si le suma 30 grados de tono. En
+            HSL sí: partes de <code>hsl(248 100% 74%)</code>, sumas 30 y obtienes un magenta con
+            la misma luz. Decide en HSL y exporta en hexadecimal.
+          </p>
+          <p>
+            La regla operativa cabe en una línea: <strong>cambia el tono para buscar armonías,
+            la saturación para bajar el ruido y la luminosidad para construir escalas.</strong>
+            En el <a href="/herramientas/paletas/">generador de paletas</a> ves los dos valores a
+            la vez, así que puedes moverte en HSL sin perder el hex que vas a pegar en el CSS.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+
+        <div class="prose reveal">
+          <h2>Las armonías y cuándo usar cada una</h2>
+          <p>
+            Una armonía es una fórmula para elegir tonos que conviven bien. No son leyes, son
+            puntos de partida fiables. Estas cuatro cubren casi cualquier proyecto web.
+          </p>
+
+          <h3>Análoga: tonos vecinos (±30°)</h3>
+          <p>
+            Calma y coherencia: todo parece de la misma familia porque lo es. Funciona en
+            portafolios, blogs, servicios profesionales y salud. Su punto débil es la
+            jerarquía: si el botón principal es vecino del fondo, nadie lo ve. Reserva un tono
+            mucho más saturado u oscuro para las acciones.
+          </p>
+
+          <h3>Complementaria: opuestos a 180°</h3>
+          <p>
+            Máxima tensión visual. Es la armonía de las <em>landings</em> de conversión, donde
+            una sola acción tiene que ganar. Con una condición: uno manda y el otro aparece solo
+            en el acento. Nunca al 50&nbsp;% cada uno, porque dos opuestos saturados en
+            superficies grandes vibran y cansan la vista.
+          </p>
+
+          <h3>Tríada: tres tonos a 120°</h3>
+          <p>
+            Vibrante y equilibrada. Su terreno son los productos con varias categorías y los
+            paneles con gráficas, donde hay que distinguir series sin parecer un semáforo.
+            Truco: deja uno a plena saturación y desatura los otros dos un 20-40&nbsp;%.
+          </p>
+
+          <h3>Complementaria dividida: la base y los dos vecinos de su opuesto</h3>
+          <p>
+            El contraste de la complementaria sin la agresividad. Es la opción más segura
+            cuando no hay dirección de arte detrás: un acento que destaca de verdad y un tercer
+            tono para estados secundarios. Si dudas, empieza aquí.
+          </p>
+
+          <p>
+            Esto se decide viendo, no leyendo: mete el color de tu marca en el
+            <a href="/herramientas/paletas/">generador de paletas</a> y compara las armonías
+            calculadas desde ese mismo tono.
+          </p>
+        </div>
+
+        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(1.6rem, 4vw, 2.6rem); margin-block: 2rem;">
+          <p class="eyebrow" style="justify-content: center;">Atajo</p>
+          <h3 style="max-width: 28ch; margin-inline: auto;">Prueba las armonías con tu color, no con el del ejemplo</h3>
+          <p style="max-width: 50ch; margin-inline: auto; color: var(--muted);">
+            Pega tu hexadecimal y obtén las cinco armonías, la escala completa y el código
+            listo para el CSS. Está entre las
+            <a href="/herramientas/">herramientas gratuitas</a> del sitio, sin registro.
+          </p>
+          <div class="hero__cta" style="justify-content: center;">
+            <a class="btn btn--primary" href="/herramientas/paletas/">Abrir el generador de paletas</a>
+          </div>
+        </div>
+
+        <div class="prose reveal">
+          <h2>La regla 60-30-10 aplicada a interfaces</h2>
+          <p>
+            En decoración se explica con paredes, muebles y cojines. En una interfaz se traduce
+            así:
+          </p>
+          <ul>
+            <li><strong>60&nbsp;% — dominante.</strong> Fondo de página y superficies grandes. Casi nunca es el color de marca: suele ser un neutro (blanco roto, gris muy claro, tinta oscura). Si tu color corporativo ocupa el 60&nbsp;%, la web grita.</li>
+            <li><strong>30&nbsp;% — secundario.</strong> Tarjetas, cabeceras, bordes, texto secundario y fondos de sección. Aquí sí vive tu color de marca, teñido: el mismo tono con poca saturación.</li>
+            <li><strong>10&nbsp;% — acento.</strong> Botón primario, enlaces, anillo de foco y estados activos. Poco y muy visible.</li>
+          </ul>
+          <p>
+            La regla práctica que evita discusiones: <strong>si el acento aparece en más del
+            10&nbsp;% de la pantalla, deja de ser acento.</strong> Cuando todo destaca, no
+            destaca nada.
+          </p>
+          <p>
+            Un ejemplo con los colores de este sitio: fondo casi negro (60&nbsp;%), superficies
+            de violeta muy desaturado y líneas finas (30&nbsp;%), turquesa saturado solo en el
+            botón y el enlace activo (10&nbsp;%). Es lo que puedes comprobar en
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a>: cambias los colores y
+            ves al instante si la proporción aguanta sobre una maqueta completa.
+          </p>
+
+          <h2>Por qué necesitas escalas de tono y no solo cinco colores</h2>
+          <p>
+            Piensa en lo que pide una interfaz real para un único color de marca: fondo de
+            página, fondo de tarjeta, borde normal, borde en hover, texto secundario, texto
+            principal, botón, botón en hover y botón pulsado. Nueve decisiones. Una paleta de
+            cinco hexadecimales no cubre ninguna: cubre «el color» y te deja improvisando.
+          </p>
+          <p>
+            Por eso los sistemas de diseño trabajan con <strong>escalas</strong>: once pasos por
+            familia, del 50 (casi blanco) al 950 (casi negro), variando la luminosidad y
+            ajustando la saturación en los extremos. Un reparto que funciona:
+          </p>
+          <ul>
+            <li><strong>50-100:</strong> fondos sutiles, franjas de sección, filas alternas de tablas.</li>
+            <li><strong>200-300:</strong> bordes, separadores y estados deshabilitados.</li>
+            <li><strong>400-600:</strong> el color «real» de la marca; el 500 es el de referencia.</li>
+            <li><strong>700-800:</strong> hover y estado pulsado de los botones, enlaces sobre fondo claro.</li>
+            <li><strong>900-950:</strong> texto de máximo contraste y fondos oscuros.</li>
+          </ul>
+          <p>
+            Con una escala, los estados dejan de improvisarse: <strong>hover es un paso más
+            oscuro y pulsado son dos.</strong> Nunca inventes un hexadecimal nuevo para un
+            hover. Guárdala como variables CSS (<code>--violeta-500</code>,
+            <code>--violeta-700</code>): el día que cambie la marca, cambias once líneas.
+          </p>
+          <p>
+            Generarla a mano es tedioso y sale desigual. El
+            <a href="/herramientas/paletas/">generador de paletas</a> la crea desde un solo
+            color y la devuelve en variables CSS o en formato Tailwind, con el contraste de
+            cada peldaño calculado.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+
+        <div class="prose reveal">
+          <h2>Contraste y accesibilidad: los números que importan</h2>
+          <p>
+            Aquí se acaban las opiniones y empiezan las matemáticas. El contraste es la relación
+            entre la luminancia de dos colores y va de 1:1 (idénticos) a 21:1 (negro sobre
+            blanco). Las WCAG piden:
+          </p>
+          <ul>
+            <li><strong>Nivel AA — 4.5:1</strong> para texto normal y <strong>3:1</strong> para texto grande. Es el mínimo que reclaman las normativas de accesibilidad.</li>
+            <li><strong>Nivel AAA — 7:1</strong> para texto normal y <strong>4.5:1</strong> para texto grande.</li>
+            <li><strong>3:1</strong> para elementos no textuales que informan: iconos, bordes de campos e indicadores de foco.</li>
+          </ul>
+          <p>
+            ¿Qué cuenta como texto grande? A partir de 24&nbsp;px (18&nbsp;pt), o desde
+            18,66&nbsp;px (14&nbsp;pt) si está en negrita. Por eso un titular puede permitirse un
+            color que un párrafo no.
+          </p>
+          <p>
+            Dos consejos que ahorran rehacer pantallas. <strong>Mide sobre el fondo real</strong>:
+            da igual que el texto pase el contraste sobre el fondo de página si va dentro de una
+            tarjeta de otro color. Y cuando el acento no pasa —casi nunca pasa; un turquesa
+            bonito sobre blanco anda por 1,8:1—, <strong>no cambies de color, cambia de
+            paso</strong>: usa el 700 para el texto y deja el 400 para el fondo del botón.
+          </p>
+          <p>
+            Y un detalle que se olvida: el color nunca puede ser el único portador de
+            información. Un error en rojo necesita también icono y texto, porque cerca del
+            8&nbsp;% de los hombres tiene algún tipo de daltonismo. En
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a> tienes el ratio de cada
+            combinación en pantalla mientras editas.
+          </p>
+
+          <h2>Errores comunes con el color en una web</h2>
+          <ul>
+            <li><strong>Saturación uniforme.</strong> Cinco colores al 100&nbsp;% pelean entre sí. Baja la saturación de los de soporte y reserva el máximo para el acento.</li>
+            <li><strong>Gris puro para el texto.</strong> Un <code>#808080</code> sobre un fondo de marca se ve sucio. Tiñe los grises: el tono de tu color principal con un 6-12&nbsp;% de saturación.</li>
+            <li><strong>Acento en exceso.</strong> Botón violeta, título violeta, icono violeta, borde violeta. Decide qué importa en esa pantalla y pinta solo eso.</li>
+            <li><strong>El mismo color para lo clicable y lo decorativo.</strong> Si el color de los enlaces también aparece en ilustraciones y fondos, nadie sabe qué se puede pulsar.</li>
+            <li><strong>Copiar una paleta bonita sin comprobar el contraste.</strong> Las de las galerías se diseñan para lucir en una imagen cuadrada, no para sostener texto de 14&nbsp;px.</li>
+            <li><strong>Modo oscuro por inversión.</strong> No basta con dar la vuelta a los valores: baja la saturación, evita el negro puro y no uses blanco puro en el texto, que deslumbra.</li>
+          </ul>
+
+          <h2>Preguntas frecuentes</h2>
+          <h3>¿Cuántos colores debe tener una web?</h3>
+          <p>
+            Con tres familias basta: un neutro, el color de marca y un acento. Súmales los
+            semánticos (éxito, aviso, error) solo si el producto los necesita. Lo importante no
+            es el número de familias, sino que cada una tenga su escala completa: es preferible
+            un solo color con once pasos que seis colores sueltos sin variantes.
+          </p>
+          <h3>¿Sirve para web la teoría del color que se enseña en pintura?</h3>
+          <p>
+            En parte. El círculo tradicional (RYB) mezcla pigmentos y da complementarios
+            distintos: el opuesto del rojo es el verde en RYB y el cian en RGB. La pantalla
+            trabaja con luz, así que conviene razonar en HSL sobre el círculo RGB. Los conceptos
+            de armonía, proporción y jerarquía sí se trasladan tal cual.
+          </p>
+          <h3>¿Cómo elijo el color principal de una marca?</h3>
+          <p>
+            Mira primero el sector y la competencia: si todos son azules, el azul te vuelve
+            invisible. Después comprueba dos cosas prácticas: que el tono aguante una escala
+            completa sin volverse barro en los pasos oscuros, y que algún paso supere 4.5:1
+            sobre blanco para poder usarlo en texto y enlaces.
+          </p>
+          <h3>Mi color corporativo no pasa el contraste, ¿tengo que cambiarlo?</h3>
+          <p>
+            No hace falta. Un color de marca puede funcionar como fondo —con texto blanco o
+            negro encima, el que mejor contraste dé— aunque no sirva para texto pequeño. Para
+            textos y enlaces usa un paso más oscuro de su misma escala: sigue siendo tu color y
+            cumples el 4.5:1 del nivel AA.
+          </p>
+        </div>
+
+        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem); margin-block: 2rem;">
+          <p class="eyebrow" style="justify-content: center;">Ponlo en práctica</p>
+          <h2 style="max-width: 24ch; margin-inline: auto;">De la teoría a tu CSS en dos pasos</h2>
+          <p style="max-width: 52ch; margin-inline: auto; color: var(--muted);">
+            Construye la paleta y la escala en el
+            <a href="/herramientas/paletas/">generador de paletas</a>, compruébala sobre una
+            maqueta real en <a href="/herramientas/colores-en-vivo/">colores en vivo</a> y copia
+            las variables CSS. Sin registro y sin instalar nada.
+          </p>
+          <div class="hero__cta" style="justify-content: center;">
+            <a class="btn btn--primary" href="/herramientas/colores-en-vivo/">Probar mis colores en vivo</a>
+            <a class="btn btn--ghost" href="/blog/">Más guías del blog</a>
+          </div>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+
+        <section class="section" style="padding-bottom: 0;">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue aprendiendo</p>
+              <h2>Más guías para tu caja de herramientas</h2>
+            </div>
+            <a class="more" href="/blog/">Ver el blog →</a>
+          </div>
+
+          <div class="card-grid">
+            <a class="card reveal" href="/blog/como-crear-favicon-svg/">
+              <span class="card__tag">Guías</span>
+              <div class="card__art" aria-hidden="true">
+                <svg viewBox="0 0 200 90" width="200" height="90">
+                  <rect x="70" y="15" width="60" height="60" rx="15" fill="#8b7bff" />
+                  <text x="100" y="57" font-size="34" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-style="italic" font-weight="700">a</text>
+                  <path d="M138 22l6-12 6 12 12 3-9 9 2 13-11-6-11 6 2-13-9-9z" fill="#ffb454" transform="scale(0.8) translate(38 -2)" />
+                </svg>
+              </div>
+              <h3>Cómo crear un favicon SVG (guía completa)</h3>
+              <p>Data URIs, modo oscuro, emoji y compatibilidad entre navegadores, con código listo para copiar.</p>
+              <span class="card__meta">Guía · 8 min de lectura</span>
+            </a>
+
+            <a class="card reveal" style="--reveal-delay: 90ms" href="/herramientas/paletas/">
+              <span class="card__tag">Color</span>
+              <div class="card__art" aria-hidden="true">
+                <svg viewBox="0 0 200 90" width="200" height="90">
+                  <rect x="30" y="25" width="28" height="40" rx="8" fill="#8b7bff" />
+                  <rect x="64" y="25" width="28" height="40" rx="8" fill="#6e5df2" />
+                  <rect x="98" y="25" width="28" height="40" rx="8" fill="#35d6c8" />
+                  <rect x="132" y="25" width="28" height="40" rx="8" fill="#ffb454" />
+                </svg>
+              </div>
+              <h3>Generador de paletas</h3>
+              <p>Armonías y escalas del 50 al 950 con contraste WCAG, listas para exportar a CSS o Tailwind.</p>
+              <span class="card__meta">Herramienta interactiva · Gratis</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" style="padding-bottom: 0;">
+          <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem);">
+            <p class="eyebrow" style="justify-content: center;">Andy Publicista en YouTube</p>
+            <h2 style="max-width: 22ch; margin-inline: auto;">Cada semana, recursos nuevos y procesos creativos reales</h2>
+            <p style="max-width: 52ch; margin-inline: auto; color: var(--muted);">
+              Diseño web, dirección de arte, motion graphics y packs descargables.
+              Suscríbete para no perderte la próxima guía ni la próxima herramienta.
+            </p>
+            <div class="hero__cta" style="justify-content: center;">
+              <a class="btn btn--primary" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg?sub_confirmation=1" target="_blank" rel="noopener">Suscribirme al canal</a>
+              <a class="btn btn--ghost" href="/herramientas/">Ver todas las herramientas</a>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="AG Publicista — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="44" fill="#fff" text-anchor="middle">AG</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__name">AG <em>Publicista</em></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> AG Publicista · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+  </body>
+</html>
