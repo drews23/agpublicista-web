@@ -1,4 +1,4 @@
-/* AG Publicista — Herramienta: generador de paletas de colores
+/* Lienzo — Herramienta: generador de paletas de colores
    Toda la lógica de color vive en /js/color-engine.js (window.AGColor).
    Aquí solo hay estado de interfaz, render y exportación. */
 (() => {

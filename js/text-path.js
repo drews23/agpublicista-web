@@ -1,4 +1,4 @@
-/* AG Publicista — Componente de texto sobre onda (TextPathMarquee)
+/* Lienzo — Componente de texto sobre onda (TextPathMarquee)
    Uso: <div data-text-path data-text="DISEÑO" data-separator="•" ...></div>
    API global: window.TextPathMarquee, window.initTextPaths, window.getTextPathInstance */
 (() => {

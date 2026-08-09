@@ -1,4 +1,4 @@
-/* AG Publicista — Herramienta "Colores en vivo"
+/* Lienzo — Herramienta "Colores en vivo"
    Cinco colores por rol aplicados a una maqueta de web real, con contraste WCAG.
    Depende de /js/color-engine.js (window.AGColor) y de /js/site.js
    (window.agpCopy, window.agpToast). Sin librerías externas. */

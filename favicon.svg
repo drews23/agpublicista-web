@@ -7,6 +7,6 @@
     </linearGradient>
   </defs>
   <rect width="100" height="100" rx="26" fill="url(#g)"/>
-  <text x="50" y="65" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="44" fill="#ffffff" text-anchor="middle">AG</text>
+  <text x="50" y="67" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="56" fill="#ffffff" text-anchor="middle">L</text>
   <circle cx="79" cy="24" r="7" fill="#ffb454"/>
 </svg>

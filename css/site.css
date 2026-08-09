@@ -171,13 +171,36 @@ img, svg { max-width: 100%; }
 
 .brand:hover .brand__mark { transform: rotate(-8deg) scale(1.05); }
 
-.brand__name { font-size: 1.06rem; }
+.brand__lockup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  line-height: 1.1;
+}
 
-.brand__name em {
+.brand__name {
   font-family: var(--font-display);
   font-style: italic;
-  font-weight: 500;
-  color: var(--violeta);
+  font-weight: 560;
+  font-size: 1.32rem;
+  letter-spacing: -0.01em;
+  background: linear-gradient(100deg, var(--violeta), var(--turquesa) 75%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand__tagline {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  .brand__tagline { display: none; }
 }
 
 .site-nav {

@@ -1,4 +1,4 @@
-/* AG Publicista — Motor de color (sin dependencias)
+/* Lienzo — Motor de color (sin dependencias)
    Conversión de espacios, escalas, armonías y contraste WCAG.
    API global: window.AGColor */
 (() => {

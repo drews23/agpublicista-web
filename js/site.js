@@ -1,4 +1,4 @@
-/* AG Publicista — JS global: tema, navegación móvil, animaciones, toast */
+/* Lienzo — JS global: tema, navegación móvil, animaciones, toast */
 (() => {
   "use strict";
 

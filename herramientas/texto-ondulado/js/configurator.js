@@ -1,4 +1,4 @@
-/* AG Publicista — Configurador del generador de texto ondulado
+/* Lienzo — Configurador del generador de texto ondulado
    Requiere el componente compartido /js/text-path.js (window.initTextPaths,
    window.getTextPathInstance) y /js/site.js (window.agpToast, window.agpCopy). */
 (() => {
