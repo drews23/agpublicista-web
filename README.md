@@ -19,6 +19,7 @@ Sitio estático en español con herramientas creativas, recursos descargables y 
 /js/site.js             Tema, navegación, animaciones, utilidades
 /js/text-path.js        Componente TextPathMarquee (texto sobre onda SVG)
 /js/color-engine.js     Motor de color (conversión, escalas, armonías, contraste WCAG)
+/scripts/make-og.ps1    Regenera assets/og/og-home.png (PowerShell, sin dependencias)
 ```
 
 Sin build ni dependencias: HTML + CSS + JS vanilla. La raíz del repositorio es la raíz web.
