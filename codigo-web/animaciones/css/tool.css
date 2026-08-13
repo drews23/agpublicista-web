@@ -1,0 +1,117 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo — Generador de animaciones CSS
+   Solo lo que NO existe en /css/codigo-web.css: la curva de aceleración
+   dibujada en SVG, su marcador animado y dos piezas menores del taller.
+\* ------------------------------------------------------------------ */
+
+/* Dos botones en la cabecera del panel de vista previa */
+.acciones-previa {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Estado de la vista previa (región aria-live) */
+.nota-anim {
+  margin: 0;
+  padding: 0.9rem 1.1rem;
+  border-top: 1px solid var(--line);
+  color: var(--faint);
+  font-size: 0.79rem;
+  line-height: 1.45;
+}
+
+/* Los cuatro valores del cubic-bezier, en dos filas de dos */
+.bezier {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+/* Curva de aceleración ------------------------------------------------ */
+
+.curva {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.curva__lienzo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+}
+
+/* El viewBox se recalcula solo cuando la curva se sale del cuadro, así que
+   los trazos se fijan en píxeles reales para no adelgazar al reescalar. */
+.curva__rejilla {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.curva__diagonal {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.curva__mango {
+  stroke: var(--turquesa);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.curva__punto { fill: var(--turquesa); }
+
+.curva__trazo {
+  fill: none;
+  stroke: var(--violeta);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.curva__marcador { fill: var(--ambar); }
+
+.curva__pie {
+  color: var(--faint);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* El marcador recorre la curva: el eje X avanza con el reloj (linear) y el
+   eje Y con la curva elegida. El JS solo les pasa duración, retardo,
+   repeticiones, dirección y pausa.
+
+   Van con guion bajo a propósito: limpiarNombre() nunca puede devolver un
+   guion bajo, así que la animación que nombre el usuario jamás podrá chocar
+   con estos dos nombres y romper el marcador por cascada. */
+@keyframes agp_curva_x {
+  from { transform: translateX(0); }
+  to { transform: translateX(100px); }
+}
+
+@keyframes agp_curva_y {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100px); }
+}
+
+[data-marcador-x] {
+  animation-name: agp_curva_x;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+[data-marcador-y] {
+  animation-name: agp_curva_y;
+  animation-fill-mode: both;
+}
+
+/* Quien pide menos movimiento no recibe la animación al cargar: el JS
+   arranca la vista previa en pausa y deja el botón «Reproducir» listo.
+   No se anula aquí porque ver el efecto ES la herramienta. */

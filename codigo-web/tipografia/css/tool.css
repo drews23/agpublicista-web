@@ -1,0 +1,50 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo — Generador de estilos de texto
+   Solo lo que NO existe ya en /css/codigo-web.css
+\* ------------------------------------------------------------------ */
+
+/* La muestra necesita ocupar todo el ancho disponible: la alineación y la
+   sangría no se aprecian en una caja que se encoge hasta el contenido. */
+.previa-tipo {
+  display: grid;
+  /* minmax(0, 1fr) y no 1fr: sin el mínimo en 0, una palabra larga a 96 px
+     ensancha la columna y el texto se sale del marco en vez de partirse. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 42rem;
+  min-width: 0;
+}
+
+.previa-tipo .demo-texto {
+  max-width: none;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+/* Párrafo secundario: mismo estilo a menor tamaño, para juzgar de verdad la
+   altura de línea, el interletrado en frases largas y el justificado. */
+.previa-parrafo {
+  margin: 0;
+  color: var(--muted);
+  overflow-wrap: break-word;
+  transition: all 220ms var(--ease);
+}
+
+/* Fragmentos de código dentro de las ayudas de los controles */
+/* El chip usa --muted, no --faint: sobre el fondo aclarado por var(--panel)
+   el gris de las ayudas se queda en 4.22:1 y no llega al mínimo AA. */
+.campo__hint code,
+.interruptor small code {
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .previa-parrafo { transition: none; }
+}

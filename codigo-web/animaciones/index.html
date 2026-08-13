@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de animaciones CSS y keyframes — Lienzo</title>
+    <meta
+      name="description"
+      content="Crea animaciones CSS con vista previa en vivo: elige la curva de aceleración, ajusta duración y repeticiones, y copia los keyframes listos para pegar."
+    />
+    <link rel="canonical" href="https://agpublicista.com/codigo-web/animaciones/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de animaciones CSS y keyframes" />
+    <meta property="og:description" content="Animaciones CSS con curva de aceleración dibujada en vivo, vista previa que puedes pausar y código listo para copiar." />
+    <meta property="og:url" content="https://agpublicista.com/codigo-web/animaciones/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/codigo-web.css" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/codigo-web/animaciones/#app",
+          "name": "Generador de animaciones CSS",
+          "url": "https://agpublicista.com/codigo-web/animaciones/",
+          "description": "Generador visual de animaciones CSS con bloque @keyframes, curva de aceleración dibujada en vivo, control de duración, retardo, repeticiones, dirección y modo de relleno.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Código web", "item": "https://agpublicista.com/codigo-web/" },
+            { "@type": "ListItem", "position": 3, "name": "Animaciones CSS", "item": "https://agpublicista.com/codigo-web/animaciones/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuál es la diferencia entre una transición y una animación en CSS?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Una transición necesita que algo cambie para dispararse, por ejemplo un hover o una clase que añades con JavaScript, y solo va del estado A al estado B. Una animación con keyframes se reproduce sola en cuanto el elemento existe, admite todos los pasos intermedios que quieras y controla repeticiones, dirección y retardo. Si el efecto es una respuesta a la acción del usuario, usa transición; si es un movimiento propio del elemento, usa animación."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué hace exactamente animation-fill-mode?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Decide qué estilos conserva el elemento fuera del tiempo que dura la animación. Con none vuelve a su aspecto normal antes de empezar y al terminar. Con forwards se queda congelado en el último fotograma. Con backwards adopta el primer fotograma durante el retardo, antes de arrancar. Con both hace las dos cosas, y es lo que quieres casi siempre en animaciones de entrada para que el elemento no parpadee ni salte al final."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué mi animación se ve a tirones?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Casi siempre porque estás animando propiedades que obligan al navegador a recalcular el diseño de la página en cada fotograma, como width, height, top, left, margin o padding. Cambia esos movimientos por transform (translate, scale, rotate) y usa opacity para las apariciones: el navegador los resuelve en la tarjeta gráfica sin rehacer el diseño, y la animación pasa a ir fluida."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo hago que la animación se reproduzca cuando el elemento entra en pantalla?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pon la animación en una clase, por ejemplo .animado, y añádesela al elemento con un IntersectionObserver cuando entre en el viewport. Con animation-fill-mode: both el elemento queda en su sitio al terminar. También puedes hacerlo sin JavaScript con animation-timeline: view(), aunque su soporte todavía no es universal."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Animaciones</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Generador CSS</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de animaciones CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            Elige un efecto, ajusta el tiempo y dibuja la curva de aceleración. Te llevas
+            el bloque <code>@keyframes</code> y la propiedad <code>animation</code> listos
+            para pegar, con el respeto por quien pide menos movimiento ya incluido.
+          </p>
+        </div>
+
+        <div class="taller reveal" style="--reveal-delay: 200ms">
+          <div class="taller__main">
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Vista previa</h2>
+                <div class="acciones-previa">
+                  <button class="boton-sutil" type="button" data-pausa>Pausar</button>
+                  <button class="boton-sutil" type="button" data-reiniciar>Reiniciar</button>
+                </div>
+              </div>
+              <div class="lienzo-previa lienzo-previa--liso">
+                <div class="demo-caja" data-caja>Lienzo</div>
+              </div>
+              <p class="nota-anim" data-estado aria-live="polite">
+                Vista previa en reproducción. Pulsa «Reiniciar» para verla otra vez desde el principio.
+              </p>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
+              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de la animación"></pre>
+              <div class="acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS completo</button>
+                <button class="btn btn--ghost" type="button" data-copiar-keyframes>Copiar solo los keyframes</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes de la animación" data-controles>
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Efecto</h2></div>
+              <div class="controles">
+                <div class="campo">
+                  <span class="campo__label">Preestablecido</span>
+                  <div class="opciones" role="radiogroup" aria-label="Animación preestablecida">
+                    <label><input type="radio" name="preset" data-control="preset" value="aparecer" checked /> Aparecer</label>
+                    <label><input type="radio" name="preset" data-control="preset" value="deslizar" /> Deslizar</label>
+                    <label><input type="radio" name="preset" data-control="preset" value="escalar" /> Escalar</label>
+                    <label><input type="radio" name="preset" data-control="preset" value="rebotar" /> Rebotar</label>
+                    <label><input type="radio" name="preset" data-control="preset" value="latido" /> Latido</label>
+                    <label><input type="radio" name="preset" data-control="preset" value="sacudir" /> Sacudir</label>
+                    <label><input type="radio" name="preset" data-control="preset" value="girar" /> Girar</label>
+                    <label><input type="radio" name="preset" data-control="preset" value="personalizada" /> A medida</label>
+                  </div>
+                  <span class="campo__hint">Cada preestablecido trae su tiempo y su curva recomendados. A partir de ahí, todo es tuyo.</span>
+                </div>
+
+                <label class="campo">
+                  <span class="campo__label">Nombre de la animación</span>
+                  <input type="text" data-control="nombre" value="aparecer" spellcheck="false" autocomplete="off" />
+                  <span class="campo__hint">Es el identificador de <code>@keyframes</code>. Solo letras, números y guiones.</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Tiempo</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Duración <span><output data-output="duracion">0.6</output> s</span></span>
+                  <input type="range" min="0.1" max="5" step="0.05" value="0.6" data-control="duracion" aria-label="Duración en segundos" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Retardo <span><output data-output="retardo">0</output> s</span></span>
+                  <input type="range" min="0" max="3" step="0.05" value="0" data-control="retardo" aria-label="Retardo en segundos" />
+                </label>
+
+                <label class="campo" data-campo-repeticiones>
+                  <span class="campo__label">Repeticiones</span>
+                  <input type="number" min="1" max="50" step="1" value="1" data-control="repeticiones" />
+                </label>
+
+                <label class="interruptor">
+                  <input type="checkbox" data-control="infinito" />
+                  <span>Repetir sin fin<small>Equivale a <code>infinite</code>. Úsalo solo en indicadores de carga o adornos discretos.</small></span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Dirección</span>
+                  <select data-control="direccion">
+                    <option value="normal" selected>normal — siempre hacia delante</option>
+                    <option value="reverse">reverse — siempre hacia atrás</option>
+                    <option value="alternate">alternate — ida y vuelta</option>
+                    <option value="alternate-reverse">alternate-reverse — vuelta e ida</option>
+                  </select>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Modo de relleno</span>
+                  <select data-control="relleno">
+                    <option value="none">none — no conserva nada</option>
+                    <option value="forwards">forwards — se queda en el último fotograma</option>
+                    <option value="backwards">backwards — adopta el primero durante el retardo</option>
+                    <option value="both" selected>both — las dos cosas</option>
+                  </select>
+                  <span class="campo__hint">Para animaciones de entrada casi siempre quieres <code>both</code>: evita el salto del final y el parpadeo del principio.</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Curva de aceleración</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Curva</span>
+                  <select data-control="curva">
+                    <option value="linear">linear</option>
+                    <option value="ease">ease</option>
+                    <option value="ease-in">ease-in</option>
+                    <option value="ease-out" selected>ease-out</option>
+                    <option value="ease-in-out">ease-in-out</option>
+                    <option value="personalizada">cubic-bezier a medida</option>
+                  </select>
+                </label>
+
+                <div class="campo bezier" data-campo-bezier hidden>
+                  <label class="campo">
+                    <span class="campo__label">X1</span>
+                    <input type="number" min="0" max="1" step="0.01" value="0" data-control="bx1" />
+                  </label>
+                  <label class="campo">
+                    <span class="campo__label">Y1</span>
+                    <input type="number" min="-3" max="3" step="0.01" value="0" data-control="by1" />
+                  </label>
+                  <label class="campo">
+                    <span class="campo__label">X2</span>
+                    <input type="number" min="0" max="1" step="0.01" value="0.58" data-control="bx2" />
+                  </label>
+                  <label class="campo">
+                    <span class="campo__label">Y2</span>
+                    <input type="number" min="-3" max="3" step="0.01" value="1" data-control="by2" />
+                  </label>
+                </div>
+
+                <figure class="curva">
+                  <svg class="curva__lienzo" viewBox="-15 -15 130 130" data-curva role="img" aria-label="Curva de aceleración ease-out">
+                    <g class="curva__rejilla" aria-hidden="true">
+                      <rect x="0" y="0" width="100" height="100" rx="3" />
+                      <line x1="0" y1="50" x2="100" y2="50" />
+                      <line x1="50" y1="0" x2="50" y2="100" />
+                    </g>
+                    <line class="curva__diagonal" x1="0" y1="100" x2="100" y2="0" aria-hidden="true" />
+                    <line class="curva__mango" data-mango1 x1="0" y1="100" x2="0" y2="100" aria-hidden="true" />
+                    <line class="curva__mango" data-mango2 x1="58" y1="0" x2="100" y2="0" aria-hidden="true" />
+                    <path class="curva__trazo" data-trazo d="M 0 100 C 0 100, 58 0, 100 0" aria-hidden="true" />
+                    <circle class="curva__punto" data-punto1 cx="0" cy="100" r="4" aria-hidden="true" />
+                    <circle class="curva__punto" data-punto2 cx="58" cy="0" r="4" aria-hidden="true" />
+                    <g data-marcador-x aria-hidden="true">
+                      <circle class="curva__marcador" data-marcador-y cx="0" cy="100" r="5" />
+                    </g>
+                  </svg>
+                  <figcaption class="curva__pie">
+                    Horizontal: el tiempo que pasa. Vertical: lo que ha avanzado la animación.
+                    La bolita ámbar recorre la curva al ritmo real del efecto.
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="panel" data-panel-medida hidden>
+              <div class="panel__head"><h2 class="panel__title">Movimiento a medida</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Opacidad inicial <output data-output="opacidad">0</output></span>
+                  <input type="range" min="0" max="1" step="0.05" value="0" data-control="opacidad" aria-label="Opacidad inicial" />
+                </label>
+                <label class="campo">
+                  <span class="campo__label">Desplazamiento X <span><output data-output="mx">0</output> px</span></span>
+                  <input type="range" min="-200" max="200" step="1" value="0" data-control="mx" aria-label="Desplazamiento inicial en X en píxeles" />
+                </label>
+                <label class="campo">
+                  <span class="campo__label">Desplazamiento Y <span><output data-output="my">24</output> px</span></span>
+                  <input type="range" min="-200" max="200" step="1" value="24" data-control="my" aria-label="Desplazamiento inicial en Y en píxeles" />
+                </label>
+                <label class="campo">
+                  <span class="campo__label">Escala inicial <output data-output="escala">0.92</output></span>
+                  <input type="range" min="0.2" max="2" step="0.01" value="0.92" data-control="escala" aria-label="Escala inicial" />
+                </label>
+                <label class="campo">
+                  <span class="campo__label">Giro inicial <span><output data-output="giro">0</output>°</span></span>
+                  <input type="range" min="-360" max="360" step="1" value="0" data-control="giro" aria-label="Giro inicial en grados" />
+                </label>
+                <p class="campo__hint">
+                  Solo <code>transform</code> y <code>opacity</code>: son las dos propiedades que el
+                  navegador anima sin rehacer el diseño de la página.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="nota-taller">
+          ¿Buscas otro efecto? Toda la colección está en <a href="/codigo-web/">código web</a>,
+          y el <a href="/codigo-web/degradados/">generador de degradados</a> te prepara el fondo
+          sobre el que se va a mover esto.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="prose">
+          <h2>Keyframes y animation: dos piezas que se necesitan</h2>
+          <p>
+            Una animación CSS son siempre dos cosas separadas. El bloque <code>@keyframes</code>
+            describe <em>qué</em> pasa: los fotogramas clave, del <code>0%</code> al <code>100%</code>
+            (o <code>from</code> y <code>to</code> cuando solo hay dos). La propiedad
+            <code>animation</code> describe <em>cuándo y cómo</em>: a qué elemento se aplica, cuánto
+            dura, con qué curva, cuántas veces se repite y qué deja al terminar.
+          </p>
+          <p>
+            El bloque de keyframes vive fuera de cualquier selector y se puede reutilizar en veinte
+            sitios distintos con tiempos diferentes. Por eso conviene ponerle un nombre que describa
+            el movimiento (<code>deslizar</code>, <code>latido</code>) y no el elemento
+            (<code>animacion-header</code>): el mismo desplazamiento te servirá luego en una tarjeta
+            y en un aviso. En la propiedad, el orden abreviado es nombre, duración, curva, retardo,
+            repeticiones, dirección y relleno. Si pones dos tiempos, el primero siempre es la
+            duración y el segundo el retardo.
+          </p>
+
+          <h2>fill-mode: el valor que más se malinterpreta</h2>
+          <p>
+            Fuera del tiempo que dura la animación, el elemento vuelve a ser lo que dice su CSS
+            normal. <code>animation-fill-mode</code> es lo único que cambia eso, y de ahí vienen
+            la mitad de los efectos raros:
+          </p>
+          <p>
+            <strong>none</strong> no conserva nada: si tu último fotograma es
+            <code>opacity: 1</code> pero el elemento tiene <code>opacity: 0</code> en su CSS, al
+            acabar desaparece de golpe. <strong>forwards</strong> lo congela en el último fotograma,
+            que es lo que quieres en una entrada. <strong>backwards</strong> le aplica el primer
+            fotograma durante el retardo, y evita el clásico parpadeo de un elemento que se ve un
+            instante antes de empezar a animarse. <strong>both</strong> hace las dos cosas y es la
+            respuesta correcta casi siempre. Si una animación de entrada te parpadea al principio o
+            salta al final, el culpable es este valor, no tus keyframes.
+          </p>
+
+          <h2>Curvas de aceleración, y por qué linear casi nunca se ve bien</h2>
+          <p>
+            La curva reparte el progreso a lo largo del tiempo. Con <code>linear</code> el elemento
+            avanza siempre a la misma velocidad: arranca de golpe a máxima velocidad y se detiene en
+            seco. Nada en el mundo físico se mueve así, y el ojo lo nota aunque no sepa explicar por
+            qué. Su único terreno legítimo es el movimiento continuo que no tiene principio ni final
+            visibles: una rueda que gira, un indicador de carga.
+          </p>
+          <p>
+            Para todo lo demás, la regla práctica es sencilla. Lo que <em>entra</em> en pantalla usa
+            una curva que frena al final (<code>ease-out</code>): llega rápido y se posa. Lo que
+            <em>sale</em> usa una que acelera (<code>ease-in</code>): se va sin hacerse esperar. Lo
+            que se mueve de un punto a otro dentro de la pantalla usa <code>ease-in-out</code>. Y
+            cuando necesitas carácter, <code>cubic-bezier()</code> te deja pasarte del 100 % —un
+            valor de Y mayor que 1— para conseguir ese rebotito de sobrepaso que hace que un botón
+            parezca vivo. En el panel de la derecha lo ves dibujado antes de escribir una sola
+            línea.
+          </p>
+
+          <h2>Anima transform y opacity, y poco más</h2>
+          <p>
+            El navegador pinta una página en fases: calcula el diseño, dibuja los píxeles y compone
+            las capas. Animar <code>width</code>, <code>height</code>, <code>top</code>,
+            <code>left</code>, <code>margin</code> o <code>padding</code> obliga a rehacer el
+            diseño entero en cada fotograma, y en un móvil eso se traduce en tirones.
+            <code>transform</code> y <code>opacity</code> se resuelven en la última fase, en la
+            tarjeta gráfica, sin tocar el diseño.
+          </p>
+          <p>
+            La traducción es directa: en vez de <code>left</code> usa
+            <code>transform: translateX()</code>; en vez de <code>width</code>, <code>scale()</code>;
+            en vez de aparecer cambiando <code>display</code>, cambia <code>opacity</code>. Es la
+            misma técnica que mueve el <a href="/herramientas/texto-ondulado/">texto ondulado</a> de
+            este sitio sin que el navegador sude.
+          </p>
+
+          <h2>prefers-reduced-motion no es un detalle</h2>
+          <p>
+            Hay gente para la que el movimiento en pantalla no es decorativo: provoca mareo,
+            náuseas o migraña. Los sistemas operativos tienen desde hace años una casilla para
+            pedir menos movimiento, y el navegador la expone en
+            <code>@media (prefers-reduced-motion: reduce)</code>. Ignorarla no es quedarse corto en
+            accesibilidad: es hacerle daño a alguien.
+          </p>
+          <p>
+            Por eso el código que sale de esta herramienta trae siempre ese bloque, y por eso la
+            vista previa de arriba arranca en pausa si tu sistema pide menos movimiento. Respetarlo
+            no significa quitar toda vida a la interfaz: un <code>animation: none</code> basta en la
+            mayoría de casos, y cuando el movimiento comunica algo (un elemento que aparece), puedes
+            dejar solo el <code>opacity</code> y quitar el desplazamiento. Lo que no vale es no
+            escribir el bloque. Si empiezas a construir tu sistema de estilos, esto va junto a los
+            tokens de color y tipografía desde el primer día, igual que las paletas que preparas en
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a>.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Cuál es la diferencia entre una transición y una animación en CSS?</h3>
+          <p>
+            Una transición necesita que algo cambie para dispararse —un <code>hover</code>, una
+            clase que añades con JavaScript— y solo va del estado A al estado B. Una animación con
+            keyframes se reproduce sola en cuanto el elemento existe, admite todos los pasos
+            intermedios que quieras y controla repeticiones, dirección y retardo. Si el efecto es
+            una respuesta a la acción del usuario, usa transición; si es un movimiento propio del
+            elemento, usa animación.
+          </p>
+
+          <h3>¿Qué hace exactamente animation-fill-mode?</h3>
+          <p>
+            Decide qué estilos conserva el elemento fuera del tiempo que dura la animación. Con
+            <code>none</code> vuelve a su aspecto normal antes de empezar y al terminar. Con
+            <code>forwards</code> se queda congelado en el último fotograma. Con
+            <code>backwards</code> adopta el primer fotograma durante el retardo, antes de arrancar.
+            Con <code>both</code> hace las dos cosas, y es lo que quieres casi siempre en
+            animaciones de entrada para que el elemento no parpadee ni salte al final.
+          </p>
+
+          <h3>¿Por qué mi animación se ve a tirones?</h3>
+          <p>
+            Casi siempre porque estás animando propiedades que obligan al navegador a recalcular el
+            diseño de la página en cada fotograma, como <code>width</code>, <code>height</code>,
+            <code>top</code>, <code>left</code>, <code>margin</code> o <code>padding</code>. Cambia
+            esos movimientos por <code>transform</code> (<code>translate</code>, <code>scale</code>,
+            <code>rotate</code>) y usa <code>opacity</code> para las apariciones: el navegador los
+            resuelve en la tarjeta gráfica sin rehacer el diseño, y la animación pasa a ir fluida.
+          </p>
+
+          <h3>¿Cómo hago que la animación se reproduzca cuando el elemento entra en pantalla?</h3>
+          <p>
+            Pon la animación en una clase, por ejemplo <code>.animado</code>, y añádesela al
+            elemento con un <code>IntersectionObserver</code> cuando entre en el viewport. Con
+            <code>animation-fill-mode: both</code> el elemento queda en su sitio al terminar.
+            También puedes hacerlo sin JavaScript con <code>animation-timeline: view()</code>,
+            aunque su soporte todavía no es universal.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+    <script src="/js/codigo-web.js" defer></script>
+    <script src="js/animaciones.js" defer></script>
+  </body>
+</html>

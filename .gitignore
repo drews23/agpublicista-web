@@ -3,5 +3,11 @@
 .DS_Store
 Thumbs.db
 
-# Logo en iteracion, aun no integrado
+# Plantilla externa de consulta, no forma parte del sitio
+i-design-with-code/
+
+# Bocetos de logo en iteracion, aun no integrados
 lienzo.svg
+Artboard*.svg
+coding lienzo*.svg
+*.ai

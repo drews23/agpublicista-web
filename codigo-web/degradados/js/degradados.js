@@ -106,9 +106,12 @@
 
       const posicion = document.createElement("label");
       posicion.className = "campo";
+      // El <label> envolvente se asocia al <output>, que va antes en el DOM,
+      // así que el deslizador necesita su propio aria-label.
       posicion.innerHTML = `
         <span class="campo__label">Posición <output>${num(parada.pos)}%</output></span>
-        <input type="range" min="0" max="100" step="1" value="${parada.pos}" />`;
+        <input type="range" min="0" max="100" step="1" value="${parada.pos}"
+               aria-label="Posición del color ${indice + 1} en porcentaje" />`;
 
       const rangoPos = posicion.querySelector("input");
       rangoPos.addEventListener("input", () => {
@@ -121,7 +124,8 @@
       opacidad.className = "campo";
       opacidad.innerHTML = `
         <span class="campo__label">Opacidad <output>${parada.alfa}</output></span>
-        <input type="range" min="0" max="1" step="0.05" value="${parada.alfa}" />`;
+        <input type="range" min="0" max="1" step="0.05" value="${parada.alfa}"
+               aria-label="Opacidad del color ${indice + 1}" />`;
 
       const rangoAlfa = opacidad.querySelector("input");
       rangoAlfa.addEventListener("input", () => {

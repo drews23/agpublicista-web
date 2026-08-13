@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de bordes y radios CSS — Lienzo</title>
+    <meta
+      name="description"
+      content="Crea border-radius por esquina, radios elípticos tipo gota, bordes y contornos con vista previa en vivo. Ajusta y copia el CSS listo para pegar."
+    />
+    <link rel="canonical" href="https://agpublicista.com/codigo-web/bordes/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de bordes y radios CSS" />
+    <meta property="og:description" content="Radios por esquina, formas orgánicas tipo gota, bordes y contornos con vista previa en vivo y código listo para copiar." />
+    <meta property="og:url" content="https://agpublicista.com/codigo-web/bordes/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/codigo-web.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/codigo-web/bordes/#app",
+          "name": "Generador de bordes y radios CSS",
+          "url": "https://agpublicista.com/codigo-web/bordes/",
+          "description": "Generador visual de border-radius por esquina, radios elípticos para formas orgánicas, bordes y contornos, con vista previa en vivo y código listo para copiar.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Código web", "item": "https://agpublicista.com/codigo-web/" },
+            { "@type": "ListItem", "position": 3, "name": "Bordes y radios", "item": "https://agpublicista.com/codigo-web/bordes/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cómo se leen los cuatro valores de border-radius?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Siempre empiezan en la esquina superior izquierda y giran en el sentido de las agujas del reloj: superior izquierda, superior derecha, inferior derecha e inferior izquierda. Con un solo valor se aplican las cuatro esquinas por igual. Con dos, el primero va a la superior izquierda y la inferior derecha, y el segundo a las otras dos. Con tres, el del medio se reparte entre la superior derecha y la inferior izquierda."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué significa la barra / dentro de border-radius?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La barra separa los radios horizontales de los verticales. Lo que va antes marca cuánto se curva cada esquina a lo ancho y lo que va después cuánto se curva a lo alto. Cuando los dos valores de una esquina son distintos, la curva deja de ser un cuarto de círculo y pasa a ser un cuarto de elipse: es la base de las formas orgánicas tipo gota."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿En qué se diferencian border y outline?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El border forma parte de la caja: ocupa espacio real y, según el box-sizing, agranda el elemento o le come relleno por dentro. El outline se dibuja por encima del diseño y no ocupa espacio: puedes ponerlo y quitarlo sin que nada se mueva un píxel. Además el outline acepta outline-offset para separarse del borde, algo que border no puede hacer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo quitar el outline del foco si no me gusta cómo se ve?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Quitarlo sin poner nada en su lugar deja a quien navega con teclado sin saber dónde está, y eso incumple los criterios de accesibilidad WCAG sobre foco visible. Lo correcto es rediseñarlo, no eliminarlo: usa :focus-visible y dale al outline tu propio grosor, color y outline-offset, cuidando que contraste al menos 3:1 con el fondo."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Bordes y radios</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Generador CSS</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de bordes y radios CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            Redondea las cuatro esquinas o cada una por separado, prueba los radios elípticos
+            que dan las formas orgánicas, y compara borde y contorno en la misma caja.
+            El CSS se escribe solo mientras mueves los controles.
+          </p>
+        </div>
+
+        <div class="taller reveal" style="--reveal-delay: 200ms">
+          <div class="taller__main">
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Vista previa</h2>
+                <button class="boton-sutil" type="button" data-organica>Forma orgánica</button>
+              </div>
+              <div class="lienzo-previa">
+                <div class="demo-caja" data-caja role="img" aria-label="Caja de ejemplo con los bordes y radios aplicados">Lienzo</div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
+              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de los bordes y radios"></pre>
+              <div class="acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-radio>Copiar solo el radio</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes de bordes y radios">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Radios</h2></div>
+              <div class="controles" data-radios>
+                <label class="campo">
+                  <span class="campo__label">Unidad</span>
+                  <select data-control="unidad">
+                    <option value="px" selected>Píxeles (px)</option>
+                    <option value="%">Porcentaje (%)</option>
+                    <option value="rem">Rem</option>
+                  </select>
+                  <span class="campo__hint">
+                    El porcentaje se mide contra el ancho y el alto de la caja, así que la curva
+                    se adapta al tamaño. Es lo que hace posibles las formas orgánicas.
+                  </span>
+                </label>
+
+                <label class="campo" data-campo-simple>
+                  <span class="campo__label">Las cuatro esquinas <output data-eco="simple">18px</output></span>
+                  <input type="range" min="0" max="150" step="1" value="18" data-control="simple" aria-label="Radio de las cuatro esquinas" />
+                </label>
+
+                <label class="interruptor">
+                  <input type="checkbox" data-control="avanzado" />
+                  <span>
+                    Una esquina cada vez
+                    <small>Despliega un control independiente para cada esquina.</small>
+                  </span>
+                </label>
+
+                <label class="interruptor" data-campo-eliptico hidden>
+                  <input type="checkbox" data-control="eliptico" />
+                  <span>
+                    Radios elípticos
+                    <small>Dos valores por esquina separados por «/»: horizontal y vertical.</small>
+                  </span>
+                </label>
+
+                <div class="capas" data-esquinas hidden>
+                  <div class="capa">
+                    <div class="capa__head"><span class="capa__nombre">Superior izquierda</span></div>
+                    <label class="campo">
+                      <span class="campo__label"><span data-etiqueta-h>Radio</span> <output data-eco="tlh">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="tlh" aria-label="Radio horizontal de la esquina superior izquierda" />
+                    </label>
+                    <label class="campo" data-campo-vertical hidden>
+                      <span class="campo__label">Vertical <output data-eco="tlv">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="tlv" aria-label="Radio vertical de la esquina superior izquierda" />
+                    </label>
+                  </div>
+
+                  <div class="capa">
+                    <div class="capa__head"><span class="capa__nombre">Superior derecha</span></div>
+                    <label class="campo">
+                      <span class="campo__label"><span data-etiqueta-h>Radio</span> <output data-eco="trh">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="trh" aria-label="Radio horizontal de la esquina superior derecha" />
+                    </label>
+                    <label class="campo" data-campo-vertical hidden>
+                      <span class="campo__label">Vertical <output data-eco="trv">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="trv" aria-label="Radio vertical de la esquina superior derecha" />
+                    </label>
+                  </div>
+
+                  <div class="capa">
+                    <div class="capa__head"><span class="capa__nombre">Inferior derecha</span></div>
+                    <label class="campo">
+                      <span class="campo__label"><span data-etiqueta-h>Radio</span> <output data-eco="brh">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="brh" aria-label="Radio horizontal de la esquina inferior derecha" />
+                    </label>
+                    <label class="campo" data-campo-vertical hidden>
+                      <span class="campo__label">Vertical <output data-eco="brv">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="brv" aria-label="Radio vertical de la esquina inferior derecha" />
+                    </label>
+                  </div>
+
+                  <div class="capa">
+                    <div class="capa__head"><span class="capa__nombre">Inferior izquierda</span></div>
+                    <label class="campo">
+                      <span class="campo__label"><span data-etiqueta-h>Radio</span> <output data-eco="blh">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="blh" aria-label="Radio horizontal de la esquina inferior izquierda" />
+                    </label>
+                    <label class="campo" data-campo-vertical hidden>
+                      <span class="campo__label">Vertical <output data-eco="blv">18px</output></span>
+                      <input type="range" min="0" max="150" step="1" value="18" data-control="blv" aria-label="Radio vertical de la esquina inferior izquierda" />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Borde</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Grosor <span><output data-output="bgrosor">2</output>px</span></span>
+                  <input type="range" min="0" max="24" step="1" value="2" data-control="bgrosor" aria-label="Grosor del borde en píxeles" />
+                  <span class="campo__hint">Con 0 el borde desaparece del CSS generado.</span>
+                </label>
+
+                <div class="campo">
+                  <span class="campo__label">Estilo</span>
+                  <div class="opciones" role="radiogroup" aria-label="Estilo del borde">
+                    <label><input type="radio" name="bestilo" data-control="bestilo" value="solid" checked /> Sólido</label>
+                    <label><input type="radio" name="bestilo" data-control="bestilo" value="dashed" /> Trazos</label>
+                    <label><input type="radio" name="bestilo" data-control="bestilo" value="dotted" /> Puntos</label>
+                    <label><input type="radio" name="bestilo" data-control="bestilo" value="double" /> Doble</label>
+                  </div>
+                  <span class="campo__hint">El estilo doble necesita al menos 3px para que se distingan las dos líneas.</span>
+                </div>
+
+                <div class="campo">
+                  <span class="campo__label">Color</span>
+                  <div class="campo campo--color">
+                    <input type="color" value="#8b7bff" data-control="bcolor" aria-label="Color del borde" />
+                    <input type="text" value="#8b7bff" spellcheck="false" data-hex="bcolor" aria-label="Valor hexadecimal del color del borde" />
+                  </div>
+                </div>
+
+                <label class="campo">
+                  <span class="campo__label">Opacidad <output data-output="balfa">1</output></span>
+                  <input type="range" min="0" max="1" step="0.05" value="1" data-control="balfa" aria-label="Opacidad del borde" />
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Contorno</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Grosor <span><output data-output="ogrosor">2</output>px</span></span>
+                  <input type="range" min="0" max="24" step="1" value="2" data-control="ogrosor" aria-label="Grosor del contorno en píxeles" />
+                  <span class="campo__hint">
+                    El contorno (<code>outline</code>) se dibuja por encima del diseño y
+                    <strong>no ocupa espacio en el layout</strong>: puedes engordarlo o quitarlo y
+                    nada se mueve. Un <code>border</code> de 4px, en cambio, agranda la caja 8px
+                    o le come relleno por dentro.
+                  </span>
+                </label>
+
+                <div class="campo">
+                  <span class="campo__label">Estilo</span>
+                  <div class="opciones" role="radiogroup" aria-label="Estilo del contorno">
+                    <label><input type="radio" name="oestilo" data-control="oestilo" value="solid" /> Sólido</label>
+                    <label><input type="radio" name="oestilo" data-control="oestilo" value="dashed" checked /> Trazos</label>
+                    <label><input type="radio" name="oestilo" data-control="oestilo" value="dotted" /> Puntos</label>
+                    <label><input type="radio" name="oestilo" data-control="oestilo" value="double" /> Doble</label>
+                  </div>
+                </div>
+
+                <div class="campo">
+                  <span class="campo__label">Color</span>
+                  <div class="campo campo--color">
+                    <input type="color" value="#35d6c8" data-control="ocolor" aria-label="Color del contorno" />
+                    <input type="text" value="#35d6c8" spellcheck="false" data-hex="ocolor" aria-label="Valor hexadecimal del color del contorno" />
+                  </div>
+                </div>
+
+                <label class="campo">
+                  <span class="campo__label">Desplazamiento <span><output data-output="odesp">4</output>px</span></span>
+                  <input type="range" min="-20" max="24" step="1" value="4" data-control="odesp" aria-label="Desplazamiento del contorno en píxeles" />
+                  <span class="campo__hint">Con valores negativos el contorno se dibuja hacia dentro, encima del relleno.</span>
+                </label>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="nota-taller">
+          ¿Ya tienes la forma? Ponle fondo con el
+          <a href="/codigo-web/degradados/">generador de degradados</a> o vuelve al índice de
+          <a href="/codigo-web/">generadores CSS</a>.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="prose">
+          <h2>De una a cuatro esquinas: cómo se lee el atajo</h2>
+          <p>
+            <code>border-radius</code> admite entre uno y cuatro valores, y el orden es siempre el
+            mismo: empieza en la esquina <strong>superior izquierda</strong> y gira en el sentido de
+            las agujas del reloj. Con un valor se redondean las cuatro esquinas por igual. Con dos,
+            el primero va a la superior izquierda y la inferior derecha, y el segundo a las otras
+            dos: es el atajo de las formas de hoja. Con tres, el valor del medio se reparte entre la
+            superior derecha y la inferior izquierda. Con cuatro, cada esquina lleva el suyo.
+          </p>
+          <p>
+            Si escribes un radio mayor que la mitad del lado, el navegador no rompe la caja: reduce
+            proporcionalmente todos los radios hasta que quepan. Por eso <code>border-radius: 999px</code>
+            siempre da una pastilla perfecta sin tener que calcular nada.
+          </p>
+
+          <h2>La barra que lo cambia todo: radios elípticos</h2>
+          <p>
+            Dentro de <code>border-radius</code>, la barra <code>/</code> separa dos listas: antes van
+            los radios <strong>horizontales</strong> y después los <strong>verticales</strong>. Cuando
+            los dos valores de una esquina son distintos, la curva deja de ser un cuarto de círculo y
+            pasa a ser un cuarto de elipse. De ahí salen esas siluetas blandas tipo gota que ves en
+            fondos y avatares:
+          </p>
+          <pre><code>border-radius: 62% 38% 30% 70% / 55% 30% 70% 45%;</code></pre>
+          <p>
+            El truco para que la forma quede equilibrada y no se recorte es que los dos radios de un
+            mismo lado sumen 100 %: si la esquina superior izquierda lleva 62 %, la superior derecha
+            lleva 38 %. El botón <em>Forma orgánica</em> de arriba respeta esa regla, así que puedes
+            pulsarlo hasta que salga la silueta que te gusta y copiar el resultado.
+          </p>
+
+          <h2>border y outline: cuál mueve el layout</h2>
+          <p>
+            Parecen lo mismo, pero solo uno afecta al espacio. El <strong>border</strong> forma parte
+            de la caja: suma a su tamaño total, o le come relleno por dentro si usas
+            <code>box-sizing: border-box</code>. Añadirlo en <code>:hover</code> es la causa clásica
+            de ese salto de un par de píxeles al pasar el ratón.
+          </p>
+          <p>
+            El <strong>outline</strong> se pinta por encima del diseño y <strong>no ocupa espacio
+            ninguno</strong>: puedes ponerlo, engordarlo o quitarlo y nada de alrededor se mueve.
+            Además acepta <code>outline-offset</code> para separarse del borde (o meterse hacia
+            dentro con valores negativos), algo que <code>border</code> no puede hacer. Regla
+            práctica: si el contorno es decoración permanente del componente, usa <code>border</code>;
+            si aparece y desaparece —foco, selección, estado de arrastre—, usa <code>outline</code>.
+          </p>
+
+          <h2>El contorno del foco no se toca</h2>
+          <p>
+            Escribir <code>outline: none</code> para «limpiar» ese anillo azul es el error de
+            accesibilidad más repetido del CSS. Ese anillo es lo único que le dice a quien navega con
+            teclado dónde está parado; sin él, la página se vuelve imposible de recorrer con el
+            tabulador. Las pautas WCAG lo exigen de forma explícita: el foco tiene que ser visible.
+          </p>
+          <p>
+            La solución no es quitarlo, es rediseñarlo. Usa <code>:focus-visible</code> para que solo
+            aparezca en navegación con teclado, y dale tu propio grosor, color y
+            <code>outline-offset</code> —un par de píxeles de separación hacen que se lea mucho
+            mejor—. Comprueba que ese color contrasta al menos 3:1 contra el fondo; en
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a> tienes el ratio al instante,
+            y en la <a href="/blog/teoria-del-color-para-web/">guía de teoría del color</a> está
+            explicado por qué esos números importan.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Cómo se leen los cuatro valores de border-radius?</h3>
+          <p>
+            Siempre empiezan en la esquina superior izquierda y giran en el sentido de las agujas del
+            reloj: superior izquierda, superior derecha, inferior derecha e inferior izquierda. Con un
+            solo valor se aplican las cuatro esquinas por igual. Con dos, el primero va a la superior
+            izquierda y la inferior derecha, y el segundo a las otras dos. Con tres, el del medio se
+            reparte entre la superior derecha y la inferior izquierda.
+          </p>
+
+          <h3>¿Qué significa la barra / dentro de border-radius?</h3>
+          <p>
+            La barra separa los radios horizontales de los verticales. Lo que va antes marca cuánto se
+            curva cada esquina a lo ancho y lo que va después cuánto se curva a lo alto. Cuando los
+            dos valores de una esquina son distintos, la curva deja de ser un cuarto de círculo y pasa
+            a ser un cuarto de elipse: es la base de las formas orgánicas tipo gota.
+          </p>
+
+          <h3>¿En qué se diferencian border y outline?</h3>
+          <p>
+            El <code>border</code> forma parte de la caja: ocupa espacio real y, según el
+            <code>box-sizing</code>, agranda el elemento o le come relleno por dentro. El
+            <code>outline</code> se dibuja por encima del diseño y no ocupa espacio: puedes ponerlo y
+            quitarlo sin que nada se mueva un píxel. Además el outline acepta
+            <code>outline-offset</code> para separarse del borde, algo que border no puede hacer.
+          </p>
+
+          <h3>¿Puedo quitar el outline del foco si no me gusta cómo se ve?</h3>
+          <p>
+            Quitarlo sin poner nada en su lugar deja a quien navega con teclado sin saber dónde está,
+            y eso incumple los criterios de accesibilidad WCAG sobre foco visible. Lo correcto es
+            rediseñarlo, no eliminarlo: usa <code>:focus-visible</code> y dale al outline tu propio
+            grosor, color y <code>outline-offset</code>, cuidando que contraste al menos 3:1 con el
+            fondo.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+    <script src="/js/codigo-web.js" defer></script>
+    <script src="js/bordes.js" defer></script>
+  </body>
+</html>

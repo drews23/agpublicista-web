@@ -1,0 +1,39 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo — Generador de filtros CSS
+   Solo lo que NO existe ya en /css/codigo-web.css. Se enlaza después de
+   la hoja compartida, nunca antes.
+\* ------------------------------------------------------------------ */
+
+/* La muestra es de 1200×630: recortarla al 4/3 de .demo-foto se comería
+   medio encuadre, y los filtros se juzgan peor con menos imagen.
+   height: auto es imprescindible — sin él manda el atributo height del
+   HTML (que está para reservar el hueco) y aspect-ratio no llega a aplicarse. */
+.demo-foto--muestra {
+  width: min(100%, 560px);
+  height: auto;
+  aspect-ratio: 1200 / 630;
+}
+
+/* Fila de preajustes: botones que se reparten el ancho y bajan de línea
+   sin apretarse. Ocupa el cuerpo del panel, por eso lleva su propio padding. */
+.preajustes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1.1rem;
+}
+
+.preajustes .boton-sutil {
+  flex: 1 1 auto;
+  min-height: 44px;
+}
+
+/* Los campos de la sombra siguen visibles cuando el drop-shadow está
+   apagado, pero se atenúan para que se note que no pintan nada. */
+.campos-apagados {
+  opacity: 0.45;
+}
+
+@media (max-width: 620px) {
+  .preajustes .boton-sutil { flex-basis: calc(50% - 0.25rem); }
+}

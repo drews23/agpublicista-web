@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de transform CSS en 2D y 3D — Lienzo</title>
+    <meta
+      name="description"
+      content="Genera transform CSS en 2D y 3D con vista previa: rota, escala, inclina y desplaza, ajusta transform-origin y perspective, y copia el código listo."
+    />
+    <link rel="canonical" href="https://agpublicista.com/codigo-web/transformaciones/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de transform CSS en 2D y 3D" />
+    <meta property="og:description" content="Rota, escala, inclina y desplaza con vista previa en vivo. Con transform-origin visual y perspective explicada." />
+    <meta property="og:url" content="https://agpublicista.com/codigo-web/transformaciones/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/codigo-web.css" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/codigo-web/transformaciones/#app",
+          "name": "Generador de transform CSS",
+          "url": "https://agpublicista.com/codigo-web/transformaciones/",
+          "description": "Generador visual de transform CSS en 2D y 3D: translate, scale, rotate, skew, rotaciones 3D, transform-origin con nueve posiciones fijas y perspective en el contenedor.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Código web", "item": "https://agpublicista.com/codigo-web/" },
+            { "@type": "ListItem", "position": 3, "name": "Transformaciones CSS", "item": "https://agpublicista.com/codigo-web/transformaciones/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Por qué cambia el resultado si cambio el orden de las funciones en transform?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque cada función transforma el sistema de coordenadas que usará la siguiente. El navegador las aplica de izquierda a derecha: en translateX(100px) rotate(45deg) el elemento se mueve 100 píxeles a la derecha y luego gira sobre sí mismo, mientras que en rotate(45deg) translateX(100px) primero se inclinan los ejes y esos 100 píxeles se recorren en diagonal. Mismo par de funciones, dos posiciones finales distintas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué hace exactamente transform-origin?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Define el punto fijo alrededor del cual gira, escala o se inclina el elemento. Su valor por defecto es 50% 50%, el centro de la caja. Si lo cambias a 0% 100% el elemento pivota sobre su esquina inferior izquierda, como una puerta con bisagra. Los porcentajes se miden sobre el tamaño del propio elemento, y también admite palabras clave como top left o medidas absolutas en píxeles."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dónde se declara perspective y por qué parece que no funciona?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La propiedad perspective se declara en el contenedor padre, no en el elemento que gira. Si la pones en el mismo elemento que lleva el transform no pasa nada, y por eso parece que no funciona. La alternativa es usarla como función dentro del propio transform, escribiendo perspective(800px) como primer valor de la lista, aunque en ese caso cada elemento tiene su propio punto de fuga en lugar de compartir una escena común."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué conviene animar transform y opacity en vez de top, left o width?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque transform y opacity se resuelven en la fase de composición, que se ejecuta en la tarjeta gráfica y no obliga al navegador a recalcular la posición del resto de la página. Cambiar top, left, width o margin dispara un reflow: el navegador vuelve a medir la disposición completa y a repintar en cada fotograma, y ahí es donde se pierden los 60 fotogramas por segundo."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Transformaciones</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Generador CSS · 2D y 3D</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de transform CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            Desplaza, escala, gira e inclina un elemento y mira el resultado al instante.
+            Con el punto de origen marcado sobre la silueta original —lo que casi nadie
+            explica— y la perspectiva 3D en su sitio: el contenedor padre.
+          </p>
+        </div>
+
+        <div class="taller reveal" style="--reveal-delay: 200ms">
+          <div class="taller__main">
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Vista previa</h2>
+                <button class="boton-sutil" type="button" data-reset>Restablecer</button>
+              </div>
+              <div class="lienzo-previa lienzo-previa--liso" role="img" aria-label="Vista previa del elemento transformado">
+                <div class="escena" data-escena data-guias="1">
+                  <div class="guias" aria-hidden="true"></div>
+                  <div class="fantasma" aria-hidden="true"></div>
+                  <span class="marca-origen" data-marca aria-hidden="true"></span>
+                  <div class="demo-caja" data-caja>Frente</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
+              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de la transformación"></pre>
+              <div class="acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo transform</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="sidebar" data-controles aria-label="Ajustes de la transformación">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Punto de origen</h2></div>
+              <div class="controles">
+                <div class="campo">
+                  <span class="campo__label">Posiciones fijas</span>
+                  <div class="rejilla-origen" data-origen-rejilla>
+                    <button class="origen-btn" type="button" data-origen="0 0" aria-pressed="false" aria-label="Arriba izquierda (0% 0%)" title="Arriba izquierda"></button>
+                    <button class="origen-btn" type="button" data-origen="50 0" aria-pressed="false" aria-label="Arriba centro (50% 0%)" title="Arriba centro"></button>
+                    <button class="origen-btn" type="button" data-origen="100 0" aria-pressed="false" aria-label="Arriba derecha (100% 0%)" title="Arriba derecha"></button>
+                    <button class="origen-btn" type="button" data-origen="0 50" aria-pressed="false" aria-label="Centro izquierda (0% 50%)" title="Centro izquierda"></button>
+                    <button class="origen-btn" type="button" data-origen="50 50" aria-pressed="true" aria-label="Centro (50% 50%)" title="Centro"></button>
+                    <button class="origen-btn" type="button" data-origen="100 50" aria-pressed="false" aria-label="Centro derecha (100% 50%)" title="Centro derecha"></button>
+                    <button class="origen-btn" type="button" data-origen="0 100" aria-pressed="false" aria-label="Abajo izquierda (0% 100%)" title="Abajo izquierda"></button>
+                    <button class="origen-btn" type="button" data-origen="50 100" aria-pressed="false" aria-label="Abajo centro (50% 100%)" title="Abajo centro"></button>
+                    <button class="origen-btn" type="button" data-origen="100 100" aria-pressed="false" aria-label="Abajo derecha (100% 100%)" title="Abajo derecha"></button>
+                  </div>
+                  <p class="campo__hint" data-origen-nombre aria-live="polite">Centro · 50% 50%</p>
+                </div>
+
+                <label class="campo">
+                  <span class="campo__label">Origen X <span><output data-output="ox">50</output>%</span></span>
+                  <input type="range" min="0" max="100" step="1" value="50" data-control="ox" aria-label="Origen X en porcentaje" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Origen Y <span><output data-output="oy">50</output>%</span></span>
+                  <input type="range" min="0" max="100" step="1" value="50" data-control="oy" aria-label="Origen Y en porcentaje" />
+                  <span class="campo__hint">Es el alfiler sobre el que pivota todo. 0% 0% es la esquina superior izquierda; el porcentaje se mide sobre el propio elemento.</span>
+                </label>
+
+                <label class="interruptor">
+                  <input type="checkbox" data-control="guias" checked />
+                  <span>Mostrar guías<small>Rejilla, ejes y la silueta sin transformar, con el punto de origen marcado en ámbar.</small></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">2D</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">translateX <span><output data-output="tx">0</output>px</span></span>
+                  <input type="range" min="-150" max="150" step="1" value="0" data-control="tx" aria-label="translateX en píxeles" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">translateY <span><output data-output="ty">0</output>px</span></span>
+                  <input type="range" min="-150" max="150" step="1" value="0" data-control="ty" aria-label="translateY en píxeles" />
+                  <span class="campo__hint">Los valores positivos de Y bajan: el eje vertical de la pantalla crece hacia abajo.</span>
+                </label>
+
+                <label class="interruptor">
+                  <input type="checkbox" data-control="uniforme" checked />
+                  <span>Escala uniforme<small>Enlaza los dos ejes para que el elemento no se deforme.</small></span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label"><span data-etiqueta-escala>scale</span> <output data-output="sx">1</output></span>
+                  <input type="range" min="0" max="2.5" step="0.05" value="1" data-control="sx" aria-label="Escala horizontal" />
+                </label>
+
+                <label class="campo" data-campo-sy hidden>
+                  <span class="campo__label">scaleY <output data-output="sy">1</output></span>
+                  <input type="range" min="0" max="2.5" step="0.05" value="1" data-control="sy" aria-label="Escala vertical" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">rotate <span><output data-output="rot">0</output>°</span></span>
+                  <input type="range" min="-180" max="180" step="1" value="0" data-control="rot" aria-label="Rotación en grados" />
+                  <span class="campo__hint">Gira en el plano de la pantalla, en sentido horario. Es exactamente lo mismo que rotateZ.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">skewX <span><output data-output="skx">0</output>°</span></span>
+                  <input type="range" min="-60" max="60" step="1" value="0" data-control="skx" aria-label="Inclinación X en grados" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">skewY <span><output data-output="sky">0</output>°</span></span>
+                  <input type="range" min="-60" max="60" step="1" value="0" data-control="sky" aria-label="Inclinación Y en grados" />
+                  <span class="campo__hint">Inclinar deforma también el texto de dentro. Pasados los 30° suele leerse mal.</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">3D</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">rotateX <span><output data-output="rx">0</output>°</span></span>
+                  <input type="range" min="-180" max="180" step="1" value="0" data-control="rx" aria-label="Rotación X en grados" />
+                  <span class="campo__hint">Vuelca el elemento hacia atrás o hacia delante, como la tapa de una caja.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">rotateY <span><output data-output="ry">0</output>°</span></span>
+                  <input type="range" min="-180" max="180" step="1" value="0" data-control="ry" aria-label="Rotación Y en grados" />
+                  <span class="campo__hint">Gira como una puerta. A 180° verás el reverso, con el texto en espejo.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">rotateZ <span><output data-output="rz">0</output>°</span></span>
+                  <input type="range" min="-180" max="180" step="1" value="0" data-control="rz" aria-label="Rotación Z en grados" />
+                  <span class="campo__hint">El mismo giro que rotate. Si usas los dos, los ángulos se suman.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">translateZ <span><output data-output="tz">0</output>px</span></span>
+                  <input type="range" min="-300" max="300" step="1" value="0" data-control="tz" aria-label="translateZ en píxeles" />
+                  <span class="campo__hint">Acerca o aleja el elemento del ojo. Sin perspectiva declarada no se nota nada.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">perspective <span><output data-output="persp">800</output>px</span></span>
+                  <input type="range" min="100" max="2000" step="10" value="800" data-control="persp" aria-label="Perspectiva en píxeles" />
+                  <span class="campo__hint">Va en el contenedor padre. Cuanto menor es el valor, más cerca está el ojo y más brutal la deformación.</span>
+                </label>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="nota-taller">
+          ¿Buscas otra propiedad? Todos los generadores están en
+          <a href="/codigo-web/">código web</a>.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="prose">
+          <h2>El orden de las funciones no es decorativo</h2>
+          <p>
+            El navegador lee la lista de <code>transform</code> de izquierda a derecha, y cada
+            función deja transformado el sistema de coordenadas que usará la siguiente. Por eso
+            <code>translateX(100px) rotate(45deg)</code> mueve el elemento 100 píxeles a la derecha
+            y luego lo gira sobre sí mismo, mientras que <code>rotate(45deg) translateX(100px)</code>
+            inclina primero los ejes y hace que esos 100 píxeles se recorran en diagonal. Mismas dos
+            funciones, dos posiciones finales completamente distintas.
+          </p>
+          <p>
+            Este generador siempre escribe en un orden fijo: <strong>desplazamiento, giro,
+            inclinación y escala</strong>. No es capricho. Al poner el desplazamiento primero, el
+            elemento se mueve por los ejes de la pantalla, que es lo que casi siempre esperas; si lo
+            dejaras para el final, cada giro previo cambiaría la dirección del movimiento y tendrías
+            que calcular de cabeza hacia dónde acaba yendo. Si necesitas el efecto órbita —girar
+            alrededor de un punto lejano— es justo al revés: pon primero el giro y después el
+            desplazamiento.
+          </p>
+
+          <h2>transform-origin: el alfiler sobre el que pivota todo</h2>
+          <p>
+            Todas las funciones de <code>transform</code>, menos las de desplazamiento, necesitan un
+            punto fijo de referencia. Ese punto es <code>transform-origin</code> y por defecto vale
+            <code>50% 50%</code>: el centro exacto del elemento. Cámbialo y cambia el gesto entero
+            sin tocar ni un grado.
+          </p>
+          <p>
+            Un <code>rotate(15deg)</code> con origen <code>50% 50%</code> es una tarjeta ligeramente
+            torcida. El mismo giro con origen <code>0% 100%</code> es una puerta con bisagra en la
+            esquina inferior izquierda. Un <code>scaleX(1.4)</code> con origen al centro crece hacia
+            los dos lados; con origen <code>0% 50%</code> crece solo hacia la derecha, que es el truco
+            detrás de las barras de progreso y los subrayados que se despliegan al pasar el ratón.
+            Los porcentajes se miden sobre el tamaño del propio elemento, así que también admite
+            palabras clave (<code>top left</code> equivale a <code>0% 0%</code>) y medidas absolutas
+            en píxeles. En 3D acepta un tercer valor, la profundidad, que siempre va en píxeles.
+          </p>
+          <p>
+            Enciende «mostrar guías» en el panel de la derecha: el punto ámbar marca dónde está
+            clavado el alfiler y la silueta discontinua es la posición original del elemento. Mover
+            el origen y ver cómo cambia el mismo giro es la forma rápida de entenderlo.
+          </p>
+
+          <h2>Qué hace perspective y dónde se declara</h2>
+          <p>
+            <code>perspective</code> es la distancia entre el ojo del espectador y el plano de la
+            pantalla. Sin ella, un <code>rotateY(45deg)</code> se ve como un simple aplastamiento
+            horizontal, porque el navegador dibuja la escena en proyección plana. Con ella, el lado
+            que se aleja se hace más pequeño y aparece la sensación de profundidad. Valores bajos
+            (200–400 px) ponen el ojo muy cerca y exageran el efecto; valores altos (1200 px o más)
+            lo dejan sutil y elegante. Para interfaces, entre 600 y 1000 px suele funcionar.
+          </p>
+          <p>
+            La trampa: <strong>la propiedad se declara en el contenedor padre</strong>, no en el
+            elemento que gira. Si la escribes junto al <code>transform</code>, no pasa absolutamente
+            nada, y ese es el motivo número uno de «no me funciona la perspectiva». Existe también la
+            <em>función</em> <code>perspective()</code>, que sí va dentro del propio
+            <code>transform</code> y debe ser el primer valor de la lista; la diferencia es que
+            entonces cada elemento tiene su propio punto de fuga, en vez de compartir una escena
+            común. Si vas a animar varias tarjetas como si estuvieran en la misma habitación, usa la
+            propiedad en el padre. Y si quieres mover el punto de fuga fuera del centro, ahí está
+            <code>perspective-origin</code>.
+          </p>
+
+          <h2>Por qué transform y opacity son las dos propiedades baratas de animar</h2>
+          <p>
+            Para pintar un fotograma, el navegador recorre cuatro fases: calcula estilos, calcula la
+            disposición (<em>layout</em>), pinta los píxeles y compone las capas. Cuando animas
+            <code>width</code>, <code>top</code>, <code>left</code> o <code>margin</code>, obligas a
+            rehacer la disposición completa: mover una caja puede desplazar a todas sus vecinas, así
+            que el navegador vuelve a medir y a repintar en cada fotograma. A 60 fotogramas por
+            segundo tienes 16 milisegundos para todo, y ahí es donde aparece el tirón.
+          </p>
+          <p>
+            <code>transform</code> y <code>opacity</code> se saltan las fases caras: el elemento ya
+            está pintado en su capa y la tarjeta gráfica se limita a colocarlo movido, girado o más
+            transparente. Por eso la regla práctica es traducir el efecto a estas dos propiedades
+            siempre que puedas: en vez de animar <code>left</code>, anima <code>translateX</code>; en
+            vez de <code>width</code>, un <code>scaleX</code> con el origen bien puesto; en vez de
+            <code>height: 0</code>, un <code>scaleY</code> desde el borde superior. Si necesitas
+            avisar al navegador de que algo va a moverse, <code>will-change: transform</code> ayuda,
+            pero úsalo con cuentagotas: cada capa extra consume memoria de vídeo.
+          </p>
+          <p>
+            Cuando toque decidir el color y el ritmo del movimiento, el
+            <a href="/codigo-web/degradados/">generador de degradados</a> te da el fondo, en
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a> compruebas que el contraste
+            aguanta, y la <a href="/blog/teoria-del-color-para-web/">guía de teoría del color</a>
+            explica por qué unas combinaciones se sienten estables y otras no.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Por qué cambia el resultado si cambio el orden de las funciones en transform?</h3>
+          <p>
+            Porque cada función transforma el sistema de coordenadas que usará la siguiente. El
+            navegador las aplica de izquierda a derecha: en <code>translateX(100px) rotate(45deg)</code>
+            el elemento se mueve 100 píxeles a la derecha y luego gira sobre sí mismo, mientras que en
+            <code>rotate(45deg) translateX(100px)</code> primero se inclinan los ejes y esos 100
+            píxeles se recorren en diagonal. Mismo par de funciones, dos posiciones finales distintas.
+          </p>
+
+          <h3>¿Qué hace exactamente transform-origin?</h3>
+          <p>
+            Define el punto fijo alrededor del cual gira, escala o se inclina el elemento. Su valor
+            por defecto es <code>50% 50%</code>, el centro de la caja. Si lo cambias a
+            <code>0% 100%</code> el elemento pivota sobre su esquina inferior izquierda, como una
+            puerta con bisagra. Los porcentajes se miden sobre el tamaño del propio elemento, y
+            también admite palabras clave como <code>top left</code> o medidas absolutas en píxeles.
+          </p>
+
+          <h3>¿Dónde se declara perspective y por qué parece que no funciona?</h3>
+          <p>
+            La propiedad <code>perspective</code> se declara en el contenedor padre, no en el elemento
+            que gira. Si la pones en el mismo elemento que lleva el <code>transform</code> no pasa
+            nada, y por eso parece que no funciona. La alternativa es usarla como función dentro del
+            propio <code>transform</code>, escribiendo <code>perspective(800px)</code> como primer
+            valor de la lista, aunque en ese caso cada elemento tiene su propio punto de fuga en lugar
+            de compartir una escena común.
+          </p>
+
+          <h3>¿Por qué conviene animar transform y opacity en vez de top, left o width?</h3>
+          <p>
+            Porque <code>transform</code> y <code>opacity</code> se resuelven en la fase de
+            composición, que se ejecuta en la tarjeta gráfica y no obliga al navegador a recalcular la
+            posición del resto de la página. Cambiar <code>top</code>, <code>left</code>,
+            <code>width</code> o <code>margin</code> dispara un <em>reflow</em>: el navegador vuelve a
+            medir la disposición completa y a repintar en cada fotograma, y ahí es donde se pierden
+            los 60 fotogramas por segundo.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+    <script src="/js/codigo-web.js" defer></script>
+    <script src="js/transformaciones.js" defer></script>
+  </body>
+</html>

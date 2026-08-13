@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de filtros CSS con vista previa — Lienzo</title>
+    <meta
+      name="description"
+      content="Aplica blur, brillo, contraste, saturación, sepia y drop-shadow sobre una imagen real, ajusta cada filtro con controles y copia el CSS listo para pegar."
+    />
+    <link rel="canonical" href="https://agpublicista.com/codigo-web/filtros/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de filtros CSS con vista previa" />
+    <meta property="og:description" content="Los nueve filtros CSS más drop-shadow, sobre una imagen de verdad y con el código listo para copiar." />
+    <meta property="og:url" content="https://agpublicista.com/codigo-web/filtros/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/codigo-web.css" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/codigo-web/filtros/#app",
+          "name": "Generador de filtros CSS",
+          "url": "https://agpublicista.com/codigo-web/filtros/",
+          "description": "Generador visual de la propiedad filter de CSS: desenfoque, brillo, contraste, escala de grises, giro de tono, inversión, opacidad, saturación, sepia y drop-shadow, con vista previa sobre una imagen real y código listo para copiar.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Código web", "item": "https://agpublicista.com/codigo-web/" },
+            { "@type": "ListItem", "position": 3, "name": "Filtros CSS", "item": "https://agpublicista.com/codigo-web/filtros/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Los filtros CSS afectan al rendimiento de la página?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, y no todos igual. Brightness, contrast, saturate, grayscale o sepia se resuelven muy rápido en la tarjeta gráfica porque cada píxel se calcula por su cuenta. Blur y drop-shadow son los caros: obligan al navegador a mirar los píxeles vecinos, y el coste crece con el área de la superficie y con el radio. En una miniatura no lo notarás; en un fondo a pantalla completa que además se anima, sí."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué cambia el resultado si cambio el orden de los filtros?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque cada función recibe la imagen que dejó la anterior, como una cadena de revelado. Grayscale al cien por cien seguido de hue-rotate no hace nada, porque ya no queda color que girar, mientras que al revés el gris final sí cambia. Con blur y drop-shadow pasa lo mismo: la sombra se calcula sobre la silueta que le llega, así que desenfocar antes o después da resultados distintos."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuál es la diferencia entre filter y backdrop-filter?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Filter afecta al elemento y a todo su contenido. Backdrop-filter afecta solo a lo que hay detrás del elemento y deja intacto lo que hay dentro. Es la propiedad del efecto cristal: un panel con fondo semitransparente y backdrop-filter blur desenfoca la página que queda debajo y mantiene nítido el texto encima. Necesita que el fondo del elemento sea al menos parcialmente transparente."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Se pueden animar los filtros CSS?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, filter es una propiedad animable y transiciona bien entre valores del mismo tipo. La condición es que los dos estados tengan las mismas funciones y en el mismo orden: de blur cero píxeles a blur ocho píxeles interpola de forma suave, pero pasar de none a una cadena de tres funciones produce un salto seco. Por eso conviene escribir el estado de reposo con los valores neutros en vez de usar none."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Filtros</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Generador CSS</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de filtros CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            Los nueve filtros de CSS más <code>drop-shadow</code>, probados sobre una imagen de
+            verdad. Mueve los controles, mira el resultado y copia la cadena. Solo sale en el
+            código lo que de verdad cambia algo.
+          </p>
+        </div>
+
+        <div class="taller reveal" style="--reveal-delay: 200ms" data-controles>
+          <div class="taller__main">
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Vista previa</h2>
+                <label class="interruptor">
+                  <input type="checkbox" data-control="plano" />
+                  <span>
+                    Ver sobre bloque de color
+                    <small>Hue-rotate e invert se leen mejor sobre color sólido.</small>
+                  </span>
+                </label>
+              </div>
+              <div class="lienzo-previa">
+                <img
+                  class="demo-foto demo-foto--muestra"
+                  data-foto
+                  src="/assets/og/og-home.png"
+                  alt="Imagen de muestra de Lienzo: fondo oscuro con manchas de luz violeta y turquesa y el nombre de la marca"
+                  width="1200"
+                  height="630"
+                  decoding="async"
+                />
+                <div class="demo-caja" data-caja hidden>Lienzo</div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Preajustes</h2></div>
+              <div class="preajustes">
+                <button class="boton-sutil" type="button" data-preajuste="ninguno">Ninguno</button>
+                <button class="boton-sutil" type="button" data-preajuste="byn">Blanco y negro</button>
+                <button class="boton-sutil" type="button" data-preajuste="sepia">Sepia vintage</button>
+                <button class="boton-sutil" type="button" data-preajuste="contraste">Alto contraste</button>
+                <button class="boton-sutil" type="button" data-preajuste="sueno">Sueño</button>
+                <button class="boton-sutil" type="button" data-preajuste="invertido">Invertido</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">CSS generado</h2>
+                <span class="capa__nombre" data-resumen role="status" aria-live="polite">Sin filtros</span>
+              </div>
+              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de los filtros"></pre>
+              <div class="acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo el valor</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes de los filtros">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Filtros</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Desenfoque <span><output data-output="desenfoque">0</output>px</span></span>
+                  <input type="range" min="0" max="20" step="0.5" value="0" data-control="desenfoque" aria-label="Desenfoque en píxeles" />
+                  <span class="campo__hint">El más caro de todos. Por encima de 8 px ya no se lee nada de la imagen.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Brillo <span><output data-output="brillo">100</output>%</span></span>
+                  <input type="range" min="0" max="200" step="1" value="100" data-control="brillo" aria-label="Brillo en porcentaje" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Contraste <span><output data-output="contraste">100</output>%</span></span>
+                  <input type="range" min="0" max="200" step="1" value="100" data-control="contraste" aria-label="Contraste en porcentaje" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Saturación <span><output data-output="saturacion">100</output>%</span></span>
+                  <input type="range" min="0" max="300" step="1" value="100" data-control="saturacion" aria-label="Saturación en porcentaje" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Giro de tono <span><output data-output="tono">0</output>°</span></span>
+                  <input type="range" min="0" max="360" step="1" value="0" data-control="tono" aria-label="Giro de tono en grados" />
+                  <span class="campo__hint">Rota la rueda de color entera. A 360° vuelve al punto de partida.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Escala de grises <span><output data-output="gris">0</output>%</span></span>
+                  <input type="range" min="0" max="100" step="1" value="0" data-control="gris" aria-label="Escala de grises en porcentaje" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Sepia <span><output data-output="sepia">0</output>%</span></span>
+                  <input type="range" min="0" max="100" step="1" value="0" data-control="sepia" aria-label="Sepia en porcentaje" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Inversión <span><output data-output="invertir">0</output>%</span></span>
+                  <input type="range" min="0" max="100" step="1" value="0" data-control="invertir" aria-label="Inversión en porcentaje" />
+                  <span class="campo__hint">Al 50 % todo se vuelve gris medio: ahí es donde se cruzan los valores.</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Opacidad <span><output data-output="opacidad">100</output>%</span></span>
+                  <input type="range" min="0" max="100" step="1" value="100" data-control="opacidad" aria-label="Opacidad en porcentaje" />
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Sombra proyectada</h2></div>
+              <div class="controles">
+                <label class="interruptor">
+                  <input type="checkbox" data-control="sombra" />
+                  <span>
+                    Añadir drop-shadow
+                    <small>Sigue el contorno real del contenido, no su caja.</small>
+                  </span>
+                </label>
+
+                <div class="capa campos-apagados" data-campos-sombra>
+                  <label class="campo">
+                    <span class="campo__label">Desplazamiento X <span><output data-output="sombraX">0</output>px</span></span>
+                    <input type="range" min="-40" max="40" step="1" value="0" data-control="sombraX" aria-label="Sombra: desplazamiento horizontal en píxeles" disabled />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Desplazamiento Y <span><output data-output="sombraY">10</output>px</span></span>
+                    <input type="range" min="-40" max="40" step="1" value="10" data-control="sombraY" aria-label="Sombra: desplazamiento vertical en píxeles" disabled />
+                  </label>
+
+                  <label class="campo">
+                    <span class="campo__label">Desenfoque <span><output data-output="sombraDesenfoque">18</output>px</span></span>
+                    <input type="range" min="0" max="60" step="1" value="18" data-control="sombraDesenfoque" aria-label="Sombra: desenfoque en píxeles" disabled />
+                  </label>
+
+                  <div class="campo campo--color">
+                    <input type="color" value="#0a0a0f" data-control="sombraColor" aria-label="Color de la sombra" disabled />
+                    <input type="text" value="#0a0a0f" spellcheck="false" data-sombra-hex aria-label="Valor hexadecimal del color de la sombra" disabled />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="nota-taller">
+          ¿Necesitas el fondo antes que el filtro? Pásate por el
+          <a href="/codigo-web/degradados/">generador de degradados</a>.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="prose">
+          <h2>Qué hace cada filtro, en una frase</h2>
+          <ul>
+            <li><code>blur()</code> — difumina el contenido mezclando cada píxel con sus vecinos; se mide en píxeles y es el único que crece hacia fuera del borde.</li>
+            <li><code>brightness()</code> — multiplica la luz de cada píxel: por debajo del 100 % oscurece, por encima quema los claros.</li>
+            <li><code>contrast()</code> — separa los tonos del gris medio, así que aumenta la diferencia entre luces y sombras.</li>
+            <li><code>grayscale()</code> — quita el color de forma progresiva hasta dejar solo la luminancia.</li>
+            <li><code>hue-rotate()</code> — gira todos los tonos por la rueda de color los grados que le indiques, sin tocar saturación ni brillo.</li>
+            <li><code>invert()</code> — cambia cada color por su opuesto; al 50 % toda la imagen colapsa en un gris plano.</li>
+            <li><code>opacity()</code> — hace translúcido el elemento, igual que la propiedad <code>opacity</code> pero encadenable con el resto.</li>
+            <li><code>saturate()</code> — sube o baja la intensidad del color; a 0 % equivale a blanco y negro, por encima de 200 % entra en territorio de póster.</li>
+            <li><code>sepia()</code> — vira la imagen a un marrón cálido de fotografía antigua.</li>
+            <li><code>drop-shadow()</code> — proyecta una sombra que sigue la silueta con transparencia del contenido, no el rectángulo de su caja.</li>
+          </ul>
+
+          <h2>El orden de la cadena no es decorativo</h2>
+          <p>
+            <code>filter</code> no es una lista de ajustes independientes: es una cadena de
+            revelado. Cada función recibe la imagen que dejó la anterior, así que cambiar el
+            orden cambia el resultado. <code>grayscale(100%) hue-rotate(90deg)</code> no hace
+            absolutamente nada con el giro de tono, porque ya no queda color que girar; al revés,
+            <code>hue-rotate(90deg) grayscale(100%)</code> sí produce un gris distinto, porque
+            cada tono aporta una luminancia diferente.
+          </p>
+          <p>
+            Este generador escribe siempre la cadena en el mismo orden, y está elegido para que
+            cada paso tenga sentido sobre el anterior: primero el revelado tonal
+            (<code>brightness</code>, <code>contrast</code>), después el color
+            (<code>saturate</code>, <code>hue-rotate</code>), luego las conversiones que se
+            comen el color (<code>grayscale</code>, <code>sepia</code>, <code>invert</code>),
+            a continuación la óptica (<code>blur</code> y el <code>drop-shadow</code>, que así
+            se calcula sobre la silueta ya procesada) y al final <code>opacity</code>, para que
+            atenúe el conjunto incluida la sombra. Si copias la cadena y reordenas a mano, cuenta
+            con que el resultado se moverá.
+          </p>
+          <p>
+            Otro detalle que ahorra disgustos: aquí solo entra en el código lo que está fuera de
+            su valor neutro. <code>brightness(100%)</code> o <code>blur(0px)</code> no aportan
+            nada y sí obligan al navegador a montar la tubería de filtrado, además de ensuciar
+            la hoja de estilos.
+          </p>
+
+          <h2>El desenfoque es el filtro caro</h2>
+          <p>
+            La mayoría de los filtros son baratos: <code>brightness</code>,
+            <code>contrast</code>, <code>saturate</code> o <code>grayscale</code> calculan cada
+            píxel por su cuenta y la tarjeta gráfica los resuelve casi gratis.
+            <code>blur</code> y <code>drop-shadow</code> son otra historia, porque cada píxel
+            necesita leer a sus vecinos. El coste sube con el área de la superficie y con el
+            radio, y se dispara si además hay una animación por medio.
+          </p>
+          <p>
+            Tres formas de mitigarlo, de la más útil a la más agresiva. Primero,
+            <strong>reduce la superficie</strong>: desenfoca una imagen de 400 px, no un fondo a
+            pantalla completa. Segundo, <strong>aísla el elemento en su propia capa</strong> con
+            <code>will-change: filter</code> o <code>transform: translateZ(0)</code>, para que el
+            navegador no vuelva a pintar media página en cada fotograma; ponlo solo en el
+            elemento que se anima y quítalo cuando termine, porque cada capa consume memoria de
+            vídeo. Y tercero, si el desenfoque es fijo y no cambia nunca,
+            <strong>hornéalo en la imagen</strong> antes de subirla: un PNG ya desenfocado cuesta
+            cero en tiempo de ejecución.
+          </p>
+
+          <h2>backdrop-filter, el pariente del efecto cristal</h2>
+          <p>
+            <code>filter</code> afecta al elemento y a su contenido.
+            <code>backdrop-filter</code> hace lo mismo pero con lo que hay <em>detrás</em>,
+            dejando intacto lo de dentro. Es exactamente lo que necesitas para el efecto cristal:
+            un panel con un fondo semitransparente y <code>backdrop-filter: blur(12px)</code>
+            desenfoca la página que queda debajo mientras el texto de encima sigue nítido. Acepta
+            las mismas funciones que <code>filter</code>, con la misma regla de orden y el mismo
+            coste de rendimiento, así que conviene reservarlo para cabeceras fijas y tarjetas
+            pequeñas.
+          </p>
+          <p>
+            Si vas por ese camino, cuida el contraste del texto que va encima: sobre un fondo
+            desenfocado el ratio real depende de la foto que haya debajo. Compruébalo con
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a>, y si quieres entender
+            por qué 4.5:1 es la cifra que importa, está explicado en la
+            <a href="/blog/teoria-del-color-para-web/">guía de teoría del color</a>. El resto de
+            generadores de la categoría están en <a href="/codigo-web/">código web</a>.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Los filtros CSS afectan al rendimiento de la página?</h3>
+          <p>
+            Sí, y no todos igual. <code>brightness</code>, <code>contrast</code>,
+            <code>saturate</code>, <code>grayscale</code> o <code>sepia</code> se resuelven muy
+            rápido en la tarjeta gráfica porque cada píxel se calcula por su cuenta.
+            <code>blur</code> y <code>drop-shadow</code> son los caros: obligan al navegador a
+            mirar los píxeles vecinos, y el coste crece con el área de la superficie y con el
+            radio. En una miniatura no lo notarás; en un fondo a pantalla completa que además se
+            anima, sí.
+          </p>
+
+          <h3>¿Por qué cambia el resultado si cambio el orden de los filtros?</h3>
+          <p>
+            Porque cada función recibe la imagen que dejó la anterior, como una cadena de
+            revelado. <code>grayscale(100%)</code> seguido de <code>hue-rotate</code> no hace
+            nada, porque ya no queda color que girar, mientras que al revés el gris final sí
+            cambia. Con <code>blur</code> y <code>drop-shadow</code> pasa lo mismo: la sombra se
+            calcula sobre la silueta que le llega, así que desenfocar antes o después da
+            resultados distintos.
+          </p>
+
+          <h3>¿Cuál es la diferencia entre filter y backdrop-filter?</h3>
+          <p>
+            <code>filter</code> afecta al elemento y a todo su contenido.
+            <code>backdrop-filter</code> afecta solo a lo que hay detrás del elemento y deja
+            intacto lo que hay dentro. Es la propiedad del efecto cristal: un panel con fondo
+            semitransparente y <code>backdrop-filter: blur()</code> desenfoca la página que queda
+            debajo y mantiene nítido el texto encima. Necesita que el fondo del elemento sea al
+            menos parcialmente transparente.
+          </p>
+
+          <h3>¿Se pueden animar los filtros CSS?</h3>
+          <p>
+            Sí, <code>filter</code> es una propiedad animable y transiciona bien entre valores
+            del mismo tipo. La condición es que los dos estados tengan las mismas funciones y en
+            el mismo orden: de <code>blur(0px)</code> a <code>blur(8px)</code> interpola de forma
+            suave, pero pasar de <code>none</code> a una cadena de tres funciones produce un
+            salto seco. Por eso conviene escribir el estado de reposo con los valores neutros en
+            vez de usar <code>none</code>.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+    <script src="/js/codigo-web.js" defer></script>
+    <script src="js/filtros.js" defer></script>
+  </body>
+</html>

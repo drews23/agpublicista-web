@@ -135,5 +135,17 @@
   /** Quita decimales innecesarios: 1.50 → 1.5, 2.00 → 2 */
   const num = (valor) => String(Math.round(valor * 1000) / 1000);
 
-  window.AGCode = { highlightCss, renderCode, bindCopy, bindControls, readControls, syncOutputs, rgba, num, escapeHtml };
+  /**
+   * Expande #abc a #aabbcc. Hace falta antes de asignar a un <input type="color">:
+   * la especificación solo admite la forma larga y los navegadores que no son
+   * indulgentes (Firefox, Safari) convierten el resto en negro sin avisar.
+   */
+  const expandHex = (hex) => {
+    const valor = String(hex || "").trim();
+    return /^#[0-9a-f]{3}$/i.test(valor)
+      ? "#" + valor.slice(1).split("").map((c) => c + c).join("")
+      : valor;
+  };
+
+  window.AGCode = { highlightCss, renderCode, bindCopy, bindControls, readControls, syncOutputs, rgba, num, expandHex, escapeHtml };
 })();

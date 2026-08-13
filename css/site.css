@@ -31,7 +31,9 @@
   --line-strong: rgba(255, 255, 255, 0.2);
   --text: #f4f3f8;
   --muted: #a2a1b3;
-  --faint: #6e6d80;
+  /* Ajustado para superar el 4.5:1 de la WCAG sobre los paneles translúcidos
+     (fondo real compuesto #141419). El valor anterior, #6e6d80, daba 3.64:1. */
+  --faint: #7f7e91;
   --violeta: #8b7bff;
   --turquesa: #35d6c8;
   --ambar: #ffb454;
@@ -52,7 +54,8 @@
   --line-strong: rgba(24, 22, 40, 0.24);
   --text: #17161f;
   --muted: #5d5c6e;
-  --faint: #8c8b9c;
+  /* Mismo criterio en claro: #8c8b9c daba 3.29:1 sobre el fondo de página. */
+  --faint: #6f6e7f;
   --violeta: #5b46e8;
   --turquesa: #0d9488;
   --ambar: #d97a06;

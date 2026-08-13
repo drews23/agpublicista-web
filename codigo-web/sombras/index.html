@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de sombras CSS gratis — Lienzo</title>
+    <meta
+      name="description"
+      content="Crea sombras CSS con varias capas y vista previa en vivo: box-shadow y text-shadow, desenfoque, extensión, inset y color. Copia el código listo para pegar."
+    />
+    <link rel="canonical" href="https://agpublicista.com/codigo-web/sombras/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de sombras CSS gratis" />
+    <meta property="og:description" content="Sombras multicapa para caja y texto, con vista previa en vivo y código listo para copiar." />
+    <meta property="og:url" content="https://agpublicista.com/codigo-web/sombras/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/codigo-web.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/codigo-web/sombras/#app",
+          "name": "Generador de sombras CSS",
+          "url": "https://agpublicista.com/codigo-web/sombras/",
+          "description": "Generador visual de sombras CSS multicapa para box-shadow y text-shadow, con desplazamiento, desenfoque, extensión, inset, color y código listo para copiar.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Código web", "item": "https://agpublicista.com/codigo-web/" },
+            { "@type": "ListItem", "position": 3, "name": "Sombras CSS", "item": "https://agpublicista.com/codigo-web/sombras/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Por qué mis sombras se ven falsas o duras?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque una sola capa concentra todo el peso de la sombra en un único desenfoque. La luz real produce un contacto pequeño y marcado junto al objeto, más una difusión amplia y tenue que se pierde con la distancia. Apilar dos o tres sombras, una corta y densa y otra larga y suave, reproduce ese comportamiento: es justo lo que aplica el botón Sombra suave."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué diferencia hay entre el desenfoque y la extensión?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El desenfoque difumina el borde de la sombra sin cambiar su tamaño de partida. La extensión agranda o encoge la silueta antes de difuminarla: con valores positivos la sombra sobresale por todos lados y con valores negativos se recoge. Una extensión negativa combinada con un desplazamiento vertical es el truco para que la sombra no asome por los costados y el objeto parezca flotar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuándo conviene usar una sombra interior (inset)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cuando quieres que algo parezca hundido en vez de elevado: campos de formulario, barras de progreso, casillas marcadas, huecos donde encaja una pieza o el borde interior de un contenedor. Con inset la sombra se dibuja dentro del elemento, así que un desplazamiento positivo en Y oscurece el borde superior, al revés de lo que ocurre con una sombra normal."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo pongo sombra a un texto sin arruinar la legibilidad?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Con desplazamientos de uno o dos píxeles, poco desenfoque y opacidad baja. La propiedad text-shadow no admite extensión ni inset, solo desplazamiento, desenfoque y color. Si el texto va sobre una foto, funciona mejor una sombra amplia y muy tenue del mismo tono oscuro del fondo, o una capa de color semitransparente detrás del texto, que un contorno duro alrededor de cada letra."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Sombras</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Generador CSS</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de sombras CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            box-shadow y text-shadow con todas las capas que necesites. Ajusta desenfoque,
+            extensión y color, júzgalo sobre un fondo real y llévate el CSS listo para pegar.
+            Todo pasa en tu navegador, en tiempo real.
+          </p>
+        </div>
+
+        <div class="taller reveal" style="--reveal-delay: 200ms">
+          <div class="taller__main">
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Vista previa</h2>
+                <button class="boton-sutil" type="button" data-suave>Sombra suave</button>
+              </div>
+              <div class="lienzo-previa lienzo-previa--liso" data-previa>
+                <div class="demo-caja" data-demo-caja>Tarjeta</div>
+                <p class="demo-texto" data-demo-texto>Sombra que se lee</p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
+              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de la sombra"></pre>
+              <div class="acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo el valor</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes de la sombra">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Ajustes</h2></div>
+              <div class="controles" data-controles>
+                <div class="campo">
+                  <span class="campo__label">Propiedad</span>
+                  <div class="opciones" role="radiogroup" aria-label="Tipo de sombra">
+                    <label><input type="radio" name="modo" data-control="modo" value="box" checked /> box-shadow</label>
+                    <label><input type="radio" name="modo" data-control="modo" value="text" /> text-shadow</label>
+                  </div>
+                </div>
+
+                <div class="campo">
+                  <span class="campo__label">Fondo de la vista previa</span>
+                  <div class="campo--color">
+                    <input type="color" value="#f1f0f7" data-control="fondo" aria-label="Color de fondo de la vista previa" />
+                    <input type="text" value="#f1f0f7" spellcheck="false" data-fondo-hex aria-label="Valor hexadecimal del fondo de la vista previa" />
+                  </div>
+                  <span class="campo__hint">Una sombra solo existe en contexto: cámbialo para ver si aguanta sobre claro y sobre oscuro.</span>
+                </div>
+
+                <label class="campo" data-campo-radio>
+                  <span class="campo__label">Radio de la caja <output data-output="radio">20</output>px</span>
+                  <input type="range" min="0" max="70" step="1" value="20" data-control="radio" aria-label="Radio de la caja de ejemplo en píxeles" />
+                  <span class="campo__hint">No sale en el CSS generado: está aquí para juzgar la sombra sobre la forma real.</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Capas</h2>
+                <button class="boton-sutil" type="button" data-agregar>+ Añadir capa</button>
+              </div>
+              <div class="controles">
+                <div class="capas" data-capas></div>
+                <p class="campo__hint" data-estado aria-live="polite">1 capa activa.</p>
+                <p class="campo__hint">
+                  Hasta 5 capas. La primera de la lista se dibuja encima de las demás, así que
+                  conviene que sea la más pequeña y densa.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="nota-taller">
+          ¿El fondo antes que la sombra? Pásate por el
+          <a href="/codigo-web/degradados/">generador de degradados</a> o vuelve al
+          <a href="/codigo-web/">índice de generadores CSS</a>.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="prose">
+          <h2>Por qué una sombra de una sola capa se ve barata</h2>
+          <p>
+            El <code>box-shadow</code> de manual —un desplazamiento, un desenfoque y un negro al
+            20 %— produce una mancha uniforme que no se parece a ninguna sombra real. En el mundo
+            físico la luz deja dos cosas a la vez: un <strong>contacto</strong> pequeño y oscuro
+            justo debajo del objeto, y una <strong>difusión</strong> ancha y muy tenue que se
+            desvanece con la distancia. Una sola capa tiene que elegir entre las dos, y siempre
+            elige mal.
+          </p>
+          <p>
+            La solución es apilar. CSS acepta tantas sombras separadas por comas como quieras, y
+            se pintan en el orden de la lista: la primera queda encima. La receta que aplica el
+            botón <em>Sombra suave</em> son tres capas con desenfoque y opacidad crecientes; el
+            resultado tiene profundidad sin que se note de dónde sale. Empieza por ahí y luego
+            mueve los valores.
+          </p>
+
+          <h2>Desenfoque y extensión no son lo mismo</h2>
+          <p>
+            El <strong>desenfoque</strong> difumina el borde de la sombra, pero no cambia su
+            tamaño de partida: la silueta sigue siendo la del elemento. La
+            <strong>extensión</strong> sí lo cambia — agranda o encoge esa silueta antes de
+            difuminarla. Por eso una extensión negativa es el truco que más cambia el resultado:
+            recoge la sombra hacia dentro para que no asome por los costados y solo se vea caer
+            hacia abajo, que es exactamente lo que hace un objeto apoyado sobre una superficie.
+          </p>
+          <p>
+            Regla práctica: si la sombra se ve como un halo alrededor de la caja, baja la
+            extensión antes que la opacidad. Si se ve como un borde duro, sube el desenfoque.
+          </p>
+
+          <h2>Sombras interiores (inset) y cuándo sirven</h2>
+          <p>
+            Con la palabra clave <code>inset</code> la sombra se dibuja <em>dentro</em> del
+            elemento en lugar de proyectarse fuera. Sirve para lo contrario que una sombra normal:
+            en vez de elevar, hunde. Campos de formulario, barras de progreso, casillas marcadas,
+            un hueco donde encaja una pieza o el borde interior de una sección con textura.
+          </p>
+          <p>
+            Ojo con la dirección: en una sombra interior, un desplazamiento positivo en Y oscurece
+            el <strong>borde superior</strong>, no el inferior. Es la parte que despista la primera
+            vez, y se entiende en dos segundos moviendo el control con el interruptor activado.
+          </p>
+
+          <h2>Sombras en texto sin arruinar la legibilidad</h2>
+          <p>
+            <code>text-shadow</code> es más corto: desplazamiento, desenfoque y color, sin
+            extensión ni <code>inset</code>. Y es mucho menos indulgente, porque cualquier exceso
+            se come el contorno de las letras. Uno o dos píxeles de desplazamiento, poco desenfoque
+            y opacidad baja bastan para despegar un titular de un fondo con ruido.
+          </p>
+          <p>
+            Si el texto va sobre una foto, una sombra amplia y muy tenue del mismo tono oscuro del
+            fondo funciona mejor que un contorno duro. Y antes de dar el tema por bueno, comprueba
+            el contraste real entre texto y fondo en
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a>: la sombra ayuda a
+            separar, pero no arregla un color que ya nace por debajo del mínimo. El porqué del
+            4.5:1 está contado en la
+            <a href="/blog/teoria-del-color-para-web/">guía de teoría del color</a>.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Por qué mis sombras se ven falsas o duras?</h3>
+          <p>
+            Porque una sola capa concentra todo el peso de la sombra en un único desenfoque. La luz
+            real produce un contacto pequeño y marcado junto al objeto, más una difusión amplia y
+            tenue que se pierde con la distancia. Apilar dos o tres sombras, una corta y densa y
+            otra larga y suave, reproduce ese comportamiento: es justo lo que aplica el botón
+            «Sombra suave».
+          </p>
+
+          <h3>¿Qué diferencia hay entre el desenfoque y la extensión?</h3>
+          <p>
+            El desenfoque difumina el borde de la sombra sin cambiar su tamaño de partida. La
+            extensión agranda o encoge la silueta antes de difuminarla: con valores positivos la
+            sombra sobresale por todos lados y con valores negativos se recoge. Una extensión
+            negativa combinada con un desplazamiento vertical es el truco para que la sombra no
+            asome por los costados y el objeto parezca flotar.
+          </p>
+
+          <h3>¿Cuándo conviene usar una sombra interior (inset)?</h3>
+          <p>
+            Cuando quieres que algo parezca hundido en vez de elevado: campos de formulario, barras
+            de progreso, casillas marcadas, huecos donde encaja una pieza o el borde interior de un
+            contenedor. Con inset la sombra se dibuja dentro del elemento, así que un
+            desplazamiento positivo en Y oscurece el borde superior, al revés de lo que ocurre con
+            una sombra normal.
+          </p>
+
+          <h3>¿Cómo pongo sombra a un texto sin arruinar la legibilidad?</h3>
+          <p>
+            Con desplazamientos de uno o dos píxeles, poco desenfoque y opacidad baja. La propiedad
+            <code>text-shadow</code> no admite extensión ni <code>inset</code>, solo desplazamiento,
+            desenfoque y color. Si el texto va sobre una foto, funciona mejor una sombra amplia y
+            muy tenue del mismo tono oscuro del fondo, o una capa de color semitransparente detrás
+            del texto, que un contorno duro alrededor de cada letra.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+    <script src="/js/color-engine.js" defer></script>
+    <script src="/js/codigo-web.js" defer></script>
+    <script src="js/sombras.js" defer></script>
+  </body>
+</html>

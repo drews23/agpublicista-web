@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de estilos de texto CSS — Lienzo</title>
+    <meta
+      name="description"
+      content="Ajusta tamaño, grosor, altura de línea, interletrado y decoración con vista previa en vivo y copia el CSS de tu estilo de texto listo para pegar."
+    />
+    <link rel="canonical" href="https://agpublicista.com/codigo-web/tipografia/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de estilos de texto CSS" />
+    <meta property="og:description" content="Tamaño, grosor, altura de línea, interletrado y decoración con vista previa en vivo y CSS listo para copiar." />
+    <meta property="og:url" content="https://agpublicista.com/codigo-web/tipografia/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/codigo-web.css" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/codigo-web/tipografia/#app",
+          "name": "Generador de estilos de texto CSS",
+          "url": "https://agpublicista.com/codigo-web/tipografia/",
+          "description": "Generador visual de estilos de texto en CSS: tamaño, grosor, altura de línea, interletrado, espaciado entre palabras, transformación, alineación, sangría y decoración, con vista previa en vivo y código listo para copiar.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Código web", "item": "https://agpublicista.com/codigo-web/" },
+            { "@type": "ListItem", "position": 3, "name": "Tipografía CSS", "item": "https://agpublicista.com/codigo-web/tipografia/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué altura de línea debo usar en un texto?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Para texto corrido, entre 1.4 y 1.6 sin unidad: da aire suficiente para que el ojo encuentre el siguiente renglón sin perderse. Para titulares grandes, entre 1.05 y 1.25, porque a tamaños altos el hueco entre líneas se ve enorme si dejas el valor del cuerpo. Y cuanto más larga sea la línea, más altura necesita."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuándo conviene usar interletrado negativo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Solo en titulares grandes, a partir de unos 32 px, y con valores muy pequeños: de -0.01em a -0.03em. A tamaños altos las letras parecen separarse de más y cerrar el espacio compacta la palabra. En texto pequeño el negativo pega las letras y cuesta leer. El positivo, de 0.05em a 0.12em, es lo contrario: va bien en palabras en mayúsculas y en etiquetas diminutas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Es mala idea justificar el texto en una web?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Casi siempre. El navegador justifica estirando los espacios entre palabras y, sin guionado, en columnas estrechas se abren huecos enormes que forman ríos blancos verticales. Si aun así lo necesitas, activa hyphens: auto, declara el idioma en la etiqueta html y mantén la línea entre 60 y 75 caracteres."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo usar cualquier tipografía en este generador?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En la vista previa solo aparecen las fuentes que ya carga este sitio, Fraunces e Instrument Sans, más las genéricas del sistema: aquí no se cargan fuentes externas. El CSS que copias funciona con cualquier tipografía; basta con cambiar el nombre en font-family por el de la fuente que tengas cargada con @font-face o desde tu servicio de fuentes."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Tipografía</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Generador CSS</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de estilos de texto CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            Tamaño, grosor, altura de línea, interletrado, alineación y decoración. Escribe
+            tu propio texto, míralo en un titular y en un párrafo de verdad, y llévate el CSS
+            listo para pegar.
+          </p>
+        </div>
+
+        <div class="taller reveal" style="--reveal-delay: 200ms">
+          <div class="taller__main">
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Vista previa</h2>
+                <button class="boton-sutil" type="button" data-restablecer>Restablecer</button>
+              </div>
+
+              <div class="lienzo-previa lienzo-previa--liso">
+                <div class="previa-tipo" data-previa>
+                  <p class="demo-texto" data-muestra>La tipografía también habla</p>
+                  <p class="previa-parrafo" data-parrafo>
+                    Un párrafo de prueba sirve para lo que una sola línea no puede: ver si el
+                    texto respira. Aquí se nota de verdad la altura de línea, cómo se comporta
+                    el interletrado en frases largas y qué les pasa a los espacios cuando
+                    justificas una columna estrecha.
+                  </p>
+                </div>
+              </div>
+
+              <div class="panel__body">
+                <label class="campo">
+                  <span class="campo__label">Texto de ejemplo</span>
+                  <input type="text" value="La tipografía también habla" maxlength="80" spellcheck="false" data-texto />
+                  <span class="campo__hint">
+                    El párrafo mantiene el mismo estilo a un tamaño menor: así ves cómo la altura
+                    de línea sin unidad se adapta sola a cada tamaño.
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
+              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS del estilo de texto"></pre>
+              <div class="acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-props>Copiar solo las propiedades</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes del estilo de texto" data-controles>
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Fuente</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Familia</span>
+                  <select data-control="familia">
+                    <option value="instrument" selected>Instrument Sans (cuerpo del sitio)</option>
+                    <option value="fraunces">Fraunces (titulares del sitio)</option>
+                    <option value="serif">Serif del sistema</option>
+                    <option value="sans">Sans-serif del sistema</option>
+                    <option value="mono">Monoespaciada del sistema</option>
+                  </select>
+                  <span class="campo__hint">
+                    Solo las fuentes que esta página ya carga, para no traer dependencias nuevas.
+                    En tu proyecto, cambia el nombre en <code>font-family</code> por el de la tuya.
+                  </span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Tamaño <span><output data-output="tamano">40</output> px</span></span>
+                  <input type="range" min="12" max="96" step="1" value="40" data-control="tamano" aria-label="Tamaño de fuente en píxeles" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Grosor <span><output data-output="grosor">700</output> · <span data-nombre-grosor>Negrita</span></span></span>
+                  <input type="range" min="100" max="900" step="100" value="700" data-control="grosor" aria-label="Grosor de la fuente" />
+                  <span class="campo__hint">
+                    Fraunces e Instrument Sans son variables de 400 a 700. Fuera de ese rango el
+                    navegador simula el grosor, y eso siempre se nota.
+                  </span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Altura de línea <output data-output="altura">1.2</output></span>
+                  <input type="range" min="1" max="2.5" step="0.05" value="1.2" data-control="altura" aria-label="Altura de línea" />
+                  <span class="campo__hint">Sin unidad. 1.05–1.25 para titulares, 1.4–1.6 para texto corrido.</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Espaciado y forma</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Interletrado <span><output data-output="interletrado">0</output> em</span></span>
+                  <input type="range" min="-0.1" max="0.4" step="0.005" value="0" data-control="interletrado" aria-label="Interletrado en em" />
+                  <span class="campo__hint">
+                    En <code>em</code> para que escale con el tamaño. Negativo solo en titulares
+                    grandes; positivo en textos en mayúsculas.
+                  </span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Espacio entre palabras <span><output data-output="palabras">0</output> px</span></span>
+                  <input type="range" min="-5" max="20" step="0.5" value="0" data-control="palabras" aria-label="Espacio entre palabras en píxeles" />
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Sangría de primera línea <span><output data-output="sangria">0</output> px</span></span>
+                  <input type="range" min="-60" max="120" step="2" value="0" data-control="sangria" aria-label="Sangría de primera línea en píxeles" />
+                  <span class="campo__hint">En negativo, la primera línea sobresale (sangría francesa).</span>
+                </label>
+
+                <label class="campo">
+                  <span class="campo__label">Transformación</span>
+                  <select data-control="transformacion">
+                    <option value="none" selected>Ninguna</option>
+                    <option value="uppercase">MAYÚSCULAS</option>
+                    <option value="lowercase">minúsculas</option>
+                    <option value="capitalize">Iniciales En Mayúscula</option>
+                  </select>
+                </label>
+
+                <div class="campo">
+                  <span class="campo__label">Alineación</span>
+                  <div class="opciones" role="radiogroup" aria-label="Alineación del texto">
+                    <label><input type="radio" name="alineacion" data-control="alineacion" value="left" checked /> Izquierda</label>
+                    <label><input type="radio" name="alineacion" data-control="alineacion" value="center" /> Centro</label>
+                    <label><input type="radio" name="alineacion" data-control="alineacion" value="right" /> Derecha</label>
+                    <label><input type="radio" name="alineacion" data-control="alineacion" value="justify" /> Justificado</label>
+                  </div>
+                </div>
+
+                <label class="interruptor">
+                  <input type="checkbox" data-control="versalitas" />
+                  <span>
+                    Versalitas
+                    <small>Convierte las minúsculas en mayúsculas pequeñas con <code>font-variant-caps</code>. Si la fuente no las trae, el navegador las simula.</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Decoración</h2></div>
+              <div class="controles">
+                <label class="campo">
+                  <span class="campo__label">Línea</span>
+                  <select data-control="linea">
+                    <option value="none" selected>Ninguna</option>
+                    <option value="underline">Subrayado</option>
+                    <option value="overline">Línea superior</option>
+                    <option value="line-through">Tachado</option>
+                  </select>
+                </label>
+
+                <label class="campo" data-campo-deco hidden>
+                  <span class="campo__label">Estilo de línea</span>
+                  <select data-control="estilo">
+                    <option value="solid" selected>Continua</option>
+                    <option value="double">Doble</option>
+                    <option value="dotted">Punteada</option>
+                    <option value="dashed">Discontinua</option>
+                    <option value="wavy">Ondulada</option>
+                  </select>
+                </label>
+
+                <label class="campo" data-campo-deco hidden>
+                  <span class="campo__label">Grosor de la línea <span><output data-output="grosorLinea">auto</output></span></span>
+                  <input type="range" min="0" max="10" step="0.5" value="0" data-control="grosorLinea" aria-label="Grosor de la línea de decoración en píxeles" />
+                  <span class="campo__hint">En 0 se queda en <code>auto</code>: el grosor lo decide la propia fuente.</span>
+                </label>
+
+                <label class="interruptor" data-campo-deco hidden>
+                  <input type="checkbox" data-control="colorHeredado" checked />
+                  <span>
+                    Usar el color del texto
+                    <small>Es el comportamiento por defecto (<code>currentColor</code>). Desmárcalo para pintar la línea de otro color.</small>
+                  </span>
+                </label>
+
+                <div class="campo campo--color" data-campo-color hidden>
+                  <input type="color" value="#ffb454" data-control="colorLinea" aria-label="Color de la línea de decoración" />
+                  <input type="text" value="#ffb454" spellcheck="false" data-hex aria-label="Valor hexadecimal del color de la línea" />
+                </div>
+
+                <label class="campo" data-campo-offset hidden>
+                  <span class="campo__label">Separación del subrayado <span><output data-output="offset">auto</output></span></span>
+                  <input type="range" min="0" max="14" step="1" value="0" data-control="offset" aria-label="Separación del subrayado en píxeles" />
+                  <span class="campo__hint">
+                    Solo para el subrayado. En 0 se queda en <code>auto</code>; sube un par de píxeles
+                    y el trazo deja de cortar las letras con rabito.
+                  </span>
+                </label>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="nota-taller">
+          ¿Vas a poner este texto sobre un fondo de color? Compruébalo antes en el
+          <a href="/codigo-web/degradados/">generador de degradados</a>.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="prose">
+          <h2>La altura de línea se declara sin unidad</h2>
+          <p>
+            <code>line-height: 1.5</code> y <code>line-height: 24px</code> parecen lo mismo en un
+            párrafo de 16 px, pero no lo son. El valor con unidad calcula la altura una vez y la
+            reparte a todos los hijos tal cual: un titular de 40 px dentro de ese bloque heredaría
+            24 px de altura y las líneas se montarían unas encima de otras. El valor sin unidad
+            hereda el <em>factor</em>, no el resultado, y cada elemento lo multiplica por su propio
+            tamaño. Por eso el titular de la vista previa y su párrafo comparten el mismo número y
+            aun así respiran bien los dos.
+          </p>
+          <p>
+            Como punto de partida: 1.4–1.6 para texto corrido, 1.05–1.25 para titulares grandes.
+            La otra variable es el ancho: cuanta más larga sea la línea, más altura necesita para
+            que el ojo no se pierda al saltar de renglón.
+          </p>
+
+          <h2>Interletrado: negativo en titulares, positivo en mayúsculas</h2>
+          <p>
+            Las fuentes se dibujan con un espaciado pensado para tamaños de lectura. Cuando subes
+            un titular a 48 o 72 px ese espacio crece proporcionalmente y las letras empiezan a
+            parecer sueltas. Ahí es donde entra el <strong>interletrado negativo</strong>: entre
+            <code>-0.01em</code> y <code>-0.03em</code> basta para que la palabra se compacte y se
+            lea como una unidad. Más allá de eso empiezas a pegar las letras.
+          </p>
+          <p>
+            Al revés pasa con las <strong>mayúsculas</strong>. Las versales se diseñaron para
+            aparecer sueltas dentro de un texto en minúsculas, no en bloque; en una etiqueta o un
+            botón todo en mayúsculas conviene abrirlas entre <code>0.05em</code> y
+            <code>0.12em</code>. La misma regla vale para el texto muy pequeño, de 11 o 12 px:
+            un poco de aire extra lo hace legible.
+          </p>
+          <p>
+            Fíjate en que la unidad es <code>em</code> y no píxeles. Así el espaciado se recalcula
+            solo si mañana cambias el tamaño de la fuente, en vez de quedarse fijo y romperse.
+          </p>
+
+          <h2>Justificar en web casi siempre empeora la lectura</h2>
+          <p>
+            En un libro, el texto justificado funciona porque hay guionado y porque alguien ajustó
+            la composición línea a línea. El navegador no hace nada de eso por defecto: para
+            cuadrar los dos márgenes solo puede estirar los espacios entre palabras. En columnas
+            estrechas —o sea, en casi cualquier móvil— aparecen huecos enormes que se alinean
+            verticalmente entre líneas y forman los llamados <em>ríos</em> de espacio en blanco.
+          </p>
+          <p>
+            Si aun así lo necesitas, hay tres cosas que lo hacen soportable: activar
+            <code>hyphens: auto</code>, declarar bien el idioma en la etiqueta <code>html</code>
+            (sin él, el navegador no sabe dónde partir las palabras) y mantener la medida entre 60 y
+            75 caracteres. Prueba el modo justificado en la vista previa de arriba y verás el efecto
+            al momento.
+          </p>
+
+          <h2>text-decoration ya no es solo un subrayado</h2>
+          <p>
+            Durante años, <code>text-decoration: underline</code> era todo lo que había: una línea
+            de grosor fijo pegada a la base del texto, cortando las colas de las jotas y las ges.
+            Hoy se controla por partes: <code>text-decoration-style</code> cambia el trazo
+            (continuo, doble, punteado, discontinuo u ondulado),
+            <code>text-decoration-thickness</code> ajusta el grosor,
+            <code>text-decoration-color</code> lo pinta de un color distinto al del texto y
+            <code>text-underline-offset</code> lo separa de la línea base.
+          </p>
+          <p>
+            La combinación más útil para enlaces dentro de un párrafo es un subrayado fino,
+            separado dos o tres píxeles y en un tono de acento en lugar de negro. Se sigue leyendo
+            como enlace, pero deja respirar al texto. En la
+            <a href="/blog/teoria-del-color-para-web/">guía de teoría del color</a> está la parte
+            de qué tono elegir sin perder contraste, y con
+            <a href="/herramientas/colores-en-vivo/">colores en vivo</a> puedes probar la
+            combinación sobre una página real antes de decidirte. El resto de generadores están en
+            <a href="/codigo-web/">código web</a>.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Qué altura de línea debo usar en un texto?</h3>
+          <p>
+            Para texto corrido, entre 1.4 y 1.6 sin unidad: da aire suficiente para que el ojo
+            encuentre el siguiente renglón sin perderse. Para titulares grandes, entre 1.05 y 1.25,
+            porque a tamaños altos el hueco entre líneas se ve enorme si dejas el valor del cuerpo.
+            Y cuanto más larga sea la línea, más altura necesita.
+          </p>
+
+          <h3>¿Cuándo conviene usar interletrado negativo?</h3>
+          <p>
+            Solo en titulares grandes, a partir de unos 32 px, y con valores muy pequeños: de
+            <code>-0.01em</code> a <code>-0.03em</code>. A tamaños altos las letras parecen
+            separarse de más y cerrar el espacio compacta la palabra. En texto pequeño el negativo
+            pega las letras y cuesta leer. El positivo, de <code>0.05em</code> a
+            <code>0.12em</code>, es lo contrario: va bien en palabras en mayúsculas y en etiquetas
+            diminutas.
+          </p>
+
+          <h3>¿Es mala idea justificar el texto en una web?</h3>
+          <p>
+            Casi siempre. El navegador justifica estirando los espacios entre palabras y, sin
+            guionado, en columnas estrechas se abren huecos enormes que forman ríos blancos
+            verticales. Si aun así lo necesitas, activa <code>hyphens: auto</code>, declara el
+            idioma en la etiqueta <code>html</code> y mantén la línea entre 60 y 75 caracteres.
+          </p>
+
+          <h3>¿Puedo usar cualquier tipografía en este generador?</h3>
+          <p>
+            En la vista previa solo aparecen las fuentes que ya carga este sitio, Fraunces e
+            Instrument Sans, más las genéricas del sistema: aquí no se cargan fuentes externas. El
+            CSS que copias funciona con cualquier tipografía; basta con cambiar el nombre en
+            <code>font-family</code> por el de la fuente que tengas cargada con
+            <code>@font-face</code> o desde tu servicio de fuentes.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+    <script src="/js/codigo-web.js" defer></script>
+    <script src="js/tipografia.js" defer></script>
+  </body>
+</html>

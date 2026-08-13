@@ -310,6 +310,21 @@
 
 /* 5. Piezas sueltas ------------------------------------------------------ */
 
+/* El atributo [hidden] trae display:none de la hoja del navegador, pero
+   pierde por especificidad contra las clases de arriba que declaran display.
+   Se resuelve una vez aquí en lugar de repetirlo en cada generador. */
+.campo[hidden],
+.campos[hidden],
+.interruptor[hidden],
+.capa[hidden],
+.capas[hidden],
+.opciones[hidden],
+.demo-caja[hidden],
+.demo-texto[hidden],
+.demo-foto[hidden] {
+  display: none;
+}
+
 /* Rejilla de la página índice de la categoría */
 .familias {
   display: grid;
