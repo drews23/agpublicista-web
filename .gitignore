@@ -2,3 +2,6 @@
 .claude/
 .DS_Store
 Thumbs.db
+
+# Logo en iteracion, aun no integrado
+lienzo.svg
