@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de degradados CSS gratis — Lienzo</title>
+    <meta
+      name="description"
+      content="Crea degradados CSS lineales, radiales y cónicos con vista previa en vivo. Añade colores, ajusta posición y opacidad, y copia el código listo para pegar."
+    />
+    <link rel="canonical" href="https://agpublicista.com/codigo-web/degradados/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de degradados CSS gratis" />
+    <meta property="og:description" content="Degradados lineales, radiales y cónicos con vista previa en vivo y código listo para copiar." />
+    <meta property="og:url" content="https://agpublicista.com/codigo-web/degradados/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/codigo-web.css" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/codigo-web/degradados/#app",
+          "name": "Generador de degradados CSS",
+          "url": "https://agpublicista.com/codigo-web/degradados/",
+          "description": "Generador visual de degradados CSS lineales, radiales y cónicos, con paradas de color editables, opacidad y código listo para copiar.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Código web", "item": "https://agpublicista.com/codigo-web/" },
+            { "@type": "ListItem", "position": 3, "name": "Degradados CSS", "item": "https://agpublicista.com/codigo-web/degradados/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuál es la diferencia entre un degradado lineal, radial y cónico?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El lineal avanza en línea recta según un ángulo, y es el más común para fondos y botones. El radial se expande en círculo o elipse desde un punto, útil para focos de luz y viñetas. El cónico gira alrededor de un centro como las agujas de un reloj, y es el que se usa para ruedas de color, gráficos de sectores y efectos de brillo metálico."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué mi degradado se ve con bandas o franjas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El bandeado aparece cuando dos colores muy parecidos se reparten en una superficie grande: la pantalla no tiene suficientes tonos intermedios y se ven escalones. Se corrige añadiendo una parada de color intermedia, aumentando el contraste entre los colores, o superponiendo una textura de ruido muy sutil."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué ángulo debo usar en un degradado lineal?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En CSS, 0 grados va de abajo hacia arriba y los grados avanzan en el sentido de las agujas del reloj: 90 grados es de izquierda a derecha y 180 de arriba hacia abajo. Los ángulos diagonales, entre 120 y 135 grados, suelen verse más naturales en fondos porque imitan la caída de la luz."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo usar degradados en textos y bordes?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Para texto se aplica el degradado como fondo y se recorta con background-clip: text junto a color: transparent. Para bordes se usa border-image con el degradado, o un contenedor con el degradado de fondo y un elemento interior opaco que deja ver solo el contorno."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs>
+              <linearGradient id="brand-g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#8b7bff" />
+                <stop offset="0.6" stop-color="#6e5df2" />
+                <stop offset="1" stop-color="#35d6c8" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+            <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+            <circle cx="79" cy="24" r="7" fill="#ffb454" />
+          </svg>
+          <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Degradados</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Generador CSS</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de degradados CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            Lineales, radiales y cónicos. Mueve los colores, ajusta la opacidad y llévate
+            el CSS listo para pegar. Todo pasa en tu navegador, en tiempo real.
+          </p>
+        </div>
+
+        <div class="taller reveal" style="--reveal-delay: 200ms">
+          <div class="taller__main">
+            <div class="panel">
+              <div class="panel__head">
+                <h2 class="panel__title">Vista previa</h2>
+                <button class="boton-sutil" type="button" data-aleatorio>Degradado aleatorio</button>
+              </div>
+              <div class="lienzo-previa" data-previa role="img" aria-label="Vista previa del degradado generado"></div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
+              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS del degradado"></pre>
+              <div class="acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo el valor</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes del degradado">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Ajustes</h2></div>
+              <div class="controles" data-controles>
+                <div class="campo">
+                  <span class="campo__label">Tipo</span>
+                  <div class="opciones" role="radiogroup" aria-label="Tipo de degradado">
+                    <label><input type="radio" name="tipo" data-control="tipo" value="linear" checked /> Lineal</label>
+                    <label><input type="radio" name="tipo" data-control="tipo" value="radial" /> Radial</label>
+                    <label><input type="radio" name="tipo" data-control="tipo" value="conic" /> Cónico</label>
+                  </div>
+                </div>
+
+                <label class="campo" data-campo-angulo>
+                  <span class="campo__label"><span data-etiqueta-angulo>Ángulo</span> <output data-output="angulo">135</output>°</span>
+                  <input type="range" min="0" max="360" step="1" value="135" data-control="angulo" />
+                  <span class="campo__hint">0° va de abajo hacia arriba y avanza en sentido horario. Las diagonales (120–135°) suelen verse más naturales.</span>
+                </label>
+
+                <label class="campo" data-campo-forma hidden>
+                  <span class="campo__label">Forma</span>
+                  <select data-control="forma">
+                    <option value="circle">Círculo</option>
+                    <option value="ellipse" selected>Elipse</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Colores</h2></div>
+              <div class="controles">
+                <div class="capas" data-paradas></div>
+                <button class="boton-sutil" type="button" data-agregar>+ Añadir color</button>
+                <p class="campo__hint">Hasta 8 paradas. El color nuevo se inserta en el hueco más ancho.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="nota-taller">
+          ¿Buscas la paleta antes que el degradado? Empieza por el
+          <a href="/herramientas/paletas/">generador de paletas</a>.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="prose">
+          <h2>Los tres tipos de degradado, y cuándo usar cada uno</h2>
+          <p>
+            El <strong>lineal</strong> avanza en línea recta según un ángulo. Es el que usarás el
+            90 % de las veces: fondos de sección, botones, tarjetas. El <strong>radial</strong> se
+            expande desde un punto en círculo o elipse, y sirve para simular un foco de luz o una
+            viñeta que concentra la atención en el centro. El <strong>cónico</strong> gira alrededor
+            de un punto como las agujas de un reloj: es el que hace posibles las ruedas de color,
+            los gráficos de sectores y los brillos metálicos, todo en CSS puro.
+          </p>
+
+          <h2>El problema de las franjas</h2>
+          <p>
+            Si tu degradado se ve con escalones en vez de una transición suave, no es culpa tuya:
+            es <em>bandeado</em>. Ocurre cuando dos colores muy parecidos se reparten sobre una
+            superficie grande y la pantalla no tiene suficientes tonos intermedios para dibujar el
+            salto. Tres formas de arreglarlo, de menos a más esfuerzo: añadir una parada de color
+            intermedia, aumentar el contraste entre los extremos, o superponer una textura de ruido
+            muy sutil que rompa las bandas.
+          </p>
+
+          <h2>Degradados en texto y en bordes</h2>
+          <p>
+            Un degradado no está limitado al fondo. Para pintar <strong>texto</strong>, se aplica
+            como fondo y se recorta con <code>background-clip: text</code> junto a
+            <code>color: transparent</code> — es exactamente la técnica que usa el nombre "Lienzo"
+            en la cabecera de este sitio. Para <strong>bordes</strong>, la vía más limpia es
+            <code>border-image</code> con el degradado, aunque también funciona un contenedor con
+            el degradado de fondo y un hijo opaco encima que deje ver solo el contorno.
+          </p>
+
+          <h2>Un consejo de contraste</h2>
+          <p>
+            Si vas a poner texto encima, comprueba el contraste contra el punto más claro
+            <em>y</em> el más oscuro del degradado, no contra el promedio. Un degradado que va de
+            violeta a turquesa puede pasar el mínimo de accesibilidad en un extremo y fallar en el
+            otro. La herramienta de <a href="/herramientas/colores-en-vivo/">colores en vivo</a>
+            te da los ratios WCAG al instante, y en la
+            <a href="/blog/teoria-del-color-para-web/">guía de teoría del color</a> está explicado
+            por qué 4.5:1 es el número que importa.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h3>¿Cuál es la diferencia entre un degradado lineal, radial y cónico?</h3>
+          <p>
+            El lineal avanza en línea recta según un ángulo, y es el más común para fondos y
+            botones. El radial se expande en círculo o elipse desde un punto, útil para focos de
+            luz y viñetas. El cónico gira alrededor de un centro como las agujas de un reloj, y es
+            el que se usa para ruedas de color, gráficos de sectores y efectos metálicos.
+          </p>
+
+          <h3>¿Por qué mi degradado se ve con bandas o franjas?</h3>
+          <p>
+            El bandeado aparece cuando dos colores muy parecidos se reparten en una superficie
+            grande: la pantalla no tiene suficientes tonos intermedios y se ven escalones. Se
+            corrige añadiendo una parada de color intermedia, aumentando el contraste entre los
+            colores, o superponiendo una textura de ruido muy sutil.
+          </p>
+
+          <h3>¿Qué ángulo debo usar en un degradado lineal?</h3>
+          <p>
+            En CSS, 0 grados va de abajo hacia arriba y los grados avanzan en sentido horario:
+            90° es de izquierda a derecha y 180° de arriba hacia abajo. Los ángulos diagonales,
+            entre 120° y 135°, suelen verse más naturales en fondos porque imitan la caída de la luz.
+          </p>
+
+          <h3>¿Puedo usar degradados en textos y bordes?</h3>
+          <p>
+            Sí. Para texto se aplica el degradado como fondo y se recorta con
+            <code>background-clip: text</code> junto a <code>color: transparent</code>. Para bordes
+            se usa <code>border-image</code> con el degradado, o un contenedor con el degradado de
+            fondo y un elemento interior opaco que deja ver solo el contorno.
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="brand__mark" viewBox="0 0 100 100" aria-hidden="true">
+                <rect width="100" height="100" rx="26" fill="url(#brand-g)" />
+                <text x="50" y="65" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="56" fill="#fff" text-anchor="middle">L</text>
+                <circle cx="79" cy="24" r="7" fill="#ffb454" />
+              </svg>
+              <span class="brand__lockup"><span class="brand__name">Lienzo</span><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com</span>
+          <span><a href="/privacidad/">Privacidad</a> · Hecho con ♥ y mucho SVG</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js" defer></script>
+    <script src="/js/color-engine.js" defer></script>
+    <script src="/js/codigo-web.js" defer></script>
+    <script src="js/degradados.js" defer></script>
+  </body>
+</html>
