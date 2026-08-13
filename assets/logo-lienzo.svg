@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" role="img" aria-label="Lienzo">
+  <title>Lienzo</title>
+
+  <style>
+    /* El wordmark se adapta solo cuando el SVG se usa suelto: favicon, imagen
+       OG o etiqueta de imagen. Al insertarlo en línea dentro de una página,
+       basta con darle color al elemento padre: currentColor manda sobre esto. */
+    .wordmark { stroke: #f4f3f8; }
+    @media (prefers-color-scheme: light) {
+      .wordmark { stroke: #17161f; }
+    }
+  </style>
+
+  <!-- Marco partido en dos tramos. El hueco entre ellos dibuja una diagonal
+       implícita: es el gesto de la marca, y no hace falta una barra encima
+       que acabe leyéndose como un tachado sobre las letras. -->
+  <g fill="none" stroke="#ffb454" stroke-width="22" stroke-linecap="round">
+    <path d="M104 249 H63 a35 35 0 0 1-35-35 V46 a35 35 0 0 1 35-35 H566" />
+    <path d="M838 11 H897 a35 35 0 0 1 35 35 V214 a35 35 0 0 1-35 35 H394" />
+  </g>
+
+  <!-- Chevrones: el gesto de código, en el violeta de la marca -->
+  <g fill="none" stroke="#8b7bff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M46 92 L4 130 L46 168" />
+    <path d="M914 92 L956 130 L914 168" />
+  </g>
+
+  <!-- LIENZO. Monolínea geométrica: legible a cualquier tamaño y sin depender
+       de que cargue ninguna tipografía. -->
+  <g class="wordmark" fill="none" stroke="currentColor" stroke-width="26"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 68 V192 H222" />
+    <path d="M266 68 V192" />
+    <path d="M390 68 H310 V192 H390 M310 130 H372" />
+    <path d="M434 192 V68 L518 192 V68" />
+    <path d="M562 68 H642 L562 192 H642" />
+    <ellipse cx="738" cy="130" rx="48" ry="62" />
+  </g>
+</svg>

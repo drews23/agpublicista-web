@@ -407,6 +407,56 @@ img, svg { max-width: 100%; }
   margin-top: 1.8rem;
 }
 
+/* 6b. Hero de pluma (curva bézier con anclas) -------------------------- */
+
+.hero-pluma {
+  width: min(100%, 820px);
+  margin-inline: auto;
+}
+
+.hero-pluma__svg { display: block; width: 100%; height: auto; }
+
+.hero-pluma__texto {
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-size: 92px;
+  letter-spacing: -0.02em;
+}
+
+.hero-pluma__texto--a { fill: var(--text); }
+.hero-pluma__texto--b { fill: var(--turquesa); }
+
+.hero-pluma__curva {
+  stroke: var(--violeta);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.hero-pluma__manija {
+  stroke: color-mix(in oklab, var(--violeta) 55%, transparent);
+  stroke-width: 2;
+}
+
+.hero-pluma__tirador { fill: var(--violeta); }
+
+.hero-pluma__ancla {
+  fill: var(--bg);
+  stroke: var(--violeta);
+  stroke-width: 4;
+}
+
+@media (max-width: 620px) {
+  .hero-pluma__texto { font-size: 104px; }
+}
+
+/* Logo completo insertado en línea: hereda el color del tema */
+.logo-lienzo {
+  display: block;
+  width: min(100%, 460px);
+  height: auto;
+  color: var(--text);
+}
+
 /* 7. Secciones y cards ------------------------------------------------ */
 
 .section { padding-block: clamp(2.6rem, 6vw, 4.6rem); }
