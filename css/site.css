@@ -165,33 +165,23 @@ img, svg { max-width: 100%; }
   letter-spacing: -0.01em;
 }
 
-.brand__mark {
-  width: 38px;
-  height: 38px;
-  flex: 0 0 auto;
-  transition: transform 400ms var(--ease);
-}
-
-.brand:hover .brand__mark { transform: rotate(-8deg) scale(1.05); }
-
 .brand__lockup {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.3rem;
   line-height: 1.1;
 }
 
-.brand__name {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 560;
-  font-size: 1.32rem;
-  letter-spacing: -0.01em;
-  background: linear-gradient(100deg, var(--violeta), var(--turquesa) 75%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Logo completo en el header: hereda el color del tema vía currentColor */
+.brand__logo {
+  display: block;
+  width: 172px;
+  height: auto;
+  color: var(--text);
+  transition: transform 400ms var(--ease);
 }
+
+.brand:hover .brand__logo { transform: scale(1.04); }
 
 .brand__tagline {
   font-family: var(--font-body);
