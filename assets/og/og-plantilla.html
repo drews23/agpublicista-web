@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Plantilla OG — no enlazar</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet" />
+<style>
+  /* Lienzo fijo de 1200x630: se captura con Edge headless a ese tamaño.
+     Regenerar con: powershell -ExecutionPolicy Bypass -File scripts/make-og.ps1 */
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background:
+      radial-gradient(40rem 26rem at 16% 8%, rgba(139, 123, 255, 0.22), transparent 70%),
+      radial-gradient(34rem 24rem at 86% 96%, rgba(53, 214, 200, 0.16), transparent 70%),
+      radial-gradient(22rem 16rem at 78% 10%, rgba(255, 180, 84, 0.10), transparent 70%),
+      #0a0a0f;
+    font-family: "Instrument Sans", system-ui, sans-serif;
+    display: grid; place-items: center;
+  }
+  .marco { display: grid; justify-items: center; gap: 34px; }
+  .logo { width: 680px; height: auto; color: #f4f3f8; }
+  /* La captura debe salir oscura aunque el sistema que la genere esté en
+     esquema claro: important gana a la media query interna del SVG. */
+  .logo .wordmark { stroke: #f4f3f8 !important; }
+  .eslogan { color: #a2a1b3; font-size: 31px; letter-spacing: 0.01em; text-align: center; line-height: 1.5; }
+  .eslogan strong { color: #f4f3f8; font-weight: 600; }
+  .raya { width: 430px; height: 7px; border-radius: 99px;
+    background: linear-gradient(90deg, #8b7bff, #35d6c8 60%, #ffb454); }
+  .dominio { color: #f4f3f8; font-weight: 700; font-size: 25px; letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+  <div class="marco">
+    <svg class="logo" viewBox="0 0 960 260" aria-hidden="true"><style>.wordmark{stroke:#f4f3f8}</style><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-width="22" d="M28 100V46a35 35 0 0 1 35-35h468m90 0h276a35 35 0 0 1 35 35v54m0 60v54a35 35 0 0 1-35 35H545m-90 0H63a35 35 0 0 1-35-35v-54"/><path fill="none" stroke="#8b7bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+    <p class="eslogan"><strong>Herramientas creativas sin fricción</strong><br />Diseño, web y marketing — gratis y en español</p>
+    <div class="raya"></div>
+    <p class="dominio">agpublicista.com</p>
+  </div>
+</body>
+</html>

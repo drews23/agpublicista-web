@@ -457,6 +457,13 @@ img, svg { max-width: 100%; }
   color: var(--text);
 }
 
+.site-footer .logo-lienzo {
+  width: min(100%, 280px);
+  transition: transform 400ms var(--ease);
+}
+
+.site-footer .brand:hover .logo-lienzo { transform: scale(1.03); }
+
 /* 7. Secciones y cards ------------------------------------------------ */
 
 .section { padding-block: clamp(2.6rem, 6vw, 4.6rem); }
