@@ -3,21 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sobre mí — Andy, publicista y director de arte — Lienzo</title>
+    <title>Mi lienzo: guarda tus creaciones — Lienzo</title>
     <meta
       name="description"
-      content="Conoce a Andy, publicista y director de arte detrás de Lienzo (agpublicista.com) y del canal Andy Publicista: diseño gráfico, diseño web, social media y motion."
+      content="Tu espacio creativo personal, sin cuentas ni contraseñas: guarda paletas y CSS de los generadores, marca herramientas favoritas y desbloquea insignias. Todo en tu navegador."
     />
-    <link rel="canonical" href="https://agpublicista.com/sobre-mi/" />
+    <link rel="canonical" href="https://agpublicista.com/mi-lienzo/" />
     <meta name="theme-color" content="#0a0a0f" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Sobre mí — Andy, publicista y director de arte" />
-    <meta property="og:description" content="Quién está detrás de Lienzo y del canal Andy Publicista: diseño gráfico, diseño web, social media y motion, con proyectos reales en video." />
-    <meta property="og:url" content="https://agpublicista.com/sobre-mi/" />
+    <meta property="og:title" content="Mi lienzo — tu espacio creativo en el navegador" />
+    <meta property="og:description" content="Guarda tus paletas y fragmentos CSS, marca favoritos y sigue tu racha creativa. Sin registro: todo queda en tu navegador." />
+    <meta property="og:url" content="https://agpublicista.com/mi-lienzo/" />
     <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -38,35 +37,65 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/mi-lienzo/espacio.css" />
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "AboutPage",
-          "@id": "https://agpublicista.com/sobre-mi/#webpage",
-          "url": "https://agpublicista.com/sobre-mi/",
-          "name": "Sobre mí — Andy, publicista y director de arte",
-          "description": "Quién está detrás de Lienzo y del canal Andy Publicista: diseño gráfico, diseño web, dirección de arte, social media y motion graphics.",
+          "@type": "WebApplication",
+          "name": "Mi lienzo",
+          "url": "https://agpublicista.com/mi-lienzo/",
+          "applicationCategory": "DesignApplication",
+          "operatingSystem": "Web",
+          "description": "Espacio creativo personal que funciona sin cuentas: guarda paletas de color y fragmentos CSS generados con las herramientas de Lienzo, marca favoritas y sigue tu actividad. Los datos se almacenan únicamente en el navegador del usuario.",
           "inLanguage": "es",
-          "isPartOf": { "@id": "https://agpublicista.com/#website" },
-          "about": { "@id": "https://agpublicista.com/sobre-mi/#person" }
-        },
-        {
-          "@type": "Person",
-          "@id": "https://agpublicista.com/sobre-mi/#person",
-          "name": "Andy",
-          "url": "https://agpublicista.com/sobre-mi/",
-          "jobTitle": "Publicista y director de arte",
-          "worksFor": { "@id": "https://agpublicista.com/#org" },
-          "sameAs": ["https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg"]
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" }
         },
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Sobre mí", "item": "https://agpublicista.com/sobre-mi/" }
+            { "@type": "ListItem", "position": 2, "name": "Mi lienzo", "item": "https://agpublicista.com/mi-lienzo/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Necesito crear una cuenta para usar Mi lienzo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Mi lienzo no usa cuentas, correos ni contraseñas: eliges un nombre y un color, y tu espacio queda guardado en el almacenamiento local de tu navegador. Nada viaja a ningún servidor."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué puedo guardar en Mi lienzo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Las paletas del generador de colores y el CSS de los siete generadores de Código web: degradados, sombras, bordes, filtros, transformaciones, animaciones y tipografía. Cada creación guarda su código listo para copiar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué pasa si cambio de navegador o borro los datos?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Como todo vive en tu navegador, el espacio no se comparte entre dispositivos y se pierde si limpias los datos del sitio. Para eso existe el botón Exportar: descarga tu lienzo como archivo JSON y vuelve a importarlo donde quieras."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Quién puede ver lo que guardo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Solo tú. Los datos nunca salen de tu equipo: ni Lienzo ni terceros tienen acceso a tu nombre, tus creaciones o tu actividad."
+              }
+            }
           ]
         }
       ]
@@ -100,111 +129,82 @@
     </header>
 
     <main>
-      <section class="section shell">
-        <div class="page-head">
-          <p class="eyebrow reveal">Sobre mí</p>
-          <h1 class="reveal" style="--reveal-delay: 80ms">Soy Andy, publicista y <span class="fancy">director de arte</span></h1>
-          <p class="lede reveal" style="--reveal-delay: 160ms">
-            Diseño marcas, sitios web y contenido que se nota. En esta página te cuento
-            quién está detrás de Lienzo y qué puedes llevarte gratis de aquí.
-          </p>
-        </div>
+      <section class="shell page-head">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a> · <span>Mi lienzo</span>
+        </nav>
+        <p class="eyebrow">Tu espacio</p>
+        <h1>Mi lienzo</h1>
+        <p class="lede">
+          Guarda lo que creas con las herramientas, marca tus favoritas y sigue tu
+          racha creativa. Sin cuentas ni contraseñas: todo vive en tu navegador.
+        </p>
+      </section>
 
-        <div class="prose reveal" style="--reveal-delay: 240ms">
-          <h2>Qué hago</h2>
+      <section class="shell section" style="padding-top: 1.5rem;" data-espacio-app aria-live="polite">
+        <noscript>
+          <div class="card" style="text-align: center; padding: 2.4rem;">
+            <h2>Mi lienzo necesita JavaScript</h2>
+            <p style="color: var(--muted);">
+              El espacio personal se guarda y se muestra directamente en tu navegador,
+              por eso requiere JavaScript activado. Las
+              <a href="/herramientas/">herramientas</a> y el <a href="/blog/">blog</a>
+              siguen disponibles.
+            </p>
+          </div>
+        </noscript>
+      </section>
+
+      <!-- Contenido estático: qué es este espacio (indexable) -->
+      <section class="shell section" aria-labelledby="que-es">
+        <div class="prose">
+          <h2 id="que-es">Un espacio personal sin fricción</h2>
           <p>
-            Trabajo donde el diseño y la estrategia se cruzan: diseño gráfico e identidad
-            visual, diseño web, dirección de arte, social media y motion graphics. Me gusta
-            pensar cada proyecto completo, desde el concepto hasta el archivo final que se
-            publica, cuidando que todo comunique lo mismo: la marca.
+            Mi lienzo es la memoria de tu trabajo en Lienzo: cada paleta que generas y
+            cada fragmento CSS que ajustas en los <a href="/codigo-web/">generadores de Código web</a>
+            se puede guardar aquí con un nombre, listo para copiarlo cuando lo necesites.
+            También puedes marcar tus <a href="/herramientas/">herramientas</a> favoritas
+            y ver cuáles usas más.
           </p>
           <p>
-            Además del trabajo con clientes, comparto lo que aprendo en
-            <a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Andy Publicista</a>,
-            mi canal de YouTube. Ahí muestro procesos reales de diseño, publico plantillas y
-            packs descargables, y explico técnicas que puedes aplicar en tus propios proyectos.
+            Fiel al lema de la casa, no te pedimos nada a cambio: ni correo, ni cuenta,
+            ni contraseña. Tus datos se guardan en el almacenamiento local de tu navegador
+            y nunca salen de tu equipo. Si quieres llevarte tu espacio a otro dispositivo
+            —o simplemente tener una copia— expórtalo como archivo JSON y vuelve a
+            importarlo donde quieras.
           </p>
 
-          <h2>Qué vas a encontrar en este sitio</h2>
+          <h2>Preguntas frecuentes</h2>
+          <h3>¿Necesito crear una cuenta?</h3>
           <p>
-            Lienzo (en agpublicista.com) es la extensión del canal: una caja de herramientas
-            en español pensada para creadores, diseñadores y emprendedores.
+            No. Eliges un nombre y un color, y tu espacio queda listo. Nada viaja a
+            ningún servidor: por eso tampoco hay nada que hackear ni contraseñas que olvidar.
           </p>
-          <ul>
-            <li>
-              <strong><a href="/herramientas/">Herramientas gratis</a></strong>, como la
-              <a href="/herramientas/favicons/">galería de favicons SVG</a> y el
-              <a href="/herramientas/texto-ondulado/">texto ondulado animado</a>. Funcionan
-              en tu navegador, sin registros: creas, copias y pegas.
-            </li>
-            <li>
-              <strong><a href="/recursos/">Recursos descargables</a></strong>: packs de
-              sonido, plantillas de After Effects y material que acompaña a cada video del canal.
-            </li>
-            <li>
-              <strong><a href="/blog/">Blog</a></strong>: guías y tutoriales de diseño, SVG,
-              motion y marketing digital, escritos para que los apliques hoy mismo.
-            </li>
-          </ul>
-
-          <h2>Proyectos reales, sin humo</h2>
+          <h3>¿Qué puedo guardar?</h3>
           <p>
-            Prefiero mostrar el trabajo antes que hablar de él. En el canal está mi
-            portafolio en video, con proyectos para clientes reales como GuianCafé,
-            Uchawi Travel, Vive Esports y ABC Fitness: diseño web, email marketing y
-            estrategia de contenidos para social media. Aquí tienes dos ejemplos:
+            Paletas del <a href="/herramientas/paletas/">generador de colores</a> y el CSS
+            de los siete generadores: degradados, sombras, bordes, filtros, transformaciones,
+            animaciones y tipografía. Busca el botón <em>Guardar en Mi lienzo</em> junto al
+            código de cada herramienta.
+          </p>
+          <h3>¿Qué pasa si borro los datos del navegador?</h3>
+          <p>
+            El espacio se pierde, igual que cualquier dato local. Antes de limpiar,
+            usa <em>Exportar</em>: descarga un archivo con todo tu lienzo y vuelve a
+            importarlo después, aquí o en otro navegador.
+          </p>
+          <h3>¿Quién ve lo que guardo?</h3>
+          <p>
+            Solo tú. Ni Lienzo ni terceros tienen acceso a tu nombre, tus creaciones
+            o tu actividad. Los detalles están en la
+            <a href="/privacidad/">política de privacidad</a>.
           </p>
         </div>
       </section>
 
-      <section class="section shell">
-        <div class="card-grid">
-          <div class="card reveal">
-            <span class="card__tag">Portafolio</span>
-            <h3>Diseño web para GuianCafé Quindío</h3>
-            <div class="video-embed">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/TtuoCCIidsA"
-                title="Diseño web para GuianCafé Quindío (portafolio)"
-                loading="lazy"
-                allowfullscreen
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
-            </div>
-            <span class="card__meta">Diseño web · Proyecto real</span>
-          </div>
-
-          <div class="card reveal" style="--reveal-delay: 90ms">
-            <span class="card__tag">Portafolio</span>
-            <h3>Diseño web para Vive Esports</h3>
-            <div class="video-embed">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/j9N62CG0Oz0"
-                title="Diseño Web Vive Esports (portafolio)"
-                loading="lazy"
-                allowfullscreen
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
-            </div>
-            <span class="card__meta">Diseño web · Proyecto real</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section shell">
-        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem);">
-          <p class="eyebrow" style="justify-content: center;">Hablemos</p>
-          <h2 style="max-width: 24ch; margin-inline: auto;">¿Tienes una duda, una idea o un proyecto?</h2>
-          <p style="max-width: 52ch; margin-inline: auto; color: var(--muted);">
-            La forma más directa de contactarme es a través del canal: deja un comentario
-            en cualquier video y te respondo. Y si quieres recursos nuevos cada semana,
-            suscríbete para no perderte nada.
-          </p>
-          <div class="hero__cta" style="justify-content: center;">
-            <a class="btn btn--primary" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg?sub_confirmation=1" target="_blank" rel="noopener">Suscribirme al canal</a>
-            <a class="btn btn--ghost" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Escribirme en YouTube</a>
-          </div>
-        </div>
+      <section class="shell">
+        <div class="ad-slot" role="complementary" aria-label="Publicidad">Espacio publicitario</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
       </section>
     </main>
 
@@ -251,5 +251,6 @@
 
     <script src="/js/site.js" defer></script>
     <script src="/js/mi-lienzo.js" defer></script>
+    <script src="/mi-lienzo/espacio.js" defer></script>
   </body>
 </html>

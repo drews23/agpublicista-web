@@ -19,6 +19,7 @@
   --radius: 16px;
   --radius-lg: 24px;
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --rebote: cubic-bezier(0.34, 1.56, 0.64, 1);
   --shell: 1160px;
 }
 
@@ -41,6 +42,12 @@
   --accent-ink: #0a0a12;
   --shadow: 0 20px 44px -20px rgba(0, 0, 0, 0.85);
   --header-bg: rgba(10, 10, 15, 0.78);
+  /* Vidrio esmerilado: el blur+saturate del header y el panel móvil
+     necesitan alfas distintos (el panel tapa contenido, va más opaco). */
+  --vidrio-bg: rgba(16, 16, 26, 0.52);
+  --vidrio-bg-fuerte: rgba(12, 12, 19, 0.82);
+  --vidrio-linea: rgba(255, 255, 255, 0.12);
+  --vidrio-sombra: 0 14px 44px rgba(0, 0, 0, 0.45);
   --code-bg: rgba(0, 0, 0, 0.45);
   color-scheme: dark;
 }
@@ -63,6 +70,10 @@
   --accent-ink: #ffffff;
   --shadow: 0 18px 38px -22px rgba(30, 25, 60, 0.4);
   --header-bg: rgba(246, 244, 239, 0.82);
+  --vidrio-bg: rgba(252, 250, 245, 0.55);
+  --vidrio-bg-fuerte: rgba(250, 248, 243, 0.88);
+  --vidrio-linea: rgba(24, 22, 40, 0.12);
+  --vidrio-sombra: 0 14px 40px rgba(30, 25, 60, 0.22);
   --code-bg: #12121a;
   color-scheme: light;
 }
@@ -138,14 +149,28 @@ img, svg { max-width: 100%; }
 
 /* 3. Header / nav ---------------------------------------------------- */
 
+/* Vidrio esmerilado: fondo translúcido + blur que satura lo de atrás.
+   Al hacer scroll (.con-sombra, la pone site.js) gana opacidad y sombra
+   para que el texto siga legible sobre cualquier contenido. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--header-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
+  background: var(--vidrio-bg);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-bottom: 1px solid var(--vidrio-linea);
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+}
+
+.site-header.con-sombra {
+  background: var(--vidrio-bg-fuerte);
+  box-shadow: var(--vidrio-sombra);
+}
+
+/* Sin backdrop-filter (navegadores viejos): fondo casi opaco y listo */
+@supports not (backdrop-filter: blur(1px)) {
+  .site-header { background: var(--header-bg); }
 }
 
 .site-header__inner {
@@ -253,6 +278,44 @@ img, svg { max-width: 100%; }
 }
 
 .theme-btn:hover { transform: rotate(20deg); background: var(--panel-hover); }
+
+/* Acceso a "Mi lienzo": mismo cuerpo que el botón de tema. El punto
+   central toma el color favorito del usuario (lo pinta mi-lienzo.js). */
+.espacio-btn {
+  text-decoration: none;
+  transition: transform 300ms var(--ease), background-color 180ms ease, border-color 180ms ease;
+}
+
+.espacio-btn:hover { transform: translateY(-1px); background: var(--panel-hover); }
+
+.espacio-btn svg { display: block; width: 18px; height: 18px; }
+
+.espacio-btn .espacio-btn__punto {
+  fill: var(--faint);
+  transition: fill 300ms ease;
+}
+
+.espacio-btn.tiene-perfil .espacio-btn__punto { fill: var(--color-perfil, var(--violeta)); }
+
+.espacio-btn.tiene-perfil {
+  border-color: color-mix(in oklab, var(--color-perfil, var(--violeta)) 55%, var(--line));
+}
+
+/* Velo bajo el menú móvil: atenúa el contenido para que el panel de
+   vidrio se lea. Lo inyecta site.js; en escritorio nunca se muestra. */
+.nav-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 38;
+  background: color-mix(in oklab, var(--bg) 55%, transparent);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.nav-scrim.is-visible { opacity: 1; pointer-events: auto; }
 
 /* 4. Footer ---------------------------------------------------------- */
 
@@ -690,22 +753,40 @@ img, svg { max-width: 100%; }
 .breadcrumbs a { color: var(--faint); text-decoration: none; }
 .breadcrumbs a:hover { color: var(--text); }
 
+/* Toast de vidrio: entra desde abajo con un rebote sutil. La palomita
+   va en ::before para no ensuciar el mensaje que lee el lector de pantalla. */
 .toast {
   position: fixed;
   left: 50%;
   bottom: 26px;
-  transform: translate(-50%, 20px);
-  background: var(--text);
-  color: var(--bg);
-  padding: 0.7rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  transform: translate(-50%, 140%);
+  background: var(--vidrio-bg-fuerte);
+  backdrop-filter: blur(14px) saturate(1.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  color: var(--text);
+  border: 1px solid var(--vidrio-linea);
+  box-shadow: var(--vidrio-sombra);
+  padding: 0.75rem 1.3rem;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.92rem;
+  max-width: min(92vw, 30rem);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 240ms ease, transform 240ms var(--ease);
+  transition: opacity 300ms ease, transform 480ms var(--rebote);
   z-index: 90;
 }
+
+.toast::before {
+  content: "✓";
+  font-weight: 800;
+  color: var(--turquesa);
+}
+
+.toast.toast--error::before { content: "✕"; color: var(--coral); }
 
 .toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
 
@@ -724,6 +805,8 @@ img, svg { max-width: 100%; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .wave-band svg animate, .wave-band svg animateTransform { display: none; }
+  .site-nav, .toast, .modal__tarjeta, .modal__velo, .modal .opcion { transition-duration: 0.01ms; }
+  .modal__icono { animation: none; }
 }
 
 /* 12. Responsive ------------------------------------------------------ */
@@ -737,23 +820,216 @@ img, svg { max-width: 100%; }
 @media (max-width: 760px) {
   .nav-toggle { display: inline-flex; }
 
+  /* Panel de vidrio: cuelga del header (top: 100% sigue su alto real),
+     fondo fuerte para tapar el contenido y despliegue con rebote suave.
+     Ancla en .shell (el padre posicionado): los laterales negativos
+     compensan el margen del shell para dejar 0.75rem reales de borde. */
   .site-nav {
-    position: fixed;
-    inset: 61px 0 auto;
+    position: absolute;
+    top: 100%;
+    left: -0.75rem;
+    right: -0.75rem;
     z-index: 39;
     flex-direction: column;
     align-items: stretch;
-    padding: 1rem 1.5rem 1.4rem;
-    background: var(--header-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--line);
-    display: none;
+    gap: 0.3rem;
+    margin-top: 0.55rem;
+    padding: 0.9rem;
+    background: var(--vidrio-bg-fuerte);
+    backdrop-filter: blur(24px) saturate(1.8);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    border: 1px solid var(--vidrio-linea);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--vidrio-sombra);
+    opacity: 0;
+    transform: translateY(-14px) scale(0.98);
+    transform-origin: top center;
+    pointer-events: none;
+    transition: opacity 260ms ease, transform 340ms var(--rebote);
   }
 
-  .site-nav.is-open { display: flex; }
+  .site-nav.is-open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
 
-  .site-nav a { padding: 0.8rem 1rem; font-size: 1.05rem; }
+  @supports not (backdrop-filter: blur(1px)) {
+    .site-nav { background: var(--bg-soft); }
+  }
+
+  .site-nav a { padding: 0.8rem 1rem; font-size: 1.05rem; border-radius: var(--radius-sm); }
+
+  .site-nav a.nav-yt { margin-top: 0.4rem; text-align: center; border-radius: 999px; }
 
   .site-footer__grid { grid-template-columns: 1fr; gap: 1.8rem; }
+}
+
+/* 13. Modales de vidrio ----------------------------------------------- */
+/* Motor en site.js (AGModal): tarjeta centrada con rebote, velo con blur,
+   halo superior por variante y opciones que entran escalonadas. */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  visibility: hidden;
+}
+
+.modal.is-open { visibility: visible; }
+
+.modal__velo {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--bg) 62%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.modal.is-open .modal__velo { opacity: 1; }
+
+.modal__tarjeta {
+  position: relative;
+  width: min(400px, 100%);
+  max-height: min(84vh, 40rem);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2.4rem 1.8rem 1.8rem;
+  background: var(--vidrio-bg-fuerte);
+  backdrop-filter: blur(24px) saturate(1.7);
+  -webkit-backdrop-filter: blur(24px) saturate(1.7);
+  border: 1px solid var(--vidrio-linea);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--vidrio-sombra);
+  transform: scale(0.86) translateY(28px);
+  opacity: 0;
+  transition: transform 460ms var(--rebote), opacity 360ms ease;
+}
+
+.modal.is-open .modal__tarjeta { transform: none; opacity: 1; }
+
+@supports not (backdrop-filter: blur(1px)) {
+  .modal__tarjeta { background: var(--bg-soft); }
+}
+
+/* Halo de color que asoma por arriba de la tarjeta */
+.modal__halo {
+  position: absolute;
+  top: -42%;
+  left: 50%;
+  width: 120%;
+  height: 60%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--violeta) 34%, transparent), transparent 70%);
+  pointer-events: none;
+}
+
+.modal--peligro .modal__halo { background: radial-gradient(circle, color-mix(in oklab, var(--coral) 36%, transparent), transparent 70%); }
+.modal--ok .modal__halo { background: radial-gradient(circle, color-mix(in oklab, var(--turquesa) 34%, transparent), transparent 70%); }
+
+.modal__icono {
+  width: 58px;
+  height: 58px;
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, var(--violeta), var(--turquesa));
+  box-shadow: 0 10px 28px color-mix(in oklab, var(--violeta) 45%, transparent);
+  animation: modal-pop 560ms var(--rebote) both 120ms;
+}
+
+.modal--peligro .modal__icono {
+  background: linear-gradient(135deg, var(--coral), #d64530);
+  box-shadow: 0 10px 28px color-mix(in oklab, var(--coral) 45%, transparent);
+}
+
+.modal--ok .modal__icono {
+  background: linear-gradient(135deg, var(--turquesa), #1a9d92);
+  box-shadow: 0 10px 28px color-mix(in oklab, var(--turquesa) 45%, transparent);
+}
+
+.modal__icono svg { width: 26px; height: 26px; }
+
+@keyframes modal-pop {
+  from { transform: scale(0) rotate(-24deg); opacity: 0; }
+}
+
+.modal__titulo {
+  margin: 0;
+  text-align: center;
+  font-size: 1.45rem;
+}
+
+.modal__sub {
+  margin: -0.3rem 0 0.4rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.modal__cerrar {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--vidrio-linea);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 300ms var(--ease), background-color 180ms ease, color 180ms ease;
+}
+
+.modal__cerrar:hover { transform: rotate(90deg); background: var(--coral); color: var(--accent-ink); }
+
+/* Opciones del modal: entran escalonadas cuando se abre */
+.modal .opcion {
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 420ms var(--ease), opacity 420ms ease;
+}
+
+.modal.is-open .opcion { transform: none; opacity: 1; }
+.modal.is-open .opcion:nth-of-type(1) { transition-delay: 140ms; }
+.modal.is-open .opcion:nth-of-type(2) { transition-delay: 210ms; }
+.modal.is-open .opcion:nth-of-type(3) { transition-delay: 280ms; }
+
+.modal__fila {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.modal__fila .btn { flex: 1; }
+
+.modal__campo {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.modal__campo:focus {
+  outline: none;
+  border-color: var(--violeta);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--violeta) 28%, transparent);
 }
