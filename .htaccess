@@ -14,8 +14,10 @@ RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 # /testimonials/, /services_group/, /portfolio_group/) se dejan morir en 404
 # a propósito: eran demos del tema, no contenido.
 
-# Plantillas de After Effects → la guía actual de plantillas
-RewriteRule ^(after-effects-mockup-app-promo-iphone-13-pro|animacion-logo-after-effects|plantilla-logo-after-effects-gratis|plantilla-gratis-after-effects-abridor-dinamico|plantilla-gratis-after-effects-grid-slideshow-moderno|plantilla-gratis-after-effects-suscripcion-youtube|plantilla-gratis-after-effects-transiciones-titulos)/?$ /blog/plantillas-after-effects-gratis/ [R=301,L]
+# Plantillas de After Effects → la guía actual de plantillas.
+# Con (/.*)?$ para atrapar también las páginas de adjunto que generaba
+# WordPress bajo cada entrada (…/ice_screenshot_20230124-153641/).
+RewriteRule ^(after-effects-mockup-app-promo-iphone-13-pro|animacion-logo-after-effects|plantilla-logo-after-effects-gratis|plantilla-gratis-after-effects-abridor-dinamico|plantilla-gratis-after-effects-grid-slideshow-moderno|plantilla-gratis-after-effects-suscripcion-youtube|plantilla-gratis-after-effects-transiciones-titulos|transicion-after-effects|transicion-after-effects-plantilla|transicion-after-effects-plantilla-gratis|transicion-after-effects-plantilla-gratis-2|transicion-after-effects-plantilla-gratis-3)(/.*)?$ /blog/plantillas-after-effects-gratis/ [R=301,L]
 
 # Privacidad y tratamiento de datos
 RewriteRule ^(politicas-de-privacidad|instrucciones-para-eliminacion-de-datos)/?$ /privacidad/ [R=301,L]
@@ -23,14 +25,22 @@ RewriteRule ^(politicas-de-privacidad|instrucciones-para-eliminacion-de-datos)/?
 # Recursos descargables
 RewriteRule ^recursos-visuales/?$ /recursos/ [R=301,L]
 
-# Portafolio y trabajos → los proyectos viven ahora en recursos
-RewriteRule ^(portfolio|trabajos|branding-buenaldea)(/.*)?$ /recursos/ [R=301,L]
+# Portafolio y trabajos → los proyectos viven ahora en recursos.
+# portfolio_group eran las categorías del portafolio: apuntan a trabajo
+# real, así que se redirigen (a diferencia de /team/ o /testimonials/,
+# que eran contenido de demostración de la plantilla).
+RewriteRule ^(portfolio|portfolio_group|trabajos|branding-buenaldea)(/.*)?$ /recursos/ [R=301,L]
 
 # Artículos de marketing del sitio anterior → el blog actual
-RewriteRule ^(calendario-de-contenido-para-redes-sociales|como-desarrollar-mi-plan-de-marketing-digital|conciencia-de-marca-toma-importancia-en-marketing|costos-de-publicidad-en-internet-2023-google-ads|diferencias-entre-publicidad-y-marketing|el-discurso-publicitario|estrategias-marketing-digital-fin-de-ano|estrategias-para-temperatura-del-trafico|formatos-de-video-corto-para-redes-sociales|google-ads-empresas-presupuestos-limitados|publicidad-en-internet|storytelling|vende-el-problema-que-solventas)/?$ /blog/ [R=301,L]
+RewriteRule ^(calendario-de-contenido-para-redes-sociales|como-desarrollar-mi-plan-de-marketing-digital|conciencia-de-marca-toma-importancia-en-marketing|costos-de-publicidad-en-internet-2023-google-ads|diferencias-entre-publicidad-y-marketing|el-discurso-publicitario|estrategias-marketing-digital-fin-de-ano|estrategias-para-temperatura-del-trafico|formatos-de-video-corto-para-redes-sociales|freelance-story-telling|google-ads-empresas-presupuestos-limitados|google-analytics-marketing-digital|marketing-tradicional-y-marketing-digital|publicidad-en-internet|reputacion-digital-marketing|storytelling|vende-el-problema-que-solventas)/?$ /blog/ [R=301,L]
+
+# Taxonomías del blog anterior. La de recursos visuales va antes porque
+# la regla general de /category/ se la llevaría por delante.
+RewriteRule ^category/diseno-grafico/recursos-visuales/?$ /recursos/ [R=301,L]
+RewriteRule ^(category|tag)(/.*)?$ /blog/ [R=301,L]
 
 # Servicios, proceso y contacto → la página sobre mí
-RewriteRule ^(services|servicios-de-marketing-digital|administracion-de-redes-sociales|contacto|proceso-de-trabajo)(/.*)?$ /sobre-mi/ [R=301,L]
+RewriteRule ^(services|services_group|servicios-de-marketing-digital|administracion-de-redes-sociales|contacto|proceso-de-trabajo)(/.*)?$ /sobre-mi/ [R=301,L]
 
 # Página de error personalizada
 ErrorDocument 404 /404.html
