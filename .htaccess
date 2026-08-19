@@ -7,6 +7,31 @@ RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
+# Redirecciones del sitio anterior (WordPress, hasta 2026)
+# Google todavía tiene indexadas esas URLs y hoy caen en 404: cada una es
+# una visita perdida. Se mandan al equivalente más cercano del sitio actual.
+# Las páginas de andamiaje de la plantilla vieja (/layouts/, /team/,
+# /testimonials/, /services_group/, /portfolio_group/) se dejan morir en 404
+# a propósito: eran demos del tema, no contenido.
+
+# Plantillas de After Effects → la guía actual de plantillas
+RewriteRule ^(after-effects-mockup-app-promo-iphone-13-pro|animacion-logo-after-effects|plantilla-logo-after-effects-gratis|plantilla-gratis-after-effects-abridor-dinamico|plantilla-gratis-after-effects-grid-slideshow-moderno|plantilla-gratis-after-effects-suscripcion-youtube|plantilla-gratis-after-effects-transiciones-titulos)/?$ /blog/plantillas-after-effects-gratis/ [R=301,L]
+
+# Privacidad y tratamiento de datos
+RewriteRule ^(politicas-de-privacidad|instrucciones-para-eliminacion-de-datos)/?$ /privacidad/ [R=301,L]
+
+# Recursos descargables
+RewriteRule ^recursos-visuales/?$ /recursos/ [R=301,L]
+
+# Portafolio y trabajos → los proyectos viven ahora en recursos
+RewriteRule ^(portfolio|trabajos|branding-buenaldea)(/.*)?$ /recursos/ [R=301,L]
+
+# Artículos de marketing del sitio anterior → el blog actual
+RewriteRule ^(calendario-de-contenido-para-redes-sociales|como-desarrollar-mi-plan-de-marketing-digital|conciencia-de-marca-toma-importancia-en-marketing|costos-de-publicidad-en-internet-2023-google-ads|diferencias-entre-publicidad-y-marketing|el-discurso-publicitario|estrategias-marketing-digital-fin-de-ano|estrategias-para-temperatura-del-trafico|formatos-de-video-corto-para-redes-sociales|google-ads-empresas-presupuestos-limitados|publicidad-en-internet|storytelling|vende-el-problema-que-solventas)/?$ /blog/ [R=301,L]
+
+# Servicios, proceso y contacto → la página sobre mí
+RewriteRule ^(services|servicios-de-marketing-digital|administracion-de-redes-sociales|contacto|proceso-de-trabajo)(/.*)?$ /sobre-mi/ [R=301,L]
+
 # Página de error personalizada
 ErrorDocument 404 /404.html
 
