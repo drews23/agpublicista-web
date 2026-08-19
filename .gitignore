@@ -11,3 +11,6 @@ lienzo.svg
 Artboard*.svg
 coding lienzo*.svg
 *.ai
+
+# Material fuente para packs descargables: se aloja fuera, nunca en el repo publico
+svg/
