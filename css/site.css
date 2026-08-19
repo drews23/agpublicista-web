@@ -840,18 +840,21 @@ img, svg { max-width: 100%; }
 
 /* 11. Animaciones ----------------------------------------------------- */
 
-.reveal {
+/* El estado oculto sólo se aplica si hay JS (la clase .js la pone el script
+   en línea del <head>, que no depende de la red). Si site.js no llega a
+   cargar, el contenido se ve igual en vez de quedar invisible para siempre. */
+.js .reveal {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 700ms ease, transform 700ms var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.reveal.is-in { opacity: 1; transform: none; }
+.js .reveal.is-in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   .wave-band svg animate, .wave-band svg animateTransform { display: none; }
   .site-nav, .toast, .modal__tarjeta, .modal__velo, .modal .opcion { transition-duration: 0.01ms; }
   .modal__icono { animation: none; }
