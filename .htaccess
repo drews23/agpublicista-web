@@ -11,8 +11,9 @@ RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 # Google todavía tiene indexadas esas URLs y hoy caen en 404: cada una es
 # una visita perdida. Se mandan al equivalente más cercano del sitio actual.
 # Las páginas de andamiaje de la plantilla vieja (/layouts/, /team/,
-# /testimonials/, /services_group/, /portfolio_group/) se dejan morir en 404
-# a propósito: eran demos del tema, no contenido.
+# /testimonials/) se dejan morir en 404 a propósito: eran contenido de
+# demostración del tema (perfiles inventados, testimonios falsos), no
+# páginas reales del negocio.
 
 # Plantillas de After Effects → la guía actual de plantillas.
 # Con (/.*)?$ para atrapar también las páginas de adjunto que generaba
