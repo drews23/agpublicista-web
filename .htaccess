@@ -8,24 +8,10 @@ RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
 # Material fuente de los packs: NUNCA se sirve al público. Las carpetas
-# están fuera del repo (gitignore), pero el deploy de Hostinger no borra
-# los archivos ya subidos al servidor (solo añade/sobrescribe), así que
-# cualquier copia huérfana que quede allí se corta aquí con un 404.
-# Control positivo de la sonda: este archivo SI existe, debe dar 410.
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^_sonda-verificacion.txt$ - [R=410,L]
-
-# TEMPORAL (20 ago): 410 cuando el archivo SIGUE en disco, 404 cuando ya no.
-# Sirve para comprobar si el borrado en el servidor se hizo de verdad, sin
-# exponer nada: ninguno de los dos codigos entrega el archivo. Restaurar a
-# 404 a secas en cuanto se verifique.
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^svg(/|$) - [R=410,L]
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^escenas[\s]3d(/|$) - [R=410,L]
-
+# están fuera del repo (gitignore) y el 20 ago 2026 se borraron del servidor,
+# pero la red se queda puesta: el deploy de Hostinger no borra archivos (solo
+# añade y sobrescribe), así que cualquier copia que vuelva a subirse por
+# descuido queda cortada aquí en vez de quedar pública.
 RewriteRule ^svg(/|$) - [R=404,L]
 # Ojo: el espacio va como clase [\s] — un espacio literal en el patron
 # rompe el parseo de argumentos de Apache y anula la regla.
