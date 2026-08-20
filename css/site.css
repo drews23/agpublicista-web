@@ -784,6 +784,49 @@ img, svg { max-width: 100%; }
   text-transform: uppercase;
 }
 
+/* Muestra de escenas 3D: rejilla de portadas con nombre. La primera ocupa
+   el ancho completo (es la protagonista); el resto va en columnas. */
+.muestra-escenas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+  padding: 0;
+  margin: 1.6em 0;
+  list-style: none;
+}
+.muestra-escenas li { margin: 0; }
+.muestra-escenas figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.muestra-escenas li:first-child {
+  grid-column: 1 / -1;
+}
+.muestra-escenas img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.muestra-escenas figcaption {
+  font-size: 0.88rem;
+  color: var(--muted);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+.muestra-escenas figcaption code {
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+@media (max-width: 620px) {
+  .muestra-escenas { grid-template-columns: 1fr; }
+}
+
 /* Preguntas frecuentes en acordeón (details/summary nativo).
    El atributo name="faq" en cada <details> da la exclusividad (abrir una
    cierra la otra) sin JS; site.js añade un respaldo para navegadores viejos.
