@@ -656,7 +656,9 @@ img, svg { max-width: 100%; }
 
 .prose li { margin-bottom: 0.45em; }
 
-.prose a { color: var(--violeta); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+/* :not(.btn): sin esta exclusión, esta regla (0,1,1) le gana a .btn--primary
+   (0,1,0) y el botón de descarga de los posts sale violeta sobre violeta */
+.prose a:not(.btn) { color: var(--violeta); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 
 .prose blockquote {
   margin: 1.6em 0;
@@ -781,6 +783,85 @@ img, svg { max-width: 100%; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+/* Preguntas frecuentes en acordeón (details/summary nativo).
+   El atributo name="faq" en cada <details> da la exclusividad (abrir una
+   cierra la otra) sin JS; site.js añade un respaldo para navegadores viejos.
+   Sin JS el contenido sigue accesible: es HTML nativo. */
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95em 0;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary h3 {
+  margin: 0;
+  font-size: 1.08rem;
+}
+/* el h3 dentro de summary no debe heredar el margen/tamaño de .prose h3 */
+.prose .faq-item summary h3 { margin: 0; }
+.faq-item summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  font: 400 1.3rem/1 var(--font-body);
+  color: var(--violeta);
+  transition: transform 200ms var(--ease);
+}
+.faq-item[open] summary::after { content: "−"; color: var(--turquesa); }
+.faq-item > p { margin: 0 0 1.1em; color: var(--muted); }
+.faq-item summary:hover h3 { color: var(--violeta); }
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--violeta);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Compartir el artículo (tras las preguntas frecuentes) */
+.compartir {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 2em 0 0.4em;
+}
+.compartir__titulo {
+  font: 600 0.8rem var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-right: 0.3rem;
+}
+.compartir a,
+.compartir button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 180ms var(--ease), color 160ms ease, border-color 160ms ease;
+}
+.compartir svg { width: 19px; height: 19px; }
+.compartir a:hover,
+.compartir button:hover {
+  transform: translateY(-2px);
+  color: var(--text);
+  border-color: var(--violeta);
+}
+/* el botón de copiar enlace necesita JS (agpCopy): sin JS, no se muestra */
+html:not(.js) .compartir [data-compartir-copiar] { display: none; }
 
 /* 10. Utilidades ------------------------------------------------------ */
 

@@ -270,6 +270,33 @@
     if (!copied) throw new Error("No se pudo copiar.");
   };
 
+  /* Acordeón de preguntas frecuentes: la exclusividad la da el atributo
+     name="faq" de <details> de forma nativa; esto es solo el respaldo para
+     navegadores que aún no lo soportan (el contenido funciona igual sin JS). */
+  const soportaNombre = "name" in document.createElement("details");
+  if (!soportaNombre) {
+    document.querySelectorAll("details.faq-item").forEach((det) => {
+      det.addEventListener("toggle", () => {
+        if (!det.open) return;
+        document.querySelectorAll('details.faq-item[open]').forEach((otro) => {
+          if (otro !== det) otro.open = false;
+        });
+      });
+    });
+  }
+
+  /* Compartir: copiar el enlace del artículo */
+  document.querySelectorAll("[data-compartir-copiar]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await window.agpCopy(window.location.href.split("#")[0]);
+        window.agpToast("Enlace copiado");
+      } catch (e) {
+        window.agpToast("No se pudo copiar el enlace", "error");
+      }
+    });
+  });
+
   /* Año actual en el pie */
   document.querySelectorAll("[data-year]").forEach((el) => {
     el.textContent = String(new Date().getFullYear());
