@@ -135,7 +135,12 @@ del canal deja de ser una lista cronológica y pasa a leerse como un catálogo:
 1. Packs de iconos
 2. Packs de sonido
 3. Plantillas de After Effects
-4. Portafolio
+
+> Los videos de portafolio (GuianCafé, Uchawi Travel, Vive Esports…) **no
+> entran aquí**: están como *no listados*, sirven de referencia para
+> creativomarketingdigital.com y algunos van incrustados en el portafolio de MD.
+> El canal público es íntegramente Lienzo, lo cual juega a favor del nombre
+> nuevo. Ver la nota sobre MD al final de este documento.
 
 ---
 
@@ -172,3 +177,37 @@ Andy Publicista» y no se re-suben (se perdería la URL, las vistas y los
 comentarios). El cierre se actualiza a partir del próximo video: hay que tocar
 `videos/<proyecto>/compositions/frames/09-cierre.html` y el `BRIEF.md` de la
 plantilla, que aún declara `Canal: "Andy Publicista"`.
+
+---
+
+## Efecto colateral en MD Estudio Creativo (a valorar)
+
+Los videos de portafolio están *no listados* y algunos van **incrustados en
+creativomarketingdigital.com**, que es un negocio aparte de Lienzo.
+
+El detalle: un video incrustado **sigue mostrando el canal al que pertenece**.
+Al pausar el reproductor, o al pulsar el título para abrirlo en YouTube,
+aparecen el nombre y el avatar del canal. Hasta hoy eso mostraba «Andy
+Publicista» —un nombre personal, que en el portafolio de una agencia pasa
+desapercibido—. A partir del cambio mostrará **«Lienzo · Recursos creativos»**
+con los chevrones de Lienzo: es decir, la marca de recursos gratuitos aparecerá
+dentro del portafolio comercial de MD. No hay parámetro de incrustación que lo
+oculte del todo.
+
+Cómo de grave es: **moderado**. Un cliente potencial de MD puede leerlo como
+«el mismo estudio también publica recursos», que no es un mal mensaje, pero
+mezcla dos marcas que hasta ahora estaban separadas a propósito.
+
+Opciones, de menor a mayor esfuerzo:
+
+1. **Asumirlo.** No bloquea nada y el cambio de nombre puede hacerse hoy mismo.
+2. **Canal propio para MD** (lo limpio a medio plazo). YouTube **no permite
+   mover videos entre canales**: habría que volver a subirlos al canal de MD y
+   actualizar los enlaces incrustados en creativomarketingdigital.com. Los
+   actuales pueden quedarse funcionando mientras tanto, así que se puede hacer
+   sin prisa.
+3. **Sacar el portafolio de YouTube** (Vimeo o video autoalojado). Es lo que da
+   más control sobre la marca, y también lo que más trabajo cuesta.
+
+Nada de esto condiciona el cambio de nombre del canal: es una decisión separada
+sobre dónde vive el portafolio de MD.
