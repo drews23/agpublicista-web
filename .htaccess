@@ -11,6 +11,17 @@ RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 # están fuera del repo (gitignore), pero el deploy de Hostinger no borra
 # los archivos ya subidos al servidor (solo añade/sobrescribe), así que
 # cualquier copia huérfana que quede allí se corta aquí con un 404.
+# TEMPORAL (20 ago): 410 cuando el archivo SIGUE en disco, 404 cuando ya no.
+# Sirve para comprobar si el borrado en el servidor se hizo de verdad, sin
+# exponer nada: ninguno de los dos codigos entrega el archivo. Restaurar a
+# 404 a secas en cuanto se verifique.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^svg(/|$) - [R=410,L]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^escenas[\s]3d(/|$) - [R=410,L]
+
 RewriteRule ^svg(/|$) - [R=404,L]
 # Ojo: el espacio va como clase [\s] — un espacio literal en el patron
 # rompe el parseo de argumentos de Apache y anula la regla.
