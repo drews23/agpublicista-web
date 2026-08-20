@@ -11,6 +11,10 @@ RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 # están fuera del repo (gitignore), pero el deploy de Hostinger no borra
 # los archivos ya subidos al servidor (solo añade/sobrescribe), así que
 # cualquier copia huérfana que quede allí se corta aquí con un 404.
+# Control positivo de la sonda: este archivo SI existe, debe dar 410.
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^_sonda-verificacion.txt$ - [R=410,L]
+
 # TEMPORAL (20 ago): 410 cuando el archivo SIGUE en disco, 404 cuando ya no.
 # Sirve para comprobar si el borrado en el servidor se hizo de verdad, sin
 # exponer nada: ninguno de los dos codigos entrega el archivo. Restaurar a

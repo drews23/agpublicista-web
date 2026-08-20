@@ -1,0 +1,1 @@
+Archivo temporal de verificacion. Se borra tras comprobar la sonda.
