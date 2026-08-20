@@ -297,6 +297,37 @@
     });
   });
 
+  /* Previsualización en vivo de una escena 3D: monta el iframe de Spline sólo
+     al pulsar. Antes de eso la tarjeta es sólo su portada, así que la página
+     nunca arranca con varios contextos WebGL a la vez. */
+  document.querySelectorAll("[data-escena-viva]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const url = btn.getAttribute("data-escena-viva");
+      const marco = btn.closest("figure")?.querySelector(".marco-vivo");
+      if (!url || !marco || marco.classList.contains("esta-vivo")) return;
+
+      btn.disabled = true;
+      btn.textContent = "Cargando…";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.loading = "lazy";
+      iframe.allow = "autoplay; fullscreen; xr-spatial-tracking";
+      iframe.setAttribute("title", "Escena 3D interactiva: " + (btn.getAttribute("data-escena-nombre") || "previsualización"));
+
+      iframe.addEventListener("load", () => {
+        btn.remove();
+        const pista = document.createElement("span");
+        pista.className = "pista-vivo";
+        pista.textContent = "Arrastra para girar la escena";
+        marco.append(pista);
+      });
+
+      marco.classList.add("esta-vivo");
+      marco.append(iframe);
+    });
+  });
+
   /* Año actual en el pie */
   document.querySelectorAll("[data-year]").forEach((el) => {
     el.textContent = String(new Date().getFullYear());
