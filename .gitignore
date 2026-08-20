@@ -21,3 +21,9 @@ skills-lock.json
 
 # Proyectos de video de HyperFrames (fuentes y renders, no son parte del sitio)
 videos/
+
+# Identidad del canal de YouTube: se versiona la FUENTE (html, iconos, fuentes
+# tipograficas y el script de verificacion), no los PNG renderizados. Pesan
+# megas, el repo se despliega entero al hosting y nadie los enlaza desde el
+# sitio. Se regeneran con Edge headless (ver assets/canal/LEEME.md).
+assets/canal/*.png

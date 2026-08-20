@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Lienzo — portada de canal A (lockup sereno)</title>
+<style>
+/* =========================================================================
+   PORTADA DE CANAL DE YOUTUBE — Lienzo · direccion A "lockup sereno"
+   Lienzo total 2560x1440.
+   Zona segura (movil, todos los dispositivos): 1546x423 en x507 y508.
+   Franja de escritorio: 2560x423 en y508.
+   Todo lo esencial vive en .zona-segura; el resto es atmosfera.
+   ========================================================================= */
+
+@font-face{font-family:Fraunces;src:url("fuentes/fraunces-var.woff2") format("woff2-variations");font-weight:100 900;font-style:normal}
+@font-face{font-family:"Instrument Sans";src:url("fuentes/instrument-var.woff2") format("woff2-variations");font-weight:100 900;font-style:normal}
+
+:root{
+  --tinta:#0a0a0f;
+  --texto:#f4f3f8;
+  --apagado:#a2a1b3;
+  --violeta:#8b7bff;
+  --violeta-profundo:#6e5df2;
+  --turquesa:#35d6c8;
+  --ambar:#ffb454;
+  --coral:#ff7a68;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{width:2560px;height:1440px}
+body{
+  position:relative;
+  overflow:hidden;
+  background:var(--tinta);
+  font-family:"Instrument Sans",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- ATMOSFERA: blooms radiales (siempre circle closest-side) ------ */
+.atmosfera{position:absolute;inset:0;overflow:hidden}
+.bloom{position:absolute;border-radius:50%}
+
+/* violeta dominante, esquina superior izquierda (arranque del degradado 135deg) */
+.b-violeta-no{left:-560px;top:-660px;width:2180px;height:2180px;
+  background:radial-gradient(circle closest-side,rgba(139,123,255,.30),rgba(139,123,255,.11) 46%,transparent 72%)}
+/* turquesa opuesto, esquina inferior derecha: cierra la diagonal de marca */
+.b-turquesa-se{left:1180px;top:200px;width:1840px;height:1840px;
+  background:radial-gradient(circle closest-side,rgba(53,214,200,.26),rgba(53,214,200,.09) 46%,transparent 72%)}
+/* refuerzo turquesa mas bajo, para que la esquina SE no muera en negro */
+.b-turquesa-so{left:1420px;top:720px;width:1300px;height:1300px;
+  background:radial-gradient(circle closest-side,rgba(53,214,200,.16),transparent 70%)}
+/* violeta profundo que sostiene el flanco izquierdo en la franja de escritorio */
+.b-violeta-o{left:-300px;top:400px;width:1420px;height:1420px;
+  background:radial-gradient(circle closest-side,rgba(110,93,242,.24),transparent 70%)}
+/* violeta profundo alto a la derecha: es la zona de transito del degradado */
+.b-violeta-ne{left:1780px;top:-460px;width:1240px;height:1240px;
+  background:radial-gradient(circle closest-side,rgba(110,93,242,.20),transparent 70%)}
+/* ambar tenue: unica nota calida, lejos del centro */
+.b-ambar{left:1560px;top:100px;width:880px;height:880px;
+  background:radial-gradient(circle closest-side,rgba(255,180,84,.11),transparent 70%)}
+/* segundo ambar bajo, a la izquierda, para no dejar la banda inferior muerta */
+.b-ambar-so{left:40px;top:900px;width:840px;height:840px;
+  background:radial-gradient(circle closest-side,rgba(255,180,84,.09),transparent 70%)}
+/* luz de apoyo bajo el lockup: la profundidad se hace con luz, no con sombra */
+.b-lift{left:490px;top:-60px;width:1580px;height:1580px;
+  background:radial-gradient(circle closest-side,rgba(184,176,255,.13),rgba(139,123,255,.045) 50%,transparent 72%)}
+
+/* vinieta muy suave: solo recoge las esquinas del lienzo de TV, sin apagar los blooms */
+.vinieta{position:absolute;left:-22%;top:-22%;width:144%;height:144%;
+  background:radial-gradient(circle closest-side,transparent 60%,rgba(10,10,15,.28) 86%,rgba(10,10,15,.55))}
+
+/* grano finisimo: evita el banding de los degradados grandes */
+.grano{position:absolute;inset:0;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:220px 220px}
+
+/* ---------- CONSTELACION: refuerzo lateral, recortable sin perder sentido - */
+.constelacion{position:absolute;inset:0}
+.constelacion .ico{position:absolute;fill:none;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.hilos{position:absolute;inset:0}
+
+/* ---------- ZONA SEGURA: 1546x423 centrada. Aqui va TODO lo esencial ------ */
+.zona-segura{
+  position:absolute;left:507px;top:508px;width:1546px;height:423px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+
+.logo{width:600px;height:auto;display:block}
+
+.eslogan{
+  margin-top:30px;
+  font-family:Fraunces,Georgia,serif;
+  font-variation-settings:"opsz" 144,"wght" 400;
+  font-size:44px;line-height:1.12;
+  color:var(--texto);
+  letter-spacing:.004em;
+}
+
+.pilares{
+  margin-top:23px;
+  display:flex;align-items:center;gap:16px;
+  font-size:22px;line-height:1;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+}
+.pilares .gratis{color:var(--turquesa);font-weight:700}
+.pilares .barra{width:1px;height:20px;background:rgba(162,161,179,.42)}
+.pilares .lista{color:var(--apagado);font-weight:500}
+.pilares .punto{color:var(--violeta);opacity:.85}
+
+.raya{
+  margin-top:26px;
+  width:440px;height:3px;border-radius:99px;
+  background:linear-gradient(90deg,rgba(139,123,255,0),#8b7bff 16%,#6e5df2 42%,#35d6c8 74%,rgba(255,180,84,0) 100%);
+}
+
+.pie{
+  margin-top:26px;
+  display:flex;align-items:baseline;gap:22px;
+  font-size:21px;line-height:1;
+}
+.pie .dominio{color:var(--texto);font-weight:700;font-size:25px;letter-spacing:.012em}
+.pie .dato{color:var(--apagado);font-weight:500}
+.pie .sep{width:4px;height:4px;border-radius:50%;background:var(--ambar);opacity:.75;align-self:center}
+</style>
+</head>
+<body>
+
+<!-- ===================== capas de fondo (no esenciales) ===================== -->
+<div class="atmosfera">
+  <div class="bloom b-violeta-no"></div>
+  <div class="bloom b-turquesa-se"></div>
+  <div class="bloom b-turquesa-so"></div>
+  <div class="bloom b-violeta-o"></div>
+  <div class="bloom b-violeta-ne"></div>
+  <div class="bloom b-ambar"></div>
+  <div class="bloom b-ambar-so"></div>
+  <div class="bloom b-lift"></div>
+  <div class="vinieta"></div>
+  <div class="grano"></div>
+</div>
+
+<!-- sprite de iconos de la constelacion -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-vector" viewBox="0 0 24 24">
+      <path d="M5.5 18.5C5.5 11.5 18.5 12.5 18.5 5.5"/>
+      <rect x="2.6" y="15.6" width="5.8" height="5.8" rx="1.4"/>
+      <rect x="15.6" y="2.6" width="5.8" height="5.8" rx="1.4"/>
+    </symbol>
+    <symbol id="i-onda" viewBox="0 0 24 24">
+      <path d="M2.5 11v2M6.5 8v8M10.5 3.5v17M14.5 6.5v11M18.5 9.5v5M22 11v2"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <rect x="2.6" y="4.2" width="18.8" height="15.6" rx="3.4"/>
+      <path d="M10.2 9.1l4.9 2.9-4.9 2.9z"/>
+    </symbol>
+    <symbol id="i-paleta" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9.2"/>
+      <circle cx="8.7" cy="9.4" r="1.4" fill="currentColor" stroke="none"/>
+      <circle cx="14.6" cy="8.6" r="1.4" fill="currentColor" stroke="none"/>
+      <circle cx="15.8" cy="14.6" r="1.4" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-codigo" viewBox="0 0 24 24">
+      <path d="M9.2 6.4L3.6 12l5.6 5.6M14.8 6.4L20.4 12l-5.6 5.6"/>
+    </symbol>
+    <symbol id="i-descarga" viewBox="0 0 24 24">
+      <path d="M12 2.8v11.4M12 14.2l-4.2-4.2M12 14.2l4.2-4.2M3.6 17v2.6a1.6 1.6 0 001.6 1.6h13.6a1.6 1.6 0 001.6-1.6V17"/>
+    </symbol>
+    <symbol id="i-capas" viewBox="0 0 24 24">
+      <path d="M12 2.6l9.2 5.1-9.2 5.1-9.2-5.1z"/>
+      <path d="M3 13.1l9 5 9-5"/>
+      <path d="M3 17.6l9 5 9-5"/>
+    </symbol>
+    <symbol id="i-cursor" viewBox="0 0 24 24">
+      <path d="M5.2 2.9l14 7.3-6.2 1.6-2.9 6.1z"/>
+    </symbol>
+    <symbol id="i-chispa" viewBox="0 0 24 24">
+      <path d="M12 2.6l2.3 7.1 7.1 2.3-7.1 2.3-2.3 7.1-2.3-7.1L2.6 12l7.1-2.3z"/>
+    </symbol>
+    <symbol id="i-rejilla" viewBox="0 0 24 24">
+      <rect x="3.2" y="3.2" width="7.4" height="7.4" rx="1.8"/>
+      <rect x="13.4" y="3.2" width="7.4" height="7.4" rx="1.8"/>
+      <rect x="3.2" y="13.4" width="7.4" height="7.4" rx="1.8"/>
+      <rect x="13.4" y="13.4" width="7.4" height="7.4" rx="1.8"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="constelacion" aria-hidden="true">
+  <!-- hilos que unen la constelacion: casi invisibles, solo dan direccion -->
+  <svg class="hilos" viewBox="0 0 2560 1440" preserveAspectRatio="none">
+    <g fill="none" stroke="#f4f3f8" stroke-width="1" opacity=".055">
+      <polyline points="173,273 377,447 241,666 414,849 142,1032 347,1197"/>
+      <polyline points="2340,250 2132,417 2425,615 2178,808 2362,1002 2127,1197"/>
+    </g>
+    <g fill="none" stroke="#8b7bff" stroke-width="1" opacity=".05">
+      <polyline points="778,193 1180,286 1736,231"/>
+      <polyline points="838,1233 1305,1315 1676,1161"/>
+    </g>
+    <g fill="#f4f3f8" opacity=".10">
+      <circle cx="560" cy="352" r="2.4"/><circle cx="398" cy="648" r="2"/>
+      <circle cx="470" cy="1128" r="2.4"/><circle cx="2015" cy="322" r="2"/>
+      <circle cx="1930" cy="1090" r="2.4"/><circle cx="2500" cy="820" r="2"/>
+      <circle cx="1050" cy="120" r="2"/><circle cx="1480" cy="1390" r="2.4"/>
+    </g>
+    <g fill="#ffb454" opacity=".16">
+      <circle cx="640" cy="196" r="2.6"/><circle cx="2260" cy="1310" r="2.6"/>
+      <circle cx="300" cy="1330" r="2.2"/>
+    </g>
+    <g fill="#35d6c8" opacity=".16">
+      <circle cx="1900" cy="176" r="2.6"/><circle cx="905" cy="1352" r="2.2"/>
+    </g>
+  </svg>
+
+  <!-- flanco izquierdo (x<507): recortable en movil sin perder sentido -->
+  <svg class="ico" style="left:150px;top:250px;width:46px;height:46px;color:#8b7bff;opacity:.085" viewBox="0 0 24 24"><use href="#i-vector" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:360px;top:430px;width:34px;height:34px;color:#f4f3f8;opacity:.07" viewBox="0 0 24 24"><use href="#i-chispa" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:215px;top:640px;width:52px;height:52px;color:#35d6c8;opacity:.095" viewBox="0 0 24 24"><use href="#i-onda" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:395px;top:830px;width:38px;height:38px;color:#f4f3f8;opacity:.075" viewBox="0 0 24 24"><use href="#i-capas" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:120px;top:1010px;width:44px;height:44px;color:#8b7bff;opacity:.08" viewBox="0 0 24 24"><use href="#i-paleta" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:330px;top:1180px;width:34px;height:34px;color:#ffb454;opacity:.085" viewBox="0 0 24 24"><use href="#i-cursor" stroke="currentColor"/></svg>
+
+  <!-- flanco derecho (x>2053) -->
+  <svg class="ico" style="left:2320px;top:230px;width:40px;height:40px;color:#35d6c8;opacity:.08" viewBox="0 0 24 24"><use href="#i-rejilla" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:2115px;top:400px;width:34px;height:34px;color:#f4f3f8;opacity:.07" viewBox="0 0 24 24"><use href="#i-descarga" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:2400px;top:590px;width:50px;height:50px;color:#8b7bff;opacity:.095" viewBox="0 0 24 24"><use href="#i-codigo" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:2160px;top:790px;width:36px;height:36px;color:#f4f3f8;opacity:.075" viewBox="0 0 24 24"><use href="#i-play" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:2340px;top:980px;width:44px;height:44px;color:#35d6c8;opacity:.08" viewBox="0 0 24 24"><use href="#i-vector" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:2110px;top:1180px;width:34px;height:34px;color:#f4f3f8;opacity:.07" viewBox="0 0 24 24"><use href="#i-chispa" stroke="currentColor"/></svg>
+
+  <!-- banda superior (y<508) y banda inferior (y>931): atmosfera pura -->
+  <svg class="ico" style="left:760px;top:175px;width:36px;height:36px;color:#f4f3f8;opacity:.065" viewBox="0 0 24 24"><use href="#i-descarga" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:1164px;top:270px;width:32px;height:32px;color:#8b7bff;opacity:.06" viewBox="0 0 24 24"><use href="#i-paleta" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:1720px;top:215px;width:32px;height:32px;color:#f4f3f8;opacity:.065" viewBox="0 0 24 24"><use href="#i-onda" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:820px;top:1215px;width:36px;height:36px;color:#f4f3f8;opacity:.065" viewBox="0 0 24 24"><use href="#i-capas" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:1290px;top:1300px;width:30px;height:30px;color:#f4f3f8;opacity:.06" viewBox="0 0 24 24"><use href="#i-rejilla" stroke="currentColor"/></svg>
+  <svg class="ico" style="left:1660px;top:1145px;width:32px;height:32px;color:#35d6c8;opacity:.07" viewBox="0 0 24 24"><use href="#i-codigo" stroke="currentColor"/></svg>
+</div>
+
+<!-- ============= ZONA SEGURA 1546x423 · todo lo esencial vive aqui ========= -->
+<div class="zona-segura">
+
+  <!-- Logo maestro inlineado SIN su bloque <style> (llevaba prefers-color-scheme).
+       El wordmark queda fijado a #f4f3f8 y el id del degradado renombrado. -->
+  <svg class="logo" viewBox="0 0 960 260" role="img" aria-label="Lienzo">
+    <defs>
+      <linearGradient id="marco-banner-a" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#marco-banner-a)" stroke-linecap="round" stroke-width="22">
+      <path d="M28 100V46a35 35 0 0 1 35-35h468"/>
+      <path d="M621 11h276a35 35 0 0 1 35 35v54"/>
+      <path d="M932 160v54a35 35 0 0 1-35 35H545"/>
+      <path d="M455 249H63a35 35 0 0 1-35-35v-54"/>
+    </g>
+    <path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/>
+    <g class="wordmark" fill="none" stroke="#f4f3f8" stroke-linecap="round" stroke-linejoin="round" stroke-width="26">
+      <path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/>
+      <ellipse cx="746" cy="130" rx="50" ry="64"/>
+    </g>
+  </svg>
+
+  <p class="eslogan">Herramientas creativas sin fricci&oacute;n</p>
+
+  <p class="pilares">
+    <span class="gratis">Gratis</span>
+    <span class="barra"></span>
+    <span class="lista">Iconos SVG <span class="punto">&middot;</span> Sonidos <span class="punto">&middot;</span> Plantillas <span class="punto">&middot;</span> Herramientas web</span>
+  </p>
+
+  <div class="raya"></div>
+
+  <p class="pie">
+    <span class="dominio">agpublicista.com</span>
+    <span class="sep"></span>
+    <span class="dato">Sin registro</span>
+    <span class="sep"></span>
+    <span class="dato">Un pack nuevo cada semana</span>
+  </p>
+
+</div>
+</body>
+</html>
