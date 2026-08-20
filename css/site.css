@@ -804,12 +804,38 @@ img, svg { max-width: 100%; }
 .muestra-escenas li:first-child {
   grid-column: 1 / -1;
 }
+/* El marco recorta; la imagen se mueve dentro (paneo/zoom continuo tipo
+   Ken Burns). La animación es puro CSS: corre sin JS y se apaga con
+   prefers-reduced-motion. El radio y el borde viven en el marco para que
+   la imagen escalada no rompa las esquinas. */
+.muestra-escenas .marco-vivo {
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
 .muestra-escenas img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
+  animation: escena-viva 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+/* variaciones por posición: cada tarjeta respira con su propio ritmo y
+   rumbo, para que la rejilla no lata al unísono */
+.muestra-escenas li:first-child img {
+  animation-duration: 18s;
+  transform-origin: 42% 55%;
+}
+.muestra-escenas li:nth-child(2) img { animation-duration: 13s; transform-origin: 70% 30%; }
+.muestra-escenas li:nth-child(3) img { animation-duration: 16s; transform-origin: 30% 65%; animation-delay: -6s; }
+.muestra-escenas li:nth-child(4) img { animation-duration: 12s; transform-origin: 62% 58%; animation-delay: -3s; }
+.muestra-escenas li:nth-child(5) img { animation-duration: 15s; transform-origin: 45% 35%; animation-delay: -9s; }
+@keyframes escena-viva {
+  from { transform: scale(1.02) translate3d(-0.8%, 0.4%, 0); }
+  to   { transform: scale(1.09) translate3d(0.9%, -0.6%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .muestra-escenas img { animation: none; }
 }
 .muestra-escenas figcaption {
   font-size: 0.88rem;
