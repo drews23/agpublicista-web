@@ -14,6 +14,7 @@ coding lienzo*.svg
 
 # Material fuente para packs descargables: se aloja fuera, nunca en el repo publico
 svg/
+escenas 3d/
 
 # Skills de HyperFrames (herramienta de autoria de video, no es parte del sitio)
 .agents/
