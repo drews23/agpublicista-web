@@ -17,15 +17,34 @@ Las imágenes (portada y foto de perfil) están en esta misma carpeta; ver
 
 ### Nombre
 ```
-Andy Publicista
+Lienzo · Recursos creativos
 ```
-Ya está puesto. *(YouTube permite cambiarlo dos veces cada 14 días.)*
+**Cambio decidido el 20 ago 2026** (antes: *Andy Publicista*). El motivo: todo
+el ecosistema ya decía Lienzo —el sitio, el banner, el avatar, los LEEME de
+cada ZIP— y el canal era la única pieza que decía otra cosa; quien veía el
+banner y luego el nombre no sabía si eran lo mismo. Además, "Andy Publicista"
+no dice nada de lo que ofrece el canal.
+
+Se le añade el descriptor **"Recursos creativos"** en vez de dejar *Lienzo* a
+secas porque «lienzo» es una palabra genérica en español, muy ocupada por
+pintura, arte y el modelo Canvas de negocio: sola no compite bien y no explica
+la oferta. Con el descriptor, el nombre hace los dos trabajos de un nombre de
+canal —identidad y descubrimiento— y encaja con el wordmark del banner.
+
+*(YouTube permite cambiarlo dos veces cada 14 días: conviene acertar a la
+primera.)*
 
 ### Identificador
 ```
 @AndyPublicista
 ```
-Ya está puesto → https://www.youtube.com/@AndyPublicista
+**Se queda como está.** YouTube permite que el nombre visible y el @ sean
+distintos, y conservarlo evita romper las URLs ya compartidas en los videos
+publicados y en el sitio. El nombre visible es el que pesa; el @ es la
+dirección. Si algún día se cambia, la URL antigua deja de funcionar a los 14
+días y habría que actualizar los enlaces del sitio y de cada video ya subido.
+
+→ https://www.youtube.com/@AndyPublicista
 
 ### Pronombres
 **Decisión tuya.** Es un campo opcional y un dato personal: indica a los demás
@@ -124,3 +143,32 @@ del canal deja de ser una lista cronológica y pasa a leerse como un catálogo:
 
 Pulsa **Publicar** arriba a la derecha. Los cambios de nombre e imagen solo
 afectan a YouTube, no al resto de tu cuenta de Google.
+
+---
+
+## Pendiente que arrastra el cambio de nombre
+
+El sitio menciona **«el canal Andy Publicista»** en 14 páginas (inicio,
+recursos, blog y sus artículos, herramientas, sobre mí, privacidad), tanto en
+texto visible como en metadatos de SEO. Quien lea ahí «el canal Andy
+Publicista», haga clic y aterrice en *Lienzo · Recursos creativos* va a dudar
+un segundo — que es exactamente la disonancia que este cambio venía a eliminar,
+sólo que del otro lado.
+
+No todas las menciones necesitan cambiar. Conviene distinguir:
+
+- **Referencias al CANAL** («los packs descargables del canal Andy Publicista»,
+  el encabezado «Andy Publicista en YouTube», «Suscríbete a Andy Publicista»)
+  → estas sí deberían pasar a nombrar el canal por su nombre nuevo.
+- **Referencias a la PERSONA** (en `sobre-mi`: «quién está detrás de Lienzo y
+  del canal Andy Publicista») → estas siguen siendo correctas: Andy sigue
+  siendo Andy, y el @ del canal no ha cambiado.
+
+Es un repaso editorial de una sola pasada, pero toca páginas en producción y
+metadatos indexados, así que se hace aparte y con revisión.
+
+**Ojo con los videos ya publicados:** su escena de cierre dice «Suscríbete a
+Andy Publicista» y no se re-suben (se perdería la URL, las vistas y los
+comentarios). El cierre se actualiza a partir del próximo video: hay que tocar
+`videos/<proyecto>/compositions/frames/09-cierre.html` y el `BRIEF.md` de la
+plantilla, que aún declara `Canal: "Andy Publicista"`.
