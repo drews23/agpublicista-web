@@ -21,7 +21,9 @@ if (!QUITAR && !/^ca-pub-\d{16}$/.test(CLIENTE || "")) {
   process.exit(1);
 }
 
-const SALTAR = new Set([".git", ".claude", ".agents", "node_modules", "videos", "svg", "_templates", "i-design-with-code", "capture", "escenas 3d"]);
+/* "assets" queda fuera a propósito: sus .html no son páginas del sitio,
+   son plantillas que se renderizan a PNG (banner del canal, imagen OG). */
+const SALTAR = new Set([".git", ".claude", ".agents", "node_modules", "videos", "svg", "_templates", "i-design-with-code", "capture", "escenas 3d", "assets"]);
 
 const paginas = [];
 const recorrer = (dir) => {
