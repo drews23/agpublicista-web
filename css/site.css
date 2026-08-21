@@ -770,11 +770,23 @@ img, svg { max-width: 100%; }
   .muestra-iconos li { transition: none; }
 }
 
-/* Bloque reservado para publicidad (AdSense) */
+/* Bloque reservado para publicidad (AdSense).
+
+   OCULTO HASTA LA APROBACIÓN DE ADSENSE: mientras no haya anuncios reales,
+   estas cajas sólo enseñan huecos punteados que dicen "espacio publicitario",
+   y durante la revisión eso juega en contra (el sitio debe valer por su
+   contenido, no por el inventario que promete).
+
+   PARA REACTIVARLOS cuando aprueben: borra el bloque `.ad-slot { display:none }`
+   de abajo y sube la versión de assets. El marcado sigue en su sitio en las
+   24 páginas, con su comentario <!-- AdSense: pegar aquí… --> al lado. */
 .ad-slot {
+  /* PARA REACTIVAR: cambia esta línea por `display: grid;` y sube la versión
+     de assets. El resto de la regla ya está lista debajo. */
+  display: none;
+
   min-height: 90px;
   margin: 2.2em auto;
-  display: grid;
   place-items: center;
   border: 1px dashed var(--line);
   border-radius: var(--radius);
