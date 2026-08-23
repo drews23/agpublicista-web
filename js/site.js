@@ -91,7 +91,20 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px" }
+      /* threshold DEBE ser 0, no un porcentaje.
+
+         Un umbral por ratio es INALCANZABLE para un elemento más alto que
+         (viewport / threshold). Con 0.12 y una ventana de 800 px, cualquier
+         elemento de más de ~6.700 px no dispara jamás: se queda en opacity 0
+         para siempre. Pasó de verdad el 23 ago 2026 con el `.prose.reveal` de
+         las páginas legales (8.322 px, ratio máximo posible 0,068) — la página
+         entera se veía vacía hasta el pie.
+
+         Con threshold 0 el disparo lo marca el rootMargin inferior: el elemento
+         se revela cuando su borde superior entra 40 px en la ventana. Para una
+         tarjeta de ~300 px eso equivale casi exacto al 12 % anterior (36 px),
+         así que la sensación de la animación no cambia. */
+      { threshold: 0, rootMargin: "0px 0px -40px" }
     );
 
     revealItems.forEach((item) => observer.observe(item));
@@ -332,4 +345,42 @@
   document.querySelectorAll("[data-year]").forEach((el) => {
     el.textContent = String(new Date().getFullYear());
   });
+
+  /* Enlace "Configuración de privacidad y de cookies" (CMP de Google).
+
+     Google exige que el visitante pueda reabrir el mensaje de consentimiento y
+     cambiar su elección, y desde el 30 de abril de 2024 exige ese título literal.
+
+     El enlace nace OCULTO en el pie y solo aparece donde Google llega a mostrar
+     el mensaje (EEE, Reino Unido y Suiza). Al resto del mundo no se le enseña un
+     enlace que no haría nada. Se oculta el envoltorio entero, no solo el <a>,
+     para no dejar colgando el separador "·".
+
+     Ojo: fuera del EEE la API __tcfapi puede no definirse nunca, así que todo va
+     detrás de comprobaciones. Si el fragmento de AdSense no carga, esto no falla:
+     simplemente el enlace se queda oculto. */
+  const revocacion = document.querySelector("[data-revocar-consentimiento]");
+  if (revocacion) {
+    const enlace = revocacion.querySelector("a");
+
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({
+      CONSENT_API_READY: () => {
+        if (typeof window.__tcfapi !== "function") return;
+        window.__tcfapi("addEventListener", 2, (tcData, exito) => {
+          if (exito && tcData && tcData.gdprApplies) revocacion.style.display = "";
+        });
+      },
+    });
+
+    if (enlace) {
+      enlace.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (window.googlefc && typeof window.googlefc.showRevocationMessage === "function") {
+          window.googlefc.showRevocationMessage();
+        }
+      });
+    }
+  }
 })();

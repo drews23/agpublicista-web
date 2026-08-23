@@ -3,6 +3,9 @@
 .DS_Store
 Thumbs.db
 
+# Respaldo del historial de chat de la sesion de agente, no es parte del sitio
+_historial_chat/
+
 # Plantilla externa de consulta, no forma parte del sitio
 i-design-with-code/
 

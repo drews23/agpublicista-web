@@ -50,8 +50,11 @@ RewriteRule ^(calendario-de-contenido-para-redes-sociales|como-desarrollar-mi-pl
 RewriteRule ^category/diseno-grafico/recursos-visuales/?$ /recursos/ [R=301,L]
 RewriteRule ^(category|tag)(/.*)?$ /blog/ [R=301,L]
 
-# Servicios, proceso y contacto → la página sobre mí
-RewriteRule ^(services|services_group|servicios-de-marketing-digital|administracion-de-redes-sociales|contacto|proceso-de-trabajo)(/.*)?$ /sobre-mi/ [R=301,L]
+# Servicios y proceso de trabajo → la página sobre mí.
+# OJO: "contacto" salió de esta lista el 23 ago 2026, cuando se publicó
+# /contacto/ como página propia. Si vuelve a entrar aquí, la página nueva
+# deja de ser accesible y se redirige a /sobre-mi/ con un 301.
+RewriteRule ^(services|services_group|servicios-de-marketing-digital|administracion-de-redes-sociales|proceso-de-trabajo)(/.*)?$ /sobre-mi/ [R=301,L]
 
 # Página de error personalizada
 ErrorDocument 404 /404.html

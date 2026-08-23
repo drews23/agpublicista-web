@@ -22,8 +22,19 @@ if (!QUITAR && !/^ca-pub-\d{16}$/.test(CLIENTE || "")) {
 }
 
 /* "assets" queda fuera a propósito: sus .html no son páginas del sitio,
-   son plantillas que se renderizan a PNG (banner del canal, imagen OG). */
-const SALTAR = new Set([".git", ".claude", ".agents", "node_modules", "videos", "svg", "_templates", "i-design-with-code", "capture", "escenas 3d", "assets"]);
+   son plantillas que se renderizan a PNG (banner del canal, imagen OG).
+
+   "privacidad" y "cookies" quedan fuera por exigencia de Google: la URL que se
+   declara como política de privacidad/cookies en el mensaje de consentimiento
+   NO puede alojar secuencias de comandos que requieran consentimiento, y la
+   etiqueta de anuncios lo es. /contacto/ y /aviso-legal/ sí pueden llevarla. */
+const SALTAR = new Set([".git", ".claude", ".agents", "node_modules", "videos", "svg", "_templates", "i-design-with-code", "capture", "escenas 3d", "assets", "privacidad", "cookies"]);
+
+/* Archivos sueltos que nunca deben llevar el fragmento: 404.html se sirve
+   con estado HTTP 404 y sin contenido de editor (política de Google sobre
+   anuncios en pantallas sin contenido); el archivo de verificación de
+   Search Console no se toca por ninguna razón. */
+const SALTAR_ARCHIVOS = new Set(["404.html", "googleb7bf25195d1606c4.html"]);
 
 const paginas = [];
 const recorrer = (dir) => {
@@ -32,6 +43,7 @@ const recorrer = (dir) => {
       if (SALTAR.has(e.name)) continue;
       recorrer(join(dir, e.name));
     } else if (e.name.endsWith(".html")) {
+      if (SALTAR_ARCHIVOS.has(e.name)) continue;
       paginas.push(join(dir, e.name));
     }
   }
@@ -39,8 +51,19 @@ const recorrer = (dir) => {
 recorrer(RAIZ);
 
 const MARCA = "pagead2.googlesyndication.com";
+
+/* requestNonPersonalizedAds = 1: decisión del 23 ago 2026, para TODO el
+   tráfico (no solo el EEE). Reduce la exposición al art. 27 del RGPD, que
+   exige representante en la UE salvo tratamiento "ocasional" — la publicidad
+   comportamental continua no lo es, pero sin personalización desaparece el
+   perfilado que activa esa obligación. Documentado en la memoria persistente
+   `agpublicista-adsense`. Si se revierte, hay que avisar y corregir las
+   páginas legales, que afirman que los anuncios no son personalizados. */
 const fragmento = (cliente) =>
-  `    <!-- AdSense -->\n` +
+  `    <!-- AdSense: anuncios no personalizados en todo el tráfico -->\n` +
+  `    <script>\n` +
+  `      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;\n` +
+  `    </script>\n` +
   `    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${cliente}"\n` +
   `         crossorigin="anonymous"></script>\n`;
 
@@ -54,7 +77,10 @@ for (const ruta of paginas) {
 
   if (QUITAR) {
     if (!tiene) continue;
-    html = html.replace(/[ \t]*<!-- AdSense -->\n[ \t]*<script async src="https:\/\/pagead2\.googlesyndication\.com[^\n]*\n[^\n]*crossorigin="anonymous"><\/script>\n/g, "");
+    /* Quita el bloque con o sin el <script> de requestNonPersonalizedAds
+       intercalado, para poder limpiar páginas con cualquiera de las dos
+       versiones del fragmento. */
+    html = html.replace(/[ \t]*<!-- AdSense[^\n]*-->\n(?:[ \t]*<script>\n[ \t]*\(adsbygoogle[^\n]*\n[ \t]*<\/script>\n)?[ \t]*<script async src="https:\/\/pagead2\.googlesyndication\.com[^\n]*\n[^\n]*crossorigin="anonymous"><\/script>\n/g, "");
     writeFileSync(ruta, html);
     tocadas++;
     continue;
