@@ -946,6 +946,82 @@ html:not(.js) .btn-vivo { display: none; }
   0%, 70% { opacity: 1; }
   100% { opacity: 0; }
 }
+/* Rejilla de piezas sueltas: cada objeto de un pack, descargable por separado.
+   La tarjeta ENTERA es el enlace de descarga, y el pie lo dice literalmente
+   ("Descargar · ZIP 34 KB") para que nadie pulse sin saber que sale del sitio.
+   Sin animación de paneo aquí a propósito: son ocho tarjetas y el conjunto
+   latiendo a la vez distrae de lo único que importa, elegir una. */
+.rejilla-piezas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.1rem;
+  padding: 0;
+  margin: 1.6em 0;
+  list-style: none;
+}
+.rejilla-piezas li { margin: 0; }
+.pieza {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 200ms var(--ease), border-color 160ms ease;
+}
+.pieza:hover,
+.pieza:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--violeta);
+}
+.pieza:focus-visible {
+  outline: 2px solid var(--violeta);
+  outline-offset: 3px;
+}
+.pieza img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--line);
+}
+.pieza__cuerpo {
+  padding: 0.75rem 0.9rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+.pieza__nombre {
+  font: 600 0.95rem/1.25 var(--font-body);
+  color: var(--text);
+}
+.pieza__uso {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--muted);
+  flex: 1;
+}
+.pieza__bajar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+  font: 600 0.78rem var(--font-body);
+  color: var(--violeta);
+}
+.pieza__bajar svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pieza { transition: none; }
+  .pieza:hover, .pieza:focus-visible { transform: none; }
+}
+
 @media (max-width: 620px) {
   .muestra-escenas { grid-template-columns: 1fr; }
 }

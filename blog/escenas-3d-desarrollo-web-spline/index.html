@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8 escenas 3D de desarrollo web gratis, una por archivo &mdash; Lienzo</title>
+    <meta name="description" content="Descarga gratis 8 escenas 3D de desarrollo web en formato .spline: velocidad, SEO, login, búsqueda, VPN, anuncios, historial y optimización. Cada una en su propio archivo." />
+    <link rel="canonical" href="https://agpublicista.com/blog/escenas-3d-desarrollo-web-spline/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="8 escenas 3D de desarrollo web, gratis y descargables una por una" />
+    <meta property="og:description" content="Ocho objetos 3D animados de desarrollo web en formato .spline. Cada uno en su propio archivo, para que te lleves solo el que necesitas." />
+    <meta property="og:url" content="https://agpublicista.com/blog/escenas-3d-desarrollo-web-spline/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/escenas-3d/desarrollo-web/desarrollo-web.webp" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1280" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026082602" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://agpublicista.com/blog/escenas-3d-desarrollo-web-spline/#article",
+          "headline": "8 escenas 3D de desarrollo web, gratis y descargables una por una",
+          "description": "Descarga gratis 8 escenas 3D de desarrollo web en formato .spline: velocidad, SEO, login, búsqueda, VPN, anuncios, historial y optimización. Cada una en su propio archivo.",
+          "datePublished": "2026-08-26",
+          "dateModified": "2026-08-26",
+          "inLanguage": "es",
+          "image": "https://agpublicista.com/assets/escenas-3d/desarrollo-web/desarrollo-web.webp",
+          "author": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lienzo",
+            "url": "https://agpublicista.com/",
+            "logo": { "@type": "ImageObject", "url": "https://agpublicista.com/favicon.svg" }
+          },
+          "mainEntityOfPage": "https://agpublicista.com/blog/escenas-3d-desarrollo-web-spline/"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://agpublicista.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "8 escenas 3D de desarrollo web, gratis y descargables una por una", "item": "https://agpublicista.com/blog/escenas-3d-desarrollo-web-spline/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Puedo bajarme solo una de las ocho escenas?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Sí, y esa es justo la idea de este pack. Cada uno de los ocho objetos va en su propio archivo .spline, con su ZIP y su enlace de descarga independiente. Si solo necesitas el velocímetro no tienes que bajarte los otros siete ni entrar al editor a borrarlos uno a uno. También está el ZIP con las ocho juntas más la escena completa, por si prefieres tenerlo todo de una vez." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué es un archivo .spline y con qué se abre?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Es el archivo de proyecto del editor 3D Spline (spline.design): guarda la escena completa —objetos, materiales, luces, cámara y animaciones—, no una imagen renderizada. Se abre arrastrándolo al editor de Spline, que funciona en el navegador o con su aplicación de escritorio y tiene plan gratuito." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Las escenas sueltas conservan la animación?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Sí. Cada archivo individual mantiene su cámara, su luz y el movimiento flotante que tenía dentro del conjunto: lo abres, pulsas Play y ya se mueve solo, sin reconstruir nada. Lo único que cambia es que el objeto conserva la posición que ocupaba en la escena completa, así que puede aparecer descentrado al abrirlo; se arregla poniendo su Position X e Y en 0." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo publico la escena en mi web o la llevo a Blender?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Las dos cosas salen del menú de exportación de Spline. Con Export → Web obtienes un enlace público o un código para incrustar la escena interactiva en tu página. Y con Export → 3D Formats la exportas como GLTF, GLB, OBJ, STL o USDZ para seguir trabajándola en otro software. También puedes sacarla como imagen (JPG/PNG) o video (MP4/GIF/WebM)." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Con qué condiciones puedo usarlas?",
+              "acceptedAnswer": { "@type": "Answer", "text": "La descarga es libre y no pide registro ni correo. Para el uso, la referencia es la sección «Licencia y uso» de este mismo artículo: las condiciones de cada archivo las fija quien lo creó, así que conviene comprobarlas antes de que una escena acabe en un encargo comercial. Y si quieres compartir el pack, enlaza este artículo en lugar de volver a subir el ZIP a otro sitio." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/" aria-current="page">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <article class="section shell">
+        <div class="prose">
+          <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+            <a href="/">Inicio</a> &rsaquo; <a href="/blog/">Blog</a> &rsaquo; <span>Escenas 3D de desarrollo web</span>
+          </nav>
+
+          <p class="eyebrow reveal">Pack de escenas 3D &middot; Descarga gratuita</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">8 escenas 3D de desarrollo web, gratis y descargables una por una</h1>
+          <p class="article-meta reveal" style="--reveal-delay: 140ms">
+            <time datetime="2026-08-26">26 de agosto de 2026</time> &middot; Escenas 3D &middot; 6 min de lectura
+          </p>
+
+          <p class="reveal" style="--reveal-delay: 200ms">
+            Los packs de 3D casi siempre llegan en bloque: un archivo con ocho objetos dentro.
+            Si de esos ocho te sirve uno, el trámite es abrir el editor, buscar el que quieres
+            entre las capas, borrar los otros siete sin llevarte por delante una luz, y recolocar
+            lo que quede. Diez minutos de fontanería antes de empezar a trabajar.
+          </p>
+          <p class="reveal" style="--reveal-delay: 260ms">
+            Aquí ese trabajo ya está hecho. Este pack son <strong>ocho escenas 3D animadas de
+            desarrollo web en formato <code>.spline</code>, y cada objeto va en su propio
+            archivo</strong>: te bajas el velocímetro, o el candado de la VPN, o el megáfono de
+            anuncios, sin arrastrar los otros siete. Abajo tienes la escena completa en vivo para
+            verlas todas juntas, y luego las ocho por separado con su descarga individual.
+          </p>
+
+          <h2 id="en-vivo">La escena completa, en vivo</h2>
+          <p>
+            Esto no es un video ni una captura: es la escena real corriendo en tu navegador. Pulsa
+            el bot&oacute;n y podr&aacute;s girarla con el rat&oacute;n, acercarte y ver la
+            animaci&oacute;n de cada objeto. Se carga solo cuando la pides, para no gastarle datos
+            a quien solo viene a por un archivo.
+          </p>
+
+          <ul class="muestra-escenas reveal">
+            <li>
+              <figure>
+                <div class="marco-vivo"><img src="/assets/escenas-3d/desarrollo-web/desarrollo-web.webp" alt="Las ocho escenas 3D de desarrollo web flotando juntas sobre un fondo azul claro: velocímetro, gráfica SEO, inicio de sesión, búsqueda WWW, VPN, anuncios, historial y engranajes" width="1920" height="1280" loading="lazy" /></div>
+                <figcaption><span class="escena-id"><strong>Desarrollo web</strong> <code>desarrollo-web.spline</code></span><button type="button" class="btn-vivo" data-escena-viva="https://my.spline.design/desarrolloweb-v3VMEEWQQ76IINyf1mZV56Tk/" data-escena-nombre="Desarrollo web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Previsualizaci&oacute;n en vivo</button></figcaption>
+              </figure>
+            </li>
+          </ul>
+
+          <h2 id="piezas">Las ocho piezas, una por una</h2>
+          <p>
+            Cada tarjeta descarga un ZIP con <strong>una sola escena</strong>, su portada y el
+            LEEME. Ninguna pasa de 43 KB, as&iacute; que puedes bajarte las que te interesen sin
+            pensarlo. Si las quieres todas, el pack completo est&aacute;
+            <a href="#descargar">un poco m&aacute;s abajo</a>.
+          </p>
+
+          <ul class="rejilla-piezas reveal">
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/dax7osnq52cquse/escena-3d-velocidad-web-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/velocidad-web.webp" alt="Escena 3D de un monitor con un velocímetro de rendimiento en rojo, amarillo y verde" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">Velocidad web</span>
+                  <span class="pieza__uso">Informes de PageSpeed, páginas de hosting y cualquier sitio que venda rapidez.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 32 KB</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/kqd5gnr5prvva4z/escena-3d-grafica-seo-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/grafica-seo.webp" alt="Escena 3D de una ventana con una gráfica de velas de colores y una etiqueta SEO" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">Gráfica SEO</span>
+                  <span class="pieza__uso">Servicios de posicionamiento, informes de analítica y paneles de resultados.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 36 KB</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/q41ca4ylhhpkmlt/escena-3d-inicio-de-sesion-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/inicio-de-sesion.webp" alt="Escena 3D de un monitor con un avatar de usuario y un campo de contraseña" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">Inicio de sesión</span>
+                  <span class="pieza__uso">Pantallas de acceso, onboarding y secciones de gestión de cuentas.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 34 KB</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/z3x0psvf6q53rko/escena-3d-busqueda-web-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/busqueda-web.webp" alt="Escena 3D de una barra de navegador con las letras WWW y una lupa amarilla encima" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">Búsqueda web</span>
+                  <span class="pieza__uso">Buscadores internos, venta de dominios y todo lo que hable de indexación.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 33 KB</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/h3ky1t71yqr3z5f/escena-3d-vpn-segura-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/vpn-segura.webp" alt="Escena 3D de una nube azul con la etiqueta VPN y un escudo verde de verificación" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">VPN segura</span>
+                  <span class="pieza__uso">Seguridad, privacidad, certificados SSL y páginas de confianza.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 43 KB</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/lhvh05jar6ozuus/escena-3d-promocion-web-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/promocion-web.webp" alt="Escena 3D de una ventana con un bloque de anuncios verde y un megáfono rojo delante" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">Promoción con anuncios</span>
+                  <span class="pieza__uso">Campañas de publicidad, lanzamientos y secciones de novedades.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 36 KB</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/egvaaww6jgstrsp/escena-3d-historial-web-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/historial-web.webp" alt="Escena 3D de una ventana con una lista de elementos y un reloj de historial dorado" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">Historial de actividad</span>
+                  <span class="pieza__uso">Registros de actividad, control de versiones y páginas de seguimiento.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 32 KB</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="pieza" href="https://www.mediafire.com/file/5ovf5o2qz3wdpeh/escena-3d-optimizacion-web-lienzo.zip/file" target="_blank" rel="noopener">
+                <img src="/assets/escenas-3d/desarrollo-web/optimizacion-web.webp" alt="Escena 3D de engranajes blancos con una etiqueta WEB amarilla y arcos rojos alrededor" width="960" height="640" loading="lazy" />
+                <span class="pieza__cuerpo">
+                  <span class="pieza__nombre">Optimización web</span>
+                  <span class="pieza__uso">Mantenimiento, servicios técnicos y planes de optimización.</span>
+                  <span class="pieza__bajar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Descargar &middot; ZIP 31 KB</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <p class="muestra-pie">
+            Las descargas est&aacute;n alojadas en MediaFire. Son ZIP normales: al abrirlos
+            encontrar&aacute;s el archivo <code>.spline</code>, la portada en WebP y un
+            <code>LEEME.txt</code> en espa&ntilde;ol con los pasos para abrirlo.
+          </p>
+
+          <h2 id="por-que-separadas">Por qu&eacute; cada pieza va en su propio archivo</h2>
+          <p>
+            Porque separar ocho objetos a mano es exactamente el tipo de tarea que nadie quiere
+            hacer dos veces. En el editor implica desplegar el &aacute;rbol de capas, identificar
+            qu&eacute; grupo corresponde a qu&eacute; objeto &mdash;los nombres originales vienen
+            en ingl&eacute;s y no siempre son obvios&mdash;, borrar siete grupos con cuidado de no
+            tocar la c&aacute;mara ni la luz, y guardar. Multiplicado por ocho, si quieres tenerlos
+            todos sueltos.
+          </p>
+          <p>
+            Lo hice una vez, por c&oacute;digo, y comprob&eacute; archivo por archivo que el
+            resultado es <strong>id&eacute;ntico al original</strong>: misma geometr&iacute;a,
+            mismos materiales, misma luz, misma c&aacute;mara y la misma animaci&oacute;n flotante.
+            No hay reexportaci&oacute;n ni p&eacute;rdida por el camino; es el mismo objeto, solo
+            que sin los otros siete al lado. Abres el archivo, pulsas Play y ya se est&aacute;
+            moviendo.
+          </p>
+          <p>
+            <strong>Un detalle honesto sobre la posici&oacute;n:</strong> cada objeto conserva las
+            coordenadas que ten&iacute;a dentro del conjunto, as&iacute; que al abrir un archivo
+            suelto puede aparecer desplazado del centro en lugar de justo en medio. Se arregla en
+            dos segundos &mdash;selecci&oacute;nalo y pon su <em>Position</em> X e Y en 0, o mueve
+            la c&aacute;mara a tu gusto&mdash;, pero prefiero avis&aacute;rtelo aqu&iacute; a que
+            lo descubras t&uacute;.
+          </p>
+
+          <h2 id="descargar">Descarga el pack completo</h2>
+          <p>
+            Si prefieres tenerlo todo de una vez, este ZIP trae <strong>las ocho escenas
+            sueltas m&aacute;s la escena completa con los ocho objetos juntos</strong> &mdash;
+            nueve archivos <code>.spline</code> en total&mdash;, la portada del conjunto y el
+            <code>LEEME.txt</code>. Pesa 204 KB: menos que una foto del m&oacute;vil. La descarga
+            es directa y no pide registro ni correo.
+          </p>
+          <p style="margin-top: 1.4em;">
+            <a class="btn btn--primary" href="https://www.mediafire.com/file/opwiqcexlc8n0ke/escenas-3d-desarrollo-web-lienzo.zip/file" target="_blank" rel="noopener">Descargar las 8 escenas + el conjunto (ZIP &middot; 204 KB)</a>
+          </p>
+          <p>
+            Si este pack te sirvi&oacute;, mira tambi&eacute;n las
+            <a href="/blog/escenas-3d-gratis-para-web-spline/">5 escenas 3D del primer pack</a> y
+            el resto de <a href="/recursos/">recursos gratuitos</a> &mdash; publicamos uno nuevo
+            cada semana.
+          </p>
+
+          <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+          <!-- AdSense: pegar aqu&iacute; el bloque responsive cuando la cuenta est&eacute; aprobada -->
+
+          <h2 id="que-es-spline">Qu&eacute; es Spline y por qu&eacute; importa el formato</h2>
+          <p>
+            <a href="https://spline.design" target="_blank" rel="noopener">Spline</a> es un editor
+            3D que funciona en el navegador &mdash;tambi&eacute;n tiene aplicaci&oacute;n de
+            escritorio&mdash; y tiene plan gratuito. Un archivo <code>.spline</code> es su archivo
+            de <strong>proyecto</strong>: guarda la escena completa (objetos, materiales, luces,
+            c&aacute;mara y animaciones), no una imagen del resultado. La comparaci&oacute;n
+            m&aacute;s justa es un archivo de Figma frente a una captura de pantalla del
+            dise&ntilde;o.
+          </p>
+          <p>
+            Ah&iacute; est&aacute; la diferencia con bajarse un PNG. Un render es la fotograf&iacute;a
+            de un set que ya se desmont&oacute;: si el cliente quiere ese mismo objeto en su verde
+            corporativo, te toca enmascarar y rezar para que las sombras no te delaten. Con la
+            escena cambias el material y el resto responde solo. El encuadre tampoco viene
+            decidido: mueves la c&aacute;mara y exportas otra vez, en vertical para una historia o
+            en plano cerrado para una miniatura. Y la animaci&oacute;n la ajustas, la ralentizas o
+            la quitas &mdash; un GIF se mueve como se mueve, y punto.
+          </p>
+
+          <h2 id="publicar">De archivo a tu web en cuatro pasos</h2>
+          <ol>
+            <li>Abre el editor en <a href="https://spline.design" target="_blank" rel="noopener">spline.design</a> y arrastra el archivo <code>.spline</code> (o usa Import &rarr; Spline).</li>
+            <li>Edita lo que necesites: colores, materiales, textos, c&aacute;mara, animaciones.</li>
+            <li>Pulsa <strong>Play</strong> para comprobar c&oacute;mo se ve en movimiento.</li>
+            <li>Ve a <strong>Export &rarr; Web</strong>: obtienes un enlace p&uacute;blico o un c&oacute;digo para incrustar la escena <em>interactiva</em> en tu p&aacute;gina.</li>
+          </ol>
+          <p>
+            Un aviso que sale de haber publicado estas escenas en este mismo sitio: en
+            <strong>Export &rarr; Play Settings</strong> hay un ajuste de <em>Renderer</em> que por
+            defecto puede venir en <em>WebGPU</em>. Cambialo a <strong>WebGL 2</strong> antes de
+            publicar. Con WebGPU la escena funciona en tu navegador pero le sale un mensaje de
+            error a quien no lo tenga, y como en el tuyo se ve bien, no te enteras. Nos pas&oacute;
+            con dos escenas del pack anterior.
+          </p>
+
+          <h2 id="produccion">Antes de ponerla en producci&oacute;n</h2>
+          <p>
+            Una escena 3D en vivo no es una imagen: <strong>se dibuja en tiempo real en el equipo
+            de quien visita tu p&aacute;gina</strong>. Tres costumbres que ahorran sustos:
+          </p>
+          <ul>
+            <li>
+              <strong>Una escena por p&aacute;gina.</strong> Como pieza protagonista de una
+              cabecera funciona de maravilla; tres compitiendo en la misma pantalla, no. Con
+              archivos sueltos la tentaci&oacute;n de poner cuatro es real &mdash; resiste.
+            </li>
+            <li>
+              <strong>Prueba en un m&oacute;vil de verdad</strong>, no solo en el modo responsive
+              del navegador. Y si pones un titular encima de la escena, ajusta el fondo o las luces
+              hasta que el texto se lea sin esfuerzo.
+            </li>
+            <li>
+              <strong>Guarda el archivo original como maestro.</strong> No lo sobrescribas con la
+              versi&oacute;n de un proyecto concreto: duplica y edita la copia. Y si una
+              p&aacute;gina no puede permitirse el 3D en vivo, el plan B es exportar la misma
+              escena como video o imagen &mdash; nadie pierde.
+            </li>
+          </ul>
+
+          <h2 id="licencia">Licencia y uso</h2>
+
+          <h3>Sobre este pack</h3>
+          <p>
+            Conviene decir con claridad qu&eacute; parte de este pack es trabajo m&iacute;o. Los
+            modelos 3D no lo son: no reivindico su autor&iacute;a ni la presento como propia. Lo
+            m&iacute;o es todo lo que hay alrededor &mdash;la divisi&oacute;n de la escena en ocho
+            archivos independientes y la verificaci&oacute;n de que cada uno conserva intacta su
+            geometr&iacute;a, sus materiales, su luz y su animaci&oacute;n; la traducci&oacute;n de
+            los nombres al espa&ntilde;ol; el recorte de las ocho portadas; la organizaci&oacute;n
+            de los nueve ZIP con su <code>LEEME.txt</code>; y la escena completa publicada aqu&iacute;
+            para que puedas verla antes de descargar nada&mdash;. Eso es lo que convierte un archivo
+            en bloque en algo que se puede usar pieza por pieza.
+          </p>
+
+          <h3>C&oacute;mo usarlo</h3>
+          <p>
+            Por mi parte la descarga es directa: no te pido registro, ni el correo, ni
+            atribuci&oacute;n. Lo que exija la licencia de cada archivo lo fija su autor, no yo. Si
+            el pack te sirve y quieres compartirlo, enlaza este art&iacute;culo en lugar de subir
+            los ZIP a otro sitio: as&iacute; quien lo reciba tendr&aacute; siempre la versi&oacute;n
+            actualizada.
+          </p>
+          <p>
+            Y una advertencia que prefiero dar antes que callar: no puedo conceder derechos en
+            nombre de terceros. Antes de que una escena acabe en un encargo comercial &mdash;la
+            cabecera de la landing de un cliente, la secci&oacute;n de producto de una tienda o una
+            campa&ntilde;a de pago&mdash;, comprueba que las condiciones de ese archivo concreto
+            encajan con ese uso. Es un minuto de revisi&oacute;n y evita el disgusto.
+          </p>
+
+          <h3>Si crees que algo no deber&iacute;a estar aqu&iacute;</h3>
+          <p>
+            Si eres el autor de alguna de estas escenas, o representas a quien lo es, y no quieres
+            que se distribuya desde aqu&iacute;, escr&iacute;beme a
+            <a href="mailto:agpublicista2021@gmail.com">agpublicista2021@gmail.com</a> indicando
+            este art&iacute;culo y el archivo concreto. Retiro el enlace mientras reviso el caso, en
+            un plazo de 48 a 72 horas: primero se retira, despu&eacute;s hablamos si hace falta. El
+            procedimiento completo est&aacute; en el
+            <a href="/aviso-legal/#aviso-y-retirada">aviso legal</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Puedo bajarme solo una de las ocho escenas?</h3></summary>
+            <p>Sí, y esa es justo la idea de este pack. Cada uno de los ocho objetos va en su propio archivo .spline, con su ZIP y su enlace de descarga independiente. Si solo necesitas el velocímetro no tienes que bajarte los otros siete ni entrar al editor a borrarlos uno a uno. También está el ZIP con las ocho juntas más la escena completa, por si prefieres tenerlo todo de una vez.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué es un archivo .spline y con qué se abre?</h3></summary>
+            <p>Es el archivo de proyecto del editor 3D Spline (spline.design): guarda la escena completa —objetos, materiales, luces, cámara y animaciones—, no una imagen renderizada. Se abre arrastrándolo al editor de Spline, que funciona en el navegador o con su aplicación de escritorio y tiene plan gratuito.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Las escenas sueltas conservan la animación?</h3></summary>
+            <p>Sí. Cada archivo individual mantiene su cámara, su luz y el movimiento flotante que tenía dentro del conjunto: lo abres, pulsas Play y ya se mueve solo, sin reconstruir nada. Lo único que cambia es que el objeto conserva la posición que ocupaba en la escena completa, así que puede aparecer descentrado al abrirlo; se arregla poniendo su Position X e Y en 0.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo publico la escena en mi web o la llevo a Blender?</h3></summary>
+            <p>Las dos cosas salen del menú de exportación de Spline. Con Export → Web obtienes un enlace público o un código para incrustar la escena interactiva en tu página. Y con Export → 3D Formats la exportas como GLTF, GLB, OBJ, STL o USDZ para seguir trabajándola en otro software. También puedes sacarla como imagen (JPG/PNG) o video (MP4/GIF/WebM).</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Con qué condiciones puedo usarlas?</h3></summary>
+            <p>La descarga es libre y no pide registro ni correo. Para el uso, la referencia es la sección «Licencia y uso» de este mismo artículo: las condiciones de cada archivo las fija quien lo creó, así que conviene comprobarlas antes de que una escena acabe en un encargo comercial. Y si quieres compartir el pack, enlaza este artículo en lugar de volver a subir el ZIP a otro sitio.</p>
+          </details>
+
+          <div class="compartir reveal" aria-label="Compartir este art&iacute;culo">
+            <span class="compartir__titulo">Compartir</span>
+            <a href="https://wa.me/?text=8%20escenas%203D%20de%20desarrollo%20web%2C%20gratis%20y%20descargables%20una%20por%20una%20https%3A%2F%2Fagpublicista.com%2Fblog%2Fescenas-3d-desarrollo-web-spline%2F" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"/></svg></a>
+            <a href="https://t.me/share/url?url=https%3A%2F%2Fagpublicista.com%2Fblog%2Fescenas-3d-desarrollo-web-spline%2F&amp;text=8%20escenas%203D%20de%20desarrollo%20web%2C%20gratis%20y%20descargables%20una%20por%20una" target="_blank" rel="noopener" aria-label="Compartir en Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"/></svg></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fagpublicista.com%2Fblog%2Fescenas-3d-desarrollo-web-spline%2F" target="_blank" rel="noopener" aria-label="Compartir en Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"/></svg></a>
+            <button type="button" data-compartir-copiar aria-label="Copiar el enlace" title="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
+            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fagpublicista.com%2Fblog%2Fescenas-3d-desarrollo-web-spline%2F&amp;text=8%20escenas%203D%20de%20desarrollo%20web%2C%20gratis%20y%20descargables%20una%20por%20una" target="_blank" rel="noopener" aria-label="Compartir en X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
+          </div>
+
+          <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+          <!-- AdSense: pegar aqu&iacute; el bloque responsive cuando la cuenta est&eacute; aprobada -->
+        </div>
+      </article>
+
+      <!-- Sigue aprendiendo -->
+      <section class="section shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue aprendiendo</p>
+            <h2>M&aacute;s recursos para tu pr&oacute;ximo proyecto</h2>
+            <p>Packs y herramientas que combinan de maravilla con estas escenas.</p>
+          </div>
+          <a class="more" href="/recursos/">Ver todos los recursos &rarr;</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/blog/escenas-3d-gratis-para-web-spline/">
+            <span class="card__tag">Escenas 3D</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <path d="M100 20l30 17v34l-30 17-30-17V37z" fill="none" stroke="#8b7bff" stroke-width="3" stroke-linejoin="round" />
+                <path d="M100 20v34l30 17M100 54 70 71" fill="none" stroke="#8b7bff" stroke-width="3" stroke-linejoin="round" opacity="0.6" />
+                <circle cx="100" cy="54" r="4" fill="#35d6c8" />
+                <path d="M40 30v30M25 45h30" fill="none" stroke="#ffb454" stroke-width="3" stroke-linecap="round" />
+                <circle cx="165" cy="45" r="12" fill="none" stroke="#ff7a68" stroke-width="3" />
+              </svg>
+            </div>
+            <h3>5 escenas 3D animadas</h3>
+            <p>El primer pack: gr&aacute;ficas, contrataci&oacute;n, meg&aacute;fono, mapa y Halloween.</p>
+            <span class="card__meta">Pack .spline &middot; Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/blog/iconos-de-realidad-virtual-gratis-svg/">
+            <span class="card__tag">Iconos</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <g fill="none" stroke="#8b7bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M38 32h44a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8H70c-2-5-6-8-10-8s-8 3-10 8H38a8 8 0 0 1-8-8V40a8 8 0 0 1 8-8z" />
+                  <path d="M30 44h-6M90 44h6" />
+                </g>
+                <circle cx="48" cy="45" r="5" fill="#8b7bff" opacity="0.55" />
+                <circle cx="72" cy="45" r="5" fill="#8b7bff" opacity="0.55" />
+                <g fill="none" stroke="#35d6c8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M118 32l12-7 12 7-12 7z" />
+                  <path d="M118 32v10l12 7 12-7V32M130 39v10" />
+                  <path d="M112 64h36" />
+                </g>
+                <path d="M172 32a16 16 0 1 1-11 27" fill="none" stroke="#ffb454" stroke-width="3" stroke-linecap="round" />
+                <path d="M158 52l3 8 8-3" fill="none" stroke="#ffb454" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="172" cy="47" r="3" fill="#ff7a68" />
+              </svg>
+            </div>
+            <h3>50 iconos de realidad virtual</h3>
+            <p>Visores, hologramas y AR en SVG y PNG, para acompa&ntilde;ar tus escenas 3D.</p>
+            <span class="card__meta">Pack SVG + PNG &middot; Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 180ms" href="/herramientas/paletas/">
+            <span class="card__tag">Color</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="30" y="25" width="28" height="40" rx="8" fill="#8b7bff" />
+                <rect x="64" y="25" width="28" height="40" rx="8" fill="#6e5df2" />
+                <rect x="98" y="25" width="28" height="40" rx="8" fill="#35d6c8" />
+                <rect x="132" y="25" width="28" height="40" rx="8" fill="#ffb454" />
+              </svg>
+            </div>
+            <h3>Generador de paletas</h3>
+            <p>Elige los colores con los que vas a recolorear las escenas, con contraste WCAG.</p>
+            <span class="card__meta">Herramienta interactiva &middot; Gratis</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA YouTube -->
+      <section class="section shell">
+        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem);">
+          <p class="eyebrow" style="justify-content: center;">Lienzo en YouTube</p>
+          <h2 style="max-width: 22ch; margin-inline: auto;">Un pack nuevo cada semana</h2>
+          <p style="max-width: 52ch; margin-inline: auto; color: var(--muted);">
+            Iconos, sonidos, escenas 3D, plantillas de After Effects y procesos creativos
+            reales. Suscr&iacute;bete y no te pierdas el pr&oacute;ximo recurso gratuito.
+          </p>
+          <div class="hero__cta" style="justify-content: center;">
+            <a class="btn btn--primary" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg?sub_confirmation=1" target="_blank" rel="noopener">Suscribirme al canal</a>
+            <a class="btn btn--ghost" href="/recursos/">Ver todos los recursos</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026082602" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026082602" defer></script>
+  </body>
+</html>
