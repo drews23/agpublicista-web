@@ -902,15 +902,31 @@ html:not(.js) .btn-vivo { display: none; }
 .marco-vivo.esta-vivo {
   position: relative;
   aspect-ratio: 3 / 2;
+  overflow: hidden;
 }
 .marco-vivo.esta-vivo img { display: none; }
+
+/* El iframe se monta SIEMPRE a 1200x800 y se reduce con transform:scale.
+
+   Motivo (medido el 26 ago 2026): las escenas de Spline usan cámara
+   ORTOGRÁFICA, donde 1 unidad de escena = 1 píxel del contenedor. Es decir,
+   un contenedor pequeño no encoge la escena: la RECORTA. Medido en las dos
+   escenas publicadas: a 1280 px de ancho el contenido ocupaba el 73 %, y a
+   420 px el marco salía COMPLETAMENTE VACÍO. En móvil no se vería nada.
+
+   Con tamaño fijo + escala, el encuadre es idéntico en cualquier ancho y no
+   depende de cómo esté authorizada cada escena. La escala la calcula site.js
+   (--escala-viva) y se recalcula al cambiar el tamaño de la ventana. */
 .marco-vivo iframe {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  width: 1200px;
+  height: 800px;
   border: 0;
   display: block;
+  transform-origin: top left;
+  transform: scale(var(--escala-viva, 1));
 }
 .marco-vivo .pista-vivo {
   position: absolute;

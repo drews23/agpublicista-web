@@ -336,8 +336,26 @@
         marco.append(pista);
       });
 
+      /* El iframe mide 1200x800 fijos (ver site.css) y se reduce con
+         transform:scale hasta el ancho real del marco. Las escenas de Spline
+         usan cámara ortográfica: un contenedor pequeño no las encoge, las
+         recorta — a 420 px de ancho el marco salía vacío. Escalando desde un
+         tamaño fijo, el encuadre es el mismo en móvil y en escritorio. */
+      const ANCHO_ESCENA = 1200;
+      const ajustarEscala = () => {
+        const ancho = marco.clientWidth;
+        if (ancho) marco.style.setProperty("--escala-viva", (ancho / ANCHO_ESCENA).toFixed(4));
+      };
+
       marco.classList.add("esta-vivo");
+      ajustarEscala();
       marco.append(iframe);
+
+      if ("ResizeObserver" in window) {
+        new ResizeObserver(ajustarEscala).observe(marco);
+      } else {
+        window.addEventListener("resize", ajustarEscala);
+      }
     });
   });
 
