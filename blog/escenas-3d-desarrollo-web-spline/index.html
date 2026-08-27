@@ -37,7 +37,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/site.css?v=2026082705" />
+    <link rel="stylesheet" href="/css/site.css?v=2026082706" />
 
     <script type="application/ld+json">
     {
@@ -379,6 +379,76 @@
             con dos escenas del pack anterior.
           </p>
 
+          <h2 id="sin-visor">Ll&eacute;vala a tu web sin el visor de Spline</h2>
+          <p>
+            Los cuatro pasos de arriba te dejan un <code>&lt;iframe&gt;</code> de
+            <code>my.spline.design</code>. Funciona, pero trae tres cosas que quiz&aacute; no
+            quieres: una petici&oacute;n a un servidor ajeno en cada visita, la marca
+            &laquo;Built with Spline&raquo; sobre tu escena, y la dependencia de que ese enlace
+            siga vivo. Se puede evitar: la escena la sirves t&uacute;, y de Spline solo viene el
+            programa que la dibuja.
+          </p>
+          <p>
+            <strong>Esto no es teor&iacute;a.</strong> Es lo que mueve la escena 3D de la portada
+            de este mismo sitio: sin iframe, sin marca de agua y con el archivo alojado en
+            nuestro servidor. Los pasos:
+          </p>
+          <ol>
+            <li>
+              Publica la escena normal, con <strong>Export &rarr; Public URL</strong>. Necesitas
+              este paso porque el editor prepara el archivo para la web; el
+              <code>.spline</code> tal cual sale del ZIP a&uacute;n no sirve.
+            </li>
+            <li>
+              Abre esa URL p&uacute;blica y mira el c&oacute;digo fuente de la p&aacute;gina
+              (<code>Ctrl</code>+<code>U</code>). Busca <code>app.start([</code>: detr&aacute;s hay una
+              larga lista de n&uacute;meros. <strong>Esa lista es tu escena</strong> &mdash; Spline
+              no descarga ning&uacute;n archivo aparte, la lleva incrustada ah&iacute;.
+            </li>
+            <li>
+              Gu&aacute;rdala como archivo binario en tu servidor. En la consola del navegador,
+              sobre esa misma p&aacute;gina:
+              <pre><code>const bytes = new Uint8Array(/* pega aqu&iacute; la lista de n&uacute;meros */);
+const a = document.createElement('a');
+a.href = URL.createObjectURL(new Blob([bytes]));
+a.download = 'escena.spline';
+a.click();</code></pre>
+            </li>
+            <li>
+              Y en tu p&aacute;gina, un <code>&lt;canvas&gt;</code> y once l&iacute;neas:
+              <pre><code>&lt;div style="position:relative;aspect-ratio:16/9"&gt;
+  &lt;canvas id="escena" style="width:100%;height:100%;display:block"&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+
+&lt;script type="module"&gt;
+  const { Application } = await import(
+    'https://cdn.spline.design/@splinetool/runtime@2.0.8/build/runtime.js'
+  );
+  const app = new Application(document.getElementById('escena'), {
+    htmlContentMode: 'inline'
+  });
+  const datos = await fetch('/ruta/a/tu/escena.spline');
+  await app.start(new Uint8Array(await datos.arrayBuffer()));
+&lt;/script&gt;</code></pre>
+            </li>
+          </ol>
+          <p>
+            Tres detalles que descubrimos por las malas y te ahorran la tarde. El runtime
+            <strong>reencaja la escena</strong> en el tama&ntilde;o que tenga tu contenedor, as&iacute;
+            que aqu&iacute; no sufres el recorte de la c&aacute;mara ortogr&aacute;fica que s&iacute;
+            tiene el iframe. Si la escena se ve cortada arriba y abajo es que est&aacute;
+            <em>compuesta</em> en otra proporci&oacute;n: c&aacute;mbiale la proporci&oacute;n al
+            contenedor o baja el zoom de la c&aacute;mara en el editor. Y si al girar la rueda
+            del rat&oacute;n sobre la escena la p&aacute;gina no baja, es que los controles de
+            &oacute;rbita se est&aacute;n quedando el scroll: desactiva <em>Zoom</em> en
+            <strong>Export &rarr; Play Settings</strong> antes de publicar.
+          </p>
+          <p>
+            Una nota justa: el programa que dibuja la escena sigue siendo de Spline y se
+            descarga de su CDN &mdash; esto te libera de su visor, no de su tecnolog&iacute;a. Si tu
+            plan te pide atribuci&oacute;n visible, d&eacute;jala puesta.
+          </p>
+
           <h2 id="produccion">Antes de ponerla en producci&oacute;n</h2>
           <p>
             Una escena 3D en vivo no es una imagen: <strong>se dibuja en tiempo real en el equipo
@@ -610,7 +680,7 @@
       </div>
     </footer>
 
-    <script src="/js/site.js?v=2026082705" defer></script>
-    <script src="/js/mi-lienzo.js?v=2026082705" defer></script>
+    <script src="/js/site.js?v=2026082706" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026082706" defer></script>
   </body>
 </html>
