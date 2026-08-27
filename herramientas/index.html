@@ -38,7 +38,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/site.css?v=2026082602" />
+    <link rel="stylesheet" href="/css/site.css?v=2026082705" />
 
     <script type="application/ld+json">
     {
@@ -136,14 +136,39 @@
     </header>
 
     <main>
-      <!-- Cabecera de página -->
-      <section class="page-head shell">
-        <p class="eyebrow reveal">Herramientas</p>
-        <h1 class="reveal" style="--reveal-delay: 80ms">Herramientas de diseño gratis</h1>
-        <p class="lede reveal" style="--reveal-delay: 160ms">
-          Generadores SVG online, sin registro y sin descargas. Configura, copia el código
-          y pégalo en tu web: el resultado es tuyo, sin archivos que alojar ni marcas de agua.
-        </p>
+      <!-- Cabecera de página: hereda el contexto visual del antiguo hero de
+           inicio — la pluma DISEÑO/CÓDIGO y la banda ondulada — que aquí habla
+           del oficio exacto de esta página. El h1 real queda para lectores de
+           pantalla y buscadores, como hacía la portada. -->
+      <section class="hero">
+        <div class="shell">
+          <p class="eyebrow reveal">Herramientas</p>
+          <h1 class="sr-only">Herramientas de diseño gratis</h1>
+          <div class="hero-pluma reveal" style="--reveal-delay: 80ms"
+               data-hero-pluma data-arriba="DISEÑO" data-abajo="CÓDIGO"></div>
+          <p class="lede reveal" style="--reveal-delay: 160ms">
+            Generadores SVG online, sin registro y sin descargas. Configura, copia el código
+            y pégalo en tu web: el resultado es tuyo, sin archivos que alojar ni marcas de agua.
+          </p>
+        </div>
+
+        <div
+          class="wave-band"
+          data-text-path
+          data-text="DISEÑO · CÓDIGO · BRANDING · SVG · MARKETING"
+          data-separator="✦"
+          data-gap="3"
+          data-speed="14"
+          data-reversed="false"
+          data-wave-frequency="2"
+          data-wave-height="46"
+          data-font-size="26"
+          data-letter-spacing="4"
+          data-font-family="Fraunces, Georgia, serif"
+          data-font-style="italic"
+          data-font-weight="600"
+          aria-hidden="true"
+        ></div>
       </section>
 
       <!-- Grid de herramientas -->
@@ -347,7 +372,9 @@
       </div>
     </footer>
 
-    <script src="/js/site.js?v=2026082602" defer></script>
-    <script src="/js/mi-lienzo.js?v=2026082602" defer></script>
+    <script src="/js/text-path.js?v=2026082705" defer></script>
+    <script src="/js/hero-pluma.js?v=2026082705" defer></script>
+    <script src="/js/site.js?v=2026082705" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026082705" defer></script>
   </body>
 </html>

@@ -928,6 +928,44 @@ html:not(.js) .btn-vivo { display: none; }
   transform-origin: top left;
   transform: scale(var(--escala-viva, 1));
 }
+/* Escena 3D del hero: canvas propio, sin iframe (ver js/escena-3d.js).
+   La escena se publico SIN fondo, asi que se apoya sobre la tinta del sitio:
+   nada de borde ni tarjeta — es parte del lienzo de la pagina, no una
+   ventana dentro de ella. */
+.hero-escena {
+  margin: clamp(1.4rem, 3.5vw, 2.4rem) 0 clamp(1.6rem, 3.5vw, 2.6rem);
+}
+.escena-3d__marco {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+.escena-3d__portada,
+.escena-3d__lienzo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.escena-3d__portada {
+  object-fit: contain;
+  transition: opacity 600ms var(--ease);
+}
+.escena-3d__lienzo {
+  opacity: 0;
+  transition: opacity 600ms var(--ease);
+  /* el runtime encaja la escena en el lienzo; los objetos se arrastran */
+  touch-action: pan-y;
+}
+/* al cargar la escena, la portada cede el sitio con un fundido */
+.escena-3d.esta-viva .escena-3d__portada { opacity: 0; }
+.escena-3d.esta-viva .escena-3d__lienzo { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .escena-3d__portada,
+  .escena-3d__lienzo { transition: none; }
+}
+
 .marco-vivo .pista-vivo {
   position: absolute;
   left: 50%;

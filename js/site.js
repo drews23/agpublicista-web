@@ -310,9 +310,10 @@
     });
   });
 
-  /* Previsualización en vivo de una escena 3D: monta el iframe de Spline sólo
-     al pulsar. Antes de eso la tarjeta es sólo su portada, así que la página
-     nunca arranca con varios contextos WebGL a la vez. */
+  /* Previsualización en vivo de una escena 3D (patrón del blog): monta el
+     iframe de Spline sólo al pulsar. Antes de eso la tarjeta es sólo su
+     portada, así que la página nunca arranca con varios contextos WebGL a la
+     vez. El hero de inicio usa otro montador, sin iframe: ver escena-3d.js. */
   document.querySelectorAll("[data-escena-viva]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const url = btn.getAttribute("data-escena-viva");

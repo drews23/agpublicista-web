@@ -38,7 +38,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/site.css?v=2026082602" />
+    <link rel="stylesheet" href="/css/site.css?v=2026082705" />
 
     <script type="application/ld+json">
     {
@@ -103,40 +103,35 @@
         <div class="shell">
           <p class="eyebrow reveal">Diseño · Código · Dirección de arte</p>
 
-          <!-- La curva parte el titular: arriba "DISEÑO", debajo "CON CÓDIGO".
-               El h1 real queda para lectores de pantalla y buscadores. -->
-          <h1 class="sr-only">Diseño con código: herramientas creativas gratis</h1>
-          <div class="hero-pluma reveal" style="--reveal-delay: 80ms"
-               data-hero-pluma data-arriba="DISEÑO" data-abajo="CÓDIGO"></div>
+          <h1 class="reveal" style="--reveal-delay: 80ms">
+            Diseño <span class="fancy">con código</span><span class="sr-only">: herramientas creativas gratis</span>
+          </h1>
 
-          <p class="lede reveal" style="--reveal-delay: 160ms">
+          <!-- LA ESCENA ES EL HERO: parte visual y estructural de la portada.
+               Sin iframe y sin visor de terceros — el archivo .spline lo
+               servimos nosotros y el runtime lo monta sobre un <canvas>
+               transparente, así que la escena se apoya en el fondo del sitio.
+               La imagen (WebP con alfa, 32 KB) pinta al instante y es el
+               respaldo permanente con ahorro de datos, movimiento reducido o
+               sin WebGL. Ver js/escena-3d.js. -->
+          <figure class="hero-escena escena-3d reveal" style="--reveal-delay: 160ms"
+                  data-escena-3d="/assets/escenas-3d/hero-diseno-web.spline">
+            <div class="escena-3d__marco">
+              <img class="escena-3d__portada" src="/assets/escenas-3d/hero-diseno-web.webp" alt="Escena 3D de diseño web: ventanas de navegador, una gráfica de anillo y un cursor flotando en los colores de Lienzo" width="1920" height="1080" fetchpriority="high" />
+            </div>
+          </figure>
+
+          <p class="lede reveal" style="--reveal-delay: 240ms">
             Lienzo es tu caja de herramientas en español: generadores SVG y CSS listos para
             copiar y pegar, plantillas gratuitas, guías de diseño web y recursos de marketing
             que convierten ideas en resultados.
           </p>
-          <div class="hero__cta reveal" style="--reveal-delay: 240ms">
+          <div class="hero__cta reveal" style="--reveal-delay: 320ms">
             <a class="btn btn--primary" href="/herramientas/">Explorar herramientas</a>
             <a class="btn btn--ghost" href="/codigo-web/">Generadores CSS</a>
           </div>
-        </div>
 
-        <div
-          class="wave-band"
-          data-text-path
-          data-text="DISEÑO · CÓDIGO · BRANDING · SVG · MARKETING"
-          data-separator="✦"
-          data-gap="3"
-          data-speed="14"
-          data-reversed="false"
-          data-wave-frequency="2"
-          data-wave-height="46"
-          data-font-size="26"
-          data-letter-spacing="4"
-          data-font-family="Fraunces, Georgia, serif"
-          data-font-style="italic"
-          data-font-weight="600"
-          aria-hidden="true"
-        ></div>
+        </div>
       </section>
 
       <!-- Herramientas -->
@@ -573,9 +568,8 @@
       </div>
     </footer>
 
-    <script src="/js/text-path.js?v=2026082602" defer></script>
-    <script src="/js/hero-pluma.js?v=2026082602" defer></script>
-    <script src="/js/site.js?v=2026082602" defer></script>
-    <script src="/js/mi-lienzo.js?v=2026082602" defer></script>
+    <script src="/js/escena-3d.js?v=2026082705" defer></script>
+    <script src="/js/site.js?v=2026082705" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026082705" defer></script>
   </body>
 </html>
