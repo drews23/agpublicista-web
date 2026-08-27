@@ -74,7 +74,11 @@ const procesarDir = (dirEntrada, dirSalida, esSvg) => {
 };
 
 for (const v of variantes) {
-  procesarDir(join(origen, v.de), join(raizSalida, v.a), v.de.toUpperCase().startsWith("SVG"));
+  // El tipo (SVG/PNG) puede ir primero (SVG/Light) o al final (Flat/SVG)
+  // segun como venga organizado el pack; se busca como segmento completo,
+  // no solo al inicio de la ruta.
+  const esSvg = v.de.split(/[\\/]/).some((seg) => seg.toUpperCase() === "SVG");
+  procesarDir(join(origen, v.de), join(raizSalida, v.a), esSvg);
 }
 
 writeFileSync(join(raizSalida, "LEEME.txt"), leeme.join("\r\n"), "utf8");
