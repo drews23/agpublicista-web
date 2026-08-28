@@ -1725,5 +1725,16 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
 
 .diferir-render {
   content-visibility: auto;
-  contain-intrinsic-size: auto none auto var(--alto-estimado, 900px);
+  contain-intrinsic-size: auto none auto var(--alto-escritorio, 900px);
+}
+
+/* Un solo alto estimado no sirve para los dos anchos: la misma seccion mide
+   2-3 veces mas en movil (una columna) que en escritorio (tres). Si se reserva
+   el alto movil en escritorio, al renderizar la seccion la pagina se encoge de
+   golpe y el pie salta hacia arriba: /codigo-web/degradados/ llego a CLS 0,691
+   asi. Por eso cada seccion declara sus dos medidas. */
+@media (max-width: 700px) {
+  .diferir-render {
+    contain-intrinsic-size: auto none auto var(--alto-movil, var(--alto-escritorio, 900px));
+  }
 }
