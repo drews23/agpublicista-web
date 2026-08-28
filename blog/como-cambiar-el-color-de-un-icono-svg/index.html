@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cómo cambiar el color de un icono SVG: 3 métodos</title>
+    <meta
+      name="description"
+      content="Cambia el color de cualquier icono SVG de tres formas: editando el atributo fill, con currentColor para que herede el color del texto, o como máscara CSS."
+    />
+    <link rel="canonical" href="https://agpublicista.com/blog/como-cambiar-el-color-de-un-icono-svg/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Cómo cambiar el color de un icono SVG: 3 métodos" />
+    <meta property="og:description" content="Editar el atributo fill, usar currentColor para que el icono herede el color del texto, o pintarlo desde el CSS como máscara. Con el código de cada método." />
+    <meta property="og:url" content="https://agpublicista.com/blog/como-cambiar-el-color-de-un-icono-svg/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026082806" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://agpublicista.com/blog/como-cambiar-el-color-de-un-icono-svg/#article",
+          "headline": "Cómo cambiar el color de un icono SVG: 3 métodos",
+          "description": "Cambia el color de cualquier icono SVG de tres formas: editando el atributo fill, con currentColor para que herede el color del texto, o como máscara CSS.",
+          "datePublished": "2026-08-28",
+          "dateModified": "2026-08-28",
+          "inLanguage": "es",
+          "author": { "@type": "Organization", "name": "Lienzo", "url": "https://agpublicista.com/" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lienzo",
+            "url": "https://agpublicista.com/",
+            "logo": { "@type": "ImageObject", "url": "https://agpublicista.com/favicon.svg" }
+          },
+          "mainEntityOfPage": "https://agpublicista.com/blog/como-cambiar-el-color-de-un-icono-svg/"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://agpublicista.com/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Cómo cambiar el color de un icono SVG: 3 métodos", "item": "https://agpublicista.com/blog/como-cambiar-el-color-de-un-icono-svg/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Por qué mi icono SVG se ve negro y no cambia de color?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Suele haber dos causas. La primera es que el archivo no declara ningún relleno: sin un fill, el navegador lo pinta en negro por defecto, y basta con añadir fill=\"currentColor\" a la etiqueta svg. La segunda es que lo has insertado con una etiqueta img: así el SVG se comporta como una imagen cerrada y ni el CSS ni currentColor pueden entrar. Para poder recolorearlo, pégalo en línea dentro del HTML o úsalo como máscara CSS."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo cambiar el color de un SVG sin abrir el archivo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, usándolo como máscara CSS. Declaras el color como background del elemento y aplicas el SVG en la propiedad mask: el navegador pinta el fondo y recorta la silueta del icono. El archivo se queda intacto, y cambias el color de todos los iconos del sitio tocando una sola línea de CSS."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Y si el icono tiene varios colores?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Los iconos de estilo plano traen un color propio en cada forma, así que no responden a currentColor ni a la máscara, que solo sirven para siluetas de un color. Para esos hay que abrir el SVG con un editor de texto y sustituir los valores hexadecimales uno a uno, normalmente en el bloque style del principio del archivo. Si vas a incrustar varios iconos planos en la misma página, insértalos como img en lugar de en línea para que sus clases internas no choquen entre sí."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Sirve esto con iconos de cualquier sitio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, siempre que sean SVG de verdad y no un PNG con la extensión cambiada. Ábrelo con un editor de texto: si ves etiquetas y atributos legibles, es un SVG y los tres métodos funcionan. Ten en cuenta que las condiciones de uso las fija quien creó cada archivo, así que compruébalas antes de llevar un icono ajeno a un encargo comercial."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/" aria-current="page">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <article class="section shell">
+        <div class="prose">
+          <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+            <a href="/">Inicio</a> › <a href="/blog/">Blog</a> › <span>Cambiar el color de un icono SVG</span>
+          </nav>
+
+          <p class="eyebrow reveal">Guía · SVG</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Cómo cambiar el color de un icono SVG: 3 métodos</h1>
+          <p class="article-meta reveal" style="--reveal-delay: 140ms">
+            <time datetime="2026-08-28">28 de agosto de 2026</time> · SVG · 5 min de lectura
+          </p>
+
+          <p class="reveal" style="--reveal-delay: 200ms">
+            Te has descargado un pack de iconos, encaja con lo que necesitabas, pero vienen en un
+            color que no es el tuyo. La buena noticia es que un SVG no es una imagen cerrada como
+            un PNG: <strong>es texto</strong>. Puedes abrirlo con el Bloc de notas y leer las
+            instrucciones de dibujo, incluido el color.
+          </p>
+          <p class="reveal" style="--reveal-delay: 260ms">
+            Eso significa que recolorearlo no requiere Illustrator ni Photoshop. Aquí van los tres
+            métodos que uso, del más directo al más flexible, con el código de cada uno. Al final
+            está lo que hacer cuando el icono tiene varios colores, que es el caso que suele
+            atascar a la gente.
+          </p>
+
+          <h2 id="a-mano">1. Cambiar el color a mano</h2>
+          <p>
+            El más directo, y el que conviene si solo vas a usar el icono en un sitio. Abre el
+            archivo con cualquier editor de texto —el Bloc de notas vale— y busca el atributo
+            <code>fill</code>. Verás un valor hexadecimal como <code>fill="#050000"</code>: ese es
+            el color del dibujo. Sustitúyelo por el tuyo, guarda, y listo.
+          </p>
+          <pre><code>&lt;svg viewBox="0 0 512 512" fill="#8b7bff"&gt;
+  &lt;path d="…" /&gt;
+&lt;/svg&gt;</code></pre>
+          <p>
+            Si el icono no trae ningún <code>fill</code>, el navegador lo pinta en negro por
+            defecto; en ese caso no hay que sustituir nada, sino <em>añadir</em> el atributo a la
+            etiqueta <code>&lt;svg&gt;</code>. Y si no tienes claro qué color poner, el
+            <a href="/herramientas/paletas/">generador de paletas</a> te da armonías completas con
+            su código hexadecimal y la comprobación de contraste, para que el icono siga
+            leyéndose sobre tu fondo.
+          </p>
+
+          <h2 id="current-color">2. Que el icono herede el color del texto</h2>
+          <p>
+            Este es el truco más práctico para una web, y el que más tiempo ahorra a la larga. En
+            lugar de un color fijo, pon la palabra clave <code>currentColor</code> y pega el SVG
+            <strong>en línea</strong> dentro de tu HTML. El icono adoptará automáticamente el
+            color del texto que lo rodea:
+          </p>
+          <pre><code>&lt;p style="color: #8b7bff"&gt;
+  &lt;svg viewBox="0 0 512 512" fill="currentColor" width="24" height="24" aria-hidden="true"&gt;
+    &lt;path d="…" /&gt;
+  &lt;/svg&gt;
+  Descargar
+&lt;/p&gt;</code></pre>
+          <p>
+            La gracia es que funciona solo cuando cambias de contexto. Un icono dentro de un botón
+            azul se vuelve azul; el mismo icono en un aviso rojo se vuelve rojo; y al alternar
+            entre tema claro y oscuro se ajusta sin que escribas una línea más. Es exactamente lo
+            que hacen los iconos de las muestras en los packs de este sitio.
+          </p>
+          <p>
+            La condición es que el SVG esté <strong>pegado en línea</strong> en el HTML. Si lo
+            insertas con <code>&lt;img src="icono.svg"&gt;</code>, el navegador lo trata como una
+            imagen cerrada: ni <code>currentColor</code> ni tu CSS pueden entrar a modificarlo.
+            Esa es la causa número uno de "no me funciona el truco".
+          </p>
+
+          <h2 id="mascara-css">3. Colorear desde el CSS, sin tocar el archivo</h2>
+          <p>
+            Si prefieres dejar el SVG como archivo suelto —más limpio si tienes muchos— y
+            controlar el color desde la hoja de estilos, úsalo como máscara. El navegador pinta el
+            fondo del elemento y recorta la silueta del icono encima:
+          </p>
+          <pre><code>.icono {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: #35d6c8;
+  -webkit-mask: url("iconos/descargar.svg") center / contain no-repeat;
+  mask: url("iconos/descargar.svg") center / contain no-repeat;
+}</code></pre>
+          <p>
+            La ventaja es el mantenimiento: cambias el color de todos los iconos de tu sitio
+            tocando una sola línea, sin volver a abrir un solo archivo. Y como el color es una
+            propiedad CSS normal, puedes animarlo, cambiarlo al pasar el ratón o vincularlo a una
+            variable de tu tema. Si además quieres degradados, sombras o filtros sobre esos
+            iconos, en <a href="/codigo-web/">Código web</a> tienes generadores visuales que te
+            dan el CSS hecho.
+          </p>
+
+          <h2 id="varios-colores">Cuando el icono tiene varios colores</h2>
+          <p>
+            Los tres métodos de arriba dan por hecho que el icono es una silueta de un solo color,
+            que es como vienen los estilos de contorno y sólido. Los iconos de
+            <strong>estilo plano</strong> son otra historia: cada forma trae su propio relleno
+            definido, así que ni <code>currentColor</code> ni la máscara sirven —ambos aplican un
+            color único a todo el dibujo.
+          </p>
+          <p>
+            Para esos, toca abrir el SVG con un editor de texto y sustituir los valores
+            hexadecimales uno a uno. Suelen estar agrupados en un bloque
+            <code>&lt;style&gt;</code> al principio del archivo, lo que hace el cambio más
+            llevadero de lo que parece. Un aviso: si vas a incrustar varios iconos planos en la
+            misma página, insértalos como <code>&lt;img&gt;</code> en vez de en línea, o las
+            clases internas de unos pisarán las de otros y verás colores cruzados.
+          </p>
+
+          <blockquote>
+            Consejo: antes de subir iconos a tu web, pásalos por un optimizador. Los SVG suelen
+            arrastrar metadatos invisibles del programa con el que se dibujaron, y a menudo pesan
+            más que el propio dibujo. El
+            <a href="/herramientas/optimizar-svg/">optimizador de Lienzo</a> se los quita sin que
+            el archivo salga de tu equipo.
+          </blockquote>
+
+          <h2 id="cual-elegir">Cuál de los tres usar</h2>
+          <ul>
+            <li>
+              <strong>Un icono suelto, un color fijo:</strong> edítalo a mano. No merece la pena
+              montar nada más.
+            </li>
+            <li>
+              <strong>Iconos dentro de texto, botones o menús:</strong> <code>currentColor</code>
+              en línea. Es el que menos mantenimiento pide.
+            </li>
+            <li>
+              <strong>Muchos iconos como archivos sueltos:</strong> máscara CSS. Un solo sitio
+              donde cambiar el color de todos.
+            </li>
+            <li>
+              <strong>Iconos multicolor:</strong> a mano, sobre el bloque
+              <code>&lt;style&gt;</code> del archivo.
+            </li>
+          </ul>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Por qué mi icono SVG se ve negro y no cambia de color?</h3></summary>
+            <p>
+              Suele haber dos causas. La primera es que el archivo no declara ningún relleno: sin
+              un <code>fill</code>, el navegador lo pinta en negro por defecto, y basta con añadir
+              <code>fill="currentColor"</code> a la etiqueta <code>&lt;svg&gt;</code>. La segunda
+              es que lo has insertado con una etiqueta <code>&lt;img&gt;</code>: así el SVG se
+              comporta como una imagen cerrada y ni el CSS ni <code>currentColor</code> pueden
+              entrar. Para poder recolorearlo, pégalo en línea dentro del HTML o úsalo como
+              máscara CSS.
+            </p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo cambiar el color de un SVG sin abrir el archivo?</h3></summary>
+            <p>
+              Sí, usándolo como <a href="#mascara-css">máscara CSS</a>. Declaras el color como
+              <code>background</code> del elemento y aplicas el SVG en la propiedad
+              <code>mask</code>: el navegador pinta el fondo y recorta la silueta del icono. El
+              archivo se queda intacto, y cambias el color de todos los iconos del sitio tocando
+              una sola línea de CSS.
+            </p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Y si el icono tiene varios colores?</h3></summary>
+            <p>
+              Los iconos de estilo plano traen un color propio en cada forma, así que no responden
+              a <code>currentColor</code> ni a la máscara, que solo sirven para siluetas de un
+              color. Para esos hay que abrir el SVG con un editor de texto y sustituir los valores
+              hexadecimales uno a uno, normalmente en el bloque <code>&lt;style&gt;</code> del
+              principio del archivo. Si vas a incrustar varios iconos planos en la misma página,
+              insértalos como <code>&lt;img&gt;</code> en lugar de en línea para que sus clases
+              internas no choquen entre sí.
+            </p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Sirve esto con iconos de cualquier sitio?</h3></summary>
+            <p>
+              Sí, siempre que sean SVG de verdad y no un PNG con la extensión cambiada. Ábrelo con
+              un editor de texto: si ves etiquetas y atributos legibles, es un SVG y los tres
+              métodos funcionan. Ten en cuenta que las condiciones de uso las fija quien creó cada
+              archivo, así que compruébalas antes de llevar un icono ajeno a un encargo comercial.
+            </p>
+          </details>
+
+          <div class="compartir reveal" aria-label="Compartir este artículo">
+            <span class="compartir__titulo">Compartir</span>
+            <a href="https://wa.me/?text=C%C3%B3mo%20cambiar%20el%20color%20de%20un%20icono%20SVG%3A%203%20m%C3%A9todos%20https%3A%2F%2Fagpublicista.com%2Fblog%2Fcomo-cambiar-el-color-de-un-icono-svg%2F" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"/></svg></a>
+            <a href="https://t.me/share/url?url=https%3A%2F%2Fagpublicista.com%2Fblog%2Fcomo-cambiar-el-color-de-un-icono-svg%2F&amp;text=C%C3%B3mo%20cambiar%20el%20color%20de%20un%20icono%20SVG%3A%203%20m%C3%A9todos" target="_blank" rel="noopener" aria-label="Compartir en Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"/></svg></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fagpublicista.com%2Fblog%2Fcomo-cambiar-el-color-de-un-icono-svg%2F" target="_blank" rel="noopener" aria-label="Compartir en Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"/></svg></a>
+            <button type="button" data-compartir-copiar aria-label="Copiar el enlace" title="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
+            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fagpublicista.com%2Fblog%2Fcomo-cambiar-el-color-de-un-icono-svg%2F&amp;text=C%C3%B3mo%20cambiar%20el%20color%20de%20un%20icono%20SVG%3A%203%20m%C3%A9todos" target="_blank" rel="noopener" aria-label="Compartir en X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
+          </div>
+
+
+          <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+          <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+        </div>
+      </article>
+
+      <!-- Sigue aprendiendo -->
+      <section class="section shell diferir-render" style="--alto-escritorio: 608px; --alto-movil: 1293px">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue aprendiendo</p>
+            <h2>Packs de iconos para practicar</h2>
+            <p>Todos vienen en SVG, con nombres en español y descarga directa.</p>
+          </div>
+          <a class="more" href="/recursos/">Ver todos los recursos →</a>
+        </div>
+
+        <div class="card-grid">
+          <a class="card reveal" href="/herramientas/optimizar-svg/">
+            <span class="card__tag">SVG</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="24" y="22" width="52" height="46" rx="8" fill="none" stroke="#ff7a68" stroke-width="3" />
+                <path d="M34 56l10-13 7 8 6-7 9 12z" fill="#ff7a68" opacity="0.55" />
+                <path d="M88 45h26" stroke="#8b7bff" stroke-width="3" stroke-linecap="round" />
+                <path d="M108 38l8 7-8 7" fill="none" stroke="#8b7bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <rect x="128" y="30" width="40" height="30" rx="7" fill="none" stroke="#35d6c8" stroke-width="3" />
+                <path d="M136 50l8-10 5 6 4-5 7 9z" fill="#35d6c8" opacity="0.55" />
+                <circle cx="168" cy="30" r="6" fill="#ffb454" />
+              </svg>
+            </div>
+            <h3>Optimizador de SVG</h3>
+            <p>Baja el peso de tus iconos sin que el archivo salga de tu equipo.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 90ms" href="/herramientas/paletas/">
+            <span class="card__tag">Color</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="30" y="25" width="28" height="40" rx="8" fill="#8b7bff" />
+                <rect x="64" y="25" width="28" height="40" rx="8" fill="#6e5df2" />
+                <rect x="98" y="25" width="28" height="40" rx="8" fill="#35d6c8" />
+                <rect x="132" y="25" width="28" height="40" rx="8" fill="#ffb454" />
+              </svg>
+            </div>
+            <h3>Generador de paletas</h3>
+            <p>Elige los colores con los que vas a recolorear los iconos, con contraste WCAG.</p>
+            <span class="card__meta">Herramienta interactiva · Gratis</span>
+          </a>
+
+          <a class="card reveal" style="--reveal-delay: 180ms" href="/recursos/">
+            <span class="card__tag">Iconos</span>
+            <div class="card__art" aria-hidden="true">
+              <svg viewBox="0 0 200 90" width="200" height="90">
+                <rect x="26" y="24" width="42" height="42" rx="10" fill="none" stroke="#8b7bff" stroke-width="3" />
+                <rect x="79" y="24" width="42" height="42" rx="10" fill="none" stroke="#35d6c8" stroke-width="3" />
+                <rect x="132" y="24" width="42" height="42" rx="10" fill="none" stroke="#ffb454" stroke-width="3" />
+                <path d="M38 45h18M47 36v18" stroke="#8b7bff" stroke-width="3" stroke-linecap="round" />
+                <circle cx="100" cy="45" r="9" fill="none" stroke="#35d6c8" stroke-width="3" />
+                <path d="M144 52l8-10 6 7 4-5 8 8z" fill="#ffb454" opacity="0.55" />
+              </svg>
+            </div>
+            <h3>Todos los packs de iconos</h3>
+            <p>Cocina, hotelería, eventos virtuales, realidad virtual, ropa e IA.</p>
+            <span class="card__meta">Packs SVG + PNG · Gratis</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA YouTube -->
+      <section class="section shell diferir-render" style="--alto-escritorio: 455px; --alto-movil: 478px">
+        <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem);">
+          <p class="eyebrow" style="justify-content: center;">Lienzo en YouTube</p>
+          <h2 style="max-width: 22ch; margin-inline: auto;">Un pack nuevo cada semana</h2>
+          <p style="max-width: 52ch; margin-inline: auto; color: var(--muted);">
+            Iconos, sonidos, plantillas de After Effects y procesos creativos reales de diseño y
+            marketing. Suscríbete y no te pierdas el próximo recurso gratuito.
+          </p>
+          <div class="hero__cta" style="justify-content: center;">
+            <a class="btn btn--primary" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg?sub_confirmation=1" target="_blank" rel="noopener">Suscribirme al canal</a>
+            <a class="btn btn--ghost" href="/recursos/">Ver todos los recursos</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026082806" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026082806" defer></script>
+  </body>
+</html>

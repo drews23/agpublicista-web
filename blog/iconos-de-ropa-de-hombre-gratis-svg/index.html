@@ -289,61 +289,16 @@
             versiones antiguas de Office.
           </p>
 
-          <h2 id="cambiar-color">Cómo cambiar el color de un icono SVG</h2>
+          <h2 id="cambiar-color">Cómo adaptar los iconos a tu catálogo</h2>
           <p>
-            Un icono SVG de este pack es texto: puedes abrirlo con el Bloc de notas y verás un
-            atributo <code>fill</code> con su color. Cambiarlo es todo lo que hace falta para que
-            combine con tu marca, tu app o tu presentación.
+            Los 50 iconos vienen con el trazo en tinta oscura y en blanco, pero <code>camisa.svg</code> se abre con el Bloc de notas y su <code>fill</code> se cambia en un segundo: suficiente para que las fichas de producto y los filtros de la tienda usen el color de cada categoría.
           </p>
-
-          <h3>1. Cambiar el color a mano</h3>
           <p>
-            Abre el archivo con cualquier editor de texto, busca el valor hexadecimal del
-            <code>fill</code> y sustitúyelo por el color de tu marca. Guarda y listo. Si no sabes
-            qué color usar, nuestro <a href="/herramientas/paletas/">generador de paletas</a> te
-            da armonías completas con su código hexadecimal y la comprobación de contraste.
+            Los tres métodos —editarlo a mano, que el icono herede el color del texto con
+            <code>currentColor</code>, o pintarlo desde el CSS como máscara— están explicados
+            paso a paso, con el código de cada uno, en
+            <a href="/blog/como-cambiar-el-color-de-un-icono-svg/">cómo cambiar el color de un icono SVG</a>.
           </p>
-
-          <h3>2. Que el icono herede el color del texto</h3>
-          <p>
-            El truco más práctico para una web. Si sustituyes el color por la palabra clave
-            <code>currentColor</code> y pegas el SVG en línea dentro de tu HTML, el icono adopta
-            automáticamente el color del texto que lo rodea, incluso al cambiar de tema claro a
-            oscuro. Es exactamente lo que hace la muestra al principio de este artículo:
-          </p>
-          <pre><code>&lt;p style="color: #8b7bff"&gt;
-  &lt;svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"&gt;
-    &lt;path d="…" /&gt;
-  &lt;/svg&gt;
-  Camisa
-&lt;/p&gt;</code></pre>
-
-          <h3>3. Colorear desde el CSS, sin tocar el archivo</h3>
-          <p>
-            Si prefieres dejar el SVG como archivo suelto y controlar el color desde la hoja de
-            estilos, úsalo como máscara. El navegador pinta el fondo y recorta la silueta:
-          </p>
-          <pre><code>.icono-camisa {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  background: #35d6c8;
-  -webkit-mask: url("iconos/camisa.svg") center / contain no-repeat;
-  mask: url("iconos/camisa.svg") center / contain no-repeat;
-}</code></pre>
-          <p>
-            La ventaja es que cambias el color de todos los iconos de tu sitio tocando una sola
-            línea. Y si además quieres degradados, sombras o filtros sobre esos iconos, en
-            <a href="/codigo-web/">Código web</a> tienes generadores visuales que te dan el CSS
-            hecho.
-          </p>
-
-          <blockquote>
-            Consejo: antes de subir iconos a tu web, pásalos por un optimizador. Los SVG de este
-            pack ya vienen limpios, pero si mezclas iconos de otras fuentes, el
-            <a href="/herramientas/optimizar-svg/">optimizador de Lienzo</a> les quita metadatos
-            invisibles que suelen ocupar más que el dibujo.
-          </blockquote>
 
           <h2 id="como-usar">Cómo usarlos en tus programas</h2>
           <ul>
