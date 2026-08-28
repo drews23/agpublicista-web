@@ -38,7 +38,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/site.css?v=2026082706" />
+    <link rel="stylesheet" href="/css/site.css?v=2026082801" />
 
     <script type="application/ld+json">
     {
@@ -131,6 +131,101 @@
             <a class="btn btn--ghost" href="/codigo-web/">Generadores CSS</a>
           </div>
 
+        </div>
+      </section>
+
+      <!-- Lo más reciente (carrusel) -->
+      <section class="section shell novedades" aria-labelledby="novedades-titulo">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Lo más reciente</p>
+            <h2 id="novedades-titulo">Recién publicado en Lienzo</h2>
+            <p>Lo último que sube al sitio, sea un pack de iconos, una escena 3D o una guía.</p>
+          </div>
+          <a class="more" href="/blog/">Ver todo →</a>
+        </div>
+
+        <!-- El carrusel necesita EXACTAMENTE 6 láminas: su posición la fija el
+             CSS por nth-child (2 a pantalla completa + 4 tarjetas laterales). -->
+        <div class="carrusel reveal" data-carrusel>
+          <ul class="carrusel__pista" data-pista>
+            <li class="carrusel__item">
+              <img class="carrusel__img" src="/assets/novedades/iconos-ropa-hombre.webp" alt="" width="1200" height="900" fetchpriority="high" decoding="async" />
+              <div class="carrusel__contenido">
+                <span class="carrusel__tag">Iconos</span>
+                <h3 class="carrusel__titulo">50 iconos de ropa de hombre, en 2 variantes</h3>
+                <p class="carrusel__desc">Camisas, sudaderas, abrigos y accesorios en SVG y PNG, con variante clara y oscura para cualquier fondo.</p>
+                <span class="carrusel__meta">27 de agosto de 2026 &middot; 6 min de lectura</span>
+                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-ropa-de-hombre-gratis-svg/">Ver el pack</a>
+              </div>
+            </li>
+
+            <li class="carrusel__item">
+              <img class="carrusel__img" src="/assets/novedades/iconos-ia.webp" alt="" width="1200" height="900" decoding="async" />
+              <div class="carrusel__contenido">
+                <span class="carrusel__tag">Iconos</span>
+                <h3 class="carrusel__titulo">25 iconos de inteligencia artificial, en 3 estilos</h3>
+                <p class="carrusel__desc">Robots, redes neuronales y chatbots en plano a color, contorno y sólido: los mismos 25 conceptos, tres acabados.</p>
+                <span class="carrusel__meta">27 de agosto de 2026 &middot; 7 min de lectura</span>
+                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-inteligencia-artificial-gratis-svg/">Ver el pack</a>
+              </div>
+            </li>
+
+            <li class="carrusel__item">
+              <img class="carrusel__img" src="/assets/escenas-3d/desarrollo-web/desarrollo-web.webp" alt="" width="1200" height="900" loading="lazy" decoding="async" />
+              <div class="carrusel__contenido">
+                <span class="carrusel__tag">Escenas 3D</span>
+                <h3 class="carrusel__titulo">8 escenas 3D de desarrollo web, descargables una por una</h3>
+                <p class="carrusel__desc">Velocidad, SEO, login, búsqueda, VPN, anuncios, historial y optimización: cada objeto en su propio archivo <code>.spline</code>.</p>
+                <span class="carrusel__meta">26 de agosto de 2026 &middot; 6 min de lectura</span>
+                <a class="btn btn--primary carrusel__cta" href="/blog/escenas-3d-desarrollo-web-spline/">Ver el pack</a>
+              </div>
+            </li>
+
+            <li class="carrusel__item">
+              <img class="carrusel__img" src="/assets/escenas-3d/graficas-de-datos.webp" alt="" width="1200" height="900" loading="lazy" decoding="async" />
+              <div class="carrusel__contenido">
+                <span class="carrusel__tag">Escenas 3D</span>
+                <h3 class="carrusel__titulo">5 escenas 3D animadas gratis para tu web</h3>
+                <p class="carrusel__desc">Editables en Spline y listas para incrustar, con previsualización en vivo y guía para servirlas desde tu propio dominio.</p>
+                <span class="carrusel__meta">20 de agosto de 2026 &middot; 7 min de lectura</span>
+                <a class="btn btn--primary carrusel__cta" href="/blog/escenas-3d-gratis-para-web-spline/">Ver el pack</a>
+              </div>
+            </li>
+
+            <li class="carrusel__item">
+              <img class="carrusel__img" src="/assets/novedades/iconos-realidad-virtual.webp" alt="" width="1200" height="900" loading="lazy" decoding="async" />
+              <div class="carrusel__contenido">
+                <span class="carrusel__tag">Iconos</span>
+                <h3 class="carrusel__titulo">50 iconos de realidad virtual en SVG y PNG</h3>
+                <p class="carrusel__desc">Gafas, hologramas, gestos y seguimiento de movimiento, en variante clara y oscura y con nombres en español.</p>
+                <span class="carrusel__meta">20 de agosto de 2026 &middot; 6 min de lectura</span>
+                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-realidad-virtual-gratis-svg/">Ver el pack</a>
+              </div>
+            </li>
+
+            <li class="carrusel__item">
+              <img class="carrusel__img" src="/assets/novedades/iconos-eventos-virtuales.webp" alt="" width="1200" height="900" loading="lazy" decoding="async" />
+              <div class="carrusel__contenido">
+                <span class="carrusel__tag">Iconos</span>
+                <h3 class="carrusel__titulo">50 iconos de eventos virtuales en SVG y PNG</h3>
+                <p class="carrusel__desc">Streaming, agenda, ponentes y networking: el set completo para la web de un evento en línea.</p>
+                <span class="carrusel__meta">20 de agosto de 2026 &middot; 6 min de lectura</span>
+                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-eventos-virtuales-gratis-svg/">Ver el pack</a>
+              </div>
+            </li>
+          </ul>
+
+          <div class="carrusel__mandos">
+            <button class="carrusel__btn" type="button" data-anterior aria-label="Recurso anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+            </button>
+            <button class="carrusel__btn" type="button" data-siguiente aria-label="Recurso siguiente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+            </button>
+          </div>
+
+          <div class="carrusel__progreso" aria-hidden="true"><span class="carrusel__barra" data-barra></span></div>
         </div>
       </section>
 
@@ -613,8 +708,8 @@
       </div>
     </footer>
 
-    <script src="/js/escena-3d.js?v=2026082706" defer></script>
-    <script src="/js/site.js?v=2026082706" defer></script>
-    <script src="/js/mi-lienzo.js?v=2026082706" defer></script>
+    <script src="/js/escena-3d.js?v=2026082801" defer></script>
+    <script src="/js/site.js?v=2026082801" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026082801" defer></script>
   </body>
 </html>

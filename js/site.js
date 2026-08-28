@@ -402,4 +402,110 @@
       });
     }
   }
+
+  /* Carrusel de novedades (inicio) -----------------------------------
+     Avanzar = mover el primer <li> al final; la posición de cada lámina la
+     resuelve el CSS por nth-child. El tiempo que cada una permanece visible
+     NO es fijo: se calcula con los caracteres que hay que leer en ella, para
+     que una lámina con titular largo no se vaya antes de terminarla. */
+  document.querySelectorAll('[data-carrusel]').forEach((carrusel) => {
+    const pista = carrusel.querySelector('[data-pista]');
+    const barra = carrusel.querySelector('[data-barra]');
+    if (!pista || pista.children.length < 3) return;
+
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // A un carrusel no se le LEE, se le ojea: ~28 caracteres/segundo (unas
+    // 300 ppm a 5,5 caracteres por palabra). Los 2,2 s de base cubren la
+    // transición de entrada y el salto de la mirada hasta el texto.
+    // Con 18 c/s (lectura pausada) todas las láminas se iban al tope de 12 s
+    // y el tiempo dejaba de depender del texto, que es justo lo que se busca.
+    const CHARS_POR_SEG = 28;
+    const BASE_MS = 2200;
+    const MIN_MS = 5500;
+    const MAX_MS = 11000;
+
+    const permanencia = (lamina) => {
+      // Sólo cuenta lo que de verdad se lee: titular y entradilla. La etiqueta,
+      // la fecha y el botón se miran de un vistazo y ya están en la base.
+      const partes = lamina.querySelectorAll('.carrusel__titulo, .carrusel__desc');
+      const chars = [...partes]
+        .map((el) => el.textContent.replace(/\s+/g, ' ').trim())
+        .join(' ').length;
+      const ms = BASE_MS + (chars / CHARS_POR_SEG) * 1000;
+      return Math.round(Math.min(MAX_MS, Math.max(MIN_MS, ms)));
+    };
+
+    let temporizador = null;
+    let detenido = false;
+
+    const limpiar = () => { clearTimeout(temporizador); temporizador = null; };
+
+    const programar = () => {
+      limpiar();
+      if (detenido || sinMovimiento.matches) {
+        if (barra) barra.classList.remove('corriendo');
+        return;
+      }
+      const activa = pista.children[1];
+      if (!activa) return;
+      const ms = permanencia(activa);
+      if (barra) {
+        // Reiniciar la animación de la barra: quitar la clase no basta si el
+        // navegador no ha repintado todavía, hay que forzar un reflow.
+        barra.classList.remove('corriendo');
+        void barra.offsetWidth;
+        barra.style.setProperty('--dwell', ms + 'ms');
+        barra.classList.add('corriendo');
+      }
+      temporizador = setTimeout(() => { mover('siguiente'); }, ms);
+    };
+
+    const mover = (sentido) => {
+      const items = pista.children;
+      if (items.length < 3) return;
+      if (sentido === 'anterior') pista.prepend(items[items.length - 1]);
+      else pista.append(items[0]);
+      programar();
+    };
+
+    carrusel.querySelector('[data-siguiente]')?.addEventListener('click', () => mover('siguiente'));
+    carrusel.querySelector('[data-anterior]')?.addEventListener('click', () => mover('anterior'));
+
+    // Clic en una tarjeta lateral: traerla al frente en vez de obligar a
+    // esperar. Se avanza tantas veces como posiciones la separen de la activa.
+    pista.addEventListener('click', (event) => {
+      const lamina = event.target.closest('.carrusel__item');
+      if (!lamina || event.target.closest('a')) return;
+      const idx = [...pista.children].indexOf(lamina);
+      if (idx < 2) return;
+      event.preventDefault();
+      for (let i = 0; i < idx - 1; i++) pista.append(pista.children[0]);
+      programar();
+    });
+
+    const pausar = () => { detenido = true; limpiar(); if (barra) barra.classList.remove('corriendo'); };
+    const seguir = () => { if (!detenido) return; detenido = false; programar(); };
+
+    carrusel.addEventListener('mouseenter', pausar);
+    carrusel.addEventListener('mouseleave', seguir);
+    carrusel.addEventListener('focusin', pausar);
+    carrusel.addEventListener('focusout', (event) => {
+      if (!carrusel.contains(event.relatedTarget)) seguir();
+    });
+
+    // Fuera de pantalla no tiene sentido gastar temporizadores ni repintar.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => { e.isIntersecting ? seguir() : pausar(); });
+      }, { threshold: 0.25 }).observe(carrusel);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      document.hidden ? pausar() : seguir();
+    });
+
+    sinMovimiento.addEventListener?.('change', programar);
+    programar();
+  });
 })();

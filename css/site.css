@@ -1445,3 +1445,266 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   border-color: var(--violeta);
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--violeta) 28%, transparent);
 }
+
+/* 14. Carrusel de novedades -------------------------------------------- *\
+   Va justo debajo del hero de inicio y muestra lo último publicado, sea del
+   tipo que sea (packs de iconos, escenas 3D, guías).
+
+   Mecánica heredada del carrusel de referencia: la POSICIÓN de cada lámina
+   la decide su `nth-child`, no una transformación calculada en JS. Las dos
+   primeras ocupan el marco entero (la 1 es la que sale, la 2 es la activa) y
+   de la 3 en adelante quedan como tarjetas apiladas a la derecha. Avanzar es
+   mover el primer `<li>` al final de la lista: el navegador reasigna los
+   `nth-child` y las transiciones de `left/width/height` hacen el resto.
+   Por eso el marcador exige EXACTAMENTE 6 láminas.
+\* ---------------------------------------------------------------------- */
+
+.novedades { padding-top: clamp(1.4rem, 3vw, 2.2rem); }
+
+.carrusel {
+  position: relative;
+  height: clamp(430px, 62vh, 560px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.carrusel__pista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.carrusel__item {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 760px);
+  width: 178px;
+  height: 262px;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 18px 34px -14px rgba(0, 0, 0, 0.75);
+  transition:
+    left 750ms var(--ease),
+    top 750ms var(--ease),
+    width 750ms var(--ease),
+    height 750ms var(--ease),
+    border-radius 750ms var(--ease),
+    opacity 500ms ease;
+}
+
+/* Las dos primeras llenan el marco. La 1 queda debajo mientras la 2 entra. */
+.carrusel__item:nth-child(1),
+.carrusel__item:nth-child(2) {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 1;
+}
+
+/* Todas las láminas comparten z-index: el orden del DOM decide qué se pinta
+   encima, así las tarjetas laterales (hermanas posteriores) quedan sobre la
+   lámina grande. Subirle el z-index a la activa las taparía. */
+
+.carrusel__item:nth-child(3) { left: calc(50% + 6px); }
+.carrusel__item:nth-child(4) { left: calc(50% + 200px); }
+.carrusel__item:nth-child(5) { left: calc(50% + 394px); }
+/* La sexta espera fuera de plano: es la que entrará como tarjeta al avanzar. */
+.carrusel__item:nth-child(6) { left: calc(50% + 588px); opacity: 0; }
+
+.carrusel__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Velo: sin él, el texto blanco cae sobre las zonas claras del bloom.
+   Sólo hace falta en las dos láminas grandes; en las tarjetas estorba. */
+.carrusel__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  background:
+    linear-gradient(105deg, rgba(6, 6, 12, 0.9) 0%, rgba(6, 6, 12, 0.72) 34%, rgba(6, 6, 12, 0.12) 68%, transparent 100%),
+    linear-gradient(0deg, rgba(6, 6, 12, 0.55) 0%, transparent 55%);
+}
+
+.carrusel__item:nth-child(1)::after,
+.carrusel__item:nth-child(2)::after { opacity: 1; }
+
+.carrusel__contenido {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: clamp(1.4rem, 4vw, 3.2rem);
+  transform: translateY(-50%);
+  width: min(46ch, 60%);
+  color: #fff;
+  display: none;
+}
+
+/* El texto sólo existe para la lámina activa: si se deja en todas, se lee
+   apelotonado dentro de las tarjetas de 178 px. */
+.carrusel__item:nth-child(2) .carrusel__contenido {
+  display: block;
+  animation: novedad-entra 720ms var(--ease) 260ms backwards;
+}
+
+@keyframes novedad-entra {
+  from { opacity: 0; filter: blur(6px); transform: translateY(calc(-50% + 34px)); }
+  to   { opacity: 1; filter: blur(0);   transform: translateY(-50%); }
+}
+
+.carrusel__tag {
+  display: inline-block;
+  font: 700 0.7rem/1 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--ambar);
+  padding: 0.34rem 0.62rem;
+  border-radius: 999px;
+}
+
+.carrusel__titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  line-height: 1.12;
+  margin: 0.75rem 0 0;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.carrusel__desc {
+  margin: 0.7rem 0 0;
+  font-size: clamp(0.92rem, 1.5vw, 1.02rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.carrusel__meta {
+  display: block;
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.carrusel__cta { margin-top: 1.2rem; display: inline-flex; }
+
+/* Mandos ------------------------------------------------------------- */
+
+.carrusel__mandos {
+  position: absolute;
+  z-index: 4;
+  right: clamp(1rem, 2.4vw, 1.6rem);
+  bottom: clamp(1rem, 2.4vw, 1.6rem);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carrusel__btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(10, 10, 18, 0.45);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  transition: background-color 200ms ease, border-color 200ms ease, transform 200ms var(--ease);
+}
+
+.carrusel__btn:hover {
+  background: rgba(10, 10, 18, 0.72);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+
+.carrusel__btn:focus-visible {
+  outline: 2px solid var(--turquesa);
+  outline-offset: 3px;
+}
+
+.carrusel__btn svg { width: 20px; height: 20px; display: block; }
+
+/* Barra de avance: refleja el tiempo de lectura de la lámina activa. */
+.carrusel__progreso {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.carrusel__barra {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--violeta), var(--turquesa));
+}
+
+.carrusel__barra.corriendo {
+  animation: novedad-avance var(--dwell, 8s) linear forwards;
+}
+
+@keyframes novedad-avance {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@media (max-width: 900px) {
+  .carrusel__item { width: 150px; height: 220px; }
+  .carrusel__item:nth-child(3) { left: calc(50% + 40px); }
+  .carrusel__item:nth-child(4) { left: calc(50% + 206px); }
+  .carrusel__item:nth-child(5) { left: calc(50% + 372px); }
+  .carrusel__item:nth-child(6) { left: calc(50% + 538px); }
+  .carrusel__contenido { width: min(40ch, 72%); }
+}
+
+@media (max-width: 620px) {
+  .carrusel { height: clamp(400px, 76vh, 500px); }
+  /* En móvil las tarjetas laterales no caben sin tapar el texto: se ocultan
+     y el carrusel se queda sólo con la lámina grande. */
+  .carrusel__item:nth-child(n + 3) { opacity: 0; pointer-events: none; }
+  .carrusel__contenido {
+    width: auto;
+    right: clamp(1.4rem, 4vw, 3.2rem);
+    top: auto;
+    bottom: 3.2rem;
+    transform: none;
+  }
+  .carrusel__item:nth-child(2) .carrusel__contenido { animation-name: novedad-entra-movil; }
+  @keyframes novedad-entra-movil {
+    from { opacity: 0; filter: blur(6px); transform: translateY(28px); }
+    to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
+  }
+  .carrusel__mandos { bottom: auto; top: clamp(1rem, 4vw, 1.4rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carrusel__item { transition: none; }
+  .carrusel__item:nth-child(2) .carrusel__contenido { animation: none; }
+  .carrusel__barra.corriendo { animation: none; transform: scaleX(1); }
+}
