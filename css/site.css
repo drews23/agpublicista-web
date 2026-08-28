@@ -1708,3 +1708,22 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   .carrusel__item:nth-child(2) .carrusel__contenido { animation: none; }
   .carrusel__barra.corriendo { animation: none; transform: scaleX(1); }
 }
+
+/* 15. Diferir el render de lo que está bajo el pliegue --------------- *\
+   `content-visibility: auto` deja que el navegador se salte el cálculo de
+   maquetación y pintado de un bloque hasta que se acerca a la ventana. En la
+   portada eso son 21 tarjetas con 20 SVG en línea que no se ven al abrir.
+
+   Sólo se aplica a bloques que están CONFIRMADOS bajo el pliegue: ponerlo en
+   algo visible al cargar retrasa el render crítico en vez de acelerarlo.
+
+   `contain-intrinsic-size` es obligatorio: sin él la sección colapsa a 0 px
+   mientras está fuera de pantalla y la barra de scroll pega saltos. El `auto`
+   hace que el navegador recuerde la medida real tras el primer render, así
+   que `--alto-estimado` sólo gobierna la primera pasada.
+\* ------------------------------------------------------------------- */
+
+.diferir-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto var(--alto-estimado, 900px);
+}
