@@ -13,7 +13,8 @@ const require = createRequire(import.meta.url);
 const sharp = require(rutaSharp);
 
 const ANCHO = 1200;
-const ALTO = 900;
+const ALTO = 675; // 16:9 — el marco del carrusel es apaisado y ancho;
+                  // a 4:3 se recortaba (object-fit: cover) casi un cuarto del alto.
 const COLS = 5;
 const FILAS = 3;
 const CELDA_W = ANCHO / COLS;
@@ -82,9 +83,12 @@ const maestro = `<svg xmlns="http://www.w3.org/2000/svg" width="${ANCHO}" height
 
 mkdirSync(dirname(salida), { recursive: true });
 // El degradado de fondo es lo que engorda el WebP (el trazo de los iconos
-// comprime bien). Calidad 66 + effort alto deja el archivo en la línea de
-// las portadas de las escenas 3D sin que se vea banding en el bloom.
-await sharp(Buffer.from(maestro), { density: 200 })
-  .webp({ quality: 66, effort: 6 })
-  .toFile(salida);
+// comprime bien). Calidad 62 + effort alto deja el archivo ligero sin banding.
+// Se emiten dos anchos para el srcset: 700 para móvil y tarjetas, 1200 para
+// la lámina a marco completo en escritorio.
+const base = sharp(Buffer.from(maestro), { density: 200 });
+for (const ancho of [1200, 700]) {
+  const destino = ancho === 1200 ? salida : salida.replace(/\.webp$/, "-700.webp");
+  await base.clone().resize(ancho).webp({ quality: 62, effort: 6 }).toFile(destino);
+}
 console.log(`Portada lista: ${salida} (${ANCHO}x${ALTO}, ${elegidos.length} iconos)`);

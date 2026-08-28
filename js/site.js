@@ -461,11 +461,21 @@
       temporizador = setTimeout(() => { mover('siguiente'); }, ms);
     };
 
+    /* Las láminas que no están al frente van con loading="lazy", y en móvil
+       las laterales ni se pintan (opacity: 0), así que el navegador no las
+       descarga: eso ahorra mucho, pero la siguiente entraría en blanco. Se
+       adelanta la carga de la que va a tomar el relevo, sólo esa. */
+    const precargarSiguiente = () => {
+      const proxima = pista.children[2]?.querySelector('img');
+      if (proxima && proxima.loading === 'lazy') proxima.loading = 'eager';
+    };
+
     const mover = (sentido) => {
       const items = pista.children;
       if (items.length < 3) return;
       if (sentido === 'anterior') pista.prepend(items[items.length - 1]);
       else pista.append(items[0]);
+      precargarSiguiente();
       programar();
     };
 
@@ -506,6 +516,7 @@
     });
 
     sinMovimiento.addEventListener?.('change', programar);
+    precargarSiguiente();
     programar();
   });
 })();

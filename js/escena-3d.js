@@ -24,6 +24,16 @@
   const debeAbstenerse = () => {
     if (navigator.connection && navigator.connection.saveData) return "ahorro de datos";
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return "movimiento reducido";
+    /* En pantalla pequeña la escena se ve a un tamaño en el que el 3D casi no
+       se aprecia, y en cambio cuesta el runtime de Spline (~124 KB), el .spline
+       (53 KB) y el arranque de WebGL — justo lo que hunde la puntuación móvil.
+       La portada WebP (33 KB) es el mismo dibujo y ya está pintada. */
+    if (matchMedia("(max-width: 700px)").matches) return "pantalla pequeña";
+    /* Equipos flojos: 2 GB de RAM o 4 hilos no llevan bien una escena WebGL.
+       Ambas señales pueden no existir (Safari no las expone): si faltan, se
+       sigue adelante, no se castiga a quien no informa. */
+    if (navigator.deviceMemory && navigator.deviceMemory < 4) return "poca memoria";
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return "pocos núcleos";
     // Sin WebGL no hay escena posible: nos quedamos con la imagen.
     try {
       const c = document.createElement("canvas");
