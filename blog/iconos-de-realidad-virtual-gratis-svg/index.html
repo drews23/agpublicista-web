@@ -291,18 +291,25 @@
             virtual o un catálogo con vista previa, esa distinción te ahorra explicaciones.
           </p>
 
-          <h2 id="svg-o-png">SVG o PNG: cuál usar en cada caso</h2>
+          <h2 id="svg-o-png">Aquí el PNG no es el plan B</h2>
           <p>
-            <strong>Usa el SVG siempre que puedas.</strong> Es vectorial: se ve nítido en un botón
-            de 16 píxeles y en la pantalla de bienvenida de tu app VR, pesa unos pocos kilobytes
-            y le puedes cambiar el color desde el propio código. El PNG es una imagen de píxeles:
-            su color viene fijo y, aunque estos vienen en 512 × 512 —de sobra para la mayoría de
-            usos—, ampliarlos más allá los pixela.
+            En la mayoría de artículos el PNG aparece como el formato de repuesto, el que usas
+            cuando el SVG no entra. En desarrollo para visores es al revés: <strong>Unity y Unreal
+            trabajan con texturas</strong>, y una textura es una rejilla de píxeles. Aunque
+            importes un vector, el motor termina rasterizándolo para subirlo a la tarjeta gráfica.
+            Así que para todo lo que se dibuje dentro de la experiencia, los PNG de 512 px del
+            pack son el formato nativo, no un apaño.
           </p>
           <p>
-            El PNG cubre los casos donde el SVG no entra: plantillas de correo (muchos gestores lo
-            bloquean), motores de juego y editores 3D que esperan texturas de trama, y versiones
-            antiguas de Office.
+            El SVG sigue mandando fuera del motor: la web donde presentas el proyecto, la ficha de
+            la tienda de aplicaciones, los mockups en Figma y cualquier sitio donde quieras
+            recolorear el icono sin volver a exportarlo. Ahí el vector te ahorra rehacer trabajo
+            cada vez que cambia la paleta.
+          </p>
+          <p>
+            Un detalle que se paga caro si se pasa por alto: al importar el PNG, revisa el ajuste
+            de compresión de tu motor. La compresión agresiva de texturas emborrona los bordes
+            limpios de un icono, y en un visor ese temblor se nota mucho más que en un monitor.
           </p>
 
           <h2 id="cambiar-color">Cómo adaptar los iconos a tu interfaz VR</h2>
@@ -316,37 +323,38 @@
             <a href="/blog/como-cambiar-el-color-de-un-icono-svg/">cómo cambiar el color de un icono SVG</a>.
           </p>
 
-          <h2 id="como-usar">Cómo usarlos en tus programas</h2>
+          <h2 id="interfaz-vr">Cómo meterlos en una interfaz que se mira con visor</h2>
+          <p>
+            Diseñar para un visor tiene una trampa que no existe en pantalla plana: tu monitor te
+            miente. Un icono que se lee perfecto a 30 cm de tus ojos puede ser una mancha
+            ilegible dentro del casco, porque ahí interviene la distancia en el mundo virtual, la
+            resolución por ojo y el desenfoque de las lentes hacia los bordes.
+          </p>
           <ul>
             <li>
-              <strong>Canva:</strong> Elementos → Subir → arrastra los SVG. Una vez en el lienzo,
-              selecciona el icono y usa el selector de color de la barra superior.
+              <strong>Unity o Unreal.</strong> Importa los PNG de 512 px como Sprite y móntalos en
+              un canvas en espacio de mundo. Empieza por un tamaño que te parezca exagerado y
+              redúcelo desde ahí probando <em>con el visor puesto</em>; el camino contrario —
+              agrandar lo que no se lee — se hace eterno.
             </li>
             <li>
-              <strong>Figma:</strong> arrastra el SVG directamente al lienzo. Entra como vector
-              editable: cambia el relleno o conviértelo en componente para tu sistema de diseño.
+              <strong>Elige por silueta, no por detalle.</strong> A dos metros de distancia
+              virtual desaparecen los matices y solo queda la forma general. Si dos iconos de tu
+              menú comparten silueta, el usuario va a fallar al pulsar aunque los dibujos sean
+              distintos.
             </li>
             <li>
-              <strong>Unity y motores de juego:</strong> los PNG de 512 px con transparencia
-              entran directo como textura de interfaz; súbelos como Sprite y ya los tienes para
-              los botones del menú de tu experiencia VR.
+              <strong>Contraste antes que elegancia.</strong> Las variantes de trazo fino son las
+              que peor sobreviven en un visor. Si el icono va sobre un fondo variable —el paso
+              habitual en RA, donde detrás está el mundo real— dale un halo o una placa de fondo
+              en vez de confiar en que el contraste se mantenga.
             </li>
             <li>
-              <strong>PowerPoint y Google Slides:</strong> inserta el SVG como imagen. En
-              PowerPoint, clic derecho → Convertir en forma para recolorearlo como elemento nativo.
-            </li>
-            <li>
-              <strong>Tu web o app:</strong> lo más rápido es
-              <code>&lt;img src="gafas-vr.svg" alt="Gafas VR" width="32" height="32"&gt;</code>. Para
-              controlar el color, pégalo en línea con el truco de <code>currentColor</code>.
+              <strong>Mockups y presentaciones.</strong> Para enseñar el concepto antes de
+              construirlo, los SVG entran en Figma como vector editable y te dejan iterar el menú
+              entero sin volver a exportar nada.
             </li>
           </ul>
-          <p>
-            ¿Quieres usar uno de estos iconos como favicon de tu proyecto? En la
-            <a href="/herramientas/favicons/">galería de favicons SVG</a> tienes la etiqueta lista
-            para copiar, y en la <a href="/blog/como-crear-favicon-svg/">guía para crear un favicon
-            SVG</a> explicamos cómo hacer que se adapte al modo oscuro del navegador.
-          </p>
 
           <h2 id="licencia">Licencia y uso</h2>
 

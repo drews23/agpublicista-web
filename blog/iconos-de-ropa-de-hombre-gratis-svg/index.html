@@ -275,18 +275,25 @@
             accesorios y capas exteriores.
           </p>
 
-          <h2 id="svg-o-png">SVG o PNG: cuál usar en cada caso</h2>
+          <h2 id="svg-o-png">Por qué tu tienda no te deja subir el SVG</h2>
           <p>
-            <strong>Usa el SVG siempre que puedas.</strong> Es vectorial: se ve nítido en un
-            icono de talla de 16 píxeles y en el encabezado de una guía de estilo, pesa unos
-            pocos kilobytes y le puedes cambiar el color desde el propio código. El PNG es una
-            imagen de píxeles: su color viene fijo y, aunque estos vienen en 512 × 512 —de sobra
-            para la mayoría de usos—, ampliarlos más allá los pixela.
+            Vas a subir el icono de una categoría a Shopify o a WooCommerce, y te lo rechaza. No
+            has hecho nada mal: <strong>un SVG es un archivo de texto que puede contener código</strong>,
+            así que la mayoría de plataformas de comercio bloquean su subida por seguridad. Es una
+            precaución razonable, pero deja tu carpeta de vectores a medio usar.
           </p>
           <p>
-            El PNG cubre los casos donde el SVG no entra: plantillas de correo (muchos gestores lo
-            bloquean), catálogos de plataformas de venta que solo aceptan imágenes de trama y
-            versiones antiguas de Office.
+            La salida está en cómo entra el archivo. Por el <strong>formulario de subida de
+            imágenes</strong> —imagen de producto, icono de categoría, banner— usa los PNG de
+            512 px: pasan siempre y ya vienen con el fondo transparente. Por la <strong>plantilla
+            del tema</strong>, donde editas el código, el SVG entra pegado en línea sin problema y
+            conservas todo lo bueno: nitidez a cualquier tamaño, unos pocos kilobytes y el color
+            controlado desde el CSS.
+          </p>
+          <p>
+            Merece la pena hacer ese esfuerzo justo en los filtros y la navegación, que es donde
+            los iconos se repiten en cada página del catálogo y donde su peso y su nitidez más se
+            notan.
           </p>
 
           <h2 id="cambiar-color">Cómo adaptar los iconos a tu catálogo</h2>
@@ -300,37 +307,36 @@
             <a href="/blog/como-cambiar-el-color-de-un-icono-svg/">cómo cambiar el color de un icono SVG</a>.
           </p>
 
-          <h2 id="como-usar">Cómo usarlos en tus programas</h2>
+          <h2 id="ficha-y-filtro">Cómo usarlos en la ficha y en los filtros de tu tienda</h2>
+          <p>
+            En una tienda de ropa los iconos casi nunca son decoración: son el atajo con el que
+            alguien encuentra una camisa entre cuatrocientas prendas. Eso cambia lo que hay que
+            vigilar.
+          </p>
           <ul>
             <li>
-              <strong>Canva:</strong> Elementos → Subir → arrastra los SVG. Una vez en el lienzo,
-              selecciona el icono y usa el selector de color de la barra superior.
+              <strong>Filtros y navegación por categoría.</strong> Se ven a 20 o 24 px y en
+              columna, uno debajo de otro. Ahí una camisa y un polo se parecen peligrosamente:
+              antes de publicar, ponlos juntos a ese tamaño y comprueba que se distinguen por la
+              silueta. Si solo los separa el detalle del cuello, cambia uno de los dos.
             </li>
             <li>
-              <strong>Figma:</strong> arrastra el SVG directamente al lienzo. Entra como vector
-              editable: cambia el relleno o conviértelo en componente para tu sistema de diseño.
+              <strong>Guías de tallas y fichas de producto.</strong> Aquí el icono va grande y
+              acompañado de medidas, así que el SVG entra directo y escala sin límite. Es también
+              donde más se agradece que el trazo coincida con el de tu tipografía: iconos finos
+              con tipografía pesada se ven prestados.
             </li>
             <li>
-              <strong>Tiendas online (Shopify, WooCommerce y similares):</strong> los PNG de
-              512 px con transparencia entran directo como icono de categoría o de guía de tallas
-              en los editores que no aceptan SVG.
+              <strong>Shopify, WooCommerce y demás.</strong> Cuidado con esto: varias plataformas
+              bloquean la subida de SVG por seguridad, sobre todo en los campos de imagen de
+              producto. No es un fallo tuyo — para esos huecos usa los PNG de 512 px del ZIP, y
+              reserva el SVG para las plantillas del tema, donde sí puedes pegarlo en el código.
             </li>
             <li>
-              <strong>PowerPoint y Google Slides:</strong> inserta el SVG como imagen. En
-              PowerPoint, clic derecho → Convertir en forma para recolorearlo como elemento nativo.
-            </li>
-            <li>
-              <strong>Tu web o app:</strong> lo más rápido es
-              <code>&lt;img src="camisa.svg" alt="Camisa" width="32" height="32"&gt;</code>. Para
-              controlar el color, pégalo en línea con el truco de <code>currentColor</code>.
+              <strong>Catálogo impreso y etiquetas.</strong> Illustrator o Inkscape abren el SVG
+              tal cual. Recuerda pasar el color a CMYK antes de mandarlo a imprenta.
             </li>
           </ul>
-          <p>
-            ¿Quieres usar uno de estos iconos como favicon de tu proyecto? En la
-            <a href="/herramientas/favicons/">galería de favicons SVG</a> tienes la etiqueta lista
-            para copiar, y en la <a href="/blog/como-crear-favicon-svg/">guía para crear un
-            favicon SVG</a> explicamos cómo hacer que se adapte al modo oscuro del navegador.
-          </p>
 
           <h2 id="licencia">Licencia y uso</h2>
 

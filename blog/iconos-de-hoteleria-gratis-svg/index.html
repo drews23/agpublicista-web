@@ -302,41 +302,37 @@
             <a href="/blog/como-cambiar-el-color-de-un-icono-svg/">cómo cambiar el color de un icono SVG</a>.
           </p>
 
-          <h2 id="como-usar">Cómo usarlos en tus programas</h2>
+          <h2 id="recorrido-huesped">Del cartel de la puerta al motor de reservas</h2>
+          <p>
+            En un hotel los iconos no viven en un solo sitio: acompañan al huésped desde que
+            compara habitaciones hasta que busca el gimnasio en la tercera planta. Cada tramo de
+            ese recorrido pide algo distinto del mismo archivo.
+          </p>
           <ul>
             <li>
-              <strong>Canva:</strong> Elementos → Subir → arrastra los SVG. Una vez en el lienzo,
-              selecciona el icono y usa el selector de color de la barra superior para adaptarlo
-              a tu diseño.
+              <strong>Señalética y cartelería.</strong> Es donde el vector se paga solo: el mismo
+              <code>recepcion-01.svg</code> vale para un vinilo de puerta y para un tótem de
+              entrada sin perder un pixel. La prueba real no es mirarlo en el monitor, es
+              imprimirlo y alejarte tres metros. Si a esa distancia dudas entre dos pictogramas,
+              el problema es el icono, no la señal.
             </li>
             <li>
-              <strong>Figma:</strong> arrastra el SVG directamente al lienzo. Entra como vector
-              editable, así que puedes cambiar el relleno, el grosor o convertirlo en componente
-              para reutilizarlo en todo tu sistema de diseño.
+              <strong>El motor de reservas.</strong> Los iconos de servicios —wifi, desayuno,
+              parking, mascotas— se ven en fila y a tamaño pequeño, así que lo que importa es que
+              todos ocupen ópticamente lo mismo. Colócalos en una caja fija de 24 o 32 px en vez
+              de dejar que cada uno se escale a su aire.
             </li>
             <li>
-              <strong>Illustrator:</strong> Archivo → Abrir. Verás las formas listas para editar,
-              combinar o exportar en el formato que necesites.
+              <strong>El directorio de la habitación y los PDF internos.</strong> Inserta el SVG
+              en tu editor y, si es PowerPoint, con clic derecho → Convertir en forma pasa a ser
+              un elemento nativo que recoloreas como cualquier otro.
             </li>
             <li>
-              <strong>PowerPoint y Google Slides:</strong> inserta el SVG como imagen. En
-              PowerPoint, con clic derecho → Convertir en forma podrás recolorearlo como
-              cualquier elemento nativo.
-            </li>
-            <li>
-              <strong>Tu web o app de reservas:</strong> lo más rápido es
-              <code>&lt;img src="recepcion-01.svg" alt="Recepción" width="32" height="32"&gt;</code>.
-              Si además quieres controlar el color, pégalo en línea con el truco de
-              <code>currentColor</code> que vimos arriba.
+              <strong>Canales de terceros.</strong> Booking, Expedia y los gestores de canales
+              suelen pedir imagen rasterizada: para eso están los PNG del pack, con transparencia
+              y a 512 px.
             </li>
           </ul>
-          <p>
-            ¿Necesitas convertir uno de estos iconos en el favicon de tu proyecto? En la
-            <a href="/herramientas/favicons/">galería de favicons SVG</a> tienes la etiqueta
-            lista para copiar y pegar, y en la
-            <a href="/blog/como-crear-favicon-svg/">guía para crear un favicon SVG</a> explicamos
-            cómo hacer que se adapte al modo oscuro del navegador.
-          </p>
 
           <h2 id="licencia">Licencia y uso</h2>
 
