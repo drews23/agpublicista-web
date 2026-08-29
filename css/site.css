@@ -1739,27 +1739,42 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   }
 }
 
-/* 16. Iconos reales en las tarjetas de packs ---------------------------- *\
-   El card__art de los 6 packs de iconos muestra 3 iconos REALES del set,
-   incrustados desde el archivo (verificados path a path, nunca transcritos).
+/* 16. Iconos de las tarjetas: reales, y que se dibujan al aparecer -------- *\
+   Dos cosas conviven aquí.
 
-   La animación adapta "Stroked SVG icon animation" (codepen.io/andyfitz/pen/
-   LYbXmG): una capa punteada que recorre el contorno con stroke-dasharray +
-   stroke-dashoffset animado, sin JS.
+   (a) Las 6 tarjetas de packs de iconos muestran 3 iconos REALES de su set
+       (leídos del archivo, verificados path a path), en violeta/turquesa/
+       ámbar. Marcado: .card__art--iconos > .art-ic > svg + svg.art-ic__traza.
 
-   Dos adaptaciones obligadas, ambas medidas antes de decidir:
-   1. Nuestros iconos son RELLENOS, no trazos. Contornearlos directamente
-      (fill:none + stroke) los desintegra en puntos sueltos, porque cada path
-      lleva varios subtrazos y un dasharray único los fragmenta — probado, y
-      ni siquiera pathLength="1" lo salva. Por eso la traza va en una CAPA
-      APARTE encima del icono relleno, que es justo lo que hace el pen con
-      su path "virtual".
-   2. La traza usa currentColor, no blanco. Con el blanco del pen los tres
-      iconos se lavaban a gris y se perdía el color de marca.
+   (b) TODO el arte de tarjeta —el de los packs, el decorativo del resto y los
+       iconos de familia de /codigo-web/— tiene un gesto de entrada cuando su
+       tarjeta aparece. Adaptado de "SVG icon animations"
+       (codepen.io/Dianatomic/pen/NWNWmq), que anima el stroke-dasharray de 0
+       a completo en vez de mover puntos por la línea.
 
-   En reposo el icono está limpio y a color pleno; la traza solo corre al
-   pasar el ratón o enfocar con teclado, así que la página no tiene motion
-   permanente en 18 tarjetas.                                              */
+   ADAPTACIÓN OBLIGADA, medida antes de decidir: el pen corre en bucle
+   infinito y su ciclo pasa por `stroke-dasharray: 0 600`, o sea por el icono
+   INVISIBLE. Con 120 iconos en el sitio eso serían 120 dibujos parpadeando y
+   desapareciendo cada 7 s. Aquí el trazo se dibuja UNA VEZ al entrar en
+   pantalla y se queda (`forwards`): dinamismo al descubrir la tarjeta, cero
+   parpadeo después.
+
+   TRES FAMILIAS DE ARTE, porque no todas se pueden dibujar:
+     · pack     — icono relleno + capa de trazo que lo repasa.
+     · trazo    — el dibujo ya es de línea: se dibuja solo.
+     · relleno  — hecho de rect/circle/text con fill y ni una línea. No hay
+                  nada que trazar, así que entra apareciendo y subiendo. Sin
+                  esto se quedaban 27 de las 99 piezas del sitio sin gesto,
+                  y en /herramientas/ se veía el contraste en la misma fila.
+
+   EL CANDADO ES `.js-arte`, NO `.js`.
+   `.js` la pone el <script> en línea del <head> en cuanto el navegador tiene
+   JavaScript: dice "hay JS", no "site.js hizo su trabajo". Si site.js no
+   llega (404, versión mal cacheada, red caída, un bloqueador, una excepción
+   antes del observador), con `.js` el estado de partida se quedaba congelado
+   y el 60 % del arte era invisible PARA SIEMPRE. `.js-arte` la pone el propio
+   site.js justo antes de observar, así que si no corre no hay candado, no hay
+   estado de partida, y el arte se ve sólido y quieto igual que sin JS.       */
 
 .card__art--iconos {
   display: flex;
@@ -1774,7 +1789,6 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   width: 62px;
   height: 62px;
   color: var(--c);
-  transition: transform 0.45s var(--rebote, cubic-bezier(0.34, 1.56, 0.64, 1));
 }
 
 .art-ic svg {
@@ -1785,49 +1799,24 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   display: block;
 }
 
-.art-ic svg path {
+/* apunta a las formas, no sólo a `path`: el mando del pack de realidad
+   virtual lleva 5 <circle> sin fill propio y salían negros. */
+.art-ic svg :is(path, circle, ellipse, rect, polygon, polyline, line) {
   fill: currentColor;
 }
 
-/* la capa que traza el contorno: invisible hasta que se interactúa */
-.art-ic__traza path {
-  fill: none;
+/* la capa que repasa el contorno del icono relleno */
+.art-ic__traza {
+  pointer-events: none;
+}
+
+.art-ic__traza :is(path, circle, ellipse, rect, polygon, polyline, line) {
+  fill: none !important;
   stroke: currentColor;
-  stroke-width: 0.55;
+  stroke-width: 0.85;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 1.4 3.4;
   opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.card:hover .art-ic__traza path,
-.card:focus-visible .art-ic__traza path {
-  opacity: 0.95;
-  animation: recorrer-contorno 14s linear infinite;
-}
-
-/* los tres iconos se levantan escalonados, para que el gesto tenga ritmo */
-.card:hover .art-ic,
-.card:focus-visible .art-ic {
-  transform: translateY(-4px);
-}
-.card:hover .art-ic:nth-child(2),
-.card:focus-visible .art-ic:nth-child(2) {
-  transition-delay: 60ms;
-}
-.card:hover .art-ic:nth-child(3),
-.card:focus-visible .art-ic:nth-child(3) {
-  transition-delay: 120ms;
-}
-
-@keyframes recorrer-contorno {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: 48;
-  }
 }
 
 @media (max-width: 620px) {
@@ -1837,15 +1826,197 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   }
 }
 
-/* sin movimiento para quien lo pide: la traza aparece, pero quieta */
+/* ---- el gesto de entrada, sólo cuando site.js ha corrido de verdad ---- */
+
+/* (a) PACKS · estado de partida: el relleno espera, el trazo no está dibujado */
+.js-arte .card__art--iconos .art-ic > svg:not(.art-ic__traza) :is(path, circle, ellipse, rect, polygon, polyline, line) {
+  opacity: 0;
+}
+.js-arte .card__art--iconos .art-ic__traza :is(path, circle, ellipse, rect, polygon, polyline, line) {
+  stroke-dasharray: 0 600;
+}
+
+/* (a) PACKS · al entrar: se traza, y detrás aparece el relleno */
+.js-arte .card.is-in .art-ic__traza :is(path, circle, ellipse, rect, polygon, polyline, line) {
+  animation: art-trazar 1.15s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 0.12s);
+}
+.js-arte .card.is-in .art-ic > svg:not(.art-ic__traza) :is(path, circle, ellipse, rect, polygon, polyline, line) {
+  animation: art-rellenar 0.5s ease forwards;
+  animation-delay: calc(var(--i, 0) * 0.12s + 0.45s);
+}
+
+/* (b) TRAZO · el arte que ya es de línea se dibuja solo.
+   Dos ramas, porque el trazo puede declararse en el hijo o heredarse del
+   <svg> raíz (que es como exporta la mayoría de iconos: los 6 de
+   /codigo-web/ llevan stroke en la raíz y ni un hijo con atributo propio).
+   `:not([stroke-dasharray])` respeta los punteados de autor —el marco de las
+   8 escenas 3D, la elipse de las 5, la onda de puntos— que la animación
+   habría dejado sólidos. */
+.js-arte
+  :is(.card__art:not(.card__art--iconos), .familia)
+  :is(
+    svg [stroke]:not([stroke="none"]):not([stroke-dasharray]),
+    svg[stroke]:not([stroke="none"]) > :is(path, rect, circle, ellipse, line, polyline, polygon, g):not([stroke-dasharray])
+  ) {
+  stroke-dasharray: 0 600;
+}
+.js-arte
+  :is(.card.is-in .card__art:not(.card__art--iconos), .familias.is-in .familia)
+  :is(
+    svg [stroke]:not([stroke="none"]):not([stroke-dasharray]),
+    svg[stroke]:not([stroke="none"]) > :is(path, rect, circle, ellipse, line, polyline, polygon, g):not([stroke-dasharray])
+  ) {
+  animation: art-trazar-deco 1.3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* (c) RELLENO · sin una sola línea que dibujar, el gesto es aparecer.
+   `:not(:has([stroke]…))` reserva esta rama al arte que de verdad no tiene
+   trazo, para no pisar el dibujo de (b). */
+.js-arte
+  :is(.card__art:not(.card__art--iconos), .familia):not(:has([stroke]:not([stroke="none"])))
+  svg
+  > *:not([opacity]) {
+  opacity: 0;
+}
+.js-arte
+  :is(.card.is-in .card__art:not(.card__art--iconos), .familias.is-in .familia):not(:has([stroke]:not([stroke="none"])))
+  svg
+  > *:not([opacity]) {
+  animation: art-aparecer 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+/* los acentos con opacity de autor (0.35, 0.55…) suben, pero nadie les toca
+   la opacidad: la animación gana a los atributos de presentación y los
+   aplanaría todos a 1. */
+.js-arte
+  :is(.card.is-in .card__art:not(.card__art--iconos), .familias.is-in .familia):not(:has([stroke]:not([stroke="none"])))
+  svg
+  > *[opacity] {
+  animation: art-subir 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+/* escalonado del arte que no es de pack. `nth-child` cuenta TODOS los
+   hermanos (también <defs> y <g>), así que no siempre cae donde uno querría;
+   cubrir seis posiciones alcanza a la práctica totalidad del arte del sitio,
+   y quien se salga arranca a 0 s, que es un desfase de menos, no un fallo. */
+.js-arte .card.is-in .card__art:not(.card__art--iconos) svg > *:nth-child(2),
+.js-arte .familias.is-in .familia svg > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.js-arte .card.is-in .card__art:not(.card__art--iconos) svg > *:nth-child(3),
+.js-arte .familias.is-in .familia svg > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.js-arte .card.is-in .card__art:not(.card__art--iconos) svg > *:nth-child(4),
+.js-arte .familias.is-in .familia svg > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.js-arte .card.is-in .card__art:not(.card__art--iconos) svg > *:nth-child(5),
+.js-arte .familias.is-in .familia svg > *:nth-child(5) {
+  animation-delay: 0.32s;
+}
+.js-arte .card.is-in .card__art:not(.card__art--iconos) svg > *:nth-child(6),
+.js-arte .familias.is-in .familia svg > *:nth-child(6) {
+  animation-delay: 0.4s;
+}
+
+@keyframes art-trazar {
+  0% {
+    stroke-dasharray: 0 600;
+    opacity: 1;
+  }
+  70% {
+    stroke-dasharray: 600 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 600 0;
+    opacity: 0;
+  }
+}
+
+@keyframes art-rellenar {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes art-trazar-deco {
+  from {
+    stroke-dasharray: 0 600;
+  }
+  to {
+    stroke-dasharray: 600 0;
+  }
+}
+
+@keyframes art-aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes art-subir {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* al pasar el ratón, los iconos del pack se levantan escalonados */
+.card:hover .art-ic {
+  transform: translateY(-4px);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* quien pide menos movimiento ve el dibujo ya hecho, sin gesto de entrada */
 @media (prefers-reduced-motion: reduce) {
-  .card:hover .art-ic__traza path,
-  .card:focus-visible .art-ic__traza path {
+  .js-arte .card__art--iconos .art-ic > svg:not(.art-ic__traza) :is(path, circle, ellipse, rect, polygon, polyline, line),
+  .js-arte .card.is-in .art-ic > svg:not(.art-ic__traza) :is(path, circle, ellipse, rect, polygon, polyline, line) {
+    opacity: 1;
     animation: none;
   }
-  .art-ic,
-  .card:hover .art-ic,
-  .card:focus-visible .art-ic {
+  .js-arte .card__art--iconos .art-ic__traza :is(path, circle, ellipse, rect, polygon, polyline, line),
+  .js-arte .card.is-in .art-ic__traza :is(path, circle, ellipse, rect, polygon, polyline, line) {
+    opacity: 0;
+    animation: none;
+  }
+  .js-arte
+    :is(.card__art:not(.card__art--iconos), .familia, .card.is-in .card__art:not(.card__art--iconos), .familias.is-in .familia)
+    :is(
+      svg [stroke]:not([stroke="none"]):not([stroke-dasharray]),
+      svg[stroke]:not([stroke="none"]) > :is(path, rect, circle, ellipse, line, polyline, polygon, g):not([stroke-dasharray])
+    ) {
+    stroke-dasharray: none;
+    animation: none;
+  }
+  .js-arte
+    :is(.card__art:not(.card__art--iconos), .familia, .card.is-in .card__art:not(.card__art--iconos), .familias.is-in .familia):not(:has([stroke]:not([stroke="none"])))
+    svg
+    > *:not([opacity]) {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .js-arte
+    :is(.card__art:not(.card__art--iconos), .familia, .card.is-in .card__art:not(.card__art--iconos), .familias.is-in .familia):not(:has([stroke]:not([stroke="none"])))
+    svg
+    > *[opacity] {
+    transform: none;
+    animation: none;
+  }
+  .card:hover .art-ic {
     transform: none;
     transition: none;
   }

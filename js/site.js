@@ -79,6 +79,19 @@
   });
 
   /* Animaciones de entrada */
+
+  /* El candado del arte de las tarjetas (sección 16 del CSS).
+
+     NO vale reutilizar la clase "js" que pone el <script> en línea del
+     <head>: esa dice "el navegador tiene JavaScript", no "site.js llegó y
+     corrió". Si este archivo no llega (404, versión mal cacheada, red caída,
+     un bloqueador, una excepción más arriba), con aquélla el arte se quedaba
+     en su estado de partida —relleno a opacity 0, trazos sin dibujar— y era
+     invisible para siempre: medido, el 60 % de las formas de la portada.
+     Poniéndola aquí, si no corre no hay candado y el arte se ve sólido y
+     quieto, igual que sin JavaScript. */
+  document.documentElement.classList.add("js-arte");
+
   const revealItems = document.querySelectorAll(".reveal");
 
   if ("IntersectionObserver" in window && revealItems.length) {
