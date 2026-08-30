@@ -20,6 +20,7 @@
     "favicon-dominio": { nombre: "Favicon por dominio", ruta: "/herramientas/favicons/de-dominio/" },
     "texto-ondulado": { nombre: "Texto ondulado", ruta: "/herramientas/texto-ondulado/" },
     paletas: { nombre: "Generador de paletas", ruta: "/herramientas/paletas/", guarda: "paleta" },
+    "paletas-desde-imagen": { nombre: "Extraer paleta de imagen", ruta: "/herramientas/paletas/desde-imagen/", guarda: "paleta" },
     "colores-en-vivo": { nombre: "Colores en vivo", ruta: "/herramientas/colores-en-vivo/" },
     "optimizar-svg": { nombre: "Optimizador de SVG", ruta: "/herramientas/optimizar-svg/" },
     degradados: { nombre: "Degradados CSS", ruta: "/codigo-web/degradados/", guarda: "degradado" },
@@ -197,7 +198,7 @@
   /* --- Guardado en herramientas -------------------------------------- */
 
   const leerCssActual = (slug) => {
-    if (slug === "paletas") {
+    if (slug === "paletas" || slug === "paletas-desde-imagen") {
       const nodo = document.querySelector("[data-code]");
       return nodo ? (nodo.dataset.raw || nodo.textContent) : "";
     }
@@ -243,7 +244,7 @@
     if (!cfg?.guarda || document.querySelector("[data-guardar-lienzo]")) return;
 
     const destino =
-      slug === "paletas"
+      slug === "paletas" || slug === "paletas-desde-imagen"
         ? document.querySelector(".export__actions")
         : document.querySelector(".acciones");
     if (!destino) return;
