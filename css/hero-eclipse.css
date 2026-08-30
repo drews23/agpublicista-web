@@ -39,7 +39,7 @@
   position: relative;
   overflow: hidden;
   background: var(--ecl-bg) linear-gradient(0deg, rgba(139, 123, 255, 0.05), rgba(53, 214, 200, 0.05));
-  min-height: 47em;
+  min-height: 52em;
 }
 
 /* Modo alterno (ámbar) — se activa clicando el disco del eclipse */
@@ -79,7 +79,12 @@
   animation: ecl-load 2s ease-in 1.6s forwards, ecl-up 1.4s ease-out 1.6s forwards;
 }
 
+/* El disco es el único elemento interactivo del hero y pasaba desapercibido:
+   un círculo negro y quieto no dice "tócame". Se le añaden tres señales que
+   no compiten con el titular — un anillo que late, una pista escrita que
+   aparece al acercarse, y el crecimiento al pasar el mouse. */
 .eclipse .disco {
+  position: relative;
   width: 1.8em; height: 1.8em;
   border-radius: 50%;
   background: #000;
@@ -87,7 +92,49 @@
   padding: 0;
   box-shadow: 0 0 1em 0 var(--ecl-glow);
   cursor: pointer;
-  transition: box-shadow 1s ease-in-out;
+  transition: box-shadow 1s ease-in-out, scale 400ms var(--rebote, cubic-bezier(0.34, 1.56, 0.64, 1));
+}
+
+/* Anillo que se expande y se apaga, como una onda: dice "aquí pasa algo"
+   sin ocupar sitio. Empieza a los 3,4s, cuando el hero ya se armó. */
+.eclipse .disco::after {
+  content: '';
+  position: absolute;
+  inset: -0.35em;
+  border-radius: 50%;
+  border: 1px solid var(--ecl-glow);
+  opacity: 0;
+  animation: ecl-latido 3.2s ease-out 3.4s infinite;
+  pointer-events: none;
+}
+@keyframes ecl-latido {
+  0%   { transform: scale(0.85); opacity: 0; }
+  25%  { opacity: 0.75; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+.eclipse .disco:hover,
+.eclipse .disco:focus-visible {
+  scale: 1.18;
+}
+
+/* Pista escrita: aparece debajo del disco al acercarse o al tabular. */
+.eclipse .disco-pista {
+  position: absolute;
+  top: 3.4em; left: 50%;
+  translate: -50% 0;
+  font-size: 0.92em;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--ecl-text-lo);
+  opacity: 0;
+  transition: opacity 260ms ease, translate 260ms ease;
+  pointer-events: none;
+}
+.eclipse .cabecera:hover .disco-pista,
+.eclipse .disco:focus-visible ~ .disco-pista {
+  opacity: 0.85;
+  translate: -50% 0.3em;
 }
 .eclipse .disco:hover,
 .eclipse .disco:focus-visible {
@@ -477,8 +524,11 @@
 
 /* ── Montañas de vidrio ───────────────────────────────────────────── */
 
+/* Bajadas 5em el 30 ago 2026: a 33em su pico central subia 4,27em por
+   encima del boton "Explorar herramientas" y asomaba por detras como un
+   rectangulo de esquinas dobladas, sin sentido visual. Medido, no a ojo. */
 .eclipse .montanas {
-  position: absolute; left: 0; right: 0; top: 33em; margin: auto;
+  position: absolute; left: 0; right: 0; top: 38em; margin: auto;
   width: 100%; height: 10em;
   pointer-events: none;
   z-index: 1;
@@ -538,13 +588,15 @@
 
 /* Reserva la altura de la composición (todo el interior es absoluto) */
 .eclipse .espaciador {
-  height: 43.5em;
+  height: 48.5em;
   pointer-events: none;
 }
 
 /* ── Movimiento reducido: composición estática, sin canvas ────────── */
 
 @media (prefers-reduced-motion: reduce) {
+  .eclipse .disco::after { animation: none; opacity: 0.45; transform: scale(1.25); }
+  .eclipse .disco:hover, .eclipse .disco:focus-visible { scale: 1; }
   .eclipse .cabecera,
   .eclipse .spotlight > div,
   .eclipse .accent-lines > div:nth-child(1) > div,
@@ -581,8 +633,8 @@
 /* ── Ajustes de pantalla estrecha ─────────────────────────────────── */
 
 @media (max-width: 640px) {
-  .eclipse { min-height: 52em; }
+  .eclipse { min-height: 57em; }
   .eclipse .lema { font-size: 1.5em; max-width: 20em; }
-  .eclipse .montanas { top: 37em; }
-  .eclipse .espaciador { height: 48em; }
+  .eclipse .montanas { top: 42em; }
+  .eclipse .espaciador { height: 53em; }
 }

@@ -245,9 +245,12 @@ img, svg { max-width: 100%; }
   border: 1px solid var(--line);
 }
 
+/* Ámbar y no coral (30 ago 2026): el coral no está en la identidad, el ámbar
+   sí — es el de los chevrones ‹ › del logo y el del modo alterno del eclipse.
+   Es además el mismo token que ya usan las etiquetas .card__tag. */
 .site-nav a.nav-yt {
   color: var(--accent-ink);
-  background: var(--coral);
+  background: var(--ambar);
   border: 0;
 }
 
@@ -1533,6 +1536,17 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Las miniaturas son verticales (178x262, relación 0,68) y la imagen es
+   16:9 (relación 1,78): con `cover` solo entra el 38 % del ancho. Recortado
+   al centro caía en el fondo vacío y las tres se veían iguales e
+   ilegibles — el objeto protagonista de estas miniaturas vive a la DERECHA
+   (lo dejó el hueco del texto que se ocultó al generarlas). Al 75 % entra
+   completo en los cuatro packs; comprobado recortando y mirando, no a ojo.
+   La lámina grande no lleva este ajuste: ahí sí entra la imagen entera. */
+.carrusel__item:nth-child(n + 3) .carrusel__img {
+  object-position: 75% 50%;
 }
 
 /* Multiplicar + oscurecer: el trazo blanco de los iconos de fondo compite con
