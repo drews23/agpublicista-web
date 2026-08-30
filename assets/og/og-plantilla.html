@@ -21,8 +21,8 @@
     font-family: "Instrument Sans", system-ui, sans-serif;
     display: grid; place-items: center;
   }
-  .marco { display: grid; justify-items: center; gap: 34px; }
-  .logo { width: 680px; height: auto; color: #f4f3f8; }
+  .marco { display: grid; justify-items: center; gap: 26px; }
+  .logo { width: 600px; height: auto; color: #f4f3f8; }
   /* La captura debe salir oscura aunque el sistema que la genere esté en
      esquema claro: important gana a la media query interna del SVG. */
   .logo .wordmark { stroke: #f4f3f8 !important; }
@@ -31,13 +31,22 @@
   .raya { width: 430px; height: 7px; border-radius: 99px;
     background: linear-gradient(90deg, #8b7bff, #35d6c8 60%, #ffb454); }
   .dominio { color: #f4f3f8; font-weight: 700; font-size: 25px; letter-spacing: 0.02em; }
+  .iconos { display: flex; gap: 46px; align-items: center; }
+  .iconos img { width: 84px; height: 84px; display: block;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.45)); }
 </style>
   </head>
 <body>
   <div class="marco">
     <svg class="logo" viewBox="0 0 960 260" aria-hidden="true"><style>.wordmark{stroke:#f4f3f8}</style><defs><linearGradient id="marco-og" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-og)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
-    <p class="eslogan"><strong>Herramientas creativas sin fricción</strong><br />Diseño, web y marketing — gratis y en español</p>
+    <p class="eslogan">Diseño web, SVG, CSS, branding y marketing digital:<br /><strong>herramientas y recursos gratis, en español</strong></p>
     <div class="raya"></div>
+    <div class="iconos">
+      <img src="../../herramientas/favicons/iconos3d/9abf5882.svg" alt="" />
+      <img src="../../herramientas/favicons/iconos3d/50ad3a46.svg" alt="" />
+      <img src="../../herramientas/favicons/iconos3d/12256f2f.svg" alt="" />
+      <img src="../../herramientas/favicons/iconos3d/5ac63ec7.svg" alt="" />
+    </div>
     <p class="dominio">lienzo.tools</p>
   </div>
 </body>
