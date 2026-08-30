@@ -3,12 +3,16 @@
 RewriteEngine On
 
 # Migración de dominio (30 ago 2026): agpublicista.com -> lienzo.tools.
-# Un solo salto: dominio, esquema y www se resuelven aquí a la vez, ANTES
-# de la regla genérica de HTTPS/no-www de abajo — así una visita vieja a
-# http://www.agpublicista.com/lo-que-sea llega a lienzo.tools en un solo
-# 301, no en dos. Mientras el dominio viejo siga apuntando a este mismo
-# hosting, esta regla debe quedarse: es la que evita perder el tráfico y
-# el enlazado que ya apunta a agpublicista.com.
+# Va ANTES de la regla genérica de HTTPS/no-www de abajo para resolver
+# dominio, esquema y www de una vez. Medido en producción el 30 ago:
+# una entrada por https:// sale en UN 301; una por http:// sale en DOS,
+# porque el "Forzar HTTPS" que Hostinger aplica a nivel de servidor corre
+# antes que este archivo y ya hizo su propio salto a https:// del mismo
+# dominio. No es evitable desde aquí (solo apagando ese ajuste, que es
+# peor) y dos saltos no penalizan: no perseguir esa optimización.
+# Mientras el dominio viejo siga apuntando a este mismo hosting, esta
+# regla debe quedarse: es la que evita perder el tráfico y el enlazado
+# que ya apunta a agpublicista.com.
 RewriteCond %{HTTP_HOST} ^(www\.)?agpublicista\.com$ [NC]
 RewriteRule ^ https://lienzo.tools%{REQUEST_URI} [L,R=301]
 
