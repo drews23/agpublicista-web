@@ -16,6 +16,8 @@
      y qué se puede guardar desde cada una. */
   const HERRAMIENTAS = {
     favicons: { nombre: "Galería de favicons", ruta: "/herramientas/favicons/" },
+    "favicons-emojis": { nombre: "Galería de emojis", ruta: "/herramientas/favicons/emojis/" },
+    "favicon-dominio": { nombre: "Favicon por dominio", ruta: "/herramientas/favicons/de-dominio/" },
     "texto-ondulado": { nombre: "Texto ondulado", ruta: "/herramientas/texto-ondulado/" },
     paletas: { nombre: "Generador de paletas", ruta: "/herramientas/paletas/", guarda: "paleta" },
     "colores-en-vivo": { nombre: "Colores en vivo", ruta: "/herramientas/colores-en-vivo/" },
