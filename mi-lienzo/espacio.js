@@ -199,7 +199,7 @@
 
         <div class="tablero__stats">
           <div class="stat"><b>${d.creaciones.length}</b><span>creaciones guardadas</span></div>
-          <div class="stat"><b>${visitadas}<small style="color:var(--faint)">/12</small></b><span>herramientas probadas</span></div>
+          <div class="stat"><b>${visitadas}<small style="color:var(--faint)">/${Object.keys(window.AGLienzo.HERRAMIENTAS).length}</small></b><span>herramientas probadas</span></div>
           <div class="stat"><b>${logradas}<small style="color:var(--faint)">/6</small></b><span>insignias logradas</span></div>
           <div class="stat"><b>${d.dias.length}</b><span>días creando</span></div>
         </div>

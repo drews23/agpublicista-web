@@ -30,6 +30,16 @@
         document.documentElement.dataset.theme =
           t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
       } catch (e) {}
+
+      /* Vigilante del candado: la clase "js" esconde los .reveal y quien los
+         revela es el observador que viaja en /js/site.js. Si ese archivo no
+         llega (404, CDN caído, bloqueador), sin esto el contenido quedaría
+         invisible PARA SIEMPRE. A los 3 s sin señal de vida —site.js pone
+         "js-arte" al arrancar— se suelta el candado y todo se ve. */
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -415,6 +425,8 @@
             <h4>Herramientas</h4>
             <ul>
               <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/favicons/emojis/">Galería de emojis</a></li>
+              <li><a href="/herramientas/favicons/de-dominio/">Favicon por dominio</a></li>
               <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
               <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
               <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>

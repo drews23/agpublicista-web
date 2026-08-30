@@ -88,6 +88,27 @@
   let porChar = null; // char → registro
   let indice = null; // [{char, hay}] para buscar
   let cargaPromesa = null;
+  let datosFallaron = false;
+
+  /* Aviso visible cuando el índice de nombres no llega. El placeholder del
+     buscador no sirve: es invisible en cuanto el campo tiene texto, que es
+     justo el caso en que se descubre el fallo. */
+  const avisarDatosCaidos = () => {
+    if (buscador) {
+      buscador.value = "";
+      buscador.disabled = true;
+      buscador.placeholder = "Búsqueda no disponible";
+    }
+    if (contador) contador.textContent = "";
+    if (galeria && !galeria.querySelector(".aviso-datos")) {
+      const p = document.createElement("p");
+      p.className = "aviso-datos";
+      p.setAttribute("role", "status");
+      p.textContent =
+        "No se pudo cargar el índice de nombres, así que la búsqueda y los tonos de piel no están disponibles ahora mismo. Los emojis siguen aquí y se copian igual.";
+      galeria.insertBefore(p, galeria.firstElementChild);
+    }
+  };
 
   const cargarDatos = () => {
     if (cargaPromesa) return cargaPromesa;
@@ -116,11 +137,11 @@
         return j;
       })
       .catch((e) => {
-        cargaPromesa = null;
-        if (buscador) {
-          buscador.disabled = true;
-          buscador.placeholder = "Búsqueda no disponible (sin conexión). Los emojis siguen aquí.";
-        }
+        // NO se pone cargaPromesa a null: si la URL está muerta, reintentar
+        // en cada clic sólo genera peticiones inútiles (medido: 8 clics, 8
+        // peticiones). La promesa rechazada se recuerda y se avisa una vez.
+        datosFallaron = true;
+        avisarDatosCaidos();
         throw e;
       });
     return cargaPromesa;
@@ -201,6 +222,11 @@
 
   const abrirDock = (char) => {
     seleccionado = char;
+    // exponer la región viva ANTES de escribir dentro: mientras el <aside>
+    // tiene [hidden] está fuera del árbol de accesibilidad y el lector de
+    // pantalla no anuncia el primer emoji seleccionado
+    dock.hidden = false;
+    document.body.classList.add("con-dock");
     const ch = variante(char);
     dockChar.textContent = ch;
     const r = porChar && porChar.get(char);
@@ -224,8 +250,6 @@
         }
       }
     }
-    dock.hidden = false;
-    document.body.classList.add("con-dock");
     // aria-live del dock anuncia el cambio sin robar el foco
   };
 
@@ -242,7 +266,7 @@
     if (tono && !porChar) {
       // preferencia guardada pero dato aún no cargado: copiar la base y decirlo
       toast("Copiado el tono neutro (los tonos aún cargaban)");
-      cargarDatos().catch(() => {});
+      if (!datosFallaron) cargarDatos().catch(() => {});
     } else {
       ch = variante(base);
     }
@@ -255,7 +279,8 @@
       toast("No se pudo copiar", "error");
     }
     abrirDock(base);
-    if (!porChar) cargarDatos().then(() => abrirDock(base)).catch(() => {});
+    if (!porChar && !datosFallaron)
+      cargarDatos().then(() => abrirDock(base)).catch(() => {});
   };
 
   document.addEventListener("click", (ev) => {
@@ -332,6 +357,21 @@
   const grupos = Array.from(
     document.querySelectorAll(".grupo-emojis:not(.grupo-emojis--pop)")
   );
+  const seccionesTodas = Array.from(document.querySelectorAll(".grupo-emojis"));
+
+  /* Resiembra las paradas de tabulación: una por sección visible, siempre en
+     una celda visible. Sin esto, al filtrar las 9 paradas se quedaban dentro
+     de celdas ocultas y el teclado no podía entrar en ningún resultado. */
+  const resembrarParadas = () => {
+    for (const b of todas) if (b.tabIndex === 0) b.tabIndex = -1;
+    for (const sec of seccionesTodas) {
+      if (sec.hidden) continue;
+      const primera = Array.from(sec.querySelectorAll(".gc")).find(
+        (b) => !b.hidden && !b.closest("[hidden]")
+      );
+      if (primera) primera.tabIndex = 0;
+    }
+  };
   let grupoActivo = ""; // "" = todos
   let query = "";
 
@@ -350,10 +390,12 @@
       $("#ge-populares").hidden = grupoActivo !== "";
       if (contador) contador.textContent = "";
       if (sinResultados) sinResultados.hidden = true;
+      resembrarParadas();
       return;
     }
 
     if (!indice) {
+      if (datosFallaron) return;
       cargarDatos()
         .then(aplicarFiltro)
         .catch(() => {});
@@ -391,6 +433,7 @@
       contador.textContent =
         visibles === 0 ? "" : `${visibles.toLocaleString("es")} resultados`;
     if (sinResultados) sinResultados.hidden = visibles !== 0;
+    resembrarParadas();
   };
 
   let temporizador;
@@ -447,13 +490,28 @@
     else if (ev.key === "End") destino = visibles[visibles.length - 1];
     else if (ev.key === "Enter" && ev.shiftKey) {
       ev.preventDefault();
-      dock.querySelector("button:not([hidden])")?.focus();
+      // [hidden] en el propio botón no basta: los tonos viven dentro de
+      // #dock-tonos[hidden], así que hay que mirar la visibilidad real
+      (
+        dock.querySelector(".dock__acciones button") ||
+        Array.from(dock.querySelectorAll("button")).find((b) => b.offsetParent !== null)
+      )?.focus();
       return;
     } else return;
 
     if (destino) {
       ev.preventDefault();
+      const secOrigen = celda.closest(".grupo-emojis");
+      const secDestino = destino.closest(".grupo-emojis");
       celda.tabIndex = -1;
+      // si se abandona un grupo, ese grupo se queda sin ninguna parada y
+      // dejaría de ser alcanzable con Tab el resto de la sesión
+      if (secOrigen && secOrigen !== secDestino) {
+        const primera = Array.from(secOrigen.querySelectorAll(".gc")).find(
+          (b) => !b.hidden && !b.closest("[hidden]")
+        );
+        if (primera) primera.tabIndex = 0;
+      }
       destino.tabIndex = 0;
       destino.focus();
     }
@@ -527,9 +585,8 @@
         }
       }
     }
-    if (marcados) {
-      console.info(`emojis: ${marcados} sin glifo en este sistema (marcados, no ocultos)`);
-    }
+    // (los emojis sin glifo quedan marcados con .gc--nosoporta y su title;
+    //  nada que registrar en la consola del visitante)
   };
 
   if ("requestIdleCallback" in window) {

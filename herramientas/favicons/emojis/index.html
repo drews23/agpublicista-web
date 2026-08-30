@@ -30,6 +30,16 @@
         document.documentElement.dataset.theme =
           t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
       } catch (e) {}
+
+      /* Vigilante del candado: la clase "js" esconde los .reveal y quien los
+         revela es el observador que viaja en /js/site.js. Si ese archivo no
+         llega (404, CDN caído, bloqueador), sin esto el contenido quedaría
+         invisible PARA SIEMPRE. A los 3 s sin señal de vida —site.js pone
+         "js-arte" al arrancar— se suelta el candado y todo se ve. */
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -219,7 +229,7 @@
 <section class="grupo-emojis grupo-emojis--pop" id="ge-populares" aria-labelledby="h-populares">
 <h2 id="h-populares">Los más usados</h2>
 <ul class="grid-emojis grid-emojis--pop">
-<li><button type="button" class="gc" data-e="😂" tabindex="-1" aria-label="cara llorando de risa" title="cara llorando de risa">😂</button><span class="gc__nombre">cara llorando de risa</span></li>
+<li><button type="button" class="gc" data-e="😂" tabindex="0" aria-label="cara llorando de risa" title="cara llorando de risa">😂</button><span class="gc__nombre">cara llorando de risa</span></li>
 <li><button type="button" class="gc" data-e="❤️" tabindex="-1" aria-label="corazón rojo" title="corazón rojo">❤️</button><span class="gc__nombre">corazón rojo</span></li>
 <li><button type="button" class="gc" data-e="🤣" tabindex="-1" aria-label="cara revolviéndose de la risa" title="cara revolviéndose de la risa">🤣</button><span class="gc__nombre">cara revolviéndose de la risa</span></li>
 <li><button type="button" class="gc" data-e="👍️" tabindex="-1" aria-label="pulgar hacia arriba" title="pulgar hacia arriba">👍️</button><span class="gc__nombre">pulgar hacia arriba</span></li>
@@ -2599,6 +2609,8 @@
             <h4>Herramientas</h4>
             <ul>
               <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/favicons/emojis/">Galería de emojis</a></li>
+              <li><a href="/herramientas/favicons/de-dominio/">Favicon por dominio</a></li>
               <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
               <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
               <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
@@ -2646,6 +2658,6 @@
 
     <script src="/js/site.js?v=2026082906" defer></script>
     <script src="/js/mi-lienzo.js?v=2026082906" defer></script>
-    <script src="js/emojis.js?v=1" defer></script>
+    <script src="js/emojis.js?v=2" defer></script>
   </body>
 </html>

@@ -155,11 +155,13 @@ for (const p of POPULARES) {
 L.push('<section class="grupo-emojis grupo-emojis--pop" id="ge-populares" aria-labelledby="h-populares">');
 L.push('<h2 id="h-populares">Los más usados</h2>');
 L.push('<ul class="grid-emojis grid-emojis--pop">');
-for (const e of popValidos) {
+popValidos.forEach((e, i) => {
+  // la primera celda lleva la parada de tabulación de esta sección: sin ella
+  // los 24 populares —la sección que la página destaca— eran inalcanzables
   L.push(
-    `<li>${celda(e, -1)}<span class="gc__nombre">${escapar(e.label)}</span></li>`
+    `<li>${celda(e, i === 0 ? 0 : -1)}<span class="gc__nombre">${escapar(e.label)}</span></li>`
   );
-}
+});
 L.push("</ul>");
 L.push("</section>");
 
