@@ -40,14 +40,20 @@
 
   function colocar() {
     const paso = 360 / tarjetas.length;
-    /* Radio del anillo. La plantilla usaba min(400, ancho/2.5), pero está
-       pensada para 5 tarjetas: con 6 el paso baja a 60 grados y las vecinas
-       quedaban casi de canto y muy lejos —medido: a 429px del centro y con
-       48px de ancho, astillas sueltas en los bordes—. Con 220 caen a ~200px
-       y ~108px de ancho, solapando apenas la activa, que es la lectura del
-       CodePen original. Si algún día cambia el número de láminas, hay que
-       volver a medir: el ángulo depende de cuántas son. */
-    const radio = Math.min(220, window.innerWidth / 4.5);
+    /* Radio del anillo. La plantilla usa min(400, ancho/2.5), pero está
+       pensada para 5 tarjetas: con 6 el paso baja de 72 a 60 grados y toda la
+       geometría se corre. Calibrado contra la referencia con dos medidas
+       reales, porque el ojo aquí decide mejor que la fórmula:
+
+         radio 400 -> vecina a 433px, hueco de 185px  ... demasiado lejos
+         radio 220 -> vecina a 214px, solapa 25px     ... demasiado apretado
+         radio 320 -> vecina a 330px, hueco de 86px   ... esta
+
+       El hueco es lo que se mira: la distancia entre el borde de la tarjeta
+       activa y el borde interior de la vecina. Si algún día cambia el número
+       de láminas hay que volver a medirlo, porque el ángulo del paso —y con
+       él la escala en perspectiva— depende de cuántas son. */
+    const radio = Math.min(320, window.innerWidth / 3.4);
 
     tarjetas.forEach((tarjeta, i) => {
       // Ángulo RELATIVO a la activa: así el anillo gira de verdad.
@@ -88,9 +94,13 @@
         return;
       }
 
-      tarjeta.style.opacity = String(Math.max(0.15, 1 - dist * 0.26));
+      /* Opacidad y desenfoque son los de la plantilla: 0,8 y 1px para la
+         vecina. Los había subido a 0,74 y 2px y las laterales dejaban de
+         leerse como tarjetas —quedaban como manchas detrás de la activa—,
+         que es justo lo que la referencia NO hace. */
+      tarjeta.style.opacity = String(Math.max(0.15, 1 - dist * 0.2));
       tarjeta.style.zIndex = String(10 - dist);
-      tarjeta.style.filter = `blur(${Math.min(6, dist * 2)}px)`;
+      tarjeta.style.filter = `blur(${Math.min(6, dist)}px)`;
       tarjeta.style.transform =
         `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) rotateY(${giro}deg)`;
     });
