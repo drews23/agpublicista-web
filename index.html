@@ -49,6 +49,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026083001" />
+    <link rel="stylesheet" href="/css/hero-eclipse.css?v=2026083010" />
 
     <script type="application/ld+json">
     {
@@ -108,44 +109,72 @@
     </header>
 
     <main>
-      <!-- Hero -->
-      <section class="hero">
-        <div class="shell">
-          <p class="eyebrow reveal">Diseño · Código · Dirección de arte</p>
-
-          <h1 class="reveal" style="--reveal-delay: 80ms">
-            Herramientas <span class="fancy">de diseño web y creatividad</span><span class="sr-only">: recursos útiles, originales y gratuitos en español</span>
-          </h1>
-
-          <!-- LA ESCENA ES EL HERO: parte visual y estructural de la portada.
-               Sin iframe y sin visor de terceros — el archivo .spline lo
-               servimos nosotros y el runtime lo monta sobre un <canvas>
-               transparente, así que la escena se apoya en el fondo del sitio.
-               La imagen (WebP con alfa, 32 KB) pinta al instante y es el
-               respaldo permanente con ahorro de datos, movimiento reducido o
-               sin WebGL. Ver js/escena-3d.js. -->
-          <figure class="hero-escena escena-3d reveal" style="--reveal-delay: 160ms"
-                  data-escena-3d="/assets/escenas-3d/hero-diseno-web.spline">
-            <div class="escena-3d__marco">
-              <img class="escena-3d__portada" src="/assets/escenas-3d/hero-diseno-web.webp" alt="Escena 3D de diseño web: ventanas de navegador, una gráfica de anillo y un cursor flotando en los colores de Lienzo" width="1920" height="1080" fetchpriority="high" />
-            </div>
-          </figure>
-
-          <p class="lede reveal" style="--reveal-delay: 240ms">
-            Lienzo reúne herramientas para diseño web, SVG, CSS, branding y marketing digital
-            en español. Aquí encontrarás recursos reales, originales y útiles para crear
-            interfaces, favicons, iconos y contenido visual con criterio, claridad y valor práctico.
-          </p>
-          <p class="reveal" style="--reveal-delay: 280ms; max-width: 62ch; margin: 0 auto 0; color: var(--muted);">
-            El contenido del sitio se escribe con criterio propio, se actualiza con foco en la
-            utilidad real y se diseña para resolver problemas concretos, no para llenar espacio.
-          </p>
-          <div class="hero__cta reveal" style="--reveal-delay: 320ms">
-            <a class="btn btn--primary" href="/herramientas/">Explorar herramientas</a>
-            <a class="btn btn--ghost" href="/codigo-web/">Generadores CSS</a>
-          </div>
-
+      <!-- Hero "Eclipse" — composición adaptada a los tokens Lienzo.
+           Ver css/hero-eclipse.css y js/hero-eclipse.js (MIT, adaptado de
+           codepen.io/RAFA3L). El disco de arriba alterna violeta↔ámbar. -->
+      <section class="eclipse" aria-label="Portada de Lienzo">
+        <div class="cabecera">
+          <button class="disco" type="button" aria-pressed="false"
+                  aria-label="Alternar el acento del hero entre violeta y ámbar"></button>
         </div>
+        <div class="spotlight" aria-hidden="true">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <canvas class="particulas" aria-hidden="true"></canvas>
+
+        <div class="accent-lines" aria-hidden="true">
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+
+        <div class="sub-eyebrow">
+          <p>Herramientas creativas sin fricción</p>
+        </div>
+        <div class="titular">
+          <h1>Lienzo<span class="sr-only"> — herramientas de diseño web y creatividad, gratis y en español</span></h1>
+          <div class="titular-glow" aria-hidden="true">Lienzo</div>
+        </div>
+        <div class="pie">
+          <p class="lema">Diseño web, SVG, CSS y marketing digital:<br />
+            herramientas y recursos gratis, en español.</p>
+          <a class="cta" href="/herramientas/">
+            <span class="glow" aria-hidden="true"></span>
+            <span class="cta-texto">Explorar herramientas</span>
+          </a>
+        </div>
+        <div class="montanas" aria-hidden="true">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="espaciador"></div>
+      </section>
+
+      <!-- El propósito del sitio, conservado bajo el hero -->
+      <section class="section shell" aria-label="Qué es Lienzo">
+        <p class="reveal" style="max-width: 62ch; margin: 0 auto; text-align: center; font-size: 1.12rem;">
+          Lienzo reúne herramientas para diseño web, SVG, CSS, branding y marketing digital
+          en español. Aquí encontrarás recursos reales, originales y útiles para crear
+          interfaces, favicons, iconos y contenido visual con criterio, claridad y valor práctico.
+        </p>
+        <p class="reveal" style="--reveal-delay: 120ms; max-width: 62ch; margin: 1rem auto 0; text-align: center; color: var(--muted);">
+          El contenido del sitio se escribe con criterio propio, se actualiza con foco en la
+          utilidad real y se diseña para resolver problemas concretos, no para llenar espacio.
+        </p>
       </section>
 
       <!-- Lo más reciente (carrusel) -->
@@ -675,7 +704,7 @@
       </div>
     </footer>
 
-    <script src="/js/escena-3d.js?v=2026083001" defer></script>
+    <script src="/js/hero-eclipse.js?v=2026083010" defer></script>
     <script src="/js/site.js?v=2026083001" defer></script>
     <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
   </body>

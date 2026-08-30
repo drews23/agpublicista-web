@@ -1,0 +1,588 @@
+/* Hero "Eclipse" de la portada — composición adaptada a los tokens Lienzo.
+   Adaptado de "Eclipse Hero" de Rafa — https://codepen.io/RAFA3L/pen/RwOMEEa
+   The MIT License (MIT) — Copyright (c) 2026 Rafa
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction (…) subject to including this notice.
+
+   Adaptación (30 ago 2026): colores del sistema Lienzo en lugar del azul
+   original (violeta #8b7bff, turquesa #35d6c8, ámbar #ffb454 para el modo
+   alterno), Fraunces en lugar de Hubot Sans (sin fuentes nuevas), todo el
+   CSS bajo el ámbito .eclipse con keyframes prefijados ecl- para no chocar
+   con site.css, y variables CSS en lugar del truco de filter:invert del
+   original para el modo alterno. El disco (eclipse) sigue siendo clicable
+   y alterna violeta↔ámbar, como en la plantilla.
+
+   El hero es un escenario oscuro EN LOS DOS TEMAS (decisión de dirección:
+   funciona como póster de marca); el degradado final lo funde con el fondo
+   real del sitio, que sí cambia con el tema. */
+
+.eclipse {
+  /* El truco de escala de la plantilla, movido del body a la sección:
+     todo el interior está en em, así que la composición entera escala
+     con el viewport. */
+  --_factor: min(600px, 80vh);
+  --_size: min(var(--_factor), 80vw);
+  font-size: max(calc(var(--_size) * 0.03), 10px);
+
+  /* Tokens de la composición (modo violeta por defecto) */
+  --ecl-bg: #07060d;
+  --ecl-glow: #8b7bff;            /* violeta Lienzo */
+  --ecl-glow-2: #35d6c8;          /* turquesa Lienzo */
+  --ecl-line: #c7bfff;            /* violeta claro para líneas/bordes */
+  --ecl-line-soft: rgba(199, 191, 255, 0.18);
+  --ecl-text-hi: #efeaff;
+  --ecl-text-lo: #b3a8ff;
+  --ecl-spot: 139, 123, 255;      /* rgb del haz de luz */
+  --ecl-panel: #14121f;
+
+  position: relative;
+  overflow: hidden;
+  background: var(--ecl-bg) linear-gradient(0deg, rgba(139, 123, 255, 0.05), rgba(53, 214, 200, 0.05));
+  min-height: 47em;
+}
+
+/* Modo alterno (ámbar) — se activa clicando el disco del eclipse */
+.eclipse.eclipse--oro {
+  --ecl-glow: #ffb454;
+  --ecl-glow-2: #ffd39b;
+  --ecl-line: #ffd9a8;
+  --ecl-line-soft: rgba(255, 217, 168, 0.18);
+  --ecl-text-hi: #fff3e2;
+  --ecl-text-lo: #ffcf94;
+  --ecl-spot: 255, 180, 84;
+}
+
+/* Fundido con el fondo real del sitio al final de la sección */
+.eclipse::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 6em;
+  background: linear-gradient(180deg, transparent, var(--bg, #0a0a0f));
+  pointer-events: none;
+  z-index: 3;
+}
+
+.eclipse h1, .eclipse p { margin: 0; padding: 0; }
+
+/* ── Disco del eclipse + haces de luz ─────────────────────────────── */
+
+.eclipse .cabecera {
+  display: flex; width: 100%;
+  justify-content: center;
+  padding: 2em;
+  position: absolute;
+  top: 0; left: 0; right: 0; margin: 0 auto;
+  opacity: 0;
+  translate: 0 -1em;
+  animation: ecl-load 2s ease-in 1.6s forwards, ecl-up 1.4s ease-out 1.6s forwards;
+}
+
+.eclipse .disco {
+  width: 1.8em; height: 1.8em;
+  border-radius: 50%;
+  background: #000;
+  border: none;
+  padding: 0;
+  box-shadow: 0 0 1em 0 var(--ecl-glow);
+  cursor: pointer;
+  transition: box-shadow 1s ease-in-out;
+}
+.eclipse .disco:hover,
+.eclipse .disco:focus-visible {
+  box-shadow: -0.3em 0.1em 0.3em 0 #ffb454;
+}
+.eclipse.eclipse--oro .disco:hover,
+.eclipse.eclipse--oro .disco:focus-visible {
+  box-shadow: -0.3em 0.1em 0.3em 0 #8b7bff;
+}
+.eclipse .disco:focus-visible {
+  outline: 2px solid var(--ecl-line);
+  outline-offset: 3px;
+}
+
+.eclipse .spotlight {
+  pointer-events: none;
+  position: absolute; left: 0; right: 0; top: 0; margin: 0 auto;
+  transition: filter 1s ease-in-out;
+  height: 42em; width: 100%;
+  overflow: hidden;
+}
+.eclipse .spotlight > div {
+  border-radius: 0 0 50% 50%;
+  position: absolute; left: 0; right: 0; margin: 0 auto;
+  top: 3em;
+  width: 30em; height: max(42em, 86vh);
+  background-image: conic-gradient(from 0deg at 50% -5%,
+    transparent 45%,
+    rgba(var(--ecl-spot), 0.3) 49%,
+    rgba(var(--ecl-spot), 0.5) 50%,
+    rgba(var(--ecl-spot), 0.3) 51%,
+    transparent 55%);
+  transform-origin: 50% 0;
+  filter: blur(15px) opacity(0.5);
+  z-index: 0;
+  animation: ecl-load 2s ease-in-out forwards, ecl-loadrot 2s ease-in-out forwards, ecl-spotlight 21s ease-in-out infinite reverse;
+}
+.eclipse .spotlight > div:nth-child(1) {
+  rotate: 20deg;
+  animation: ecl-load 2s ease-in-out forwards, ecl-loadrot 2s ease-in-out forwards, ecl-spotlight 17s ease-in-out infinite;
+}
+.eclipse .spotlight > div:nth-child(2) {
+  rotate: -20deg;
+  animation: ecl-load 2s ease-in-out forwards, ecl-loadrot 2s ease-in-out forwards, ecl-spotlight 14s ease-in-out infinite;
+}
+@keyframes ecl-loadrot {
+  0% { rotate: 0deg; scale: 0; }
+  100% { scale: 1; }
+}
+@keyframes ecl-spotlight {
+  0%   { transform: rotateZ(0deg) scale(1);    filter: blur(15px) opacity(0.5); }
+  20%  { transform: rotateZ(-1deg) scale(1.2); filter: blur(16px) opacity(0.6); }
+  40%  { transform: rotateZ(2deg) scale(1.3);  filter: blur(14px) opacity(0.4); }
+  60%  { transform: rotateZ(-2deg) scale(1.2); filter: blur(15px) opacity(0.6); }
+  80%  { transform: rotateZ(1deg) scale(1.1);  filter: blur(13px) opacity(0.4); }
+  100% { transform: rotateZ(0deg) scale(1);    filter: blur(15px) opacity(0.5); }
+}
+
+/* ── Partículas (canvas, ver js/hero-eclipse.js) ──────────────────── */
+
+.eclipse canvas.particulas {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  animation: ecl-load 0.4s ease-in-out forwards;
+  z-index: 1;
+  width: 100%; height: 100%;
+}
+
+/* ── Líneas de acento ─────────────────────────────────────────────── */
+
+.eclipse .accent-lines {
+  pointer-events: none;
+  position: absolute; top: 0; left: 0; right: 0;
+  width: 100%; height: 42em;
+  z-index: 0;
+}
+.eclipse .accent-lines > div {
+  position: absolute; top: 0; right: 0; left: 0; margin: auto;
+  height: 100%; width: 100%;
+}
+.eclipse .accent-lines > div:nth-child(1) > div {
+  position: absolute; top: 0; right: 0; left: 0; margin: auto;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ecl-line-soft), transparent);
+  opacity: 0; scale: 0;
+  animation: ecl-accentload 2s ease-out 2.4s forwards;
+}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1) { top: 6em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2) { top: 11em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(3) { top: 16em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(4) { top: 24em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(5) { top: 29em; }
+.eclipse .accent-lines > div:nth-child(2) > div {
+  position: absolute; top: 0; right: 0; left: 0; margin: auto;
+  width: 1px; height: 100%;
+  background: var(--ecl-line-soft);
+  opacity: 0; scale: 0;
+  animation: ecl-accentload 2s ease-out 2s forwards;
+}
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(1) { left: 24em; }
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(2) { left: 34em; }
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(3) { right: 24em; }
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(4) { right: 34em; }
+@keyframes ecl-accentload {
+  0%   { opacity: 0; scale: 0; }
+  100% { opacity: 1; scale: 1; }
+}
+
+.eclipse .accent-lines > div:nth-child(1) > div::before,
+.eclipse .accent-lines > div:nth-child(1) > div::after {
+  content: ''; display: none; position: absolute;
+  width: 0.2em; height: 0.2em; border-radius: 1em;
+  background: var(--ecl-glow);
+  left: 0; right: 0; margin: auto;
+  translate: 0 -1px;
+  opacity: 0; scale: 0;
+  animation: ecl-accentload 2s ease-out 4.4s forwards;
+}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(3)::before { display: block; left: 24em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(3)::after  { display: block; right: 24em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(4)::before { display: block; left: 24em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(4)::after  { display: block; right: 24em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(5)::before { display: block; left: 24em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(5)::after  { display: block; right: 24em; }
+
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::before,
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::after {
+  display: block; width: 5em; height: 1px; border-radius: 0;
+  animation: ecl-accentload2 2s ease-out 2.4s forwards;
+}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::before { right: 24em; rotate: 45deg;  translate: -2.5em 2.5em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::after  { right: 24em; rotate: -45deg; translate: -2.5em 2.5em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::before,
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::after {
+  display: block; width: 5em; height: 1px; border-radius: 0;
+  animation: ecl-accentload3 2s ease-out 2.4s forwards;
+}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::before { left: 24em; rotate: 45deg;  translate: 2.5em 7.5em; }
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::after  { left: 24em; rotate: -45deg; translate: 2.5em 7.5em; }
+@keyframes ecl-accentload2 {
+  0%   { opacity: 0; scale: 0; transform: rotate(360deg); }
+  50%  { scale: 0; }
+  100% { opacity: 0.12; scale: 1; transform: rotate(0deg); }
+}
+@keyframes ecl-accentload3 {
+  0%   { opacity: 0; scale: 0; transform: rotate(-360deg); }
+  50%  { scale: 0; }
+  100% { opacity: 0.12; scale: 1; transform: rotate(0deg); }
+}
+
+/* ── Textos del hero ──────────────────────────────────────────────── */
+
+.eclipse .sub-eyebrow {
+  position: absolute; left: 0; right: 0; top: 13em; margin: auto;
+  height: fit-content;
+  opacity: 0;
+  translate: 0 -1em;
+  animation: ecl-load3 2s ease-in 0s forwards, ecl-up 1.4s ease-out 0s forwards;
+  z-index: 2;
+}
+@keyframes ecl-load3 {
+  0% { opacity: 0; }
+  100% { opacity: 0.7; }
+}
+.eclipse .sub-eyebrow p {
+  font-size: 1.1em;
+  position: relative; width: fit-content; margin: auto;
+  letter-spacing: 0.08em;
+  color: var(--ecl-text-hi);
+  text-shadow: 0 2px 16px rgba(var(--ecl-spot), 0.24);
+  background: linear-gradient(0deg, var(--ecl-text-hi) 0, var(--ecl-text-lo) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.eclipse .sub-eyebrow p::before,
+.eclipse .sub-eyebrow p::after {
+  position: absolute; top: 60%;
+  display: block; content: '';
+  width: 5em; height: 1px;
+  opacity: 0;
+  animation: ecl-load2 1.4s ease-in-out 0s forwards, ecl-up 1.4s ease-out 0s forwards;
+}
+@keyframes ecl-load2 {
+  0% { opacity: 0; }
+  100% { opacity: 0.3; }
+}
+.eclipse .sub-eyebrow p::before {
+  background: linear-gradient(-90deg, var(--ecl-glow) 0%, transparent 100%);
+  right: 120%;
+  translate: -5em 0;
+}
+.eclipse .sub-eyebrow p::after {
+  background: linear-gradient(90deg, var(--ecl-glow) 0%, transparent 100%);
+  left: 120%;
+  translate: 5em 0;
+}
+
+.eclipse .titular {
+  position: absolute; left: 0; right: 0; top: 16em; margin: auto;
+  height: 20em;
+  padding-top: 2em;
+  translate: 0 -1.6em;
+  opacity: 0;
+  animation: ecl-load 2s ease-in-out 0.6s forwards;
+  z-index: 2;
+}
+@keyframes ecl-load {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.eclipse .titular > * {
+  position: absolute; left: 0; right: 0; margin: auto;
+  width: fit-content;
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-size: 7em;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ecl-text-lo);
+  /* El barrido de brillo de la plantilla: un radial que viaja por el texto
+     vía la propiedad animable --ecl-p, sobre el degradado de la marca. */
+  background:
+    radial-gradient(2em 2em at 50% 50%,
+      transparent calc(var(--ecl-p) - 2em),
+      #fff calc(var(--ecl-p) - 1em),
+      #fff calc(var(--ecl-p) - 0.4em),
+      transparent var(--ecl-p)),
+    linear-gradient(100deg, var(--ecl-glow) 10%, var(--ecl-glow-2) 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 16px rgba(var(--ecl-spot), 0.24);
+  --ecl-p: 0%;
+  animation: ecl-pulse 10s linear 1.2s infinite;
+}
+.eclipse .titular > .titular-glow {
+  background:
+    radial-gradient(2em 2em at 50% 50%,
+      transparent calc(var(--ecl-p) - 2em),
+      transparent calc(var(--ecl-p) - 1em),
+      #fff calc(var(--ecl-p) - 1em),
+      #fff calc(var(--ecl-p) - 0.4em),
+      transparent calc(var(--ecl-p) - 0.4em),
+      transparent var(--ecl-p));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: blur(16px) opacity(0.4);
+}
+@keyframes ecl-pulse {
+  0%   { --ecl-p: 0%; }
+  50%  { --ecl-p: 300%; }
+  100% { --ecl-p: 300%; }
+}
+@property --ecl-p {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+.eclipse .titular .sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* Lema + CTA viven en un contenedor EN FLUJO: así nunca se pisan entre sí
+   aunque el texto parta en más líneas (la plantilla posicionaba cada pieza
+   con top absoluto y el em del top dependía del font-size del elemento —
+   frágil en viewports estrechos). */
+.eclipse .pie {
+  position: absolute; left: 0; right: 0; top: 26.9em;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 1.4em;
+  z-index: 2;
+  padding: 0 1em;
+}
+.eclipse .lema {
+  font-size: 1.35em;
+  line-height: 1.55;
+  width: fit-content; max-width: 34em;
+  text-align: center;
+  opacity: 0;
+  translate: 0 1em;
+  animation: ecl-load 2s ease-out 2s forwards, ecl-up 1.4s ease-out 2s forwards;
+  color: var(--ecl-text-hi);
+  text-shadow: 0 2px 16px rgba(var(--ecl-spot), 0.24);
+  background: linear-gradient(0deg, var(--ecl-text-hi) 0, var(--ecl-text-lo) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@keyframes ecl-up {
+  100% { translate: 0; }
+}
+
+/* ── CTA con borde luminoso en bucle ─────────────────────────────── */
+
+.eclipse .cta {
+  position: relative;
+  width: fit-content; min-width: 11em;
+  min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border-radius: 20em;
+  border: 1px solid rgba(199, 191, 255, 0.2);
+  padding: 0.55em 1.6em 0.45em;
+  background: var(--ecl-panel);
+  text-decoration: none;
+  white-space: nowrap;
+  z-index: 2;
+  opacity: 0;
+  translate: 0 1em;
+  animation: ecl-load 2s ease-out 2.2s forwards, ecl-up 1.4s ease-out 2.2s forwards;
+  transition: background 0.5s;
+}
+.eclipse .cta::before {
+  content: ''; display: block; position: absolute; left: 0; top: 0;
+  border-radius: 20em;
+  width: 100%; height: 100%;
+  background: rgba(var(--ecl-spot), 0.55) radial-gradient(farthest-side at 50% 100%, var(--ecl-line), transparent);
+  opacity: 0.1;
+  transition: all 0.4s ease-in-out;
+}
+.eclipse .cta:hover::before,
+.eclipse .cta:focus-visible::before {
+  opacity: 0.3;
+}
+.eclipse .cta:focus-visible {
+  outline: 2px solid var(--ecl-line);
+  outline-offset: 3px;
+}
+.eclipse .cta .glow {
+  --border-width: 1px;
+  --loop-cycle: 24s;
+  position: absolute;
+  inset: calc(var(--border-width) * -1);
+  border-radius: 50px;
+  border: var(--border-width) solid transparent;
+  -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+  mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+  -webkit-mask-clip: padding-box, border-box;
+  mask-clip: padding-box, border-box;
+  -webkit-mask-composite: source-in, xor;
+  mask-composite: intersect;
+  pointer-events: none;
+}
+.eclipse .cta:hover .glow { --loop-cycle: 2s; }
+.eclipse .cta .glow::after,
+.eclipse .cta .glow::before {
+  content: '';
+  height: 100%;
+  offset-anchor: 100% 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.75), transparent 50%),
+    radial-gradient(circle at 50% 50%, var(--ecl-line) 50%, transparent);
+  opacity: 0.4;
+  offset-path: rect(0 100% 100% 0 round 33px);
+  position: absolute;
+  display: inline-block;
+  animation: ecl-loop var(--loop-cycle) linear infinite;
+  aspect-ratio: 1 / 1;
+  transition: opacity 1s ease-in-out;
+}
+.eclipse .cta .glow::before {
+  animation-delay: calc(var(--loop-cycle) / -2);
+}
+@keyframes ecl-loop {
+  100% { offset-distance: 100%; }
+}
+.eclipse .cta .cta-texto {
+  background: linear-gradient(0deg, var(--ecl-text-hi), var(--ecl-text-lo));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.2em;
+  font-weight: 600;
+  line-height: 142%;
+}
+.eclipse .cta:hover .glow::after,
+.eclipse .cta:hover .glow::before {
+  opacity: 0.6;
+}
+
+/* ── Montañas de vidrio ───────────────────────────────────────────── */
+
+.eclipse .montanas {
+  position: absolute; left: 0; right: 0; top: 33em; margin: auto;
+  width: 100%; height: 10em;
+  pointer-events: none;
+  z-index: 1;
+}
+.eclipse .montanas::before {
+  content: ''; display: block;
+  width: 100%; height: 500%;
+  position: absolute; top: 0%;
+  background: linear-gradient(0deg, var(--ecl-bg) 80%, transparent 90%);
+  z-index: 2;
+}
+.eclipse .montanas > div {
+  box-shadow:
+    -1em -0.2em 0.4em -1.1em var(--ecl-line),
+    inset 0em 0em 0em 2px var(--ecl-line),
+    inset 0.2em 0.3em 0.2em -0.2em var(--ecl-line),
+    inset 10.2em 10.3em 2em -10em rgba(var(--ecl-spot), 0.18);
+  background: var(--ecl-panel);
+  z-index: 1;
+  filter: brightness(0.8);
+  position: absolute; left: 0; right: 0; margin: auto;
+  width: 20em; height: 20em;
+  rotate: 45deg;
+}
+.eclipse .montanas > div:nth-child(1) {
+  bottom: -240%;
+  translate: -6em 2em;
+  animation: ecl-mountain1 2s ease-out 2.4s forwards;
+}
+.eclipse .montanas > div:nth-child(2) {
+  bottom: -240%;
+  translate: -2em 0em;
+  width: 14em; height: 20em;
+  animation: ecl-mountain2 2s ease-out 2.2s forwards;
+}
+.eclipse .montanas > div:nth-child(3) {
+  bottom: -240%;
+  translate: 6em 3em;
+  animation: ecl-mountain1 2s ease-out 2s forwards;
+}
+@keyframes ecl-mountain1 {
+  0% { bottom: -240%; }
+  100% { bottom: -140%; }
+}
+@keyframes ecl-mountain2 {
+  0% { bottom: -240%; }
+  100% { bottom: -108%; }
+}
+.eclipse .montanas > div::before {
+  content: ''; display: block;
+  background: repeating-radial-gradient(at 100% 100%, transparent 0%, rgba(199, 191, 255, 0.13) 2px, transparent 4px);
+  width: 12em; height: 12em;
+  position: absolute;
+  left: 0; top: 0;
+  border-bottom-right-radius: 100%;
+}
+
+/* Reserva la altura de la composición (todo el interior es absoluto) */
+.eclipse .espaciador {
+  height: 43.5em;
+  pointer-events: none;
+}
+
+/* ── Movimiento reducido: composición estática, sin canvas ────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .eclipse .cabecera,
+  .eclipse .spotlight > div,
+  .eclipse .accent-lines > div:nth-child(1) > div,
+  .eclipse .accent-lines > div:nth-child(2) > div,
+  .eclipse .accent-lines > div:nth-child(1) > div::before,
+  .eclipse .accent-lines > div:nth-child(1) > div::after,
+  .eclipse .sub-eyebrow,
+  .eclipse .sub-eyebrow p::before,
+  .eclipse .sub-eyebrow p::after,
+  .eclipse .titular,
+  .eclipse .titular > *,
+  .eclipse .lema,
+  .eclipse .cta,
+  .eclipse .cta .glow::after,
+  .eclipse .cta .glow::before {
+    animation: none !important;
+    opacity: 1;
+    translate: 0;
+    scale: 1;
+  }
+  .eclipse .sub-eyebrow { opacity: 0.7; }
+  .eclipse .sub-eyebrow p::before,
+  .eclipse .sub-eyebrow p::after { opacity: 0.3; }
+  .eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::before,
+  .eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::after,
+  .eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::before,
+  .eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::after { opacity: 0.12; }
+  .eclipse .montanas > div:nth-child(1) { animation: none; bottom: -140%; }
+  .eclipse .montanas > div:nth-child(2) { animation: none; bottom: -108%; }
+  .eclipse .montanas > div:nth-child(3) { animation: none; bottom: -140%; }
+  .eclipse canvas.particulas { display: none; }
+}
+
+/* ── Ajustes de pantalla estrecha ─────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .eclipse { min-height: 52em; }
+  .eclipse .lema { font-size: 1.5em; max-width: 20em; }
+  .eclipse .montanas { top: 37em; }
+  .eclipse .espaciador { height: 48em; }
+}

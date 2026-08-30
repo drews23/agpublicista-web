@@ -31,3 +31,6 @@ videos/
 # megas, el repo se despliega entero al hosting y nadie los enlaza desde el
 # sitio. Se regeneran con Edge headless (ver assets/canal/LEEME.md).
 assets/canal/*.png
+
+# Material fuente de iconos 3D (Envato): NUNCA al repo ni al deploy
+GALERIA DE FAVICONES SVG/
