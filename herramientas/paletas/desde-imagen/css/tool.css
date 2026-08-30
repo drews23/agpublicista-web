@@ -1,0 +1,261 @@
+/* ==================================================================== *\
+   Extraer paleta desde imagen — estilos PROPIOS de la página hija.
+   Los del sistema de paletas (picker, .segmented, .palette, .export,
+   .a11y) llegan de ../css/tool.css del generador padre: aquí solo vive
+   lo nuevo — dropzone, workspace de la foto, puntos y swatches.
+
+   1. Dropzone                3. Puntos arrastrables
+   2. Workspace de la foto    4. Swatches extraídos y avisos
+\* ==================================================================== */
+
+/* 1. Dropzone (lenguaje de optimizar-svg, adaptado) ------------------- */
+
+.dropzone {
+  display: grid;
+  place-items: center;
+  gap: 0.9rem;
+  padding: clamp(2rem, 6vw, 3.4rem) 1.5rem;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, transform 200ms var(--ease);
+}
+
+.dropzone:hover,
+.dropzone:focus-visible {
+  border-color: var(--violeta);
+  background: var(--panel-hover);
+}
+
+.dropzone[data-over="true"] {
+  border-color: var(--turquesa);
+  background: color-mix(in oklab, var(--turquesa) 10%, var(--panel));
+  transform: scale(1.01);
+}
+
+.dropzone[data-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.dropzone__icon {
+  width: 46px;
+  height: 46px;
+  color: var(--violeta);
+}
+
+.dropzone__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.dropzone__hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.dropzone__actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error {
+  margin: 0.9rem 0 0;
+  padding: 0.8rem 1rem;
+  font-size: 0.92rem;
+  color: var(--text);
+  background: color-mix(in oklab, var(--coral, #ff7a68) 14%, var(--panel));
+  border: 1px solid color-mix(in oklab, var(--coral, #ff7a68) 45%, var(--line));
+  border-radius: var(--radius);
+}
+
+/* 2. Workspace de la foto --------------------------------------------- */
+
+.foto-ws {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.foto-ws[data-busy="true"] {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.foto-ws__marco {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background:
+    conic-gradient(var(--line) 25%, transparent 0 50%, var(--line) 0 75%, transparent 0)
+    0 0 / 18px 18px;
+}
+
+.foto-ws__marco canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.foto-ws__lado {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.foto-ws__acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* 3. Puntos arrastrables ----------------------------------------------- */
+
+.foto-ws__puntos {
+  position: absolute;
+  inset: 0;
+}
+
+.punto {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  /* área táctil de 44px sin engordar el círculo visible */
+  padding: 8px;
+  box-sizing: content-box;
+  margin: -22px 0 0 -22px;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+}
+
+.punto::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--p, #fff);
+  border: 3px solid #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s var(--ease);
+}
+
+.punto:hover::before,
+.punto:focus-visible::before {
+  transform: scale(1.18);
+}
+
+.punto:active {
+  cursor: grabbing;
+}
+
+.punto:focus-visible {
+  outline: none;
+}
+
+.punto:focus-visible::before {
+  border-color: var(--turquesa);
+}
+
+/* 4. Swatches extraídos y avisos --------------------------------------- */
+
+.sw-lista {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sw {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.45rem 0.7rem 0.45rem 0.45rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.15s var(--ease);
+}
+
+.sw:hover {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+  transform: translateX(2px);
+}
+
+.sw[aria-pressed="true"] {
+  border-color: color-mix(in oklab, var(--violeta) 65%, var(--line));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--violeta) 45%, transparent);
+}
+
+.sw__color {
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--sw);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.sw__hex {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.sw__pct {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--faint);
+}
+
+.sw[aria-pressed="true"] .sw__pct::after {
+  content: " · base";
+  color: var(--violeta);
+}
+
+.aviso-extraccion {
+  margin: 0;
+  padding: 0.7rem 0.95rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 2px solid color-mix(in oklab, var(--ambar, #ffb454) 70%, transparent);
+  border-radius: 4px var(--radius) var(--radius) 4px;
+}
+
+/* responsive + movimiento ---------------------------------------------- */
+
+@media (max-width: 760px) {
+  .foto-ws {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone,
+  .dropzone[data-over="true"],
+  .punto::before,
+  .sw,
+  .sw:hover {
+    transition: none;
+    transform: none;
+  }
+}

@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generador de paletas de colores gratis — armonías y escalas</title>
+    <title>Extraer la paleta de colores de una imagen o foto gratis</title>
     <meta
       name="description"
-      content="Generador de paletas gratis: elige un color base o sácalo de una foto y obtén armonías, escala 50-950, contraste WCAG y exportación a CSS o Tailwind."
+      content="Sube una foto y saca su paleta de colores al instante: la imagen no sale de tu navegador. Escalas 50-950, contraste WCAG y exportación a CSS y Tailwind."
     />
-    <link rel="canonical" href="https://agpublicista.com/herramientas/paletas/" />
+    <link rel="canonical" href="https://agpublicista.com/herramientas/paletas/desde-imagen/" />
     <meta name="theme-color" content="#0a0a0f" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Generador de paletas de colores gratis — armonías y escalas" />
-    <meta property="og:description" content="Elige un color base y obtén armonías, escalas 50-950, contraste WCAG y exportación a CSS, Tailwind, SVG y PNG. Sin registro." />
-    <meta property="og:url" content="https://agpublicista.com/herramientas/paletas/" />
+    <meta property="og:title" content="Extraer la paleta de colores de una imagen o foto gratis" />
+    <meta property="og:description" content="Arrastra una foto y saca sus colores dominantes con cinco estilos de extracción, sin que la imagen salga de tu navegador. Con escala, armonías y WCAG." />
+    <meta property="og:url" content="https://agpublicista.com/herramientas/paletas/desde-imagen/" />
     <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -49,6 +49,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026082906" />
+    <link rel="stylesheet" href="../css/tool.css?v=1" />
     <link rel="stylesheet" href="css/tool.css?v=1" />
 
     <script type="application/ld+json">
@@ -57,19 +58,20 @@
       "@graph": [
         {
           "@type": "WebApplication",
-          "@id": "https://agpublicista.com/herramientas/paletas/#app",
-          "name": "Generador de paletas de colores",
-          "url": "https://agpublicista.com/herramientas/paletas/",
-          "description": "Herramienta gratuita para generar paletas de color a partir de un color base: armonías, escalas de tono del 50 al 950, comprobación de contraste WCAG y exportación a variables CSS, Tailwind, SVG y PNG.",
+          "@id": "https://agpublicista.com/herramientas/paletas/desde-imagen/#app",
+          "name": "Extractor de paleta de colores desde imagen",
+          "url": "https://agpublicista.com/herramientas/paletas/desde-imagen/",
+          "description": "Herramienta gratuita para extraer la paleta de colores dominantes de una imagen o foto, con cinco estilos de extracción, sin subirla a ningún servidor: el análisis ocurre dentro del navegador. Incluye escala 50-950, armonías, contraste WCAG y exportación a CSS, Tailwind, SVG y PNG.",
           "applicationCategory": "DesignApplication",
           "operatingSystem": "Web",
           "inLanguage": "es",
           "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
           "featureList": [
-            "Armonías: análoga, complementaria, complementaria dividida, tríada, tétrada y monocromática",
-            "Escala completa de tonos del 50 al 950 para cada color",
-            "Ratio de contraste y nivel WCAG contra blanco y negro",
-            "Exportación a variables CSS, Tailwind, lista de hex, SVG y PNG"
+            "Extracción de hasta seis colores dominantes con su porcentaje de presencia",
+            "Cinco estilos de extracción: fiel, vivo, luminoso, suave y oscuro",
+            "Puntos arrastrables sobre la foto para afinar cada color a mano",
+            "Análisis 100 % local: la imagen nunca sale del navegador",
+            "Escala 50-950, armonías y contraste WCAG del color elegido, con exportación a CSS, Tailwind, SVG y PNG"
           ],
           "publisher": {
             "@type": "Organization",
@@ -82,7 +84,8 @@
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
             { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://agpublicista.com/herramientas/" },
-            { "@type": "ListItem", "position": 3, "name": "Generador de paletas", "item": "https://agpublicista.com/herramientas/paletas/" }
+            { "@type": "ListItem", "position": 3, "name": "Generador de paletas", "item": "https://agpublicista.com/herramientas/paletas/" },
+            { "@type": "ListItem", "position": 4, "name": "Desde una imagen", "item": "https://agpublicista.com/herramientas/paletas/desde-imagen/" }
           ]
         },
         {
@@ -90,34 +93,42 @@
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "¿Qué es una armonía de color?",
+              "name": "¿La foto se sube a algún servidor?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Es un grupo de colores que mantienen una relación fija en el círculo cromático. Partiendo de tu color base, la herramienta gira el matiz un número concreto de grados: 180° para la complementaria, ±30° para la análoga, 120° para la tríada, 90° para la tétrada. Esa relación es la que hace que los colores se vean elegidos a propósito y no al azar."
+                "text": "No. La imagen se abre y se analiza dentro de tu navegador, en un lienzo local; nunca viaja por la red. Puedes comprobarlo tú: carga la página, desconecta internet y la extracción sigue funcionando igual."
               }
             },
             {
               "@type": "Question",
-              "name": "¿Qué significan los números del 50 al 950?",
+              "name": "¿Cuántos colores saca de la foto?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Son los pasos de luminosidad de cada color, la misma convención que usan Tailwind y la mayoría de sistemas de diseño. El 50 es el tono más claro y el 950 el más oscuro; el paso marcado como base es el más cercano a tu color original. Tener la escala completa te ahorra inventar variantes a mano para fondos, bordes, estados hover o texto secundario."
+                "text": "Hasta seis colores dominantes, ordenados por su presencia en la imagen y con el porcentaje que ocupa cada uno. Decimos «hasta» porque los tonos casi idénticos se funden en uno: una foto muy uniforme puede dar menos de seis, y eso es una respuesta honesta, no un fallo."
               }
             },
             {
               "@type": "Question",
-              "name": "¿Cómo exporto la paleta a Tailwind?",
+              "name": "¿Por qué los colores no coinciden exactamente con los que veo en la foto?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Elige el formato Tailwind en el panel de exportación, pulsa Copiar código y pega el bloque dentro de theme.extend.colors en tu archivo tailwind.config.js. A partir de ahí puedes usar clases como bg-paleta-base-500 o text-paleta-acento-1-700 en tu HTML."
+                "text": "Cada color extraído es el promedio de un grupo de miles de píxeles parecidos, no el valor de un píxel concreto: por eso representa la zona mejor que cualquier punto suelto, pero puede no ser idéntico a ninguno. Además, cada pantalla reproduce el color a su manera. Si necesitas el píxel exacto, arrastra uno de los puntos sobre la foto."
               }
             },
             {
               "@type": "Question",
-              "name": "¿Por qué importa el contraste de una paleta?",
+              "name": "¿Qué formatos y tamaño de imagen acepta?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Porque un color bonito que no se lee no sirve. La WCAG 2.1 pide un ratio mínimo de 4,5:1 entre texto y fondo, o 3:1 si el texto es grande o va en negrita. El bloque de accesibilidad te indica, color por color, si funciona con texto blanco o negro encima, así eliges el par correcto antes de escribir una línea de CSS."
+                "text": "JPG, PNG, WebP, AVIF, GIF y SVG, hasta 20 MB y 32 megapíxeles. Los límites existen para que el análisis no congele el navegador: una foto de cámara normal entra sobrada."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo usar la paleta en proyectos comerciales?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí: los colores en sí no tienen derechos de autor, y la paleta que exportes es tuya. Otra cosa es la foto de la que salieron: si no es tuya, sus derechos no cambian por haberle extraído los colores."
               }
             }
           ]
@@ -132,6 +143,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
          crossorigin="anonymous"></script>
   </head>
+
   <body>
     <div class="glow" aria-hidden="true"></div>
 
@@ -159,21 +171,100 @@
     </header>
 
     <main>
-      <!-- Cabecera de página -->
-      <div class="page-head shell">
+      <!-- Cabecera de la herramienta -->
+      <section class="shell page-head">
         <nav class="breadcrumbs reveal" aria-label="Migas de pan">
-          <a href="/">Inicio</a> / <a href="/herramientas/">Herramientas</a> / <span aria-current="page">Generador de paletas</span>
+          <a href="/">Inicio</a> / <a href="/herramientas/">Herramientas</a> / <a href="/herramientas/paletas/">Generador de paletas</a> / <span>Desde una imagen</span>
         </nav>
-        <p class="eyebrow reveal">Herramienta gratuita · Color</p>
-        <h1 class="reveal" style="--reveal-delay: 80ms">Generador de paletas de colores</h1>
+        <p class="eyebrow reveal">Sin registro · Cinco estilos · La foto no sale de tu navegador</p>
+        <h1 class="reveal" style="--reveal-delay: 80ms">Extraer la paleta de colores de una imagen</h1>
         <p class="lede reveal" style="--reveal-delay: 160ms">
-          Elige un color base y obtén al instante su armonía, la escala completa de tonos
-          del 50 al 950 y el contraste de cada color. Copia cualquier muestra con un clic
-          y exporta a variables CSS, Tailwind, SVG o PNG. Sin registro y sin librerías. ¿Tu color vive en una foto? También puedes <a href="/herramientas/paletas/desde-imagen/">extraer la paleta de una imagen</a>.
+          Arrastra una foto o una captura y saca sus colores dominantes sin subirla a ningún
+          servidor: el análisis ocurre dentro de tu navegador. Y cada color extraído entra
+          directo al generador — escala del 50 al 950, armonías, contraste WCAG y exportación
+          a CSS o Tailwind en un clic.
         </p>
-      </div>
+      </section>
 
-      <!-- Generador -->
+      <!-- La foto -->
+      <section class="section shell" aria-labelledby="foto-title">
+        <h2 id="foto-title" class="sr-only">Tu imagen</h2>
+
+        <div
+          class="dropzone reveal"
+          data-dropzone
+          data-over="false"
+          role="button"
+          tabindex="0"
+          aria-label="Arrastra una imagen o pulsa para elegirla"
+        >
+          <svg class="dropzone__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="3" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="m21 15-3.4-3.4a2 2 0 0 0-2.8 0L7 19" />
+          </svg>
+          <p class="dropzone__title">Extrae la paleta de una foto</p>
+          <p class="dropzone__hint">
+            Arrástrala aquí o pulsa para elegirla · JPG, PNG, WebP, AVIF, GIF o SVG, hasta
+            20 MB · se analiza en tu navegador: no se sube a ningún servidor.
+          </p>
+          <div class="dropzone__actions">
+            <button class="btn btn--ghost" type="button" data-demo>Probar con un ejemplo</button>
+          </div>
+          <input type="file" accept=".jpg,.jpeg,.png,.webp,.avif,.gif,.svg,image/*" hidden data-file />
+        </div>
+
+        <p class="error" data-error role="alert" hidden></p>
+
+        <div class="foto-ws" data-workspace hidden>
+          <div class="foto-ws__marco">
+            <canvas data-miniatura aria-label="Tu imagen, con un punto arrastrable por cada color extraído"></canvas>
+            <div class="foto-ws__puntos" data-puntos></div>
+          </div>
+
+          <div class="foto-ws__lado">
+            <fieldset class="segmented" data-estilos>
+              <legend class="segmented__legend">Estilo de extracción</legend>
+              <label class="segmented__item">
+                <input type="radio" name="estilo" value="fiel" checked />
+                <span>Fiel</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="estilo" value="vivo" />
+                <span>Vivo</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="estilo" value="luminoso" />
+                <span>Luminoso</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="estilo" value="suave" />
+                <span>Suave</span>
+              </label>
+              <label class="segmented__item">
+                <input type="radio" name="estilo" value="oscuro" />
+                <span>Oscuro</span>
+              </label>
+            </fieldset>
+
+            <p class="aviso-extraccion" data-aviso-extraccion hidden></p>
+
+            <ul class="sw-lista" data-swatches aria-label="Colores extraídos de la foto"></ul>
+
+            <div class="foto-ws__acciones">
+              <button class="btn btn--ghost" type="button" data-quitar-foto>Quitar la foto</button>
+            </div>
+
+            <p class="picker__hint" style="margin: 0">
+              Haz clic en un color para fijarlo como base, o arrastra su punto sobre la foto
+              para afinarlo píxel a píxel. Los puntos también se mueven con las flechas del
+              teclado.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- El sistema de paletas completo (el MISMO js del generador) -->
       <section class="section shell" aria-labelledby="generador-title">
         <h2 id="generador-title" class="sr-only">Generador de paletas</h2>
 
@@ -207,14 +298,18 @@
           </div>
 
           <p class="picker__hint" id="hex-help">
-            Escribe un hex (<code>#8b7bff</code> o <code>8b7bff</code>), usa el selector o pulsa la
-            barra espaciadora para probar suerte. La dirección de la página guarda tu color base:
-            cópiala para compartir la paleta.
+            La base sale de tu foto, pero también puedes escribir un hex o usar el selector —
+            al editarla a mano vuelves a las armonías clásicas. La dirección de la página
+            guarda tu color base: cópiala para compartir la paleta.
           </p>
 
           <fieldset class="segmented" data-harmony-group>
             <legend class="segmented__legend">Tipo de armonía</legend>
 
+            <label class="segmented__item">
+              <input type="radio" name="armonia" value="foto" disabled />
+              <span>De tu foto</span>
+            </label>
             <label class="segmented__item">
               <input type="radio" name="armonia" value="analoga" checked />
               <span>Análoga</span>
@@ -327,172 +422,115 @@
         <ul class="a11y" data-a11y></ul>
       </section>
 
-      <!-- Cómo usar una paleta -->
-      <section class="section shell diferir-render" aria-labelledby="uso-title" style="--alto-escritorio: 1034px; --alto-movil: 1754px">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow" style="margin-bottom: 0.6rem;">Guía práctica</p>
-            <h2 id="uso-title">Cómo usar una paleta en tu proyecto</h2>
-          </div>
-        </div>
+      <!-- Guía -->
+      <section class="section shell prose diferir-render" style="--alto-escritorio: 1423px; --alto-movil: 2342px">
+        <h2>Cómo saca los colores: miles de píxeles, unos pocos grupos</h2>
+        <p>
+          Una foto de móvil tiene millones de píxeles y casi ninguno se repite exactamente:
+          un cielo «azul» son miles de azules vecinos. Por eso la herramienta no busca los
+          píxeles más frecuentes — buscaría agujas idénticas en un pajar donde no las hay —
+          sino que <strong>agrupa los parecidos</strong>: cada píxel es un voto, los votos
+          similares se juntan, y cada grupo devuelve su promedio como color representativo.
+          El porcentaje que ves junto a cada color es cuánta foto ocupa su grupo.
+        </p>
+        <p>
+          La comparación de «parecido» no se hace con los números RGB crudos, que engañan al
+          ojo, sino en un espacio de color perceptual: dos colores quedan cerca si un humano
+          los ve parecidos. Es la diferencia entre una paleta que suena a la foto y una lista
+          de valores técnicamente frecuentes pero visualmente sosos.
+        </p>
 
-        <div class="prose reveal">
-          <p>
-            <strong>Empieza por el color base, no por la paleta.</strong> El base es el color
-            que la gente asocia con tu marca: el del logo, el del botón principal, el del enlace.
-            Elígelo con una luminosidad media (ni casi blanco ni casi negro) porque de ahí saldrán
-            luego los tonos claros y oscuros; si arrancas de un color extremo, media escala se te
-            queda plana. Cuando tengas un candidato, pruébalo en contexto con
-            <a href="/herramientas/colores-en-vivo/">Colores en vivo</a>: ver un color aislado en un
-            cuadrado engaña, verlo en una web completa no.
-          </p>
-          <p>
-            <strong>Las escalas son las que sostienen la interfaz.</strong> Un producto real no usa
-            tres colores, usa treinta variantes de tres colores. La convención 50-950 te da ese
-            reparto sin pensarlo: los pasos 50-200 sirven para fondos suaves, tarjetas y estados
-            seleccionados; los 300-400 para bordes, separadores y elementos deshabilitados; el 500-600
-            es tu color de acción (botones, enlaces, iconos activos); y del 700 al 950 sacas textos
-            sobre fondo claro, estados <em>hover</em> y superficies del modo oscuro. Exporta la escala
-            como variables CSS o como escala de Tailwind y deja de escribir hex sueltos en cada componente.
-          </p>
-          <p>
-            <strong>Análoga cuando quieres calma, complementaria cuando quieres contraste.</strong>
-            La armonía análoga toma vecinos del círculo cromático (±30°): produce paletas cohesionadas,
-            ideales para fondos, degradados e ilustraciones donde nada debe gritar. La complementaria
-            toma el color opuesto (180°) y sirve justo para lo contrario: destacar una sola cosa, un
-            botón de compra, una alerta, un dato clave. La complementaria dividida suaviza ese choque y
-            suele ser la opción más segura para una web entera; la tríada y la tétrada dan variedad para
-            gráficas, categorías o etiquetas; y la monocromática es el atajo cuando la marca ya tiene un
-            color fuerte y solo necesitas jerarquía.
-          </p>
-          <p>
-            <strong>Valida el contraste antes de maquetar, no después.</strong> Un texto necesita 4,5:1
-            respecto a su fondo (3:1 si es grande o va en negrita), así que decide desde el principio qué
-            pasos de la escala llevan texto blanco y cuáles texto negro. Un truco que ahorra horas: usa el
-            paso 600 o 700 para texto sobre fondos claros y reserva el 400-500 para superficies con texto
-            blanco encima. Con la paleta cerrada, aplícala al resto de tu identidad — por ejemplo generando
-            el icono del navegador con la <a href="/herramientas/favicons/">galería de favicons SVG</a> — y si
-            quieres profundizar en teoría de color, tipografía y sistemas de diseño, en el
-            <a href="/blog/">blog</a> vas encontrando guías nuevas cada semana.
-          </p>
-        </div>
+        <h2>«Dominante» no siempre es «bonito»: para eso están los estilos</h2>
+        <p>
+          En muchas fotos el color que más superficie ocupa es un gris de asfalto, un beige
+          de pared o un blanco de cielo quemado. Es la respuesta <em>correcta</em> a «¿de qué
+          color es esta imagen?» — y la menos útil para diseñar. Los cinco estilos existen
+          para eso: <strong>Fiel</strong> te da la verdad estadística; <strong>Vivo</strong>
+          premia los tonos saturados aunque ocupen poco (el vestido rojo en la calle gris);
+          <strong>Suave</strong> se queda con los tonos tierra y pastel; y
+          <strong>Luminoso</strong> y <strong>Oscuro</strong> extraen solo la mitad clara u
+          oscura, útiles para fondos y textos. Si la foto no tiene material para un estilo,
+          la herramienta lo dice y te enseña la extracción fiel en su lugar — antes que
+          inventarse colores que no están.
+        </p>
+
+        <h2>Elegir el color de marca a partir de una foto</h2>
+        <p>
+          El flujo que mejor funciona: extrae en <strong>Vivo</strong>, fija como base el
+          color con más carácter (no el más abundante), y revisa la sección de contraste de
+          abajo antes de casarte con él — un color de marca que no aguanta texto encima es
+          una fuente de problemas. Después cambia a una armonía clásica para ver qué acentos
+          le sientan, y exporta la escala completa: los pasos claros te darán los fondos y
+          los oscuros el texto, ya verificados contra el estándar WCAG.
+        </p>
+
+        <h2>Los límites honestos: promedios y pantallas</h2>
+        <p>
+          Dos cosas que ninguna herramienta de extracción puede prometer. Primero: cada
+          color es el promedio de su grupo, así que puede no coincidir exactamente con
+          ningún píxel concreto — si necesitas el píxel exacto, para eso están los puntos
+          arrastrables sobre la foto. Y segundo: el color depende de la pantalla que lo
+          muestra; la misma paleta se ve distinta en un monitor calibrado y en un móvil con
+          el brillo al mínimo. La paleta extraída es un excelente punto de partida, no una
+          medición de laboratorio.
+        </p>
       </section>
 
       <!-- FAQ -->
-      <section class="section shell diferir-render" aria-labelledby="faq-title" style="--alto-escritorio: 551px; --alto-movil: 529px">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow" style="margin-bottom: 0.6rem;">Dudas frecuentes</p>
-            <h2 id="faq-title">Preguntas frecuentes</h2>
-          </div>
-        </div>
-
+      <section class="section shell diferir-render" aria-labelledby="faq-heading" style="--alto-escritorio: 665px; --alto-movil: 790px">
+        <h2 class="section-head" id="faq-heading">Preguntas frecuentes</h2>
         <div class="faq">
           <details class="reveal">
-            <summary>¿Qué es una armonía de color?</summary>
+            <summary>¿La foto se sube a algún servidor?</summary>
             <p>
-              Es un grupo de colores que mantienen una relación fija en el círculo cromático.
-              Partiendo de tu color base, la herramienta gira el matiz un número concreto de
-              grados: 180° para la complementaria, ±30° para la análoga, 120° para la tríada,
-              90° para la tétrada. Esa relación es la que hace que los colores se vean elegidos
-              a propósito y no al azar.
+              No. La imagen se abre y se analiza dentro de tu navegador, en un lienzo local;
+              nunca viaja por la red. Puedes comprobarlo tú: carga la página, desconecta
+              internet y la extracción sigue funcionando igual.
             </p>
           </details>
-
-          <details class="reveal" style="--reveal-delay: 60ms">
-            <summary>¿Qué significan los números del 50 al 950?</summary>
+          <details class="reveal">
+            <summary>¿Cuántos colores saca de la foto?</summary>
             <p>
-              Son los pasos de luminosidad de cada color, la misma convención que usan Tailwind
-              y la mayoría de sistemas de diseño. El 50 es el tono más claro y el 950 el más
-              oscuro; el paso marcado como base es el más cercano a tu color original. Tener la
-              escala completa te ahorra inventar variantes a mano para fondos, bordes, estados
-              <em>hover</em> o texto secundario.
+              Hasta seis colores dominantes, ordenados por su presencia en la imagen y con el
+              porcentaje que ocupa cada uno. Decimos «hasta» porque los tonos casi idénticos
+              se funden en uno: una foto muy uniforme puede dar menos de seis, y eso es una
+              respuesta honesta, no un fallo.
             </p>
           </details>
-
-          <details class="reveal" style="--reveal-delay: 120ms">
-            <summary>¿Cómo exporto la paleta a Tailwind?</summary>
+          <details class="reveal">
+            <summary>¿Por qué los colores no coinciden exactamente con los que veo en la foto?</summary>
             <p>
-              Elige el formato <strong>Tailwind</strong> en el panel de exportación, pulsa
-              <strong>Copiar código</strong> y pega el bloque dentro de
-              <code>theme.extend.colors</code> en tu archivo <code>tailwind.config.js</code>.
-              A partir de ahí puedes usar clases como <code>bg-paleta-base-500</code> o
-              <code>text-paleta-acento-1-700</code> en tu HTML.
+              Cada color extraído es el promedio de un grupo de miles de píxeles parecidos,
+              no el valor de un píxel concreto: por eso representa la zona mejor que
+              cualquier punto suelto, pero puede no ser idéntico a ninguno. Además, cada
+              pantalla reproduce el color a su manera. Si necesitas el píxel exacto, arrastra
+              uno de los puntos sobre la foto.
             </p>
           </details>
-
-          <details class="reveal" style="--reveal-delay: 180ms">
-            <summary>¿Por qué importa el contraste de una paleta?</summary>
+          <details class="reveal">
+            <summary>¿Qué formatos y tamaño de imagen acepta?</summary>
             <p>
-              Porque un color bonito que no se lee no sirve. La WCAG 2.1 pide un ratio mínimo
-              de 4,5:1 entre texto y fondo, o 3:1 si el texto es grande o va en negrita. El
-              bloque de accesibilidad te indica, color por color, si funciona con texto blanco
-              o negro encima, así eliges el par correcto antes de escribir una línea de CSS.
+              JPG, PNG, WebP, AVIF, GIF y SVG, hasta 20 MB y 32 megapíxeles. Los límites
+              existen para que el análisis no congele el navegador: una foto de cámara normal
+              entra sobrada.
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>¿Puedo usar la paleta en proyectos comerciales?</summary>
+            <p>
+              Sí: los colores en sí no tienen derechos de autor, y la paleta que exportes es
+              tuya. Otra cosa es la foto de la que salieron: si no es tuya, sus derechos no
+              cambian por haberle extraído los colores.
             </p>
           </details>
         </div>
-      </section>
 
-      <!-- Más del sitio -->
-      <section class="section shell diferir-render" aria-labelledby="mas-title" style="--alto-escritorio: 600px; --alto-movil: 1284px">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow" style="margin-bottom: 0.6rem;">Sigue creando</p>
-            <h2 id="mas-title">Más herramientas y guías</h2>
-          </div>
-          <a class="more" href="/herramientas/">Ver todas las herramientas →</a>
-        </div>
-
-        <div class="card-grid">
-          <a class="card reveal" href="/herramientas/colores-en-vivo/">
-            <span class="card__tag">Color</span>
-            <div class="card__art" aria-hidden="true">
-              <svg viewBox="0 0 200 90" width="200" height="90">
-                <rect x="30" y="14" width="140" height="62" rx="10" fill="none" stroke="#8b7bff" stroke-width="3" />
-                <rect x="30" y="14" width="140" height="14" rx="7" fill="#8b7bff" opacity="0.35" />
-                <rect x="42" y="38" width="52" height="8" rx="4" fill="#35d6c8" />
-                <rect x="42" y="52" width="80" height="6" rx="3" fill="currentColor" opacity="0.25" />
-                <rect x="42" y="63" width="34" height="8" rx="4" fill="#ffb454" />
-                <circle cx="150" cy="52" r="14" fill="#ff7a68" />
-              </svg>
-            </div>
-            <h3>Colores en vivo</h3>
-            <p>Prueba tu paleta sobre una web real: fondo, texto, botones y tarjetas cambiando al instante.</p>
-            <span class="card__meta">Herramienta interactiva · Gratis</span>
-          </a>
-
-          <a class="card reveal" style="--reveal-delay: 90ms" href="/herramientas/favicons/">
-            <span class="card__tag">SVG</span>
-            <div class="card__art" aria-hidden="true">
-              <svg viewBox="0 0 200 90" width="200" height="90">
-                <rect x="40" y="17" width="34" height="34" rx="9" fill="#8b7bff" />
-                <text x="57" y="41" font-size="20" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-weight="700">A</text>
-                <rect x="84" y="17" width="34" height="34" rx="17" fill="#35d6c8" />
-                <circle cx="101" cy="34" r="8" fill="#0a0a12" />
-                <rect x="128" y="17" width="34" height="34" rx="9" fill="#ffb454" />
-                <text x="145" y="42" font-size="22" text-anchor="middle">🎯</text>
-                <rect x="40" y="60" width="122" height="12" rx="6" fill="currentColor" opacity="0.12" />
-              </svg>
-            </div>
-            <h3>Galería de favicons</h3>
-            <p>60 favicons SVG listos para copiar como etiqueta <code>&lt;link&gt;</code>, más generadores de emoji y monograma.</p>
-            <span class="card__meta">Herramienta interactiva · Gratis</span>
-          </a>
-
-          <a class="card reveal" style="--reveal-delay: 180ms" href="/blog/">
-            <div class="card__art" aria-hidden="true">
-              <svg viewBox="0 0 200 90" width="200" height="90">
-                <rect x="55" y="16" width="90" height="10" rx="5" fill="#8b7bff" />
-                <rect x="55" y="34" width="70" height="8" rx="4" fill="currentColor" opacity="0.25" />
-                <rect x="55" y="48" width="90" height="8" rx="4" fill="currentColor" opacity="0.25" />
-                <rect x="55" y="62" width="52" height="8" rx="4" fill="#35d6c8" />
-              </svg>
-            </div>
-            <h3>Guías del blog</h3>
-            <p>Tutoriales de diseño, color, SVG y marketing digital que complementan cada video del canal.</p>
-            <span class="card__meta">Blog · Nuevas guías cada semana</span>
-          </a>
-        </div>
+        <p class="tool-links" style="margin-top: 2rem; color: var(--muted); max-width: 70ch">
+          ¿Prefieres partir de un color en vez de una foto? Ese es el
+          <a href="/herramientas/paletas/">generador de paletas</a> clásico. Y para ver
+          cinco colores aplicados sobre una web real, prueba
+          <a href="/herramientas/colores-en-vivo/">colores en vivo</a>.
+        </p>
       </section>
 
       <!-- Publicidad -->
@@ -548,6 +586,8 @@
     <script src="/js/color-engine.js?v=2026082906" defer></script>
     <script src="/js/site.js?v=2026082906" defer></script>
     <script src="/js/mi-lienzo.js?v=2026082906" defer></script>
-    <script src="js/paletas.js?v=1" defer></script>
+    <script src="../js/paletas.js?v=1" defer></script>
+    <script src="../js/extraer.js?v=1" defer></script>
+    <script src="js/desde-imagen.js?v=1" defer></script>
   </body>
 </html>

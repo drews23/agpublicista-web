@@ -48,7 +48,7 @@
   };
 
   const harmonyLabel = (type) =>
-    type === MONO ? "Monocromática" : (C.HARMONIES[type] || {}).label || type;
+    type === "foto" ? "De tu foto" : type === MONO ? "Monocromática" : (C.HARMONIES[type] || {}).label || type;
 
   const formatDegrees = (deg) => (deg > 0 ? "+" + deg + "°" : "−" + Math.abs(deg) + "°");
 
@@ -81,8 +81,28 @@
     return steps.map((step, i) => (i === nearest ? { ...step, isBase: true } : step));
   }
 
+  /* Colores extraídos de una imagen (los pone desde-imagen.js vía
+     window.AGPaletas.setGruposFoto). Solo la página que tenga el radio
+     value="foto" puede activar este modo; en el resto es inerte. */
+  let gruposFoto = null;
+
   /** Grupos de la armonía: color principal + nombre + escala completa. */
   function buildGroups(base, type) {
+    if (type === "foto") {
+      if (!gruposFoto || !gruposFoto.length) {
+        // sin foto cargada el radio no debería estar activo; red de seguridad
+        type = "analoga";
+      } else {
+        return gruposFoto.map((g, i) => ({
+          hex: g.hex,
+          key: g.hex === base ? "base" : "foto-" + (i + 1),
+          label: g.hex === base ? "Base" : g.label || "Color " + (i + 1),
+          note: g.note || "",
+          steps: withBaseStep(C.scale(g.hex), g.hex),
+        }));
+      }
+    }
+
     if (type === MONO) {
       return C.monochrome(base, MONO_COUNT).map((hex, i) => ({
         hex,
@@ -259,6 +279,19 @@
     if (!els.status) return;
 
     const steps = state.groups.reduce((total, group) => total + group.steps.length, 0);
+    if (state.harmony === "foto") {
+      els.status.textContent =
+        "Colores de tu foto: " +
+        state.groups.length +
+        (state.groups.length === 1 ? " color" : " colores") +
+        " y " +
+        steps +
+        " pasos de escala. Base: " +
+        state.base +
+        ".";
+      return;
+    }
+
     els.status.textContent =
       "Armonía " +
       harmonyLabel(state.harmony).toLowerCase() +
@@ -412,11 +445,14 @@
   document.addEventListener("keydown", (event) => {
     if (event.key !== " " && event.code !== "Space") return;
     if (event.ctrlKey || event.metaKey || event.altKey) return;
+    if (event.defaultPrevented) return;
 
     const target = event.target;
     if (
       target instanceof Element &&
-      target.closest("input, textarea, select, button, a, summary, [contenteditable='']," + " [contenteditable='true']")
+      target.closest(
+        "input, textarea, select, button, a, summary, [role=\"button\"], [contenteditable='']," + " [contenteditable='true']"
+      )
     ) {
       return;
     }
@@ -443,4 +479,26 @@
   if (checkedHarmony) state.harmony = checkedHarmony.value;
 
   render();
+
+  /* Hook para la extracción desde imagen (herramientas/paletas/desde-imagen/):
+     la hija comparte ESTE archivo — sus selectores no dependen de la URL. */
+  window.AGPaletas = {
+    setBase,
+    get base() {
+      return state.base;
+    },
+    get armonia() {
+      return state.harmony;
+    },
+    setGruposFoto(lista) {
+      gruposFoto = Array.isArray(lista) && lista.length ? lista : null;
+      if (state.harmony === "foto") render();
+    },
+    setArmonia(tipo) {
+      state.harmony = tipo;
+      const radio = els.harmonyGroup && els.harmonyGroup.querySelector('input[value="' + tipo + '"]');
+      if (radio) radio.checked = true;
+      render();
+    },
+  };
 })();
