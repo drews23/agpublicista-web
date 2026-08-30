@@ -247,14 +247,32 @@ img, svg { max-width: 100%; }
 
 /* Ámbar y no coral (30 ago 2026): el coral no está en la identidad, el ámbar
    sí — es el de los chevrones ‹ › del logo y el del modo alterno del eclipse.
-   Es además el mismo token que ya usan las etiquetas .card__tag. */
+   Y en vidrio, con el mismo tratamiento que las .card__tag, para que el
+   único botón de color del header hable el mismo idioma que el resto. */
 .site-nav a.nav-yt {
-  color: var(--accent-ink);
-  background: var(--ambar);
-  border: 0;
+  color: var(--ambar);
+  background: color-mix(in srgb, var(--ambar) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ambar) 42%, transparent);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  backdrop-filter: blur(10px) saturate(1.4);
+  box-shadow:
+    0 2px 10px color-mix(in srgb, var(--ambar) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 12%, transparent);
+  transition: background 240ms ease, box-shadow 240ms ease;
 }
 
-.site-nav a.nav-yt:hover { filter: brightness(1.08); }
+:root[data-theme='light'] .site-nav a.nav-yt {
+  color: #7a4a00;
+  background: color-mix(in srgb, var(--ambar) 34%, transparent);
+  border-color: color-mix(in srgb, #7a4a00 30%, transparent);
+}
+
+.site-nav a.nav-yt:hover {
+  background: color-mix(in srgb, var(--ambar) 28%, transparent);
+  box-shadow:
+    0 4px 18px color-mix(in srgb, var(--ambar) 30%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 16%, transparent);
+}
 
 .nav-toggle {
   display: none;
@@ -624,6 +642,24 @@ img, svg { max-width: 100%; }
   color: #7a4a00;
   background: color-mix(in srgb, var(--ambar) 34%, transparent);
   border-color: color-mix(in srgb, #7a4a00 30%, transparent);
+}
+
+/* Variante turquesa (CSS, Pronto). Antes iba como style="background:
+   var(--turquesa)" en el HTML, y ese estilo en línea pisaba el vidrio:
+   la etiqueta quedaba rellena y plana entre las demás. */
+.card__tag--turquesa {
+  color: var(--turquesa);
+  background: color-mix(in srgb, var(--turquesa) 16%, transparent);
+  border-color: color-mix(in srgb, var(--turquesa) 42%, transparent);
+  box-shadow:
+    0 2px 10px color-mix(in srgb, var(--turquesa) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+:root[data-theme='light'] .card__tag--turquesa {
+  color: #045d55;
+  background: color-mix(in srgb, var(--turquesa) 30%, transparent);
+  border-color: color-mix(in srgb, #045d55 30%, transparent);
 }
 
 .card__meta {

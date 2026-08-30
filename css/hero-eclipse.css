@@ -39,7 +39,7 @@
   position: relative;
   overflow: hidden;
   background: var(--ecl-bg) linear-gradient(0deg, rgba(139, 123, 255, 0.05), rgba(53, 214, 200, 0.05));
-  min-height: 52em;
+  min-height: 47em;
 }
 
 /* Modo alterno (ámbar) — se activa clicando el disco del eclipse */
@@ -491,11 +491,14 @@
 
 /* ── Montañas de vidrio ───────────────────────────────────────────── */
 
-/* Bajadas 5em el 30 ago 2026: a 33em su pico central subia 4,27em por
-   encima del boton "Explorar herramientas" y asomaba por detras como un
-   rectangulo de esquinas dobladas, sin sentido visual. Medido, no a ojo. */
+/* NO mover de 33em sin mirar el fondo: el degradado que funde las montanas
+   con el escenario es su propio ::before (height 500%, anclado al top de
+   .montanas). Al bajarlas 5em el 30 ago, ese degradado bajo con ellas y su
+   borde quedo a la vista como una linea dura de lado a lado. Se revirtio.
+   El contorno que se veia sobre el boton NO eran las montanas: era el
+   span.glow, ya retirado. */
 .eclipse .montanas {
-  position: absolute; left: 0; right: 0; top: 38em; margin: auto;
+  position: absolute; left: 0; right: 0; top: 33em; margin: auto;
   width: 100%; height: 10em;
   pointer-events: none;
   z-index: 1;
@@ -555,7 +558,7 @@
 
 /* Reserva la altura de la composición (todo el interior es absoluto) */
 .eclipse .espaciador {
-  height: 48.5em;
+  height: 43.5em;
   pointer-events: none;
 }
 
@@ -576,7 +579,12 @@
   .eclipse .titular,
   .eclipse .titular > *,
   .eclipse .lema,
-  .eclipse .cta,
+  .eclipse .cta {
+    animation: none !important;
+    opacity: 1;
+    translate: 0;
+    scale: 1;
+  }
   .eclipse .sub-eyebrow { opacity: 0.7; }
   .eclipse .sub-eyebrow p::before,
   .eclipse .sub-eyebrow p::after { opacity: 0.3; }
@@ -593,8 +601,8 @@
 /* ── Ajustes de pantalla estrecha ─────────────────────────────────── */
 
 @media (max-width: 640px) {
-  .eclipse { min-height: 57em; }
+  .eclipse { min-height: 52em; }
   .eclipse .lema { font-size: 1.5em; max-width: 20em; }
-  .eclipse .montanas { top: 42em; }
-  .eclipse .espaciador { height: 53em; }
+  .eclipse .montanas { top: 37em; }
+  .eclipse .espaciador { height: 48em; }
 }
