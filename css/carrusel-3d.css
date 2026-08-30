@@ -259,10 +259,29 @@ html:not(.js-arte) .carrusel3d__puntos {
 }
 
 @media (max-width: 640px) {
-  .carrusel3d { height: clamp(490px, 76vh, 540px); }
+  /* El suelo sube de 490 a 520 para dejar sitio a la fila de mandos de
+     abajo: la lámina mide 392 y con la perspectiva ocupa ~404, así que en
+     una caja de 490 el borde inferior caía justo encima de las flechas. */
+  .carrusel3d { height: clamp(520px, 78vh, 560px); }
   .carrusel3d__card { width: 264px; height: 392px; }
   /* El desenfoque de las tarjetas del fondo es caro en móvil y ahí sólo se
-     ve la del frente: el JS las esconde (ver carrusel-3d.js). */
+     ve la del frente: el JS las esconde (ver carrusel-3d.js).
+
+     Y por eso mismo las flechas no pueden seguir a los lados: sin tarjetas
+     vecinas que ocupen ese espacio, la lámina se lleva casi todo el ancho.
+     Medido a 375px: el carrusel mide 327 y la tarjeta 272, quedan 27px por
+     lado y la flecha necesita 46 —se montaba 30px sobre la imagen—. Abajo
+     forman una fila con los puntos y además los dos objetivos táctiles se
+     alejan del borde de la pantalla, donde vive el gesto de volver. */
+  .carrusel3d__nav {
+    top: auto;
+    bottom: 0;
+    transform: none;
+  }
+  .carrusel3d__nav--prev { left: 1.4rem; }
+  .carrusel3d__nav--next { right: 1.4rem; }
+  /* Centra los puntos contra las flechas: (46 - 11) / 2 */
+  .carrusel3d__puntos { bottom: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

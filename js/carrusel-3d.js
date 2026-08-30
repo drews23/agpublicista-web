@@ -30,7 +30,14 @@
   if (tarjetas.length < 2) return;
 
   const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const esMovil = window.matchMedia('(max-width: 640px)');
+  /* Umbral GEOMÉTRICO, a propósito distinto del de la hoja de estilos (640px,
+     que decide el tamaño de la lámina y dónde van los mandos). Aquí lo que se
+     mide es si el anillo cabe: por debajo de ~735px de ancho el hueco entre la
+     tarjeta activa y la vecina se vuelve negativo —a 641px se solapan 31px— y
+     además el borde exterior queda a 6px del borde del contenedor. Es decir,
+     no hay radio que lo arregle: no cabe. En esa franja se enseña sólo la
+     tarjeta del frente, igual que en móvil. */
+  const esMovil = window.matchMedia('(max-width: 720px)');
 
   let actual = 0;
   let temporizador = null;
@@ -52,8 +59,16 @@
        El hueco es lo que se mira: la distancia entre el borde de la tarjeta
        activa y el borde interior de la vecina. Si algún día cambia el número
        de láminas hay que volver a medirlo, porque el ángulo del paso —y con
-       él la escala en perspectiva— depende de cuántas son. */
-    const radio = Math.min(320, window.innerWidth / 3.4);
+       él la escala en perspectiva— depende de cuántas son.
+
+       El divisor es 3 y no 3,4 por la franja de tablet: el tope de 320 sólo
+       manda a partir de 960px de ancho, y por debajo el radio se encoge
+       mientras la tarjeta sigue midiendo 300. Con 3,4 a 768px la vecina
+       acababa solapando 18px —el mismo defecto que se corrigió arriba, pero
+       en pantallas medianas—; con 3 quedan +13px de hueco y el borde exterior
+       sigue cabiendo dentro del contenedor. Por debajo de 720px no aplica
+       nada de esto: ahí sólo se ve la tarjeta del frente (ver esMovil). */
+    const radio = Math.min(320, window.innerWidth / 3);
 
     tarjetas.forEach((tarjeta, i) => {
       // Ángulo RELATIVO a la activa: así el anillo gira de verdad.
