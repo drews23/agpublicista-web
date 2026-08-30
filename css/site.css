@@ -592,17 +592,38 @@ img, svg { max-width: 100%; }
     var(--bg-soft);
 }
 
+/* Etiqueta de categoría en vidrio (30 ago 2026): antes era un pastilla
+   ámbar sólida, ajena al lenguaje neon-glass del resto de la tarjeta.
+   Ahora es vidrio teñido de ámbar —el color se mantiene, que es lo que
+   identifica la categoría— con desenfoque de fondo y un borde luminoso.
+   El texto pasa a ámbar claro porque sobre vidrio ya no hay un fondo
+   opaco que sostenga la tinta oscura: medido, 8,9:1 en tema oscuro. */
 .card__tag {
   position: absolute;
   top: 1.1rem;
   right: 1.1rem;
+  z-index: 2;
   font: 700 0.7rem/1 var(--font-body);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-ink);
-  background: var(--ambar);
+  color: var(--ambar);
+  background: color-mix(in srgb, var(--ambar) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ambar) 42%, transparent);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  backdrop-filter: blur(10px) saturate(1.4);
+  box-shadow:
+    0 2px 10px color-mix(in srgb, var(--ambar) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--text) 12%, transparent);
   padding: 0.32rem 0.6rem;
   border-radius: 999px;
+}
+
+/* En tema claro el ámbar sobre vidrio claro no contrasta: se oscurece la
+   tinta y se sube la opacidad del velo. */
+:root[data-theme='light'] .card__tag {
+  color: #7a4a00;
+  background: color-mix(in srgb, var(--ambar) 34%, transparent);
+  border-color: color-mix(in srgb, #7a4a00 30%, transparent);
 }
 
 .card__meta {

@@ -470,44 +470,15 @@
   outline: 2px solid var(--ecl-line);
   outline-offset: 3px;
 }
-.eclipse .cta .glow {
-  --border-width: 1px;
-  --loop-cycle: 24s;
-  position: absolute;
-  inset: calc(var(--border-width) * -1);
-  border-radius: 50px;
-  border: var(--border-width) solid transparent;
-  -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-  mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-  -webkit-mask-clip: padding-box, border-box;
-  mask-clip: padding-box, border-box;
-  -webkit-mask-composite: source-in, xor;
-  mask-composite: intersect;
-  pointer-events: none;
-}
-.eclipse .cta:hover .glow { --loop-cycle: 2s; }
-.eclipse .cta .glow::after,
-.eclipse .cta .glow::before {
-  content: '';
-  height: 100%;
-  offset-anchor: 100% 50%;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.75), transparent 50%),
-    radial-gradient(circle at 50% 50%, var(--ecl-line) 50%, transparent);
-  opacity: 0.4;
-  offset-path: rect(0 100% 100% 0 round 33px);
-  position: absolute;
-  display: inline-block;
-  animation: ecl-loop var(--loop-cycle) linear infinite;
-  aspect-ratio: 1 / 1;
-  transition: opacity 1s ease-in-out;
-}
-.eclipse .cta .glow::before {
-  animation-delay: calc(var(--loop-cycle) / -2);
-}
-@keyframes ecl-loop {
-  100% { offset-distance: 100%; }
-}
+/* El span.glow de la plantilla (un borde de luz recorriendo el boton) se
+   retiro el 30 ago 2026. Su pseudo-elemento usaba height:100% + aspect-ratio
+   1/1, que en la plantilla original resolvia contra un boton de alto FIJO
+   (position:absolute). Al pasar el boton a position:relative -para que el
+   lema y el CTA dejaran de pisarse- ese 100% se disparo: el glow paso a
+   medir 473px de alto y dibujaba un contorno redondeado gigante que cruzaba
+   el boton y las montanas. El boton ya tiene borde propio y brillo al hover,
+   asi que se elimina en vez de apuntalarlo. */
+
 .eclipse .cta .cta-texto {
   background: linear-gradient(0deg, var(--ecl-text-hi), var(--ecl-text-lo));
   background-clip: text;
@@ -516,10 +487,6 @@
   font-size: 1.2em;
   font-weight: 600;
   line-height: 142%;
-}
-.eclipse .cta:hover .glow::after,
-.eclipse .cta:hover .glow::before {
-  opacity: 0.6;
 }
 
 /* ── Montañas de vidrio ───────────────────────────────────────────── */
@@ -610,13 +577,6 @@
   .eclipse .titular > *,
   .eclipse .lema,
   .eclipse .cta,
-  .eclipse .cta .glow::after,
-  .eclipse .cta .glow::before {
-    animation: none !important;
-    opacity: 1;
-    translate: 0;
-    scale: 1;
-  }
   .eclipse .sub-eyebrow { opacity: 0.7; }
   .eclipse .sub-eyebrow p::before,
   .eclipse .sub-eyebrow p::after { opacity: 0.3; }

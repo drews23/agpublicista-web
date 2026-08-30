@@ -48,8 +48,9 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/site.css?v=2026083017" />
-    <link rel="stylesheet" href="/css/hero-eclipse.css?v=2026083017" />
+    <link rel="stylesheet" href="/css/site.css?v=2026083018" />
+    <link rel="stylesheet" href="/css/hero-eclipse.css?v=2026083020" />
+    <link rel="stylesheet" href="/css/carrusel-3d.css?v=2026083020" />
 
     <script type="application/ld+json">
     {
@@ -153,7 +154,6 @@
           <p class="lema">Diseño web, SVG, CSS y marketing digital:<br />
             herramientas y recursos gratis, en español.</p>
           <a class="cta" href="/herramientas/">
-            <span class="glow" aria-hidden="true"></span>
             <span class="cta-texto">Explorar herramientas</span>
           </a>
         </div>
@@ -178,7 +178,7 @@
         </p>
       </section>
 
-      <!-- Lo más reciente (carrusel) -->
+            <!-- Lo más reciente (carrusel 3D) -->
       <section class="section shell novedades" aria-labelledby="novedades-titulo">
         <div class="section-head reveal">
           <div>
@@ -189,91 +189,87 @@
           <a class="more" href="/blog/">Ver todo →</a>
         </div>
 
-        <!-- El carrusel necesita EXACTAMENTE 6 láminas: su posición la fija el
-             CSS por nth-child (2 a pantalla completa + 4 tarjetas laterales). -->
-        <div class="carrusel reveal" data-carrusel>
-          <ul class="carrusel__pista" data-pista>
-            <li class="carrusel__item">
-              <img class="carrusel__img" src="/assets/novedades/mini-ropa-hombre.webp" srcset="/assets/novedades/mini-ropa-hombre-700.webp 700w, /assets/novedades/mini-ropa-hombre.webp 1200w" sizes="(min-width: 1232px) 1160px, calc(100vw - 3rem)" alt="Sudadera con capucha en trazo neon, del pack de 50 iconos de ropa de hombre" width="1200" height="675" decoding="async" fetchpriority="low" />
-              <div class="carrusel__contenido">
-                <span class="carrusel__tag">Iconos</span>
-                <h3 class="carrusel__titulo">50 iconos de ropa de hombre, en 2 variantes</h3>
-                <p class="carrusel__desc">Camisas, sudaderas, abrigos y accesorios en SVG y PNG, con variante clara y oscura para cualquier fondo.</p>
-                <span class="carrusel__meta">27 de agosto de 2026 &middot; 6 min de lectura</span>
-                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-ropa-de-hombre-gratis-svg/">Ver el pack</a>
-              </div>
+        <!-- Las tarjetas viven en el HTML y el JS sólo las coloca en el
+             anillo 3D: sin JavaScript quedan como una rejilla normal y los
+             seis enlaces al blog siguen existiendo. Ver js/carrusel-3d.js. -->
+        <div class="carrusel3d reveal" data-carrusel3d
+             role="group" aria-roledescription="carrusel" aria-label="Novedades del sitio">
+          <button class="carrusel3d__nav carrusel3d__nav--prev" type="button"
+                  data-anterior3d aria-label="Novedad anterior">&#10094;</button>
+          <ul class="carrusel3d__pista" data-pista3d>
+            <li class="carrusel3d__card">
+              <img class="carrusel3d__img" src="/assets/novedades/mini-ropa-hombre.webp"
+                srcset="/assets/novedades/mini-ropa-hombre-700.webp 700w, /assets/novedades/mini-ropa-hombre.webp 1200w" sizes="(max-width: 640px) 264px, 300px"
+                alt="Sudadera con capucha en trazo neon, del pack de 50 iconos de ropa de hombre" width="1200" height="675" decoding="async" />
+              <span class="carrusel3d__tag">Iconos</span>
+              <h3 class="carrusel3d__titulo">50 iconos de ropa de hombre, en 2 variantes</h3>
+              <p class="carrusel3d__desc">Camisas, sudaderas, abrigos y accesorios en SVG y PNG, con variante clara y oscura para cualquier fondo.</p>
+              <span class="carrusel3d__meta">27 de agosto de 2026 &middot; 6 min de lectura</span>
+              <a class="carrusel3d__cta" href="/blog/iconos-de-ropa-de-hombre-gratis-svg/">Ver el pack</a>
             </li>
 
-            <li class="carrusel__item">
-              <img class="carrusel__img" src="/assets/novedades/mini-ia.webp" srcset="/assets/novedades/mini-ia-700.webp 700w, /assets/novedades/mini-ia.webp 1200w" sizes="(min-width: 1232px) 1160px, calc(100vw - 3rem)" alt="Robot en estilo plano a color, del pack de 25 iconos de inteligencia artificial" width="1200" height="675" decoding="async" />
-              <div class="carrusel__contenido">
-                <span class="carrusel__tag">Iconos</span>
-                <h3 class="carrusel__titulo">25 iconos de inteligencia artificial, en 3 estilos</h3>
-                <p class="carrusel__desc">Robots, redes neuronales y chatbots en plano a color, contorno y sólido: los mismos 25 conceptos, tres acabados.</p>
-                <span class="carrusel__meta">27 de agosto de 2026 &middot; 7 min de lectura</span>
-                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-inteligencia-artificial-gratis-svg/">Ver el pack</a>
-              </div>
+            <li class="carrusel3d__card">
+              <img class="carrusel3d__img" src="/assets/novedades/mini-ia.webp"
+                srcset="/assets/novedades/mini-ia-700.webp 700w, /assets/novedades/mini-ia.webp 1200w" sizes="(max-width: 640px) 264px, 300px"
+                alt="Robot en estilo plano a color, del pack de 25 iconos de inteligencia artificial" width="1200" height="675" decoding="async" loading="lazy" />
+              <span class="carrusel3d__tag">Iconos</span>
+              <h3 class="carrusel3d__titulo">25 iconos de inteligencia artificial, en 3 estilos</h3>
+              <p class="carrusel3d__desc">Robots, redes neuronales y chatbots en plano a color, contorno y sólido: los mismos 25 conceptos, tres acabados.</p>
+              <span class="carrusel3d__meta">27 de agosto de 2026 &middot; 7 min de lectura</span>
+              <a class="carrusel3d__cta" href="/blog/iconos-de-inteligencia-artificial-gratis-svg/">Ver el pack</a>
             </li>
 
-            <li class="carrusel__item">
-              <img class="carrusel__img" src="/assets/novedades/escenas-desarrollo-web.webp" srcset="/assets/novedades/escenas-desarrollo-web-700.webp 700w, /assets/novedades/escenas-desarrollo-web.webp 1200w" sizes="(min-width: 1232px) 1160px, calc(100vw - 3rem)" alt="8 escenas 3D de desarrollo web: velocidad, SEO, login, búsqueda, VPN, anuncios e historial" width="1200" height="675" decoding="async" loading="lazy" fetchpriority="low" />
-              <div class="carrusel__contenido">
-                <span class="carrusel__tag">Escenas 3D</span>
-                <h3 class="carrusel__titulo">8 escenas 3D de desarrollo web, descargables una por una</h3>
-                <p class="carrusel__desc">Velocidad, SEO, login, búsqueda, VPN, anuncios, historial y optimización: cada objeto en su propio archivo <code>.spline</code>.</p>
-                <span class="carrusel__meta">26 de agosto de 2026 &middot; 6 min de lectura</span>
-                <a class="btn btn--primary carrusel__cta" href="/blog/escenas-3d-desarrollo-web-spline/">Ver el pack</a>
-              </div>
+            <li class="carrusel3d__card">
+              <img class="carrusel3d__img" src="/assets/novedades/escenas-desarrollo-web.webp"
+                srcset="/assets/novedades/escenas-desarrollo-web-700.webp 700w, /assets/novedades/escenas-desarrollo-web.webp 1200w" sizes="(max-width: 640px) 264px, 300px"
+                alt="8 escenas 3D de desarrollo web: velocidad, SEO, login, búsqueda, VPN, anuncios e historial" width="1200" height="675" decoding="async" loading="lazy" />
+              <span class="carrusel3d__tag">Escenas 3D</span>
+              <h3 class="carrusel3d__titulo">8 escenas 3D de desarrollo web, descargables una por una</h3>
+              <p class="carrusel3d__desc">Velocidad, SEO, login, búsqueda, VPN, anuncios, historial y optimización: cada objeto en su propio archivo <code>.spline</code>.</p>
+              <span class="carrusel3d__meta">26 de agosto de 2026 &middot; 6 min de lectura</span>
+              <a class="carrusel3d__cta" href="/blog/escenas-3d-desarrollo-web-spline/">Ver el pack</a>
             </li>
 
-            <li class="carrusel__item">
-              <img class="carrusel__img" src="/assets/novedades/escenas-3d-web.webp" srcset="/assets/novedades/escenas-3d-web-700.webp 700w, /assets/novedades/escenas-3d-web.webp 1200w" sizes="(min-width: 1232px) 1160px, calc(100vw - 3rem)" alt="5 escenas 3D animadas gratis para web editables en Spline, listas para incrustar sin iframe" width="1200" height="675" decoding="async" loading="lazy" fetchpriority="low" />
-              <div class="carrusel__contenido">
-                <span class="carrusel__tag">Escenas 3D</span>
-                <h3 class="carrusel__titulo">5 escenas 3D animadas gratis para tu web</h3>
-                <p class="carrusel__desc">Editables en Spline y listas para incrustar, con previsualización en vivo y guía para servirlas desde tu propio dominio.</p>
-                <span class="carrusel__meta">20 de agosto de 2026 &middot; 7 min de lectura</span>
-                <a class="btn btn--primary carrusel__cta" href="/blog/escenas-3d-gratis-para-web-spline/">Ver el pack</a>
-              </div>
+            <li class="carrusel3d__card">
+              <img class="carrusel3d__img" src="/assets/novedades/escenas-3d-web.webp"
+                srcset="/assets/novedades/escenas-3d-web-700.webp 700w, /assets/novedades/escenas-3d-web.webp 1200w" sizes="(max-width: 640px) 264px, 300px"
+                alt="5 escenas 3D animadas gratis para web editables en Spline, listas para incrustar sin iframe" width="1200" height="675" decoding="async" loading="lazy" />
+              <span class="carrusel3d__tag">Escenas 3D</span>
+              <h3 class="carrusel3d__titulo">5 escenas 3D animadas gratis para tu web</h3>
+              <p class="carrusel3d__desc">Editables en Spline y listas para incrustar, con previsualización en vivo y guía para servirlas desde tu propio dominio.</p>
+              <span class="carrusel3d__meta">20 de agosto de 2026 &middot; 7 min de lectura</span>
+              <a class="carrusel3d__cta" href="/blog/escenas-3d-gratis-para-web-spline/">Ver el pack</a>
             </li>
 
-            <li class="carrusel__item">
-              <img class="carrusel__img" src="/assets/novedades/mini-realidad-virtual.webp" srcset="/assets/novedades/mini-realidad-virtual-700.webp 700w, /assets/novedades/mini-realidad-virtual.webp 1200w" sizes="(min-width: 1232px) 1160px, calc(100vw - 3rem)" alt="Portal holografico y mano robotica, del pack de 50 iconos de realidad virtual" width="1200" height="675" decoding="async" loading="lazy" fetchpriority="low" />
-              <div class="carrusel__contenido">
-                <span class="carrusel__tag">Iconos</span>
-                <h3 class="carrusel__titulo">50 iconos de realidad virtual en SVG y PNG</h3>
-                <p class="carrusel__desc">Gafas, hologramas, gestos y seguimiento de movimiento, en variante clara y oscura y con nombres en español.</p>
-                <span class="carrusel__meta">20 de agosto de 2026 &middot; 6 min de lectura</span>
-                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-realidad-virtual-gratis-svg/">Ver el pack</a>
-              </div>
+            <li class="carrusel3d__card">
+              <img class="carrusel3d__img" src="/assets/novedades/mini-realidad-virtual.webp"
+                srcset="/assets/novedades/mini-realidad-virtual-700.webp 700w, /assets/novedades/mini-realidad-virtual.webp 1200w" sizes="(max-width: 640px) 264px, 300px"
+                alt="Portal holografico y mano robotica, del pack de 50 iconos de realidad virtual" width="1200" height="675" decoding="async" loading="lazy" />
+              <span class="carrusel3d__tag">Iconos</span>
+              <h3 class="carrusel3d__titulo">50 iconos de realidad virtual en SVG y PNG</h3>
+              <p class="carrusel3d__desc">Gafas, hologramas, gestos y seguimiento de movimiento, en variante clara y oscura y con nombres en español.</p>
+              <span class="carrusel3d__meta">20 de agosto de 2026 &middot; 6 min de lectura</span>
+              <a class="carrusel3d__cta" href="/blog/iconos-de-realidad-virtual-gratis-svg/">Ver el pack</a>
             </li>
 
-            <li class="carrusel__item">
-              <img class="carrusel__img" src="/assets/novedades/mini-eventos.webp" srcset="/assets/novedades/mini-eventos-700.webp 700w, /assets/novedades/mini-eventos.webp 1200w" sizes="(min-width: 1232px) 1160px, calc(100vw - 3rem)" alt="Ventana de transmision en vivo con camara, microfono y auriculares, del pack de 50 iconos de eventos virtuales" width="1200" height="675" decoding="async" loading="lazy" fetchpriority="low" />
-              <div class="carrusel__contenido">
-                <span class="carrusel__tag">Iconos</span>
-                <h3 class="carrusel__titulo">50 iconos de eventos virtuales en SVG y PNG</h3>
-                <p class="carrusel__desc">Streaming, agenda, ponentes y networking: el set completo para la web de un evento en línea.</p>
-                <span class="carrusel__meta">20 de agosto de 2026 &middot; 6 min de lectura</span>
-                <a class="btn btn--primary carrusel__cta" href="/blog/iconos-de-eventos-virtuales-gratis-svg/">Ver el pack</a>
-              </div>
+            <li class="carrusel3d__card">
+              <img class="carrusel3d__img" src="/assets/novedades/mini-eventos.webp"
+                srcset="/assets/novedades/mini-eventos-700.webp 700w, /assets/novedades/mini-eventos.webp 1200w" sizes="(max-width: 640px) 264px, 300px"
+                alt="Ventana de transmision en vivo con camara, microfono y auriculares, del pack de 50 iconos de eventos virtuales" width="1200" height="675" decoding="async" loading="lazy" />
+              <span class="carrusel3d__tag">Iconos</span>
+              <h3 class="carrusel3d__titulo">50 iconos de eventos virtuales en SVG y PNG</h3>
+              <p class="carrusel3d__desc">Streaming, agenda, ponentes y networking: el set completo para la web de un evento en línea.</p>
+              <span class="carrusel3d__meta">20 de agosto de 2026 &middot; 6 min de lectura</span>
+              <a class="carrusel3d__cta" href="/blog/iconos-de-eventos-virtuales-gratis-svg/">Ver el pack</a>
             </li>
           </ul>
-
-          <div class="carrusel__mandos">
-            <button class="carrusel__btn" type="button" data-anterior aria-label="Recurso anterior">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
-            </button>
-            <button class="carrusel__btn" type="button" data-siguiente aria-label="Recurso siguiente">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
-            </button>
-          </div>
-
-          <div class="carrusel__progreso" aria-hidden="true"><span class="carrusel__barra" data-barra></span></div>
+          <button class="carrusel3d__nav carrusel3d__nav--next" type="button"
+                  data-siguiente3d aria-label="Novedad siguiente">&#10095;</button>
+          <div class="carrusel3d__puntos" data-puntos3d></div>
         </div>
       </section>
 
-      <!-- Herramientas -->
+<!-- Herramientas -->
       <section class="section shell diferir-render" style="--alto-escritorio: 1022px; --alto-movil: 2463px" id="herramientas">
         <div class="section-head reveal">
           <div>
@@ -664,6 +660,7 @@
     </footer>
 
     <script src="/js/hero-eclipse.js?v=2026083010" defer></script>
+    <script src="/js/carrusel-3d.js?v=2026083018" defer></script>
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
   </body>
