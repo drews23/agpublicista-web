@@ -2021,3 +2021,111 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
     transition: none;
   }
 }
+
+/* 15. Tratamiento "neon glass" (direccion aprobada el 30 ago 2026) ----
+   Vidrio + neon SOBRE los tokens Lienzo: paleta, tipografia y logo no
+   cambian; cambia la superficie. Vocabulario adaptado de la plantilla
+   MIT "Neon Glass Context Menu" de codepen.io/themrsami (Copyright (c)
+   2026 themrsami), traducido a violeta/turquesa/ambar.
+   Guardas de rendimiento:
+   - backdrop-filter solo en pantallas >=768px: en movil la tarjeta sigue
+     siendo el panel opaco de siempre (el blur en scroll tactil cuesta).
+   - El barrido de brillo y el borde-degradado solo animan al hover.
+   - Los iconos 3D flotan con `translate` (compositor) y el hover usa
+     `scale`/`rotate` como propiedades independientes: no compiten con
+     la animacion por `transform`. Con reduced-motion, todo quieto. */
+
+@media (min-width: 768px) {
+  .card {
+    background: color-mix(in srgb, var(--panel) 62%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+}
+
+/* Borde-degradado que respira al hover (mascara doble: solo pinta el aro) */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg,
+    color-mix(in srgb, var(--violeta) 60%, transparent),
+    color-mix(in srgb, var(--turquesa) 50%, transparent) 45%,
+    color-mix(in srgb, var(--ambar) 50%, transparent));
+  background-size: 220% 220%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 320ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card:hover::before,
+.card:focus-visible::before {
+  opacity: 1;
+  animation: brillo-borde 3s ease-in-out infinite;
+}
+@keyframes brillo-borde {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Barrido de brillo al hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -130%;
+  width: 70%; height: 100%;
+  background: linear-gradient(100deg, transparent,
+    color-mix(in srgb, var(--text) 7%, transparent), transparent);
+  transform: skewX(-14deg);
+  transition: left 600ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card:hover::after { left: 160%; }
+
+/* Elevacion con glow neon (pisa el hover base de la seccion 7) */
+.card:hover {
+  transform: translateY(-9px);
+  box-shadow:
+    0 22px 44px color-mix(in srgb, var(--turquesa) 13%, transparent),
+    0 10px 24px color-mix(in srgb, var(--violeta) 16%, transparent);
+}
+
+/* Iconos 3D de las tarjetas */
+.card__art--3d {
+  background:
+    radial-gradient(10rem 6rem at 50% 110%, color-mix(in srgb, var(--violeta) 22%, transparent), transparent 72%),
+    radial-gradient(8rem 5rem at 85% -10%, color-mix(in srgb, var(--turquesa) 14%, transparent), transparent 65%),
+    var(--bg-soft);
+}
+.icono-3d {
+  width: 104px;
+  height: 104px;
+  filter: drop-shadow(0 12px 20px color-mix(in srgb, var(--text) 22%, transparent));
+  animation: flotar-3d 5.5s ease-in-out infinite;
+  transition: scale 320ms var(--rebote), rotate 320ms var(--rebote);
+}
+.card:nth-child(2n) .icono-3d { animation-delay: 1.3s; }
+.card:nth-child(3n) .icono-3d { animation-delay: 2.6s; }
+.card:hover .icono-3d,
+.card:focus-visible .icono-3d {
+  scale: 1.08;
+  rotate: 3deg;
+}
+@keyframes flotar-3d {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icono-3d { animation: none; }
+  .card::after { display: none; }
+  .card:hover::before { animation: none; }
+  .card:hover .icono-3d { scale: 1; rotate: 0deg; }
+}
