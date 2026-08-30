@@ -1,6 +1,6 @@
 /*
   Galería de favicons — lógica de la herramienta.
-  Adaptación en español para agpublicista.com. La codificación de los
+  Adaptación en español para lienzo.tools. La codificación de los
   data URIs vive en encode.js; los iconos, en favicons.js. El tema
   claro/oscuro y el toast global los gestiona /js/site.js.
 */

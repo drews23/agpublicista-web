@@ -1,6 +1,6 @@
-# Lienzo — agpublicista.com
+# Lienzo — lienzo.tools
 
-Sitio estático en español con herramientas creativas, recursos descargables y blog de diseño gráfico, diseño web y marketing digital. **Lienzo** es la submarca del sitio; **agpublicista.com** es solo el dominio. Complementa al canal de YouTube [Andy Publicista](https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg).
+Sitio estático en español con herramientas creativas, recursos descargables y blog de diseño gráfico, diseño web y marketing digital. Hasta el 30 de agosto de 2026 vivió en agpublicista.com, con **Lienzo** como submarca y el dominio sin relación con el nombre; desde ese día el dominio es **lienzo.tools** y coincide con la marca. Complementa al canal de YouTube [Andy Publicista](https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg).
 
 ## Estructura
 
@@ -51,7 +51,7 @@ Para futuros cambios: hacer commit y `git push origin main` — Hostinger despli
 
 ## SEO + monetización
 
-- Sitio verificado en [Google Search Console](https://search.google.com/search-console) (propiedad `https://agpublicista.com/`) con `sitemap.xml` enviado y leído correctamente.
+- Sitio verificado en [Google Search Console](https://search.google.com/search-console) (propiedad `https://lienzo.tools/`) con `sitemap.xml` enviado y leído correctamente.
 - **No borrar** `/googleb7bf25195d1606c4.html` — es el archivo de verificación de propiedad; eliminarlo revoca la verificación.
 - Solicitar [Google AdSense](https://adsense.google.com) cuando haya contenido indexado; sustituir los bloques `.ad-slot` por el código de anuncio (los puntos están marcados con comentarios `<!-- AdSense -->`).
 - Cada video nuevo del canal = un artículo nuevo en `/blog/` enlazándolo (el sitio y el canal se retroalimentan).

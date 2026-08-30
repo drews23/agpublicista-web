@@ -1,7 +1,19 @@
-# AG Publicista — configuración Apache/LiteSpeed (Hostinger)
+# Lienzo — configuración Apache/LiteSpeed (Hostinger)
 
-# Forzar HTTPS y dominio sin www
 RewriteEngine On
+
+# Migración de dominio (30 ago 2026): agpublicista.com -> lienzo.tools.
+# Un solo salto: dominio, esquema y www se resuelven aquí a la vez, ANTES
+# de la regla genérica de HTTPS/no-www de abajo — así una visita vieja a
+# http://www.agpublicista.com/lo-que-sea llega a lienzo.tools en un solo
+# 301, no en dos. Mientras el dominio viejo siga apuntando a este mismo
+# hosting, esta regla debe quedarse: es la que evita perder el tráfico y
+# el enlazado que ya apunta a agpublicista.com.
+RewriteCond %{HTTP_HOST} ^(www\.)?agpublicista\.com$ [NC]
+RewriteRule ^ https://lienzo.tools%{REQUEST_URI} [L,R=301]
+
+# Forzar HTTPS y dominio sin www (para lienzo.tools; agpublicista.com ya
+# salió por la regla de arriba y nunca llega hasta aquí)
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]

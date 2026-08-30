@@ -68,7 +68,7 @@ Soy Andy y aquí muestro cómo se usa cada recurso de Lienzo. Lo bueno no deber�
 
 Uso personal y comercial, incluidos trabajos para clientes.
 
-Un recurso nuevo cada semana en https://agpublicista.com/
+Un recurso nuevo cada semana en https://lienzo.tools/
 Herramientas creativas sin fricción.
 ```
 
@@ -84,10 +84,10 @@ el orden importa. El que ya tienes se queda el primero:
 
 | # | Título del enlace | URL |
 |---|---|---|
-| 1 | Sitio Web | `https://agpublicista.com/` |
-| 2 | Recursos gratis | `https://agpublicista.com/recursos/` |
-| 3 | Herramientas | `https://agpublicista.com/herramientas/` |
-| 4 | Código web | `https://agpublicista.com/codigo-web/` |
+| 1 | Sitio Web | `https://lienzo.tools/` |
+| 2 | Recursos gratis | `https://lienzo.tools/recursos/` |
+| 3 | Herramientas | `https://lienzo.tools/herramientas/` |
+| 4 | Código web | `https://lienzo.tools/codigo-web/` |
 
 Las cuatro verificadas y respondiendo correctamente. Los tres últimos son
 opcionales, pero llevan al visitante directo a lo que busca en vez de obligarle
@@ -95,7 +95,7 @@ a navegar desde la portada.
 
 ### Información de contacto
 ```
-info@agpublicista.com
+contacto@lienzo.tools
 ```
 Ya está puesto. Aparece en la sección *Más información* del canal, tras un
 captcha, para consultas comerciales.

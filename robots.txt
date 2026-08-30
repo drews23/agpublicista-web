@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://agpublicista.com/sitemap.xml
+Sitemap: https://lienzo.tools/sitemap.xml
