@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ver y copiar el favicon de cualquier web por dominio</title>
+    <meta
+      name="description"
+      content="Escribe un dominio y ve su favicon al instante: compara fuentes, copia la URL o el código HTML listo y consulta hasta 30 dominios de una vez. Gratis."
+    />
+    <link rel="canonical" href="https://agpublicista.com/herramientas/favicons/de-dominio/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Ver y copiar el favicon de cualquier web por dominio" />
+    <meta property="og:description" content="Escribe un dominio y ve su favicon en 16, 32 y 64 píxeles, compáralo entre fuentes y copia el código HTML listo para tu web. Con modo lote de 30 dominios." />
+    <meta property="og:url" content="https://agpublicista.com/herramientas/favicons/de-dominio/" />
+    <meta property="og:image" content="https://agpublicista.com/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026082905" />
+    <link rel="stylesheet" href="css/tool.css?v=1" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://agpublicista.com/herramientas/favicons/de-dominio/#app",
+          "name": "Favicon por dominio",
+          "url": "https://agpublicista.com/herramientas/favicons/de-dominio/",
+          "description": "Herramienta gratuita para ver el favicon de cualquier sitio web a partir de su dominio: varios tamaños, comparación entre fuentes, código HTML listo para copiar y consulta de hasta 30 dominios a la vez.",
+          "applicationCategory": "DesignApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lienzo",
+            "url": "https://agpublicista.com/"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://agpublicista.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://agpublicista.com/herramientas/" },
+            { "@type": "ListItem", "position": 3, "name": "Galería de favicons", "item": "https://agpublicista.com/herramientas/favicons/" },
+            { "@type": "ListItem", "position": 4, "name": "Favicon por dominio", "item": "https://agpublicista.com/herramientas/favicons/de-dominio/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es un favicon y para qué sirve?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Es el icono pequeño que identifica a un sitio en las pestañas del navegador, los marcadores, el historial y algunos resultados de búsqueda. Ayuda a reconocer la web de un vistazo y transmite cuidado por los detalles."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué no basta con pedir dominio.com/favicon.ico?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque muchos sitios ya no guardan el icono en esa ruta clásica: lo declaran con etiquetas link en el head, en formatos PNG o SVG, o dentro de un manifest. Los servicios de resolución siguen todas esas pistas y devuelven una imagen aunque el .ico de la raíz no exista."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué formatos y tamaños se usan para favicons?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El .ico clásico puede contener varias resoluciones; el PNG se usa en 16, 32, 48 y 180 píxeles (este último como apple-touch-icon), y los manifests de aplicaciones web piden 192 y 512. El SVG escala a cualquier tamaño con un solo archivo y admite modo oscuro."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo mostrar el favicon de otra web en la mía?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mostrarlo como referencia junto a un enlace —lo que hacen buscadores y gestores de marcadores— suele considerarse uso referencial. Aun así, el logo tiene titular: no lo presentes como propio ni lo uses para sugerir una relación que no existe. Ante dudas comerciales, consulta a un profesional."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué no hay botón de descarga directa?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Los servicios públicos de favicons no permiten que otra web lea la imagen desde el navegador (no envían CORS), así que una descarga automática mentiría. En su lugar puedes abrir el icono a 256 píxeles en otra pestaña y guardarlo con clic derecho, o copiar su URL y el código listo."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Cabecera de la herramienta -->
+      <section class="shell page-head">
+        <nav class="breadcrumbs reveal" aria-label="Migas de pan">
+          <a href="/">Inicio</a> / <a href="/herramientas/">Herramientas</a> / <a href="/herramientas/favicons/">Galería de favicons</a> / <span>Favicon por dominio</span>
+        </nav>
+        <p class="eyebrow reveal">Sin registro · Sin subir nada · Al instante</p>
+        <h1 class="reveal" style="--reveal-delay: 80ms">El favicon de cualquier web, a partir de su dominio</h1>
+        <p class="lede reveal" style="--reveal-delay: 160ms">
+          Escribe un dominio y ve su icono en varios tamaños, compáralo entre fuentes y llévate
+          la URL o el código <code>&lt;img&gt;</code> listo para pegar. Útil para directorios de
+          enlaces, dashboards y listas de recursos — y con modo lote para consultar hasta 30
+          dominios de una vez.
+        </p>
+
+        <!-- Demo -->
+        <div class="demo reveal" style="--reveal-delay: 240ms">
+          <form id="demo-form" class="demo__form">
+            <div class="demo__campo">
+              <label for="dominio">Dominio</label>
+              <input
+                type="text"
+                id="dominio"
+                placeholder="wikipedia.org, rtve.es, eltiempo.com…"
+                autocomplete="off"
+                spellcheck="false"
+                inputmode="url"
+              />
+              <p class="demo__normalizado" id="normalizado" aria-live="polite"></p>
+            </div>
+            <button class="primary-btn" type="submit">Ver favicon</button>
+          </form>
+
+          <ul class="populares-dominios" id="populares-dominios">
+            <li><button type="button" data-d="youtube.com"><img src="https://www.google.com/s2/favicons?domain=youtube.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">youtube.com</button></li>
+            <li><button type="button" data-d="wikipedia.org"><img src="https://www.google.com/s2/favicons?domain=wikipedia.org&amp;sz=32" width="18" height="18" alt="" loading="lazy">wikipedia.org</button></li>
+            <li><button type="button" data-d="github.com"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">github.com</button></li>
+            <li><button type="button" data-d="eltiempo.com"><img src="https://www.google.com/s2/favicons?domain=eltiempo.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">eltiempo.com</button></li>
+            <li><button type="button" data-d="elpais.com"><img src="https://www.google.com/s2/favicons?domain=elpais.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">elpais.com</button></li>
+            <li><button type="button" data-d="rtve.es"><img src="https://www.google.com/s2/favicons?domain=rtve.es&amp;sz=32" width="18" height="18" alt="" loading="lazy">rtve.es</button></li>
+            <li><button type="button" data-d="bbc.com"><img src="https://www.google.com/s2/favicons?domain=bbc.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">bbc.com</button></li>
+            <li><button type="button" data-d="mozilla.org"><img src="https://www.google.com/s2/favicons?domain=mozilla.org&amp;sz=32" width="18" height="18" alt="" loading="lazy">mozilla.org</button></li>
+            <li><button type="button" data-d="wordpress.org"><img src="https://www.google.com/s2/favicons?domain=wordpress.org&amp;sz=32" width="18" height="18" alt="" loading="lazy">wordpress.org</button></li>
+            <li><button type="button" data-d="figma.com"><img src="https://www.google.com/s2/favicons?domain=figma.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">figma.com</button></li>
+            <li><button type="button" data-d="canva.com"><img src="https://www.google.com/s2/favicons?domain=canva.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">canva.com</button></li>
+            <li><button type="button" data-d="mercadolibre.com"><img src="https://www.google.com/s2/favicons?domain=mercadolibre.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">mercadolibre.com</button></li>
+            <li><button type="button" data-d="netflix.com"><img src="https://www.google.com/s2/favicons?domain=netflix.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">netflix.com</button></li>
+            <li><button type="button" data-d="spotify.com"><img src="https://www.google.com/s2/favicons?domain=spotify.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">spotify.com</button></li>
+            <li><button type="button" data-d="instagram.com"><img src="https://www.google.com/s2/favicons?domain=instagram.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">instagram.com</button></li>
+            <li><button type="button" data-d="amazon.com"><img src="https://www.google.com/s2/favicons?domain=amazon.com&amp;sz=32" width="18" height="18" alt="" loading="lazy">amazon.com</button></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Resultado del demo (lo rellena JS) -->
+      <section class="shell resultado" id="resultado" hidden aria-live="polite">
+        <div>
+          <h2>Tamaños</h2>
+          <div class="tallas">
+            <figure class="talla"><img data-sz="16" width="16" height="16" alt="" /><figcaption>16</figcaption></figure>
+            <figure class="talla"><img data-sz="32" width="32" height="32" alt="" /><figcaption>32</figcaption></figure>
+            <figure class="talla"><img data-sz="64" width="64" height="64" alt="" /><figcaption>64</figcaption></figure>
+            <figure class="talla talla--quiza"><img data-sz="128" width="128" height="128" alt="" /><figcaption>128</figcaption></figure>
+            <figure class="talla talla--quiza"><img data-sz="256" width="256" height="256" alt="" /><figcaption>256</figcaption></figure>
+          </div>
+        </div>
+
+        <div>
+          <h2>Así se ve en una pestaña</h2>
+          <div class="tabmocks">
+            <div class="tabmock tabmock--oscuro"><img alt="" /><span></span></div>
+            <div class="tabmock tabmock--claro"><img alt="" /><span></span></div>
+          </div>
+        </div>
+
+        <div>
+          <h2>Tres fuentes, comparadas</h2>
+          <div class="fuentes">
+            <figure class="fuente" id="fuente-google">
+              <h3>Servicio de Google</h3>
+              <img alt="" width="64" height="64" />
+              <figcaption class="fuente__estado"></figcaption>
+              <p class="fuente__url"></p>
+            </figure>
+            <figure class="fuente" id="fuente-ddg">
+              <h3>Servicio de DuckDuckGo</h3>
+              <img alt="" width="64" height="64" />
+              <figcaption class="fuente__estado"></figcaption>
+              <p class="fuente__url"></p>
+            </figure>
+            <figure class="fuente" id="fuente-directo">
+              <h3>El archivo original</h3>
+              <img alt="" width="64" height="64" />
+              <figcaption class="fuente__estado"></figcaption>
+              <p class="fuente__url"></p>
+            </figure>
+          </div>
+          <p class="nota-globo" style="margin-top: 0.9rem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 2.6 2.8 15.4 0 18M12 3c-2.8 2.6-2.8 15.4 0 18"/></svg>
+            ¿El resultado es un globo gris como este? Ese dominio no declara favicon, o Google
+            aún no lo ha indexado. El icono real, si existe, suele aparecer en «El archivo
+            original».
+          </p>
+        </div>
+
+        <div>
+          <h2>Código listo</h2>
+          <div class="snippets">
+            <div class="snippet">
+              <p class="snippet__uso">Para mostrar favicons de terceros en listas, directorios o artículos — con carga perezosa y un respaldo propio si no carga:</p>
+              <pre id="snippet-img"></pre>
+              <button class="ghost-btn" type="button" data-copiar="snippet-img">Copiar &lt;img&gt;</button>
+            </div>
+            <div class="snippet">
+              <p class="snippet__uso">Solo si el dominio es tuyo — la etiqueta clásica para tu propio <code>&lt;head&gt;</code>:</p>
+              <pre id="snippet-link"></pre>
+              <button class="ghost-btn" type="button" data-copiar="snippet-link">Copiar &lt;link&gt;</button>
+            </div>
+          </div>
+          <div class="acciones-resultado" style="margin-top: 0.9rem">
+            <a class="ghost-btn" id="abrir-grande" href="#" target="_blank" rel="noopener">Abrir a 256 px en otra pestaña</a>
+            <button class="ghost-btn" type="button" data-copiar="url-grande">Copiar URL de la imagen</button>
+          </div>
+          <p class="snippet__uso" style="margin-top: 0.5rem">
+            Para guardar el archivo: ábrelo en la otra pestaña y usa clic derecho → «Guardar imagen».
+          </p>
+        </div>
+      </section>
+
+      <!-- Modo lote -->
+      <section class="shell">
+        <details class="lote">
+          <summary>Modo lote: hasta 30 dominios de una vez</summary>
+          <form class="lote__cuerpo" id="lote-form">
+            <label for="lote-entrada" class="snippet__uso" style="margin: 0">Pega hasta 30 dominios, uno por línea:</label>
+            <textarea id="lote-entrada" spellcheck="false" placeholder="wikipedia.org&#10;github.com&#10;eltiempo.com"></textarea>
+            <p class="lote__aviso">Se consultan de seis en seis para no saturar el servicio: los resultados van llegando.</p>
+            <div class="acciones-resultado">
+              <button class="primary-btn" type="submit">Consultar dominios</button>
+            </div>
+            <table id="lote-tabla" hidden>
+              <thead><tr><th>Favicon</th><th>Dominio</th><th>URL de la imagen</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div class="acciones-resultado" id="lote-acciones" hidden>
+              <button class="ghost-btn" type="button" id="lote-copiar-urls">Copiar todas las URLs</button>
+              <button class="ghost-btn" type="button" id="lote-copiar-md">Copiar tabla en Markdown</button>
+            </div>
+          </form>
+        </details>
+      </section>
+
+      <!-- Guía -->
+      <section class="section shell guia diferir-render" style="--alto-escritorio: 868px; --alto-movil: 1244px">
+        <h2 class="section-head">Cómo encuentra un navegador el favicon</h2>
+        <p style="max-width: 72ch; color: var(--muted)">
+          Cuando visitas una página, el navegador busca el icono en un orden concreto: primero
+          las etiquetas <code>&lt;link rel="icon"&gt;</code> declaradas en el
+          <code>&lt;head&gt;</code> —puede haber varias, con distintos tamaños y formatos—,
+          después el archivo <code>/favicon.ico</code> en la raíz del dominio, la convención
+          heredada de los años noventa, y por último los iconos que declare el
+          <em>manifest</em> si la página es una aplicación web. Los servicios de resolución
+          como los que compara esta herramienta hacen ese mismo recorrido por ti, guardan el
+          resultado en caché y lo sirven como imagen simple: por eso funcionan aunque el sitio
+          no tenga el <code>.ico</code> clásico.
+        </p>
+
+        <h2 class="section-head" style="margin-top: 2rem">Tamaños que conviene conocer</h2>
+        <table>
+          <thead><tr><th>Tamaño</th><th>Dónde se usa</th></tr></thead>
+          <tbody>
+            <tr><td>16 × 16</td><td>Pestañas del navegador y listas de marcadores.</td></tr>
+            <tr><td>32 × 32</td><td>Pantallas de alta densidad y accesos directos de escritorio.</td></tr>
+            <tr><td>48 × 48</td><td>Iconos de sitio en Windows y algunos resultados de búsqueda.</td></tr>
+            <tr><td>180 × 180</td><td>El <code>apple-touch-icon</code> de la pantalla de inicio de iOS.</td></tr>
+            <tr><td>192 / 512</td><td>Los que pide el <em>manifest</em> de una aplicación web (PWA).</td></tr>
+            <tr><td>SVG</td><td>Un solo archivo que escala a todo y admite modo oscuro.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-head" style="margin-top: 2rem">Buenas prácticas al incrustar favicons de terceros</h2>
+        <div class="notes">
+          <ul>
+            <li><strong>Carga perezosa siempre.</strong> Un directorio con cien enlaces son cien peticiones de imagen: con <code>loading="lazy"</code> solo se piden las que entran en pantalla.</li>
+            <li><strong>Ancho y alto fijos.</strong> Declara <code>width</code> y <code>height</code> en cada <code>&lt;img&gt;</code> para que la lista no salte mientras cargan los iconos.</li>
+            <li><strong>Un respaldo propio.</strong> El snippet de arriba incluye un <code>onerror</code> que pinta un avatar con la inicial del dominio si el icono no carga — la lista nunca queda con huecos rotos.</li>
+            <li><strong>Texto alternativo.</strong> Un <code>alt</code> del estilo «Favicon de wikipedia.org» mantiene la lista legible para lectores de pantalla.</li>
+          </ul>
+        </div>
+
+        <p class="tool-links" style="margin-top: 2rem; color: var(--muted); max-width: 70ch">
+          ¿Lo que necesitas es el favicon de tu propia web? Elige uno hecho en la
+          <a href="/herramientas/favicons/">galería de favicons SVG</a>, monta uno con un emoji
+          en la <a href="/herramientas/favicons/emojis/">galería de emojis</a>, o sigue la guía
+          para <a href="/blog/como-crear-favicon-svg/">crear tu favicon desde cero</a>.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section shell diferir-render" aria-labelledby="faq-heading" style="--alto-escritorio: 608px; --alto-movil: 1064px">
+        <h2 class="section-head" id="faq-heading">Preguntas frecuentes</h2>
+        <div class="faq-list">
+          <article class="faq-item reveal">
+            <h3>¿Qué es un favicon y para qué sirve?</h3>
+            <p>
+              El icono pequeño que identifica a un sitio en pestañas, marcadores, historial y
+              algunos resultados de búsqueda. Ayuda a reconocer la web de un vistazo y
+              transmite cuidado por los detalles.
+            </p>
+          </article>
+          <article class="faq-item reveal" style="--reveal-delay: 90ms">
+            <h3>¿Por qué no basta con pedir <code>/favicon.ico</code>?</h3>
+            <p>
+              Muchos sitios ya no lo guardan en esa ruta: lo declaran con etiquetas
+              <code>&lt;link&gt;</code>, en PNG o SVG, o dentro de un <em>manifest</em>. Los
+              servicios de resolución siguen todas esas pistas y devuelven una imagen aunque el
+              <code>.ico</code> clásico no exista.
+            </p>
+          </article>
+          <article class="faq-item reveal" style="--reveal-delay: 180ms">
+            <h3>¿Qué formatos y tamaños se usan?</h3>
+            <p>
+              El <code>.ico</code> puede contener varias resoluciones; el PNG se usa en 16, 32,
+              48 y 180 píxeles, y los <em>manifests</em> piden 192 y 512. El SVG escala a
+              cualquier tamaño con un solo archivo.
+            </p>
+          </article>
+          <article class="faq-item reveal" style="--reveal-delay: 270ms">
+            <h3>¿Puedo mostrar el favicon de otra web en la mía?</h3>
+            <p>
+              Como referencia junto a un enlace —lo que hacen buscadores y gestores de
+              marcadores— suele considerarse uso referencial. Aun así, el logo tiene titular:
+              no lo presentes como propio ni sugieras una relación que no existe. Ante dudas
+              comerciales, consulta a un profesional.
+            </p>
+          </article>
+          <article class="faq-item reveal" style="--reveal-delay: 360ms">
+            <h3>¿Por qué no hay botón de descarga directa?</h3>
+            <p>
+              Los servicios públicos de favicons no dejan que otra web lea la imagen desde el
+              navegador (sin CORS), así que un botón de descarga automática mentiría. Abre el
+              icono a 256 px en otra pestaña y guárdalo con clic derecho, o copia su URL.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Publicidad -->
+      <div class="shell">
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · agpublicista.com · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026082905" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026082905" defer></script>
+    <script src="js/de-dominio.js?v=1" defer></script>
+  </body>
+</html>

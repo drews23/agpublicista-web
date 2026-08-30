@@ -1,0 +1,544 @@
+/* ==================================================================== *\
+   Favicon por dominio — estilos de la herramienta
+   Tokens del sitio + lenguaje visual clonado de la familia favicons.
+
+   1. Alias de tokens        4. Comparador de fuentes
+   2. Formulario del demo    5. Snippets y acciones
+   3. Tamaños y tabmock      6. Lote, populares, notas, FAQ
+\* ==================================================================== */
+
+/* 1. Alias de tokens -------------------------------------------------- */
+:root {
+  --sans: var(--font-body);
+  --mono: var(--font-mono);
+  --accent: var(--violeta);
+  --accent-2: var(--turquesa);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.page-head code,
+.notes code,
+.faq-item code,
+.guia code,
+.demo code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+}
+
+/* 2. Formulario del demo ---------------------------------------------- */
+
+.demo {
+  margin-top: 1.6rem;
+}
+
+.demo__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.demo__campo {
+  flex: 1 1 300px;
+  max-width: 460px;
+}
+
+.demo__campo label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.demo__campo input {
+  width: 100%;
+  padding: 0.78rem 1.1rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+[data-theme="light"] .demo__campo input {
+  box-shadow: var(--shadow);
+}
+
+.demo__campo input::placeholder {
+  color: var(--faint);
+}
+
+.demo__campo input:focus {
+  outline: none;
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--line));
+  background: var(--panel-hover);
+}
+
+.demo__normalizado {
+  min-height: 1.3em;
+  margin: 0.35rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+
+.primary-btn,
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.72rem 1.15rem;
+  font: 600 0.9rem var(--sans);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s var(--ease), border-color 0.2s, background 0.2s, filter 0.2s;
+}
+
+.ghost-btn:hover {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+}
+
+.primary-btn {
+  background: linear-gradient(140deg, var(--accent), color-mix(in oklab, var(--accent-2) 70%, var(--accent)));
+  border-color: transparent;
+  color: #fff;
+  font-weight: 650;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.08);
+}
+
+.primary-btn:active,
+.ghost-btn:active {
+  transform: scale(0.97);
+}
+
+/* 3. Tamaños y tabmock ------------------------------------------------- */
+
+.resultado {
+  margin-top: 1.8rem;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.resultado[hidden] {
+  display: none;
+}
+
+.resultado h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.7rem;
+}
+
+.tallas {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.talla {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.talla img {
+  display: block;
+  background:
+    conic-gradient(var(--line) 25%, transparent 0 50%, var(--line) 0 75%, transparent 0)
+    0 0 / 14px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  image-rendering: auto;
+}
+
+.talla figcaption {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+.talla--quiza figcaption::after {
+  content: " · si existe";
+  color: var(--ambar, #ffb454);
+}
+
+/* maqueta de pestaña, clara y oscura lado a lado */
+.tabmocks {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.tabmock {
+  flex: 1 1 240px;
+  max-width: 330px;
+  border-radius: 10px 10px 0 0;
+  padding: 0.55rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+}
+
+.tabmock img {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.tabmock span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tabmock--oscuro {
+  background: #1f1f28;
+  color: #e8e6f0;
+}
+
+.tabmock--claro {
+  background: #f2f0ea;
+  color: #26242e;
+}
+
+/* 4. Comparador de fuentes --------------------------------------------- */
+
+.fuentes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 0.9rem;
+}
+
+.fuente {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.05rem;
+  display: grid;
+  gap: 0.55rem;
+  justify-items: start;
+}
+
+.fuente h3 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.fuente img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background:
+    conic-gradient(var(--line) 25%, transparent 0 50%, var(--line) 0 75%, transparent 0)
+    0 0 / 16px 16px;
+}
+
+.fuente__estado {
+  font-size: 0.78rem;
+  color: var(--faint);
+  min-height: 2.4em;
+  text-wrap: pretty;
+}
+
+.fuente--ok .fuente__estado {
+  color: var(--turquesa);
+}
+
+.fuente--mal img {
+  opacity: 0.25;
+}
+
+.fuente__url {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--faint);
+  word-break: break-all;
+}
+
+.fuente .ghost-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.78rem;
+}
+
+/* nota del globo genérico */
+.nota-globo {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 2px solid color-mix(in oklab, var(--ambar, #ffb454) 70%, transparent);
+  border-radius: 4px var(--radius) var(--radius) 4px;
+  padding: 0.75rem 0.95rem;
+  max-width: 72ch;
+}
+
+.nota-globo svg {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  color: var(--faint);
+}
+
+/* 5. Snippets y acciones ----------------------------------------------- */
+
+.snippets {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.snippet {
+  background: var(--code-bg, var(--panel));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+}
+
+.snippet__uso {
+  font-size: 0.8rem;
+  color: var(--faint);
+  margin: 0 0 0.5rem;
+}
+
+.snippet pre {
+  margin: 0 0 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--text);
+}
+
+.acciones-resultado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* 6. Lote, populares, notas, FAQ --------------------------------------- */
+
+.lote {
+  margin-top: 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.lote summary {
+  cursor: pointer;
+  padding: 0.9rem 1.1rem;
+  font-weight: 600;
+}
+
+.lote__cuerpo {
+  padding: 0 1.1rem 1.1rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.lote textarea {
+  width: 100%;
+  min-height: 7.5em;
+  padding: 0.7rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--bg-soft, var(--bg));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  resize: vertical;
+}
+
+.lote__aviso {
+  font-size: 0.8rem;
+  color: var(--faint);
+  margin: 0;
+}
+
+.lote table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.lote th {
+  text-align: left;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.lote td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.lote td img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.lote .url-celda {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  word-break: break-all;
+  color: var(--muted);
+}
+
+/* populares: rejilla de dominios de ejemplo, estática y clicable */
+.populares-dominios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0.9rem 0 0;
+  list-style: none;
+}
+
+.populares-dominios button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.7rem;
+  font: 500 0.84rem var(--sans);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.15s var(--ease);
+}
+
+.populares-dominios button:hover {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+  transform: translateY(-1px);
+}
+
+.populares-dominios img {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+/* tabla de tamaños de la guía */
+.guia table {
+  width: 100%;
+  max-width: 620px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 0.8rem 0 1.2rem;
+}
+
+.guia th {
+  text-align: left;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.guia td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.guia td:first-child {
+  font-family: var(--mono);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.notes ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 0.9rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.notes li {
+  padding: 0.95rem 1.05rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 2px solid color-mix(in oklab, var(--accent) 65%, transparent);
+  border-radius: 4px var(--radius) var(--radius) 4px;
+  text-wrap: pretty;
+}
+
+.notes strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.faq-item {
+  margin: 0;
+  padding: 1.15rem 1.3rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.faq-item h3 {
+  font-size: 1.08rem;
+  margin: 0 0 0.45rem;
+}
+
+.faq-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-btn,
+  .ghost-btn,
+  .populares-dominios button {
+    transition: none;
+    transform: none;
+  }
+}
