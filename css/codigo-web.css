@@ -332,29 +332,21 @@
   gap: 1.1rem;
 }
 
+/* .familia también lleva la clase .card (site.css, seccion 15): de ahi
+   saca el vidrio, el borde-degradado y el glow al hover. Aqui solo quedan
+   los ajustes propios de esta rejilla mas densa: gap y padding ligeramente
+   menores que .card sola, y el tamano del icono. Se elimino el .familia:hover
+   que habia antes -era identico a las declaraciones base de .card:hover en
+   site.css (mismo border-color/background)- para que gane el .card:hover
+   de la seccion 15 (elevacion mayor + glow), igual que en el resto del sitio. */
 .familia {
-  display: flex;
-  flex-direction: column;
   gap: 0.45rem;
   padding: 1.4rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--panel);
-  text-decoration: none;
-  color: inherit;
-  transition: transform 280ms var(--ease), border-color 200ms ease, background-color 200ms ease;
-}
-
-.familia:hover {
-  transform: translateY(-4px);
-  border-color: var(--line-strong);
-  background: var(--panel-hover);
 }
 
 .familia__icono {
-  width: 42px;
-  height: 42px;
-  margin-bottom: 0.5rem;
+  width: 60px;
+  height: 60px;
   color: var(--violeta);
 }
 
