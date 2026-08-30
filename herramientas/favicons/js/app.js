@@ -18,6 +18,18 @@
     dev: 'Código',
     nature: 'Naturaleza',
     pixel: 'Pixel art',
+    /* Colección 3D (ver cargar3D más abajo). Sus categorías van aparte de
+       las de arriba: aquellas describen la TÉCNICA del favicon (emoji,
+       pixel art, degradado) y estas el TEMA del dibujo. */
+    diseno: 'Diseño 3D',
+    tecnologia: 'Tecnología 3D',
+    naturaleza: 'Naturaleza 3D',
+    comida: 'Comida 3D',
+    fiesta: 'Fiestas 3D',
+    personas: 'Personas 3D',
+    lugares: 'Lugares 3D',
+    objetos: 'Objetos 3D',
+    simbolos: 'Símbolos 3D',
   };
 
   // Normaliza para buscar sin distinguir mayúsculas ni acentos.
@@ -27,7 +39,7 @@
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
 
-  const items = window.FAVICONS.map((item) => {
+  let items = window.FAVICONS.map((item) => {
     const href = item.png ? item.png : fromSvg(item.svg);
     return {
       ...item,
@@ -93,8 +105,70 @@
     if (pageFavicon) pageFavicon.setAttribute('href', href);
   }
 
+  /* --- colección 3D ---------------------------------------------------
+     Los 60 favicons de favicons.js viven como marcado SVG dentro del JS y
+     su data URI se calcula al arrancar. Con los 1720 iconos 3D eso sería
+     un archivo de 17 MB bloqueando la carga, así que aquí el trato es otro:
+     cada SVG es un archivo suelto en /iconos3d/, la galería sólo carga un
+     manifiesto de 186 KB con nombre + categoría + etiquetas, y el data URI
+     se construye al vuelo cuando el visitante copia uno concreto.
+
+     Consecuencia asumida: los 60 originales siguen pre-renderizados en el
+     HTML y se ven sin JavaScript; la colección 3D necesita JS. Si el
+     manifiesto no llega, la galería sigue funcionando con sus 60. */
+
+  const RUTA_3D = '/herramientas/favicons/iconos3d';
+  let cargando3D = null;
+
+  function cargar3D() {
+    if (cargando3D) return cargando3D;
+    cargando3D = fetch('/herramientas/favicons/js/iconos3d.json')
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((lista) => {
+        const nuevos = lista.map((it) => ({
+          id: it.h,
+          name: it.n,
+          cat: it.c,
+          tags: it.t,
+          href: `${RUTA_3D}/${it.h}.svg`,
+          es3d: true,
+          isRaster: false,
+          haystack: fold(`${it.n} ${it.t} ${it.c} ${CATEGORY_LABELS[it.c] || ''}`),
+        }));
+        items = items.concat(nuevos);
+        nuevos.forEach((it) => byId.set(it.id, it));
+        search.placeholder = `Busca entre ${items.length} favicons…`;
+        buildChips();
+        return true;
+      })
+      .catch(() => false);
+    return cargando3D;
+  }
+
+  /* El <link> de un icono 3D se arma la primera vez que hace falta: se trae
+     el SVG del disco y se codifica igual que los originales. Se memoriza en
+     el propio item para no repetir la petición. */
+  async function tagDe(item) {
+    if (item.tag) return item.tag;
+    const res = await fetch(item.href);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    item.dataUri = fromSvg(await res.text());
+    item.tag = linkTag(item.dataUri);
+    return item.tag;
+  }
+
   async function copyFavicon(item, cardEl) {
-    const ok = await copyText(item.tag);
+    let etiqueta;
+    try {
+      etiqueta = await tagDe(item);
+    } catch {
+      notify('No se pudo leer el icono. Recarga la página e inténtalo otra vez.');
+      return;
+    }
+    const ok = await copyText(etiqueta);
     if (!ok) {
       notify('No se pudo copiar. Abre los detalles y copia el código manualmente.');
       return;
@@ -140,9 +214,57 @@
     });
   }
 
+  /* Render por tandas: con la colección 3D cargada la lista llega a 1780
+     items, y volcarlos de una sola vez son 1780 nodos y ~700 KB de HTML
+     parseados en el hilo principal. Se pintan de a TANDA y el resto entra
+     cuando el centinela del final se asoma al viewport. */
+  const TANDA = 120;
+  let pendientes = [];
+  let centinela = null;
+  let vigia = null;
+
+  function pintarTanda() {
+    if (!pendientes.length) {
+      if (centinela) centinela.remove();
+      centinela = null;
+      return;
+    }
+    const lote = pendientes.splice(0, TANDA);
+    const base = grid.querySelectorAll('.card').length;
+    grid.insertAdjacentHTML(
+      'beforeend',
+      lote.map((item, i) => cardMarkup(item, base + i)).join('')
+    );
+    if (pendientes.length) {
+      if (!centinela) {
+        centinela = document.createElement('div');
+        centinela.className = 'grid__centinela';
+        centinela.setAttribute('aria-hidden', 'true');
+      }
+      grid.append(centinela);
+      if (!vigia) {
+        vigia = new IntersectionObserver(
+          (entradas) => {
+            if (entradas.some((e) => e.isIntersecting)) pintarTanda();
+          },
+          { rootMargin: '600px' }
+        );
+      }
+      vigia.observe(centinela);
+    } else if (centinela) {
+      centinela.remove();
+      centinela = null;
+    }
+  }
+
   function render() {
     const list = visibleItems();
-    grid.innerHTML = list.map(cardMarkup).join('');
+    if (vigia) vigia.disconnect();
+    if (centinela) centinela.remove();
+    centinela = null;
+    grid.innerHTML = '';
+    pendientes = list.slice();
+    pintarTanda();
     empty.hidden = list.length > 0;
   }
 
@@ -236,9 +358,22 @@
     );
   }
 
-  function openSheet(item) {
+  async function openSheet(item) {
     sheetItem = item;
     lastFocused = document.activeElement;
+
+    /* Un icono 3D llega con la RUTA de su archivo, no con el data URI: la
+       ficha muestra el código que se copia, así que hay que resolverlo
+       antes de pintarla. */
+    if (item.es3d && !item.tag) {
+      try {
+        await tagDe(item);
+      } catch {
+        notify('No se pudo leer el icono.');
+        return;
+      }
+    }
+    const codigoHref = item.dataUri || item.href;
 
     $('#sheet-cat').textContent = CATEGORY_LABELS[item.cat] || item.cat;
     $('#sheet-title').textContent = item.name;
@@ -252,7 +387,7 @@
       img.dataset.pixelated = String(item.isRaster);
     });
 
-    sheetCode.innerHTML = highlight(item.href);
+    sheetCode.innerHTML = highlight(codigoHref);
 
     const bytes = new Blob([item.tag]).size;
     $('#sheet-bytes').textContent = `${bytes} bytes en total · ${
@@ -260,7 +395,10 @@
     } · sin peticiones HTTP adicionales`;
 
     downloadLink.href = item.href;
-    downloadLink.setAttribute('download', `${item.id}.${item.isRaster ? 'png' : 'svg'}`);
+    downloadLink.setAttribute(
+      'download',
+      `${item.es3d ? fold(item.name).replace(/[^a-z0-9]+/g, '-') : item.id}.${item.isRaster ? 'png' : 'svg'}`
+    );
     downloadLink.textContent = `Descargar .${item.isRaster ? 'png' : 'svg'}`;
 
     sheet.hidden = false;
@@ -286,7 +424,7 @@
 
   $('#copy-href').addEventListener('click', async () => {
     if (!sheetItem) return;
-    const ok = await copyText(sheetItem.href);
+    const ok = await copyText(sheetItem.dataUri || sheetItem.href);
     notify(ok ? 'Data URI copiado (solo el valor del href).' : 'No se pudo copiar.');
   });
 
@@ -418,4 +556,14 @@
   buildChips();
   renderSiCambio();
   refreshBuilders();
+
+  /* La colección 3D entra DESPUÉS del primer pintado: las 60 tarjetas
+     estáticas ya están a la vista y el manifiesto (186 KB) no bloquea nada.
+     Al llegar, buildChips() se rehace con las categorías nuevas. */
+  const arrancar3D = () => cargar3D();
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(arrancar3D, { timeout: 2500 });
+  } else {
+    setTimeout(arrancar3D, 400);
+  }
 })();

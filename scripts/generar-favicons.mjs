@@ -20,7 +20,17 @@
    RUNBOOK · al añadir o editar un favicon en favicons.js:
    1. node scripts/generar-favicons.mjs → regenera las 60 tarjetas.
    2. Confirmar visualmente que el nuevo favicon aparece en /herramientas/favicons/.
-   3. No hace falta tocar alturas: esta sección no usa .diferir-render. */
+   3. No hace falta tocar alturas: esta sección no usa .diferir-render.
+
+   OJO · ESTE SCRIPT NO TOCA LA COLECCIÓN 3D (1720 iconos, 30 ago 2026).
+   Esos NO viven en favicons.js ni se pre-renderizan aquí: son archivos
+   sueltos en herramientas/favicons/iconos3d/<id>.svg más un manifiesto
+   herramientas/favicons/js/iconos3d.json, y app.js los carga después del
+   primer pintado. Meterlos en el HTML estático serían ~700 KB de marcado;
+   meterlos en favicons.js, 17 MB de JavaScript. Por eso el trato distinto:
+   los 60 de autor se ven sin JS, los 1720 de catálogo necesitan JS.
+   Para regenerar el manifiesto hay que rehacer la traducción — ver
+   .claude/SPEC-iconos-3d.md. */
 import { readFileSync, writeFileSync } from "node:fs";
 import vm from "node:vm";
 
