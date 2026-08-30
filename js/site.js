@@ -517,6 +517,17 @@
       if (!carrusel.contains(event.relatedTarget)) seguir();
     });
 
+    /* `overflow: hidden` NO impide el desplazamiento programático. Las láminas
+       en espera viven fuera del marco (left: calc(50% + 588px)), así que en
+       cuanto un enlace suyo recibe el foco —tabulando, o al pulsar los mandos—
+       el navegador desplaza el contenedor para traerlo a la vista: la pista
+       queda corrida ~186 px y el texto de la lámina activa se sale del marco.
+       Nada lo devolvía, así que el carrusel se quedaba roto para el resto de
+       la visita. Medido el 30 ago 2026: scrollLeft llegaba a 186,79. */
+    carrusel.addEventListener('scroll', () => {
+      if (carrusel.scrollLeft !== 0) carrusel.scrollLeft = 0;
+    });
+
     // Fuera de pantalla no tiene sentido gastar temporizadores ni repintar.
     if ('IntersectionObserver' in window) {
       new IntersectionObserver((entradas) => {

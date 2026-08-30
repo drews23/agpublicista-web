@@ -1490,6 +1490,10 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 18px 34px -14px rgba(0, 0, 0, 0.75);
+  /* Aisla el mix-blend-mode de la imagen a este slide: sin esto, "multiply"
+     se mezclaria con el slide de ATRAS en el stack (item 1 y 2 se superponen
+     por completo), no con un fondo propio. */
+  isolation: isolate;
   transition:
     left 750ms var(--ease),
     top 750ms var(--ease),
@@ -1529,6 +1533,31 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Multiplicar + oscurecer: el trazo blanco de los iconos de fondo compite con
+   el titulo por TODO el ancho de la lamina, mientras que el velo de abajo solo
+   protege la banda diagonal izquierda (a 68% del ancho ya es casi transparente,
+   y ahi el titulo largo seguia peleando con los iconos).
+
+   El color de fondo es la BASE del multiply, y su luminancia decide cuanto
+   queda de la imagen: multiply da imagen x base/255. Con una base casi negra
+   (#06060c) el factor es ~0.02 y la imagen no se atenua, DESAPARECE. Con este
+   violeta oscuro el factor es ~0.24: los iconos siguen leyendose como textura
+   y ya no compiten con el texto. Si alguna vez se retoca, mover la luminancia
+   de este color, no la opacidad.
+
+   El fondo va DENTRO del propio item (no en .carrusel) para que el
+   isolation: isolate de arriba lo capture y el multiply no se mezcle con la
+   lamina de atras. Solo en las 2 laminas grandes: en las miniaturas laterales
+   el patron debe verse nitido, no hay texto encima que proteger. */
+.carrusel__item:nth-child(1),
+.carrusel__item:nth-child(2) {
+  background: #3d3850;
+}
+.carrusel__item:nth-child(1) .carrusel__img,
+.carrusel__item:nth-child(2) .carrusel__img {
+  mix-blend-mode: multiply;
 }
 
 /* Velo: sin él, el texto blanco cae sobre las zonas claras del bloom.
