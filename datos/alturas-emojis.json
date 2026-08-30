@@ -1,0 +1,41 @@
+{
+ "_nota": "Medidas reales en navegador: escritorio a 1280px, movil a 375px. Re-medir si cambia el CSS de la rejilla o el numero de emojis.",
+ "porGrupo": {
+  "0": {
+   "escritorio": 1607,
+   "movil": 2599
+  },
+  "1": {
+   "escritorio": 2106,
+   "movil": 4535
+  },
+  "2": {
+   "escritorio": 983,
+   "movil": 1921
+  },
+  "3": {
+   "escritorio": 725,
+   "movil": 1719
+  },
+  "4": {
+   "escritorio": 1370,
+   "movil": 2749
+  },
+  "5": {
+   "escritorio": 597,
+   "movil": 1093
+  },
+  "6": {
+   "escritorio": 1957,
+   "movil": 3612
+  },
+  "7": {
+   "escritorio": 1534,
+   "movil": 3080
+  },
+  "8": {
+   "escritorio": 1069,
+   "movil": 2904
+  }
+ }
+}
