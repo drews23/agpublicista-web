@@ -1553,7 +1553,10 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
    el patron debe verse nitido, no hay texto encima que proteger. */
 .carrusel__item:nth-child(1),
 .carrusel__item:nth-child(2) {
-  background: #3d3850;
+  /* #3d3850 (factor ~0.24) era para las portadas ruidosas; con las miniaturas
+     sin texto (fondos ya oscuros, un solo objeto heroe) se aclara un paso a
+     peticion del usuario, 30 ago 2026. */
+  background: #514b6b;
 }
 .carrusel__item:nth-child(1) .carrusel__img,
 .carrusel__item:nth-child(2) .carrusel__img {
