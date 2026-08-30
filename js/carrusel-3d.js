@@ -40,7 +40,14 @@
 
   function colocar() {
     const paso = 360 / tarjetas.length;
-    const radio = Math.min(400, window.innerWidth / 2.5);
+    /* Radio del anillo. La plantilla usaba min(400, ancho/2.5), pero está
+       pensada para 5 tarjetas: con 6 el paso baja a 60 grados y las vecinas
+       quedaban casi de canto y muy lejos —medido: a 429px del centro y con
+       48px de ancho, astillas sueltas en los bordes—. Con 220 caen a ~200px
+       y ~108px de ancho, solapando apenas la activa, que es la lectura del
+       CodePen original. Si algún día cambia el número de láminas, hay que
+       volver a medir: el ángulo depende de cuántas son. */
+    const radio = Math.min(220, window.innerWidth / 4.5);
 
     tarjetas.forEach((tarjeta, i) => {
       // Ángulo RELATIVO a la activa: así el anillo gira de verdad.
