@@ -146,6 +146,16 @@
     empty.hidden = list.length > 0;
   }
 
+  // Las 60 tarjetas ya llegan escritas en el HTML (scripts/generar-favicons.mjs):
+  // si site.js nunca corre, la galería sigue completa y visible. render()
+  // sólo reescribe el grid cuando el visitante de verdad filtra o busca;
+  // en el estado inicial (todo, sin búsqueda) el marcado estático es la
+  // fuente de verdad y no hay que tocarlo.
+  function renderSiCambio() {
+    if (activeCat === 'all' && !query) return;
+    render();
+  }
+
   function buildChips() {
     const counts = items.reduce((acc, item) => {
       acc[item.cat] = (acc[item.cat] || 0) + 1;
@@ -406,6 +416,6 @@
 
   search.placeholder = `Busca entre ${items.length} favicons…`;
   buildChips();
-  render();
+  renderSiCambio();
   refreshBuilders();
 })();
