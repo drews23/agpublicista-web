@@ -449,11 +449,14 @@
 
   const emojiInput = $('#emoji-input');
   const emojiPreview = $('#emoji-preview');
+  const emojiBg = $('#emoji-bg');
+  const emojiSize = $('#emoji-size');
   const monoInput = $('#mono-input');
   const monoBg = $('#mono-bg');
   const monoFg = $('#mono-fg');
   const monoPreview = $('#mono-preview');
   let monoShape = 'squircle';
+  let emojiShape = 'squircle';
 
   const escapeXml = (str) =>
     str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -471,7 +474,13 @@
   const builders = {
     emoji() {
       const char = firstGrapheme(emojiInput.value.trim()) || '🎯';
-      return fromSvg(T.emoji(escapeXml(char)));
+      const shapes = {
+        squircle: `<rect width="100" height="100" rx="24" fill="${emojiBg.value}"/>`,
+        circle: `<circle cx="50" cy="50" r="50" fill="${emojiBg.value}"/>`,
+        square: `<rect width="100" height="100" fill="${emojiBg.value}"/>`,
+        none: '',
+      };
+      return fromSvg(T.emojiCard(escapeXml(char), shapes[emojiShape], Number(emojiSize.value)));
     },
     mono() {
       const raw = monoInput.value.trim().slice(0, 2) || 'A';
@@ -511,7 +520,18 @@
     refreshBuilders();
   });
 
-  [emojiInput, monoInput, monoBg, monoFg].forEach((el) =>
+  $('#emoji-shape').addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-shape]');
+    if (!button) return;
+    emojiShape = button.dataset.shape;
+    $('#emoji-shape')
+      .querySelectorAll('button')
+      .forEach((el) => el.classList.toggle('is-active', el === button));
+    emojiBg.disabled = emojiShape === 'none';
+    refreshBuilders();
+  });
+
+  [emojiInput, emojiBg, emojiSize, monoInput, monoBg, monoFg].forEach((el) =>
     el.addEventListener('input', refreshBuilders)
   );
 

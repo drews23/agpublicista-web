@@ -489,6 +489,26 @@ img[data-pixelated="true"] {
   border-radius: 7px;
 }
 
+.field input[type="color"]:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Control de tamaño del constructor de emoji: mismo alto que el selector
+   de color de al lado (36px) para que el field-row quede alineado. */
+.field--range {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.field input[type="range"] {
+  width: 100%;
+  height: 36px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 #emoji-input {
   font-size: 1.3rem;
   line-height: 1.2;
@@ -518,6 +538,7 @@ img[data-pixelated="true"] {
 
 .segmented {
   display: inline-flex;
+  flex-wrap: wrap;
   padding: 3px;
   gap: 2px;
   background: var(--bg-soft);

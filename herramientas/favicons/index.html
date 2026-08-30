@@ -1125,6 +1125,24 @@
                 <input id="emoji-input" type="text" value="🎯" maxlength="8" autocomplete="off" />
               </label>
               <div class="emoji-quick" id="emoji-quick"></div>
+
+              <div class="field-row">
+                <label class="field field--color">
+                  <span>Fondo</span>
+                  <input id="emoji-bg" type="color" value="#8b7bff" />
+                </label>
+                <label class="field field--range">
+                  <span>Tamaño</span>
+                  <input id="emoji-size" type="range" min="55" max="84" value="76" step="1" aria-label="Tamaño del emoji" />
+                </label>
+              </div>
+              <div class="segmented" id="emoji-shape" role="group" aria-label="Forma del fondo">
+                <button type="button" data-shape="squircle" class="is-active">Redondeado</button>
+                <button type="button" data-shape="circle">Círculo</button>
+                <button type="button" data-shape="square">Cuadrado</button>
+                <button type="button" data-shape="none">Sin fondo</button>
+              </div>
+
               <button class="primary-btn" type="button" data-copy-builder="emoji">
                 Copiar etiqueta link
               </button>
@@ -1398,9 +1416,14 @@
 
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
-    <script src="js/pixel-icons.js" defer></script>
-    <script src="js/encode.js" defer></script>
-    <script src="js/favicons.js" defer></script>
-    <script src="js/app.js?v=2026083015" defer></script>
+    <!-- Los cuatro van versionados a la vez: app.js depende de las plantillas
+         de favicons.js y del codificador de encode.js, así que si uno se
+         actualiza y el otro se sirve desde la caché de un mes (.htaccess),
+         la herramienta se rompe para quien ya visitó la página. Pasó el
+         30 ago 2026 al añadir emojiCard(). -->
+    <script src="js/pixel-icons.js?v=2026083016" defer></script>
+    <script src="js/encode.js?v=2026083016" defer></script>
+    <script src="js/favicons.js?v=2026083016" defer></script>
+    <script src="js/app.js?v=2026083016" defer></script>
   </body>
 </html>

@@ -11,8 +11,21 @@ const svg = (inner, viewBox = '0 0 100 100') =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">${inner}</svg>`;
 
 // El clásico de una línea: un emoji como ícono completo.
+// NO TOCAR esta firma: es el mismo marcado que copiaron los visitantes que
+// ya usan uno de los 14 favicons de la categoría "emoji" de abajo.
 const emoji = (char) =>
   svg(`<text y=".9em" font-size="90">${char}</text>`);
+
+// Variante con fondo, forma y tamaño ajustables — la usa el constructor
+// "Favicon de emoji" de la página (ver app.js). Centrado con
+// text-anchor/dominant-baseline en vez del y=".9em" de arriba porque aquí
+// el emoji tiene que quedar centrado DENTRO de la forma, no solo en el
+// viewBox.
+const emojiCard = (char, shape = '', size = 78) =>
+  svg(
+    `${shape}<text x="50" y="54" text-anchor="middle" dominant-baseline="central" ` +
+      `font-size="${size}">${char}</text>`
+  );
 
 const monogram = (letter, fill, shape, size = 58) =>
   svg(
@@ -21,7 +34,7 @@ const monogram = (letter, fill, shape, size = 58) =>
       `font-size="${size}" font-weight="700" fill="${fill}">${letter}</text>`
   );
 
-window.FaviconTemplates = { svg, emoji, monogram };
+window.FaviconTemplates = { svg, emoji, emojiCard, monogram };
 
 window.FAVICONS = [
   /* ---------------------------------------------------------- emoji ---- */
