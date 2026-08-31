@@ -1,0 +1,445 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo — "Lo más reciente": marquesina de tarjetas neon-glass.
+   Sustituye al carrusel 3D. Sin JavaScript: la pista está duplicada en
+   el HTML (la copia lleva inert + aria-hidden) y translateX(-50%) cierra
+   el bucle. Se pausa con hover y con foco de teclado; con movimiento
+   reducido la animación se apaga y la fila se desplaza a mano.
+   1. Escenario y marquesina   3. Flotantes (iconos y escenas)
+   2. Tarjeta neon-glass       4. Temas y responsive
+\* ------------------------------------------------------------------ */
+
+/* 1. Escenario y marquesina ------------------------------------------ */
+
+.neonov {
+  position: relative;
+  margin-top: 1.6rem;
+}
+
+/* Manchas de luz detrás del vidrio: sin algo que desenfocar, el glass
+   no existe. Muy tenues para no competir con las tarjetas. */
+.neonov::before,
+.neonov::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.neonov::before {
+  width: 340px;
+  height: 340px;
+  left: -90px;
+  top: -60px;
+  background: var(--violeta);
+  opacity: 0.16;
+}
+
+.neonov::after {
+  width: 300px;
+  height: 300px;
+  right: -80px;
+  bottom: -70px;
+  background: var(--turquesa);
+  opacity: 0.12;
+}
+
+.neonov__marquee {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding-block: 14px;
+  /* fundido en los bordes para que las tarjetas entren y salgan suaves */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.neonov__pista {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* ~29 px/s con 6 tarjetas de ~340px: más lento que la referencia (50) */
+  animation: neonov-desliza var(--neonov-dur, 76s) linear infinite;
+  will-change: transform;
+}
+
+@keyframes neonov-desliza {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Pausa: cursor encima o foco de teclado dentro */
+.neonov__marquee:hover .neonov__pista,
+.neonov__marquee:focus-within .neonov__pista {
+  animation-play-state: paused;
+}
+
+/* 2. Tarjeta neon-glass ---------------------------------------------- */
+
+.neonov__item {
+  /* margen y NO gap: con margen por ítem, translateX(-50%) cae exacto
+     en la costura entre las dos mitades de la pista */
+  margin-right: 26px;
+  perspective: 1100px;
+}
+
+.neonov__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: clamp(280px, 30vw, 342px);
+  min-height: 442px;
+  padding: 22px;
+  border-radius: 26px;
+  overflow: hidden;
+
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+
+  transform-style: preserve-3d;
+  transition: transform 450ms var(--ease), box-shadow 450ms var(--ease);
+}
+
+.neonov__card:hover {
+  transform: rotateX(4deg) rotateY(-6deg) translateY(-8px);
+  box-shadow:
+    0 44px 90px rgba(0, 0, 0, 0.5),
+    0 0 60px color-mix(in oklab, var(--turquesa) 10%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Borde de neón: degradado violeta→turquesa recortado por máscara */
+.neonov__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    color-mix(in oklab, var(--violeta) 85%, #fff),
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.03) 60%,
+    var(--turquesa)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Resplandor interior, esquina derecha */
+.neonov__card::after {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  right: -55px;
+  top: 130px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--violeta) 22%, transparent);
+  filter: blur(55px);
+  pointer-events: none;
+}
+
+.neonov__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  transform: translateZ(30px);
+}
+
+.neonov__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font: 700 0.66rem/1 var(--font-body);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--turquesa) 75%, #fff);
+  background: color-mix(in oklab, var(--turquesa) 9%, transparent);
+  border: 1px solid color-mix(in oklab, var(--turquesa) 25%, transparent);
+}
+
+.neonov__punto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--turquesa);
+  box-shadow: 0 0 10px var(--turquesa);
+}
+
+.neonov__formato {
+  padding: 6px 10px;
+  border-radius: 10px;
+  font: 600 0.66rem/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* 3. Flotantes -------------------------------------------------------- */
+
+.neonov__escena {
+  position: relative;
+  z-index: 2;
+  height: 168px;
+  display: grid;
+  place-items: center;
+  transform: translateZ(55px);
+}
+
+/* Disco de luz tras los flotantes */
+.neonov__halo {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--violeta) 24%, transparent),
+    color-mix(in oklab, var(--turquesa) 10%, transparent) 45%,
+    transparent 70%
+  );
+  filter: blur(16px);
+}
+
+.neonov__flotantes {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.neonov__flot {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  animation: neonov-flota 4.6s ease-in-out infinite;
+}
+
+/* Composición: protagonista al centro, satélites a los lados */
+.neonov__flot--a {
+  width: 84px;
+  height: 84px;
+  left: 50%;
+  top: 50%;
+  margin: -46px 0 0 -42px;
+  filter: drop-shadow(0 0 10px color-mix(in oklab, var(--violeta) 65%, transparent))
+          drop-shadow(0 6px 24px rgba(0, 0, 0, 0.45));
+}
+
+.neonov__flot--b {
+  width: 54px;
+  height: 54px;
+  left: 12%;
+  top: 12%;
+  animation-delay: -1.6s;
+  animation-duration: 5.4s;
+  filter: drop-shadow(0 0 8px color-mix(in oklab, var(--turquesa) 55%, transparent));
+}
+
+.neonov__flot--c {
+  width: 48px;
+  height: 48px;
+  right: 10%;
+  bottom: 8%;
+  animation-delay: -3.1s;
+  animation-duration: 5s;
+  filter: drop-shadow(0 0 8px color-mix(in oklab, var(--ambar) 50%, transparent));
+}
+
+.neonov__flot svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tríada de marca: cada flotante hereda su tinta vía currentColor */
+.neonov__flot--a { color: color-mix(in oklab, var(--violeta) 55%, #fff); }
+.neonov__flot--b { color: var(--turquesa); }
+.neonov__flot--c { color: var(--ambar); }
+
+@keyframes neonov-flota {
+  0%, 100% { transform: translateY(6px) rotate(-2deg); }
+  50%      { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* Variante escenas 3D: mini-renders reales, como pantallas flotando */
+.neonov__flot--foto {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+  filter: none;
+}
+
+.neonov__flot--foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.neonov__flot--foto.neonov__flot--a { width: 128px; height: 86px; margin: -48px 0 0 -64px; }
+.neonov__flot--foto.neonov__flot--b { width: 92px; height: 62px; }
+.neonov__flot--foto.neonov__flot--c { width: 84px; height: 56px; }
+
+/* 4. Texto, pie, temas y responsive ----------------------------------- */
+
+.neonov__cuerpo {
+  position: relative;
+  z-index: 2;
+  transform: translateZ(40px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.neonov__fecha {
+  font: 600 0.66rem/1 var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.34);
+  margin: 4px 0 8px;
+}
+
+.neonov__titulo {
+  margin: 0 0 8px;
+  font: 600 1.28rem/1.15 var(--font-display);
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.neonov__titulo span {
+  background: linear-gradient(90deg, color-mix(in oklab, var(--violeta) 60%, #fff), var(--turquesa));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.neonov__desc {
+  margin: 0 0 16px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.neonov__pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
+  transform: translateZ(48px);
+}
+
+.neonov__meta {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.neonov__meta-label {
+  font: 700 0.6rem/1 var(--font-body);
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.neonov__meta-valor {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.neonov__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, color-mix(in oklab, var(--violeta) 55%, #fff), var(--turquesa));
+  color: #0b0a12;
+  font: 700 0.72rem/1 var(--font-body);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 10px 26px color-mix(in oklab, var(--violeta) 28%, transparent);
+  transition: transform 250ms var(--ease), box-shadow 250ms var(--ease);
+  flex: 0 0 auto;
+}
+
+.neonov__cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 32px color-mix(in oklab, var(--turquesa) 30%, transparent);
+}
+
+.neonov__cta:focus-visible {
+  outline: 2px solid var(--turquesa);
+  outline-offset: 3px;
+}
+
+/* Tema claro: el vidrio invierte su base, el neón se queda */
+[data-theme="light"] .neonov__card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.4));
+  border-color: rgba(20, 18, 29, 0.08);
+  box-shadow:
+    0 30px 70px rgba(31, 27, 56, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="light"] .neonov__titulo { color: var(--text); }
+[data-theme="light"] .neonov__desc { color: color-mix(in oklab, var(--text) 62%, transparent); }
+[data-theme="light"] .neonov__fecha { color: color-mix(in oklab, var(--text) 40%, transparent); }
+[data-theme="light"] .neonov__meta-label { color: color-mix(in oklab, var(--text) 36%, transparent); }
+[data-theme="light"] .neonov__meta-valor { color: color-mix(in oklab, var(--text) 75%, transparent); }
+[data-theme="light"] .neonov__formato {
+  color: color-mix(in oklab, var(--text) 60%, transparent);
+  border-color: rgba(20, 18, 29, 0.1);
+  background: rgba(20, 18, 29, 0.04);
+}
+[data-theme="light"] .neonov__tag { color: color-mix(in oklab, var(--turquesa) 60%, var(--text)); }
+[data-theme="light"] .neonov__flot--a { color: var(--violeta); }
+[data-theme="light"] .neonov::before { opacity: 0.1; }
+[data-theme="light"] .neonov::after { opacity: 0.08; }
+
+@media (max-width: 640px) {
+  .neonov__item { margin-right: 16px; }
+  .neonov__card { width: 272px; min-height: 420px; padding: 18px; }
+  .neonov__escena { height: 148px; }
+  .neonov__flot--a { width: 72px; height: 72px; margin: -40px 0 0 -36px; }
+  .neonov__titulo { font-size: 1.16rem; }
+}
+
+/* Movimiento reducido: sin marquesina, la fila se desplaza a mano y
+   la copia duplicada desaparece; los flotantes se quedan quietos. */
+@media (prefers-reduced-motion: reduce) {
+  .neonov__pista { animation: none; width: auto; }
+  .neonov__marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .neonov__item[aria-hidden="true"] { display: none; }
+  .neonov__flot { animation: none; }
+  .neonov__card,
+  .neonov__cta { transition: none; }
+  .neonov__card:hover { transform: none; }
+}
