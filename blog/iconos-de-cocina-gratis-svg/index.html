@@ -6,7 +6,7 @@
     <title>50 iconos de cocina gratis en SVG y PNG</title>
     <meta
       name="description"
-      content="Descarga gratis 50 iconos de cocina en SVG y PNG, con variante clara y oscura y nombres en español. Incluye guía para recolorearlos y usarlos en web, Canva y Figma."
+      content="Descarga gratis 50 iconos de cocina en SVG y PNG, con variante clara y oscura y nombres en español. Incluye guía para recolorearlos."
     />
     <link rel="canonical" href="https://lienzo.tools/blog/iconos-de-cocina-gratis-svg/" />
     <meta name="theme-color" content="#0a0a0f" />
@@ -201,8 +201,9 @@
 
           <h2 id="muestra">Así se ven los iconos</h2>
           <p>
-            Una muestra de 12 de los 50 iconos del pack. Todos comparten el mismo trazo fino y el
-            mismo tamaño de caja, así que se ven coherentes al ponerlos juntos:
+            Doce de los 50 iconos del pack. Cubren la cadena entera de una cocina
+            profesional —preparación, cocción, servicio y menaje— con el mismo grosor de trazo, para
+            que no desentonen al alinearlos en una carta:
           </p>
 
           <ul class="muestra-iconos reveal">
@@ -234,13 +235,18 @@
           </p>
           <ul>
             <li>
-              <strong>50 iconos en SVG</strong>, en dos variantes: <code>svg/claro</code> (trazo en
-              tinta oscura, para fondos claros) y <code>svg/oscuro</code> (trazo en blanco, para
-              fondos oscuros y modo noche).
+              
+              <strong>50 iconos en SVG</strong>, en dos variantes: <code>svg/claro</code>, con el
+              trazo en tinta oscura para cartas impresas y fondos claros, y <code>svg/oscuro</code>,
+              con el trazo en blanco para pizarras, fondos de foto y modo noche.
+            
             </li>
             <li>
-              <strong>Los mismos 50 iconos en PNG</strong> a 24, 48 y 96 píxeles, también en las dos
-              variantes, con versiones <code>@2x</code> y <code>@4x</code> para pantallas retina.
+              
+              <strong>Los mismos 50 iconos en PNG</strong> a 24, 48 y 96 píxeles, en las dos
+              variantes y con versiones <code>@2x</code> y <code>@4x</code>, que es lo que pide el
+              gestor de una carta digital cuando no acepta vectores.
+            
             </li>
             <li>
               <strong>Nombres en español y en minúsculas</strong>: <code>olla-a-presion.svg</code>,
@@ -302,10 +308,10 @@
             Los 50 iconos vienen con el trazo en tinta oscura y en blanco, pero <code>olla-01.svg</code> se abre con el Bloc de notas y su <code>fill</code> se cambia en un segundo: útil cuando la carta del restaurante ya tiene su propia gama y los iconos tienen que entrar sin desentonar.
           </p>
           <p>
-            Los tres métodos —editarlo a mano, que el icono herede el color del texto con
-            <code>currentColor</code>, o pintarlo desde el CSS como máscara— están explicados
-            paso a paso, con el código de cada uno, en
-            <a href="/blog/como-cambiar-el-color-de-un-icono-svg/">cómo cambiar el color de un icono SVG</a>.
+            Si vas a repetir la operación en los 50 iconos, no lo hagas a mano: el método de
+            la máscara CSS te deja cambiar toda la carta desde una sola variable. Lo tienes con
+            código en <a href="/blog/como-cambiar-el-color-de-un-icono-svg/">cómo cambiar el color
+            de un icono SVG</a>.
           </p>
 
           <h2 id="en-la-carta">Cómo llevarlos a la carta de tu restaurante</h2>
@@ -372,10 +378,10 @@
             quien lo reciba tendrá siempre la versión actualizada.
           </p>
           <p>
-            La intención de esta publicación es dejar claro que el contenido se ofrece como material
-            propio del sitio, con la lógica editorial y la utilidad práctica con la que se presenta
-            todo el trabajo de Lienzo. Si lo usas en un proyecto de cliente o una pieza comercial más
-            específica, esta guía ya te da la referencia de uso y la intención del recurso.
+            La duda que más me llega sobre este pack es si vale para una carta que el
+            restaurante va a cobrar impresa. Sí: uso comercial incluido, y no hay que acreditar a
+            Lienzo en la carta. Lo que no cubre esta publicación es revender el pack como producto
+            propio, ni subirlo a un banco de recursos como si fuera tuyo.
           </p>
 
           <h3>Si crees que algo no debería estar aquí</h3>
@@ -392,10 +398,11 @@
           <details class="faq-item" name="faq" open>
             <summary><h3>¿Cómo cambio el color de un icono SVG?</h3></summary>
             <p>
-              Abre el archivo con un editor de texto y sustituye el valor de <code>fill</code> por tu
-              color. Si lo reemplazas por <code>currentColor</code> y pegas el SVG en línea en tu HTML,
-              el icono tomará automáticamente el color del texto que lo rodea. En Figma, Illustrator o
-              Canva basta con seleccionarlo y aplicar un relleno nuevo.
+              Para una carta impresa lo más rápido es abrir el SVG en Illustrator o Affinity y
+              aplicar el color corporativo directamente al trazo. Si la carta es digital, conviene
+              pegar el SVG en línea en el HTML y poner <code>fill="currentColor"</code>: así el
+              icono adopta el color del texto de cada sección y no hay que mantener dos paletas.
+              Los tres métodos están explicados con código en <a href="/blog/como-cambiar-el-color-de-un-icono-svg/">cómo cambiar el color de un icono SVG</a>.
             </p>
           </details>
           <details class="faq-item" name="faq">
@@ -466,7 +473,9 @@
               </svg>
             </div>
             <h3>Optimizador de SVG</h3>
-            <p>Baja el peso de tus iconos hasta un 70 % sin que el archivo salga de tu equipo.</p>
+            <p>
+              Aligera los iconos antes de subirlos al gestor de la carta digital.
+            </p>
             <span class="card__meta">Herramienta interactiva · Gratis</span>
           </a>
 
