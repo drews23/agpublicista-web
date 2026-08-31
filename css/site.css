@@ -2200,6 +2200,22 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
     0 10px 24px color-mix(in srgb, var(--violeta) 16%, transparent);
 }
 
+/* Fotograma real del pack (30 ago 2026): las cards de escenas 3D usaban un
+   icono abstracto dibujado a mano (cubos, hexagonos) que no se parecia a
+   nada de lo que el pack realmente trae -confunde al lector-. Ahora es una
+   captura real de las propias escenas .spline, a sangre en la card. */
+.card__art--foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 420ms var(--ease);
+}
+.card:hover .card__art--foto img,
+.card:focus-visible .card__art--foto img {
+  transform: scale(1.045);
+}
+
 /* Iconos 3D de las tarjetas */
 .card__art--3d {
   background:
