@@ -52,19 +52,22 @@ cómo referirse a ti y puedes elegir quién lo ve. No lo relleno por ti; si
 quieres ponerlo, se edita o se quita cuando quieras.
 
 ### Descripción
-994 caracteres de los 1000 que permite YouTube. Los primeros 137 son los únicos
-que se ven en los resultados de búsqueda y en la vista previa del canal, así que
-funcionan solos y llevan los términos que la gente escribe de verdad.
+**Reescrita el 31 ago 2026** con el reordenamiento de la estrategia: el sonido
+(108K búsquedas/mes) abre el texto y los iconos dejan el primer puesto, igual
+que en los pilares del canal. 966 caracteres de los 1000 que permite YouTube.
+Los primeros 137 son los únicos que se ven en los resultados de búsqueda y en
+la vista previa del canal: la primera línea (113) funciona sola y arranca con
+la frase exacta que la gente escribe.
 
 ```
-Recursos de diseño gratis en español: iconos SVG y PNG, efectos de sonido, plantillas de After Effects y generadores de CSS. Sin registro.
+Efectos de sonido para videos, plantillas de edición y herramientas de diseño: gratis, en español y sin registro.
 
 Soy Andy y aquí muestro cómo se usa cada recurso de Lienzo. Lo bueno no debería estar detrás de un formulario: tomas lo que necesitas y sigues trabajando.
 
-▪ Recursos — packs de iconos en SVG y PNG (clara y oscura, nombres en español), efectos y transiciones en WAV, plantillas de After Effects sin plugins.
-▪ Herramientas — paletas con contraste WCAG, colores en vivo sobre una maqueta real, optimizador de SVG, favicons y más. Corren en tu navegador: tus archivos no se suben a ningún servidor.
-▪ Código web — generadores de degradados, sombras, filtros, animaciones y tipografía: ajustas y te llevas el CSS listo.
-▪ Guías — teoría del color, favicons para modo oscuro y la guía de cada recurso.
+▪ Sonido: packs de efectos en WAV para editar tus videos (transiciones, impactos, ambientes), cada uno con su guía de uso y descarga directa.
+▪ Plantillas y recursos: proyectos de After Effects sin plugins, iconos en SVG y PNG con nombres en español y escenas 3D editables.
+▪ Herramientas: editor de audio, generador de códigos QR, paletas con contraste WCAG, optimizador de SVG y más. Todo corre en tu navegador: tus archivos no se suben a ningún servidor.
+▪ Código web: degradados, sombras, animaciones y componentes CSS listos para copiar.
 
 Uso personal y comercial, incluidos trabajos para clientes.
 
