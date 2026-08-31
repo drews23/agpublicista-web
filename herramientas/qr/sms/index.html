@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Código QR para SMS gratis — mensaje de texto prellenado | Lienzo</title>
+    <meta name="description" content="Crea un código QR que abre la app de mensajes con el número y el texto ya escritos. Gratis, sin registro y sin que los datos salgan de tu navegador." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/qr/sms/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Código QR para SMS" />
+    <meta property="og:description" content="Un código QR que abre un SMS ya redactado al escanearlo. Nada se sube a ningún servidor." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/qr/sms/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/qr/sms/#app",
+      "name": "Generador de código QR para SMS de Lienzo",
+      "url": "https://lienzo.tools/herramientas/qr/sms/",
+      "description": "Genera un código QR que abre un mensaje de texto (SMS) prellenado al escanearlo, sin subir los datos a ningún servidor.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Código QR",
+          "item": "https://lienzo.tools/herramientas/qr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Código QR para SMS",
+          "item": "https://lienzo.tools/herramientas/qr/sms/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿El mensaje se envía automáticamente al escanear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El escaneo abre la app de mensajes con el número y el texto ya cargados; la persona debe pulsar enviar ella misma."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si el mensaje supera los 160 caracteres?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mayoría de teléfonos lo dividen en varios SMS enlazados automáticamente, lo que puede generar cargos adicionales según el operador de quien escanea. Por eso el contador te avisa al acercarte al límite."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito escribir el prefijo del país?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es muy recomendable: sin el prefijo (como +57, +34, +52), algunos teléfonos no completan el número correctamente o lo interpretan como local."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Mis datos se suben a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El código se genera enteramente en tu navegador; el número y el mensaje no se envían a ningún sitio antes de que la persona que escanea decida enviarlo de verdad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Funciona igual en iPhone y Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, el esquema SMSTO: que usa este código es reconocido por la cámara nativa y la app de mensajes de ambos sistemas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo dejar el mensaje vacío y que la persona escriba el suyo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: si dejas el campo de mensaje en blanco, el código solo prellena el número de destino y la persona escribe su propio texto."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> › <a href="/herramientas/qr/">Código QR</a> › <span>Código QR para SMS</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Código QR para SMS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Escanear el código abre la app de mensajes del teléfono con el número y el texto ya escritos. Ideal cuando el correo es demasiado lento y quieres una respuesta directa.</p>
+        </div>
+
+        <div class="workspace" data-workspace style="margin-top: 2rem">
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Vista previa</h2>
+              <span class="stat__value--small" data-nombre-archivo>—</span>
+            </div>
+            <div class="qr-preview" data-preview>
+              <div class="qr-lienzo" data-lienzo hidden><canvas data-canvas width="1" height="1"></canvas></div>
+              <div class="qr-preview__vacio" data-vacio>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14v7M14 19h7"/></svg>
+                <span>Completa los campos para ver tu código QR</span>
+              </div>
+            </div>
+            <p class="error" data-error role="alert" hidden></p>
+            <div class="stats" aria-live="polite">
+              <div class="stat"><span class="stat__label">Versión</span><span class="stat__value" data-stat-version>—</span></div>
+              <div class="stat"><span class="stat__label">Módulos</span><span class="stat__value stat__value--small" data-stat-modulos>—</span></div>
+              <div class="stat"><span class="stat__label">Corrección</span><span class="stat__value stat__value--small" data-stat-ec>—</span></div>
+              <div class="stat"><span class="stat__label">Contenido</span><span class="stat__value stat__value--small" data-stat-bytes>—</span></div>
+            </div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-png>Descargar PNG</button>
+              <button class="btn btn--ghost" type="button" data-descargar-svg>Descargar SVG</button>
+            </div>
+          </div>
+          <aside class="sidebar" aria-label="Ajustes">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Mensaje de texto</h2></div>
+              <div class="settings">
+                <label class="field"><span class="field__label">Número de teléfono</span><input type="tel" placeholder="+57 300 1234567" data-campo="numero" value="+57 300 1234567" /></label>
+                <label class="field">
+                  <span class="field__label">Mensaje <span class="contador" data-contador>0</span> / 160</span>
+                  <textarea placeholder="Escribe el mensaje..." data-campo="mensaje" rows="4">Hola, vi tu código QR</textarea>
+                  <span class="field__hint">160 caracteres es el límite de un SMS clásico; pasarte de eso puede partir el mensaje en dos.</span>
+                </label>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Apariencia</h2></div>
+              <div class="settings">
+                <div class="field-row">
+                  <label class="field">
+                    <span class="field__label">Color</span>
+                    <div class="campo-color">
+                      <input type="color" value="#0a0a0f" data-color-primario />
+                      <input type="text" value="#0a0a0f" data-color-primario-texto />
+                    </div>
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Fondo</span>
+                    <div class="campo-color">
+                      <input type="color" value="#ffffff" data-color-fondo />
+                      <input type="text" value="#ffffff" data-color-fondo-texto />
+                    </div>
+                  </label>
+                </div>
+                <label class="field">
+                  <span class="field__label">Tamaño de descarga <output data-tamano-output>1024 px</output></span>
+                  <input type="range" min="256" max="2048" step="256" value="1024" data-tamano />
+                </label>
+                <div class="field">
+                  <span class="field__label">Corrección de errores</span>
+                  <div class="radiogroup" role="radiogroup" aria-label="Nivel de corrección de errores">
+                    <label><input type="radio" name="ec" value="L" data-ec /> <span>L · 7 %</span></label>
+                    <label><input type="radio" name="ec" value="M" data-ec checked /> <span>M · 15 %</span></label>
+                    <label><input type="radio" name="ec" value="Q" data-ec /> <span>Q · 25 %</span></label>
+                    <label><input type="radio" name="ec" value="H" data-ec /> <span>H · 30 %</span></label>
+                  </div>
+                  <span class="field__hint">Cuánto puede ensuciarse o taparse el código y aún leerse. H es la más resistente; úsala si vas a imprimirlo pequeño o a ponerle un logo encima en un editor externo.</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          El código se genera y se dibuja en tu navegador. Nada de lo que escribes aquí se envía a ningún servidor.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 1900px; --alto-movil: 3100px">
+        <div class="prose">
+          <h2>Un mensaje que ya viene escrito</h2>
+          <p>
+            Este código guarda el número y el texto de un SMS. Al escanearlo, el teléfono
+            abre la app de mensajes nativa con ambos datos ya cargados: la persona solo
+            confirma el envío, sin escribir el número a mano ni redactar desde cero.
+          </p>
+
+          <h2>Cómo crear el código</h2>
+          <ol>
+            <li>Escribe el número completo, con el prefijo del país (por ejemplo, +57 para Colombia).</li>
+            <li>Redacta el mensaje, sin pasarte de 160 caracteres si quieres que llegue como un solo SMS.</li>
+            <li>Descarga el código.</li>
+          </ol>
+
+          <h2>Cuándo un SMS y no un correo</h2>
+          <p>
+            El SMS llega sin necesitar conexión a internet, se lee casi de inmediato (a
+            diferencia de un correo, que puede tardar horas en abrirse) y no depende de
+            que la persona tenga una app de correo configurada. Es la opción correcta para
+            confirmaciones rápidas, reservas o cuando necesitas una respuesta el mismo
+            momento.
+          </p>
+
+          <h2>Casos de uso habituales</h2>
+          <ul>
+            <li><strong>Reservas y turnos:</strong> confirmar asistencia con un mensaje corto.</li>
+            <li><strong>Soporte técnico in situ:</strong> reportar una falla desde un cartel en el equipo.</li>
+            <li><strong>Eventos:</strong> apuntarse a una lista de espera por mensaje.</li>
+            <li><strong>Negocios pequeños:</strong> pedir turno o hacer un encargo sin llamar.</li>
+          </ul>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h2>Las demás herramientas de código QR</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/qr/url/">código qr para una url</a>, <a href="/herramientas/qr/texto/">código qr de texto</a>, <a href="/herramientas/qr/wifi/">código qr para wifi</a>, <a href="/herramientas/qr/contacto/">código qr de contacto</a> y <a href="/herramientas/qr/email/">código qr para correo</a>. Y si tu caso no encaja
+            en ninguna de las variantes específicas, el
+            <a href="/herramientas/qr/">generador de código QR</a> acepta cualquier texto.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿El mensaje se envía automáticamente al escanear?</h3></summary>
+            <p>No. El escaneo abre la app de mensajes con el número y el texto ya cargados; la persona debe pulsar enviar ella misma.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué pasa si el mensaje supera los 160 caracteres?</h3></summary>
+            <p>La mayoría de teléfonos lo dividen en varios SMS enlazados automáticamente, lo que puede generar cargos adicionales según el operador de quien escanea. Por eso el contador te avisa al acercarte al límite.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Necesito escribir el prefijo del país?</h3></summary>
+            <p>Es muy recomendable: sin el prefijo (como +57, +34, +52), algunos teléfonos no completan el número correctamente o lo interpretan como local.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Mis datos se suben a algún servidor?</h3></summary>
+            <p>No. El código se genera enteramente en tu navegador; el número y el mensaje no se envían a ningún sitio antes de que la persona que escanea decida enviarlo de verdad.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Funciona igual en iPhone y Android?</h3></summary>
+            <p>Sí, el esquema SMSTO: que usa este código es reconocido por la cámara nativa y la app de mensajes de ambos sistemas.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo dejar el mensaje vacío y que la persona escriba el suyo?</h3></summary>
+            <p>Sí: si dejas el campo de mensaje en blanco, el código solo prellena el número de destino y la persona escribe su propio texto.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Código QR</h4>
+            <ul>
+              <li><a href="/herramientas/qr/">Generador de código QR</a></li>
+              <li><a href="/herramientas/qr/url/">Código QR para una URL</a></li>
+              <li><a href="/herramientas/qr/texto/">Código QR de texto</a></li>
+              <li><a href="/herramientas/qr/wifi/">Código QR para WiFi</a></li>
+              <li><a href="/herramientas/qr/contacto/">Código QR de contacto</a></li>
+              <li><a href="/herramientas/qr/email/">Código QR para correo</a></li>
+              <li><a href="/herramientas/qr/sms/">Código QR para SMS</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/vendor/qrcode-generator.js" defer></script>
+    <script src="../js/qr-core.js" defer></script>
+    <script src="js/sms.js" defer></script>
+  </body>
+</html>

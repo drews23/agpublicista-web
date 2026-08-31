@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de código QR gratis online — sin registro | Lienzo</title>
+    <meta name="description" content="Crea un código QR a partir de cualquier texto o enlace, en PNG o SVG, con tu color y tu nivel de corrección. Gratis, sin registro, sin marca de agua y sin subir nada a un servidor." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/qr/hub/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Generador de código QR gratis" />
+    <meta property="og:description" content="Crea un código QR a partir de cualquier texto o enlace. Nada se sube a ningún servidor." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/qr/hub/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/qr/hub/#app",
+      "name": "Generador de código QR de Lienzo",
+      "url": "https://lienzo.tools/herramientas/qr/hub/",
+      "description": "Generador de códigos QR en el navegador: cualquier texto o enlace, con color y nivel de corrección configurables, exportado en PNG o SVG sin subir nada a un servidor.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Código QR",
+          "item": "https://lienzo.tools/herramientas/qr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Generador de código QR",
+          "item": "https://lienzo.tools/herramientas/qr/hub/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Se sube mi contenido a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El código QR se genera y se dibuja completamente en tu navegador. Ni el texto que escribes ni la imagen resultante viajan por la red en ningún momento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los códigos QR caducan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, nunca. Un código QR de contenido directo (como estos, sin acortador ni redirección) es solo una forma de guardar el texto: mientras el texto siga siendo válido —por ejemplo, mientras la URL exista— el código funciona para siempre, sin fecha de vencimiento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo usar el código en un proyecto comercial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. El código que generas es tuyo, para el uso que necesites, comercial incluido. No hay marca de agua ni ninguna condición añadida sobre el resultado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto texto puedo meter en un código QR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Varios miles de caracteres si el contenido es solo texto o números, algo menos si mezcla mayúsculas, minúsculas y símbolos. Para un uso normal (una URL, una frase, un dato de contacto) nunca vas a acercarte al límite."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué mi lector no reconoce el código?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Casi siempre es por falta de margen en blanco alrededor (la «zona de silencio») o por un color de bajo contraste entre el código y el fondo. Esta herramienta ya deja el margen correcto; si personalizas los colores, mantén el fondo claro y el código oscuro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito una app especial para leer el código?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. La cámara nativa de cualquier teléfono moderno (iPhone desde iOS 11, Android desde la versión 9 con Google Lens integrado) lee códigos QR sin instalar nada."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> › <span>Generador de código QR</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de código QR</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Escribe cualquier texto o pega un enlace y descarga el código QR al instante, en PNG o en SVG. Se genera en tu navegador: nada de lo que escribes viaja por la red.</p>
+        </div>
+
+        <div class="workspace" data-workspace style="margin-top: 2rem">
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Vista previa</h2>
+              <span class="stat__value--small" data-nombre-archivo>—</span>
+            </div>
+            <div class="qr-preview" data-preview>
+              <div class="qr-lienzo" data-lienzo hidden><canvas data-canvas width="1" height="1"></canvas></div>
+              <div class="qr-preview__vacio" data-vacio>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14v7M14 19h7"/></svg>
+                <span>Completa los campos para ver tu código QR</span>
+              </div>
+            </div>
+            <p class="error" data-error role="alert" hidden></p>
+            <div class="stats" aria-live="polite">
+              <div class="stat"><span class="stat__label">Versión</span><span class="stat__value" data-stat-version>—</span></div>
+              <div class="stat"><span class="stat__label">Módulos</span><span class="stat__value stat__value--small" data-stat-modulos>—</span></div>
+              <div class="stat"><span class="stat__label">Corrección</span><span class="stat__value stat__value--small" data-stat-ec>—</span></div>
+              <div class="stat"><span class="stat__label">Contenido</span><span class="stat__value stat__value--small" data-stat-bytes>—</span></div>
+            </div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-png>Descargar PNG</button>
+              <button class="btn btn--ghost" type="button" data-descargar-svg>Descargar SVG</button>
+            </div>
+          </div>
+          <aside class="sidebar" aria-label="Ajustes">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Contenido</h2></div>
+              <div class="settings">
+                <label class="field">
+                  <span class="field__label">Texto o enlace <span class="contador" data-contador>0</span></span>
+                  <textarea placeholder="https://lienzo.tools/" data-campo="contenido" rows="4">https://lienzo.tools/</textarea>
+                  <span class="field__hint">Cualquier cosa: una URL, una frase, un número de referencia.</span>
+                </label>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Apariencia</h2></div>
+              <div class="settings">
+                <div class="field-row">
+                  <label class="field">
+                    <span class="field__label">Color</span>
+                    <div class="campo-color">
+                      <input type="color" value="#0a0a0f" data-color-primario />
+                      <input type="text" value="#0a0a0f" data-color-primario-texto />
+                    </div>
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Fondo</span>
+                    <div class="campo-color">
+                      <input type="color" value="#ffffff" data-color-fondo />
+                      <input type="text" value="#ffffff" data-color-fondo-texto />
+                    </div>
+                  </label>
+                </div>
+                <label class="field">
+                  <span class="field__label">Tamaño de descarga <output data-tamano-output>1024 px</output></span>
+                  <input type="range" min="256" max="2048" step="256" value="1024" data-tamano />
+                </label>
+                <div class="field">
+                  <span class="field__label">Corrección de errores</span>
+                  <div class="radiogroup" role="radiogroup" aria-label="Nivel de corrección de errores">
+                    <label><input type="radio" name="ec" value="L" data-ec /> <span>L · 7 %</span></label>
+                    <label><input type="radio" name="ec" value="M" data-ec checked /> <span>M · 15 %</span></label>
+                    <label><input type="radio" name="ec" value="Q" data-ec /> <span>Q · 25 %</span></label>
+                    <label><input type="radio" name="ec" value="H" data-ec /> <span>H · 30 %</span></label>
+                  </div>
+                  <span class="field__hint">Cuánto puede ensuciarse o taparse el código y aún leerse. H es la más resistente; úsala si vas a imprimirlo pequeño o a ponerle un logo encima en un editor externo.</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          El código se genera y se dibuja en tu navegador. Nada de lo que escribes aquí se envía a ningún servidor.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3300px">
+        <div class="prose">
+          <h2>Un generador de QR sin fricción</h2>
+          <p>
+            La mayoría de generadores de código QR te piden crear una cuenta, te limitan
+            las descargas o esconden el botón real de PNG detrás de un plan de pago. Este
+            no: escribes, ves el código actualizarse al instante y lo descargas. Todo el
+            cálculo —la codificación, la corrección de errores, el dibujo del código—
+            ocurre dentro de tu navegador.
+          </p>
+
+          <h2>Cómo crear un código QR</h2>
+          <ol>
+            <li>Escribe o pega el contenido: un enlace, una frase, lo que necesites.</li>
+            <li>Ajusta el color, el fondo y el nivel de corrección si quieres personalizarlo.</li>
+            <li>Descarga en PNG (para imprimir o compartir) o en SVG (para editar en otro programa).</li>
+          </ol>
+
+          <h2>PNG o SVG: cuál elegir</h2>
+          <p>
+            <strong>PNG</strong> es una imagen de píxeles: perfecta para pegarla en un
+            documento, subirla a redes sociales o imprimirla directamente. <strong>SVG</strong>
+            es vectorial —sin píxeles, escala a cualquier tamaño sin perder nitidez— y es
+            la opción correcta si vas a llevar el código a Illustrator, Figma o Canva para
+            montarlo en un diseño más grande, como un cartel o un empaque.
+          </p>
+
+          <h2>Qué significa el nivel de corrección de errores</h2>
+          <p>
+            Todo código QR guarda una copia de seguridad de sus propios datos, calculada
+            matemáticamente. El nivel de corrección decide cuánta: con L, hasta un 7 % del
+            código puede estar sucio, doblado o tapado y aun así se lee; con H, hasta un
+            30 %. Más corrección hace el código un poco más denso (más cuadritos), pero
+            en la mayoría de tamaños de impresión no se nota. Si vas a ponerle un logo
+            encima en otro programa, usa H: es justo el margen que ese logo va a ocupar.
+          </p>
+
+          <h2>Casos de uso habituales</h2>
+          <ul>
+            <li><strong>Carteles y volantes:</strong> enlazar directo a una página sin que nadie tenga que teclear la URL.</li>
+            <li><strong>Presentaciones:</strong> un código en la última diapositiva para que el público acceda al material.</li>
+            <li><strong>Empaques y etiquetas:</strong> enlazar a instrucciones, garantía o el catálogo completo.</li>
+            <li><strong>Documentos internos:</strong> codificar un número de referencia o de serie.</li>
+          </ul>
+
+          <h2>Y si necesitas un formato específico</h2>
+          <p>
+            Si lo que vas a codificar es una red WiFi, una tarjeta de contacto, un correo
+            prellenado o un SMS, usa la variante enfocada: el formato interno de esos
+            códigos tiene reglas propias (comillas, separadores, campos obligatorios) que
+            las páginas específicas resuelven por ti sin que tengas que conocerlas.
+          </p>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h2>Las demás herramientas de código QR</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/qr/url/">código qr para una url</a>, <a href="/herramientas/qr/texto/">código qr de texto</a>, <a href="/herramientas/qr/wifi/">código qr para wifi</a>, <a href="/herramientas/qr/contacto/">código qr de contacto</a>, <a href="/herramientas/qr/email/">código qr para correo</a> y <a href="/herramientas/qr/sms/">código qr para sms</a>. Y si tu caso no encaja
+            en ninguna de las variantes específicas, el
+            <a href="/herramientas/qr/">generador de código QR</a> acepta cualquier texto.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Se sube mi contenido a algún servidor?</h3></summary>
+            <p>No. El código QR se genera y se dibuja completamente en tu navegador. Ni el texto que escribes ni la imagen resultante viajan por la red en ningún momento.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Los códigos QR caducan?</h3></summary>
+            <p>No, nunca. Un código QR de contenido directo (como estos, sin acortador ni redirección) es solo una forma de guardar el texto: mientras el texto siga siendo válido —por ejemplo, mientras la URL exista— el código funciona para siempre, sin fecha de vencimiento.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo usar el código en un proyecto comercial?</h3></summary>
+            <p>Sí. El código que generas es tuyo, para el uso que necesites, comercial incluido. No hay marca de agua ni ninguna condición añadida sobre el resultado.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cuánto texto puedo meter en un código QR?</h3></summary>
+            <p>Varios miles de caracteres si el contenido es solo texto o números, algo menos si mezcla mayúsculas, minúsculas y símbolos. Para un uso normal (una URL, una frase, un dato de contacto) nunca vas a acercarte al límite.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué mi lector no reconoce el código?</h3></summary>
+            <p>Casi siempre es por falta de margen en blanco alrededor (la «zona de silencio») o por un color de bajo contraste entre el código y el fondo. Esta herramienta ya deja el margen correcto; si personalizas los colores, mantén el fondo claro y el código oscuro.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Necesito una app especial para leer el código?</h3></summary>
+            <p>No. La cámara nativa de cualquier teléfono moderno (iPhone desde iOS 11, Android desde la versión 9 con Google Lens integrado) lee códigos QR sin instalar nada.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Código QR</h4>
+            <ul>
+              <li><a href="/herramientas/qr/">Generador de código QR</a></li>
+              <li><a href="/herramientas/qr/url/">Código QR para una URL</a></li>
+              <li><a href="/herramientas/qr/texto/">Código QR de texto</a></li>
+              <li><a href="/herramientas/qr/wifi/">Código QR para WiFi</a></li>
+              <li><a href="/herramientas/qr/contacto/">Código QR de contacto</a></li>
+              <li><a href="/herramientas/qr/email/">Código QR para correo</a></li>
+              <li><a href="/herramientas/qr/sms/">Código QR para SMS</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="js/vendor/qrcode-generator.js" defer></script>
+    <script src="js/qr-core.js" defer></script>
+    <script src="js/qr-generador.js" defer></script>
+  </body>
+</html>

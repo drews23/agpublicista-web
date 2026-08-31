@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Código QR para WiFi gratis — conecta sin escribir la contraseña | Lienzo</title>
+    <meta name="description" content="Genera un código QR que conecta a tu red WiFi al escanearlo, sin escribir la contraseña. Gratis, sin registro y sin que tu contraseña salga de tu navegador." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/qr/wifi/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Código QR para WiFi" />
+    <meta property="og:description" content="Crea un código QR que conecta a tu red WiFi al escanearlo. Tu contraseña nunca sale de tu navegador." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/qr/wifi/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/qr/wifi/#app",
+      "name": "Generador de código QR para WiFi de Lienzo",
+      "url": "https://lienzo.tools/herramientas/qr/wifi/",
+      "description": "Genera un código QR que conecta automáticamente a una red WiFi al escanearlo, sin subir la contraseña a ningún servidor.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Código QR",
+          "item": "https://lienzo.tools/herramientas/qr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Código QR para WiFi",
+          "item": "https://lienzo.tools/herramientas/qr/wifi/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Mi contraseña de WiFi se sube a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El código se construye y se dibuja completamente en tu navegador. La contraseña nunca se envía a ningún sitio — es exactamente el tipo de dato para el que esta garantía importa más."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Funciona con cualquier teléfono?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con iPhones desde iOS 11 y con la mayoría de Android actuales (a través de la cámara o Google Lens), sí, de forma nativa. En Android más antiguos puede hacer falta una app lectora de QR aparte."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tipo de seguridad elijo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si no lo sabes con certeza, elige WPA/WPA2: es el estándar en prácticamente cualquier router doméstico o comercial de los últimos 15 años. WEP es un formato antiguo y ya poco usado; «Abierta» es solo para redes públicas sin contraseña."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es una red oculta y cuándo activar esa opción?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una red oculta no aparece en la lista de redes WiFi disponibles del dispositivo: hay que conocer su nombre exacto para conectarse. Actívalo solo si configuraste tu router así; si tu red aparece normalmente en la lista, déjalo desactivado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo cambiar la contraseña después sin rehacer el código?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: si cambias la contraseña de la red, el código impreso deja de funcionar y hay que generar uno nuevo con la clave actualizada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El código revela mi contraseña a quien lo mire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No a simple vista: es un patrón, no texto legible. Solo se revela al escanearlo con la cámara, que es exactamente el uso previsto — compártelo solo con quien quieras que se conecte."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> › <a href="/herramientas/qr/">Código QR</a> › <span>Código QR para WiFi</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Código QR para WiFi</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Pega tu red y tu contraseña, y obtén un código que conecta al instante al escanearlo con la cámara. Nadie tiene que teclear ni ver la contraseña real.</p>
+        </div>
+
+        <div class="workspace" data-workspace style="margin-top: 2rem">
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Vista previa</h2>
+              <span class="stat__value--small" data-nombre-archivo>—</span>
+            </div>
+            <div class="qr-preview" data-preview>
+              <div class="qr-lienzo" data-lienzo hidden><canvas data-canvas width="1" height="1"></canvas></div>
+              <div class="qr-preview__vacio" data-vacio>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14v7M14 19h7"/></svg>
+                <span>Completa los campos para ver tu código QR</span>
+              </div>
+            </div>
+            <p class="error" data-error role="alert" hidden></p>
+            <div class="stats" aria-live="polite">
+              <div class="stat"><span class="stat__label">Versión</span><span class="stat__value" data-stat-version>—</span></div>
+              <div class="stat"><span class="stat__label">Módulos</span><span class="stat__value stat__value--small" data-stat-modulos>—</span></div>
+              <div class="stat"><span class="stat__label">Corrección</span><span class="stat__value stat__value--small" data-stat-ec>—</span></div>
+              <div class="stat"><span class="stat__label">Contenido</span><span class="stat__value stat__value--small" data-stat-bytes>—</span></div>
+            </div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-png>Descargar PNG</button>
+              <button class="btn btn--ghost" type="button" data-descargar-svg>Descargar SVG</button>
+            </div>
+          </div>
+          <aside class="sidebar" aria-label="Ajustes">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Red WiFi</h2></div>
+              <div class="settings">
+                <label class="field">
+                  <span class="field__label">Nombre de la red (SSID)</span>
+                  <input type="text" placeholder="Mi Red WiFi" data-campo="ssid" value="Mi Red WiFi" />
+                </label>
+                <label class="field">
+                  <span class="field__label">Contraseña</span>
+                  <input type="text" placeholder="Contraseña de la red" data-campo="password" value="contraseñaSegura123" />
+                </label>
+                <div class="field">
+                  <span class="field__label">Seguridad</span>
+                  <div class="radiogroup" role="radiogroup" aria-label="Tipo de seguridad">
+                    <label><input type="radio" name="seguridad" value="wpa" data-campo="seguridad" checked /> <span>WPA/WPA2</span></label>
+                    <label><input type="radio" name="seguridad" value="wep" data-campo="seguridad" /> <span>WEP</span></label>
+                    <label><input type="radio" name="seguridad" value="ninguna" data-campo="seguridad" /> <span>Abierta</span></label>
+                  </div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" data-campo="oculta" />
+                  <span>Red oculta<small>Actívalo solo si tu red no aparece en la lista de redes disponibles.</small></span>
+                </label>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Apariencia</h2></div>
+              <div class="settings">
+                <div class="field-row">
+                  <label class="field">
+                    <span class="field__label">Color</span>
+                    <div class="campo-color">
+                      <input type="color" value="#0a0a0f" data-color-primario />
+                      <input type="text" value="#0a0a0f" data-color-primario-texto />
+                    </div>
+                  </label>
+                  <label class="field">
+                    <span class="field__label">Fondo</span>
+                    <div class="campo-color">
+                      <input type="color" value="#ffffff" data-color-fondo />
+                      <input type="text" value="#ffffff" data-color-fondo-texto />
+                    </div>
+                  </label>
+                </div>
+                <label class="field">
+                  <span class="field__label">Tamaño de descarga <output data-tamano-output>1024 px</output></span>
+                  <input type="range" min="256" max="2048" step="256" value="1024" data-tamano />
+                </label>
+                <div class="field">
+                  <span class="field__label">Corrección de errores</span>
+                  <div class="radiogroup" role="radiogroup" aria-label="Nivel de corrección de errores">
+                    <label><input type="radio" name="ec" value="L" data-ec /> <span>L · 7 %</span></label>
+                    <label><input type="radio" name="ec" value="M" data-ec checked /> <span>M · 15 %</span></label>
+                    <label><input type="radio" name="ec" value="Q" data-ec /> <span>Q · 25 %</span></label>
+                    <label><input type="radio" name="ec" value="H" data-ec /> <span>H · 30 %</span></label>
+                  </div>
+                  <span class="field__hint">Cuánto puede ensuciarse o taparse el código y aún leerse. H es la más resistente; úsala si vas a imprimirlo pequeño o a ponerle un logo encima en un editor externo.</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          El código se genera y se dibuja en tu navegador. Nada de lo que escribes aquí se envía a ningún servidor.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3300px">
+        <div class="prose">
+          <h2>Conectar sin dictar la contraseña letra por letra</h2>
+          <p>
+            Cualquiera que haya deletreado una contraseña de WiFi larga y con símbolos a
+            una visita sabe lo tedioso que es. Este código resuelve exactamente eso: los
+            teléfonos modernos, al escanear un código QR de red WiFi, ofrecen conectarse
+            directamente, sin que la persona vea ni escriba la contraseña real.
+          </p>
+
+          <h2>Cómo crear el código</h2>
+          <ol>
+            <li>Escribe el nombre exacto de tu red (SSID) y la contraseña.</li>
+            <li>Elige el tipo de seguridad: WPA/WPA2 es lo normal en cualquier router de los últimos 15 años.</li>
+            <li>Descarga el código e imprímelo o compártelo con quien necesite conectarse.</li>
+          </ol>
+
+          <h2>Qué pasa al escanearlo</h2>
+          <p>
+            En iPhone (iOS 11 o superior) y en Android con Google Lens integrado, la
+            cámara nativa reconoce el formato y muestra directamente el botón "Unirse a
+            la red Wi-Fi", sin abrir ninguna app adicional ni mostrar la contraseña en
+            texto plano en pantalla.
+          </p>
+
+          <h2>Por qué esto es más seguro que un letrero con la clave</h2>
+          <p>
+            Un letrero con la contraseña escrita es legible por cualquiera que pase cerca,
+            y queda expuesta en fotos. Un código QR no revela la contraseña a simple
+            vista —hace falta escanearlo activamente para conectarse—, y sigue siendo
+            igual de rápido para quien sí tiene permiso.
+          </p>
+
+          <h2>Casos de uso habituales</h2>
+          <ul>
+            <li><strong>Airbnb y alojamientos:</strong> un cartel con el código en la mesa de la sala.</li>
+            <li><strong>Cafeterías y negocios:</strong> conectar a los clientes sin dictar la clave en el mostrador.</li>
+            <li><strong>Oficinas:</strong> red de invitados para visitas, sin exponer la clave del personal.</li>
+            <li><strong>Eventos:</strong> conectar a decenas de asistentes a la vez sin filas en recepción.</li>
+          </ul>
+
+          <h2>Preguntas frecuentes</h2>
+
+          <h2>Las demás herramientas de código QR</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/qr/url/">código qr para una url</a>, <a href="/herramientas/qr/texto/">código qr de texto</a>, <a href="/herramientas/qr/contacto/">código qr de contacto</a>, <a href="/herramientas/qr/email/">código qr para correo</a> y <a href="/herramientas/qr/sms/">código qr para sms</a>. Y si tu caso no encaja
+            en ninguna de las variantes específicas, el
+            <a href="/herramientas/qr/">generador de código QR</a> acepta cualquier texto.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Mi contraseña de WiFi se sube a algún servidor?</h3></summary>
+            <p>No. El código se construye y se dibuja completamente en tu navegador. La contraseña nunca se envía a ningún sitio — es exactamente el tipo de dato para el que esta garantía importa más.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Funciona con cualquier teléfono?</h3></summary>
+            <p>Con iPhones desde iOS 11 y con la mayoría de Android actuales (a través de la cámara o Google Lens), sí, de forma nativa. En Android más antiguos puede hacer falta una app lectora de QR aparte.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué tipo de seguridad elijo?</h3></summary>
+            <p>Si no lo sabes con certeza, elige WPA/WPA2: es el estándar en prácticamente cualquier router doméstico o comercial de los últimos 15 años. WEP es un formato antiguo y ya poco usado; «Abierta» es solo para redes públicas sin contraseña.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué es una red oculta y cuándo activar esa opción?</h3></summary>
+            <p>Una red oculta no aparece en la lista de redes WiFi disponibles del dispositivo: hay que conocer su nombre exacto para conectarse. Actívalo solo si configuraste tu router así; si tu red aparece normalmente en la lista, déjalo desactivado.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo cambiar la contraseña después sin rehacer el código?</h3></summary>
+            <p>No: si cambias la contraseña de la red, el código impreso deja de funcionar y hay que generar uno nuevo con la clave actualizada.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El código revela mi contraseña a quien lo mire?</h3></summary>
+            <p>No a simple vista: es un patrón, no texto legible. Solo se revela al escanearlo con la cámara, que es exactamente el uso previsto — compártelo solo con quien quieras que se conecte.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Código QR</h4>
+            <ul>
+              <li><a href="/herramientas/qr/">Generador de código QR</a></li>
+              <li><a href="/herramientas/qr/url/">Código QR para una URL</a></li>
+              <li><a href="/herramientas/qr/texto/">Código QR de texto</a></li>
+              <li><a href="/herramientas/qr/wifi/">Código QR para WiFi</a></li>
+              <li><a href="/herramientas/qr/contacto/">Código QR de contacto</a></li>
+              <li><a href="/herramientas/qr/email/">Código QR para correo</a></li>
+              <li><a href="/herramientas/qr/sms/">Código QR para SMS</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/vendor/qrcode-generator.js" defer></script>
+    <script src="../js/qr-core.js" defer></script>
+    <script src="js/wifi.js" defer></script>
+  </body>
+</html>
