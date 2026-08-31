@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cortar audio online gratis — recorta MP3 y WAV sin instalar nada | Lienzo</title>
+    <meta name="description" content="Corta un audio arrastrando dos manijas sobre la onda: escucha el recorte antes de exportar y descárgalo en WAV u Opus. Gratis, sin registro y sin subir el archivo." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/audio/cortar/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Cortar audio online gratis" />
+    <meta property="og:description" content="Recorta un MP3 o un WAV arrastrando sobre la forma de onda. Nada se sube a ningún servidor." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/audio/cortar/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/audio/cortar/#app",
+      "name": "Cortador de audio de Lienzo",
+      "url": "https://lienzo.tools/herramientas/audio/cortar/",
+      "description": "Herramienta para cortar un archivo de audio en el navegador arrastrando dos manijas sobre la forma de onda, sin subir el archivo a ningún servidor.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Editor de audio",
+          "item": "https://lienzo.tools/herramientas/audio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Cortar audio",
+          "item": "https://lienzo.tools/herramientas/audio/cortar/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Se sube mi audio a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El archivo se decodifica y se corta dentro de tu navegador con la Web Audio API. Nunca viaja por la red, así que puedes recortar grabaciones confidenciales sin ningún riesgo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué formatos puedo cortar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cualquiera que tu navegador sepa reproducir: MP3, WAV, OGG, M4A/AAC y normalmente FLAC. Si un archivo no abre, suele ser porque usa un códec que ese navegador concreto no incluye."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo cortar con precisión de milisegundos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Además de arrastrar las manijas, tienes dos campos numéricos con paso de una décima de segundo, y las flechas del teclado sobre cada manija mueven de 0,1 en 0,1 segundos (o de segundo en segundo con Mayús)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Pierdo calidad al cortar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si exportas en WAV, no: el WAV es sin pérdida y guarda exactamente las muestras del tramo. Ten en cuenta que si el original era un MP3, la pérdida de calidad ya venía de fábrica; cortar no la empeora, pero tampoco la recupera."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el WAV pesa más que el MP3 original?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque el WAV no comprime nada: guarda cada muestra tal cual. Un minuto en estéreo a 48 kHz ocupa unos 11 MB. Si necesitas un archivo ligero para compartir, usa la descarga comprimida en Opus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay marca de agua o límite de cortes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ninguno de los dos. No hay marca de agua, ni número máximo de cortes, ni registro. Tampoco hay límite de duración más allá de la memoria de tu propio equipo."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> ›
+          <a href="/herramientas/audio/">Editor de audio</a> › <span>Cortar audio</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Cortar audio</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Arrastra las dos manijas sobre la onda para quedarte solo con el tramo que necesitas. Escúchalo antes de exportar y descárgalo en WAV o comprimido. Todo dentro de tu navegador.</p>
+        </div>
+
+        <div class="loader reveal" style="--reveal-delay: 200ms">
+          <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
+               aria-label="Arrastra un archivo de audio o pulsa para elegirlo">
+            <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M24 32V10" />
+              <path d="m15 19 9-9 9 9" />
+              <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" />
+            </svg>
+            <p class="dropzone__title">Arrastra el audio que quieres cortar</p>
+            <p class="dropzone__hint">o pulsa para elegir un archivo · MP3, WAV, OGG, M4A · nada se sube a ningún servidor</p>
+            <div class="dropzone__actions">
+              <button class="btn btn--ghost" type="button" data-demo>Probar con un ejemplo</button>
+            </div>
+            <input type="file" accept="audio/*" hidden data-file />
+          </div>
+          <p class="error" data-error role="alert" hidden></p>
+        </div>
+
+        <p class="tool-note" data-empty>Al cargar el primer archivo el navegador prepara el motor de audio; después el recorte es instantáneo.</p>
+
+        <div class="workspace" data-workspace data-busy="false" hidden>
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Onda y recorte</h2>
+              <span class="stat__value--small" data-nombre-archivo>—</span>
+            </div>
+
+            <div class="player">
+              <div class="waveform" data-waveform>
+                <canvas data-canvas></canvas>
+                <div class="waveform__velo" data-velo-izq></div>
+                <div class="waveform__velo waveform__velo--der" data-velo-der></div>
+                <div class="waveform__cursor" data-cursor hidden></div>
+                <div class="waveform__manija" data-manija="inicio" tabindex="0" role="slider"
+                     aria-label="Inicio del recorte" aria-valuemin="0"></div>
+                <div class="waveform__manija" data-manija="fin" tabindex="0" role="slider"
+                     aria-label="Fin del recorte" aria-valuemin="0"></div>
+              </div>
+
+              <div class="transporte">
+                <button class="transporte__play" type="button" data-play aria-label="Reproducir">
+                  <svg data-icon-play viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  <svg data-icon-pause viewBox="0 0 24 24" width="18" height="18" fill="currentColor" hidden><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+                </button>
+                <span class="transporte__tiempo"><span data-tiempo-inicio>0:00</span> – <span data-tiempo-fin>0:00</span> · dura <span data-tiempo-duracion>0:00</span></span>
+                <button class="btn btn--ghost" type="button" data-reset-recorte style="margin-left: auto">Quitar recorte</button>
+              </div>
+            </div>
+            <div class="stats" aria-live="polite">
+              <div class="stat">
+                <span class="stat__label">Duración del corte</span>
+                <span class="stat__value" data-stat-duracion>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Tamaño WAV</span>
+                <span class="stat__value stat__value--small" data-stat-peso>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Original</span>
+                <span class="stat__value stat__value--small" data-stat-original>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Frecuencia</span>
+                <span class="stat__value stat__value--small" data-stat-frecuencia>—</span>
+              </div>
+            </div>
+
+            <div class="progreso" data-progreso hidden><div class="progreso__barra" data-progreso-barra></div></div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-wav>Descargar el corte en WAV</button>
+              <button class="btn btn--ghost" type="button" data-descargar-comprimido hidden>Descargar comprimido (Opus)</button>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajuste fino">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Ajuste fino</h2></div>
+              <div class="settings">
+                <label class="field">
+                  <span class="field__label">Inicio <output data-inicio-output>0:00</output></span>
+                  <input type="number" min="0" step="0.1" value="0" data-inicio-num
+                         style="width: 100%; padding: 0.5rem 0.7rem; border-radius: 10px; border: 1px solid var(--line); background: var(--bg-soft); color: var(--text)" />
+                  <span class="field__hint">Segundos desde el principio del archivo.</span>
+                </label>
+                <label class="field">
+                  <span class="field__label">Fin <output data-fin-output>0:00</output></span>
+                  <input type="number" min="0" step="0.1" value="0" data-fin-num
+                         style="width: 100%; padding: 0.5rem 0.7rem; border-radius: 10px; border: 1px solid var(--line); background: var(--bg-soft); color: var(--text)" />
+                  <span class="field__hint">También puedes mover las manijas con las flechas del teclado.</span>
+                </label>
+                <label class="switch">
+                  <input type="checkbox" data-fundido />
+                  <span>
+                    Fundido de entrada y salida
+                    <small>20 ms en cada extremo para que el corte no suene a chasquido.</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          Motor: Web Audio API nativa del navegador, sin librerías externas. El audio nunca sale de tu equipo.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3200px">
+        <div class="prose">
+          <h2>Un corte limpio, sin subir el archivo</h2>
+          <p>
+            Cortar un audio suele ser la primera edición que necesitas y la que más
+            fricción tiene: la mayoría de páginas te piden subir el archivo a un servidor
+            ajeno, esperar la cola y volver a descargarlo. Aquí no hay subida. El
+            navegador decodifica el archivo con la <strong>Web Audio API</strong>, dibuja
+            la forma de onda y corta el tramo en memoria. Si cierras la pestaña, no queda
+            nada en ninguna parte.
+          </p>
+
+          <h2>Cómo cortar un audio</h2>
+          <ol>
+            <li>Arrastra tu MP3, WAV, OGG o M4A a la zona de carga.</li>
+            <li>Mueve las dos manijas sobre la onda hasta encuadrar el tramo. Con las flechas del teclado ajustas de décima en décima, y con Mayús + flecha de segundo en segundo.</li>
+            <li>Pulsa reproducir para escuchar solo lo seleccionado y descarga en WAV o en Opus comprimido.</li>
+          </ol>
+
+          <h2>El fundido evita el chasquido</h2>
+          <p>
+            Cuando un corte cae justo en mitad de una onda, el salto brusco de una
+            amplitud alta al silencio produce un «clic» audible. Activando el fundido de
+            entrada y salida se aplican 20 milisegundos de rampa en cada extremo: no se
+            nota como efecto, pero elimina el chasquido. Para música y voz suele valer la
+            pena dejarlo activado; para efectos de sonido muy cortos y percusivos, a veces
+            es preferible quitarlo.
+          </p>
+
+          <h2>Para qué se usa</h2>
+          <ul>
+            <li><strong>Notas de voz:</strong> quedarte con los 15 segundos que de verdad importan.</li>
+            <li><strong>Podcasts:</strong> eliminar el silencio y el carraspeo del principio.</li>
+            <li><strong>Tonos de llamada:</strong> extraer el estribillo de una canción.</li>
+            <li><strong>Edición de video:</strong> preparar un efecto de sonido antes de montarlo en la línea de tiempo.</li>
+          </ul>
+
+          <h2>Qué puedes hacer con el resultado</h2>
+          <p>
+            El archivo que descargas es tuyo y sale de tu propio material: esta
+            herramienta no añade ninguna condición al resultado. La licencia que se
+            aplica es la del audio que subiste, no la nuestra. Si el original era una
+            canción con derechos, el recorte sigue teniendo esos derechos.
+          </p>
+
+          <h2>Las demás herramientas de audio</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/audio/unir/">unir audios</a>, <a href="/herramientas/audio/convertir/">convertir formato</a>, <a href="/herramientas/audio/volumen/">subir el volumen</a>, <a href="/herramientas/audio/velocidad/">cambiar la velocidad</a> y <a href="/herramientas/audio/extraer-de-video/">extraer audio de un video</a>. Y si necesitas varias cosas a la vez,
+            el <a href="/herramientas/audio/">editor de audio</a> las reúne en una sola pantalla.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Se sube mi audio a algún servidor?</h3></summary>
+            <p>No. El archivo se decodifica y se corta dentro de tu navegador con la Web Audio API. Nunca viaja por la red, así que puedes recortar grabaciones confidenciales sin ningún riesgo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué formatos puedo cortar?</h3></summary>
+            <p>Cualquiera que tu navegador sepa reproducir: MP3, WAV, OGG, M4A/AAC y normalmente FLAC. Si un archivo no abre, suele ser porque usa un códec que ese navegador concreto no incluye.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo cortar con precisión de milisegundos?</h3></summary>
+            <p>Sí. Además de arrastrar las manijas, tienes dos campos numéricos con paso de una décima de segundo, y las flechas del teclado sobre cada manija mueven de 0,1 en 0,1 segundos (o de segundo en segundo con Mayús).</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Pierdo calidad al cortar?</h3></summary>
+            <p>Si exportas en WAV, no: el WAV es sin pérdida y guarda exactamente las muestras del tramo. Ten en cuenta que si el original era un MP3, la pérdida de calidad ya venía de fábrica; cortar no la empeora, pero tampoco la recupera.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué el WAV pesa más que el MP3 original?</h3></summary>
+            <p>Porque el WAV no comprime nada: guarda cada muestra tal cual. Un minuto en estéreo a 48 kHz ocupa unos 11 MB. Si necesitas un archivo ligero para compartir, usa la descarga comprimida en Opus.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Hay marca de agua o límite de cortes?</h3></summary>
+            <p>Ninguno de los dos. No hay marca de agua, ni número máximo de cortes, ni registro. Tampoco hay límite de duración más allá de la memoria de tu propio equipo.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Editor de audio</h4>
+            <ul>
+              <li><a href="/herramientas/audio/">Editor de audio</a></li>
+              <li><a href="/herramientas/audio/cortar/">Cortar audio</a></li>
+              <li><a href="/herramientas/audio/unir/">Unir audios</a></li>
+              <li><a href="/herramientas/audio/convertir/">Convertir formato</a></li>
+              <li><a href="/herramientas/audio/volumen/">Subir el volumen</a></li>
+              <li><a href="/herramientas/audio/velocidad/">Cambiar la velocidad</a></li>
+              <li><a href="/herramientas/audio/extraer-de-video/">Extraer audio de un video</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/audio-core.js" defer></script>
+    <script src="js/cortar.js" defer></script>
+  </body>
+</html>

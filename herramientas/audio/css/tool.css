@@ -1,0 +1,429 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo — Herramientas de audio (familia)
+   Compartido por /herramientas/audio/ y sus 6 hijas.
+   1. Zona de carga      4. Ajustes
+   2. Espacio de trabajo 5. Acciones
+   3. Onda y transporte  6. Responsive
+\* ------------------------------------------------------------------ */
+
+/* 1. Zona de carga --------------------------------------------------- */
+
+.loader {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.dropzone {
+  display: grid;
+  place-items: center;
+  gap: 0.9rem;
+  padding: clamp(2rem, 6vw, 3.4rem) 1.5rem;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, transform 200ms var(--ease);
+}
+
+.dropzone:hover,
+.dropzone:focus-visible {
+  border-color: var(--violeta);
+  background: var(--panel-hover);
+}
+
+.dropzone[data-over="true"] {
+  border-color: var(--turquesa);
+  background: color-mix(in oklab, var(--turquesa) 10%, var(--panel));
+  transform: scale(1.01);
+}
+
+.dropzone__icon {
+  width: 46px;
+  height: 46px;
+  color: var(--violeta);
+}
+
+.dropzone__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.dropzone__hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.dropzone__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-top: 0.3rem;
+}
+
+.error {
+  margin: 0;
+  padding: 0.8rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in oklab, var(--coral) 45%, transparent);
+  background: color-mix(in oklab, var(--coral) 12%, transparent);
+  color: var(--text);
+  font-size: 0.92rem;
+}
+
+/* 2. Espacio de trabajo ---------------------------------------------- */
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 1.4rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+.workspace[data-busy="true"] .panel { opacity: 0.65; pointer-events: none; }
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  overflow: hidden;
+  transition: opacity 180ms ease;
+}
+
+.panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+/* 3. Onda y transporte ------------------------------------------------- */
+
+.player {
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.waveform {
+  position: relative;
+  height: 140px;
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.waveform canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Rango de selección (recortar): dos manijas + velo sobre lo descartado */
+.waveform__velo {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: color-mix(in oklab, var(--bg) 72%, transparent);
+  pointer-events: none;
+}
+
+.waveform__velo--der {
+  left: auto;
+  right: 0;
+}
+
+.waveform__manija {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  margin-left: -6px;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.waveform__manija::before {
+  content: "";
+  position: absolute;
+  inset: 0 5px;
+  background: var(--turquesa);
+  border-radius: 3px;
+}
+
+.waveform__manija:hover::before,
+.waveform__manija:focus-visible::before {
+  background: var(--ambar);
+}
+
+.waveform__cursor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--ink, var(--text));
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.transporte {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.transporte__play {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-soft);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.transporte__play:hover { background: var(--violeta); color: #fff; }
+
+.transporte__tiempo {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--muted);
+  min-width: 6.5rem;
+}
+
+/* Lista de pistas — herramienta "unir" */
+.tracklist {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.2rem;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 28px 1fr auto auto;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+}
+
+.track__handle {
+  cursor: grab;
+  color: var(--faint);
+  text-align: center;
+  user-select: none;
+}
+
+.track__info { display: grid; gap: 0.15rem; min-width: 0; }
+.track__name { font-size: 0.9rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.track__meta { font-size: 0.78rem; color: var(--faint); }
+
+.track__mini {
+  width: 90px;
+  height: 30px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.track__mini canvas { width: 100%; height: 100%; display: block; }
+
+.track__quitar {
+  border: none;
+  background: transparent;
+  color: var(--faint);
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 6px;
+  transition: color 140ms ease, background-color 140ms ease;
+}
+.track__quitar:hover { color: var(--coral); background: color-mix(in oklab, var(--coral) 12%, transparent); }
+
+.tracklist__add {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0.7rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.tracklist__add:hover { border-color: var(--violeta); color: var(--text); }
+
+/* Estadísticas */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.9rem;
+  padding: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.stat { display: grid; gap: 0.2rem; min-width: 0; }
+
+.stat__label {
+  font: 700 0.68rem/1 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__value--small {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.stat__value--win { color: var(--turquesa); }
+
+/* 4. Ajustes ----------------------------------------------------------- */
+
+.sidebar {
+  display: grid;
+  gap: 1.2rem;
+  position: sticky;
+  top: 84px;
+}
+
+.settings {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1.1rem;
+}
+
+.field { display: grid; gap: 0.45rem; font-size: 0.9rem; }
+
+.field__label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.field__label output {
+  color: var(--violeta);
+  font-variant-numeric: tabular-nums;
+}
+
+.field input[type="range"] { width: 100%; accent-color: var(--violeta); }
+
+.field__hint { color: var(--faint); font-size: 0.8rem; }
+
+.switch {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.switch input { margin-top: 0.2rem; accent-color: var(--violeta); flex: 0 0 auto; }
+.switch span { display: grid; gap: 0.15rem; }
+.switch small { color: var(--faint); font-size: 0.79rem; }
+
+.radiogroup { display: grid; gap: 0.5rem; }
+
+.radiogroup label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.radiogroup label:has(input:checked) {
+  border-color: var(--violeta);
+  background: color-mix(in oklab, var(--violeta) 8%, transparent);
+}
+
+.radiogroup input { margin-top: 0.2rem; accent-color: var(--violeta); flex: 0 0 auto; }
+.radiogroup span { display: grid; gap: 0.1rem; font-size: 0.88rem; }
+.radiogroup small { color: var(--faint); font-size: 0.78rem; }
+
+/* 5. Acciones ------------------------------------------------------------ */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.actions .btn { flex: 1 1 auto; justify-content: center; }
+
+.progreso {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin: 0 1.1rem 1.1rem;
+}
+
+.progreso__barra {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--violeta), var(--turquesa));
+  transition: width 120ms linear;
+}
+
+.tool-note {
+  margin-top: 1.4rem;
+  color: var(--faint);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+.tool-note code { font-family: var(--font-mono); }
+
+/* 6. Responsive ---------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .workspace { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+}
+
+@media (max-width: 620px) {
+  .actions .btn { flex-basis: 100%; }
+  .track { grid-template-columns: 22px 1fr auto; }
+  .track__mini { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone,
+  .progreso__barra { transition: none; }
+}

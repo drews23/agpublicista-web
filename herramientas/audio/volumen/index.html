@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subir el volumen de un audio online gratis — sin distorsión | Lienzo</title>
+    <meta name="description" content="Sube o baja el volumen de un audio en el navegador, con normalización automática al máximo sin distorsión. Gratis, sin registro y sin subir el archivo." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/audio/volumen/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Subir el volumen de un audio online" />
+    <meta property="og:description" content="Sube el volumen de una grabación baja sin que distorsione. Nada se sube a ningún servidor." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/audio/volumen/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/audio/volumen/#app",
+      "name": "Ajuste de volumen de Lienzo",
+      "url": "https://lienzo.tools/herramientas/audio/volumen/",
+      "description": "Herramienta para subir o bajar el volumen de un archivo de audio en el navegador, con normalización automática y sin subir el archivo a ningún servidor.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Editor de audio",
+          "item": "https://lienzo.tools/herramientas/audio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Subir el volumen",
+          "item": "https://lienzo.tools/herramientas/audio/volumen/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Se sube mi audio a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. La ganancia se aplica muestra a muestra dentro de tu navegador; el archivo nunca sale de tu equipo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto puedo subir el volumen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El control llega hasta +24 dB, que multiplica la amplitud por unas 16 veces. Pero el límite útil lo marca tu propio archivo: en cuanto el pico llega al techo, seguir subiendo solo añade distorsión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué significa exactamente normalizar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Buscar la muestra más alta de todo el archivo y aplicar a todo el conjunto la ganancia justa para que esa muestra quede al borde del máximo. Sube el volumen todo lo que se puede sin distorsionar ni una sola muestra."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Normalicé y sigue sonando bajo, ¿por qué?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque hay algún pico aislado muy alto —un golpe, una tos, un portazo— que ya estaba cerca del techo y no deja subir el resto. Corta ese fragmento primero y vuelve a normalizar: la diferencia suele ser notable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si fuerzo la ganancia por encima del aviso?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las muestras que se pasen se recortan al máximo permitido, lo que produce distorsión audible. La herramienta te avisa antes precisamente para que sea una decisión tuya y no una sorpresa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo bajar el volumen en vez de subirlo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, con valores negativos de ganancia. Bajar nunca distorsiona, así que ahí no hay ningún límite práctico."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> ›
+          <a href="/herramientas/audio/">Editor de audio</a> › <span>Subir el volumen</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Subir el volumen de un audio</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Sube una grabación que quedó demasiado baja, o baja una que satura. El botón de normalizar la lleva sola al máximo posible sin distorsionar.</p>
+        </div>
+
+        <div class="loader reveal" style="--reveal-delay: 200ms">
+          <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
+               aria-label="Arrastra un archivo de audio o pulsa para elegirlo">
+            <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M24 32V10" />
+              <path d="m15 19 9-9 9 9" />
+              <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" />
+            </svg>
+            <p class="dropzone__title">Arrastra el audio al que quieres cambiar el volumen</p>
+            <p class="dropzone__hint">MP3, WAV, OGG, M4A · nada se sube a ningún servidor</p>
+            <input type="file" accept="audio/*" hidden data-file />
+          </div>
+          <p class="error" data-error role="alert" hidden></p>
+        </div>
+
+        <p class="tool-note" data-empty>La onda que verás está a escala real: si toca el techo del recuadro, está al límite.</p>
+
+        <div class="workspace" data-workspace data-busy="false" hidden>
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Onda y nivel</h2>
+              <span class="stat__value--small" data-nombre-archivo>—</span>
+            </div>
+
+            <div class="player">
+              <div class="waveform" data-waveform>
+                <canvas data-canvas></canvas>
+                <div class="waveform__cursor" data-cursor hidden></div>
+              </div>
+
+              <div class="transporte">
+                <button class="transporte__play" type="button" data-play aria-label="Reproducir">
+                  <svg data-icon-play viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  <svg data-icon-pause viewBox="0 0 24 24" width="18" height="18" fill="currentColor" hidden><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+                </button>
+                <span class="transporte__tiempo"><span data-tiempo-inicio>0:00</span> – <span data-tiempo-fin>0:00</span> · dura <span data-tiempo-duracion>0:00</span></span>
+              </div>
+            </div>
+            <div class="stats" aria-live="polite">
+              <div class="stat">
+                <span class="stat__label">Pico resultante</span>
+                <span class="stat__value" data-stat-pico>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Pico original</span>
+                <span class="stat__value stat__value--small" data-stat-original>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Duración</span>
+                <span class="stat__value stat__value--small" data-stat-duracion>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Tamaño WAV</span>
+                <span class="stat__value stat__value--small" data-stat-peso>—</span>
+              </div>
+            </div>
+
+            <div class="progreso" data-progreso hidden><div class="progreso__barra" data-progreso-barra></div></div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-wav>Descargar en WAV</button>
+              <button class="btn btn--ghost" type="button" data-descargar-comprimido hidden>Descargar comprimido (Opus)</button>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Volumen">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Volumen</h2></div>
+              <div class="settings">
+                <label class="field">
+                  <span class="field__label">Ganancia <output data-ganancia-output>0 dB</output></span>
+                  <input type="range" min="-24" max="24" step="0.5" value="0" data-ganancia />
+                  <span class="field__hint">Cada +6 dB duplica la amplitud. Positivo sube, negativo baja.</span>
+                </label>
+                <button class="btn btn--primary" type="button" data-normalizar>Normalizar al máximo sin distorsión</button>
+                <button class="btn btn--ghost" type="button" data-reset>Volver al original</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Aviso de saturación</h2></div>
+              <div class="settings">
+                <p class="field__hint" data-aviso style="margin: 0">Carga un archivo para ver si la ganancia elegida lo hace saturar.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          Motor: Web Audio API nativa del navegador, sin librerías externas. El audio nunca sale de tu equipo.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3300px">
+        <div class="prose">
+          <h2>Subir el volumen sin romper el audio</h2>
+          <p>
+            Subir el volumen es multiplicar cada muestra por un número. El problema
+            aparece cuando ese número lleva alguna muestra por encima del máximo que el
+            formato puede representar: ahí la onda se corta en plano y aparece la
+            distorsión que suele describirse como «suena roto». Esta herramienta te
+            enseña el pico resultante antes de exportar y te avisa cuando la ganancia que
+            has elegido va a saturar.
+          </p>
+
+          <h2>Cómo cambiar el volumen</h2>
+          <ol>
+            <li>Arrastra el archivo. Verás la onda dibujada a escala real.</li>
+            <li>Mueve la ganancia, o pulsa «Normalizar» para que la herramienta calcule sola el máximo posible sin distorsión.</li>
+            <li>Escucha el resultado con el botón de reproducir y descarga en WAV o en Opus.</li>
+          </ol>
+
+          <h2>Normalizar no es lo mismo que comprimir</h2>
+          <p>
+            Normalizar mide el pico más alto de todo el archivo y sube el conjunto justo
+            hasta que ese pico roza el techo. Es una operación transparente: la relación
+            entre lo fuerte y lo suave se mantiene exactamente igual. Lo que hace que una
+            voz suene «más presente» en un podcast profesional es otra cosa —la
+            compresión de rango dinámico, que aplasta los picos para poder subir el
+            cuerpo— y es una decisión artística que aquí no tomamos por ti.
+          </p>
+          <p>
+            Consecuencia práctica: si tu grabación tiene un golpe puntual muy fuerte,
+            normalizar apenas subirá nada, porque ese golpe ya está cerca del techo. En
+            ese caso conviene primero
+            <a href="/herramientas/audio/cortar/">cortar</a> el golpe y después normalizar.
+          </p>
+
+          <h2>Para qué se usa</h2>
+          <ul>
+            <li><strong>Notas de voz bajas:</strong> subir una grabación hecha lejos del micrófono.</li>
+            <li><strong>Podcasts:</strong> igualar el nivel de un invitado que se oye menos.</li>
+            <li><strong>Efectos de sonido:</strong> dejar todos los efectos de un pack al mismo nivel.</li>
+            <li><strong>Video:</strong> ajustar la música de fondo para que no tape la voz.</li>
+          </ul>
+
+          <h2>Qué puedes hacer con el resultado</h2>
+          <p>
+            El archivo de salida es el tuyo con otro nivel: la licencia sigue siendo la
+            del original. Esta herramienta no añade ninguna condición ni reclama derecho
+            alguno sobre lo que exportas.
+          </p>
+
+          <h2>Las demás herramientas de audio</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/audio/cortar/">cortar audio</a>, <a href="/herramientas/audio/unir/">unir audios</a>, <a href="/herramientas/audio/convertir/">convertir formato</a>, <a href="/herramientas/audio/velocidad/">cambiar la velocidad</a> y <a href="/herramientas/audio/extraer-de-video/">extraer audio de un video</a>. Y si necesitas varias cosas a la vez,
+            el <a href="/herramientas/audio/">editor de audio</a> las reúne en una sola pantalla.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Se sube mi audio a algún servidor?</h3></summary>
+            <p>No. La ganancia se aplica muestra a muestra dentro de tu navegador; el archivo nunca sale de tu equipo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cuánto puedo subir el volumen?</h3></summary>
+            <p>El control llega hasta +24 dB, que multiplica la amplitud por unas 16 veces. Pero el límite útil lo marca tu propio archivo: en cuanto el pico llega al techo, seguir subiendo solo añade distorsión.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué significa exactamente normalizar?</h3></summary>
+            <p>Buscar la muestra más alta de todo el archivo y aplicar a todo el conjunto la ganancia justa para que esa muestra quede al borde del máximo. Sube el volumen todo lo que se puede sin distorsionar ni una sola muestra.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>Normalicé y sigue sonando bajo, ¿por qué?</h3></summary>
+            <p>Porque hay algún pico aislado muy alto —un golpe, una tos, un portazo— que ya estaba cerca del techo y no deja subir el resto. Corta ese fragmento primero y vuelve a normalizar: la diferencia suele ser notable.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué pasa si fuerzo la ganancia por encima del aviso?</h3></summary>
+            <p>Las muestras que se pasen se recortan al máximo permitido, lo que produce distorsión audible. La herramienta te avisa antes precisamente para que sea una decisión tuya y no una sorpresa.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo bajar el volumen en vez de subirlo?</h3></summary>
+            <p>Sí, con valores negativos de ganancia. Bajar nunca distorsiona, así que ahí no hay ningún límite práctico.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Editor de audio</h4>
+            <ul>
+              <li><a href="/herramientas/audio/">Editor de audio</a></li>
+              <li><a href="/herramientas/audio/cortar/">Cortar audio</a></li>
+              <li><a href="/herramientas/audio/unir/">Unir audios</a></li>
+              <li><a href="/herramientas/audio/convertir/">Convertir formato</a></li>
+              <li><a href="/herramientas/audio/volumen/">Subir el volumen</a></li>
+              <li><a href="/herramientas/audio/velocidad/">Cambiar la velocidad</a></li>
+              <li><a href="/herramientas/audio/extraer-de-video/">Extraer audio de un video</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/audio-core.js" defer></script>
+    <script src="js/volumen.js" defer></script>
+  </body>
+</html>

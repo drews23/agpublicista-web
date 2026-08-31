@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cambiar la velocidad de un audio online gratis — acelera o ralentiza | Lienzo</title>
+    <meta name="description" content="Acelera o ralentiza un audio de 0,5× a 2× en el navegador y descárgalo en WAV u Opus. Gratis, sin registro y sin que el archivo salga de tu equipo." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/audio/velocidad/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Cambiar la velocidad de un audio online" />
+    <meta property="og:description" content="Acelera una clase grabada o ralentiza una frase difícil, y descarga el resultado. Nada se sube a ningún servidor." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/audio/velocidad/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/audio/velocidad/#app",
+      "name": "Cambio de velocidad de Lienzo",
+      "url": "https://lienzo.tools/herramientas/audio/velocidad/",
+      "description": "Herramienta para acelerar o ralentizar un archivo de audio en el navegador y exportar el resultado, sin subir el archivo a ningún servidor.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Editor de audio",
+          "item": "https://lienzo.tools/herramientas/audio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Cambiar la velocidad",
+          "item": "https://lienzo.tools/herramientas/audio/velocidad/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Se sube mi audio a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El cambio de velocidad se calcula dentro de tu navegador y el archivo nunca sale de tu equipo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué la voz suena más aguda al acelerar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque el cambio es físico, como acelerar una cinta: al comprimir las ondas en menos tiempo, la frecuencia sube y con ella el tono. Es el comportamiento esperado, no un fallo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo acelerar sin que cambie el tono?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con esta herramienta no. Eso requiere time-stretch, que reconstruye el sonido por fragmentos superpuestos y no viene incluido en el navegador. Lo decimos claro en vez de ofrecer un resultado que no es el que esperarías."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto puedo acelerar o ralentizar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De 0,5× (la mitad de rápido, el doble de largo) a 2× (el doble de rápido, la mitad de largo). Fuera de ese rango la voz humana deja de ser inteligible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se pierde calidad al cambiar la velocidad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Al acelerar, prácticamente nada. Al ralentizar mucho, el navegador tiene que inventar muestras intermedias y el resultado puede sonar algo menos definido; a 0,75× no se aprecia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se puede aplicar solo a un tramo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En esta página se aplica a todo el archivo. Si quieres acelerar solo un fragmento, córtalo primero en la herramienta de cortar y después cambia la velocidad del recorte."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> ›
+          <a href="/herramientas/audio/">Editor de audio</a> › <span>Cambiar la velocidad</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Cambiar la velocidad de un audio</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Acelera una clase de una hora o ralentiza una frase que no consigues transcribir. De 0,5× a 2×, con el resultado descargable en WAV u Opus.</p>
+        </div>
+
+        <div class="loader reveal" style="--reveal-delay: 200ms">
+          <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
+               aria-label="Arrastra un archivo de audio o pulsa para elegirlo">
+            <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M24 32V10" />
+              <path d="m15 19 9-9 9 9" />
+              <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" />
+            </svg>
+            <p class="dropzone__title">Arrastra el audio que quieres acelerar o ralentizar</p>
+            <p class="dropzone__hint">MP3, WAV, OGG, M4A · nada se sube a ningún servidor</p>
+            <input type="file" accept="audio/*" hidden data-file />
+          </div>
+          <p class="error" data-error role="alert" hidden></p>
+        </div>
+
+        <p class="tool-note" data-empty>Ojo: aquí el tono sube y baja junto con la velocidad, como en una cinta. Está explicado abajo.</p>
+
+        <div class="workspace" data-workspace data-busy="false" hidden>
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Onda y reproducción</h2>
+              <span class="stat__value--small" data-nombre-archivo>—</span>
+            </div>
+
+            <div class="player">
+              <div class="waveform" data-waveform>
+                <canvas data-canvas></canvas>
+                <div class="waveform__cursor" data-cursor hidden></div>
+              </div>
+
+              <div class="transporte">
+                <button class="transporte__play" type="button" data-play aria-label="Reproducir">
+                  <svg data-icon-play viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  <svg data-icon-pause viewBox="0 0 24 24" width="18" height="18" fill="currentColor" hidden><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+                </button>
+                <span class="transporte__tiempo"><span data-tiempo-inicio>0:00</span> – <span data-tiempo-fin>0:00</span> · dura <span data-tiempo-duracion>0:00</span></span>
+              </div>
+            </div>
+            <div class="stats" aria-live="polite">
+              <div class="stat">
+                <span class="stat__label">Duración final</span>
+                <span class="stat__value" data-stat-duracion>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Duración original</span>
+                <span class="stat__value stat__value--small" data-stat-original>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Tamaño WAV</span>
+                <span class="stat__value stat__value--small" data-stat-peso>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Frecuencia</span>
+                <span class="stat__value stat__value--small" data-stat-frecuencia>—</span>
+              </div>
+            </div>
+
+            <div class="progreso" data-progreso hidden><div class="progreso__barra" data-progreso-barra></div></div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-wav>Descargar en WAV</button>
+              <button class="btn btn--ghost" type="button" data-descargar-comprimido hidden>Descargar comprimido (Opus)</button>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Velocidad">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Velocidad</h2></div>
+              <div class="settings">
+                <label class="field">
+                  <span class="field__label">Multiplicador <output data-velocidad-output>1.00×</output></span>
+                  <input type="range" min="0.5" max="2" step="0.05" value="1" data-velocidad />
+                  <span class="field__hint">Por debajo de 1× ralentiza y baja el tono; por encima acelera y lo sube.</span>
+                </label>
+                <div class="actions" style="padding: 0; border: 0; gap: 0.4rem">
+                  <button class="btn btn--ghost" type="button" data-preset="0.5">0,5×</button>
+                  <button class="btn btn--ghost" type="button" data-preset="0.75">0,75×</button>
+                  <button class="btn btn--ghost" type="button" data-preset="1">1×</button>
+                  <button class="btn btn--ghost" type="button" data-preset="1.25">1,25×</button>
+                  <button class="btn btn--ghost" type="button" data-preset="1.5">1,5×</button>
+                  <button class="btn btn--ghost" type="button" data-preset="2">2×</button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          Motor: Web Audio API nativa del navegador, sin librerías externas. El audio nunca sale de tu equipo.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3400px">
+        <div class="prose">
+          <h2>Acelerar o ralentizar, y quedártelo</h2>
+          <p>
+            Reproducir a 1,5× lo hace cualquier reproductor. Lo que no hace es
+            <em>exportarlo</em>: si necesitas el archivo ya acelerado —para montarlo en un
+            video, para pasárselo a alguien, para escucharlo en una aplicación que no
+            tiene control de velocidad— hace falta rehacer el audio, y eso es lo que
+            ocurre aquí, dentro del navegador y sin subir nada.
+          </p>
+
+          <h2>Cómo cambiar la velocidad</h2>
+          <ol>
+            <li>Arrastra el archivo.</li>
+            <li>Mueve el multiplicador o pulsa uno de los presets (0,5× a 2×).</li>
+            <li>Escucha el resultado y descarga en WAV o en Opus comprimido.</li>
+          </ol>
+
+          <h2>El tono cambia con la velocidad, y es a propósito</h2>
+          <p>
+            Aquí el cambio de velocidad es físico: exactamente lo que pasaba al acelerar
+            una cinta de casete o un vinilo. Al reproducir más rápido, las ondas se
+            comprimen en menos tiempo y el tono sube; al reproducir más lento, se estiran
+            y el tono baja. A 1,25× casi no se nota; a 2× una voz suena claramente más
+            aguda.
+          </p>
+          <p>
+            Mantener el tono mientras cambia la duración es una operación distinta
+            —se llama <em>time-stretch</em>— y necesita reconstruir el sonido por
+            fragmentos superpuestos. No es algo que el navegador traiga hecho, y hacerlo
+            mal suena peor que no hacerlo. Preferimos decir con claridad lo que esta
+            herramienta hace en lugar de prometer lo que no entrega.
+          </p>
+
+          <h2>Para qué se usa</h2>
+          <ul>
+            <li><strong>Estudiar:</strong> acelerar una clase grabada a 1,5× y quedarte el archivo.</li>
+            <li><strong>Transcribir:</strong> bajar a 0,75× un fragmento donde alguien habla muy rápido.</li>
+            <li><strong>Idiomas:</strong> ralentizar una frase para distinguir cada palabra.</li>
+            <li><strong>Efectos de sonido:</strong> el cambio de tono a 0,5× o 2× es un recurso creativo por sí mismo.</li>
+          </ul>
+
+          <h2>Qué puedes hacer con el resultado</h2>
+          <p>
+            El archivo acelerado o ralentizado es una versión del tuyo: mantiene la
+            licencia del original. Esta herramienta no reclama ningún derecho sobre lo que
+            exportas con ella.
+          </p>
+
+          <h2>Las demás herramientas de audio</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/audio/cortar/">cortar audio</a>, <a href="/herramientas/audio/unir/">unir audios</a>, <a href="/herramientas/audio/convertir/">convertir formato</a>, <a href="/herramientas/audio/volumen/">subir el volumen</a> y <a href="/herramientas/audio/extraer-de-video/">extraer audio de un video</a>. Y si necesitas varias cosas a la vez,
+            el <a href="/herramientas/audio/">editor de audio</a> las reúne en una sola pantalla.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Se sube mi audio a algún servidor?</h3></summary>
+            <p>No. El cambio de velocidad se calcula dentro de tu navegador y el archivo nunca sale de tu equipo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué la voz suena más aguda al acelerar?</h3></summary>
+            <p>Porque el cambio es físico, como acelerar una cinta: al comprimir las ondas en menos tiempo, la frecuencia sube y con ella el tono. Es el comportamiento esperado, no un fallo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo acelerar sin que cambie el tono?</h3></summary>
+            <p>Con esta herramienta no. Eso requiere time-stretch, que reconstruye el sonido por fragmentos superpuestos y no viene incluido en el navegador. Lo decimos claro en vez de ofrecer un resultado que no es el que esperarías.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cuánto puedo acelerar o ralentizar?</h3></summary>
+            <p>De 0,5× (la mitad de rápido, el doble de largo) a 2× (el doble de rápido, la mitad de largo). Fuera de ese rango la voz humana deja de ser inteligible.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Se pierde calidad al cambiar la velocidad?</h3></summary>
+            <p>Al acelerar, prácticamente nada. Al ralentizar mucho, el navegador tiene que inventar muestras intermedias y el resultado puede sonar algo menos definido; a 0,75× no se aprecia.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Se puede aplicar solo a un tramo?</h3></summary>
+            <p>En esta página se aplica a todo el archivo. Si quieres acelerar solo un fragmento, córtalo primero en la herramienta de cortar y después cambia la velocidad del recorte.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Editor de audio</h4>
+            <ul>
+              <li><a href="/herramientas/audio/">Editor de audio</a></li>
+              <li><a href="/herramientas/audio/cortar/">Cortar audio</a></li>
+              <li><a href="/herramientas/audio/unir/">Unir audios</a></li>
+              <li><a href="/herramientas/audio/convertir/">Convertir formato</a></li>
+              <li><a href="/herramientas/audio/volumen/">Subir el volumen</a></li>
+              <li><a href="/herramientas/audio/velocidad/">Cambiar la velocidad</a></li>
+              <li><a href="/herramientas/audio/extraer-de-video/">Extraer audio de un video</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/audio-core.js" defer></script>
+    <script src="js/velocidad.js" defer></script>
+  </body>
+</html>

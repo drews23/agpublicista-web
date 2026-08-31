@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extraer el audio de un video online gratis — MP4 a WAV u Opus | Lienzo</title>
+    <meta name="description" content="Saca la pista de audio de un MP4, WebM o MOV y descárgala en WAV u Opus, todo dentro del navegador. Gratis, sin registro y sin subir el video a ningún servidor." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/audio/extraer-de-video/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Extraer el audio de un video online" />
+    <meta property="og:description" content="Saca la pista de audio de un MP4 sin subir el video a ningún servidor." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/audio/extraer-de-video/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/audio/extraer-de-video/#app",
+      "name": "Extractor de audio de video de Lienzo",
+      "url": "https://lienzo.tools/herramientas/audio/extraer-de-video/",
+      "description": "Herramienta para extraer la pista de audio de un archivo de video dentro del navegador y descargarla en WAV u Opus, sin subir el video a ningún servidor.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Editor de audio",
+          "item": "https://lienzo.tools/herramientas/audio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Extraer audio de un video",
+          "item": "https://lienzo.tools/herramientas/audio/extraer-de-video/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Se sube mi video a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El navegador lee el archivo desde tu disco y extrae la pista de audio en memoria. El video no viaja por la red en ningún momento, lo que importa especialmente cuando es material personal o de trabajo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué formatos de video acepta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los que tu navegador sepa reproducir: MP4 con audio AAC, WebM con Opus o Vorbis, y los MOV de iPhone en la mayoría de los casos. Formatos profesionales o antiguos como ProRes o algunos MKV pueden fallar porque el navegador no trae ese decodificador."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay límite de tamaño del video?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El límite es la memoria de tu equipo. Un video largo en alta resolución tarda unos segundos en decodificarse porque hay que leerlo entero, pero el peso del video importa mucho menos que la duración del audio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Pierdo calidad al extraer el audio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si descargas en WAV, no se añade ninguna pérdida: se guardan las muestras tal cual salieron del decodificador. La calidad que tengas es la que ya traía el audio dentro del video."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo extraer solo un fragmento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Después de cargar el video, arrastra las dos manijas sobre la onda para quedarte con el tramo que te interesa antes de descargar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo extraer el audio de un video de YouTube?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No desde aquí: esta herramienta trabaja con archivos que ya tienes en tu equipo, no descarga nada de internet. Además, bajar contenido de plataformas ajenas suele ir contra sus condiciones de uso."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> ›
+          <a href="/herramientas/audio/">Editor de audio</a> › <span>Extraer audio de un video</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Extraer el audio de un video</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Suelta un MP4, WebM o MOV y quédate solo con el sonido. El navegador lee la pista de audio directamente del archivo: el video no se sube a ninguna parte.</p>
+        </div>
+
+        <div class="loader reveal" style="--reveal-delay: 200ms">
+          <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
+               aria-label="Arrastra un archivo de video o pulsa para elegirlo">
+            <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M24 32V10" />
+              <path d="m15 19 9-9 9 9" />
+              <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" />
+            </svg>
+            <p class="dropzone__title">Arrastra el video del que quieres sacar el audio</p>
+            <p class="dropzone__hint">MP4, WebM, MOV, M4V · el video no se sube a ningún servidor</p>
+            <input type="file" accept="video/*,audio/*" hidden data-file />
+          </div>
+          <p class="error" data-error role="alert" hidden></p>
+        </div>
+
+        <p class="tool-note" data-empty>Un video largo puede tardar unos segundos en decodificarse: el navegador tiene que leer todo el archivo antes de mostrar la onda.</p>
+
+        <div class="workspace" data-workspace data-busy="false" hidden>
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Pista de audio extraída</h2>
+              <span class="stat__value--small" data-nombre-archivo>—</span>
+            </div>
+
+            <div class="player">
+              <div class="waveform" data-waveform>
+                <canvas data-canvas></canvas>
+                <div class="waveform__velo" data-velo-izq></div>
+                <div class="waveform__velo waveform__velo--der" data-velo-der></div>
+                <div class="waveform__cursor" data-cursor hidden></div>
+                <div class="waveform__manija" data-manija="inicio" tabindex="0" role="slider"
+                     aria-label="Inicio del recorte" aria-valuemin="0"></div>
+                <div class="waveform__manija" data-manija="fin" tabindex="0" role="slider"
+                     aria-label="Fin del recorte" aria-valuemin="0"></div>
+              </div>
+
+              <div class="transporte">
+                <button class="transporte__play" type="button" data-play aria-label="Reproducir">
+                  <svg data-icon-play viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  <svg data-icon-pause viewBox="0 0 24 24" width="18" height="18" fill="currentColor" hidden><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+                </button>
+                <span class="transporte__tiempo"><span data-tiempo-inicio>0:00</span> – <span data-tiempo-fin>0:00</span> · dura <span data-tiempo-duracion>0:00</span></span>
+                <button class="btn btn--ghost" type="button" data-reset-recorte style="margin-left: auto">Quitar recorte</button>
+              </div>
+            </div>
+            <div class="stats" aria-live="polite">
+              <div class="stat">
+                <span class="stat__label">Duración</span>
+                <span class="stat__value" data-stat-duracion>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Video original</span>
+                <span class="stat__value stat__value--small" data-stat-original>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Tamaño WAV</span>
+                <span class="stat__value stat__value--small" data-stat-peso>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Canales</span>
+                <span class="stat__value stat__value--small" data-stat-canales>—</span>
+              </div>
+            </div>
+
+            <div class="progreso" data-progreso hidden><div class="progreso__barra" data-progreso-barra></div></div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-wav>Descargar el audio en WAV</button>
+              <button class="btn btn--ghost" type="button" data-descargar-comprimido hidden>Descargar comprimido (Opus)</button>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Ajustes</h2></div>
+              <div class="settings">
+                <label class="switch">
+                  <input type="checkbox" data-mono />
+                  <span>
+                    Convertir a mono
+                    <small>La mitad de peso. Buena idea si el video es de una sola voz.</small>
+                  </span>
+                </label>
+                <p class="field__hint" style="margin: 0">
+                  Puedes recortar el tramo que te interesa con las manijas de la onda antes de
+                  descargar, igual que en la herramienta de
+                  <a href="/herramientas/audio/cortar/">cortar audio</a>.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          Motor: Web Audio API nativa del navegador, sin librerías externas. El audio nunca sale de tu equipo.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3300px">
+        <div class="prose">
+          <h2>Solo el sonido, sin subir el video</h2>
+          <p>
+            Extraer el audio de un video suele acabar en una página que te pide subir un
+            archivo de cientos de megas y esperar. Aquí no hay subida: el navegador ya
+            sabe leer contenedores de video y quedarse con su pista de audio, y eso es
+            justo lo que hace esta herramienta. El video —que muchas veces es material
+            personal o de trabajo— nunca sale de tu equipo.
+          </p>
+
+          <h2>Cómo extraer el audio</h2>
+          <ol>
+            <li>Arrastra el video (MP4, WebM, MOV o M4V).</li>
+            <li>Espera unos segundos a que se decodifique; verás la forma de onda del sonido.</li>
+            <li>Si quieres, recorta el tramo con las manijas, y descarga en WAV o en Opus comprimido.</li>
+          </ol>
+
+          <h2>Qué formatos funcionan y cuáles no</h2>
+          <p>
+            Funciona todo lo que tu navegador sepa reproducir: en la práctica, MP4 con
+            audio AAC y WebM con audio Opus o Vorbis cubren casi todos los casos. Los MOV
+            grabados por un iPhone también suelen abrir sin problema, porque por dentro
+            son contenedores muy parecidos a un MP4.
+          </p>
+          <p>
+            Lo que puede fallar son formatos profesionales o antiguos —MKV con códecs
+            poco comunes, AVI viejos, ProRes— porque el navegador simplemente no incluye
+            esos decodificadores. En ese caso el aviso lo dirá claramente en vez de dejar
+            la pantalla colgada.
+          </p>
+
+          <h2>Para qué se usa</h2>
+          <ul>
+            <li><strong>Clases y reuniones:</strong> quedarte con el audio de una grabación para escucharla luego.</li>
+            <li><strong>Entrevistas:</strong> sacar la pista para transcribirla.</li>
+            <li><strong>Edición:</strong> aislar el sonido de una toma para tratarlo aparte.</li>
+            <li><strong>Podcast desde video:</strong> convertir una grabación en cámara en un episodio de audio.</li>
+          </ul>
+
+          <h2>Qué puedes hacer con el resultado</h2>
+          <p>
+            La pista extraída tiene exactamente los mismos derechos que el video del que
+            sale. Extraer el audio de un video ajeno no te convierte en su titular: si el
+            original tenía copyright, el audio también lo tiene. Esta herramienta no añade
+            ninguna condición propia al archivo que descargas.
+          </p>
+
+          <h2>Las demás herramientas de audio</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/audio/cortar/">cortar audio</a>, <a href="/herramientas/audio/unir/">unir audios</a>, <a href="/herramientas/audio/convertir/">convertir formato</a>, <a href="/herramientas/audio/volumen/">subir el volumen</a> y <a href="/herramientas/audio/velocidad/">cambiar la velocidad</a>. Y si necesitas varias cosas a la vez,
+            el <a href="/herramientas/audio/">editor de audio</a> las reúne en una sola pantalla.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Se sube mi video a algún servidor?</h3></summary>
+            <p>No. El navegador lee el archivo desde tu disco y extrae la pista de audio en memoria. El video no viaja por la red en ningún momento, lo que importa especialmente cuando es material personal o de trabajo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué formatos de video acepta?</h3></summary>
+            <p>Los que tu navegador sepa reproducir: MP4 con audio AAC, WebM con Opus o Vorbis, y los MOV de iPhone en la mayoría de los casos. Formatos profesionales o antiguos como ProRes o algunos MKV pueden fallar porque el navegador no trae ese decodificador.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Hay límite de tamaño del video?</h3></summary>
+            <p>El límite es la memoria de tu equipo. Un video largo en alta resolución tarda unos segundos en decodificarse porque hay que leerlo entero, pero el peso del video importa mucho menos que la duración del audio.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Pierdo calidad al extraer el audio?</h3></summary>
+            <p>Si descargas en WAV, no se añade ninguna pérdida: se guardan las muestras tal cual salieron del decodificador. La calidad que tengas es la que ya traía el audio dentro del video.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo extraer solo un fragmento?</h3></summary>
+            <p>Sí. Después de cargar el video, arrastra las dos manijas sobre la onda para quedarte con el tramo que te interesa antes de descargar.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo extraer el audio de un video de YouTube?</h3></summary>
+            <p>No desde aquí: esta herramienta trabaja con archivos que ya tienes en tu equipo, no descarga nada de internet. Además, bajar contenido de plataformas ajenas suele ir contra sus condiciones de uso.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Editor de audio</h4>
+            <ul>
+              <li><a href="/herramientas/audio/">Editor de audio</a></li>
+              <li><a href="/herramientas/audio/cortar/">Cortar audio</a></li>
+              <li><a href="/herramientas/audio/unir/">Unir audios</a></li>
+              <li><a href="/herramientas/audio/convertir/">Convertir formato</a></li>
+              <li><a href="/herramientas/audio/volumen/">Subir el volumen</a></li>
+              <li><a href="/herramientas/audio/velocidad/">Cambiar la velocidad</a></li>
+              <li><a href="/herramientas/audio/extraer-de-video/">Extraer audio de un video</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/audio-core.js" defer></script>
+    <script src="js/extraer-de-video.js" defer></script>
+  </body>
+</html>

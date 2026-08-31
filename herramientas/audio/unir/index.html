@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unir audios online gratis — junta varios MP3 en un solo archivo | Lienzo</title>
+    <meta name="description" content="Une varios audios en uno solo: arrastra los archivos, ordénalos y descarga el resultado en WAV u Opus. Gratis, sin registro y sin subir nada a ningún servidor." />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/audio/unir/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Unir audios online gratis" />
+    <meta property="og:description" content="Junta varios MP3 o WAV en un único archivo, en el orden que tú decidas. Nada se sube a ningún servidor." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/audio/unir/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/tool.css" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://lienzo.tools/herramientas/audio/unir/#app",
+      "name": "Unificador de audios de Lienzo",
+      "url": "https://lienzo.tools/herramientas/audio/unir/",
+      "description": "Herramienta para unir varios archivos de audio en uno solo dentro del navegador, ordenándolos manualmente y sin subirlos a ningún servidor.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "es",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Herramientas",
+          "item": "https://lienzo.tools/herramientas/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Editor de audio",
+          "item": "https://lienzo.tools/herramientas/audio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Unir audios",
+          "item": "https://lienzo.tools/herramientas/audio/unir/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Se suben mis archivos a algún servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Todos los archivos se decodifican y se concatenan dentro de tu navegador. Ninguno viaja por la red, ni siquiera de forma temporal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántos audios puedo unir de una vez?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No hay un límite fijo. El techo real es la memoria de tu equipo: cada audio decodificado ocupa bastante más que el archivo comprimido, así que juntar decenas de pistas largas puede ir lento en un equipo modesto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo mezclar formatos distintos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Puedes unir un MP3 con un WAV y un M4A sin convertirlos antes: el navegador los decodifica todos a la misma frecuencia de muestreo automáticamente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo cambio el orden de las pistas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Arrastrando cada fila por la manija de puntos de la izquierda. El orden que ves en la lista es exactamente el orden en el que se unirán."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué sirve el fundido entre pistas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para que el empalme no suene a corte. Si dos archivos terminan y empiezan a distinta amplitud, el salto produce un chasquido; 30 milisegundos de rampa lo eliminan sin que se note como efecto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué hace «igualar el volumen»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mide el pico de cada pista por separado y aplica a cada una la ganancia necesaria para que todas lleguen al mismo nivel máximo. Es útil cuando has grabado en sesiones distintas y una suena mucho más baja que otra."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> ›
+          <a href="/herramientas/audio/">Editor de audio</a> › <span>Unir audios</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Herramienta gratis</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Unir audios</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Suelta varios archivos, ponlos en el orden que quieras y descárgalos como una sola pista. El navegador los une en memoria: ninguno sale de tu equipo.</p>
+        </div>
+
+        <div class="loader reveal" style="--reveal-delay: 200ms">
+          <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
+               aria-label="Arrastra varios archivos de audio o pulsa para elegirlos">
+            <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M24 32V10" />
+              <path d="m15 19 9-9 9 9" />
+              <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" />
+            </svg>
+            <p class="dropzone__title">Arrastra los audios que quieres unir</p>
+            <p class="dropzone__hint">puedes soltar varios a la vez · MP3, WAV, OGG, M4A · nada se sube a ningún servidor</p>
+            <input type="file" accept="audio/*" multiple hidden data-file />
+          </div>
+          <p class="error" data-error role="alert" hidden></p>
+        </div>
+
+        <p class="tool-note" data-empty>Puedes soltar todos los archivos de golpe o irlos añadiendo de uno en uno; el orden lo decides tú después.</p>
+
+        <div class="workspace" data-workspace data-busy="false" hidden>
+          <div class="panel">
+            <div class="panel__head">
+              <h2 class="panel__title">Pistas</h2>
+              <span class="stat__value--small" data-conteo>0 archivos</span>
+            </div>
+
+            <div class="tracklist" data-tracklist>
+              <div class="tracklist__add" data-anadir role="button" tabindex="0">+ Añadir más archivos</div>
+            </div>
+            <div class="stats" aria-live="polite">
+              <div class="stat">
+                <span class="stat__label">Duración total</span>
+                <span class="stat__value" data-stat-duracion>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Tamaño WAV</span>
+                <span class="stat__value stat__value--small" data-stat-peso>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Canales</span>
+                <span class="stat__value stat__value--small" data-stat-canales>—</span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Frecuencia</span>
+                <span class="stat__value stat__value--small" data-stat-frecuencia>—</span>
+              </div>
+            </div>
+
+            <div class="progreso" data-progreso hidden><div class="progreso__barra" data-progreso-barra></div></div>
+            <div class="actions">
+              <button class="btn btn--primary" type="button" data-descargar-wav>Descargar la unión en WAV</button>
+              <button class="btn btn--ghost" type="button" data-descargar-comprimido hidden>Descargar comprimido (Opus)</button>
+            </div>
+          </div>
+
+          <aside class="sidebar" aria-label="Ajustes">
+            <div class="panel">
+              <div class="panel__head"><h2 class="panel__title">Ajustes</h2></div>
+              <div class="settings">
+                <label class="field">
+                  <span class="field__label">Silencio entre pistas <output data-silencio-output>0,0 s</output></span>
+                  <input type="range" min="0" max="3" step="0.1" value="0" data-silencio />
+                  <span class="field__hint">Útil para separar frases o capítulos; déjalo en cero para una mezcla continua.</span>
+                </label>
+                <label class="switch">
+                  <input type="checkbox" data-fundido checked />
+                  <span>
+                    Fundido entre pistas
+                    <small>30 ms de rampa en cada empalme para que no se oiga el salto.</small>
+                  </span>
+                </label>
+                <label class="switch">
+                  <input type="checkbox" data-normalizar-pistas />
+                  <span>
+                    Igualar el volumen de cada pista
+                    <small>Sube o baja cada archivo para que todos lleguen al mismo pico.</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="tool-note">
+          Motor: Web Audio API nativa del navegador, sin librerías externas. El audio nunca sale de tu equipo.
+        </p>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 1900px; --alto-movil: 3100px">
+        <div class="prose">
+          <h2>Varias grabaciones, un solo archivo</h2>
+          <p>
+            Unir audios parece trivial hasta que descubres que un editor de escritorio
+            tarda más en abrirse que lo que tú tardarías en hacerlo a mano. Esta página
+            resuelve el caso concreto: sueltas los archivos, los pones en orden y
+            descargas una sola pista. El navegador decodifica cada uno con la
+            <strong>Web Audio API</strong>, los alinea a la misma frecuencia de muestreo y
+            los concatena en memoria.
+          </p>
+
+          <h2>Cómo unir varios audios</h2>
+          <ol>
+            <li>Suelta todos los archivos a la vez, o añádelos de uno en uno con «Añadir más archivos».</li>
+            <li>Arrastra las pistas por la manija de la izquierda hasta dejarlas en el orden correcto.</li>
+            <li>Si quieres, añade un silencio entre pistas o activa el fundido, y descarga en WAV o en Opus.</li>
+          </ol>
+
+          <h2>Por qué se igualan las frecuencias solas</h2>
+          <p>
+            Si juntas un audio grabado a 44.100 Hz con otro a 48.000 Hz sin convertir, el
+            segundo suena más agudo o más grave según el orden. Aquí no puede pasar:
+            todos los archivos se decodifican con el mismo contexto de audio, y el propio
+            navegador los remuestrea a una frecuencia común al abrirlos. No hay nada que
+            configurar y no hay forma de equivocarse.
+          </p>
+
+          <h2>Para qué se usa</h2>
+          <ul>
+            <li><strong>Podcasts:</strong> pegar la cortinilla, el episodio y la despedida en una sola pista.</li>
+            <li><strong>Audiolibros:</strong> juntar capítulos grabados en sesiones distintas.</li>
+            <li><strong>Notas de voz:</strong> convertir una conversación partida en varios envíos en un archivo continuo.</li>
+            <li><strong>Efectos de sonido:</strong> encadenar variaciones de un mismo golpe para probarlas seguidas.</li>
+          </ul>
+
+          <h2>Qué puedes hacer con el resultado</h2>
+          <p>
+            El archivo resultante sale íntegramente de los audios que tú aportaste, y esta
+            herramienta no le añade ninguna condición. Los derechos que se aplican son los
+            de cada pista de origen: si uno de los archivos tenía licencia restringida, la
+            unión la hereda.
+          </p>
+
+          <h2>Las demás herramientas de audio</h2>
+          <p>
+            Todas comparten el mismo motor y la misma promesa —nada se sube a ningún
+            servidor—: <a href="/herramientas/audio/cortar/">cortar audio</a>, <a href="/herramientas/audio/convertir/">convertir formato</a>, <a href="/herramientas/audio/volumen/">subir el volumen</a>, <a href="/herramientas/audio/velocidad/">cambiar la velocidad</a> y <a href="/herramientas/audio/extraer-de-video/">extraer audio de un video</a>. Y si necesitas varias cosas a la vez,
+            el <a href="/herramientas/audio/">editor de audio</a> las reúne en una sola pantalla.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Se suben mis archivos a algún servidor?</h3></summary>
+            <p>No. Todos los archivos se decodifican y se concatenan dentro de tu navegador. Ninguno viaja por la red, ni siquiera de forma temporal.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cuántos audios puedo unir de una vez?</h3></summary>
+            <p>No hay un límite fijo. El techo real es la memoria de tu equipo: cada audio decodificado ocupa bastante más que el archivo comprimido, así que juntar decenas de pistas largas puede ir lento en un equipo modesto.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo mezclar formatos distintos?</h3></summary>
+            <p>Sí. Puedes unir un MP3 con un WAV y un M4A sin convertirlos antes: el navegador los decodifica todos a la misma frecuencia de muestreo automáticamente.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo cambio el orden de las pistas?</h3></summary>
+            <p>Arrastrando cada fila por la manija de puntos de la izquierda. El orden que ves en la lista es exactamente el orden en el que se unirán.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Para qué sirve el fundido entre pistas?</h3></summary>
+            <p>Para que el empalme no suene a corte. Si dos archivos terminan y empiezan a distinta amplitud, el salto produce un chasquido; 30 milisegundos de rampa lo eliminan sin que se note como efecto.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué hace «igualar el volumen»?</h3></summary>
+            <p>Mide el pico de cada pista por separado y aplica a cada una la ganancia necesaria para que todas lleguen al mismo nivel máximo. Es útil cuando has grabado en sesiones distintas y una suena mucho más baja que otra.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Editor de audio</h4>
+            <ul>
+              <li><a href="/herramientas/audio/">Editor de audio</a></li>
+              <li><a href="/herramientas/audio/cortar/">Cortar audio</a></li>
+              <li><a href="/herramientas/audio/unir/">Unir audios</a></li>
+              <li><a href="/herramientas/audio/convertir/">Convertir formato</a></li>
+              <li><a href="/herramientas/audio/volumen/">Subir el volumen</a></li>
+              <li><a href="/herramientas/audio/velocidad/">Cambiar la velocidad</a></li>
+              <li><a href="/herramientas/audio/extraer-de-video/">Extraer audio de un video</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/audio-core.js" defer></script>
+    <script src="js/unir.js" defer></script>
+  </body>
+</html>
