@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Licencias de terceros | Lienzo</title>
+    <meta
+      name="description"
+      content="El software y las obras de terceros que hacen funcionar lienzo.tools: autor, licencia y enlace al texto original de cada una."
+    />
+    <link rel="canonical" href="https://lienzo.tools/licencias-de-terceros/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Licencias de terceros" />
+    <meta property="og:description" content="El software y las obras de terceros que usa Lienzo, con su autor, su licencia y el enlace al texto original." />
+    <meta property="og:url" content="https://lienzo.tools/licencias-de-terceros/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+
+    <style>
+      .tercero {
+        padding: 1.2rem 0;
+        border-top: 1px solid var(--line);
+      }
+      .tercero__nombre {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.6rem;
+        margin: 0 0 0.15rem;
+        font-size: 1.08rem;
+      }
+      .tercero__lic {
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid color-mix(in oklab, var(--turquesa) 30%, transparent);
+        background: color-mix(in oklab, var(--turquesa) 10%, transparent);
+        color: color-mix(in oklab, var(--turquesa) 70%, var(--text));
+        font: 700 0.66rem/1 var(--font-body);
+        letter-spacing: 0.06em;
+      }
+      .tercero__autor {
+        margin: 0 0 0.6rem;
+        color: var(--faint);
+        font-size: 0.86rem;
+      }
+      .tercero__nota {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .tercero__fuente { font-size: 0.9rem; }
+      .prose .tercero p { margin: 0 0 0.5rem; }
+      .prose .tercero p:last-child { margin-bottom: 0; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://lienzo.tools/licencias-de-terceros/#page",
+          "name": "Licencias de terceros",
+          "url": "https://lienzo.tools/licencias-de-terceros/",
+          "description": "El software y las obras de terceros que usa lienzo.tools, con su autor, su licencia y un enlace al texto original de cada una.",
+          "inLanguage": "es",
+          "isPartOf": { "@type": "WebSite", "name": "Lienzo", "url": "https://lienzo.tools/" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://lienzo.tools/" },
+            { "@type": "ListItem", "position": 2, "name": "Licencias de terceros", "item": "https://lienzo.tools/licencias-de-terceros/" }
+          ]
+        }
+      ]
+    }
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <span>Licencias de terceros</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Atribuciones</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Licencias de terceros</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">
+            Este sitio no se construyó solo. Estas son las obras de otras personas que
+            lo hacen funcionar, con su autor, su licencia y el enlace al texto
+            original de cada una — no a un resumen nuestro.
+          </p>
+        </div>
+
+        <div class="prose" style="margin-top: 2.5rem">
+          <h2 id="por-que">Por qué existe esta página</h2>
+          <p>
+            Casi todas las licencias abiertas piden lo mismo: que el aviso de copyright
+            viaje con el código. Cumplirlo dentro del archivo es lo mínimo, y lo hacemos
+            —cada componente conserva su cabecera intacta—, pero un aviso enterrado en un
+            archivo no lo lee nadie. Esta página lo saca a la superficie.
+          </p>
+          <p>
+            La regla que seguimos aquí: <strong>cada crédito enlaza al documento
+            original</strong>, normalmente el archivo <code>LICENSE</code> del propio
+            proyecto. Si quieres comprobar en qué condiciones se distribuye algo, no
+            tienes que fiarte de cómo lo resumimos nosotros. Todos los enlaces de esta
+            página se comprobaron uno a uno el 31 de agosto de 2026.
+          </p>
+          <p>
+            Esto es distinto de la <a href="/licencia/">Licencia Lienzo</a>, que dice qué
+            puedes hacer <em>tú</em> con lo que descargas o generas aquí. Esta página va
+            en la dirección contraria: qué usamos <em>nosotros</em> y bajo qué permiso.
+          </p>
+
+          <h2 id="software">Software</h2>
+          <p>
+            Dos librerías, las dos con licencia MIT y las dos ejecutándose dentro de tu
+            navegador. Ninguna envía nada a ningún servidor.
+          </p>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://github.com/svg/svgo" target="_blank" rel="noopener">SVGO</a>
+              <span class="tercero__lic">MIT</span>
+            </h3>
+            <p class="tercero__autor">Kir Belevich y colaboradores</p>
+            <p>Es el motor del <a href="/herramientas/optimizar-svg/">optimizador de SVG</a>. Se ejecuta entero dentro de tu navegador: los archivos que optimizas no se envían a ningún servidor.</p>
+            <p class="tercero__nota">Versión 4.0.2, empaquetada para navegador.</p>
+            <p class="tercero__fuente">
+              <a href="https://github.com/svg/svgo/blob/main/LICENSE" target="_blank" rel="noopener">Texto completo de la licencia ↗</a>
+            </p>
+          </div>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://github.com/kazuhikoarase/qrcode-generator" target="_blank" rel="noopener">qrcode-generator</a>
+              <span class="tercero__lic">MIT</span>
+            </h3>
+            <p class="tercero__autor">Kazuhiko Arase</p>
+            <p>Calcula la matriz de módulos de todos los <a href="/herramientas/qr/">generadores de código QR</a>. El dibujo, los colores, la exportación y los formatos de contenido (WiFi, vCard, correo, SMS) son código propio construido encima.</p>
+            <p class="tercero__nota">Versión 1.4.4. Se eligió una librería probada en vez de reimplementar el estándar: un error en las tablas de corrección de errores produce un código que no escanea, y eso no se detecta a simple vista.</p>
+            <p class="tercero__fuente">
+              <a href="https://github.com/kazuhikoarase/qrcode-generator/blob/master/LICENSE" target="_blank" rel="noopener">Texto completo de la licencia ↗</a>
+            </p>
+          </div>
+
+          <h2 id="diseno">Diseño e interfaz</h2>
+          <p>
+            Piezas visuales publicadas con licencia MIT que sirvieron de punto de
+            partida. En todos los casos el resultado en el sitio está adaptado a la
+            identidad de la casa y modificado por razones de rendimiento o
+            accesibilidad; abajo se detalla qué cambió en cada uno, porque decir
+            «inspirado en» sin más sería impreciso.
+          </p>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://codepen.io/RAFA3L/pen/RwOMEEa" target="_blank" rel="noopener">Eclipse Hero</a>
+              <span class="tercero__lic">MIT</span>
+            </h3>
+            <p class="tercero__autor">Rafa</p>
+            <p>Base de las partículas y el disco del hero de la portada.</p>
+            <p class="tercero__nota">Adaptado: el lienzo se dimensiona a su sección en vez de a la ventana, respeta <code>prefers-reduced-motion</code>, y pausa el bucle cuando el hero sale de pantalla o la pestaña queda oculta — el original animaba siempre.</p>
+          </div>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://codepen.io/themrsami" target="_blank" rel="noopener">Neon Glass Context Menu</a>
+              <span class="tercero__lic">MIT</span>
+            </h3>
+            <p class="tercero__autor">themrsami</p>
+            <p>Vocabulario visual del tratamiento «neon glass» que usan las tarjetas y paneles del sitio.</p>
+            <p class="tercero__nota">Adaptado: traducido a la paleta violeta/turquesa/ámbar de la casa, y el desenfoque de fondo solo se aplica desde 768&nbsp;px — en móvil la tarjeta sigue siendo un panel opaco, porque el blur durante el desplazamiento táctil cuesta caro.</p>
+          </div>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://codepen.io/antoniasymeonidou" target="_blank" rel="noopener">Neon Glass Card</a>
+              <span class="tercero__lic">MIT</span>
+            </h3>
+            <p class="tercero__autor">NANOUU</p>
+            <p>Base de las tarjetas de «Lo más reciente» en la portada.</p>
+            <p class="tercero__nota">Adaptado: colores de marca, los archivos reales de cada pack flotando en vez de una imagen, y montado sobre una marquesina propia que se detiene al pasar el cursor.</p>
+          </div>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://codepen.io/Kan3an" target="_blank" rel="noopener">Bento element lab</a>
+              <span class="tercero__lic">MIT</span>
+            </h3>
+            <p class="tercero__autor">Mr Abu Hani</p>
+            <p>Punto de partida conceptual de la galería de <a href="/codigo-web/componentes/">componentes CSS</a>.</p>
+            <p class="tercero__nota">Reescrito por completo: las 60 recetas, su código y todo el contenido son propios. Del original se tomó la idea de organizar los componentes por categorías; la función que lo define aquí —copiar el código de cada pieza— no existía en él.</p>
+          </div>
+
+          <h2 id="tipografias">Tipografías</h2>
+          <p>
+            Las dos familias del sitio se sirven desde Google Fonts bajo la
+            <a href="https://openfontlicense.org/" target="_blank" rel="noopener">SIL Open Font License 1.1</a>,
+            que permite su uso en proyectos comerciales sin coste ni atribución
+            obligatoria. La citamos igual, porque quien diseña una tipografía merece que
+            se sepa.
+          </p>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://fonts.google.com/specimen/Fraunces" target="_blank" rel="noopener">Fraunces</a>
+              <span class="tercero__lic">OFL 1.1</span>
+            </h3>
+            <p class="tercero__autor">Undercase Type</p>
+            <p>Titulares y cifras.</p>
+          </div>
+          <div class="tercero">
+            <h3 class="tercero__nombre">
+              <a href="https://fonts.google.com/specimen/Instrument+Sans" target="_blank" rel="noopener">Instrument Sans</a>
+              <span class="tercero__lic">OFL 1.1</span>
+            </h3>
+            <p class="tercero__autor">Rodrigo Fuenzalida y Jordan Egstad</p>
+            <p>Texto corrido e interfaz.</p>
+          </div>
+
+          <h2 id="recursos">Los recursos descargables</h2>
+          <p>
+            Los packs de iconos, las escenas 3D y los efectos de sonido no aparecen en
+            esta página porque su origen tiene su propio apartado, con más detalle del
+            que cabría aquí: está en el
+            <a href="/aviso-legal/#recursos">aviso legal</a>, y las condiciones de uso
+            en la <a href="/licencia/">Licencia Lienzo</a>.
+          </p>
+
+          <h2 id="correccion">Si falta un crédito o algo está mal atribuido</h2>
+          <p>
+            Puede pasar, y preferimos enterarnos. Escribe a
+            <a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a> indicando la
+            obra y quién es su autor. Se corrige o se retira en un plazo de 48 a 72 horas
+            — el mismo compromiso que aparece en la
+            <a href="/licencia/#reclamos">Licencia Lienzo</a>.
+          </p>
+          <p>
+            <strong>Última actualización: 31 de agosto de 2026.</strong>
+          </p>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/aviso-legal/">Aviso legal</a></li>
+              <li><a href="/licencia/">Licencia Lienzo</a></li>
+              <li><a href="/licencias-de-terceros/">Licencias de terceros</a></li>
+              <li><a href="/privacidad/">Privacidad</a></li>
+              <li><a href="/cookies/">Cookies</a></li>
+              <li><a href="/contacto/">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+  </body>
+</html>
