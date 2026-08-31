@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Datos: métricas y filas — código listo para copiar" />
+    <meta property="og:title" content="Datos: métricas y filas: código listo para copiar" />
     <meta property="og:description" content="Componentes CSS de datos: métrica con variación, sparkline de barras, barra de progreso, lista densa con estados, skeleton loader y tabla compacta." />
     <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/datos/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
@@ -183,7 +183,7 @@
         <div class="page-head">
           <p class="eyebrow reveal">Código listo para copiar</p>
           <h1 class="reveal" style="--reveal-delay: 80ms">Datos: métricas y filas</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">Los datos convencen cuando se leen a la primera. Estas piezas cubren el panel típico completo — la cifra con su variación, la tendencia en miniatura, la lista con estados y la tabla — sin una librería de gráficos.</p>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Los datos convencen cuando se leen a la primera. Estas piezas cubren el panel típico completo (la cifra con su variación, la tendencia en miniatura, la lista con estados y la tabla) sin una librería de gráficos.</p>
         </div>
 
         <section class="lab-seccion" id="metricas" aria-labelledby="metricas-h">
@@ -522,8 +522,8 @@
           <p>
             Para mostrar «cómo va la semana» no hace falta un paquete de gráficos de medio
             megabyte: siete barras con alturas en variables CSS lo cuentan igual de bien.
-            El sparkline de esta página es eso — flexbox alineado abajo y una variable
-            <code>--v</code> por barra — y por eso puedes alimentarlo desde tu backend
+            El sparkline de esta página es eso (flexbox alineado abajo y una variable
+            <code>--v</code> por barra) y por eso puedes alimentarlo desde tu backend
             imprimiendo un número por elemento. Cuando de verdad necesites zoom, tooltips
             y ejes, entonces sí: librería. Mientras tanto, esto pesa cero.
           </p>
@@ -532,22 +532,21 @@
           <ol>
             <li>Copia el CSS y el HTML de la pieza. Los valores de ejemplo (alturas, porcentajes, cifras) están como variables o estilos en línea para que tu plantilla los imprima directamente.</li>
             <li>Mantén los atributos ARIA que traen: el <code>role="progressbar"</code> con sus valores y la etiqueta del sparkline explican al lector de pantalla lo que el ojo ve.</li>
-            <li>Usa <code>font-variant-numeric: tabular-nums</code> —ya incluido— en cualquier número que cambie: evita que la cifra baile al actualizarse.</li>
+            <li>Usa <code>font-variant-numeric: tabular-nums</code> (ya incluido) en cualquier número que cambie: evita que la cifra baile al actualizarse.</li>
           </ol>
 
           <h2>El skeleton: carga percibida, no decoración</h2>
           <p>
             El esqueleto de carga funciona porque promete estructura: enseña la silueta de
             lo que viene y el brillo que la recorre dice «esto avanza». Úsalo cuando la
-            carga real supere unos 300 ms y sustitúyelo por el contenido en cuanto llegue —
-            un esqueleto que dura demasiado genera más ansiedad que una pantalla vacía.
+            carga real supere unos 300 ms y sustitúyelo por el contenido en cuanto llegue, un esqueleto que dura demasiado genera más ansiedad que una pantalla vacía.
             Marca el contenedor con <code>aria-hidden</code> mientras es esqueleto, como
             hace la receta, para que el lector de pantalla no anuncie cajas grises.
           </p>
 
           <h2>Dónde encajan</h2>
           <ul>
-            <li><strong>Paneles y dashboards:</strong> métricas arriba, sparkline al lado, tabla debajo — el conjunto entero está en esta página.</li>
+            <li><strong>Paneles y dashboards:</strong> métricas arriba, sparkline al lado, tabla debajo, el conjunto entero está en esta página.</li>
             <li><strong>Estados de proceso:</strong> la barra de progreso para subidas y exportaciones; la lista densa con badges para colas de trabajo.</li>
             <li><strong>Páginas que cargan datos:</strong> el skeleton mientras llega la respuesta.</li>
             <li><strong>Informes y comparativas:</strong> la tabla compacta con números alineados a la derecha, como se leen los números.</li>
@@ -571,7 +570,7 @@
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿La barra de progreso es accesible?</h3></summary>
-            <p>Sí: lleva role="progressbar" con aria-valuenow, aria-valuemin y aria-valuemax. Cuando actualices el ancho visual, actualiza también aria-valuenow — es un cambio de atributo en la misma línea de JS.</p>
+            <p>Sí: lleva role="progressbar" con aria-valuenow, aria-valuemin y aria-valuemax. Cuando actualices el ancho visual, actualiza también aria-valuenow: es un cambio de atributo en la misma línea de JS.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Cuándo usar la lista densa y cuándo la tabla?</h3></summary>
@@ -579,7 +578,7 @@
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿El skeleton debería parecerse al contenido final?</h3></summary>
-            <p>En silueta, sí: mismo número de líneas, misma disposición aproximada. Así el cambio a contenido real no salta. No hace falta precisión de píxel — hace falta que la promesa de estructura se cumpla.</p>
+            <p>En silueta, sí: mismo número de líneas, misma disposición aproximada. Así el cambio a contenido real no salta. No hace falta precisión de píxel: hace falta que la promesa de estructura se cumpla.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Cómo hago la tabla responsive?</h3></summary>

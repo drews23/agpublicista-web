@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Botones y controles — código listo para copiar" />
+    <meta property="og:title" content="Botones y controles: código listo para copiar" />
     <meta property="og:description" content="Botones con degradado, brillo y estado de carga; switch, chips, control segmentado y pestañas accesibles con teclado. CSS y JS listos para copiar." />
     <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/botones/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
@@ -620,7 +620,7 @@ document.querySelectorAll("[data-lz-tabs]").forEach((raiz) =&gt; {
         <div class="prose">
           <h2>La regla de esta página: el control nativo se queda</h2>
           <p>
-            Todos los conmutadores que ves —el switch, los chips, el segmentado— son
+            Todos los conmutadores que ves (el switch, los chips, el segmentado) son
             <code>&lt;input&gt;</code> de verdad vestidos con CSS. El input se oculta
             visualmente pero sigue en el documento, así que el teclado, el lector de
             pantalla y el envío de formularios funcionan sin una línea de JavaScript.
@@ -631,7 +631,7 @@ document.querySelectorAll("[data-lz-tabs]").forEach((raiz) =&gt; {
           <h2>Cómo usarlos</h2>
           <ol>
             <li>Copia el CSS y el HTML juntos: en los controles, la estructura es parte del funcionamiento.</li>
-            <li>Para el botón de carga y las pestañas, copia también el JS — son menos de 25 líneas cada uno y no tienen dependencias.</li>
+            <li>Para el botón de carga y las pestañas, copia también el JS: son menos de 25 líneas cada uno y no tienen dependencias.</li>
             <li>Cambia los colores a los de tu marca. Los estados (hover, activo, foco, deshabilitado) ya están definidos: solo retíñelos.</li>
           </ol>
 
@@ -640,7 +640,7 @@ document.querySelectorAll("[data-lz-tabs]").forEach((raiz) =&gt; {
             Las guías de accesibilidad táctil convergen en lo mismo: un objetivo táctil
             necesita unos 44 píxeles de lado para pulsarse sin errar. Todos los botones de
             esta página parten de <code>min-height: 44px</code>. Cuando reduzcas un botón
-            para un contexto denso —una barra de herramientas, una tabla— reduce el
+            para un contexto denso (una barra de herramientas, una tabla) reduce el
             dibujo, no el área: <code>padding</code> negativo visual sí, objetivo táctil
             pequeño no.
           </p>
@@ -667,7 +667,7 @@ document.querySelectorAll("[data-lz-tabs]").forEach((raiz) =&gt; {
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Qué es :has() y qué pasa si el navegador no lo soporta?</h3></summary>
-            <p>Es el selector que permite estilar al padre según el estado de un hijo — aquí, pintar la caja cuando su input está marcado. Todos los navegadores lo soportan desde finales de 2023. En uno muy antiguo, el control seguiría funcionando; solo perdería el resaltado visual.</p>
+            <p>Es el selector que permite estilar al padre según el estado de un hijo: aquí, pintar la caja cuando su input está marcado. Todos los navegadores lo soportan desde finales de 2023. En uno muy antiguo, el control seguiría funcionando; solo perdería el resaltado visual.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Las pestañas necesitan una librería?</h3></summary>

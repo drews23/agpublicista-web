@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generador de animaciones CSS y keyframes — Lienzo</title>
+    <title>Generador de animaciones CSS y keyframes | Lienzo</title>
     <meta
       name="description"
       content="Crea animaciones CSS con vista previa en vivo: elige la curva de aceleración, ajusta duración y repeticiones, y copia los keyframes listos para pegar."
@@ -245,20 +245,20 @@
                 <label class="campo">
                   <span class="campo__label">Dirección</span>
                   <select data-control="direccion">
-                    <option value="normal" selected>normal — siempre hacia delante</option>
-                    <option value="reverse">reverse — siempre hacia atrás</option>
-                    <option value="alternate">alternate — ida y vuelta</option>
-                    <option value="alternate-reverse">alternate-reverse — vuelta e ida</option>
+                    <option value="normal" selected>normal (siempre hacia delante</option>
+                    <option value="reverse">reverse) siempre hacia atrás</option>
+                    <option value="alternate">alternate (ida y vuelta</option>
+                    <option value="alternate-reverse">alternate-reverse) vuelta e ida</option>
                   </select>
                 </label>
 
                 <label class="campo">
                   <span class="campo__label">Modo de relleno</span>
                   <select data-control="relleno">
-                    <option value="none">none — no conserva nada</option>
-                    <option value="forwards">forwards — se queda en el último fotograma</option>
-                    <option value="backwards">backwards — adopta el primero durante el retardo</option>
-                    <option value="both" selected>both — las dos cosas</option>
+                    <option value="none">none (no conserva nada</option>
+                    <option value="forwards">forwards) se queda en el último fotograma</option>
+                    <option value="backwards">backwards (adopta el primero durante el retardo</option>
+                    <option value="both" selected>both) las dos cosas</option>
                   </select>
                   <span class="campo__hint">Para animaciones de entrada casi siempre quieres <code>both</code>: evita el salto del final y el parpadeo del principio.</span>
                 </label>
@@ -413,8 +413,8 @@
             una curva que frena al final (<code>ease-out</code>): llega rápido y se posa. Lo que
             <em>sale</em> usa una que acelera (<code>ease-in</code>): se va sin hacerse esperar. Lo
             que se mueve de un punto a otro dentro de la pantalla usa <code>ease-in-out</code>. Y
-            cuando necesitas carácter, <code>cubic-bezier()</code> te deja pasarte del 100 % —un
-            valor de Y mayor que 1— para conseguir ese rebotito de sobrepaso que hace que un botón
+            cuando necesitas carácter, <code>cubic-bezier()</code> te deja pasarte del 100 % (un
+            valor de Y mayor que 1) para conseguir ese rebotito de sobrepaso que hace que un botón
             parezca vivo. En el panel de la derecha lo ves dibujado antes de escribir una sola
             línea.
           </p>
@@ -459,8 +459,8 @@
 
           <h3>¿Cuál es la diferencia entre una transición y una animación en CSS?</h3>
           <p>
-            Una transición necesita que algo cambie para dispararse —un <code>hover</code>, una
-            clase que añades con JavaScript— y solo va del estado A al estado B. Una animación con
+            Una transición necesita que algo cambie para dispararse (un <code>hover</code>, una
+            clase que añades con JavaScript) y solo va del estado A al estado B. Una animación con
             keyframes se reproduce sola en cuanto el elemento existe, admite todos los pasos
             intermedios que quieras y controla repeticiones, dirección y retardo. Si el efecto es
             una respuesta a la acción del usuario, usa transición; si es un movimiento propio del

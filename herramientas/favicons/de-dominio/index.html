@@ -173,7 +173,7 @@
         <p class="lede reveal" style="--reveal-delay: 160ms">
           Escribe un dominio y ve su icono en varios tamaños, compáralo entre fuentes y llévate
           la URL o el código <code>&lt;img&gt;</code> listo para pegar. Útil para directorios de
-          enlaces, dashboards y listas de recursos — y con modo lote para consultar hasta 30
+          enlaces, dashboards y listas de recursos, y con modo lote para consultar hasta 30
           dominios de una vez.
         </p>
 
@@ -271,12 +271,12 @@
           <h2>Código listo</h2>
           <div class="snippets">
             <div class="snippet">
-              <p class="snippet__uso">Para mostrar favicons de terceros en listas, directorios o artículos — con carga perezosa y un respaldo propio si no carga:</p>
+              <p class="snippet__uso">Para mostrar favicons de terceros en listas, directorios o artículos, con carga perezosa y un respaldo propio si no carga:</p>
               <pre id="snippet-img"></pre>
               <button class="ghost-btn" type="button" data-copiar="snippet-img">Copiar &lt;img&gt;</button>
             </div>
             <div class="snippet">
-              <p class="snippet__uso">Solo si el dominio es tuyo — la etiqueta clásica para tu propio <code>&lt;head&gt;</code>:</p>
+              <p class="snippet__uso">Solo si el dominio es tuyo, la etiqueta clásica para tu propio <code>&lt;head&gt;</code>:</p>
               <pre id="snippet-link"></pre>
               <button class="ghost-btn" type="button" data-copiar="snippet-link">Copiar &lt;link&gt;</button>
             </div>
@@ -320,7 +320,7 @@
         <p style="max-width: 72ch; color: var(--muted)">
           Cuando visitas una página, el navegador busca el icono en un orden concreto: primero
           las etiquetas <code>&lt;link rel="icon"&gt;</code> declaradas en el
-          <code>&lt;head&gt;</code> —puede haber varias, con distintos tamaños y formatos—,
+          <code>&lt;head&gt;</code> (puede haber varias, con distintos tamaños y formatos),
           después el archivo <code>/favicon.ico</code> en la raíz del dominio, la convención
           heredada de los años noventa, y por último los iconos que declare el
           <em>manifest</em> si la página es una aplicación web. Los servicios de resolución
@@ -347,7 +347,7 @@
           <ul>
             <li><strong>Carga perezosa siempre.</strong> Un directorio con cien enlaces son cien peticiones de imagen: con <code>loading="lazy"</code> solo se piden las que entran en pantalla.</li>
             <li><strong>Ancho y alto fijos.</strong> Declara <code>width</code> y <code>height</code> en cada <code>&lt;img&gt;</code> para que la lista no salte mientras cargan los iconos.</li>
-            <li><strong>Un respaldo propio.</strong> El snippet de arriba incluye un <code>onerror</code> que pinta un avatar con la inicial del dominio si el icono no carga — la lista nunca queda con huecos rotos.</li>
+            <li><strong>Un respaldo propio.</strong> El snippet de arriba incluye un <code>onerror</code> que pinta un avatar con la inicial del dominio si el icono no carga, la lista nunca queda con huecos rotos.</li>
             <li><strong>Texto alternativo.</strong> Un <code>alt</code> del estilo «Favicon de wikipedia.org» mantiene la lista legible para lectores de pantalla.</li>
           </ul>
         </div>
@@ -392,8 +392,8 @@
           <article class="faq-item reveal" style="--reveal-delay: 270ms">
             <h3>¿Puedo mostrar el favicon de otra web en la mía?</h3>
             <p>
-              Como referencia junto a un enlace —lo que hacen buscadores y gestores de
-              marcadores— suele considerarse uso referencial. Aun así, el logo tiene titular:
+              Como referencia junto a un enlace (lo que hacen buscadores y gestores de
+              marcadores) suele considerarse uso referencial. Aun así, el logo tiene titular:
               no lo presentes como propio ni sugieras una relación que no existe. Ante dudas
               comerciales, consulta a un profesional.
             </p>

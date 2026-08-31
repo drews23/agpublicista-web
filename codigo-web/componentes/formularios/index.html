@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Campos de formulario — código listo para copiar" />
+    <meta property="og:title" content="Campos de formulario: código listo para copiar" />
     <meta property="og:description" content="Inputs con etiqueta flotante, buscador con atajo, textarea con contador, checkbox dibujado, radios como tarjetas y range estilizado. Código listo para copiar." />
     <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/formularios/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
@@ -183,7 +183,7 @@
         <div class="page-head">
           <p class="eyebrow reveal">Código listo para copiar</p>
           <h1 class="reveal" style="--reveal-delay: 80ms">Campos de formulario</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">El formulario es donde el visitante trabaja, y donde más se nota el cuidado. Estos campos están construidos sobre los controles nativos —con su teclado, su foco y su autorrelleno intactos— y vestidos para estar a la altura del resto de tu interfaz.</p>
+          <p class="lede reveal" style="--reveal-delay: 140ms">El formulario es donde el visitante trabaja, y donde más se nota el cuidado. Estos campos están construidos sobre los controles nativos (con su teclado, su foco y su autorrelleno intactos) y vestidos para estar a la altura del resto de tu interfaz.</p>
         </div>
 
         <section class="lab-seccion" id="campos-texto" aria-labelledby="campos-texto-h">
@@ -548,14 +548,14 @@ document.querySelectorAll("[data-lz-rango]").forEach((rango) =&gt; {
           <ol>
             <li>Copia CSS y HTML juntos: en formularios, el orden de los elementos es funcionalidad (la etiqueta flotante depende de que el span siga al input).</li>
             <li>Conserva los atributos: <code>type</code> correcto, <code>maxlength</code>, <code>aria-label</code> donde no hay etiqueta visible. Son los que activan el teclado móvil adecuado y el autorrelleno.</li>
-            <li>Para el contador y el deslizador, añade el JS incluido — pocas líneas, sin dependencias.</li>
+            <li>Para el contador y el deslizador, añade el JS incluido: pocas líneas, sin dependencias.</li>
           </ol>
 
           <h2>Estados de error sin drama</h2>
           <p>
             Estos campos marcan el foco con borde violeta y halo suave. Para el estado de
             error, la misma técnica con otro color: borde coral, halo coral tenue y un
-            mensaje corto <em>debajo del campo</em> — nunca solo un borde rojo, porque el
+            mensaje corto <em>debajo del campo</em>: nunca solo un borde rojo, porque el
             color solo no comunica a todo el mundo. Valida al salir del campo, no a cada
             tecla: corregir mientras te gritan es la experiencia que todos odiamos.
           </p>
@@ -586,7 +586,7 @@ document.querySelectorAll("[data-lz-rango]").forEach((rango) =&gt; {
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Cómo activo el teclado numérico o de correo en el móvil?</h3></summary>
-            <p>Con el type correcto: email, tel, url, number o search. Es un atributo, no un estilo, y por eso estas recetas lo conservan — al copiar, no lo cambies a text.</p>
+            <p>Con el type correcto: email, tel, url, number o search. Es un atributo, no un estilo, y por eso estas recetas lo conservan: al copiar, no lo cambies a text.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿El deslizador funciona igual en Chrome y Firefox?</h3></summary>
@@ -598,7 +598,7 @@ document.querySelectorAll("[data-lz-rango]").forEach((rango) =&gt; {
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Estos campos rompen el autorrelleno del navegador?</h3></summary>
-            <p>No: al ser inputs nativos con sus type y name normales, el navegador los reconoce. Es otra razón para no fabricar campos con divs — el autorrelleno de contraseñas y direcciones no funciona sobre imitaciones.</p>
+            <p>No: al ser inputs nativos con sus type y name normales, el navegador los reconoce. Es otra razón para no fabricar campos con divs, el autorrelleno de contraseñas y direcciones no funciona sobre imitaciones.</p>
           </details>
         </div>
 

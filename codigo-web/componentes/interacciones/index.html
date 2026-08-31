@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Microinteracciones — código listo para copiar" />
+    <meta property="og:title" content="Microinteracciones: código listo para copiar" />
     <meta property="og:description" content="Microinteracciones listas para copiar: elevación, tarjeta que se voltea, ripple, tilt 3D, luz que sigue al cursor, contador animado y modal con dialog nativo." />
     <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/interacciones/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
@@ -568,14 +568,14 @@ document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
           <p>
             Cada pieza de esta página responde a algo que hizo el visitante: pasar el
             cursor, hacer clic, llegar con el scroll. Esa es la línea que separa la
-            microinteracción del adorno — el movimiento que responde comunica («te oí, esto
+            microinteracción del adorno, el movimiento que responde comunica («te oí, esto
             es pulsable, esto cambió»); el movimiento porque sí distrae. Si una animación
             no responde a nada, esta página no la incluye.
           </p>
 
           <h2>Cómo usarlas</h2>
           <ol>
-            <li>Las tres primeras son CSS puro: copia y listo. Las demás llevan su fragmento de JS al lado — vanilla, corto y sin dependencias.</li>
+            <li>Las tres primeras son CSS puro: copia y listo. Las demás llevan su fragmento de JS al lado: vanilla, corto y sin dependencias.</li>
             <li>No las apiles: una tarjeta que se eleva <em>o</em> se inclina <em>o</em> brilla. Dos efectos a la vez ya son ruido.</li>
             <li>Respeta lo que ya viene puesto: todas comprueban <code>prefers-reduced-motion</code> y se apagan para quien pidió calma. No lo quites al adaptar.</li>
           </ol>
@@ -586,14 +586,14 @@ document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
             resuelto lo que los modales caseros llevan una década haciendo mal: atrapa el
             foco dentro, se cierra con Escape, oscurece el fondo con
             <code>::backdrop</code> y devuelve el foco al botón que lo abrió. El JS de la
-            receta son ocho líneas porque el navegador hace el trabajo pesado — comparado
+            receta son ocho líneas porque el navegador hace el trabajo pesado: comparado
             con las cien líneas del modal artesanal, no hay debate.
           </p>
 
           <h2>Dónde encajan</h2>
           <ul>
             <li><strong>Galerías y portafolios:</strong> elevación o tilt en las piezas, luz de cursor en la destacada.</li>
-            <li><strong>Cifras de negocio:</strong> el contador animado en la sección de logros — una vez, al entrar en pantalla.</li>
+            <li><strong>Cifras de negocio:</strong> el contador animado en la sección de logros, una vez, al entrar en pantalla.</li>
             <li><strong>Confirmaciones y avisos:</strong> el modal nativo para decisiones que merecen foco completo.</li>
             <li><strong>Botones principales:</strong> el ripple da confirmación táctil del clic, especialmente en pantallas táctiles.</li>
           </ul>
@@ -612,7 +612,7 @@ document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Las interacciones con JS funcionan en móvil?</h3></summary>
-            <p>El ripple y el modal, perfectamente. El tilt y la luz de cursor dependen del puntero, así que en táctil simplemente no se activan — la pieza se ve como una tarjeta normal, que es la degradación correcta.</p>
+            <p>El ripple y el modal, perfectamente. El tilt y la luz de cursor dependen del puntero, así que en táctil simplemente no se activan, la pieza se ve como una tarjeta normal, que es la degradación correcta.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿El tilt 3D afecta al rendimiento?</h3></summary>

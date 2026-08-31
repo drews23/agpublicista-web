@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Bento grid con CSS Grid — código listo para copiar" />
+    <meta property="og:title" content="Bento grid con CSS Grid: código listo para copiar" />
     <meta property="og:description" content="Cuatro bento grids hechos con CSS Grid y grid-template-areas: clásico, editorial, panel y galería. Responsive con una sola media query y listos para copiar." />
     <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/bento/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
@@ -183,7 +183,7 @@
         <div class="page-head">
           <p class="eyebrow reveal">Código listo para copiar</p>
           <h1 class="reveal" style="--reveal-delay: 80ms">Bento grid con CSS Grid</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">El bento organiza una portada como una caja japonesa: compartimentos de distinto tamaño donde cada pieza tiene su lugar y una manda. Estos cuatro layouts cubren portada, editorial, panel y galería — cada uno con su mapa de áreas legible y su colapso móvil resuelto.</p>
+          <p class="lede reveal" style="--reveal-delay: 140ms">El bento organiza una portada como una caja japonesa: compartimentos de distinto tamaño donde cada pieza tiene su lugar y una manda. Estos cuatro layouts cubren portada, editorial, panel y galería: cada uno con su mapa de áreas legible y su colapso móvil resuelto.</p>
         </div>
 
         <section class="lab-seccion" id="bento-clasico" aria-labelledby="bento-clasico-h">
@@ -444,31 +444,31 @@
             <code>"ancha ancha"</code> abajo, estás viendo la composición literal de la
             página. Reordenar celdas es editar ese dibujo, no contar columnas ni calcular
             spans. Y el colapso móvil es otro dibujo: una columna con las áreas apiladas
-            en el orden que tú decidas — que no tiene por qué ser el del marcado.
+            en el orden que tú decidas, que no tiene por qué ser el del marcado.
           </p>
 
           <h2>Cómo montar tu bento</h2>
           <ol>
             <li>Elige el layout más cercano a tu contenido y copia CSS y HTML.</li>
             <li>Sustituye el contenido de cada celda. La jerarquía visual ya está resuelta: la celda protagonista es más grande y las demás la escoltan.</li>
-            <li>Ajusta el dibujo de <code>grid-template-areas</code> si tu contenido pide otra composición — añade filas, ensancha áreas, y revisa el segundo dibujo (el de la media query) para que el orden móvil siga contando la historia.</li>
+            <li>Ajusta el dibujo de <code>grid-template-areas</code> si tu contenido pide otra composición: añade filas, ensancha áreas, y revisa el segundo dibujo (el de la media query) para que el orden móvil siga contando la historia.</li>
           </ol>
 
           <h2>La regla del protagonista</h2>
           <p>
             Un bento funciona cuando una celda manda y las demás obedecen. Si todas las
             celdas pesan lo mismo, no tienes un bento: tienes una tabla. Antes de tocar el
-            código, decide qué pieza es la protagonista de la sección — el producto, la
-            cifra, el artículo — y dale el área grande. El resto de decisiones se toman
+            código, decide qué pieza es la protagonista de la sección (el producto, la
+            cifra, el artículo) y dale el área grande. El resto de decisiones se toman
             solas.
           </p>
 
           <h2>Dónde encajan</h2>
           <ul>
-            <li><strong>Portadas de producto:</strong> el clásico — héroe con captura, satélites con beneficios.</li>
-            <li><strong>Blogs y medios:</strong> el editorial — artículo principal alto, secundarios y faja de suscripción.</li>
-            <li><strong>Dashboards:</strong> el panel — métricas arriba, gráfico protagonista, lista de actividad.</li>
-            <li><strong>Portafolios:</strong> la galería — piezas cuadradas con dos protagonistas del doble de tamaño.</li>
+            <li><strong>Portadas de producto:</strong> el clásico: héroe con captura, satélites con beneficios.</li>
+            <li><strong>Blogs y medios:</strong> el editorial: artículo principal alto, secundarios y faja de suscripción.</li>
+            <li><strong>Dashboards:</strong> el panel: métricas arriba, gráfico protagonista, lista de actividad.</li>
+            <li><strong>Portafolios:</strong> la galería: piezas cuadradas con dos protagonistas del doble de tamaño.</li>
           </ul>
 
           <h2>Las demás categorías</h2>
@@ -489,7 +489,7 @@
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Cómo se comportan en móvil?</h3></summary>
-            <p>Cada receta trae su media query con el layout colapsado a una columna, y el orden de lectura móvil está decidido en el segundo dibujo de áreas — puedes cambiarlo sin tocar el HTML.</p>
+            <p>Cada receta trae su media query con el layout colapsado a una columna, y el orden de lectura móvil está decidido en el segundo dibujo de áreas: puedes cambiarlo sin tocar el HTML.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Qué hace grid-auto-flow: dense?</h3></summary>

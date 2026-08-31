@@ -173,7 +173,7 @@
           <p class="reveal" style="--reveal-delay: 260ms">
             Hay otra vía, y es más sencilla de lo que parece: <strong>el archivo lo sirves tú</strong>
             desde tu propio dominio, y de Spline solo llega el programa que lo dibuja. No es
-            teoría — es exactamente lo que mueve la escena 3D de la portada de este sitio.
+            teoría: es exactamente lo que mueve la escena 3D de la portada de este sitio.
           </p>
 
           <h2 id="por-que-no-basta">Por qué el archivo del ZIP todavía no te sirve</h2>
@@ -200,7 +200,7 @@
               Abre esa URL pública y mira el código fuente de la página
               (<code>Ctrl</code>+<code>U</code>). Busca <code>app.start([</code>: detrás hay una
               lista larguísima de números. <strong>Esa lista es tu escena.</strong> Spline no
-              descarga ningún archivo aparte — la lleva incrustada ahí dentro.
+              descarga ningún archivo aparte, la lleva incrustada ahí dentro.
             </li>
             <li>
               Guárdala como archivo binario. En la consola del navegador, sobre esa misma página:
@@ -245,7 +245,7 @@ a.click();</code></pre>
           <p>
             <strong>La escena sale cortada por arriba y por abajo.</strong> El runtime reencaja la
             escena al tamaño de tu canvas, así que aquí no sufres el recorte de la cámara
-            ortográfica que sí tiene el iframe — está comprobado de 1160 a 340 píxeles de ancho sin
+            ortográfica que sí tiene el iframe: está comprobado de 1160 a 340 píxeles de ancho sin
             un solo desborde. Pero si la escena está <em>compuesta</em> en una proporción (3:2, por
             ejemplo) y tu contenedor es otra (16:9), el recorte vertical vuelve. Se arregla
             cambiando la proporción del contenedor, o bajando el zoom de la cámara en el editor
@@ -260,7 +260,7 @@ a.click();</code></pre>
           <p>
             <strong>La escena no aparece en algunos navegadores.</strong> Mira el <em>Renderer</em>,
             también en <strong>Export → Play Settings</strong>. Si está en «WebGPU Only», cualquier
-            navegador sin WebGPU se queda sin escena — y no lo notas, porque el tuyo seguramente sí
+            navegador sin WebGPU se queda sin escena, y no lo notas, porque el tuyo seguramente sí
             lo tiene. Ponlo en <strong>«WebGL 2 Only»</strong>: funciona en todos y además el
             paquete que se descarga es más pequeño.
           </p>
