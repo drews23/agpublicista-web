@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Componentes CSS listos para copiar, gratis | Lienzo</title>
+    <meta name="description" content="Galería de componentes CSS con su código listo para copiar: glassmorphism, bento grid, botones, tarjetas, formularios y microinteracciones. Sin librerías." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Componentes CSS — código listo para copiar" />
+    <meta property="og:description" content="Galería de componentes CSS con su código listo para copiar: glassmorphism, bento grid, botones, tarjetas, formularios y microinteracciones. Sin librerías." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/#page",
+      "name": "Componentes CSS listos para copiar, gratis",
+      "url": "https://lienzo.tools/codigo-web/componentes/",
+      "description": "Galería de componentes CSS con su código listo para copiar: glassmorphism, bento grid, botones, tarjetas, formularios y microinteracciones. Sin librerías.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Puedo usar estos componentes en proyectos comerciales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Todo el código de esta galería puede usarse en proyectos personales y comerciales sin atribución, igual que el resto de recursos del sitio. Las condiciones completas están en la Licencia Lienzo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito instalar algo para que funcionen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Cada componente es CSS puro (y a veces unas líneas de JavaScript vanilla, incluidas junto a la pieza). No hay dependencias, gestores de paquetes ni archivos de configuración."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Funcionan con Tailwind, Bootstrap o React?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, porque no interfieren: las clases llevan el prefijo lz- precisamente para no chocar con las de tu framework. En React o Vue solo tienes que convertir el HTML a JSX o plantilla y pegar el CSS en tu hoja global o en un módulo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo cambio los colores a los de mi marca?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada receta concentra los valores de color al principio del bloque, muchas veces en variables CSS (--luz, --tinta). Cambia esos valores y toda la pieza se actualiza. No hay colores escondidos a mitad del código."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los componentes son accesibles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es el criterio de la casa: controles nativos vestidos con CSS (nunca divs que fingen ser botones), foco visible, etiquetas ARIA donde hacen falta y animaciones que respetan prefers-reduced-motion. Aun así, la accesibilidad final depende del contexto donde los montes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué navegadores funcionan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En cualquier navegador moderno de los últimos años. Donde una técnica es más reciente (como :has() o los backdrop-filter), la receta lo aprovecha con degradación razonable; ninguna pieza depende de características experimentales."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <span>Componentes CSS</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Componentes CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Una galería de componentes de interfaz con el código a un clic: cada pieza que ves aquí se copia tal cual y funciona en cualquier proyecto, sin librerías, sin frameworks y sin configuración.</p>
+        </div>
+
+        <div class="card-grid" style="margin-top: 2.2rem">
+          <a class="card reveal" style="--reveal-delay: 0ms" href="/codigo-web/componentes/formas/">
+            <span class="card__tag">14 piezas</span>
+            <h3>Formas y recortes</h3>
+            <p>Chaflanes, flechas, blobs y marcos degradados con clip-path y border-radius.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+          <a class="card reveal" style="--reveal-delay: 70ms" href="/codigo-web/componentes/superficies/">
+            <span class="card__tag">9 piezas</span>
+            <h3>Vidrio y neón</h3>
+            <p>Glassmorphism con backdrop-filter, neón por capas y fondos aurora.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+          <a class="card reveal" style="--reveal-delay: 140ms" href="/codigo-web/componentes/bento/">
+            <span class="card__tag">4 piezas</span>
+            <h3>Bento grid</h3>
+            <p>Cuatro bento grids con grid-template-areas y colapso móvil resuelto.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+          <a class="card reveal" style="--reveal-delay: 210ms" href="/codigo-web/componentes/botones/">
+            <span class="card__tag">8 piezas</span>
+            <h3>Botones y controles</h3>
+            <p>Botones con estados de verdad, switch, chips, segmentado y pestañas con teclado.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+          <a class="card reveal" style="--reveal-delay: 280ms" href="/codigo-web/componentes/tarjetas/">
+            <span class="card__tag">5 piezas</span>
+            <h3>Tarjetas</h3>
+            <p>Perfil, precio, testimonio, imagen con velo y fila de descarga.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+          <a class="card reveal" style="--reveal-delay: 350ms" href="/codigo-web/componentes/formularios/">
+            <span class="card__tag">6 piezas</span>
+            <h3>Formularios</h3>
+            <p>Etiqueta flotante, buscador, contador, checkbox, radios-tarjeta y range.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+          <a class="card reveal" style="--reveal-delay: 420ms" href="/codigo-web/componentes/datos/">
+            <span class="card__tag">6 piezas</span>
+            <h3>Datos y métricas</h3>
+            <p>Métricas, sparkline sin librería, progreso, lista con estados, skeleton y tabla.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+          <a class="card reveal" style="--reveal-delay: 490ms" href="/codigo-web/componentes/interacciones/">
+            <span class="card__tag">8 piezas</span>
+            <h3>Microinteracciones</h3>
+            <p>Elevación, volteo, ripple, tilt 3D, luz de cursor, contador y modal nativo.</p>
+            <span class="card__meta">CSS listo para copiar · Gratis</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 1900px; --alto-movil: 3100px">
+        <div class="prose">
+          <h2>Qué es esta galería y en qué se diferencia</h2>
+          <p>
+            Cada componente de esta sección existe dos veces: como demostración que puedes
+            ver y tocar, y como bloque de código que puedes copiar. Las dos versiones salen
+            del mismo archivo, así que <strong>lo que copias es exactamente lo que
+            estás viendo</strong> — no una aproximación, no una versión simplificada.
+          </p>
+          <p>
+            Los fragmentos no dependen de nada: ni de una librería de CSS, ni de un
+            framework de JavaScript, ni de las hojas de estilo de este sitio. Cada receta
+            lleva sus valores escritos dentro, con nombres de clase propios que no chocan
+            con los tuyos. Pega el CSS, pega el HTML y ya está funcionando.
+          </p>
+
+          <h2>Cómo usar un componente en tu proyecto</h2>
+          <ol>
+            <li>Entra en la categoría que necesitas y localiza la pieza en la galería.</li>
+            <li>Pulsa <strong>Copiar CSS</strong> (y <strong>Copiar HTML</strong> si la estructura importa). Si la pieza necesita JavaScript, el botón <strong>Copiar JS</strong> aparece al lado — nunca son más de 25 líneas.</li>
+            <li>Pega el código en tu proyecto y ajusta los colores a tu marca: cada receta concentra sus valores al principio para que el cambio sea rápido.</li>
+          </ol>
+
+          <h2>Hechos para durar, no para impresionar en la demo</h2>
+          <p>
+            Es fácil hacer un componente que se ve bien en una captura. Lo difícil es que
+            sobreviva al mundo real, y ahí es donde estas recetas ponen el cuidado: los
+            botones tienen área táctil de 44 píxeles y estados de foco visibles, los
+            interruptores y checkboxes siguen siendo controles nativos por debajo del CSS
+            —con teclado y lector de pantalla funcionando—, y todas las animaciones
+            respetan la preferencia de movimiento reducido del sistema.
+          </p>
+
+          <h2>Empieza por la categoría que te toca</h2>
+          <p>
+            Si estás montando una portada, ve directo a <a href="/codigo-web/componentes/bento/">bento grid</a>
+            y <a href="/codigo-web/componentes/superficies/">superficies</a>. Si peleas con
+            un panel de administración, <a href="/codigo-web/componentes/datos/">datos</a> y
+            <a href="/codigo-web/componentes/formularios/">formularios</a>. Y si tu interfaz
+            ya funciona pero se siente muerta,
+            <a href="/codigo-web/componentes/interacciones/">microinteracciones</a> es la
+            sección que le da el pulso.
+          </p>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a>, <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>.
+            
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Puedo usar estos componentes en proyectos comerciales?</h3></summary>
+            <p>Sí. Todo el código de esta galería puede usarse en proyectos personales y comerciales sin atribución, igual que el resto de recursos del sitio. Las condiciones completas están en la Licencia Lienzo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Necesito instalar algo para que funcionen?</h3></summary>
+            <p>No. Cada componente es CSS puro (y a veces unas líneas de JavaScript vanilla, incluidas junto a la pieza). No hay dependencias, gestores de paquetes ni archivos de configuración.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Funcionan con Tailwind, Bootstrap o React?</h3></summary>
+            <p>Sí, porque no interfieren: las clases llevan el prefijo lz- precisamente para no chocar con las de tu framework. En React o Vue solo tienes que convertir el HTML a JSX o plantilla y pegar el CSS en tu hoja global o en un módulo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo cambio los colores a los de mi marca?</h3></summary>
+            <p>Cada receta concentra los valores de color al principio del bloque, muchas veces en variables CSS (--luz, --tinta). Cambia esos valores y toda la pieza se actualiza. No hay colores escondidos a mitad del código.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Los componentes son accesibles?</h3></summary>
+            <p>Es el criterio de la casa: controles nativos vestidos con CSS (nunca divs que fingen ser botones), foco visible, etiquetas ARIA donde hacen falta y animaciones que respetan prefers-reduced-motion. Aun así, la accesibilidad final depende del contexto donde los montes.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿En qué navegadores funcionan?</h3></summary>
+            <p>En cualquier navegador moderno de los últimos años. Donde una técnica es más reciente (como :has() o los backdrop-filter), la receta lo aprovecha con degradación razonable; ninguna pieza depende de características experimentales.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>

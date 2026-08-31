@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glassmorphism y neón en CSS, listos para copiar | Lienzo</title>
+    <meta name="description" content="Paneles de vidrio esmerilado con backdrop-filter, bordes y textos de neón, fondos aurora y ruido: superficies CSS con el código a un clic." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/superficies/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Superficies: vidrio y neón — código listo para copiar" />
+    <meta property="og:description" content="Paneles de vidrio esmerilado con backdrop-filter, bordes y textos de neón, fondos aurora y ruido: superficies CSS con el código a un clic." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/superficies/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/superficies/#page",
+      "name": "Glassmorphism y neón en CSS, listos para copiar",
+      "url": "https://lienzo.tools/codigo-web/componentes/superficies/",
+      "description": "Paneles de vidrio esmerilado con backdrop-filter, bordes y textos de neón, fondos aurora y ruido: superficies CSS con el código a un clic.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Superficies: vidrio y neón",
+          "item": "https://lienzo.tools/codigo-web/componentes/superficies/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué mi efecto de vidrio no se ve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Casi seguro porque el fondo detrás del panel es plano. backdrop-filter desenfoca lo que hay detrás; necesita color, formas o una imagen para demostrarlo. Pon el panel sobre un degradado y aparecerá."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿backdrop-filter funciona en todos los navegadores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En todos los modernos, sí; en Safari conviene acompañarlo del prefijo -webkit-backdrop-filter, que estas recetas ya incluyen. Si un navegador antiguo no lo soporta, el panel se ve como un panel semitransparente normal: degrada con dignidad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El desenfoque afecta al rendimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es de los efectos más caros de pintar, sobre todo en pantallas grandes y en móviles modestos. La regla práctica: úsalo en piezas concretas (una tarjeta, una barra), no en superficies enormes, y evita animar el valor del blur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo cambio el color del neón?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada receta de neón define su color en la variable --luz y en las sombras. Cambia la variable y los rgba() de las sombras a tu color y mantén la estructura de capas: pegada, media y amplia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo usar el fondo de ruido sin cargar una imagen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, ese es el truco de la receta: el grano es un SVG con feTurbulence incrustado como data URI dentro del propio CSS. Cero peticiones de red, cero archivos que gestionar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Vidrio sobre fondo claro también funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Funciona, pero invierte los valores: en claro el panel pide un fondo blanco translúcido más opaco (0.4–0.6) y una sombra más suave. El desenfoque es el mismo; lo que cambia es cuánta luz deja pasar."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Superficies: vidrio y neón</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Superficies: vidrio y neón</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">El material de una interfaz se decide en la superficie: vidrio que deja pasar el fondo, neón que emite luz propia, ruido que da textura. Aquí están las tres, con su física explicada y su código completo.</p>
+        </div>
+
+        <section class="lab-seccion" id="vidrio" aria-labelledby="vidrio-h">
+          <header class="lab-seccion__head">
+            <h2 id="vidrio-h">Vidrio esmerilado (glassmorphism)</h2>
+            <p>backdrop-filter desenfoca lo que hay detrás del panel. Para que se aprecie, el fondo debe tener algo que desenfocar: color, foto o degradado.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="vidrio-claro">
+            <div class="pieza__escenario pieza__escenario--vivo">
+              <div class="lz-vidrio">Panel de vidrio</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Vidrio ligero</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-vidrio {
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  padding: 1.2rem 1.6rem;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}</template>
+            <template class="receta-html">&lt;div class="lz-vidrio"&gt;Panel de vidrio&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="vidrio-profundo">
+            <div class="pieza__escenario pieza__escenario--vivo">
+              <div class="lz-vidrio-hondo"><strong>04</strong><span>capas de blur</span></div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Vidrio profundo</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-vidrio-hondo {
+  display: grid;
+  gap: 0.2rem;
+  place-items: center;
+  min-height: 110px;
+  padding: 1.2rem 1.6rem;
+  color: #f4f3f8;
+  text-align: center;
+  font: 500 0.85rem/1.3 system-ui, sans-serif;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.lz-vidrio-hondo strong { font-size: 1.6rem; line-height: 1; }</template>
+            <template class="receta-html">&lt;div class="lz-vidrio-hondo"&gt;&lt;strong&gt;04&lt;/strong&gt;&lt;span&gt;capas de blur&lt;/span&gt;&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="vidrio-borde-luz">
+            <div class="pieza__escenario pieza__escenario--vivo">
+              <div class="lz-vidrio-luz">Borde encendido</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Vidrio con borde de luz</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-vidrio-luz {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  padding: 1.2rem 1.6rem;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(rgba(20, 18, 29, 0.55), rgba(20, 18, 29, 0.55)) padding-box,
+    linear-gradient(135deg, rgba(139, 123, 255, 0.9), rgba(53, 214, 200, 0.25), rgba(139, 123, 255, 0.9)) border-box;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}</template>
+            <template class="receta-html">&lt;div class="lz-vidrio-luz"&gt;Borde encendido&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="neon" aria-labelledby="neon-h">
+          <header class="lab-seccion__head">
+            <h2 id="neon-h">Neón</h2>
+            <p>El neón CSS son capas de la misma luz a distinta escala: un resplandor pegado, otro medio y otro amplio. Sin la capa amplia parece subrayado, no luz.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="neon-borde">
+            <div class="pieza__escenario">
+              <div class="lz-neon">NEÓN</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Borde de neón</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-neon {
+  --luz: #35d6c8;
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  padding: 1rem 1.8rem;
+  color: var(--luz);
+  font: 700 1.05rem/1 system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  background: #0c0b12;
+  border: 2px solid var(--luz);
+  border-radius: 18px;
+  box-shadow:
+    0 0 8px rgba(53, 214, 200, 0.7),
+    0 0 28px rgba(53, 214, 200, 0.35),
+    inset 0 0 12px rgba(53, 214, 200, 0.25);
+  text-shadow: 0 0 10px rgba(53, 214, 200, 0.8);
+}</template>
+            <template class="receta-html">&lt;div class="lz-neon"&gt;NEÓN&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="neon-texto">
+            <div class="pieza__escenario">
+              <p class="lz-neon-texto">abierto</p>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Texto de neón</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-neon-texto {
+  --luz: #ff7ab8;
+  margin: 0;
+  color: #fff;
+  font: 700 clamp(1.6rem, 5vw, 2.4rem)/1.1 system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 14px var(--luz),
+    0 0 34px var(--luz),
+    0 0 70px var(--luz);
+}</template>
+            <template class="receta-html">&lt;p class="lz-neon-texto"&gt;abierto&lt;/p&gt;</template>
+          </article>
+          <article class="pieza" id="neon-latido">
+            <div class="pieza__escenario">
+              <div class="lz-neon-latido">EN VIVO</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Neón con latido</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-neon-latido {
+  --luz: #ffb454;
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  padding: 1rem 1.8rem;
+  color: var(--luz);
+  font: 700 1rem/1 system-ui, sans-serif;
+  letter-spacing: 0.16em;
+  background: #0c0b12;
+  border: 2px solid var(--luz);
+  border-radius: 999px;
+  animation: lz-latido 2.4s ease-in-out infinite;
+}
+@keyframes lz-latido {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(255, 180, 84, 0.6), 0 0 24px rgba(255, 180, 84, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(255, 180, 84, 0.9), 0 0 44px rgba(255, 180, 84, 0.5);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-neon-latido { animation: none; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-neon-latido"&gt;EN VIVO&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="fondos" aria-labelledby="fondos-h">
+          <header class="lab-seccion__head">
+            <h2 id="fondos-h">Fondos con carácter</h2>
+            <p>Tres fondos que sostienen una sección entera sin una sola imagen: malla de color, rejilla técnica y ruido fino.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="fondo-aurora">
+            <div class="pieza__escenario">
+              <div class="lz-fondo-aurora">Aurora</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Malla aurora</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-fondo-aurora {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  border-radius: 20px;
+  background:
+    radial-gradient(60% 90% at 20% 10%, rgba(139, 123, 255, 0.55), transparent 60%),
+    radial-gradient(50% 80% at 85% 20%, rgba(53, 214, 200, 0.45), transparent 65%),
+    radial-gradient(70% 90% at 60% 100%, rgba(255, 122, 184, 0.35), transparent 60%),
+    #0c0b12;
+}</template>
+            <template class="receta-html">&lt;div class="lz-fondo-aurora"&gt;Aurora&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="fondo-rejilla">
+            <div class="pieza__escenario">
+              <div class="lz-fondo-rejilla">Blueprint</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Rejilla técnica</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-fondo-rejilla {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  border-radius: 20px;
+  background:
+    linear-gradient(rgba(139, 123, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 123, 255, 0.14) 1px, transparent 1px),
+    radial-gradient(80% 100% at 50% 0%, rgba(139, 123, 255, 0.12), transparent 70%),
+    #0c0b12;
+  background-size: 28px 28px, 28px 28px, 100% 100%, 100% 100%;
+}</template>
+            <template class="receta-html">&lt;div class="lz-fondo-rejilla"&gt;Blueprint&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="fondo-ruido">
+            <div class="pieza__escenario">
+              <div class="lz-fondo-ruido">Grano</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Ruido fino</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-fondo-ruido {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(150deg, #221e33, #0c0b12);
+  isolation: isolate;
+}
+/* Grano generado por SVG en data URI: cero peticiones, cero imágenes. */
+.lz-fondo-ruido::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}</template>
+            <template class="receta-html">&lt;div class="lz-fondo-ruido"&gt;Grano&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3400px">
+        <div class="prose">
+          <h2>El vidrio necesita algo detrás</h2>
+          <p>
+            El error más común con el glassmorphism es aplicarlo sobre un fondo plano y
+            preguntarse por qué no se ve. <code>backdrop-filter</code> desenfoca <em>lo que
+            hay detrás</em> del panel: si detrás solo hay un color liso, no hay nada que
+            desenfocar y el efecto desaparece. Por eso las demos de esta página viven sobre
+            un fondo con manchas de color — y por eso tu panel de vidrio debe ir sobre una
+            foto, un degradado o una composición con contraste.
+          </p>
+
+          <h2>Cómo usar estas superficies</h2>
+          <ol>
+            <li>Copia el CSS de la superficie. Las de vidrio incluyen el prefijo <code>-webkit-</code> que Safari todavía agradece.</li>
+            <li>Colócala sobre un fondo con información visual: degradado, imagen o la malla aurora de esta misma página.</li>
+            <li>Ajusta la opacidad del fondo del panel antes que el desenfoque: casi siempre el efecto mejora bajando la opacidad, no subiendo el blur.</li>
+          </ol>
+
+          <h2>La física del neón en tres capas</h2>
+          <p>
+            Un letrero de neón real no emite un halo, emite varios: la luz pegada al tubo,
+            un resplandor medio y una niebla amplia que tiñe la pared. El neón CSS que
+            convence imita exactamente eso: tres <code>box-shadow</code> (o
+            <code>text-shadow</code>) de la misma tonalidad a radios crecientes y opacidad
+            decreciente. Con una sola capa parece un subrayado de color; con tres, luz.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Hero sobre foto:</strong> el panel de vidrio mantiene legible el titular sin tapar la imagen.</li>
+            <li><strong>Portadas de evento o streaming:</strong> el neón marca lo que está vivo — un «EN DIRECTO», una oferta, una cifra.</li>
+            <li><strong>Fondos de sección:</strong> la malla aurora y la rejilla técnica sostienen una sección entera sin una sola imagen que cargar.</li>
+            <li><strong>Dark mode con carácter:</strong> el ruido fino quita ese aspecto de negro plano de pantalla apagada.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a> y <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Por qué mi efecto de vidrio no se ve?</h3></summary>
+            <p>Casi seguro porque el fondo detrás del panel es plano. backdrop-filter desenfoca lo que hay detrás; necesita color, formas o una imagen para demostrarlo. Pon el panel sobre un degradado y aparecerá.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿backdrop-filter funciona en todos los navegadores?</h3></summary>
+            <p>En todos los modernos, sí; en Safari conviene acompañarlo del prefijo -webkit-backdrop-filter, que estas recetas ya incluyen. Si un navegador antiguo no lo soporta, el panel se ve como un panel semitransparente normal: degrada con dignidad.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El desenfoque afecta al rendimiento?</h3></summary>
+            <p>Es de los efectos más caros de pintar, sobre todo en pantallas grandes y en móviles modestos. La regla práctica: úsalo en piezas concretas (una tarjeta, una barra), no en superficies enormes, y evita animar el valor del blur.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo cambio el color del neón?</h3></summary>
+            <p>Cada receta de neón define su color en la variable --luz y en las sombras. Cambia la variable y los rgba() de las sombras a tu color y mantén la estructura de capas: pegada, media y amplia.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo usar el fondo de ruido sin cargar una imagen?</h3></summary>
+            <p>Sí, ese es el truco de la receta: el grano es un SVG con feTurbulence incrustado como data URI dentro del propio CSS. Cero peticiones de red, cero archivos que gestionar.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Vidrio sobre fondo claro también funciona?</h3></summary>
+            <p>Funciona, pero invierte los valores: en claro el panel pide un fondo blanco translúcido más opaco (0.4–0.6) y una sombra más suave. El desenfoque es el mismo; lo que cambia es cuánta luz deja pasar.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>

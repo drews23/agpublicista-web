@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formas y recortes CSS con clip-path | Lienzo</title>
+    <meta name="description" content="Chaflanes, esquinas mordidas, paneles flecha, blobs y marcos degradados: formas CSS con clip-path y border-radius, con el código listo para copiar." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/formas/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Formas y recortes CSS — código listo para copiar" />
+    <meta property="og:description" content="Chaflanes, esquinas mordidas, paneles flecha, blobs y marcos degradados: formas CSS con clip-path y border-radius, con el código listo para copiar." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/formas/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/formas/#page",
+      "name": "Formas y recortes CSS con clip-path",
+      "url": "https://lienzo.tools/codigo-web/componentes/formas/",
+      "description": "Chaflanes, esquinas mordidas, paneles flecha, blobs y marcos degradados: formas CSS con clip-path y border-radius, con el código listo para copiar.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Formas y recortes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/formas/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿clip-path funciona en todos los navegadores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La sintaxis con polygon() que usan estas recetas funciona en todos los navegadores modernos desde hace años. Las funciones más nuevas (como path() o shape()) son otra historia, y por eso aquí no se usan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué mi elemento recortado perdió la sombra?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque clip-path recorta todo lo que se pinta fuera del polígono, y la sombra se pinta fuera. La solución es envolver el elemento en un contenedor y poner la sombra (o un drop-shadow de filter) en el contenedor, no en el elemento recortado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo animar un clip-path?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, con transition o animation, siempre que el polígono de origen y el de destino tengan el mismo número de puntos. Es una de las técnicas de revelado más vistosas que existen en CSS puro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo hago el chaflán más grande o más pequeño?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cambiando la variable --corte de la receta. El polígono está escrito con calc() sobre esa variable, así que un solo número ajusta las cuatro esquinas a la vez."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El borde degradado funciona con esquinas redondeadas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: el truco de los dos fondos (padding-box y border-box) respeta el border-radius, que es justo su ventaja sobre los métodos antiguos con pseudoelementos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el blob de ocho valores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "border-radius acepta hasta ocho radios: cuatro horizontales y cuatro verticales separados por una barra. Con valores distintos entre sí, la caja deja de ser una elipse y se vuelve una forma orgánica. Cambia cualquiera de los ocho y tendrás tu propio blob."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Formas y recortes CSS</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Formas y recortes CSS</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">La caja rectangular es solo el punto de partida. Con clip-path, border-radius y un par de trucos de fondo, el mismo div se convierte en chaflán, flecha, pestaña o blob — sin imágenes y sin SVG externos.</p>
+        </div>
+
+        <section class="lab-seccion" id="proporciones" aria-labelledby="proporciones-h">
+          <header class="lab-seccion__head">
+            <h2 id="proporciones-h">Proporciones fijas</h2>
+            <p>aspect-ratio mantiene la caja estable aunque el contenido cambie: la base de cualquier rejilla que no salta.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="caja-cuadrada">
+            <div class="pieza__escenario">
+              <div class="lz-caja lz-caja--cuadrada">1:1</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Caja 1:1</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-caja {
+  display: grid;
+  place-items: center;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-caja--cuadrada { aspect-ratio: 1; }</template>
+            <template class="receta-html">&lt;div class="lz-caja lz-caja--cuadrada"&gt;1:1&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="caja-video">
+            <div class="pieza__escenario">
+              <div class="lz-caja lz-caja--video">16:9</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Caja 16:9</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-caja {
+  display: grid;
+  place-items: center;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-caja--video { aspect-ratio: 16 / 9; }</template>
+            <template class="receta-html">&lt;div class="lz-caja lz-caja--video"&gt;16:9&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="caja-retrato">
+            <div class="pieza__escenario">
+              <div class="lz-caja lz-caja--retrato">3:4</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Caja retrato 3:4</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-caja {
+  display: grid;
+  place-items: center;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-caja--retrato { aspect-ratio: 3 / 4; }</template>
+            <template class="receta-html">&lt;div class="lz-caja lz-caja--retrato"&gt;3:4&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="radios" aria-labelledby="radios-h">
+          <header class="lab-seccion__head">
+            <h2 id="radios-h">Radios con intención</h2>
+            <p>El radio no es decoración: comunica jerarquía. Pocos valores, usados siempre igual, y la interfaz se ve ordenada sola.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="radio-suave">
+            <div class="pieza__escenario">
+              <div class="lz-radio lz-radio--suave">12px</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Suave (12px)</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-radio {
+  display: grid;
+  place-items: center;
+  min-height: 90px;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-radio--suave { border-radius: 12px; }</template>
+            <template class="receta-html">&lt;div class="lz-radio lz-radio--suave"&gt;12px&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="radio-tarjeta">
+            <div class="pieza__escenario">
+              <div class="lz-radio lz-radio--tarjeta">24px</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Tarjeta (24px)</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-radio {
+  display: grid;
+  place-items: center;
+  min-height: 90px;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-radio--tarjeta { border-radius: 24px; }</template>
+            <template class="receta-html">&lt;div class="lz-radio lz-radio--tarjeta"&gt;24px&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="radio-pildora">
+            <div class="pieza__escenario">
+              <div class="lz-radio lz-radio--pildora">Píldora</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Píldora</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-radio {
+  display: grid;
+  place-items: center;
+  min-height: 56px;
+  padding-inline: 1.4rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-radio--pildora { border-radius: 999px; }</template>
+            <template class="receta-html">&lt;div class="lz-radio lz-radio--pildora"&gt;Píldora&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="radio-blob">
+            <div class="pieza__escenario">
+              <div class="lz-radio lz-radio--blob">Blob</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Blob orgánico</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-radio {
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+/* Ocho valores: cuatro radios horizontales / cuatro verticales.
+   Cambia cualquiera y la forma sigue siendo suave. */
+.lz-radio--blob { border-radius: 58% 42% 38% 62% / 54% 36% 64% 46%; }</template>
+            <template class="receta-html">&lt;div class="lz-radio lz-radio--blob"&gt;Blob&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="recortes" aria-labelledby="recortes-h">
+          <header class="lab-seccion__head">
+            <h2 id="recortes-h">Recortes con clip-path</h2>
+            <p>clip-path recorta la caja sin imágenes ni pseudoelementos. El recorte se lleva consigo fondo, borde visual y contenido.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="chaflan">
+            <div class="pieza__escenario">
+              <div class="lz-recorte lz-recorte--chaflan">Chaflán</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Chaflán en esquinas</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-recorte {
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(140deg, #221e33, #16141f);
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-recorte--chaflan {
+  --corte: 18px;
+  clip-path: polygon(
+    var(--corte) 0, calc(100% - var(--corte)) 0, 100% var(--corte),
+    100% calc(100% - var(--corte)), calc(100% - var(--corte)) 100%,
+    var(--corte) 100%, 0 calc(100% - var(--corte)), 0 var(--corte)
+  );
+}</template>
+            <template class="receta-html">&lt;div class="lz-recorte lz-recorte--chaflan"&gt;Chaflán&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="mordida">
+            <div class="pieza__escenario">
+              <div class="lz-recorte lz-recorte--mordida">Mordida</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Esquina mordida</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-recorte {
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(140deg, #221e33, #16141f);
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-recorte--mordida {
+  --corte: 34px;
+  clip-path: polygon(
+    0 0, calc(100% - var(--corte)) 0, 100% var(--corte),
+    100% 100%, 0 100%
+  );
+  border-radius: 16px;
+}</template>
+            <template class="receta-html">&lt;div class="lz-recorte lz-recorte--mordida"&gt;Mordida&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="flecha">
+            <div class="pieza__escenario">
+              <div class="lz-recorte lz-recorte--flecha">Siguiente</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Panel flecha</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-recorte {
+  display: grid;
+  place-items: center;
+  min-height: 72px;
+  padding: 1rem 2.2rem 1rem 1.5rem;
+  background: linear-gradient(140deg, #221e33, #16141f);
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-recorte--flecha {
+  --punta: 22px;
+  clip-path: polygon(
+    0 0, calc(100% - var(--punta)) 0, 100% 50%,
+    calc(100% - var(--punta)) 100%, 0 100%
+  );
+}</template>
+            <template class="receta-html">&lt;div class="lz-recorte lz-recorte--flecha"&gt;Siguiente&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="pestana">
+            <div class="pieza__escenario">
+              <div class="lz-recorte lz-recorte--pestana">Pestaña</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Pestaña superior</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-recorte {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 1.4rem 1.5rem 1rem;
+  background: linear-gradient(140deg, #221e33, #16141f);
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+}
+.lz-recorte--pestana {
+  clip-path: polygon(
+    0 22px, 26% 22px, 34% 0, 66% 0, 74% 22px,
+    100% 22px, 100% 100%, 0 100%
+  );
+}</template>
+            <template class="receta-html">&lt;div class="lz-recorte lz-recorte--pestana"&gt;Pestaña&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="marcos" aria-labelledby="marcos-h">
+          <header class="lab-seccion__head">
+            <h2 id="marcos-h">Marcos degradados</h2>
+            <p>El truco de los dos fondos: uno pinta el interior (padding-box) y otro el borde (border-box). Un borde degradado sin pseudoelementos.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="marco-degradado">
+            <div class="pieza__escenario">
+              <div class="lz-marco">Marco vivo</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Borde degradado</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-marco {
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  padding: 1rem 1.5rem;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background:
+    linear-gradient(#14121d, #14121d) padding-box,
+    linear-gradient(135deg, #8b7bff, #35d6c8) border-box;
+}</template>
+            <template class="receta-html">&lt;div class="lz-marco"&gt;Marco vivo&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="marco-conico">
+            <div class="pieza__escenario">
+              <div class="lz-marco-conico"><span>Órbita</span></div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Marco cónico giratorio</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-marco-conico {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  padding: 1rem 1.5rem;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #14121d;
+  isolation: isolate;
+}
+.lz-marco-conico::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -2;
+  background: conic-gradient(from 0deg, transparent 12%, #8b7bff 22%, #35d6c8 32%, transparent 42%);
+  animation: lz-orbita 3.2s linear infinite;
+}
+.lz-marco-conico::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: 18px;
+  background: #14121d;
+}
+@keyframes lz-orbita { to { transform: rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) {
+  .lz-marco-conico::before { animation: none; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-marco-conico"&gt;&lt;span&gt;Órbita&lt;/span&gt;&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="marco-esquinas">
+            <div class="pieza__escenario">
+              <div class="lz-marco-esquinas">Mira HUD</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Esquinas técnicas</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-marco-esquinas {
+  --lado: 18px;
+  --grosor: 2px;
+  --tinta: #35d6c8;
+  display: grid;
+  place-items: center;
+  min-height: 100px;
+  padding: 1rem 1.5rem;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  background:
+    linear-gradient(var(--tinta), var(--tinta)) top left    / var(--lado) var(--grosor),
+    linear-gradient(var(--tinta), var(--tinta)) top left    / var(--grosor) var(--lado),
+    linear-gradient(var(--tinta), var(--tinta)) top right   / var(--lado) var(--grosor),
+    linear-gradient(var(--tinta), var(--tinta)) top right   / var(--grosor) var(--lado),
+    linear-gradient(var(--tinta), var(--tinta)) bottom left / var(--lado) var(--grosor),
+    linear-gradient(var(--tinta), var(--tinta)) bottom left / var(--grosor) var(--lado),
+    linear-gradient(var(--tinta), var(--tinta)) bottom right/ var(--lado) var(--grosor),
+    linear-gradient(var(--tinta), var(--tinta)) bottom right/ var(--grosor) var(--lado),
+    #14121d;
+  background-repeat: no-repeat;
+}</template>
+            <template class="receta-html">&lt;div class="lz-marco-esquinas"&gt;Mira HUD&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3400px">
+        <div class="prose">
+          <h2>Por qué dominar la forma de la caja</h2>
+          <p>
+            Casi toda la personalidad visual de una interfaz vive en tres decisiones:
+            color, tipografía y <strong>forma</strong>. Las dos primeras se cambian en una
+            línea; la tercera es la que la mayoría no toca, y por eso casi todos los sitios
+            se parecen. Un chaflán en las esquinas o un marco degradado distinguen una
+            interfaz al instante y cuestan exactamente las líneas de CSS que ves abajo.
+          </p>
+
+          <h2>Cómo usar estas formas</h2>
+          <ol>
+            <li>Copia el CSS de la forma que quieras: cada una es independiente.</li>
+            <li>Aplica la clase al elemento. Las formas con <code>clip-path</code> exponen el tamaño del corte en una variable (<code>--corte</code>, <code>--punta</code>) para ajustarlo sin tocar el polígono.</li>
+            <li>Si la forma recorta contenido que no debería, dale más <code>padding</code> del lado del corte: el recorte no sabe qué hay dentro.</li>
+          </ol>
+
+          <h2>clip-path o border-radius: cuál usar</h2>
+          <p>
+            <code>border-radius</code> redondea y puede llegar hasta el blob orgánico con
+            sus ocho valores, pero siempre produce curvas. <code>clip-path</code> corta en
+            línea recta —chaflanes, flechas, muescas— y además recorta de verdad: lo que
+            queda fuera del polígono desaparece, incluidos fondos e hijos. La contrapartida
+            honesta: un elemento recortado con <code>clip-path</code> pierde su
+            <code>box-shadow</code> (la sombra también se recorta). Si necesitas sombra,
+            aplícala a un contenedor padre sin recorte.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Portadas de juego o tecnología:</strong> chaflanes y esquinas técnicas dan el aire HUD sin una sola imagen.</li>
+            <li><strong>Pasos de proceso:</strong> el panel flecha encadena etapas apuntando a la siguiente.</li>
+            <li><strong>Secciones hero:</strong> el marco degradado enmarca la propuesta de valor con la paleta de la marca.</li>
+            <li><strong>Avatares y decoración:</strong> el blob suaviza retratos y fondos de icono.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a> y <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿clip-path funciona en todos los navegadores?</h3></summary>
+            <p>La sintaxis con polygon() que usan estas recetas funciona en todos los navegadores modernos desde hace años. Las funciones más nuevas (como path() o shape()) son otra historia, y por eso aquí no se usan.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué mi elemento recortado perdió la sombra?</h3></summary>
+            <p>Porque clip-path recorta todo lo que se pinta fuera del polígono, y la sombra se pinta fuera. La solución es envolver el elemento en un contenedor y poner la sombra (o un drop-shadow de filter) en el contenedor, no en el elemento recortado.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo animar un clip-path?</h3></summary>
+            <p>Sí, con transition o animation, siempre que el polígono de origen y el de destino tengan el mismo número de puntos. Es una de las técnicas de revelado más vistosas que existen en CSS puro.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo hago el chaflán más grande o más pequeño?</h3></summary>
+            <p>Cambiando la variable --corte de la receta. El polígono está escrito con calc() sobre esa variable, así que un solo número ajusta las cuatro esquinas a la vez.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El borde degradado funciona con esquinas redondeadas?</h3></summary>
+            <p>Sí: el truco de los dos fondos (padding-box y border-box) respeta el border-radius, que es justo su ventaja sobre los métodos antiguos con pseudoelementos.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué es el blob de ocho valores?</h3></summary>
+            <p>border-radius acepta hasta ocho radios: cuatro horizontales y cuatro verticales separados por una barra. Con valores distintos entre sí, la caja deja de ser una elipse y se vuelve una forma orgánica. Cambia cualquiera de los ocho y tendrás tu propio blob.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>

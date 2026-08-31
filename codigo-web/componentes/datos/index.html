@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Métricas, filas de datos y sparklines en CSS | Lienzo</title>
+    <meta name="description" content="Componentes CSS de datos: métrica con variación, sparkline de barras, barra de progreso, lista densa con estados, skeleton loader y tabla compacta." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/datos/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Datos: métricas y filas — código listo para copiar" />
+    <meta property="og:description" content="Componentes CSS de datos: métrica con variación, sparkline de barras, barra de progreso, lista densa con estados, skeleton loader y tabla compacta." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/datos/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/datos/#page",
+      "name": "Métricas, filas de datos y sparklines en CSS",
+      "url": "https://lienzo.tools/codigo-web/componentes/datos/",
+      "description": "Componentes CSS de datos: métrica con variación, sparkline de barras, barra de progreso, lista densa con estados, skeleton loader y tabla compacta.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Datos: métricas y filas",
+          "item": "https://lienzo.tools/codigo-web/componentes/datos/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo conecto el sparkline a datos reales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Imprime una barra por punto de datos con su altura en la variable: . La conversión de tu valor real a porcentaje la haces al generar el HTML, normalizando contra el máximo de la serie."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué los números van con tabular-nums?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque en la mayoría de fuentes los dígitos tienen anchos distintos, y una cifra que se actualiza baila. Con font-variant-numeric: tabular-nums cada dígito ocupa lo mismo y las columnas de números quedan alineadas de verdad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La barra de progreso es accesible?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: lleva role=\"progressbar\" con aria-valuenow, aria-valuemin y aria-valuemax. Cuando actualices el ancho visual, actualiza también aria-valuenow — es un cambio de atributo en la misma línea de JS."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo usar la lista densa y cuándo la tabla?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La lista densa cuando cada fila es un objeto con estado (archivo, tarea, pedido) y la acción vive en la fila. La tabla cuando el valor está en comparar columnas entre filas. Si dudas, pregúntate qué escanea el ojo: ¿filas o columnas?"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El skeleton debería parecerse al contenido final?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En silueta, sí: mismo número de líneas, misma disposición aproximada. Así el cambio a contenido real no salta. No hace falta precisión de píxel — hace falta que la promesa de estructura se cumpla."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo hago la tabla responsive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para pocas columnas, envuélvela en un contenedor con overflow-x: auto y deja que se desplace. Para tablas anchas de verdad, replantea: en móvil suele funcionar mejor convertir cada fila en una tarjeta apilada."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Datos: métricas y filas</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Datos: métricas y filas</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Los datos convencen cuando se leen a la primera. Estas piezas cubren el panel típico completo — la cifra con su variación, la tendencia en miniatura, la lista con estados y la tabla — sin una librería de gráficos.</p>
+        </div>
+
+        <section class="lab-seccion" id="metricas" aria-labelledby="metricas-h">
+          <header class="lab-seccion__head">
+            <h2 id="metricas-h">Métricas</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="metrica-delta">
+            <div class="pieza__escenario">
+              <article class="lz-metrica">
+                <p class="lz-metrica__nombre">Descargas</p>
+                <p class="lz-metrica__valor">12.480</p>
+                <p class="lz-metrica__delta lz-metrica__delta--sube">▲ 18,2 % este mes</p>
+              </article>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Métrica con variación</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-metrica {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 180px;
+  padding: 1.1rem 1.2rem;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font-family: system-ui, sans-serif;
+}
+.lz-metrica__nombre { margin: 0; color: #a8a4b8; font-size: 0.8rem;
+  font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.lz-metrica__valor { margin: 0; color: #f4f3f8; font-size: 1.9rem;
+  font-weight: 700; font-variant-numeric: tabular-nums; }
+.lz-metrica__delta { margin: 0; font-size: 0.82rem; font-weight: 600; }
+.lz-metrica__delta--sube { color: #35d6c8; }
+.lz-metrica__delta--baja { color: #ff7a68; }</template>
+            <template class="receta-html">&lt;article class="lz-metrica"&gt;
+  &lt;p class="lz-metrica__nombre"&gt;Descargas&lt;/p&gt;
+  &lt;p class="lz-metrica__valor"&gt;12.480&lt;/p&gt;
+  &lt;p class="lz-metrica__delta lz-metrica__delta--sube"&gt;▲ 18,2 % este mes&lt;/p&gt;
+&lt;/article&gt;</template>
+          </article>
+          <article class="pieza" id="sparkline">
+            <div class="pieza__escenario">
+              <article class="lz-spark">
+                <p class="lz-spark__nombre">Visitas · 7 días</p>
+                <div class="lz-spark__barras" role="img" aria-label="Tendencia semanal al alza">
+                  <i style="--v: 35%"></i><i style="--v: 52%"></i><i style="--v: 44%"></i>
+                  <i style="--v: 66%"></i><i style="--v: 58%"></i><i style="--v: 82%"></i>
+                  <i style="--v: 100%"></i>
+                </div>
+              </article>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Sparkline de barras</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-spark {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 190px;
+  padding: 1.1rem 1.2rem;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font-family: system-ui, sans-serif;
+}
+.lz-spark__nombre { margin: 0; color: #a8a4b8; font-size: 0.8rem; font-weight: 600; }
+.lz-spark__barras {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 52px;
+}
+.lz-spark__barras i {
+  flex: 1;
+  height: var(--v);
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, #8b7bff, #35d6c8);
+  opacity: 0.85;
+}
+.lz-spark__barras i:last-child { opacity: 1;
+  box-shadow: 0 0 12px rgba(53, 214, 200, 0.5); }</template>
+            <template class="receta-html">&lt;article class="lz-spark"&gt;
+  &lt;p class="lz-spark__nombre"&gt;Visitas · 7 días&lt;/p&gt;
+  &lt;div class="lz-spark__barras" role="img" aria-label="Tendencia semanal al alza"&gt;
+    &lt;i style="--v: 35%"&gt;&lt;/i&gt;&lt;i style="--v: 52%"&gt;&lt;/i&gt;&lt;i style="--v: 44%"&gt;&lt;/i&gt;
+    &lt;i style="--v: 66%"&gt;&lt;/i&gt;&lt;i style="--v: 58%"&gt;&lt;/i&gt;&lt;i style="--v: 82%"&gt;&lt;/i&gt;
+    &lt;i style="--v: 100%"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</template>
+          </article>
+          <article class="pieza" id="progreso">
+            <div class="pieza__escenario">
+              <div class="lz-progreso">
+                <div class="lz-progreso__cabeza"><span>Subiendo pack…</span><strong>72 %</strong></div>
+                <div class="lz-progreso__pista" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
+                  <div class="lz-progreso__relleno" style="--pct: 72%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Barra de progreso</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-progreso {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 230px;
+  font-family: system-ui, sans-serif;
+}
+.lz-progreso__cabeza {
+  display: flex;
+  justify-content: space-between;
+  color: #cfcbdd;
+  font-size: 0.85rem;
+}
+.lz-progreso__cabeza strong { color: #f4f3f8; font-variant-numeric: tabular-nums; }
+.lz-progreso__pista {
+  height: 10px;
+  border-radius: 999px;
+  background: #2c2938;
+  overflow: hidden;
+}
+.lz-progreso__relleno {
+  width: var(--pct, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8b7bff, #35d6c8);
+  transition: width 400ms ease;
+}</template>
+            <template class="receta-html">&lt;div class="lz-progreso"&gt;
+  &lt;div class="lz-progreso__cabeza"&gt;&lt;span&gt;Subiendo pack…&lt;/span&gt;&lt;strong&gt;72 %&lt;/strong&gt;&lt;/div&gt;
+  &lt;div class="lz-progreso__pista" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"&gt;
+    &lt;div class="lz-progreso__relleno" style="--pct: 72%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="filas" aria-labelledby="filas-h">
+          <header class="lab-seccion__head">
+            <h2 id="filas-h">Filas y estados</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="fila-densa">
+            <div class="pieza__escenario">
+              <ul class="lz-filas">
+                <li class="lz-fila">
+                  <span class="lz-fila__punto" aria-hidden="true"></span>
+                  <span class="lz-fila__texto"><strong>render-final.mp4</strong><span>hace 2 min · 84 MB</span></span>
+                  <span class="lz-badge lz-badge--ok">Listo</span>
+                </li>
+                <li class="lz-fila">
+                  <span class="lz-fila__punto lz-fila__punto--espera" aria-hidden="true"></span>
+                  <span class="lz-fila__texto"><strong>miniatura-v2.png</strong><span>en cola · 1,2 MB</span></span>
+                  <span class="lz-badge lz-badge--espera">En cola</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Fila de lista densa</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-filas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  min-width: 300px;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+}
+.lz-fila {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 1rem;
+}
+.lz-fila + .lz-fila { border-top: 1px solid #242131; }
+.lz-fila:hover { background: rgba(139, 123, 255, 0.06); }
+.lz-fila__punto {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #35d6c8; flex: 0 0 auto;
+}
+.lz-fila__punto--espera { background: #ffb454; }
+.lz-fila__texto { display: grid; gap: 0.05rem; min-width: 0; }
+.lz-fila__texto strong { color: #f4f3f8; font-size: 0.88rem;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lz-fila__texto span { color: #a8a4b8; font-size: 0.78rem; }
+.lz-badge {
+  margin-left: auto;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.lz-badge--ok { background: rgba(53, 214, 200, 0.15); color: #35d6c8; }
+.lz-badge--espera { background: rgba(255, 180, 84, 0.15); color: #ffb454; }</template>
+            <template class="receta-html">&lt;ul class="lz-filas"&gt;
+  &lt;li class="lz-fila"&gt;
+    &lt;span class="lz-fila__punto" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;span class="lz-fila__texto"&gt;&lt;strong&gt;render-final.mp4&lt;/strong&gt;&lt;span&gt;hace 2 min · 84 MB&lt;/span&gt;&lt;/span&gt;
+    &lt;span class="lz-badge lz-badge--ok"&gt;Listo&lt;/span&gt;
+  &lt;/li&gt;
+  &lt;li class="lz-fila"&gt;
+    &lt;span class="lz-fila__punto lz-fila__punto--espera" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;span class="lz-fila__texto"&gt;&lt;strong&gt;miniatura-v2.png&lt;/strong&gt;&lt;span&gt;en cola · 1,2 MB&lt;/span&gt;&lt;/span&gt;
+    &lt;span class="lz-badge lz-badge--espera"&gt;En cola&lt;/span&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</template>
+          </article>
+          <article class="pieza" id="skeleton">
+            <div class="pieza__escenario">
+              <article class="lz-esqueleto" aria-hidden="true">
+                <span class="lz-esqueleto__circulo"></span>
+                <span class="lz-esqueleto__lineas">
+                  <i style="width: 70%"></i>
+                  <i style="width: 45%"></i>
+                </span>
+              </article>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Esqueleto de carga</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-esqueleto {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 260px;
+  padding: 1rem 1.1rem;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+}
+.lz-esqueleto__circulo,
+.lz-esqueleto__lineas i {
+  display: block;
+  border-radius: 999px;
+  background: linear-gradient(100deg, #242131 40%, #33304a 50%, #242131 60%);
+  background-size: 220% 100%;
+  animation: lz-brillo-carga 1.3s ease-in-out infinite;
+}
+.lz-esqueleto__circulo { width: 44px; height: 44px; flex: 0 0 auto; }
+.lz-esqueleto__lineas { display: grid; gap: 0.5rem; flex: 1; }
+.lz-esqueleto__lineas i { height: 11px; }
+@keyframes lz-brillo-carga { to { background-position: -120% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .lz-esqueleto__circulo, .lz-esqueleto__lineas i { animation: none; }
+}</template>
+            <template class="receta-html">&lt;article class="lz-esqueleto" aria-hidden="true"&gt;
+  &lt;span class="lz-esqueleto__circulo"&gt;&lt;/span&gt;
+  &lt;span class="lz-esqueleto__lineas"&gt;
+    &lt;i style="width: 70%"&gt;&lt;/i&gt;
+    &lt;i style="width: 45%"&gt;&lt;/i&gt;
+  &lt;/span&gt;
+&lt;/article&gt;</template>
+          </article>
+          <article class="pieza pieza--ancha" id="tabla-compacta">
+            <div class="pieza__escenario">
+              <table class="lz-tabla">
+                <thead>
+                  <tr><th>Pack</th><th>Formato</th><th class="lz-tabla__num">Descargas</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Iconos de cocina</td><td>SVG + PNG</td><td class="lz-tabla__num">4.812</td></tr>
+                  <tr><td>Sonidos de suspenso</td><td>WAV</td><td class="lz-tabla__num">3.104</td></tr>
+                  <tr><td>Escenas 3D</td><td>Spline</td><td class="lz-tabla__num">1.987</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Tabla compacta</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-tabla {
+  min-width: 340px;
+  border-collapse: collapse;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  overflow: hidden;
+  font: 400 0.88rem/1.3 system-ui, sans-serif;
+}
+.lz-tabla th, .lz-tabla td { padding: 0.65rem 1rem; text-align: left; }
+.lz-tabla thead th {
+  color: #a8a4b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #2c2938;
+}
+.lz-tabla tbody td { color: #e8e6f2; border-bottom: 1px solid #242131; }
+.lz-tabla tbody tr:last-child td { border-bottom: 0; }
+.lz-tabla tbody tr:hover { background: rgba(139, 123, 255, 0.06); }
+.lz-tabla__num { text-align: right; font-variant-numeric: tabular-nums; }</template>
+            <template class="receta-html">&lt;table class="lz-tabla"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Pack&lt;/th&gt;&lt;th&gt;Formato&lt;/th&gt;&lt;th class="lz-tabla__num"&gt;Descargas&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Iconos de cocina&lt;/td&gt;&lt;td&gt;SVG + PNG&lt;/td&gt;&lt;td class="lz-tabla__num"&gt;4.812&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Sonidos de suspenso&lt;/td&gt;&lt;td&gt;WAV&lt;/td&gt;&lt;td class="lz-tabla__num"&gt;3.104&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Escenas 3D&lt;/td&gt;&lt;td&gt;Spline&lt;/td&gt;&lt;td class="lz-tabla__num"&gt;1.987&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3500px">
+        <div class="prose">
+          <h2>Un sparkline sin librería</h2>
+          <p>
+            Para mostrar «cómo va la semana» no hace falta un paquete de gráficos de medio
+            megabyte: siete barras con alturas en variables CSS lo cuentan igual de bien.
+            El sparkline de esta página es eso — flexbox alineado abajo y una variable
+            <code>--v</code> por barra — y por eso puedes alimentarlo desde tu backend
+            imprimiendo un número por elemento. Cuando de verdad necesites zoom, tooltips
+            y ejes, entonces sí: librería. Mientras tanto, esto pesa cero.
+          </p>
+
+          <h2>Cómo usar estas piezas</h2>
+          <ol>
+            <li>Copia el CSS y el HTML de la pieza. Los valores de ejemplo (alturas, porcentajes, cifras) están como variables o estilos en línea para que tu plantilla los imprima directamente.</li>
+            <li>Mantén los atributos ARIA que traen: el <code>role="progressbar"</code> con sus valores y la etiqueta del sparkline explican al lector de pantalla lo que el ojo ve.</li>
+            <li>Usa <code>font-variant-numeric: tabular-nums</code> —ya incluido— en cualquier número que cambie: evita que la cifra baile al actualizarse.</li>
+          </ol>
+
+          <h2>El skeleton: carga percibida, no decoración</h2>
+          <p>
+            El esqueleto de carga funciona porque promete estructura: enseña la silueta de
+            lo que viene y el brillo que la recorre dice «esto avanza». Úsalo cuando la
+            carga real supere unos 300 ms y sustitúyelo por el contenido en cuanto llegue —
+            un esqueleto que dura demasiado genera más ansiedad que una pantalla vacía.
+            Marca el contenedor con <code>aria-hidden</code> mientras es esqueleto, como
+            hace la receta, para que el lector de pantalla no anuncie cajas grises.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Paneles y dashboards:</strong> métricas arriba, sparkline al lado, tabla debajo — el conjunto entero está en esta página.</li>
+            <li><strong>Estados de proceso:</strong> la barra de progreso para subidas y exportaciones; la lista densa con badges para colas de trabajo.</li>
+            <li><strong>Páginas que cargan datos:</strong> el skeleton mientras llega la respuesta.</li>
+            <li><strong>Informes y comparativas:</strong> la tabla compacta con números alineados a la derecha, como se leen los números.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a> y <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Cómo conecto el sparkline a datos reales?</h3></summary>
+            <p>Imprime una barra por punto de datos con su altura en la variable: <i style="--v: 62%"></i>. La conversión de tu valor real a porcentaje la haces al generar el HTML, normalizando contra el máximo de la serie.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué los números van con tabular-nums?</h3></summary>
+            <p>Porque en la mayoría de fuentes los dígitos tienen anchos distintos, y una cifra que se actualiza baila. Con font-variant-numeric: tabular-nums cada dígito ocupa lo mismo y las columnas de números quedan alineadas de verdad.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿La barra de progreso es accesible?</h3></summary>
+            <p>Sí: lleva role="progressbar" con aria-valuenow, aria-valuemin y aria-valuemax. Cuando actualices el ancho visual, actualiza también aria-valuenow — es un cambio de atributo en la misma línea de JS.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cuándo usar la lista densa y cuándo la tabla?</h3></summary>
+            <p>La lista densa cuando cada fila es un objeto con estado (archivo, tarea, pedido) y la acción vive en la fila. La tabla cuando el valor está en comparar columnas entre filas. Si dudas, pregúntate qué escanea el ojo: ¿filas o columnas?</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El skeleton debería parecerse al contenido final?</h3></summary>
+            <p>En silueta, sí: mismo número de líneas, misma disposición aproximada. Así el cambio a contenido real no salta. No hace falta precisión de píxel — hace falta que la promesa de estructura se cumpla.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo hago la tabla responsive?</h3></summary>
+            <p>Para pocas columnas, envuélvela en un contenedor con overflow-x: auto y deja que se desplace. Para tablas anchas de verdad, replantea: en móvil suele funcionar mejor convertir cada fila en una tarjeta apilada.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>

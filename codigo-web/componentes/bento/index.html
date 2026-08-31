@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bento grid con CSS Grid: 4 layouts copiables | Lienzo</title>
+    <meta name="description" content="Cuatro bento grids hechos con CSS Grid y grid-template-areas: clásico, editorial, panel y galería. Responsive con una sola media query y listos para copiar." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/bento/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Bento grid con CSS Grid — código listo para copiar" />
+    <meta property="og:description" content="Cuatro bento grids hechos con CSS Grid y grid-template-areas: clásico, editorial, panel y galería. Responsive con una sola media query y listos para copiar." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/bento/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/bento/#page",
+      "name": "Bento grid con CSS Grid: 4 layouts copiables",
+      "url": "https://lienzo.tools/codigo-web/componentes/bento/",
+      "description": "Cuatro bento grids hechos con CSS Grid y grid-template-areas: clásico, editorial, panel y galería. Responsive con una sola media query y listos para copiar.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Bento grid con CSS Grid",
+          "item": "https://lienzo.tools/codigo-web/componentes/bento/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es exactamente un bento grid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una composición de celdas de distinto tamaño inspirada en las cajas bento japonesas: compartimentos desiguales, ordenados y sin huecos. En diseño web se popularizó en portadas de producto porque permite mostrar muchas cosas con una jerarquía clarísima."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué usar grid-template-areas en vez de grid-column y span?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por legibilidad y mantenimiento: las áreas dibujan el layout dentro del CSS y reordenar es editar ese dibujo. Con spans numéricos, cada cambio obliga a recalcular posiciones. Para bentos irregulares de tamaño conocido, las áreas ganan siempre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se comportan en móvil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada receta trae su media query con el layout colapsado a una columna, y el orden de lectura móvil está decidido en el segundo dibujo de áreas — puedes cambiarlo sin tocar el HTML."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué hace grid-auto-flow: dense?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Permite que Grid rellene huecos con celdas que en el flujo normal vendrían después. En la galería evita los vacíos que dejan las piezas grandes. Ojo: reordena visualmente respecto al DOM, así que no lo uses si el orden de tabulación importa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo añadir más celdas a un layout?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: añade el elemento en el HTML, dale un nombre de área en el CSS y colócalo en el dibujo. Si añades muchas, plantéate si la sección no está pidiendo dos bentos en vez de uno sobrecargado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los bento grids perjudican el SEO o la accesibilidad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No por sí mismos: son CSS sobre HTML normal. La única precaución es no abusar de reordenar visualmente (con dense o con áreas) contenido cuyo orden lógico importa, porque el lector de pantalla sigue el orden del documento, no el visual."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Bento grid con CSS Grid</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Bento grid con CSS Grid</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">El bento organiza una portada como una caja japonesa: compartimentos de distinto tamaño donde cada pieza tiene su lugar y una manda. Estos cuatro layouts cubren portada, editorial, panel y galería — cada uno con su mapa de áreas legible y su colapso móvil resuelto.</p>
+        </div>
+
+        <section class="lab-seccion" id="bento-clasico" aria-labelledby="bento-clasico-h">
+          <header class="lab-seccion__head">
+            <h2 id="bento-clasico-h">Bento clásico</h2>
+            <p>Una pieza protagonista y satélites alrededor. grid-template-areas hace legible el mapa y lo colapsa a una columna en móvil con una sola media query.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="bento-4">
+            <div class="pieza__escenario">
+              <div class="lz-bento">
+                <article class="lz-bento__celda lz-bento__celda--heroe">Héroe</article>
+                <article class="lz-bento__celda">Nota A</article>
+                <article class="lz-bento__celda">Nota B</article>
+                <article class="lz-bento__celda lz-bento__celda--ancha">Franja inferior</article>
+              </div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Héroe + 3 satélites</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-bento {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "heroe notaA"
+    "heroe notaB"
+    "ancha ancha";
+}
+.lz-bento__celda {
+  display: grid;
+  place-items: center;
+  min-height: 84px;
+  padding: 1rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.9rem/1.2 system-ui, sans-serif;
+}
+.lz-bento__celda--heroe { grid-area: heroe; min-height: 182px;
+  background: linear-gradient(150deg, #251f3d, #16141f); }
+.lz-bento__celda:nth-child(2) { grid-area: notaA; }
+.lz-bento__celda:nth-child(3) { grid-area: notaB; }
+.lz-bento__celda--ancha { grid-area: ancha; }
+@media (max-width: 560px) {
+  .lz-bento {
+    grid-template-columns: 1fr;
+    grid-template-areas: "heroe" "notaA" "notaB" "ancha";
+  }
+}</template>
+            <template class="receta-html">&lt;div class="lz-bento"&gt;
+  &lt;article class="lz-bento__celda lz-bento__celda--heroe"&gt;Héroe&lt;/article&gt;
+  &lt;article class="lz-bento__celda"&gt;Nota A&lt;/article&gt;
+  &lt;article class="lz-bento__celda"&gt;Nota B&lt;/article&gt;
+  &lt;article class="lz-bento__celda lz-bento__celda--ancha"&gt;Franja inferior&lt;/article&gt;
+&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="bento-editorial" aria-labelledby="bento-editorial-h">
+          <header class="lab-seccion__head">
+            <h2 id="bento-editorial-h">Bento editorial</h2>
+            <p>Pensado para portadas: una celda de texto alta, dos medianas y una faja de cierre. Las áreas se leen como un periódico.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="bento-editorial-r">
+            <div class="pieza__escenario">
+              <div class="lz-bento-ed">
+                <article class="lz-bento-ed__celda lz-bento-ed__celda--alta">Artículo<br>principal</article>
+                <article class="lz-bento-ed__celda">Secundario</article>
+                <article class="lz-bento-ed__celda">Terciario</article>
+                <article class="lz-bento-ed__celda lz-bento-ed__celda--faja">Suscríbete</article>
+              </div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Portada editorial</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-bento-ed {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-areas:
+    "alta sec  ter"
+    "alta faja faja";
+}
+.lz-bento-ed__celda {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  padding: 1rem;
+  text-align: center;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.9rem/1.25 system-ui, sans-serif;
+}
+.lz-bento-ed__celda--alta { grid-area: alta; min-height: 190px;
+  background: linear-gradient(160deg, #16303a, #16141f); }
+.lz-bento-ed__celda:nth-child(2) { grid-area: sec; }
+.lz-bento-ed__celda:nth-child(3) { grid-area: ter; }
+.lz-bento-ed__celda--faja { grid-area: faja;
+  background: linear-gradient(90deg, #251f3d, #16141f); }
+@media (max-width: 560px) {
+  .lz-bento-ed {
+    grid-template-columns: 1fr;
+    grid-template-areas: "alta" "sec" "ter" "faja";
+  }
+}</template>
+            <template class="receta-html">&lt;div class="lz-bento-ed"&gt;
+  &lt;article class="lz-bento-ed__celda lz-bento-ed__celda--alta"&gt;Artículo&lt;br&gt;principal&lt;/article&gt;
+  &lt;article class="lz-bento-ed__celda"&gt;Secundario&lt;/article&gt;
+  &lt;article class="lz-bento-ed__celda"&gt;Terciario&lt;/article&gt;
+  &lt;article class="lz-bento-ed__celda lz-bento-ed__celda--faja"&gt;Suscríbete&lt;/article&gt;
+&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="bento-panel" aria-labelledby="bento-panel-h">
+          <header class="lab-seccion__head">
+            <h2 id="bento-panel-h">Bento de panel</h2>
+            <p>El formato dashboard: métricas arriba, gráfico grande, lista al lado. Con dense, Grid rellena los huecos que deja el flujo.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="bento-panel-r">
+            <div class="pieza__escenario">
+              <div class="lz-bento-panel">
+                <article class="lz-bento-panel__celda">Métrica 1</article>
+                <article class="lz-bento-panel__celda">Métrica 2</article>
+                <article class="lz-bento-panel__celda">Métrica 3</article>
+                <article class="lz-bento-panel__celda lz-bento-panel__celda--grafico">Gráfico</article>
+                <article class="lz-bento-panel__celda lz-bento-panel__celda--lista">Lista</article>
+              </div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Panel de control</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-bento-panel {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: dense;
+}
+.lz-bento-panel__celda {
+  display: grid;
+  place-items: center;
+  min-height: 74px;
+  padding: 1rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.9rem/1.2 system-ui, sans-serif;
+}
+.lz-bento-panel__celda--grafico {
+  grid-column: span 2;
+  min-height: 150px;
+  background: linear-gradient(160deg, #251f3d, #16141f);
+}
+.lz-bento-panel__celda--lista { grid-row: span 1; min-height: 150px; }
+@media (max-width: 560px) {
+  .lz-bento-panel { grid-template-columns: 1fr; }
+  .lz-bento-panel__celda--grafico { grid-column: auto; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-bento-panel"&gt;
+  &lt;article class="lz-bento-panel__celda"&gt;Métrica 1&lt;/article&gt;
+  &lt;article class="lz-bento-panel__celda"&gt;Métrica 2&lt;/article&gt;
+  &lt;article class="lz-bento-panel__celda"&gt;Métrica 3&lt;/article&gt;
+  &lt;article class="lz-bento-panel__celda lz-bento-panel__celda--grafico"&gt;Gráfico&lt;/article&gt;
+  &lt;article class="lz-bento-panel__celda lz-bento-panel__celda--lista"&gt;Lista&lt;/article&gt;
+&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="bento-galeria" aria-labelledby="bento-galeria-h">
+          <header class="lab-seccion__head">
+            <h2 id="bento-galeria-h">Bento de galería</h2>
+            <p>Para portafolios: celdas cuadradas con dos protagonistas del doble de tamaño. auto-flow dense evita los huecos al reordenarse.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="bento-galeria-r">
+            <div class="pieza__escenario">
+              <div class="lz-bento-gal">
+                <figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande">1</figure>
+                <figure class="lz-bento-gal__pieza">2</figure>
+                <figure class="lz-bento-gal__pieza">3</figure>
+                <figure class="lz-bento-gal__pieza">4</figure>
+                <figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande">5</figure>
+                <figure class="lz-bento-gal__pieza">6</figure>
+                <figure class="lz-bento-gal__pieza">7</figure>
+              </div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Galería mixta</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-bento-gal {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 72px;
+  grid-auto-flow: dense;
+}
+.lz-bento-gal__pieza {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, #221e33, #16141f);
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  font: 700 1rem/1 system-ui, sans-serif;
+}
+.lz-bento-gal__pieza--grande {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(150deg, #16303a, #16141f);
+}
+@media (max-width: 560px) {
+  .lz-bento-gal { grid-template-columns: repeat(2, 1fr); }
+}</template>
+            <template class="receta-html">&lt;div class="lz-bento-gal"&gt;
+  &lt;figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande"&gt;1&lt;/figure&gt;
+  &lt;figure class="lz-bento-gal__pieza"&gt;2&lt;/figure&gt;
+  &lt;figure class="lz-bento-gal__pieza"&gt;3&lt;/figure&gt;
+  &lt;figure class="lz-bento-gal__pieza"&gt;4&lt;/figure&gt;
+  &lt;figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande"&gt;5&lt;/figure&gt;
+  &lt;figure class="lz-bento-gal__pieza"&gt;6&lt;/figure&gt;
+  &lt;figure class="lz-bento-gal__pieza"&gt;7&lt;/figure&gt;
+&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3500px">
+        <div class="prose">
+          <h2>Por qué grid-template-areas y no un framework</h2>
+          <p>
+            Todos los bento de esta página están escritos con
+            <code>grid-template-areas</code>, y es una decisión deliberada: el layout se
+            lee como un dibujo. Donde el CSS dice <code>"heroe notaA"</code> arriba y
+            <code>"ancha ancha"</code> abajo, estás viendo la composición literal de la
+            página. Reordenar celdas es editar ese dibujo, no contar columnas ni calcular
+            spans. Y el colapso móvil es otro dibujo: una columna con las áreas apiladas
+            en el orden que tú decidas — que no tiene por qué ser el del marcado.
+          </p>
+
+          <h2>Cómo montar tu bento</h2>
+          <ol>
+            <li>Elige el layout más cercano a tu contenido y copia CSS y HTML.</li>
+            <li>Sustituye el contenido de cada celda. La jerarquía visual ya está resuelta: la celda protagonista es más grande y las demás la escoltan.</li>
+            <li>Ajusta el dibujo de <code>grid-template-areas</code> si tu contenido pide otra composición — añade filas, ensancha áreas, y revisa el segundo dibujo (el de la media query) para que el orden móvil siga contando la historia.</li>
+          </ol>
+
+          <h2>La regla del protagonista</h2>
+          <p>
+            Un bento funciona cuando una celda manda y las demás obedecen. Si todas las
+            celdas pesan lo mismo, no tienes un bento: tienes una tabla. Antes de tocar el
+            código, decide qué pieza es la protagonista de la sección — el producto, la
+            cifra, el artículo — y dale el área grande. El resto de decisiones se toman
+            solas.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Portadas de producto:</strong> el clásico — héroe con captura, satélites con beneficios.</li>
+            <li><strong>Blogs y medios:</strong> el editorial — artículo principal alto, secundarios y faja de suscripción.</li>
+            <li><strong>Dashboards:</strong> el panel — métricas arriba, gráfico protagonista, lista de actividad.</li>
+            <li><strong>Portafolios:</strong> la galería — piezas cuadradas con dos protagonistas del doble de tamaño.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a> y <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Qué es exactamente un bento grid?</h3></summary>
+            <p>Una composición de celdas de distinto tamaño inspirada en las cajas bento japonesas: compartimentos desiguales, ordenados y sin huecos. En diseño web se popularizó en portadas de producto porque permite mostrar muchas cosas con una jerarquía clarísima.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué usar grid-template-areas en vez de grid-column y span?</h3></summary>
+            <p>Por legibilidad y mantenimiento: las áreas dibujan el layout dentro del CSS y reordenar es editar ese dibujo. Con spans numéricos, cada cambio obliga a recalcular posiciones. Para bentos irregulares de tamaño conocido, las áreas ganan siempre.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo se comportan en móvil?</h3></summary>
+            <p>Cada receta trae su media query con el layout colapsado a una columna, y el orden de lectura móvil está decidido en el segundo dibujo de áreas — puedes cambiarlo sin tocar el HTML.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Qué hace grid-auto-flow: dense?</h3></summary>
+            <p>Permite que Grid rellene huecos con celdas que en el flujo normal vendrían después. En la galería evita los vacíos que dejan las piezas grandes. Ojo: reordena visualmente respecto al DOM, así que no lo uses si el orden de tabulación importa.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo añadir más celdas a un layout?</h3></summary>
+            <p>Sí: añade el elemento en el HTML, dale un nombre de área en el CSS y colócalo en el dibujo. Si añades muchas, plantéate si la sección no está pidiendo dos bentos en vez de uno sobrecargado.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Los bento grids perjudican el SEO o la accesibilidad?</h3></summary>
+            <p>No por sí mismos: son CSS sobre HTML normal. La única precaución es no abusar de reordenar visualmente (con dense o con áreas) contenido cuyo orden lógico importa, porque el lector de pantalla sigue el orden del documento, no el visual.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>

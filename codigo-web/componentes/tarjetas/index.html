@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarjetas CSS: perfil, precio, testimonio | Lienzo</title>
+    <meta name="description" content="Tarjetas CSS listas para copiar: perfil con avatar, precios con borde degradado, testimonios, imagen con velo de texto y filas de descarga." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/tarjetas/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Tarjetas — código listo para copiar" />
+    <meta property="og:description" content="Tarjetas CSS listas para copiar: perfil con avatar, precios con borde degradado, testimonios, imagen con velo de texto y filas de descarga." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/tarjetas/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/tarjetas/#page",
+      "name": "Tarjetas CSS: perfil, precio, testimonio",
+      "url": "https://lienzo.tools/codigo-web/componentes/tarjetas/",
+      "description": "Tarjetas CSS listas para copiar: perfil con avatar, precios con borde degradado, testimonios, imagen con velo de texto y filas de descarga.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Tarjetas",
+          "item": "https://lienzo.tools/codigo-web/componentes/tarjetas/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo pongo varias tarjetas en una rejilla responsive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con grid y una sola línea: grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)). Las tarjetas se reparten solas y bajan de columna cuando no caben. Sus max-width internos evitan que se estiren de más en pantallas anchas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué las tarjetas usan article y figure en el HTML?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque son contenido autocontenido con significado propio, y esas etiquetas se lo comunican al navegador y a los lectores de pantalla. Un div funcionaría visualmente igual, pero regalarías semántica que no cuesta nada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo sustituyo el degradado por una imagen real?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En la tarjeta de imagen, reemplaza el span de fondo por una img con position: absolute, inset: 0, width y height al 100 % y object-fit: cover. El velo y el zoom del hover siguen funcionando igual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo hacer clicable toda la tarjeta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La de imagen ya lo es (es un enlace). Para las demás, la técnica limpia es un enlace interno con un pseudoelemento expandido (::after con inset: 0), que mantiene un solo destino de tabulación en vez de envolver todo en un a gigante."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El borde degradado de la tarjeta de precio funciona en todos los navegadores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: es el truco estándar de doble fondo (padding-box y border-box) sobre un borde transparente, soportado desde hace años. Y respeta el border-radius, que es su ventaja frente a los métodos con pseudoelementos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo adapto las tarjetas a un tema claro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Invierte los tres valores base: fondo (#16141f a blanco), texto (#f4f3f8 a tinta oscura) y borde (#2c2938 a un gris claro). La estructura y los acentos de color funcionan igual en ambos temas."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Tarjetas</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Tarjetas</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">La tarjeta es la unidad de contenido de la web moderna: casi todo lo que muestras —una persona, un plan, una descarga— acaba viviendo en una. Estas cinco cubren los casos que más se repiten, con jerarquía tipográfica ya resuelta.</p>
+        </div>
+
+        <section class="lab-seccion" id="tarjetas-persona" aria-labelledby="tarjetas-persona-h">
+          <header class="lab-seccion__head">
+            <h2 id="tarjetas-persona-h">Personas y testimonios</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="tarjeta-perfil">
+            <div class="pieza__escenario">
+              <article class="lz-perfil">
+                <span class="lz-perfil__avatar" aria-hidden="true">AG</span>
+                <h3 class="lz-perfil__nombre">Ana García</h3>
+                <p class="lz-perfil__rol">Directora de arte</p>
+                <p class="lz-perfil__bio">Identidad, editorial y motion para marcas que quieren verse vivas.</p>
+              </article>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Tarjeta de perfil</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-perfil {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  max-width: 250px;
+  padding: 1.6rem 1.4rem;
+  text-align: center;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  font-family: system-ui, sans-serif;
+}
+.lz-perfil__avatar {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.lz-perfil__nombre { margin: 0.4rem 0 0; color: #f4f3f8; font-size: 1.05rem; }
+.lz-perfil__rol { margin: 0; color: #8b7bff; font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; }
+.lz-perfil__bio { margin: 0.4rem 0 0; color: #a8a4b8; font-size: 0.88rem; line-height: 1.5; }</template>
+            <template class="receta-html">&lt;article class="lz-perfil"&gt;
+  &lt;span class="lz-perfil__avatar" aria-hidden="true"&gt;AG&lt;/span&gt;
+  &lt;h3 class="lz-perfil__nombre"&gt;Ana García&lt;/h3&gt;
+  &lt;p class="lz-perfil__rol"&gt;Directora de arte&lt;/p&gt;
+  &lt;p class="lz-perfil__bio"&gt;Identidad, editorial y motion para marcas que quieren verse vivas.&lt;/p&gt;
+&lt;/article&gt;</template>
+          </article>
+          <article class="pieza" id="tarjeta-testimonio">
+            <div class="pieza__escenario">
+              <figure class="lz-testimonio">
+                <blockquote>Entregamos el rediseño dos semanas antes gracias a estos componentes.</blockquote>
+                <figcaption>Luis M. — desarrollador freelance</figcaption>
+              </figure>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Testimonio con comilla</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-testimonio {
+  position: relative;
+  max-width: 320px;
+  margin: 0;
+  padding: 1.6rem 1.5rem 1.3rem;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 20px;
+  font-family: system-ui, sans-serif;
+}
+.lz-testimonio::before {
+  content: "\201C";
+  position: absolute;
+  top: -0.15em;
+  left: 0.35rem;
+  font: 700 4.4rem/1 Georgia, serif;
+  color: #8b7bff;
+  opacity: 0.5;
+}
+.lz-testimonio blockquote {
+  margin: 0;
+  color: #e8e6f2;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.lz-testimonio figcaption {
+  margin-top: 0.8rem;
+  color: #a8a4b8;
+  font-size: 0.84rem;
+}</template>
+            <template class="receta-html">&lt;figure class="lz-testimonio"&gt;
+  &lt;blockquote&gt;Entregamos el rediseño dos semanas antes gracias a estos componentes.&lt;/blockquote&gt;
+  &lt;figcaption&gt;Luis M. — desarrollador freelance&lt;/figcaption&gt;
+&lt;/figure&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="tarjetas-producto" aria-labelledby="tarjetas-producto-h">
+          <header class="lab-seccion__head">
+            <h2 id="tarjetas-producto-h">Producto y acción</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="tarjeta-precio">
+            <div class="pieza__escenario">
+              <article class="lz-precio">
+                <p class="lz-precio__plan">Pro</p>
+                <p class="lz-precio__cifra">$9<span>/mes</span></p>
+                <ul class="lz-precio__lista">
+                  <li>Proyectos ilimitados</li>
+                  <li>Exportación en 4K</li>
+                  <li>Soporte prioritario</li>
+                </ul>
+                <button class="lz-precio__btn" type="button">Empezar</button>
+              </article>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Tarjeta de precio</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-precio {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 240px;
+  padding: 1.6rem 1.5rem;
+  background:
+    linear-gradient(#16141f, #16141f) padding-box,
+    linear-gradient(160deg, #8b7bff, #2c2938 55%) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 22px;
+  font-family: system-ui, sans-serif;
+}
+.lz-precio__plan { margin: 0; color: #8b7bff; font-weight: 700;
+  font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.lz-precio__cifra { margin: 0; color: #f4f3f8; font-size: 2.2rem; font-weight: 700; }
+.lz-precio__cifra span { font-size: 0.9rem; font-weight: 400; color: #a8a4b8; }
+.lz-precio__lista { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.35rem; }
+.lz-precio__lista li { color: #cfcbdd; font-size: 0.88rem; padding-left: 1.2rem; position: relative; }
+.lz-precio__lista li::before { content: "✓"; position: absolute; left: 0; color: #35d6c8; }
+.lz-precio__btn {
+  margin-top: 0.4rem;
+  min-height: 42px;
+  border: 0;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #8b7bff, #5f8bff);
+  color: #fff;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-precio__btn:hover { filter: brightness(1.08); }</template>
+            <template class="receta-html">&lt;article class="lz-precio"&gt;
+  &lt;p class="lz-precio__plan"&gt;Pro&lt;/p&gt;
+  &lt;p class="lz-precio__cifra"&gt;$9&lt;span&gt;/mes&lt;/span&gt;&lt;/p&gt;
+  &lt;ul class="lz-precio__lista"&gt;
+    &lt;li&gt;Proyectos ilimitados&lt;/li&gt;
+    &lt;li&gt;Exportación en 4K&lt;/li&gt;
+    &lt;li&gt;Soporte prioritario&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class="lz-precio__btn" type="button"&gt;Empezar&lt;/button&gt;
+&lt;/article&gt;</template>
+          </article>
+          <article class="pieza" id="tarjeta-imagen">
+            <div class="pieza__escenario">
+              <a class="lz-tarjeta-img" href="#">
+                <span class="lz-tarjeta-img__fondo" aria-hidden="true"></span>
+                <span class="lz-tarjeta-img__velo">
+                  <strong>Colección nocturna</strong>
+                  <span>12 fondos · gratis</span>
+                </span>
+              </a>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Imagen con velo de texto</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-tarjeta-img {
+  position: relative;
+  display: block;
+  max-width: 280px;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+}
+/* Sustituye el fondo degradado por tu &lt;img&gt; con object-fit: cover. */
+.lz-tarjeta-img__fondo {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 90% at 30% 20%, rgba(139, 123, 255, 0.7), transparent 65%),
+    radial-gradient(60% 80% at 80% 70%, rgba(53, 214, 200, 0.5), transparent 60%),
+    #0c0b12;
+  transition: transform 500ms ease;
+}
+.lz-tarjeta-img:hover .lz-tarjeta-img__fondo { transform: scale(1.06); }
+.lz-tarjeta-img__velo {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  gap: 0.15rem;
+  padding: 2.2rem 1.2rem 1rem;
+  background: linear-gradient(transparent, rgba(6, 5, 10, 0.85));
+  color: #fff;
+  font-family: system-ui, sans-serif;
+}
+.lz-tarjeta-img__velo strong { font-size: 1rem; }
+.lz-tarjeta-img__velo span { font-size: 0.82rem; color: #cfcbdd; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-tarjeta-img__fondo { transition: none; }
+}</template>
+            <template class="receta-html">&lt;a class="lz-tarjeta-img" href="#"&gt;
+  &lt;span class="lz-tarjeta-img__fondo" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="lz-tarjeta-img__velo"&gt;
+    &lt;strong&gt;Colección nocturna&lt;/strong&gt;
+    &lt;span&gt;12 fondos · gratis&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/a&gt;</template>
+          </article>
+          <article class="pieza" id="tarjeta-descarga">
+            <div class="pieza__escenario">
+              <article class="lz-descarga">
+                <span class="lz-descarga__icono" aria-hidden="true">ZIP</span>
+                <span class="lz-descarga__info">
+                  <strong>pack-iconos-cocina.zip</strong>
+                  <span>400 archivos · 0,4 MB</span>
+                </span>
+                <button class="lz-descarga__btn" type="button" aria-label="Descargar">↓</button>
+              </article>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Fila de descarga</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-descarga {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: 340px;
+  padding: 0.8rem 0.9rem;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  font-family: system-ui, sans-serif;
+}
+.lz-descarga__icono {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(139, 123, 255, 0.14);
+  color: #8b7bff;
+  font-weight: 700;
+  font-size: 0.78rem;
+  flex: 0 0 auto;
+}
+.lz-descarga__info { display: grid; gap: 0.1rem; min-width: 0; }
+.lz-descarga__info strong { color: #f4f3f8; font-size: 0.9rem;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lz-descarga__info span { color: #a8a4b8; font-size: 0.8rem; }
+.lz-descarga__btn {
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 11px;
+  background: #35d6c8;
+  color: #06251f;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.lz-descarga__btn:hover { filter: brightness(1.1); }</template>
+            <template class="receta-html">&lt;article class="lz-descarga"&gt;
+  &lt;span class="lz-descarga__icono" aria-hidden="true"&gt;ZIP&lt;/span&gt;
+  &lt;span class="lz-descarga__info"&gt;
+    &lt;strong&gt;pack-iconos-cocina.zip&lt;/strong&gt;
+    &lt;span&gt;400 archivos · 0,4 MB&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;button class="lz-descarga__btn" type="button" aria-label="Descargar"&gt;↓&lt;/button&gt;
+&lt;/article&gt;</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3400px">
+        <div class="prose">
+          <h2>Lo que hace que una tarjeta se vea profesional</h2>
+          <p>
+            No es el borde ni la sombra: es la <strong>jerarquía interna</strong>. En cada
+            tarjeta de esta página hay exactamente un elemento que domina (el nombre, la
+            cifra, el título), uno o dos niveles de apoyo y un espaciado consistente entre
+            ellos. Cuando una tarjeta «se ve rara», el 90 % de las veces es porque dos
+            elementos compiten por mandar o porque los espacios internos son todos
+            distintos. Estas recetas traen esa disciplina puesta.
+          </p>
+
+          <h2>Cómo usarlas</h2>
+          <ol>
+            <li>Copia CSS y HTML: la estructura interna es la mitad del diseño.</li>
+            <li>Sustituye textos e iniciales. En la tarjeta de imagen, reemplaza el fondo degradado por tu <code>&lt;img&gt;</code> con <code>object-fit: cover</code> — el comentario del código marca el punto exacto.</li>
+            <li>Si vas a mostrar varias en rejilla, envuélvelas en un grid con <code>minmax</code> y deja que ellas pongan su <code>max-width</code>.</li>
+          </ol>
+
+          <h2>El velo de texto sobre imagen, bien hecho</h2>
+          <p>
+            Poner texto sobre una foto sin velo es apostar a que la foto siempre será
+            oscura donde el texto es claro. El velo degradado de la tarjeta de imagen
+            resuelve el caso general: transparente arriba, oscuro abajo, texto siempre
+            legible sin apagar la imagen completa. Es el mismo patrón que usan las
+            plataformas de video, y aquí está en seis líneas.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Equipo y nosotros:</strong> la tarjeta de perfil en una rejilla de tres o cuatro columnas.</li>
+            <li><strong>Páginas de precios:</strong> la de precio con el plan recomendado llevando el borde degradado.</li>
+            <li><strong>Prueba social:</strong> testimonios intercalados entre secciones largas.</li>
+            <li><strong>Listas de recursos:</strong> la fila de descarga, compacta y escaneable, para documentos y packs.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a> y <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Cómo pongo varias tarjetas en una rejilla responsive?</h3></summary>
+            <p>Con grid y una sola línea: grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)). Las tarjetas se reparten solas y bajan de columna cuando no caben. Sus max-width internos evitan que se estiren de más en pantallas anchas.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué las tarjetas usan article y figure en el HTML?</h3></summary>
+            <p>Porque son contenido autocontenido con significado propio, y esas etiquetas se lo comunican al navegador y a los lectores de pantalla. Un div funcionaría visualmente igual, pero regalarías semántica que no cuesta nada.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo sustituyo el degradado por una imagen real?</h3></summary>
+            <p>En la tarjeta de imagen, reemplaza el span de fondo por una img con position: absolute, inset: 0, width y height al 100 % y object-fit: cover. El velo y el zoom del hover siguen funcionando igual.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo hacer clicable toda la tarjeta?</h3></summary>
+            <p>La de imagen ya lo es (es un enlace). Para las demás, la técnica limpia es un enlace interno con un pseudoelemento expandido (::after con inset: 0), que mantiene un solo destino de tabulación en vez de envolver todo en un a gigante.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El borde degradado de la tarjeta de precio funciona en todos los navegadores?</h3></summary>
+            <p>Sí: es el truco estándar de doble fondo (padding-box y border-box) sobre un borde transparente, soportado desde hace años. Y respeta el border-radius, que es su ventaja frente a los métodos con pseudoelementos.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo adapto las tarjetas a un tema claro?</h3></summary>
+            <p>Invierte los tres valores base: fondo (#16141f a blanco), texto (#f4f3f8 a tinta oscura) y borde (#2c2938 a un gris claro). La estructura y los acentos de color funcionan igual en ambos temas.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campos de formulario CSS modernos y accesibles | Lienzo</title>
+    <meta name="description" content="Inputs con etiqueta flotante, buscador con atajo, textarea con contador, checkbox dibujado, radios como tarjetas y range estilizado. Código listo para copiar." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/formularios/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Campos de formulario — código listo para copiar" />
+    <meta property="og:description" content="Inputs con etiqueta flotante, buscador con atajo, textarea con contador, checkbox dibujado, radios como tarjetas y range estilizado. Código listo para copiar." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/formularios/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/formularios/#page",
+      "name": "Campos de formulario CSS modernos y accesibles",
+      "url": "https://lienzo.tools/codigo-web/componentes/formularios/",
+      "description": "Inputs con etiqueta flotante, buscador con atajo, textarea con contador, checkbox dibujado, radios como tarjetas y range estilizado. Código listo para copiar.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Campos de formulario",
+          "item": "https://lienzo.tools/codigo-web/componentes/formularios/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿La etiqueta flotante funciona sin JavaScript?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, todo el efecto es CSS con :placeholder-shown y :focus. El único requisito es dejar placeholder=\" \" (con espacio) en el input, porque el selector necesita un placeholder que mostrar u ocultar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el checkbox oculta el input en vez de usar appearance: none?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Son dos caminos válidos. Ocultar el input y dibujar una caja al lado da control total del dibujo (incluido el tick SVG animable) y funciona igual en todos los navegadores, que con appearance todavía guardan diferencias de detalle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo activo el teclado numérico o de correo en el móvil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con el type correcto: email, tel, url, number o search. Es un atributo, no un estilo, y por eso estas recetas lo conservan — al copiar, no lo cambies a text."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El deslizador funciona igual en Chrome y Firefox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El aspecto sí, porque la receta define el pulgar con los dos pseudoelementos (::-webkit-slider-thumb y ::-moz-range-thumb). El relleno de la pista lo sincroniza el JS incluido escribiendo una variable CSS."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo marco un campo como obligatorio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con el atributo required y un asterisco o la palabra «obligatorio» en la etiqueta visible. El navegador bloqueará el envío y enfocará el campo; si personalizas el mensaje, hazlo con setCustomValidity y déjalo debajo del campo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Estos campos rompen el autorrelleno del navegador?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No: al ser inputs nativos con sus type y name normales, el navegador los reconoce. Es otra razón para no fabricar campos con divs — el autorrelleno de contraseñas y direcciones no funciona sobre imitaciones."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Campos de formulario</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Campos de formulario</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">El formulario es donde el visitante trabaja, y donde más se nota el cuidado. Estos campos están construidos sobre los controles nativos —con su teclado, su foco y su autorrelleno intactos— y vestidos para estar a la altura del resto de tu interfaz.</p>
+        </div>
+
+        <section class="lab-seccion" id="campos-texto" aria-labelledby="campos-texto-h">
+          <header class="lab-seccion__head">
+            <h2 id="campos-texto-h">Campos de texto</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="campo-flotante">
+            <div class="pieza__escenario">
+              <label class="lz-flotante">
+                <input type="text" placeholder=" " />
+                <span>Tu nombre</span>
+              </label>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Etiqueta flotante</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-flotante {
+  position: relative;
+  display: block;
+  max-width: 260px;
+  font-family: system-ui, sans-serif;
+}
+.lz-flotante input {
+  width: 100%;
+  min-height: 52px;
+  padding: 1.2rem 0.9rem 0.4rem;
+  border: 1px solid #3a374a;
+  border-radius: 12px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 400 0.95rem/1 system-ui, sans-serif;
+}
+.lz-flotante span {
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  translate: 0 -50%;
+  color: #a8a4b8;
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: top 160ms ease, font-size 160ms ease, color 160ms ease;
+}
+/* :placeholder-shown al revés: si NO se muestra el placeholder, hay texto. */
+.lz-flotante input:focus + span,
+.lz-flotante input:not(:placeholder-shown) + span {
+  top: 0.85rem;
+  font-size: 0.72rem;
+  color: #8b7bff;
+}
+.lz-flotante input:focus {
+  outline: 0;
+  border-color: #8b7bff;
+  box-shadow: 0 0 0 3px rgba(139, 123, 255, 0.22);
+}</template>
+            <template class="receta-html">&lt;label class="lz-flotante"&gt;
+  &lt;input type="text" placeholder=" " /&gt;
+  &lt;span&gt;Tu nombre&lt;/span&gt;
+&lt;/label&gt;</template>
+          </article>
+          <article class="pieza" id="campo-busqueda">
+            <div class="pieza__escenario">
+              <label class="lz-buscador">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <input type="search" placeholder="Buscar iconos…" aria-label="Buscar" />
+                <kbd>/</kbd>
+              </label>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Campo de búsqueda</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-buscador {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 300px;
+  min-height: 48px;
+  padding: 0 0.9rem;
+  border: 1px solid #3a374a;
+  border-radius: 999px;
+  background: #16141f;
+  color: #a8a4b8;
+  font-family: system-ui, sans-serif;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.lz-buscador:focus-within {
+  border-color: #8b7bff;
+  box-shadow: 0 0 0 3px rgba(139, 123, 255, 0.22);
+}
+.lz-buscador svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.lz-buscador input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #f4f3f8;
+  font: 400 0.95rem/1 system-ui, sans-serif;
+  outline: 0;
+}
+.lz-buscador kbd {
+  padding: 0.15rem 0.5rem;
+  border: 1px solid #3a374a;
+  border-bottom-width: 2px;
+  border-radius: 7px;
+  font: 600 0.75rem/1 ui-monospace, monospace;
+  color: #cfcbdd;
+}</template>
+            <template class="receta-html">&lt;label class="lz-buscador"&gt;
+  &lt;svg viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/&gt;&lt;path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/&gt;&lt;/svg&gt;
+  &lt;input type="search" placeholder="Buscar iconos…" aria-label="Buscar" /&gt;
+  &lt;kbd&gt;/&lt;/kbd&gt;
+&lt;/label&gt;</template>
+          </article>
+          <article class="pieza" id="area-contador">
+            <div class="pieza__escenario">
+              <label class="lz-area">
+                <span class="lz-area__titulo">Mensaje</span>
+                <textarea maxlength="140" rows="3" data-lz-contador placeholder="Escribe aquí…"></textarea>
+                <span class="lz-area__cuenta" data-lz-cuenta aria-live="polite">0 / 140</span>
+              </label>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Textarea con contador</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-area {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 300px;
+  font-family: system-ui, sans-serif;
+}
+.lz-area__titulo { color: #cfcbdd; font-size: 0.85rem; font-weight: 600; }
+.lz-area textarea {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #3a374a;
+  border-radius: 12px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 400 0.95rem/1.5 system-ui, sans-serif;
+  resize: vertical;
+}
+.lz-area textarea:focus {
+  outline: 0;
+  border-color: #8b7bff;
+  box-shadow: 0 0 0 3px rgba(139, 123, 255, 0.22);
+}
+.lz-area__cuenta { justify-self: end; color: #a8a4b8; font-size: 0.78rem;
+  font-variant-numeric: tabular-nums; }</template>
+            <template class="receta-html">&lt;label class="lz-area"&gt;
+  &lt;span class="lz-area__titulo"&gt;Mensaje&lt;/span&gt;
+  &lt;textarea maxlength="140" rows="3" data-lz-contador placeholder="Escribe aquí…"&gt;&lt;/textarea&gt;
+  &lt;span class="lz-area__cuenta" data-lz-cuenta aria-live="polite"&gt;0 / 140&lt;/span&gt;
+&lt;/label&gt;</template>
+            <template class="receta-js">// Actualiza el contador de caracteres del textarea.
+document.querySelectorAll("[data-lz-contador]").forEach((area) =&gt; {
+  const cuenta = area.parentElement.querySelector("[data-lz-cuenta]");
+  const max = area.getAttribute("maxlength") || "∞";
+  const pintar = () =&gt; (cuenta.textContent = area.value.length + " / " + max);
+  area.addEventListener("input", pintar);
+  pintar();
+});</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="seleccion" aria-labelledby="seleccion-h">
+          <header class="lab-seccion__head">
+            <h2 id="seleccion-h">Selección</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="checkbox">
+            <div class="pieza__escenario">
+              <label class="lz-check">
+                <input type="checkbox" checked />
+                <span class="lz-check__caja" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Acepto recibir el pack
+              </label>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Checkbox dibujado</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #e8e6f2;
+  font: 500 0.93rem/1.3 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lz-check__caja {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #3a374a;
+  border-radius: 7px;
+  color: #06251f;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  flex: 0 0 auto;
+}
+.lz-check__caja svg { width: 14px; height: 14px; opacity: 0; transition: opacity 120ms ease; }
+.lz-check input:checked + .lz-check__caja {
+  background: #35d6c8;
+  border-color: #35d6c8;
+}
+.lz-check input:checked + .lz-check__caja svg { opacity: 1; }
+.lz-check input:focus-visible + .lz-check__caja {
+  outline: 2px solid #8b7bff;
+  outline-offset: 2px;
+}</template>
+            <template class="receta-html">&lt;label class="lz-check"&gt;
+  &lt;input type="checkbox" checked /&gt;
+  &lt;span class="lz-check__caja" aria-hidden="true"&gt;
+    &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/&gt;&lt;/svg&gt;
+  &lt;/span&gt;
+  Acepto recibir el pack
+&lt;/label&gt;</template>
+          </article>
+          <article class="pieza" id="radio-tarjetas">
+            <div class="pieza__escenario">
+              <div class="lz-radios" role="radiogroup" aria-label="Formato">
+                <label class="lz-radio-caja"><input type="radio" name="lz-fmt" checked /><strong>SVG</strong><span>Vector editable</span></label>
+                <label class="lz-radio-caja"><input type="radio" name="lz-fmt" /><strong>PNG</strong><span>Listo para pegar</span></label>
+              </div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Radios como tarjetas</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-radios {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 0.6rem;
+  max-width: 320px;
+}
+.lz-radio-caja {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #3a374a;
+  border-radius: 14px;
+  background: #16141f;
+  cursor: pointer;
+  font-family: system-ui, sans-serif;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+.lz-radio-caja input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lz-radio-caja strong { color: #f4f3f8; font-size: 0.95rem; }
+.lz-radio-caja span { color: #a8a4b8; font-size: 0.8rem; }
+.lz-radio-caja:has(input:checked) {
+  border-color: #8b7bff;
+  background: rgba(139, 123, 255, 0.1);
+}
+.lz-radio-caja:has(input:focus-visible) {
+  outline: 2px solid #8b7bff;
+  outline-offset: 2px;
+}</template>
+            <template class="receta-html">&lt;div class="lz-radios" role="radiogroup" aria-label="Formato"&gt;
+  &lt;label class="lz-radio-caja"&gt;&lt;input type="radio" name="lz-fmt" checked /&gt;&lt;strong&gt;SVG&lt;/strong&gt;&lt;span&gt;Vector editable&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="lz-radio-caja"&gt;&lt;input type="radio" name="lz-fmt" /&gt;&lt;strong&gt;PNG&lt;/strong&gt;&lt;span&gt;Listo para pegar&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="rango">
+            <div class="pieza__escenario">
+              <label class="lz-rango">
+                Volumen
+                <input type="range" min="0" max="100" value="65" data-lz-rango />
+              </label>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Deslizador con nivel</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-rango {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 260px;
+  color: #cfcbdd;
+  font: 600 0.85rem/1 system-ui, sans-serif;
+}
+.lz-rango input {
+  --nivel: 65%;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8b7bff var(--nivel), #2c2938 var(--nivel));
+  cursor: pointer;
+}
+.lz-rango input::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #8b7bff;
+}
+.lz-rango input::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #8b7bff;
+}
+.lz-rango input:focus-visible {
+  outline: 2px solid #8b7bff;
+  outline-offset: 4px;
+}</template>
+            <template class="receta-html">&lt;label class="lz-rango"&gt;
+  Volumen
+  &lt;input type="range" min="0" max="100" value="65" data-lz-rango /&gt;
+&lt;/label&gt;</template>
+            <template class="receta-js">// Mantiene el relleno de la pista sincronizado con el valor.
+document.querySelectorAll("[data-lz-rango]").forEach((rango) =&gt; {
+  const pintar = () =&gt; {
+    const pct = ((rango.value - rango.min) / (rango.max - rango.min)) * 100;
+    rango.style.setProperty("--nivel", pct + "%");
+  };
+  rango.addEventListener("input", pintar);
+  pintar();
+});</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3500px">
+        <div class="prose">
+          <h2>El truco honesto de la etiqueta flotante</h2>
+          <p>
+            La etiqueta que flota al escribir no necesita JavaScript: se apoya en
+            <code>:placeholder-shown</code>, un selector que detecta si el placeholder está
+            visible. Si no se muestra, es que hay texto; si hay texto (o foco), la etiqueta
+            sube. El único requisito, y por eso el HTML trae
+            <code>placeholder=" "</code> con un espacio: sin placeholder el selector no
+            tiene nada que evaluar.
+          </p>
+
+          <h2>Cómo usar estos campos</h2>
+          <ol>
+            <li>Copia CSS y HTML juntos: en formularios, el orden de los elementos es funcionalidad (la etiqueta flotante depende de que el span siga al input).</li>
+            <li>Conserva los atributos: <code>type</code> correcto, <code>maxlength</code>, <code>aria-label</code> donde no hay etiqueta visible. Son los que activan el teclado móvil adecuado y el autorrelleno.</li>
+            <li>Para el contador y el deslizador, añade el JS incluido — pocas líneas, sin dependencias.</li>
+          </ol>
+
+          <h2>Estados de error sin drama</h2>
+          <p>
+            Estos campos marcan el foco con borde violeta y halo suave. Para el estado de
+            error, la misma técnica con otro color: borde coral, halo coral tenue y un
+            mensaje corto <em>debajo del campo</em> — nunca solo un borde rojo, porque el
+            color solo no comunica a todo el mundo. Valida al salir del campo, no a cada
+            tecla: corregir mientras te gritan es la experiencia que todos odiamos.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Contacto y registro:</strong> etiqueta flotante para nombre y correo, textarea con contador para el mensaje.</li>
+            <li><strong>Buscadores internos:</strong> el campo con lupa y atajo de teclado visible.</li>
+            <li><strong>Elección de plan o formato:</strong> radios como tarjetas, que se pulsan mejor y se comparan mejor.</li>
+            <li><strong>Ajustes:</strong> el deslizador para valores continuos como volumen o tamaño.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a> y <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿La etiqueta flotante funciona sin JavaScript?</h3></summary>
+            <p>Sí, todo el efecto es CSS con :placeholder-shown y :focus. El único requisito es dejar placeholder=" " (con espacio) en el input, porque el selector necesita un placeholder que mostrar u ocultar.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué el checkbox oculta el input en vez de usar appearance: none?</h3></summary>
+            <p>Son dos caminos válidos. Ocultar el input y dibujar una caja al lado da control total del dibujo (incluido el tick SVG animable) y funciona igual en todos los navegadores, que con appearance todavía guardan diferencias de detalle.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo activo el teclado numérico o de correo en el móvil?</h3></summary>
+            <p>Con el type correcto: email, tel, url, number o search. Es un atributo, no un estilo, y por eso estas recetas lo conservan — al copiar, no lo cambies a text.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El deslizador funciona igual en Chrome y Firefox?</h3></summary>
+            <p>El aspecto sí, porque la receta define el pulgar con los dos pseudoelementos (::-webkit-slider-thumb y ::-moz-range-thumb). El relleno de la pista lo sincroniza el JS incluido escribiendo una variable CSS.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo marco un campo como obligatorio?</h3></summary>
+            <p>Con el atributo required y un asterisco o la palabra «obligatorio» en la etiqueta visible. El navegador bloqueará el envío y enfocará el campo; si personalizas el mensaje, hazlo con setCustomValidity y déjalo debajo del campo.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Estos campos rompen el autorrelleno del navegador?</h3></summary>
+            <p>No: al ser inputs nativos con sus type y name normales, el navegador los reconoce. Es otra razón para no fabricar campos con divs — el autorrelleno de contraseñas y direcciones no funciona sobre imitaciones.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microinteracciones CSS y JS: ripple, tilt, modal | Lienzo</title>
+    <meta name="description" content="Microinteracciones listas para copiar: elevación, tarjeta que se voltea, ripple, tilt 3D, luz que sigue al cursor, contador animado y modal con dialog nativo." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/interacciones/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Microinteracciones — código listo para copiar" />
+    <meta property="og:description" content="Microinteracciones listas para copiar: elevación, tarjeta que se voltea, ripple, tilt 3D, luz que sigue al cursor, contador animado y modal con dialog nativo." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/interacciones/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-home.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026083022" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026083101" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/interacciones/#page",
+      "name": "Microinteracciones CSS y JS: ripple, tilt, modal",
+      "url": "https://lienzo.tools/codigo-web/componentes/interacciones/",
+      "description": "Microinteracciones listas para copiar: elevación, tarjeta que se voltea, ripple, tilt 3D, luz que sigue al cursor, contador animado y modal con dialog nativo.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Microinteracciones",
+          "item": "https://lienzo.tools/codigo-web/componentes/interacciones/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es exactamente prefers-reduced-motion y por qué importa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es una preferencia del sistema operativo donde una persona pide menos movimiento, a menudo por mareo o trastornos vestibulares. Todas estas recetas la comprueban y desactivan la animación cuando está activa. Ignorarla no es un detalle estético: es dejar fuera a gente real."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las interacciones con JS funcionan en móvil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El ripple y el modal, perfectamente. El tilt y la luz de cursor dependen del puntero, así que en táctil simplemente no se activan — la pieza se ve como una tarjeta normal, que es la degradación correcta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El tilt 3D afecta al rendimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es barato porque solo anima transform, que el navegador compone en la GPU sin recalcular el layout. La receta añade will-change: transform como pista. Evita aplicarlo a decenas de elementos a la vez: uno o dos protagonistas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el contador usa IntersectionObserver?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para animarse cuando el elemento entra en pantalla y solo una vez. Sin el observador, el contador correría al cargar la página aunque estuviera tres pantallas más abajo, y nadie lo vería subir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo cambiar la duración de las animaciones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y hay una guía corta: las respuestas al hover funcionan entre 150 y 300 ms; los volteos y transiciones grandes, hasta 600 ms. Por encima de eso la interfaz empieza a sentirse lenta en vez de fluida."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El dialog nativo funciona en todos los navegadores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En todos los modernos desde 2022, con foco atrapado, Escape y ::backdrop incluidos. Es hoy la forma recomendada de hacer modales, y la razón de que el JS de la receta sea tan corto."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Microinteracciones</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Microinteracciones</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Una microinteracción es la respuesta física de la interfaz: el botón que acusa el clic, la tarjeta que se inclina hacia ti, el número que sube al entrar en pantalla. Bien dosificadas, son la diferencia entre una página que funciona y una que se siente viva.</p>
+        </div>
+
+        <section class="lab-seccion" id="solo-css" aria-labelledby="solo-css-h">
+          <header class="lab-seccion__head">
+            <h2 id="solo-css-h">Solo CSS</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="elevacion">
+            <div class="pieza__escenario">
+              <div class="lz-eleva">Pasa el cursor</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Elevación al pasar</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-eleva {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 1rem 1.4rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.lz-eleva:hover {
+  transform: translateY(-5px);
+  border-color: #8b7bff;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-eleva { transition: none; }
+  .lz-eleva:hover { transform: none; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-eleva"&gt;Pasa el cursor&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="volteo">
+            <div class="pieza__escenario">
+              <div class="lz-volteo" tabindex="0">
+                <div class="lz-volteo__interior">
+                  <div class="lz-volteo__cara">Frente</div>
+                  <div class="lz-volteo__cara lz-volteo__cara--dorso">Dorso</div>
+                </div>
+              </div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Tarjeta que se voltea</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-volteo {
+  width: 170px;
+  aspect-ratio: 4 / 3;
+  perspective: 800px;
+  cursor: pointer;
+}
+.lz-volteo__interior {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.lz-volteo:hover .lz-volteo__interior,
+.lz-volteo:focus-visible .lz-volteo__interior { transform: rotateY(180deg); }
+.lz-volteo__cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  color: #f4f3f8;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  backface-visibility: hidden;
+}
+.lz-volteo__cara--dorso {
+  transform: rotateY(180deg);
+  background: linear-gradient(140deg, #251f3d, #16141f);
+  border-color: #8b7bff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-volteo__interior { transition: none; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-volteo" tabindex="0"&gt;
+  &lt;div class="lz-volteo__interior"&gt;
+    &lt;div class="lz-volteo__cara"&gt;Frente&lt;/div&gt;
+    &lt;div class="lz-volteo__cara lz-volteo__cara--dorso"&gt;Dorso&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</template>
+          </article>
+          <article class="pieza" id="borde-pulso">
+            <div class="pieza__escenario">
+              <div class="lz-pulso">Grabando</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Borde con pulso</h3>
+              
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-pulso {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 1rem 1.4rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #ff7a68;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+}
+.lz-pulso::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid #ff7a68;
+  border-radius: inherit;
+  animation: lz-onda 1.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes lz-onda {
+  from { opacity: 0.9; transform: scale(1); }
+  to   { opacity: 0;   transform: scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-pulso::after { animation: none; opacity: 0; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-pulso"&gt;Grabando&lt;/div&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="con-js" aria-labelledby="con-js-h">
+          <header class="lab-seccion__head">
+            <h2 id="con-js-h">Con un poco de JS</h2>
+            
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="ripple">
+            <div class="pieza__escenario">
+              <button class="lz-ripple" type="button" data-lz-ripple>Haz clic aquí</button>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Onda al hacer clic (ripple)</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-ripple {
+  position: relative;
+  min-height: 48px;
+  padding: 0 1.6rem;
+  border: 0;
+  border-radius: 12px;
+  background: #251f3d;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  overflow: hidden;
+}
+.lz-ripple .lz-onda {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(139, 123, 255, 0.4);
+  transform: scale(0);
+  animation: lz-ripple 550ms ease-out forwards;
+  pointer-events: none;
+}
+@keyframes lz-ripple {
+  to { transform: scale(2.6); opacity: 0; }
+}</template>
+            <template class="receta-html">&lt;button class="lz-ripple" type="button" data-lz-ripple&gt;Haz clic aquí&lt;/button&gt;</template>
+            <template class="receta-js">// Crea la onda donde cae el clic y la retira al terminar.
+document.querySelectorAll("[data-lz-ripple]").forEach((btn) =&gt; {
+  btn.addEventListener("click", (e) =&gt; {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const caja = btn.getBoundingClientRect();
+    const onda = document.createElement("span");
+    const lado = Math.max(caja.width, caja.height);
+    onda.className = "lz-onda";
+    onda.style.width = onda.style.height = lado + "px";
+    onda.style.left = e.clientX - caja.left - lado / 2 + "px";
+    onda.style.top = e.clientY - caja.top - lado / 2 + "px";
+    btn.appendChild(onda);
+    onda.addEventListener("animationend", () =&gt; onda.remove());
+  });
+});</template>
+          </article>
+          <article class="pieza" id="tilt">
+            <div class="pieza__escenario">
+              <div class="lz-tilt" data-lz-tilt>Muéveme</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Inclinación 3D (tilt)</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-tilt {
+  display: grid;
+  place-items: center;
+  width: 170px;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(150deg, #251f3d, #16141f);
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  transition: transform 180ms ease;
+  will-change: transform;
+}</template>
+            <template class="receta-html">&lt;div class="lz-tilt" data-lz-tilt&gt;Muéveme&lt;/div&gt;</template>
+            <template class="receta-js">// Inclina la tarjeta hacia el cursor; vuelve al soltar.
+document.querySelectorAll("[data-lz-tilt]").forEach((el) =&gt; {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const MAX = 12; // grados
+  el.addEventListener("pointermove", (e) =&gt; {
+    const caja = el.getBoundingClientRect();
+    const x = (e.clientX - caja.left) / caja.width - 0.5;
+    const y = (e.clientY - caja.top) / caja.height - 0.5;
+    el.style.transform =
+      "perspective(600px) rotateY(" + x * MAX + "deg) rotateX(" + -y * MAX + "deg)";
+  });
+  el.addEventListener("pointerleave", () =&gt; (el.style.transform = ""));
+});</template>
+          </article>
+          <article class="pieza" id="foco-luz">
+            <div class="pieza__escenario">
+              <div class="lz-luz" data-lz-luz>Ilumíname</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Luz que sigue al cursor</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-luz {
+  --x: 50%;
+  --y: 50%;
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  padding: 1rem 1.6rem;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  background:
+    radial-gradient(140px circle at var(--x) var(--y), rgba(139, 123, 255, 0.28), transparent 70%),
+    #16141f;
+}</template>
+            <template class="receta-html">&lt;div class="lz-luz" data-lz-luz&gt;Ilumíname&lt;/div&gt;</template>
+            <template class="receta-js">// Mueve el foco de luz con el cursor.
+document.querySelectorAll("[data-lz-luz]").forEach((el) =&gt; {
+  el.addEventListener("pointermove", (e) =&gt; {
+    const caja = el.getBoundingClientRect();
+    el.style.setProperty("--x", e.clientX - caja.left + "px");
+    el.style.setProperty("--y", e.clientY - caja.top + "px");
+  });
+});</template>
+          </article>
+          <article class="pieza" id="contador">
+            <div class="pieza__escenario">
+              <p class="lz-contador"><span data-lz-contar data-hasta="1720">0</span> iconos</p>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Contador que sube</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-contador {
+  margin: 0;
+  color: #f4f3f8;
+  font: 700 1.9rem/1 system-ui, sans-serif;
+}
+.lz-contador span { font-variant-numeric: tabular-nums; color: #35d6c8; }</template>
+            <template class="receta-html">&lt;p class="lz-contador"&gt;&lt;span data-lz-contar data-hasta="1720"&gt;0&lt;/span&gt; iconos&lt;/p&gt;</template>
+            <template class="receta-js">// Anima el número cuando el elemento entra en pantalla.
+const observador = new IntersectionObserver((entradas) =&gt; {
+  entradas.forEach((entrada) =&gt; {
+    if (!entrada.isIntersecting) return;
+    const el = entrada.target;
+    observador.unobserve(el);
+    const hasta = parseInt(el.dataset.hasta, 10);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = hasta.toLocaleString("es");
+      return;
+    }
+    const inicio = performance.now();
+    const DURACION = 1200;
+    (function pintar(t) {
+      const avance = Math.min(1, (t - inicio) / DURACION);
+      const suave = 1 - Math.pow(1 - avance, 3);
+      el.textContent = Math.round(hasta * suave).toLocaleString("es");
+      if (avance &lt; 1) requestAnimationFrame(pintar);
+    })(inicio);
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll("[data-lz-contar]").forEach((el) =&gt; observador.observe(el));</template>
+          </article>
+          <article class="pieza pieza--ancha" id="modal">
+            <div class="pieza__escenario">
+              <button class="lz-btn-modal" type="button" data-lz-abre="lz-dialogo-demo">Abrir modal</button>
+              <dialog class="lz-modal" id="lz-dialogo-demo">
+                <h3>Un dialog de verdad</h3>
+                <p>El elemento &lt;dialog&gt; trae foco atrapado, tecla Escape y fondo oscurecido de serie.</p>
+                <button class="lz-btn-modal" type="button" data-lz-cierra>Cerrar</button>
+              </dialog>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Ventana modal nativa</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-btn-modal {
+  min-height: 44px;
+  padding: 0 1.4rem;
+  border: 1px solid #3a374a;
+  border-radius: 12px;
+  background: #251f3d;
+  color: #f4f3f8;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-modal {
+  max-width: min(92vw, 380px);
+  padding: 1.6rem;
+  border: 1px solid #3a374a;
+  border-radius: 20px;
+  background: #14121d;
+  color: #e8e6f2;
+  font-family: system-ui, sans-serif;
+}
+.lz-modal::backdrop {
+  background: rgba(6, 5, 10, 0.65);
+  backdrop-filter: blur(4px);
+}
+.lz-modal h3 { margin: 0 0 0.5rem; color: #fff; }
+.lz-modal p { margin: 0 0 1.1rem; line-height: 1.5; font-size: 0.92rem; }</template>
+            <template class="receta-html">&lt;button class="lz-btn-modal" type="button" data-lz-abre="lz-dialogo-demo"&gt;Abrir modal&lt;/button&gt;
+&lt;dialog class="lz-modal" id="lz-dialogo-demo"&gt;
+  &lt;h3&gt;Un dialog de verdad&lt;/h3&gt;
+  &lt;p&gt;El elemento &amp;lt;dialog&amp;gt; trae foco atrapado, tecla Escape y fondo oscurecido de serie.&lt;/p&gt;
+  &lt;button class="lz-btn-modal" type="button" data-lz-cierra&gt;Cerrar&lt;/button&gt;
+&lt;/dialog&gt;</template>
+            <template class="receta-js">// Abre el &lt;dialog&gt; como modal y lo cierra con su botón o clic fuera.
+document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
+  const dialogo = document.getElementById(btn.dataset.lzAbre);
+  if (!dialogo) return;
+  btn.addEventListener("click", () =&gt; dialogo.showModal());
+  dialogo.addEventListener("click", (e) =&gt; {
+    if (e.target === dialogo) dialogo.close(); // clic en el fondo
+  });
+  dialogo.querySelectorAll("[data-lz-cierra]").forEach((cerrar) =&gt;
+    cerrar.addEventListener("click", () =&gt; dialogo.close())
+  );
+});</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3500px">
+        <div class="prose">
+          <h2>El criterio: causa y efecto, nunca decoración</h2>
+          <p>
+            Cada pieza de esta página responde a algo que hizo el visitante: pasar el
+            cursor, hacer clic, llegar con el scroll. Esa es la línea que separa la
+            microinteracción del adorno — el movimiento que responde comunica («te oí, esto
+            es pulsable, esto cambió»); el movimiento porque sí distrae. Si una animación
+            no responde a nada, esta página no la incluye.
+          </p>
+
+          <h2>Cómo usarlas</h2>
+          <ol>
+            <li>Las tres primeras son CSS puro: copia y listo. Las demás llevan su fragmento de JS al lado — vanilla, corto y sin dependencias.</li>
+            <li>No las apiles: una tarjeta que se eleva <em>o</em> se inclina <em>o</em> brilla. Dos efectos a la vez ya son ruido.</li>
+            <li>Respeta lo que ya viene puesto: todas comprueban <code>prefers-reduced-motion</code> y se apagan para quien pidió calma. No lo quites al adaptar.</li>
+          </ol>
+
+          <h2>Por qué el modal es un &lt;dialog&gt; y no un div</h2>
+          <p>
+            El elemento <code>&lt;dialog&gt;</code> con <code>showModal()</code> trae
+            resuelto lo que los modales caseros llevan una década haciendo mal: atrapa el
+            foco dentro, se cierra con Escape, oscurece el fondo con
+            <code>::backdrop</code> y devuelve el foco al botón que lo abrió. El JS de la
+            receta son ocho líneas porque el navegador hace el trabajo pesado — comparado
+            con las cien líneas del modal artesanal, no hay debate.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Galerías y portafolios:</strong> elevación o tilt en las piezas, luz de cursor en la destacada.</li>
+            <li><strong>Cifras de negocio:</strong> el contador animado en la sección de logros — una vez, al entrar en pantalla.</li>
+            <li><strong>Confirmaciones y avisos:</strong> el modal nativo para decisiones que merecen foco completo.</li>
+            <li><strong>Botones principales:</strong> el ripple da confirmación táctil del clic, especialmente en pantallas táctiles.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a> y <a href="/codigo-web/componentes/datos/">datos y métricas</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Qué es exactamente prefers-reduced-motion y por qué importa?</h3></summary>
+            <p>Es una preferencia del sistema operativo donde una persona pide menos movimiento, a menudo por mareo o trastornos vestibulares. Todas estas recetas la comprueban y desactivan la animación cuando está activa. Ignorarla no es un detalle estético: es dejar fuera a gente real.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Las interacciones con JS funcionan en móvil?</h3></summary>
+            <p>El ripple y el modal, perfectamente. El tilt y la luz de cursor dependen del puntero, así que en táctil simplemente no se activan — la pieza se ve como una tarjeta normal, que es la degradación correcta.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El tilt 3D afecta al rendimiento?</h3></summary>
+            <p>Es barato porque solo anima transform, que el navegador compone en la GPU sin recalcular el layout. La receta añade will-change: transform como pista. Evita aplicarlo a decenas de elementos a la vez: uno o dos protagonistas.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué el contador usa IntersectionObserver?</h3></summary>
+            <p>Para animarse cuando el elemento entra en pantalla y solo una vez. Sin el observador, el contador correría al cargar la página aunque estuviera tres pantallas más abajo, y nadie lo vería subir.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo cambiar la duración de las animaciones?</h3></summary>
+            <p>Sí, y hay una guía corta: las respuestas al hover funcionan entre 150 y 300 ms; los volteos y transiciones grandes, hasta 600 ms. Por encima de eso la interfaz empieza a sentirse lenta en vez de fluida.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El dialog nativo funciona en todos los navegadores?</h3></summary>
+            <p>En todos los modernos desde 2022, con foco atrapado, Escape y ::backdrop incluidos. Es hoy la forma recomendada de hacer modales, y la razón de que el JS de la receta sea tan corto.</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026083101" defer></script>
+  </body>
+</html>
