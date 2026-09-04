@@ -34,3 +34,26 @@ assets/canal/*.png
 
 # Material fuente de iconos 3D (Envato): NUNCA al repo ni al deploy
 GALERIA DE FAVICONES SVG/
+
+# Paquete del sistema de diseno (skill lienzo-design, generado el 2 sep 2026):
+# material de trabajo, no es parte del sitio. La raiz del repo es la raiz web,
+# asi que versionarlo lo publicaria en lienzo.tools.
+SKILL.md
+_ds_README.md
+github.md
+_adherence.oxlintrc.json
+_ds_bundle.js
+_ds_manifest.json
+thumbnail.html
+.thumbnail
+styles.css
+/css/tool.css
+tokens/
+components/
+guidelines/
+templates/
+ui_kits/
+/assets/logo-lienzo.png
+
+# Fotogramas de video en proceso, tampoco son del sitio
+hyperframes/
