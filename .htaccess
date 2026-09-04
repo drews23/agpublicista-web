@@ -33,6 +33,12 @@ RewriteRule ^svg(/|$) - [R=404,L]
 # rompe el parseo de argumentos de Apache y anula la regla.
 RewriteRule ^escenas[\s]3d(/|$) - [R=404,L]
 
+# Material de trabajo del canal de Facebook (estrategia, plantillas y
+# piezas exportadas). Se versiona en el repositorio para tenerlo
+# respaldado, pero la raiz del repo es la raiz web, asi que aqui se corta
+# el acceso publico: no es contenido del sitio y no debe indexarse.
+RewriteRule ^_facebook(/|$) - [R=404,L]
+
 # Redirecciones del sitio anterior (WordPress, hasta 2026)
 # Google todavía tiene indexadas esas URLs y hoy caen en 404: cada una es
 # una visita perdida. Se mandan al equivalente más cercano del sitio actual.

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=block" rel="stylesheet">
+<style>
+  /* PLANTILLA POST-RECURSO 1080x1080
+     Cambiar por publicacion: .eyebrow, .titulo, .detalle, los tres .dato
+     y el icono grande. Nada mas se toca. */
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1080px; overflow: hidden; }
+  body {
+    position: relative; background: #0a0a0f;
+    font-family: "Instrument Sans", system-ui, sans-serif; color: #f4f3f8;
+    padding: 72px; display: flex; flex-direction: column;
+  }
+  .glow { position: absolute; border-radius: 50%; filter: blur(100px); }
+  .glow--v { width: 520px; height: 520px; left: -120px; top: -140px; background: #8b7bff; opacity: 0.2; }
+  .glow--t { width: 460px; height: 460px; right: -120px; bottom: -140px; background: #35d6c8; opacity: 0.15; }
+  header { position: relative; display: flex; justify-content: space-between; align-items: center; }
+  .sello { display: flex; align-items: center; gap: 16px; font-weight: 700; font-size: 30px; letter-spacing: 0.14em; }
+  .sello svg { width: 52px; height: 52px; border-radius: 14px; }
+  .gratis { font-size: 26px; font-weight: 700; letter-spacing: 0.06em; color: #0a0a12;
+    background: #ffb454; border-radius: 999px; padding: 10px 26px; }
+  main { position: relative; flex: 1; display: flex; align-items: center; gap: 52px; }
+  .col { flex: 1; display: flex; flex-direction: column; gap: 30px; }
+  .eyebrow { font-size: 28px; font-weight: 700; letter-spacing: 0.22em; color: #35d6c8; text-transform: uppercase; }
+  .titulo { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 84px; line-height: 1.06; letter-spacing: -0.01em; }
+  .titulo em { font-style: italic;
+    background: linear-gradient(90deg, #8b7bff, #35d6c8);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .detalle { font-size: 34px; line-height: 1.4; color: #a2a1b3; max-width: 22ch; }
+  .vidrio { flex: none;
+    width: 310px; height: 310px; border-radius: 40px; display: grid; place-items: center;
+    background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+  .vidrio svg { width: 180px; height: 180px; }
+  footer { position: relative; display: flex; gap: 18px; align-items: center; }
+  .dato { font-size: 27px; font-weight: 600; color: rgba(244,243,248,0.85);
+    border: 1px solid rgba(244,243,248,0.16); background: rgba(255,255,255,0.05);
+    border-radius: 999px; padding: 12px 26px; }
+  .url { margin-left: auto; font-size: 30px; font-weight: 700; color: #cdc5ff; }
+</style></head>
+<body>
+  <div class="glow glow--v"></div>
+  <div class="glow glow--t"></div>
+  <header>
+    <div class="sello">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b7bff"/><stop offset="0.6" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><rect width="100" height="100" rx="26" fill="url(#g)"/><g fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"><path d="M42 30 22 50l20 20"/><path d="M58 30 78 50 58 70"/></g><circle cx="80" cy="20" r="7" fill="#ffb454"/></svg>
+      LIENZO
+    </div>
+    <div class="gratis">GRATIS</div>
+  </header>
+  <main>
+    <div class="col">
+      <p class="eyebrow">Pack de iconos</p>
+      <h1 class="titulo">50 iconos de <em>realidad virtual</em></h1>
+      <p class="detalle">Visores, mandos, mundos y avatares en versión clara y oscura.</p>
+    </div>
+    <div class="vidrio">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" stroke="#8b7bff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M96 166h320a48 48 0 0 1 48 48v96a48 48 0 0 1-48 48h-84l-40-44h-72l-40 44H96a48 48 0 0 1-48-48v-96a48 48 0 0 1 48-48Z"/>
+        <circle cx="172" cy="262" r="30"/>
+        <circle cx="340" cy="262" r="30"/>
+      </svg>
+    </div>
+  </main>
+  <footer>
+    <span class="dato">SVG + PNG</span>
+    <span class="dato">2 variantes</span>
+    <span class="dato">Sin registro</span>
+    <span class="url">lienzo.tools</span>
+  </footer>
+</body></html>
