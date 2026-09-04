@@ -138,6 +138,34 @@ del canal deja de ser una lista cronológica y pasa a leerse como un catálogo:
 1. Packs de iconos
 2. Packs de sonido
 3. Plantillas de After Effects
+4. Técnicas de Edición de Video
+
+### Lista de reproducción: Técnicas de Edición de Video
+
+**Creada el 2 sep 2026** para agrupar la nueva línea de videos con avatar
+hablando (el primero: `Así se ve una Edición Dinámica en CapCut`,
+`Hbdz3SRrIWg`). Nombre validado en vidIQ: 5.125 búsquedas/mes, competencia
+16,5, y coincide con la etiqueta que el propio YouTube le agregó sola a ese
+video. Se eligió por encima de una alternativa más angosta ("Tutoriales de
+CapCut") a propósito: la lista no queda atada a una sola herramienta, sigue
+el roadmap ya decidido: CapCut primero, después After Effects, Photoshop y
+Premiere (nunca Illustrator-como-catálogo ni redes sociales, ver
+`.claude/SPEC-estrategia-posicionamiento.md`).
+
+Título:
+```
+Técnicas de Edición de Video
+```
+
+Descripción:
+```
+Técnicas de edición explicadas con ejemplos reales sobre metraje real, no
+solo teoría: cada video muestra la técnica funcionando, lista para aplicar
+en tu próximo proyecto. Empiezo en CapCut y voy sumando más herramientas de
+edición con el tiempo.
+
+Más recursos gratis para editores en https://lienzo.tools/
+```
 
 > Los videos de portafolio (GuianCafé, Uchawi Travel, Vive Esports…) **no
 > entran aquí**: están como *no listados*, sirven de referencia para
