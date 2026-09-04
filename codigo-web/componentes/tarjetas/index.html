@@ -43,7 +43,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090404" />
-    <link rel="stylesheet" href="../css/componentes.css?v=2026083102" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026090404" />
 
     <script type="application/ld+json">
     {
@@ -488,6 +488,232 @@
   &lt;button class="lz-descarga__btn" type="button" aria-label="Descargar"&gt;↓&lt;/button&gt;
 &lt;/article&gt;</template>
           </article>
+          <article class="pieza" id="precio-doble-cara">
+            <div class="pieza__escenario">
+              <div class="lz-precio-doble">
+  <input class="lz-precio-doble__modo" type="checkbox" id="lz-precio-modo">
+  <label class="lz-precio-doble__cambio" for="lz-precio-modo"><span>Mensual</span><i aria-hidden="true"></i><span>Anual <b>2 meses gratis</b></span></label>
+  <div class="lz-precio-doble__tarjeta">
+    <div class="lz-precio-doble__cara lz-precio-doble__cara--frente">
+      <span class="lz-precio-doble__blob" aria-hidden="true"></span>
+      <p class="lz-precio-doble__plan">Plan Pro</p>
+      <p class="lz-precio-doble__precio"><sup>$</sup>12<small>/mes</small></p>
+      <ul class="lz-precio-doble__lista">
+        <li>Proyectos ilimitados</li>
+        <li>Exportación en SVG y PNG</li>
+        <li>Soporte por correo</li>
+      </ul>
+      <button class="lz-precio-doble__btn" type="button">Empezar</button>
+    </div>
+    <div class="lz-precio-doble__cara lz-precio-doble__cara--dorso">
+      <span class="lz-precio-doble__blob" aria-hidden="true"></span>
+      <p class="lz-precio-doble__plan">Plan Pro</p>
+      <p class="lz-precio-doble__precio"><sup>$</sup>120<small>/año</small></p>
+      <p class="lz-precio-doble__ahorro">Ahorras $24</p>
+      <ul class="lz-precio-doble__lista">
+        <li>Todo lo del plan mensual</li>
+        <li>Dos meses de regalo</li>
+        <li>Soporte prioritario</li>
+      </ul>
+      <button class="lz-precio-doble__btn" type="button">Empezar</button>
+    </div>
+  </div>
+</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Precio a doble cara con profundidad</h3>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-precio-doble {
+  width: min(100%, 300px);
+  color: #f4f3f8;
+  font: 500 0.92rem/1.4 system-ui, sans-serif;
+}
+.lz-precio-doble__modo { position: absolute; opacity: 0; pointer-events: none; }
+.lz-precio-doble__cambio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 18px;
+  color: #6f6e7f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.lz-precio-doble__cambio span:first-child { color: #f4f3f8; }
+.lz-precio-doble__cambio b {
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(53, 214, 200, 0.16);
+  color: #35d6c8;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+}
+.lz-precio-doble__cambio i {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  background: #2c2938;
+}
+.lz-precio-doble__cambio i::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cambio i::after { transform: translateX(22px); }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cambio span:first-child { color: #6f6e7f; }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cambio span:last-child { color: #f4f3f8; }
+.lz-precio-doble__modo:focus-visible + .lz-precio-doble__cambio i { outline: 2px solid #8b7bff; outline-offset: 3px; }
+/* La tarjeta gira; sus capas viven a distinta profundidad (translateZ) */
+.lz-precio-doble__tarjeta { position: relative; height: 390px; perspective: 1100px; }
+.lz-precio-doble__cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 28px 24px;
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  background: linear-gradient(165deg, #1a1826, #101018);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lz-precio-doble__cara--dorso { transform: rotateY(180deg); }
+/* Con preserve-3d, el dorso oculto del padre no tapa a sus hijos con
+   translateZ: cada capa necesita su propio backface-visibility */
+.lz-precio-doble__cara > * { backface-visibility: hidden; }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--frente { transform: rotateY(-180deg); }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--dorso { transform: none; }
+/* La mancha de color detras del precio: respira solo al pasar el cursor */
+.lz-precio-doble__blob {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  translate: -50% 0;
+  border-radius: 42% 58% 61% 39% / 45% 39% 61% 55%;
+  background: radial-gradient(circle at 30% 30%, #8b7bff, #35d6c8);
+  filter: blur(22px);
+  opacity: 0.45;
+}
+.lz-precio-doble__cara--dorso .lz-precio-doble__blob { background: radial-gradient(circle at 30% 30%, #ffb454, #ff7a68); }
+.lz-precio-doble:hover .lz-precio-doble__blob { animation: lz-blob 7s ease-in-out infinite; }
+@keyframes lz-blob {
+  0%, 100% { border-radius: 42% 58% 61% 39% / 45% 39% 61% 55%; translate: -50% 0; }
+  50% { border-radius: 58% 42% 39% 61% / 55% 61% 39% 45%; translate: -50% 10px; }
+}
+.lz-precio-doble__plan {
+  position: relative;
+  margin: 0;
+  color: #35d6c8;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: translateZ(20px);
+}
+.lz-precio-doble__precio {
+  position: relative;
+  margin: 0;
+  font: 700 3.2rem/1 system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  transform: translateZ(40px);
+}
+.lz-precio-doble__precio sup { margin-right: 2px; color: #a2a1b3; font-size: 1.2rem; vertical-align: top; }
+.lz-precio-doble__precio small { color: #a2a1b3; font-size: 0.9rem; font-weight: 500; }
+.lz-precio-doble__ahorro {
+  position: relative;
+  margin: -4px 0 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 180, 84, 0.16);
+  color: #ffb454;
+  font-size: 0.74rem;
+  font-weight: 700;
+  transform: translateZ(30px);
+}
+.lz-precio-doble__lista {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #a2a1b3;
+  font-size: 0.86rem;
+  text-align: center;
+  transform: translateZ(14px);
+}
+.lz-precio-doble__btn {
+  position: relative;
+  height: 44px;
+  margin-top: 8px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b7bff, #6e5df2);
+  color: #fff;
+  font: 700 0.92rem system-ui, sans-serif;
+  cursor: pointer;
+  transform: translateZ(26px);
+  transition: filter 160ms ease;
+}
+.lz-precio-doble__btn:hover { filter: brightness(1.08); }
+.lz-precio-doble__btn:focus-visible { outline: 2px solid #35d6c8; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-precio-doble__cara { transition: opacity 250ms ease; }
+  .lz-precio-doble__cara--dorso { transform: none; opacity: 0; }
+  .lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--frente { transform: none; opacity: 0; }
+  .lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--dorso { opacity: 1; }
+  .lz-precio-doble:hover .lz-precio-doble__blob { animation: none; }
+  .lz-precio-doble__cambio i::after { transition: none; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-precio-doble"&gt;
+  &lt;input class="lz-precio-doble__modo" type="checkbox" id="lz-precio-modo"&gt;
+  &lt;label class="lz-precio-doble__cambio" for="lz-precio-modo"&gt;&lt;span&gt;Mensual&lt;/span&gt;&lt;i aria-hidden="true"&gt;&lt;/i&gt;&lt;span&gt;Anual &lt;b&gt;2 meses gratis&lt;/b&gt;&lt;/span&gt;&lt;/label&gt;
+  &lt;div class="lz-precio-doble__tarjeta"&gt;
+    &lt;div class="lz-precio-doble__cara lz-precio-doble__cara--frente"&gt;
+      &lt;span class="lz-precio-doble__blob" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;p class="lz-precio-doble__plan"&gt;Plan Pro&lt;/p&gt;
+      &lt;p class="lz-precio-doble__precio"&gt;&lt;sup&gt;$&lt;/sup&gt;12&lt;small&gt;/mes&lt;/small&gt;&lt;/p&gt;
+      &lt;ul class="lz-precio-doble__lista"&gt;
+        &lt;li&gt;Proyectos ilimitados&lt;/li&gt;
+        &lt;li&gt;Exportación en SVG y PNG&lt;/li&gt;
+        &lt;li&gt;Soporte por correo&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;button class="lz-precio-doble__btn" type="button"&gt;Empezar&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="lz-precio-doble__cara lz-precio-doble__cara--dorso"&gt;
+      &lt;span class="lz-precio-doble__blob" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;p class="lz-precio-doble__plan"&gt;Plan Pro&lt;/p&gt;
+      &lt;p class="lz-precio-doble__precio"&gt;&lt;sup&gt;$&lt;/sup&gt;120&lt;small&gt;/año&lt;/small&gt;&lt;/p&gt;
+      &lt;p class="lz-precio-doble__ahorro"&gt;Ahorras $24&lt;/p&gt;
+      &lt;ul class="lz-precio-doble__lista"&gt;
+        &lt;li&gt;Todo lo del plan mensual&lt;/li&gt;
+        &lt;li&gt;Dos meses de regalo&lt;/li&gt;
+        &lt;li&gt;Soporte prioritario&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;button class="lz-precio-doble__btn" type="button"&gt;Empezar&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</template>
+          </article>
           </div>
         </section>
       </section>
@@ -531,7 +757,7 @@
           <h2>Las demás categorías</h2>
           <p>
             La familia completa, cada una con sus piezas y su código:
-            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a>, <a href="/codigo-web/componentes/interacciones/">microinteracciones</a> y <a href="/codigo-web/componentes/carga/">estados de carga</a>.
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a>, <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>, <a href="/codigo-web/componentes/carga/">estados de carga</a> y <a href="/codigo-web/componentes/navegacion/">navegación</a>.
             Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
           </p>
 
@@ -623,6 +849,6 @@
 
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
-    <script src="../js/componentes.js?v=2026083102" defer></script>
+    <script src="../js/componentes.js?v=2026090404" defer></script>
   </body>
 </html>

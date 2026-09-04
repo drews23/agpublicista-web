@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Microinteracciones CSS y JS: ripple, tilt, modal | Lienzo</title>
-    <meta name="description" content="Microinteracciones listas para copiar: elevación, tarjeta que se voltea, ripple, tilt 3D, luz que sigue al cursor, contador animado y modal con dialog nativo." />
+    <meta name="description" content="Microinteracciones listas para copiar: elevación, volteo, ripple, tilt 3D, luz de cursor, contador, modal nativo, capa que entra por donde llega el cursor y cambio de imagen con distorsión." />
     <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/interacciones/" />
     <meta name="theme-color" content="#0a0a0f" />
 
@@ -12,7 +12,7 @@
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:title" content="Microinteracciones: código listo para copiar" />
-    <meta property="og:description" content="Microinteracciones listas para copiar: elevación, tarjeta que se voltea, ripple, tilt 3D, luz que sigue al cursor, contador animado y modal con dialog nativo." />
+    <meta property="og:description" content="Microinteracciones listas para copiar: elevación, volteo, ripple, tilt 3D, luz de cursor, contador, modal nativo, capa que entra por donde llega el cursor y cambio de imagen con distorsión." />
     <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/interacciones/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-codigo-web-componentes-interacciones.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -43,7 +43,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090404" />
-    <link rel="stylesheet" href="../css/componentes.css?v=2026083102" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026090404" />
 
     <script type="application/ld+json">
     {
@@ -54,7 +54,7 @@
       "@id": "https://lienzo.tools/codigo-web/componentes/interacciones/#page",
       "name": "Microinteracciones CSS y JS: ripple, tilt, modal",
       "url": "https://lienzo.tools/codigo-web/componentes/interacciones/",
-      "description": "Microinteracciones listas para copiar: elevación, tarjeta que se voltea, ripple, tilt 3D, luz que sigue al cursor, contador animado y modal con dialog nativo.",
+      "description": "Microinteracciones listas para copiar: elevación, volteo, ripple, tilt 3D, luz de cursor, contador, modal nativo, capa que entra por donde llega el cursor y cambio de imagen con distorsión.",
       "inLanguage": "es",
       "isPartOf": {
         "@type": "WebSite",
@@ -562,6 +562,252 @@ document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
   );
 });</template>
           </article>
+          <article class="pieza" id="hover-direccional">
+            <div class="pieza__escenario">
+              <a class="lz-direccional" href="#" data-lz-direccional>
+  <span class="lz-direccional__base"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="34" height="34"><path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></svg>Entra por un lado</span>
+  <span class="lz-direccional__capa">
+    <strong>Escenas 3D</strong>
+    <span>La capa llega desde el lado por el que entra el cursor.</span>
+  </span>
+</a>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Capa que entra por donde llega el cursor</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-direccional {
+  --ax: -1;
+  --ay: 0;
+  --origen: 50% 0%;
+  position: relative;
+  display: block;
+  width: 190px;
+  aspect-ratio: 1;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  background: linear-gradient(150deg, #251f3d, #16141f);
+  color: #f4f3f8;
+  text-decoration: none;
+  overflow: hidden;
+  perspective: 520px;
+}
+.lz-direccional__base {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  height: 100%;
+  color: #a2a1b3;
+  font: 600 0.9rem system-ui, sans-serif;
+}
+/* La capa arranca de canto (90 grados) sobre el eje que marca el JS:
+   asi hay UNA transicion para los cuatro lados, sin ocho keyframes. */
+.lz-direccional__capa {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: end;
+  gap: 6px;
+  padding: 18px;
+  background: rgba(139, 123, 255, 0.94);
+  color: #0a0a12;
+  font: 0.82rem/1.4 system-ui, sans-serif;
+  transform-origin: var(--origen);
+  transform: rotate3d(var(--ax), var(--ay), 0, 90deg);
+  /* En reposo tambien es invisible: de canto, con perspectiva, la parte
+     lejana del plano se proyecta dentro de la tarjeta y se veria una franja.
+     La opacidad cae en el ultimo tercio de la salida. */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 340ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 120ms ease 220ms,
+    visibility 0s linear 340ms;
+  pointer-events: none;
+}
+.lz-direccional__capa strong { font-size: 1rem; }
+.lz-direccional.esta-dentro .lz-direccional__capa,
+.lz-direccional:focus-visible .lz-direccional__capa {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  transition: transform 340ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0s, visibility 0s;
+}
+.lz-direccional:focus-visible { outline: 2px solid #35d6c8; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-direccional__capa { transform: none; transition: opacity 200ms ease, visibility 0s linear 200ms; }
+  .lz-direccional.esta-dentro .lz-direccional__capa,
+  .lz-direccional:focus-visible .lz-direccional__capa { transition: opacity 200ms ease, visibility 0s; }
+}</template>
+            <template class="receta-html">&lt;a class="lz-direccional" href="#" data-lz-direccional&gt;
+  &lt;span class="lz-direccional__base"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="34" height="34"&gt;&lt;path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/&gt;&lt;/svg&gt;Entra por un lado&lt;/span&gt;
+  &lt;span class="lz-direccional__capa"&gt;
+    &lt;strong&gt;Escenas 3D&lt;/strong&gt;
+    &lt;span&gt;La capa llega desde el lado por el que entra el cursor.&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/a&gt;</template>
+            <template class="receta-js">// La capa entra por el lado por el que llega el cursor y sale por el que se va.
+document.querySelectorAll("[data-lz-direccional]").forEach((el) =&gt; {
+  const LADOS = [
+    { ax: -1, ay: 0, origen: "50% 0%" },   // arriba
+    { ax: 0, ay: -1, origen: "100% 50%" }, // derecha
+    { ax: 1, ay: 0, origen: "50% 100%" },  // abajo
+    { ax: 0, ay: 1, origen: "0% 50%" },    // izquierda
+  ];
+  const lado = (e) =&gt; {
+    const c = el.getBoundingClientRect();
+    const x = (e.clientX - c.left) / c.width - 0.5;
+    const y = (e.clientY - c.top) / c.height - 0.5;
+    return Math.round(Math.atan2(y, x) / (Math.PI / 2) + 5) % 4;
+  };
+  const orienta = (i) =&gt; {
+    el.style.setProperty("--ax", LADOS[i].ax);
+    el.style.setProperty("--ay", LADOS[i].ay);
+    el.style.setProperty("--origen", LADOS[i].origen);
+  };
+  el.addEventListener("pointerenter", (e) =&gt; {
+    if (e.pointerType === "touch") return; // en tactil manda el foco
+    orienta(lado(e));
+    void el.offsetWidth; // fija la orientacion antes de animar
+    el.classList.add("esta-dentro");
+  });
+  el.addEventListener("pointerleave", (e) =&gt; {
+    orienta(lado(e));
+    el.classList.remove("esta-dentro");
+  });
+});</template>
+          </article>
+          <article class="pieza" id="distorsion">
+            <div class="pieza__escenario">
+              <div class="lz-distorsion" data-lz-distorsion>
+  <svg class="lz-distorsion__filtro" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="lz-distorsion-f" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.03" numOctaves="2" seed="7" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <div class="lz-distorsion__visor">
+    <img class="lz-distorsion__img esta-visible" src="/assets/escenas-3d/mapa-de-navegacion.webp" alt="Mapa de navegación en 3D" width="960" height="640">
+    <img class="lz-distorsion__img" src="/assets/escenas-3d/graficas-de-datos.webp" alt="Gráficas de datos en 3D" width="960" height="640" loading="lazy">
+    <img class="lz-distorsion__img" src="/assets/escenas-3d/anuncio-con-megafono.webp" alt="Anuncio con megáfono en 3D" width="960" height="640" loading="lazy">
+  </div>
+  <div class="lz-distorsion__puntos" role="group" aria-label="Elegir imagen">
+    <button type="button" data-ir aria-current="true" aria-label="Imagen 1"></button>
+    <button type="button" data-ir aria-label="Imagen 2"></button>
+    <button type="button" data-ir aria-label="Imagen 3"></button>
+  </div>
+</div>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Cambio de imagen con distorsión</h3>
+              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
+            </div>
+            <template class="receta-css">.lz-distorsion {
+  display: grid;
+  gap: 10px;
+  width: min(100%, 320px);
+}
+.lz-distorsion__filtro { position: absolute; width: 0; height: 0; }
+.lz-distorsion__visor {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #16141f;
+  filter: url(#lz-distorsion-f);
+}
+.lz-distorsion__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+.lz-distorsion__img.esta-visible { opacity: 1; }
+.lz-distorsion__puntos { display: flex; justify-content: center; gap: 8px; }
+.lz-distorsion__puntos button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #3a3750;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+}
+.lz-distorsion__puntos button[aria-current="true"] { background: #8b7bff; transform: scale(1.3); }
+.lz-distorsion__puntos button:focus-visible { outline: 2px solid #8b7bff; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-distorsion__visor { filter: none; }
+  .lz-distorsion__img { transition: opacity 250ms ease; }
+  .lz-distorsion__puntos button { transition: none; }
+}</template>
+            <template class="receta-html">&lt;div class="lz-distorsion" data-lz-distorsion&gt;
+  &lt;svg class="lz-distorsion__filtro" width="0" height="0" aria-hidden="true" focusable="false"&gt;
+    &lt;filter id="lz-distorsion-f" color-interpolation-filters="sRGB"&gt;
+      &lt;feTurbulence type="fractalNoise" baseFrequency="0.014 0.03" numOctaves="2" seed="7" result="ruido"/&gt;
+      &lt;feDisplacementMap in="SourceGraphic" in2="ruido" scale="0" xChannelSelector="R" yChannelSelector="G"/&gt;
+    &lt;/filter&gt;
+  &lt;/svg&gt;
+  &lt;div class="lz-distorsion__visor"&gt;
+    &lt;img class="lz-distorsion__img esta-visible" src="/assets/escenas-3d/mapa-de-navegacion.webp" alt="Mapa de navegación en 3D" width="960" height="640"&gt;
+    &lt;img class="lz-distorsion__img" src="/assets/escenas-3d/graficas-de-datos.webp" alt="Gráficas de datos en 3D" width="960" height="640" loading="lazy"&gt;
+    &lt;img class="lz-distorsion__img" src="/assets/escenas-3d/anuncio-con-megafono.webp" alt="Anuncio con megáfono en 3D" width="960" height="640" loading="lazy"&gt;
+  &lt;/div&gt;
+  &lt;div class="lz-distorsion__puntos" role="group" aria-label="Elegir imagen"&gt;
+    &lt;button type="button" data-ir aria-current="true" aria-label="Imagen 1"&gt;&lt;/button&gt;
+    &lt;button type="button" data-ir aria-label="Imagen 2"&gt;&lt;/button&gt;
+    &lt;button type="button" data-ir aria-label="Imagen 3"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</template>
+            <template class="receta-js">// Cambio de imagen con distorsion: el mapa de desplazamiento del filtro SVG
+// sube y baja mientras las dos imagenes se funden. Sin librerias.
+document.querySelectorAll("[data-lz-distorsion]").forEach((raiz) =&gt; {
+  const capas = [...raiz.querySelectorAll(".lz-distorsion__img")];
+  const puntos = [...raiz.querySelectorAll("[data-ir]")];
+  const mapa = raiz.querySelector("feDisplacementMap");
+  const calmado = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let actual = 0, animando = false, pila = 1;
+  const ir = (n) =&gt; {
+    if (animando || n === actual) return;
+    animando = true;
+    const anterior = actual;
+    actual = n;
+    puntos.forEach((p, i) =&gt; p.setAttribute("aria-current", i === n ? "true" : "false"));
+    capas[n].style.zIndex = String(++pila);
+    capas[n].classList.add("esta-visible");
+    let terminado = false;
+    const termina = () =&gt; {
+      if (terminado) return;
+      terminado = true;
+      capas[anterior].classList.remove("esta-visible");
+      if (mapa) mapa.setAttribute("scale", "0");
+      animando = false;
+    };
+    if (calmado || !mapa) return void setTimeout(termina, 260);
+    const t0 = performance.now(), DUR = 900;
+    // Red: si el rAF se congela (pestana en segundo plano), remata igual
+    setTimeout(termina, DUR + 80);
+    (function paso(t) {
+      if (terminado) return;
+      const a = Math.min(1, (t - t0) / DUR);
+      mapa.setAttribute("scale", String(Math.sin(a * Math.PI) * 70));
+      if (a &lt; 1) requestAnimationFrame(paso); else termina();
+    })(t0);
+  };
+  puntos.forEach((p, i) =&gt; p.addEventListener("click", () =&gt; ir(i)));
+});</template>
+          </article>
           </div>
         </section>
       </section>
@@ -605,7 +851,7 @@ document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
           <h2>Las demás categorías</h2>
           <p>
             La familia completa, cada una con sus piezas y su código:
-            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a> y <a href="/codigo-web/componentes/carga/">estados de carga</a>.
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a>, <a href="/codigo-web/componentes/carga/">estados de carga</a> y <a href="/codigo-web/componentes/navegacion/">navegación</a>.
             Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
           </p>
 
@@ -697,6 +943,6 @@ document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
 
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
-    <script src="../js/componentes.js?v=2026083102" defer></script>
+    <script src="../js/componentes.js?v=2026090404" defer></script>
   </body>
 </html>

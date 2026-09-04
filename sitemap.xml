@@ -146,7 +146,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/codigo-web/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -194,7 +194,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/codigo-web/componentes/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -207,6 +207,12 @@
   <url>
     <loc>https://lienzo.tools/codigo-web/componentes/carga/</loc>
     <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lienzo.tools/codigo-web/componentes/navegacion/</loc>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -230,13 +236,13 @@
   </url>
   <url>
     <loc>https://lienzo.tools/codigo-web/componentes/tarjetas/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://lienzo.tools/codigo-web/componentes/formularios/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -248,7 +254,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/codigo-web/componentes/interacciones/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -1048,6 +1048,167 @@
 }
 .lz-descarga__btn:hover { filter: brightness(1.1); }
 
+/* tarjetas · Precio a doble cara con profundidad */
+.lz-precio-doble {
+  width: min(100%, 300px);
+  color: #f4f3f8;
+  font: 500 0.92rem/1.4 system-ui, sans-serif;
+}
+.lz-precio-doble__modo { position: absolute; opacity: 0; pointer-events: none; }
+.lz-precio-doble__cambio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 18px;
+  color: #6f6e7f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.lz-precio-doble__cambio span:first-child { color: #f4f3f8; }
+.lz-precio-doble__cambio b {
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(53, 214, 200, 0.16);
+  color: #35d6c8;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+}
+.lz-precio-doble__cambio i {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  background: #2c2938;
+}
+.lz-precio-doble__cambio i::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cambio i::after { transform: translateX(22px); }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cambio span:first-child { color: #6f6e7f; }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cambio span:last-child { color: #f4f3f8; }
+.lz-precio-doble__modo:focus-visible + .lz-precio-doble__cambio i { outline: 2px solid #8b7bff; outline-offset: 3px; }
+/* La tarjeta gira; sus capas viven a distinta profundidad (translateZ) */
+.lz-precio-doble__tarjeta { position: relative; height: 390px; perspective: 1100px; }
+.lz-precio-doble__cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 28px 24px;
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  background: linear-gradient(165deg, #1a1826, #101018);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lz-precio-doble__cara--dorso { transform: rotateY(180deg); }
+/* Con preserve-3d, el dorso oculto del padre no tapa a sus hijos con
+   translateZ: cada capa necesita su propio backface-visibility */
+.lz-precio-doble__cara > * { backface-visibility: hidden; }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--frente { transform: rotateY(-180deg); }
+.lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--dorso { transform: none; }
+/* La mancha de color detras del precio: respira solo al pasar el cursor */
+.lz-precio-doble__blob {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  translate: -50% 0;
+  border-radius: 42% 58% 61% 39% / 45% 39% 61% 55%;
+  background: radial-gradient(circle at 30% 30%, #8b7bff, #35d6c8);
+  filter: blur(22px);
+  opacity: 0.45;
+}
+.lz-precio-doble__cara--dorso .lz-precio-doble__blob { background: radial-gradient(circle at 30% 30%, #ffb454, #ff7a68); }
+.lz-precio-doble:hover .lz-precio-doble__blob { animation: lz-blob 7s ease-in-out infinite; }
+@keyframes lz-blob {
+  0%, 100% { border-radius: 42% 58% 61% 39% / 45% 39% 61% 55%; translate: -50% 0; }
+  50% { border-radius: 58% 42% 39% 61% / 55% 61% 39% 45%; translate: -50% 10px; }
+}
+.lz-precio-doble__plan {
+  position: relative;
+  margin: 0;
+  color: #35d6c8;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: translateZ(20px);
+}
+.lz-precio-doble__precio {
+  position: relative;
+  margin: 0;
+  font: 700 3.2rem/1 system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  transform: translateZ(40px);
+}
+.lz-precio-doble__precio sup { margin-right: 2px; color: #a2a1b3; font-size: 1.2rem; vertical-align: top; }
+.lz-precio-doble__precio small { color: #a2a1b3; font-size: 0.9rem; font-weight: 500; }
+.lz-precio-doble__ahorro {
+  position: relative;
+  margin: -4px 0 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 180, 84, 0.16);
+  color: #ffb454;
+  font-size: 0.74rem;
+  font-weight: 700;
+  transform: translateZ(30px);
+}
+.lz-precio-doble__lista {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #a2a1b3;
+  font-size: 0.86rem;
+  text-align: center;
+  transform: translateZ(14px);
+}
+.lz-precio-doble__btn {
+  position: relative;
+  height: 44px;
+  margin-top: 8px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b7bff, #6e5df2);
+  color: #fff;
+  font: 700 0.92rem system-ui, sans-serif;
+  cursor: pointer;
+  transform: translateZ(26px);
+  transition: filter 160ms ease;
+}
+.lz-precio-doble__btn:hover { filter: brightness(1.08); }
+.lz-precio-doble__btn:focus-visible { outline: 2px solid #35d6c8; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-precio-doble__cara { transition: opacity 250ms ease; }
+  .lz-precio-doble__cara--dorso { transform: none; opacity: 0; }
+  .lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--frente { transform: none; opacity: 0; }
+  .lz-precio-doble:has(.lz-precio-doble__modo:checked) .lz-precio-doble__cara--dorso { opacity: 1; }
+  .lz-precio-doble:hover .lz-precio-doble__blob { animation: none; }
+  .lz-precio-doble__cambio i::after { transition: none; }
+}
+
 /* formularios · Etiqueta flotante */
 .lz-flotante {
   position: relative;
@@ -1248,6 +1409,118 @@
 .lz-rango input:focus-visible {
   outline: 2px solid #8b7bff;
   outline-offset: 4px;
+}
+
+/* formularios · Acceso con volteo: entrar o crear cuenta */
+.lz-acceso {
+  width: min(100%, 360px);
+  color: #f4f3f8;
+  font: 500 0.92rem/1.4 system-ui, sans-serif;
+}
+.lz-acceso__modo { position: absolute; opacity: 0; pointer-events: none; }
+/* El interruptor: un checkbox y su etiqueta, nada mas */
+.lz-acceso__cambio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 18px;
+  color: #6f6e7f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.lz-acceso__cambio span:first-child { color: #f4f3f8; }
+.lz-acceso__cambio i {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  background: #2c2938;
+}
+.lz-acceso__cambio i::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cambio i::after { transform: translateX(22px); }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cambio span:first-child { color: #6f6e7f; }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cambio span:last-child { color: #f4f3f8; }
+.lz-acceso__modo:focus-visible + .lz-acceso__cambio i { outline: 2px solid #8b7bff; outline-offset: 3px; }
+/* Las dos caras giran en el mismo espacio; la oculta deja de ser enfocable */
+.lz-acceso__tarjeta { position: relative; height: 380px; perspective: 1000px; }
+.lz-acceso__cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  padding: 28px;
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #1a1826, #101018);
+  backface-visibility: hidden;
+  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 300ms;
+}
+.lz-acceso__cara--dorso { transform: rotateY(180deg); visibility: hidden; }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--frente { transform: rotateY(-180deg); visibility: hidden; }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--dorso { transform: none; visibility: visible; }
+.lz-acceso h4 { margin: 0 0 6px; font: 700 1.3rem/1.1 system-ui, sans-serif; text-align: center; }
+.lz-acceso__campo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid #2c2938;
+  border-radius: 12px;
+  background: #0c0b12;
+  color: #a2a1b3;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.lz-acceso__campo svg { flex: none; width: 18px; height: 18px; }
+.lz-acceso__campo input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: #f4f3f8;
+  font: inherit;
+  outline: none;
+}
+.lz-acceso__campo input::placeholder { color: #6f6e7f; }
+.lz-acceso__campo:focus-within { border-color: #8b7bff; color: #cdc5ff; }
+/* Solo avisa cuando la persona ya ha interactuado con el campo */
+.lz-acceso__campo:has(input:user-invalid) { border-color: #ff7a68; color: #ff7a68; }
+.lz-acceso__btn {
+  height: 46px;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8b7bff, #6e5df2);
+  color: #fff;
+  font: 700 0.95rem system-ui, sans-serif;
+  cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.lz-acceso__btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.lz-acceso__btn:focus-visible { outline: 2px solid #35d6c8; outline-offset: 3px; }
+.lz-acceso__enlace { color: #a2a1b3; font-size: 0.82rem; text-align: center; text-decoration: none; }
+.lz-acceso__enlace:hover { color: #f4f3f8; text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-acceso__cara { transform: none; opacity: 1; transition: opacity 250ms ease, visibility 0s 250ms; }
+  .lz-acceso__cara--dorso { opacity: 0; }
+  .lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--frente { transform: none; opacity: 0; }
+  .lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--dorso { opacity: 1; }
+  .lz-acceso__cambio i::after, .lz-acceso__btn { transition: none; }
 }
 
 /* datos · Métrica con variación */
@@ -1599,6 +1872,117 @@
 .lz-modal h3 { margin: 0 0 0.5rem; color: #fff; }
 .lz-modal p { margin: 0 0 1.1rem; line-height: 1.5; font-size: 0.92rem; }
 
+/* interacciones · Capa que entra por donde llega el cursor */
+.lz-direccional {
+  --ax: -1;
+  --ay: 0;
+  --origen: 50% 0%;
+  position: relative;
+  display: block;
+  width: 190px;
+  aspect-ratio: 1;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  background: linear-gradient(150deg, #251f3d, #16141f);
+  color: #f4f3f8;
+  text-decoration: none;
+  overflow: hidden;
+  perspective: 520px;
+}
+.lz-direccional__base {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  height: 100%;
+  color: #a2a1b3;
+  font: 600 0.9rem system-ui, sans-serif;
+}
+/* La capa arranca de canto (90 grados) sobre el eje que marca el JS:
+   asi hay UNA transicion para los cuatro lados, sin ocho keyframes. */
+.lz-direccional__capa {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: end;
+  gap: 6px;
+  padding: 18px;
+  background: rgba(139, 123, 255, 0.94);
+  color: #0a0a12;
+  font: 0.82rem/1.4 system-ui, sans-serif;
+  transform-origin: var(--origen);
+  transform: rotate3d(var(--ax), var(--ay), 0, 90deg);
+  /* En reposo tambien es invisible: de canto, con perspectiva, la parte
+     lejana del plano se proyecta dentro de la tarjeta y se veria una franja.
+     La opacidad cae en el ultimo tercio de la salida. */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 340ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 120ms ease 220ms,
+    visibility 0s linear 340ms;
+  pointer-events: none;
+}
+.lz-direccional__capa strong { font-size: 1rem; }
+.lz-direccional.esta-dentro .lz-direccional__capa,
+.lz-direccional:focus-visible .lz-direccional__capa {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  transition: transform 340ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0s, visibility 0s;
+}
+.lz-direccional:focus-visible { outline: 2px solid #35d6c8; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-direccional__capa { transform: none; transition: opacity 200ms ease, visibility 0s linear 200ms; }
+  .lz-direccional.esta-dentro .lz-direccional__capa,
+  .lz-direccional:focus-visible .lz-direccional__capa { transition: opacity 200ms ease, visibility 0s; }
+}
+
+/* interacciones · Cambio de imagen con distorsión */
+.lz-distorsion {
+  display: grid;
+  gap: 10px;
+  width: min(100%, 320px);
+}
+.lz-distorsion__filtro { position: absolute; width: 0; height: 0; }
+.lz-distorsion__visor {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #16141f;
+  filter: url(#lz-distorsion-f);
+}
+.lz-distorsion__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+.lz-distorsion__img.esta-visible { opacity: 1; }
+.lz-distorsion__puntos { display: flex; justify-content: center; gap: 8px; }
+.lz-distorsion__puntos button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #3a3750;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+}
+.lz-distorsion__puntos button[aria-current="true"] { background: #8b7bff; transform: scale(1.3); }
+.lz-distorsion__puntos button:focus-visible { outline: 2px solid #8b7bff; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-distorsion__visor { filter: none; }
+  .lz-distorsion__img { transition: opacity 250ms ease; }
+  .lz-distorsion__puntos button { transition: none; }
+}
+
 /* carga · Líneas de texto */
 .lz-esq {
   --esq-base: #1e1b2b;
@@ -1867,4 +2251,380 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .lz-proc::before { animation: none; opacity: 0.42; }
+}
+
+/* navegacion · Rail lateral que se expande */
+.lz-rail {
+  --cerrado: 64px;
+  --abierto: 212px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: var(--cerrado);
+  height: 340px; /* en tu app: 100dvh */
+  padding: 10px;
+  background: #101018;
+  color: #a2a1b3;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: width 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Se abre al pasar, al enfocar con teclado o al fijarlo con el pin */
+.lz-rail:hover,
+.lz-rail:focus-within,
+.lz-rail:has(.lz-rail__pin input:checked) {
+  width: var(--abierto);
+}
+.lz-rail a,
+.lz-rail__pin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  font: 500 0.92rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-rail svg { flex: none; width: 20px; height: 20px; }
+.lz-rail span {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 180ms ease 60ms, transform 220ms ease 60ms;
+}
+.lz-rail:hover span,
+.lz-rail:focus-within span,
+.lz-rail:has(.lz-rail__pin input:checked) span {
+  opacity: 1;
+  transform: none;
+}
+.lz-rail a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-rail a[aria-current="page"] { background: rgba(139, 123, 255, 0.18); color: #cdc5ff; }
+.lz-rail a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+/* Punto de aviso sobre el icono */
+.lz-rail__punto { position: relative; }
+.lz-rail__punto::after {
+  content: "";
+  position: absolute;
+  left: 26px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #35d6c8;
+  box-shadow: 0 0 0 2px #101018;
+}
+.lz-rail__pin { position: relative; margin-top: auto; }
+.lz-rail__pin input { position: absolute; opacity: 0; pointer-events: none; }
+.lz-rail__pin svg { transition: transform 200ms ease; }
+.lz-rail__pin:has(input:checked) svg { transform: rotate(90deg); }
+.lz-rail__pin:has(input:focus-visible) { outline: 2px solid #8b7bff; outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-rail, .lz-rail span, .lz-rail__pin svg { transition: none; }
+}
+
+/* navegacion · Menú de app con grupos plegables */
+.lz-menu {
+  width: 236px;
+  padding: 12px;
+  background: #101018;
+  color: #a2a1b3;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 500 0.9rem/1.2 system-ui, sans-serif;
+}
+.lz-menu__marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding: 8px 10px 14px;
+  border-bottom: 1px solid #2c2938;
+  color: #f4f3f8;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.lz-menu__marca i {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+}
+/* Grupos plegables con <details>: sin JS y accesibles de serie */
+.lz-menu__grupo summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 12px 10px 6px;
+  color: #6f6e7f;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.lz-menu__grupo summary::-webkit-details-marker { display: none; }
+.lz-menu__grupo summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 200ms ease;
+}
+.lz-menu__grupo[open] summary::after { transform: rotate(45deg); }
+.lz-menu__grupo summary:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; border-radius: 8px; }
+.lz-menu a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+.lz-menu a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-menu a[aria-current="page"] { background: rgba(139, 123, 255, 0.16); color: #cdc5ff; }
+.lz-menu a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 3px;
+  background: #8b7bff;
+}
+.lz-menu a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+.lz-menu svg { flex: none; width: 18px; height: 18px; }
+.lz-menu__num {
+  margin-left: auto;
+  min-width: 22px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #35d6c8;
+  color: #0a0a12;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+}
+.lz-menu__cuenta {
+  height: auto;
+  margin-top: 10px;
+  padding: 12px 10px;
+  border-top: 1px solid #2c2938;
+  border-radius: 0 0 10px 10px;
+  color: #f4f3f8;
+}
+.lz-menu__cuenta i {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb454, #ff7a68);
+}
+.lz-menu__cuenta small { display: block; margin-top: 2px; color: #6f6e7f; font-weight: 400; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-menu__grupo summary::after { transition: none; }
+}
+
+/* navegacion · Cajón de navegación con popover */
+/* Sin JS: el atributo popover abre, cierra con Escape, atrapa el clic fuera
+   y pinta el fondo con ::backdrop. El navegador hace el trabajo. */
+.lz-cajon__abrir,
+.lz-cajon__cerrar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid #2c2938;
+  border-radius: 999px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 600 0.9rem system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-cajon__abrir svg, .lz-cajon__cerrar svg { width: 18px; height: 18px; }
+.lz-cajon__abrir:hover, .lz-cajon__cerrar:hover { border-color: #8b7bff; }
+.lz-cajon__abrir:focus-visible, .lz-cajon__cerrar:focus-visible { outline: 2px solid #8b7bff; outline-offset: 3px; }
+.lz-cajon__cerrar { width: 42px; padding: 0; justify-content: center; }
+.lz-cajon {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(320px, 85vw);
+  height: 100dvh;
+  margin: 0;
+  padding: 18px;
+  border: 0;
+  border-right: 1px solid #2c2938;
+  background: #101018;
+  color: #a2a1b3;
+  font: 500 0.95rem/1.2 system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transform: translateX(-100%);
+  transition:
+    transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    display 320ms allow-discrete,
+    overlay 320ms allow-discrete;
+}
+.lz-cajon:popover-open { transform: none; }
+@starting-style {
+  .lz-cajon:popover-open { transform: translateX(-100%); }
+}
+.lz-cajon::backdrop {
+  background: rgba(10, 10, 15, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: opacity 320ms ease, display 320ms allow-discrete, overlay 320ms allow-discrete;
+  opacity: 1;
+}
+@starting-style {
+  .lz-cajon:popover-open::backdrop { opacity: 0; }
+}
+.lz-cajon__cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 4px 4px 14px;
+  border-bottom: 1px solid #2c2938;
+  color: #f4f3f8;
+  font-size: 1.05rem;
+}
+.lz-cajon a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 46px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+.lz-cajon a svg { width: 20px; height: 20px; }
+.lz-cajon a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-cajon a[aria-current="page"] { background: rgba(139, 123, 255, 0.16); color: #cdc5ff; }
+.lz-cajon a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-cajon, .lz-cajon::backdrop { transition: none; }
+}
+
+/* navegacion · Barra inferior móvil */
+.lz-barra-inf {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  max-width: 360px;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  background: rgba(16, 16, 24, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+/* Variante pegada al borde inferior de la pantalla */
+.lz-barra-inf--fija {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 50;
+  max-width: none;
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+}
+.lz-barra-inf a {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  color: #a2a1b3;
+  text-decoration: none;
+  font: 600 0.68rem/1 system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  transition: color 160ms ease, background 160ms ease;
+}
+.lz-barra-inf svg { width: 22px; height: 22px; }
+.lz-barra-inf a:hover { color: #f4f3f8; }
+.lz-barra-inf a[aria-current="page"] { color: #cdc5ff; background: rgba(139, 123, 255, 0.16); }
+.lz-barra-inf a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+.lz-barra-inf__punto { position: relative; }
+.lz-barra-inf__punto::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: calc(50% - 16px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff7a68;
+  box-shadow: 0 0 0 2px #101018;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-barra-inf a { transition: none; }
+}
+
+/* navegacion · Pestañas con indicador deslizante */
+.lz-pestanas {
+  --n: 4;   /* numero de pestañas */
+  --i: 0;   /* la activa, contando desde 0 */
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  width: min(100%, 420px);
+  padding: 6px;
+  border: 1px solid #2c2938;
+  border-radius: 999px;
+  background: #101018;
+}
+.lz-pestanas a {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  border-radius: 999px;
+  color: #a2a1b3;
+  text-decoration: none;
+  font: 600 0.86rem/1 system-ui, sans-serif;
+  transition: color 180ms ease;
+}
+.lz-pestanas a:hover,
+.lz-pestanas a[aria-current="page"] { color: #f4f3f8; }
+.lz-pestanas a:focus-visible { outline: 2px solid #35d6c8; outline-offset: -2px; }
+/* El indicador es uno solo: se desliza hasta la pestaña que manda */
+.lz-pestanas__ind {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: calc((100% - 12px) / var(--n));
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b7bff, #6e5df2);
+  transform: translateX(calc(var(--i) * 100%));
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* La pestaña actual fija la posicion de reposo... */
+.lz-pestanas:has(> a:nth-child(2)[aria-current="page"]) { --i: 1; }
+.lz-pestanas:has(> a:nth-child(3)[aria-current="page"]) { --i: 2; }
+.lz-pestanas:has(> a:nth-child(4)[aria-current="page"]) { --i: 3; }
+/* ...y el cursor o el teclado la mueven de visita */
+.lz-pestanas:has(> a:nth-child(1):is(:hover, :focus-visible)) { --i: 0; }
+.lz-pestanas:has(> a:nth-child(2):is(:hover, :focus-visible)) { --i: 1; }
+.lz-pestanas:has(> a:nth-child(3):is(:hover, :focus-visible)) { --i: 2; }
+.lz-pestanas:has(> a:nth-child(4):is(:hover, :focus-visible)) { --i: 3; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-pestanas__ind, .lz-pestanas a { transition: none; }
 }

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navegación CSS: rail, menú de app y barra móvil | Lienzo</title>
+    <meta name="description" content="Navegación lista para copiar: rail lateral que se expande, menú de app con grupos plegables, cajón con popover sin JS, barra inferior móvil y pestañas con indicador." />
+    <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/navegacion/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Navegación CSS lista para copiar: rail, menú, cajón, barra móvil y pestañas" />
+    <meta property="og:description" content="Navegación lista para copiar: rail lateral que se expande, menú de app con grupos plegables, cajón con popover sin JS, barra inferior móvil y pestañas con indicador." />
+    <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/navegacion/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-codigo-web-componentes-navegacion.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Navegación CSS: rail, menú de app y barra móvil, en Lienzo" />
+    <meta name="twitter:image" content="https://lienzo.tools/assets/og/og-codigo-web-componentes-navegacion.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026090404" />
+    <link rel="stylesheet" href="../css/componentes.css?v=2026090404" />
+
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://lienzo.tools/codigo-web/componentes/navegacion/#page",
+      "name": "Navegación con CSS moderno",
+      "url": "https://lienzo.tools/codigo-web/componentes/navegacion/",
+      "description": "Navegación lista para copiar: rail lateral que se expande, menú de app con grupos plegables, cajón con popover sin JS, barra inferior móvil y pestañas con indicador.",
+      "inLanguage": "es",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lienzo",
+        "url": "https://lienzo.tools/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://lienzo.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Código web",
+          "item": "https://lienzo.tools/codigo-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Componentes CSS",
+          "item": "https://lienzo.tools/codigo-web/componentes/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Navegación con CSS moderno",
+          "item": "https://lienzo.tools/codigo-web/componentes/navegacion/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Funciona :has() en todos los navegadores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí en todos los actuales: Chrome, Edge, Firefox y Safari lo llevan desde 2023 y es Baseline. Si necesitas cubrir un navegador de hace más de tres años, el rail y las pestañas siguen viéndose bien: solo pierden el estado que depende de la casilla marcada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y el atributo popover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "También es Baseline desde 2024 en los cuatro grandes. En un navegador sin soporte el cajón se comporta como un bloque normal, visible, sin romper la página. Si te importa ese caso, escóndelo con una regla @supports not selector(:popover-open)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué el rail se abre también con el teclado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque :focus-within detecta que un enlace de dentro tiene el foco. Sin esa regla, quien navega con Tab vería solo iconos sin etiqueta: el rail sería inutilizable para esa persona. Es una línea de CSS y evita un problema real."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo cambio el número de pestañas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ajusta la variable --n al número de enlaces y añade una regla :has(> a:nth-child(N)...) por cada pestaña nueva, copiando el patrón de las que hay. El indicador calcula su ancho a partir de --n, así que no hay que tocar nada más."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El menú de app recuerda qué grupos están plegados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, es CSS puro: al recargar vuelve al estado del HTML (los grupos con el atributo open empiezan abiertos). Si quieres memoria, guarda el estado de cada details en localStorage con tres líneas de JS al evento toggle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo usar la barra inferior en una web normal, no solo en una app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y de hecho es donde más se nota: en móvil, una barra fija con cuatro o cinco destinos ahorra el viaje al menú superior. Añade la clase --fija y respeta la zona segura de los teléfonos con muesca, que la receta ya contempla con env(safe-area-inset-bottom)."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="/codigo-web/" aria-current="page">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section shell">
+        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Navegación con CSS moderno</span>
+        </nav>
+
+        <div class="page-head">
+          <p class="eyebrow reveal">Código listo para copiar</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Navegación con CSS moderno</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Cinco piezas que resuelven cómo se mueve la gente por una app o un sitio, casi todas sin JavaScript: el navegador ya sabe plegar, abrir cajones y atrapar el foco si le pides lo correcto. Cada una trae su estado activo, su foco visible por teclado y su respeto a quien pide menos movimiento.</p>
+        </div>
+
+        <section class="lab-seccion" id="laterales" aria-labelledby="laterales-h">
+          <header class="lab-seccion__head">
+            <h2 id="laterales-h">Laterales</h2>
+            <p>Para apps y paneles: un rail de iconos que crece al pasar el cursor, y un menú completo con grupos que se pliegan con el elemento details.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="rail-lateral">
+            <div class="pieza__escenario">
+              <nav class="lz-rail" aria-label="Menú principal">
+  <a href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg><span>Inicio</span></a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.2-4.2"/></svg><span>Buscar</span></a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"/></svg><span>Estadísticas</span></a>
+  <a href="#" class="lz-rail__punto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Mensajes</span></a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="19" cy="17" r="2"/></svg><span>Ajustes</span></a>
+  <label class="lz-rail__pin"><input type="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg><span>Fijar abierto</span></label>
+</nav>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Rail lateral que se expande</h3>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-rail {
+  --cerrado: 64px;
+  --abierto: 212px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: var(--cerrado);
+  height: 340px; /* en tu app: 100dvh */
+  padding: 10px;
+  background: #101018;
+  color: #a2a1b3;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: width 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Se abre al pasar, al enfocar con teclado o al fijarlo con el pin */
+.lz-rail:hover,
+.lz-rail:focus-within,
+.lz-rail:has(.lz-rail__pin input:checked) {
+  width: var(--abierto);
+}
+.lz-rail a,
+.lz-rail__pin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  font: 500 0.92rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-rail svg { flex: none; width: 20px; height: 20px; }
+.lz-rail span {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 180ms ease 60ms, transform 220ms ease 60ms;
+}
+.lz-rail:hover span,
+.lz-rail:focus-within span,
+.lz-rail:has(.lz-rail__pin input:checked) span {
+  opacity: 1;
+  transform: none;
+}
+.lz-rail a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-rail a[aria-current="page"] { background: rgba(139, 123, 255, 0.18); color: #cdc5ff; }
+.lz-rail a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+/* Punto de aviso sobre el icono */
+.lz-rail__punto { position: relative; }
+.lz-rail__punto::after {
+  content: "";
+  position: absolute;
+  left: 26px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #35d6c8;
+  box-shadow: 0 0 0 2px #101018;
+}
+.lz-rail__pin { position: relative; margin-top: auto; }
+.lz-rail__pin input { position: absolute; opacity: 0; pointer-events: none; }
+.lz-rail__pin svg { transition: transform 200ms ease; }
+.lz-rail__pin:has(input:checked) svg { transform: rotate(90deg); }
+.lz-rail__pin:has(input:focus-visible) { outline: 2px solid #8b7bff; outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-rail, .lz-rail span, .lz-rail__pin svg { transition: none; }
+}</template>
+            <template class="receta-html">&lt;nav class="lz-rail" aria-label="Menú principal"&gt;
+  &lt;a href="#" aria-current="page"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M3 11 12 4l9 7"/&gt;&lt;path d="M5 10v10h14V10"/&gt;&lt;/svg&gt;&lt;span&gt;Inicio&lt;/span&gt;&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;circle cx="11" cy="11" r="6"/&gt;&lt;path d="m20 20-4.2-4.2"/&gt;&lt;/svg&gt;&lt;span&gt;Buscar&lt;/span&gt;&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"/&gt;&lt;/svg&gt;&lt;span&gt;Estadísticas&lt;/span&gt;&lt;/a&gt;
+  &lt;a href="#" class="lz-rail__punto"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 5h16v11H9l-5 4z"/&gt;&lt;/svg&gt;&lt;span&gt;Mensajes&lt;/span&gt;&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"/&gt;&lt;circle cx="17" cy="7" r="2"/&gt;&lt;circle cx="9" cy="12" r="2"/&gt;&lt;circle cx="19" cy="17" r="2"/&gt;&lt;/svg&gt;&lt;span&gt;Ajustes&lt;/span&gt;&lt;/a&gt;
+  &lt;label class="lz-rail__pin"&gt;&lt;input type="checkbox"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="m9 6 6 6-6 6"/&gt;&lt;/svg&gt;&lt;span&gt;Fijar abierto&lt;/span&gt;&lt;/label&gt;
+&lt;/nav&gt;</template>
+          </article>
+          <article class="pieza" id="menu-app">
+            <div class="pieza__escenario">
+              <nav class="lz-menu" aria-label="Menú de la aplicación">
+  <div class="lz-menu__marca"><i aria-hidden="true"></i>Estudio</div>
+  <details class="lz-menu__grupo" open>
+    <summary>Trabajo</summary>
+    <a href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h6l2 2h10v11H3z"/></svg>Proyectos<span class="lz-menu__num">12</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Favoritos</a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M4 20h16"/></svg>Descargas</a>
+  </details>
+  <details class="lz-menu__grupo" open>
+    <summary>Cuenta</summary>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"/></svg>Avisos<span class="lz-menu__num">3</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="19" cy="17" r="2"/></svg>Ajustes</a>
+  </details>
+  <a class="lz-menu__cuenta" href="#"><i aria-hidden="true"></i><span>Andrea Ruiz<small>Plan Pro</small></span></a>
+</nav>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Menú de app con grupos plegables</h3>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-menu {
+  width: 236px;
+  padding: 12px;
+  background: #101018;
+  color: #a2a1b3;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 500 0.9rem/1.2 system-ui, sans-serif;
+}
+.lz-menu__marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding: 8px 10px 14px;
+  border-bottom: 1px solid #2c2938;
+  color: #f4f3f8;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.lz-menu__marca i {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+}
+/* Grupos plegables con <details>: sin JS y accesibles de serie */
+.lz-menu__grupo summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 12px 10px 6px;
+  color: #6f6e7f;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.lz-menu__grupo summary::-webkit-details-marker { display: none; }
+.lz-menu__grupo summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 200ms ease;
+}
+.lz-menu__grupo[open] summary::after { transform: rotate(45deg); }
+.lz-menu__grupo summary:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; border-radius: 8px; }
+.lz-menu a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+.lz-menu a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-menu a[aria-current="page"] { background: rgba(139, 123, 255, 0.16); color: #cdc5ff; }
+.lz-menu a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 3px;
+  background: #8b7bff;
+}
+.lz-menu a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+.lz-menu svg { flex: none; width: 18px; height: 18px; }
+.lz-menu__num {
+  margin-left: auto;
+  min-width: 22px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #35d6c8;
+  color: #0a0a12;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+}
+.lz-menu__cuenta {
+  height: auto;
+  margin-top: 10px;
+  padding: 12px 10px;
+  border-top: 1px solid #2c2938;
+  border-radius: 0 0 10px 10px;
+  color: #f4f3f8;
+}
+.lz-menu__cuenta i {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb454, #ff7a68);
+}
+.lz-menu__cuenta small { display: block; margin-top: 2px; color: #6f6e7f; font-weight: 400; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-menu__grupo summary::after { transition: none; }
+}</template>
+            <template class="receta-html">&lt;nav class="lz-menu" aria-label="Menú de la aplicación"&gt;
+  &lt;div class="lz-menu__marca"&gt;&lt;i aria-hidden="true"&gt;&lt;/i&gt;Estudio&lt;/div&gt;
+  &lt;details class="lz-menu__grupo" open&gt;
+    &lt;summary&gt;Trabajo&lt;/summary&gt;
+    &lt;a href="#" aria-current="page"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M3 6h6l2 2h10v11H3z"/&gt;&lt;/svg&gt;Proyectos&lt;span class="lz-menu__num"&gt;12&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/&gt;&lt;/svg&gt;Favoritos&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M12 4v11m-5-5 5 5 5-5M4 20h16"/&gt;&lt;/svg&gt;Descargas&lt;/a&gt;
+  &lt;/details&gt;
+  &lt;details class="lz-menu__grupo" open&gt;
+    &lt;summary&gt;Cuenta&lt;/summary&gt;
+    &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"/&gt;&lt;/svg&gt;Avisos&lt;span class="lz-menu__num"&gt;3&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"/&gt;&lt;circle cx="17" cy="7" r="2"/&gt;&lt;circle cx="9" cy="12" r="2"/&gt;&lt;circle cx="19" cy="17" r="2"/&gt;&lt;/svg&gt;Ajustes&lt;/a&gt;
+  &lt;/details&gt;
+  &lt;a class="lz-menu__cuenta" href="#"&gt;&lt;i aria-hidden="true"&gt;&lt;/i&gt;&lt;span&gt;Andrea Ruiz&lt;small&gt;Plan Pro&lt;/small&gt;&lt;/span&gt;&lt;/a&gt;
+&lt;/nav&gt;</template>
+          </article>
+          </div>
+        </section>
+
+        <section class="lab-seccion" id="movil" aria-labelledby="movil-h">
+          <header class="lab-seccion__head">
+            <h2 id="movil-h">Móvil y pestañas</h2>
+            <p>Para sitios: el cajón que se abre con el atributo popover, la barra inferior de móvil con su zona segura, y las pestañas con un solo indicador que se desliza.</p>
+          </header>
+          <div class="lab-galeria">
+          <article class="pieza" id="cajon-popover">
+            <div class="pieza__escenario">
+              <button class="lz-cajon__abrir" type="button" popovertarget="lz-cajon-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menú</button>
+<nav class="lz-cajon" id="lz-cajon-menu" popover aria-label="Menú de navegación">
+  <header class="lz-cajon__cabeza">
+    <strong>Lienzo</strong>
+    <button class="lz-cajon__cerrar" type="button" popovertarget="lz-cajon-menu" popovertargetaction="hide" aria-label="Cerrar el menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </header>
+  <a href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>Inicio</a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></svg>Recursos</a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"/></svg>Herramientas</a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Blog</a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Contacto</a>
+</nav>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Cajón de navegación con popover</h3>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">/* Sin JS: el atributo popover abre, cierra con Escape, atrapa el clic fuera
+   y pinta el fondo con ::backdrop. El navegador hace el trabajo. */
+.lz-cajon__abrir,
+.lz-cajon__cerrar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid #2c2938;
+  border-radius: 999px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 600 0.9rem system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-cajon__abrir svg, .lz-cajon__cerrar svg { width: 18px; height: 18px; }
+.lz-cajon__abrir:hover, .lz-cajon__cerrar:hover { border-color: #8b7bff; }
+.lz-cajon__abrir:focus-visible, .lz-cajon__cerrar:focus-visible { outline: 2px solid #8b7bff; outline-offset: 3px; }
+.lz-cajon__cerrar { width: 42px; padding: 0; justify-content: center; }
+.lz-cajon {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(320px, 85vw);
+  height: 100dvh;
+  margin: 0;
+  padding: 18px;
+  border: 0;
+  border-right: 1px solid #2c2938;
+  background: #101018;
+  color: #a2a1b3;
+  font: 500 0.95rem/1.2 system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transform: translateX(-100%);
+  transition:
+    transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    display 320ms allow-discrete,
+    overlay 320ms allow-discrete;
+}
+.lz-cajon:popover-open { transform: none; }
+@starting-style {
+  .lz-cajon:popover-open { transform: translateX(-100%); }
+}
+.lz-cajon::backdrop {
+  background: rgba(10, 10, 15, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: opacity 320ms ease, display 320ms allow-discrete, overlay 320ms allow-discrete;
+  opacity: 1;
+}
+@starting-style {
+  .lz-cajon:popover-open::backdrop { opacity: 0; }
+}
+.lz-cajon__cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 4px 4px 14px;
+  border-bottom: 1px solid #2c2938;
+  color: #f4f3f8;
+  font-size: 1.05rem;
+}
+.lz-cajon a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 46px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+.lz-cajon a svg { width: 20px; height: 20px; }
+.lz-cajon a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-cajon a[aria-current="page"] { background: rgba(139, 123, 255, 0.16); color: #cdc5ff; }
+.lz-cajon a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-cajon, .lz-cajon::backdrop { transition: none; }
+}</template>
+            <template class="receta-html">&lt;button class="lz-cajon__abrir" type="button" popovertarget="lz-cajon-menu"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 7h16M4 12h16M4 17h16"/&gt;&lt;/svg&gt;Menú&lt;/button&gt;
+&lt;nav class="lz-cajon" id="lz-cajon-menu" popover aria-label="Menú de navegación"&gt;
+  &lt;header class="lz-cajon__cabeza"&gt;
+    &lt;strong&gt;Lienzo&lt;/strong&gt;
+    &lt;button class="lz-cajon__cerrar" type="button" popovertarget="lz-cajon-menu" popovertargetaction="hide" aria-label="Cerrar el menú"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M6 6l12 12M18 6 6 18"/&gt;&lt;/svg&gt;&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;a href="#" aria-current="page"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M3 11 12 4l9 7"/&gt;&lt;path d="M5 10v10h14V10"/&gt;&lt;/svg&gt;Inicio&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/&gt;&lt;/svg&gt;Recursos&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"/&gt;&lt;/svg&gt;Herramientas&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 5h16v11H9l-5 4z"/&gt;&lt;/svg&gt;Blog&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;circle cx="12" cy="8" r="4"/&gt;&lt;path d="M4 21a8 8 0 0 1 16 0"/&gt;&lt;/svg&gt;Contacto&lt;/a&gt;
+&lt;/nav&gt;</template>
+          </article>
+          <article class="pieza" id="barra-inferior">
+            <div class="pieza__escenario">
+              <nav class="lz-barra-inf" aria-label="Navegación principal">
+  <a href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>Inicio</a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.2-4.2"/></svg>Buscar</a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></svg>Recursos</a>
+  <a href="#" class="lz-barra-inf__punto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"/></svg>Avisos</a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Cuenta</a>
+</nav>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Barra inferior móvil</h3>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-barra-inf {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  max-width: 360px;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  background: rgba(16, 16, 24, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+/* Variante pegada al borde inferior de la pantalla */
+.lz-barra-inf--fija {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 50;
+  max-width: none;
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+}
+.lz-barra-inf a {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  color: #a2a1b3;
+  text-decoration: none;
+  font: 600 0.68rem/1 system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  transition: color 160ms ease, background 160ms ease;
+}
+.lz-barra-inf svg { width: 22px; height: 22px; }
+.lz-barra-inf a:hover { color: #f4f3f8; }
+.lz-barra-inf a[aria-current="page"] { color: #cdc5ff; background: rgba(139, 123, 255, 0.16); }
+.lz-barra-inf a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+.lz-barra-inf__punto { position: relative; }
+.lz-barra-inf__punto::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: calc(50% - 16px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff7a68;
+  box-shadow: 0 0 0 2px #101018;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-barra-inf a { transition: none; }
+}</template>
+            <template class="receta-html">&lt;nav class="lz-barra-inf" aria-label="Navegación principal"&gt;
+  &lt;a href="#" aria-current="page"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M3 11 12 4l9 7"/&gt;&lt;path d="M5 10v10h14V10"/&gt;&lt;/svg&gt;Inicio&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;circle cx="11" cy="11" r="6"/&gt;&lt;path d="m20 20-4.2-4.2"/&gt;&lt;/svg&gt;Buscar&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/&gt;&lt;/svg&gt;Recursos&lt;/a&gt;
+  &lt;a href="#" class="lz-barra-inf__punto"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"/&gt;&lt;/svg&gt;Avisos&lt;/a&gt;
+  &lt;a href="#"&gt;&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;circle cx="12" cy="8" r="4"/&gt;&lt;path d="M4 21a8 8 0 0 1 16 0"/&gt;&lt;/svg&gt;Cuenta&lt;/a&gt;
+&lt;/nav&gt;</template>
+          </article>
+          <article class="pieza" id="pestanas-indicador">
+            <div class="pieza__escenario">
+              <nav class="lz-pestanas" aria-label="Secciones">
+  <a href="#" aria-current="page">Inicio</a>
+  <a href="#">Recursos</a>
+  <a href="#">Blog</a>
+  <a href="#">Contacto</a>
+  <i class="lz-pestanas__ind" aria-hidden="true"></i>
+</nav>
+            </div>
+            <div class="pieza__pie">
+              <h3 class="pieza__nombre">Pestañas con indicador deslizante</h3>
+              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
+              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
+            </div>
+            <template class="receta-css">.lz-pestanas {
+  --n: 4;   /* numero de pestañas */
+  --i: 0;   /* la activa, contando desde 0 */
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  width: min(100%, 420px);
+  padding: 6px;
+  border: 1px solid #2c2938;
+  border-radius: 999px;
+  background: #101018;
+}
+.lz-pestanas a {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  border-radius: 999px;
+  color: #a2a1b3;
+  text-decoration: none;
+  font: 600 0.86rem/1 system-ui, sans-serif;
+  transition: color 180ms ease;
+}
+.lz-pestanas a:hover,
+.lz-pestanas a[aria-current="page"] { color: #f4f3f8; }
+.lz-pestanas a:focus-visible { outline: 2px solid #35d6c8; outline-offset: -2px; }
+/* El indicador es uno solo: se desliza hasta la pestaña que manda */
+.lz-pestanas__ind {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: calc((100% - 12px) / var(--n));
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b7bff, #6e5df2);
+  transform: translateX(calc(var(--i) * 100%));
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* La pestaña actual fija la posicion de reposo... */
+.lz-pestanas:has(> a:nth-child(2)[aria-current="page"]) { --i: 1; }
+.lz-pestanas:has(> a:nth-child(3)[aria-current="page"]) { --i: 2; }
+.lz-pestanas:has(> a:nth-child(4)[aria-current="page"]) { --i: 3; }
+/* ...y el cursor o el teclado la mueven de visita */
+.lz-pestanas:has(> a:nth-child(1):is(:hover, :focus-visible)) { --i: 0; }
+.lz-pestanas:has(> a:nth-child(2):is(:hover, :focus-visible)) { --i: 1; }
+.lz-pestanas:has(> a:nth-child(3):is(:hover, :focus-visible)) { --i: 2; }
+.lz-pestanas:has(> a:nth-child(4):is(:hover, :focus-visible)) { --i: 3; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-pestanas__ind, .lz-pestanas a { transition: none; }
+}</template>
+            <template class="receta-html">&lt;nav class="lz-pestanas" aria-label="Secciones"&gt;
+  &lt;a href="#" aria-current="page"&gt;Inicio&lt;/a&gt;
+  &lt;a href="#"&gt;Recursos&lt;/a&gt;
+  &lt;a href="#"&gt;Blog&lt;/a&gt;
+  &lt;a href="#"&gt;Contacto&lt;/a&gt;
+  &lt;i class="lz-pestanas__ind" aria-hidden="true"&gt;&lt;/i&gt;
+&lt;/nav&gt;</template>
+          </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3500px">
+        <div class="prose">
+          <h2>Por qué casi todo es CSS puro</h2>
+          <p>
+            Hace unos años, cada una de estas piezas pedía su script: abrir y cerrar un
+            menú, saber qué pestaña está activa, plegar un grupo. Hoy el navegador trae
+            esas tres cosas resueltas. <code>:has()</code> deja que un contenedor reaccione
+            a lo que pasa dentro de él (una casilla marcada, un enlace bajo el cursor);
+            <code>&lt;details&gt;</code> pliega y despliega con teclado y lector de pantalla
+            incluidos; y el atributo <code>popover</code> abre un panel en la capa superior,
+            lo cierra con Escape o con un clic fuera y pinta el fondo con
+            <code>::backdrop</code>. Cuatro de las cinco piezas no llevan ni una línea de JS.
+          </p>
+
+          <h2>Cómo usarlas</h2>
+          <ol>
+            <li>Copia CSS y HTML de la pieza. Los iconos van en línea como SVG de trazo: cámbialos por los tuyos manteniendo el tamaño.</li>
+            <li>Marca la página actual con <code>aria-current="page"</code> en el enlace que toque. Es lo que pinta el estado activo y lo que anuncia el lector de pantalla.</li>
+            <li>Los colores están escritos en la paleta de Lienzo (tinta, violeta, turquesa). Sustitúyelos por tus variables y el resto se mantiene.</li>
+          </ol>
+
+          <h2>Accesibilidad que ya viene puesta</h2>
+          <p>
+            Cada enlace tiene su foco visible con <code>:focus-visible</code>, los grupos
+            plegados quedan fuera del orden de tabulación porque <code>details</code> lo
+            hace solo, y el cajón devuelve el foco al botón que lo abrió porque
+            <code>popover</code> también. El rail se abre al recibir foco por teclado, no
+            solo con el cursor: una persona que navega con Tab ve las etiquetas igual que
+            quien usa ratón.
+          </p>
+
+          <h2>Dónde encajan</h2>
+          <ul>
+            <li><strong>Paneles y herramientas:</strong> el rail cuando el espacio manda y el menú de app cuando hay muchas secciones.</li>
+            <li><strong>Sitios en móvil:</strong> el cajón para el menú principal y la barra inferior para las cuatro o cinco acciones de siempre.</li>
+            <li><strong>Secciones de una misma página:</strong> las pestañas con indicador, que también sirven como filtro de una galería.</li>
+          </ul>
+
+          <h2>Las demás categorías</h2>
+          <p>
+            La familia completa, cada una con sus piezas y su código:
+            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/botones/">botones y controles</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a>, <a href="/codigo-web/componentes/interacciones/">microinteracciones</a> y <a href="/codigo-web/componentes/carga/">estados de carga</a>.
+            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
+          </p>
+
+          <h2 id="faq">Preguntas frecuentes</h2>
+          <details class="faq-item" name="faq" open>
+            <summary><h3>¿Funciona :has() en todos los navegadores?</h3></summary>
+            <p>Sí en todos los actuales: Chrome, Edge, Firefox y Safari lo llevan desde 2023 y es Baseline. Si necesitas cubrir un navegador de hace más de tres años, el rail y las pestañas siguen viéndose bien: solo pierden el estado que depende de la casilla marcada.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Y el atributo popover?</h3></summary>
+            <p>También es Baseline desde 2024 en los cuatro grandes. En un navegador sin soporte el cajón se comporta como un bloque normal, visible, sin romper la página. Si te importa ese caso, escóndelo con una regla @supports not selector(:popover-open).</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Por qué el rail se abre también con el teclado?</h3></summary>
+            <p>Porque :focus-within detecta que un enlace de dentro tiene el foco. Sin esa regla, quien navega con Tab vería solo iconos sin etiqueta: el rail sería inutilizable para esa persona. Es una línea de CSS y evita un problema real.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Cómo cambio el número de pestañas?</h3></summary>
+            <p>Ajusta la variable --n al número de enlaces y añade una regla :has(> a:nth-child(N)...) por cada pestaña nueva, copiando el patrón de las que hay. El indicador calcula su ancho a partir de --n, así que no hay que tocar nada más.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿El menú de app recuerda qué grupos están plegados?</h3></summary>
+            <p>No, es CSS puro: al recargar vuelve al estado del HTML (los grupos con el atributo open empiezan abiertos). Si quieres memoria, guarda el estado de cada details en localStorage con tres líneas de JS al evento toggle.</p>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary><h3>¿Puedo usar la barra inferior en una web normal, no solo en una app?</h3></summary>
+            <p>Sí, y de hecho es donde más se nota: en móvil, una barra fija con cuatro o cinco destinos ahorra el viaje al menú superior. Añade la clase --fija y respeta la zona segura de los teléfonos con muesca, que la receta ya contempla con env(safe-area-inset-bottom).</p>
+          </details>
+        </div>
+
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </section>
+      <section class="section shell compartir-bloque" aria-label="Compartir">
+          <p class="compartir-bloque__lema">Si conoces a alguien que maqueta webs, esto le ahorra el día.</p>
+          <div class="compartir" aria-label="Compartir esta página">
+            <span class="compartir__titulo">Compartir</span>
+            <a href="https://wa.me/?text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Navegaci%C3%B3n%20CSS%3A%20rail%2C%20men%C3%BA%20de%20app%20y%20barra%20m%C3%B3vil%2C%20listo%20para%20copiar%3A%20https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fnavegacion%2F" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"/></svg></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fnavegacion%2F" target="_blank" rel="noopener" aria-label="Compartir en Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"/></svg></a>
+            <a href="https://t.me/share/url?url=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fnavegacion%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Navegaci%C3%B3n%20CSS%3A%20rail%2C%20men%C3%BA%20de%20app%20y%20barra%20m%C3%B3vil%2C%20listo%20para%20copiar" target="_blank" rel="noopener" aria-label="Compartir en Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"/></svg></a>
+            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fnavegacion%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Navegaci%C3%B3n%20CSS%3A%20rail%2C%20men%C3%BA%20de%20app%20y%20barra%20m%C3%B3vil%2C%20listo%20para%20copiar" target="_blank" rel="noopener" aria-label="Compartir en X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
+            <a href="mailto:?subject=CSS%20listo%20para%20copiar&amp;body=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Navegaci%C3%B3n%20CSS%3A%20rail%2C%20men%C3%BA%20de%20app%20y%20barra%20m%C3%B3vil%2C%20listo%20para%20copiar%3A%20https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fnavegacion%2F%0D%0A%0D%0AEncontrado%20en%20lienzo.tools" aria-label="Compartir por correo" title="Correo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 7 9-7"/></svg></a>
+            <button type="button" data-compartir-copiar aria-label="Copiar el enlace" title="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
+          </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio"><svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Componentes CSS</h4>
+            <ul>
+              <li><a href="/codigo-web/componentes/">Componentes CSS</a></li>
+              <li><a href="/codigo-web/componentes/formas/">Formas y recortes</a></li>
+              <li><a href="/codigo-web/componentes/superficies/">Vidrio y neón</a></li>
+              <li><a href="/codigo-web/componentes/bento/">Bento grid</a></li>
+              <li><a href="/codigo-web/componentes/botones/">Botones y controles</a></li>
+              <li><a href="/codigo-web/componentes/tarjetas/">Tarjetas</a></li>
+              <li><a href="/codigo-web/componentes/formularios/">Formularios</a></li>
+              <li><a href="/codigo-web/componentes/datos/">Datos y métricas</a></li>
+              <li><a href="/codigo-web/componentes/interacciones/">Microinteracciones</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/licencias-de-terceros/">Terceros</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026083001" defer></script>
+    <script src="../js/componentes.js?v=2026090404" defer></script>
+  </body>
+</html>

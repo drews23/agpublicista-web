@@ -164,4 +164,71 @@
       cerrar.addEventListener("click", () => dialogo.close())
     );
   });
+
+  /* Capa que entra por donde llega el cursor */
+  document.querySelectorAll("[data-lz-direccional]").forEach((el) => {
+    const LADOS = [
+      { ax: -1, ay: 0, origen: "50% 0%" },
+      { ax: 0, ay: -1, origen: "100% 50%" },
+      { ax: 1, ay: 0, origen: "50% 100%" },
+      { ax: 0, ay: 1, origen: "0% 50%" },
+    ];
+    const lado = (e) => {
+      const c = el.getBoundingClientRect();
+      const x = (e.clientX - c.left) / c.width - 0.5;
+      const y = (e.clientY - c.top) / c.height - 0.5;
+      return Math.round(Math.atan2(y, x) / (Math.PI / 2) + 5) % 4;
+    };
+    const orienta = (i) => {
+      el.style.setProperty("--ax", LADOS[i].ax);
+      el.style.setProperty("--ay", LADOS[i].ay);
+      el.style.setProperty("--origen", LADOS[i].origen);
+    };
+    el.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "touch") return;
+      orienta(lado(e));
+      void el.offsetWidth; // fija la orientacion antes de animar
+      el.classList.add("esta-dentro");
+    });
+    el.addEventListener("pointerleave", (e) => {
+      orienta(lado(e));
+      el.classList.remove("esta-dentro");
+    });
+  });
+
+  /* Cambio de imagen con distorsion (filtro SVG, sin librerias) */
+  document.querySelectorAll("[data-lz-distorsion]").forEach((raiz) => {
+    const capas = [...raiz.querySelectorAll(".lz-distorsion__img")];
+    const puntos = [...raiz.querySelectorAll("[data-ir]")];
+    const mapa = raiz.querySelector("feDisplacementMap");
+    let actual = 0, animando = false, pila = 1;
+    const ir = (n) => {
+      if (animando || n === actual) return;
+      animando = true;
+      const anterior = actual;
+      actual = n;
+      puntos.forEach((p, i) => p.setAttribute("aria-current", i === n ? "true" : "false"));
+      capas[n].style.zIndex = String(++pila);
+      capas[n].classList.add("esta-visible");
+      let terminado = false;
+      const termina = () => {
+        if (terminado) return;
+        terminado = true;
+        capas[anterior].classList.remove("esta-visible");
+        if (mapa) mapa.setAttribute("scale", "0");
+        animando = false;
+      };
+      if (calmado || !mapa) return void setTimeout(termina, 260);
+      const t0 = performance.now(), DUR = 900;
+      // Red: si el rAF se congela (pestana en segundo plano), remata igual
+      setTimeout(termina, DUR + 80);
+      (function paso(t) {
+        if (terminado) return;
+        const a = Math.min(1, (t - t0) / DUR);
+        mapa.setAttribute("scale", String(Math.sin(a * Math.PI) * 70));
+        if (a < 1) requestAnimationFrame(paso); else termina();
+      })(t0);
+    };
+    puntos.forEach((p, i) => p.addEventListener("click", () => ir(i)));
+  });
 })();
