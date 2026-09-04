@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Territorio cromático: mapa de colores de una imagen</title>
+    <meta
+      name="description"
+      content="Descubre qué colores mandan en una imagen, cuáles son acentos raros y dónde vive cada tono. Acentos externos con contraste WCAG. Todo en tu navegador."
+    />
+    <link rel="canonical" href="https://lienzo.tools/herramientas/paletas/territorio/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lienzo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Territorio cromático: mapa de colores de una imagen" />
+    <meta property="og:description" content="Qué colores mandan en una imagen, cuáles son acentos raros y dónde vive cada tono, con acentos externos para interfaz y su contraste medido. La imagen no sale de tu navegador." />
+    <meta property="og:url" content="https://lienzo.tools/herramientas/paletas/territorio/" />
+    <meta property="og:image" content="https://lienzo.tools/assets/og/og-herramientas-paletas-territorio.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Territorio cromático: mapa de colores de una imagen, en Lienzo" />
+    <meta name="twitter:image" content="https://lienzo.tools/assets/og/og-herramientas-paletas-territorio.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <script>
+      document.documentElement.classList.add("js");
+      try {
+        var t = localStorage.getItem("agp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+
+      /* Vigilante del candado: la clase "js" esconde los .reveal y quien los
+         revela es el observador que viaja en /js/site.js. Si ese archivo no
+         llega (404, CDN caído, bloqueador), sin esto el contenido quedaría
+         invisible para siempre. A los 3 s sin señal de vida (site.js pone
+         "js-arte" al arrancar) se suelta el candado y todo se ve. */
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.classList.contains("js-arte")) r.classList.remove("js");
+      }, 3000);
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/site.css?v=2026090404" />
+    <link rel="stylesheet" href="../css/tool.css?v=1" />
+    <link rel="stylesheet" href="css/tool.css?v=1" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://lienzo.tools/herramientas/paletas/territorio/#app",
+          "name": "Territorio cromático de una imagen",
+          "url": "https://lienzo.tools/herramientas/paletas/territorio/",
+          "description": "Herramienta gratuita que analiza el territorio cromático de una imagen dentro del navegador: colores dominantes con su cobertura, acentos raros que ocupan poco pero forman una mancha real, mapa de procedencia de cada tono, lupa con lectura por píxel y rampa de cada región, acentos externos generados para interfaz y vista de tokens con contraste WCAG. Exporta variables CSS y JSON.",
+          "applicationCategory": "DesignApplication",
+          "operatingSystem": "Web",
+          "inLanguage": "es",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "featureList": [
+            "Colores dominantes con el porcentaje de imagen que ocupa cada uno",
+            "Acentos raros: tonos de poca superficie validados como mancha conexa, no como ruido",
+            "Mapa de procedencia en tres modos: resaltar, calor y contorno, con cobertura medida",
+            "Puntos con lupa: píxel exacto, medias 3 × 3 y 11 × 11, media OKLab, territorio más cercano y rampa de la región",
+            "Acentos externos generados fuera del territorio (vivo, suave, profundo, claro) con su distancia explicada",
+            "Vista de tokens con contraste WCAG de texto, botón y enlace, y exportación a variables CSS y JSON",
+            "Análisis 100 % local: la imagen nunca sale del navegador"
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "name": "Lienzo",
+            "url": "https://lienzo.tools/"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://lienzo.tools/" },
+            { "@type": "ListItem", "position": 2, "name": "Herramientas", "item": "https://lienzo.tools/herramientas/" },
+            { "@type": "ListItem", "position": 3, "name": "Generador de paletas", "item": "https://lienzo.tools/herramientas/paletas/" },
+            { "@type": "ListItem", "position": 4, "name": "Territorio cromático", "item": "https://lienzo.tools/herramientas/paletas/territorio/" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿En qué se diferencia del extractor de paleta?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La paleta responde «qué colores hay». El territorio responde «cuánto ocupa cada uno, cuál es un acento raro y dónde vive dentro de la imagen». Además propone acentos que no están en la imagen, con su contraste medido, pensados para una interfaz que conviva con esa foto."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué es un acento raro?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Un color que ocupa muy poca superficie, menos del 6,5 % de la imagen, pero forma una mancha real: una flor, un cartel, una prenda. Las herramientas que solo cuentan píxeles lo pierden entre los dominantes. Aquí se busca aparte y se exige que sus píxeles estén conectados entre sí, para no confundir una mancha con el ruido de la compresión."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué son los acentos externos?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Colores generados, no extraídos: candidatos construidos lejos del territorio de la imagen, en cuatro familias (vivo, suave, profundo y claro). Sirven cuando necesitas un color de interfaz que no compita con la foto, como un botón sobre una imagen de fondo, una etiqueta o un enlace. Cada uno muestra su distancia al territorio y su contraste sobre el color dominante."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿La imagen se sube a algún servidor?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. La imagen se abre y se analiza dentro de tu navegador, en un hilo aparte para que la página no se congele; nunca viaja por la red. Puedes comprobarlo tú: carga la página, desconecta internet y el análisis sigue funcionando igual."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué significan Δ OK y la tolerancia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Δ OK es la distancia entre dos colores en el espacio OKLab, donde las distancias se parecen a lo que percibe el ojo: 0,02 es casi imperceptible y 0,08 ya son colores claramente distintos. La tolerancia fija cuánta diferencia admite el mapa de procedencia y la rampa de cada punto: súbela si la imagen tiene grano o compresión, bájala para aislar un tono concreto."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
+         crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="Lienzo — inicio">
+          <span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-h" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-h)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Herramientas creativas sin fricción</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/herramientas/" aria-current="page">Herramientas</a>
+          <a href="/codigo-web/">Código web</a>
+          <a href="/blog/">Blog</a>
+          <a href="/recursos/">Recursos</a>
+          <a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a>
+        </nav>
+
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button>
+          <a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>
+          <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Cabecera de la herramienta -->
+      <section class="shell page-head">
+        <nav class="breadcrumbs reveal" aria-label="Migas de pan">
+          <a href="/">Inicio</a> / <a href="/herramientas/">Herramientas</a> / <a href="/herramientas/paletas/">Generador de paletas</a> / <span>Territorio cromático</span>
+        </nav>
+        <p class="eyebrow reveal">Sin registro · Análisis en OKLab · La imagen no sale de tu navegador</p>
+        <h1 class="reveal" style="--reveal-delay: 80ms">Territorio cromático de una imagen</h1>
+        <p class="lede reveal" style="--reveal-delay: 160ms">
+          Una paleta te dice qué colores hay. El territorio te dice cuánto ocupa cada uno,
+          cuál es un acento raro que apenas aparece pero importa, y dónde vive cada tono
+          dentro de la imagen. Y propone acentos que la foto no tiene, pensados para
+          interfaz y con su contraste medido antes de que decidas.
+        </p>
+      </section>
+
+      <!-- La imagen -->
+      <section class="section shell" aria-labelledby="imagen-title">
+        <h2 id="imagen-title" class="sr-only">Tu imagen</h2>
+
+        <div
+          class="dropzone reveal"
+          data-dropzone
+          data-over="false"
+          role="button"
+          tabindex="0"
+          aria-label="Arrastra una imagen o pulsa para elegirla"
+        >
+          <svg class="dropzone__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="3" />
+            <path d="M3 12h6l2-4 3 8 2-4h5" />
+          </svg>
+          <p class="dropzone__title">Lee el territorio de una imagen</p>
+          <p class="dropzone__hint">
+            Arrástrala aquí o pulsa para elegirla · JPG, PNG, WebP, AVIF, GIF o SVG, hasta
+            20 MB · se analiza en tu navegador: no se sube a ningún servidor.
+          </p>
+          <div class="dropzone__actions">
+            <button class="btn btn--ghost" type="button" data-demo>Probar con un ejemplo</button>
+          </div>
+          <input type="file" accept=".jpg,.jpeg,.png,.webp,.avif,.gif,.svg,image/*" hidden data-file />
+        </div>
+
+        <p class="error" data-error role="alert" hidden></p>
+
+        <div class="terr-ws" data-workspace hidden>
+          <div>
+            <div class="terr-marco" data-marco>
+              <canvas data-lienzo tabindex="0" aria-label="Lienzo de análisis de color de la imagen"></canvas>
+            </div>
+            <p class="terr-estado" data-estado aria-live="polite">Carga una imagen para empezar.</p>
+          </div>
+
+          <div class="terr-lado">
+            <div class="terr-bloque" data-panel hidden>
+              <h3 class="terr-bloque__titulo">Lectura</h3>
+              <p class="terr-analisis" data-analisis></p>
+            </div>
+
+            <div class="terr-bloque" data-panel hidden>
+              <h3 class="terr-bloque__titulo">Dominantes</h3>
+              <ul class="terr-lista" data-dominantes aria-label="Colores dominantes"></ul>
+            </div>
+
+            <div class="terr-bloque" data-panel hidden>
+              <h3 class="terr-bloque__titulo">Acentos raros</h3>
+              <ul class="terr-lista" data-raros aria-label="Acentos raros"></ul>
+            </div>
+
+            <div class="terr-bloque" data-panel hidden>
+              <h3 class="terr-bloque__titulo">Mapa de procedencia</h3>
+              <p class="terr-pista" data-mapa-pista>Pulsa «ver mapa» en un color para ver dónde aparecen los tonos parecidos.</p>
+              <div class="terr-modos" data-modos role="group" aria-label="Modo del mapa" hidden>
+                <button type="button" class="terr-mini" data-modo="resaltar" aria-pressed="true">Resaltar</button>
+                <button type="button" class="terr-mini" data-modo="calor" aria-pressed="false">Calor</button>
+                <button type="button" class="terr-mini" data-modo="contorno" aria-pressed="false">Contorno</button>
+              </div>
+              <div class="terr-modos">
+                <button type="button" class="terr-mini" data-quitar-mapa hidden>Quitar el mapa</button>
+              </div>
+              <label class="terr-tol">
+                <span>Tolerancia <b data-tolerancia-etiqueta>0.06</b> Δ OK</span>
+                <input type="range" min="2" max="14" value="6" step="1" data-tolerancia />
+              </label>
+            </div>
+
+            <div class="terr-acciones">
+              <button class="btn btn--ghost" type="button" data-cambiar>Cambiar imagen</button>
+              <button class="btn btn--ghost" type="button" data-quitar>Quitar la imagen</button>
+            </div>
+
+            <p class="picker__hint" style="margin: 0">
+              Haz clic sobre la imagen para marcar un punto y arrástralo para moverlo: la lupa
+              enseña el píxel exacto. Con «mover» seleccionas un punto y lo desplazas con las
+              flechas del teclado (Mayús para pasos finos; Supr lo quita).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Puntos -->
+      <section class="section shell" aria-labelledby="puntos-title" data-panel hidden>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Puntos</p>
+            <h2 id="puntos-title">Lo que hay bajo cada punto</h2>
+            <p>
+              Cada punto devuelve seis lecturas, de la más literal a la más útil: el píxel
+              exacto, dos medias, la media perceptual, el territorio al que pertenece y una
+              versión con la luz acotada para interfaz. Debajo, la rampa de su región: cinco
+              paradas de luz sacadas de los píxeles vecinos que comparten tono.
+            </p>
+          </div>
+          <button class="btn btn--ghost" type="button" data-borrar-puntos hidden>Quitar todos los puntos</button>
+        </div>
+        <ul class="terr-puntos" data-puntos>
+          <li class="terr-vacio">Haz clic sobre la imagen para marcar un punto.</li>
+        </ul>
+      </section>
+
+      <!-- Acentos externos -->
+      <section class="section shell" aria-labelledby="externos-title" data-panel hidden>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Acentos externos</p>
+            <h2 id="externos-title">Colores que la imagen no tiene y la interfaz necesita</h2>
+            <p>
+              Generados, no extraídos: candidatos construidos lejos del territorio, en cuatro
+              familias. Pulsa «usar» para aplicarlo en la vista de tokens y «detalles» para
+              ver por qué se eligió.
+            </p>
+          </div>
+        </div>
+        <ul class="terr-exts" data-acentos aria-label="Acentos externos"></ul>
+      </section>
+
+      <!-- Vista de tokens -->
+      <section class="section shell" aria-labelledby="vista-title" data-panel hidden>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" style="margin-bottom: 0.6rem;">Vista de tokens</p>
+            <h2 id="vista-title">El contraste antes de decidir</h2>
+            <p>
+              El color dominante hace de fondo, el texto se deriva de él y el acento elegido
+              pinta el botón y el enlace. Si el acento no llega a 4,5:1 sobre el fondo, el
+              enlace se ajusta solo y aquí se dice.
+            </p>
+          </div>
+        </div>
+        <div class="terr-vista" data-vista>
+          <div class="terr-vista__tarjeta" aria-hidden="true">
+            <span class="terr-vista__acento"></span>
+            <h3>Un titular sobre el color que manda</h3>
+            <p>
+              Párrafo de prueba con un <span class="terr-vista__enlace">enlace de ejemplo</span>
+              para ver el contraste real del acento sobre el fondo dominante, tal como lo
+              vería quien use tu interfaz.
+            </p>
+            <span class="terr-vista__boton">Botón con el acento</span>
+          </div>
+          <div>
+            <ul class="terr-tokens">
+              <li class="terr-token"><span class="terr-token__chip terr-token__chip--fondo" aria-hidden="true"></span><span class="terr-token__nombre">fondo · dominante 1</span><code class="terr-token__valor" data-vista-fondo></code></li>
+              <li class="terr-token"><span class="terr-token__chip terr-token__chip--texto" aria-hidden="true"></span><span class="terr-token__nombre">texto · derivado del fondo</span><code class="terr-token__valor" data-vista-texto></code></li>
+              <li class="terr-token"><span class="terr-token__chip terr-token__chip--acento" aria-hidden="true"></span><span class="terr-token__nombre">acento · externo elegido</span><code class="terr-token__valor" data-vista-acento></code></li>
+              <li class="terr-token"><span class="terr-token__chip terr-token__chip--enlace" aria-hidden="true"></span><span class="terr-token__nombre">enlace · acento con contraste</span><code class="terr-token__valor" data-vista-enlace></code></li>
+            </ul>
+            <ul class="terr-metricas" aria-label="Contraste medido">
+              <li class="terr-metrica" data-metrica-texto></li>
+              <li class="terr-metrica" data-metrica-boton></li>
+              <li class="terr-metrica" data-metrica-enlace></li>
+              <li class="terr-metrica" data-metrica-distancia></li>
+            </ul>
+            <p class="terr-nota" data-vista-nota></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exportación -->
+      <section class="section shell" aria-labelledby="export-title" data-panel hidden>
+        <div class="export">
+          <div class="export__head">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 0.5rem;">Exportar</p>
+              <h2 id="export-title">Lleva el territorio a tu proyecto</h2>
+            </div>
+            <div class="export__actions">
+              <button class="btn btn--primary" type="button" data-copiar-css>Copiar variables CSS</button>
+              <button class="btn btn--ghost" type="button" data-copiar-json>Copiar JSON</button>
+            </div>
+          </div>
+
+          <pre class="export__code"><code data-code>/* Analiza una imagen para generar las variables */</code></pre>
+          <p class="export__status" data-export-status aria-live="polite">
+            Las variables CSS recogen tokens, dominantes, raros, externos y la rampa de cada
+            punto. El JSON añade OKLCH, coberturas, distancias y contrastes.
+          </p>
+        </div>
+      </section>
+
+      <!-- Guía -->
+      <section class="section shell prose">
+        <h2>Qué es el territorio de una imagen</h2>
+        <p>
+          Extraer una paleta responde a una pregunta pequeña: qué colores hay. El territorio
+          responde a tres más grandes. <strong>Cuánto</strong> ocupa cada color, porque un
+          azul que cubre el 40 % de la imagen y un rojo que cubre el 0,4 % no pueden pesar
+          lo mismo en una decisión de diseño. <strong>Cuál</strong> es un acento: ese rojo
+          que casi no aparece pero es lo primero que mira el ojo. Y <strong>dónde</strong>
+          vive cada tono, porque no es lo mismo un color repartido por toda la foto que uno
+          concentrado en una esquina. Todo se calcula en OKLab, un espacio donde las
+          distancias entre colores se parecen a lo que percibe una persona, y no en los
+          números RGB, que se parecen a lo que percibe un monitor.
+        </p>
+
+        <h2>Dominantes, raros y por qué se cuentan aparte</h2>
+        <p>
+          El análisis agrupa los píxeles parecidos y ordena los grupos por superficie. Los
+          que superan el 7 % son <strong>dominantes</strong>: son el fondo, la pared, el
+          cielo, lo que sostiene la imagen. Después busca en los píxeles que no encajaron
+          en ningún grupo: si entre ellos hay un tono vivo que ocupa menos del 6,5 % pero
+          forma una <strong>mancha conexa</strong> (píxeles pegados unos a otros, no
+          motas sueltas), lo declara <strong>acento raro</strong>. Esa exigencia de
+          conexión es lo que separa una flor de un artefacto de compresión. Los contadores
+          de píxeles clásicos nunca ven estos colores: quedan sepultados bajo los
+          dominantes.
+        </p>
+
+        <h2>Puntos, lupa y rampas: del píxel a la región</h2>
+        <p>
+          Un clic sobre la imagen marca un punto, y la lupa enseña el píxel exacto ampliado
+          doce veces. Pero el píxel exacto casi nunca es el color que quieres: puede ser
+          un grano de ruido o un brillo. Por eso cada punto devuelve una pila de seis
+          lecturas, de la más literal a la más útil: el píxel, la media de 3 × 3 y de
+          11 × 11 en luz lineal (la única forma correcta de promediar colores), la media
+          perceptual en OKLab, el territorio al que pertenece y una versión usable con la
+          luz acotada entre 0,32 y 0,82, que es el rango donde un color aguanta en una
+          interfaz. Debajo, la <strong>rampa de la región</strong>: la herramienta crece
+          desde el punto por los píxeles vecinos que comparten tono y croma, y devuelve
+          cinco paradas de luz (sombra, bajo, medio, alto, luz) sacadas de esa región
+          real. Es una escala tonal que sale de la imagen, no de una fórmula.
+        </p>
+
+        <h2>Acentos externos: colores que la imagen no tiene</h2>
+        <p>
+          Cuando diseñas sobre una foto, el problema suele ser el contrario al de extraer:
+          necesitas un color que <em>no</em> esté en ella, para que el botón, la etiqueta o
+          el enlace no se confundan con el fondo. Los acentos externos se construyen en
+          OKLCH recorriendo una rejilla de luz, croma y tono, se descartan los que no
+          caben en sRGB, y se puntúan por su distancia al territorio y al píxel más
+          cercano de la imagen. Cuatro familias con objetivos distintos: <strong>vivo</strong>
+          (croma alto, para llamadas a la acción), <strong>suave</strong> (croma bajo,
+          convive mejor), <strong>profundo</strong> (oscuro, para botones y marcas fuertes)
+          y <strong>claro</strong> (para resaltados sutiles). Cada uno explica sus
+          distancias en «detalles», para que la elección sea tuya y no un acto de fe.
+        </p>
+
+        <h2>La vista de tokens: el contraste antes de decidir</h2>
+        <p>
+          El color dominante hace de fondo, el texto se deriva de él conservando algo de su
+          tono, y el acento elegido pinta el botón y el enlace. Cada pareja se mide con el
+          ratio WCAG 2.1: con 4,5:1 apruebas AA en texto normal. Si el acento no llega,
+          el enlace se ajusta solo, buscando la variante que aguante el contraste
+          alejándose lo menos posible del original, y la nota lo dice con claridad. Las
+          variables CSS exportadas llevan esos tokens, el territorio completo, los acentos
+          externos y la rampa de cada punto; el JSON añade los valores OKLCH, las
+          coberturas, las distancias y los contrastes, por si quieres auditar el
+          resultado o llevarlo a otra herramienta.
+        </p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section shell" aria-labelledby="faq-heading">
+        <h2 class="section-head" id="faq-heading">Preguntas frecuentes</h2>
+        <div class="faq">
+          <details class="reveal">
+            <summary>¿En qué se diferencia del extractor de paleta?</summary>
+            <p>
+              La paleta responde «qué colores hay». El territorio responde «cuánto ocupa
+              cada uno, cuál es un acento raro y dónde vive dentro de la imagen». Además
+              propone acentos que no están en la imagen, con su contraste medido, pensados
+              para una interfaz que conviva con esa foto.
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>¿Qué es un acento raro?</summary>
+            <p>
+              Un color que ocupa muy poca superficie, menos del 6,5 % de la imagen, pero
+              forma una mancha real: una flor, un cartel, una prenda. Las herramientas que
+              solo cuentan píxeles lo pierden entre los dominantes. Aquí se busca aparte y
+              se exige que sus píxeles estén conectados entre sí, para no confundir una
+              mancha con el ruido de la compresión.
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>¿Qué son los acentos externos?</summary>
+            <p>
+              Colores generados, no extraídos: candidatos construidos lejos del territorio
+              de la imagen, en cuatro familias (vivo, suave, profundo y claro). Sirven
+              cuando necesitas un color de interfaz que no compita con la foto, como un
+              botón sobre una imagen de fondo, una etiqueta o un enlace. Cada uno muestra
+              su distancia al territorio y su contraste sobre el color dominante.
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>¿La imagen se sube a algún servidor?</summary>
+            <p>
+              No. La imagen se abre y se analiza dentro de tu navegador, en un hilo aparte
+              para que la página no se congele; nunca viaja por la red. Puedes comprobarlo
+              tú: carga la página, desconecta internet y el análisis sigue funcionando
+              igual.
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>¿Qué significan Δ OK y la tolerancia?</summary>
+            <p>
+              Δ OK es la distancia entre dos colores en el espacio OKLab, donde las
+              distancias se parecen a lo que percibe el ojo: 0,02 es casi imperceptible y
+              0,08 ya son colores claramente distintos. La tolerancia fija cuánta
+              diferencia admite el mapa de procedencia y la rampa de cada punto: súbela si
+              la imagen tiene grano o compresión, bájala para aislar un tono concreto.
+            </p>
+          </details>
+        </div>
+
+        <p class="tool-links" style="margin-top: 2rem; color: var(--muted); max-width: 70ch">
+          ¿Solo necesitas los colores de la foto, con escala y armonías? Ese es el
+          <a href="/herramientas/paletas/desde-imagen/">extractor de paleta desde imagen</a>.
+          Y para partir de un color en vez de una imagen, el
+          <a href="/herramientas/paletas/">generador de paletas</a> clásico.
+        </p>
+      </section>
+
+      <!-- Publicidad -->
+      <div class="shell">
+        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
+        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+      </div>
+      <section class="section shell compartir-bloque" aria-label="Compartir">
+          <p class="compartir-bloque__lema">Si te resolvió algo, a alguien de tu equipo también le sirve.</p>
+          <div class="compartir" aria-label="Compartir esta página">
+            <span class="compartir__titulo">Compartir</span>
+            <a href="https://wa.me/?text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Territorio%20crom%C3%A1tico%3A%20mapa%20de%20colores%20de%20una%20imagen%2C%20sin%20instalar%20nada%3A%20https%3A%2F%2Flienzo.tools%2Fherramientas%2Fpaletas%2Fterritorio%2F" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"/></svg></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fpaletas%2Fterritorio%2F" target="_blank" rel="noopener" aria-label="Compartir en Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"/></svg></a>
+            <a href="https://t.me/share/url?url=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fpaletas%2Fterritorio%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Territorio%20crom%C3%A1tico%3A%20mapa%20de%20colores%20de%20una%20imagen%2C%20sin%20instalar%20nada" target="_blank" rel="noopener" aria-label="Compartir en Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"/></svg></a>
+            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fpaletas%2Fterritorio%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Territorio%20crom%C3%A1tico%3A%20mapa%20de%20colores%20de%20una%20imagen%2C%20sin%20instalar%20nada" target="_blank" rel="noopener" aria-label="Compartir en X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
+            <a href="mailto:?subject=Una%20herramienta%20gratis%20que%20resuelve%20esto%20en%20segundos&amp;body=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Territorio%20crom%C3%A1tico%3A%20mapa%20de%20colores%20de%20una%20imagen%2C%20sin%20instalar%20nada%3A%20https%3A%2F%2Flienzo.tools%2Fherramientas%2Fpaletas%2Fterritorio%2F%0D%0A%0D%0AEncontrado%20en%20lienzo.tools" aria-label="Compartir por correo" title="Correo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 7 9-7"/></svg></a>
+            <button type="button" data-compartir-copiar aria-label="Copiar el enlace" title="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
+          </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <div class="site-footer__grid">
+          <div>
+            <a class="brand" href="/" aria-label="Lienzo — inicio">
+              <svg class="logo-lienzo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-f" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-f)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg>
+            </a>
+            <p class="site-footer__tag" style="margin-top: 1rem;">
+              Herramientas, plantillas y guías de diseño gráfico, web y marketing. Gratis, en español y sin humo.
+            </p>
+          </div>
+          <div>
+            <h4>Explora</h4>
+            <ul>
+              <li><a href="/herramientas/">Herramientas</a></li>
+              <li><a href="/codigo-web/">Código web</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/recursos/">Recursos</a></li>
+              <li><a href="/mi-lienzo/">Mi lienzo</a></li>
+              <li><a href="/sobre-mi/">Sobre mí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Herramientas</h4>
+            <ul>
+              <li><a href="/herramientas/favicons/">Galería de favicons SVG</a></li>
+              <li><a href="/herramientas/favicons/emojis/">Galería de emojis</a></li>
+              <li><a href="/herramientas/favicons/de-dominio/">Favicon por dominio</a></li>
+              <li><a href="/herramientas/texto-ondulado/">Texto ondulado animado</a></li>
+              <li><a href="/herramientas/paletas/">Generador de paletas</a></li>
+              <li><a href="/herramientas/paletas/desde-imagen/">Extraer paleta de una imagen</a></li>
+              <li><a href="/herramientas/paletas/territorio/">Territorio cromático de una imagen</a></li>
+              <li><a href="/herramientas/colores-en-vivo/">Colores en vivo</a></li>
+              <li><a href="/herramientas/optimizar-svg/">Optimizador de SVG</a></li>
+              <li><a href="/herramientas/audio/">Editor de audio</a></li>
+              <li><a href="/herramientas/qr/">Generador de código QR</a></li>
+              <li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Canal de YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <span>© <span data-year>2026</span> Lienzo · lienzo.tools · Hecho con ♥ y mucho SVG</span>
+          <span><a href="/aviso-legal/">Aviso legal</a> · <a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/licencia/">Licencia</a> · <a href="/licencias-de-terceros/">Terceros</a> · <a href="/contacto/">Contacto</a><span data-revocar-consentimiento style="display: none"> · <a href="#">Configuración de privacidad y de cookies</a></span></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/site.js?v=2026083013" defer></script>
+    <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
+    <script src="js/territorio.js?v=1" defer></script>
+  </body>
+</html>

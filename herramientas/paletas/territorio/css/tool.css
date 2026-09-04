@@ -1,0 +1,704 @@
+/* ==================================================================== *\
+   Territorio cromático · estilos PROPIOS de la página.
+   Lo compartido (.export, .segmented, .picker__hint, .faq) llega de
+   ../css/tool.css del generador padre. Aquí vive lo nuevo:
+
+   1. Dropzone y error         5. Puntos: pila y rampa
+   2. Workspace y lienzo       6. Acentos externos
+   3. Listas de colores        7. Vista de tokens
+   4. Mapa y tolerancia        8. Responsive y movimiento
+\* ==================================================================== */
+
+/* 0. El atributo hidden debe ganar a los display de grid y flex de abajo */
+
+.dropzone[hidden],
+.terr-ws[hidden],
+.terr-modos[hidden],
+[data-panel][hidden] {
+  display: none !important;
+}
+
+/* 1. Dropzone y error (mismo lenguaje que la hermana desde-imagen) ---- */
+
+.dropzone {
+  display: grid;
+  place-items: center;
+  gap: 0.9rem;
+  padding: clamp(2rem, 6vw, 3.4rem) 1.5rem;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, transform 200ms var(--ease);
+}
+
+.dropzone:hover,
+.dropzone:focus-visible {
+  border-color: var(--violeta);
+  background: var(--panel-hover);
+}
+
+.dropzone[data-over="true"] {
+  border-color: var(--turquesa);
+  background: color-mix(in oklab, var(--turquesa) 10%, var(--panel));
+  transform: scale(1.01);
+}
+
+.dropzone[data-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.dropzone__icon {
+  width: 46px;
+  height: 46px;
+  color: var(--violeta);
+}
+
+.dropzone__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.dropzone__hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.dropzone__actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error {
+  margin: 0.9rem 0 0;
+  padding: 0.8rem 1rem;
+  font-size: 0.92rem;
+  color: var(--text);
+  background: color-mix(in oklab, var(--coral, #ff7a68) 14%, var(--panel));
+  border: 1px solid color-mix(in oklab, var(--coral, #ff7a68) 45%, var(--line));
+  border-radius: var(--radius);
+}
+
+/* 2. Workspace y lienzo ------------------------------------------------ */
+
+.terr-ws {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.terr-ws[data-busy="true"] .terr-lado {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.terr-marco {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background:
+    conic-gradient(var(--line) 25%, transparent 0 50%, var(--line) 0 75%, transparent 0)
+    0 0 / 18px 18px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+}
+
+.terr-marco canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.terr-marco canvas:focus-visible {
+  outline: 2px solid var(--turquesa);
+  outline-offset: -2px;
+}
+
+.terr-estado {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--faint);
+}
+
+.terr-lado {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.terr-bloque {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.terr-bloque__titulo {
+  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.terr-analisis {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.terr-acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* 3. Listas de colores (dominantes y raros) --------------------------- */
+
+.terr-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.terr-sw {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.45rem 0.55rem 0.45rem 0.45rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.18s, background-color 0.18s;
+}
+
+.terr-sw:hover {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+}
+
+.terr-sw.esta-activa {
+  border-color: color-mix(in oklab, var(--turquesa) 65%, var(--line));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--turquesa) 45%, transparent);
+}
+
+.terr-sw__color {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 10px;
+  background: var(--sw);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.terr-sw__meta {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.terr-sw__hex {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.terr-sw__detalle {
+  font-size: 0.75rem;
+  color: var(--faint);
+}
+
+.terr-sw__acciones {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.terr-mini {
+  font: inherit;
+  font-size: 0.74rem;
+  line-height: 1;
+  min-height: 32px;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+}
+
+.terr-mini:hover,
+.terr-mini:focus-visible {
+  color: var(--text);
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+}
+
+.terr-mini[aria-pressed="true"] {
+  color: var(--turquesa);
+  border-color: color-mix(in oklab, var(--turquesa) 55%, var(--line));
+}
+
+.terr-mini--quitar {
+  min-width: 32px;
+  padding-inline: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.terr-mini--quitar:hover,
+.terr-mini--quitar:focus-visible {
+  color: var(--coral, #ff7a68);
+  border-color: color-mix(in oklab, var(--coral, #ff7a68) 55%, var(--line));
+}
+
+.terr-vacio {
+  padding: 0.35rem 0.1rem;
+  font-size: 0.85rem;
+  color: var(--faint);
+}
+
+/* 4. Mapa de procedencia y tolerancia --------------------------------- */
+
+.terr-pista {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.terr-modos {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.terr-tol {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.terr-tol b {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text);
+}
+
+.terr-tol input[type="range"] {
+  width: 100%;
+  accent-color: var(--violeta);
+  cursor: pointer;
+}
+
+/* 5. Puntos: pila de lecturas y rampa de la región -------------------- */
+
+.terr-puntos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 0.9rem;
+}
+
+.terr-puntos .terr-vacio {
+  grid-column: 1 / -1;
+}
+
+.terr-punto {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.terr-punto.esta-activa {
+  border-color: color-mix(in oklab, var(--turquesa) 65%, var(--line));
+}
+
+.terr-punto__cabeza {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.terr-punto__num {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--sw);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.terr-punto__coord {
+  margin-right: auto;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--faint);
+}
+
+.terr-pila__fila {
+  display: grid;
+  grid-template-columns: 9.2rem auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.terr-pila__etiqueta {
+  color: var(--muted);
+}
+
+.terr-pila__chip {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 6px;
+  background: var(--sw);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.terr-pila__valor {
+  display: grid;
+  min-width: 0;
+  padding: 0.15rem 0.35rem;
+  font: inherit;
+  text-align: left;
+  color: var(--text);
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.terr-pila__valor:hover,
+.terr-pila__valor:focus-visible {
+  background: var(--panel-hover);
+}
+
+.terr-pila__valor span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.terr-pila__valor em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terr-rampa {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+
+.terr-rampa__fila {
+  display: flex;
+  height: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.terr-rampa__chip {
+  flex: 1;
+  background: var(--sw);
+}
+
+.terr-rampa__pie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.74rem;
+  color: var(--faint);
+}
+
+/* 6. Acentos externos --------------------------------------------------- */
+
+.terr-exts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.9rem;
+}
+
+.terr-ext {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color 0.18s;
+}
+
+.terr-ext:hover {
+  border-color: var(--line-strong);
+}
+
+.terr-ext.esta-activa {
+  border-color: color-mix(in oklab, var(--violeta) 65%, var(--line));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--violeta) 45%, transparent);
+}
+
+.terr-ext__fila {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+}
+
+.terr-ext__color {
+  height: 3.4rem;
+  border-radius: var(--radius);
+  background: var(--sw);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.terr-ext__meta {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.terr-ext__tipo {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--violeta);
+}
+
+.terr-ext__hex {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.terr-ext__detalle {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.terr-porque {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.76rem;
+  background: var(--panel-hover);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: default;
+}
+
+.terr-porque__lema {
+  margin: 0 0 0.2rem;
+  color: var(--text);
+}
+
+.terr-porque__fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  color: var(--muted);
+}
+
+.terr-porque__fila b {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-align: right;
+  color: var(--text);
+}
+
+/* 7. Vista de tokens ---------------------------------------------------- */
+
+.terr-vista {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.terr-vista__tarjeta {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.6rem;
+  background: var(--pv-fondo, #16141f);
+  color: var(--pv-texto, #f4f3f8);
+  border: 1px solid rgba(127, 127, 127, 0.25);
+  border-radius: var(--radius-lg);
+}
+
+.terr-vista__acento {
+  display: block;
+  width: 38%;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: var(--pv-acento, #8b7bff);
+}
+
+.terr-vista__tarjeta h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.15;
+  color: inherit;
+}
+
+.terr-vista__tarjeta p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.terr-vista__enlace {
+  color: var(--pv-enlace, #cdc5ff);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.terr-vista__boton {
+  display: inline-block;
+  width: max-content;
+  padding: 0.6rem 1.05rem;
+  border-radius: 999px;
+  background: var(--pv-acento, #8b7bff);
+  color: var(--pv-acento-texto, #17161f);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.terr-tokens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.terr-token {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.terr-token__chip {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.terr-token__chip--fondo { background: var(--pv-fondo, #16141f); }
+.terr-token__chip--texto { background: var(--pv-texto, #f4f3f8); }
+.terr-token__chip--acento { background: var(--pv-acento, #8b7bff); }
+.terr-token__chip--enlace { background: var(--pv-enlace, #cdc5ff); }
+
+.terr-token__nombre {
+  color: var(--muted);
+}
+
+.terr-token__valor {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.terr-metricas {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.terr-metrica {
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.terr-metrica.es-ok {
+  color: var(--turquesa);
+  border-color: color-mix(in oklab, var(--turquesa) 45%, var(--line));
+}
+
+.terr-metrica.es-aviso {
+  color: var(--ambar, #ffb454);
+  border-color: color-mix(in oklab, var(--ambar, #ffb454) 45%, var(--line));
+}
+
+.terr-nota {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
+/* 8. Responsive y movimiento ------------------------------------------ */
+
+@media (max-width: 860px) {
+  .terr-ws,
+  .terr-vista {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .terr-pila__fila {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .terr-pila__etiqueta {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone,
+  .dropzone[data-over="true"],
+  .terr-sw,
+  .terr-mini,
+  .terr-ext {
+    transition: none;
+    transform: none;
+  }
+}

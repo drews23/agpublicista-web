@@ -21,6 +21,7 @@
     "texto-ondulado": { nombre: "Texto ondulado", ruta: "/herramientas/texto-ondulado/" },
     paletas: { nombre: "Generador de paletas", ruta: "/herramientas/paletas/", guarda: "paleta" },
     "paletas-desde-imagen": { nombre: "Extraer paleta de imagen", ruta: "/herramientas/paletas/desde-imagen/", guarda: "paleta" },
+    "paletas-territorio": { nombre: "Territorio cromático", ruta: "/herramientas/paletas/territorio/", guarda: "paleta" },
     "colores-en-vivo": { nombre: "Colores en vivo", ruta: "/herramientas/colores-en-vivo/" },
     "optimizar-svg": { nombre: "Optimizador de SVG", ruta: "/herramientas/optimizar-svg/" },
     degradados: { nombre: "Degradados CSS", ruta: "/codigo-web/degradados/", guarda: "degradado" },
@@ -197,8 +198,12 @@
 
   /* --- Guardado en herramientas -------------------------------------- */
 
+  /* Las tres herramientas de paletas exponen su código en [data-code] y sus
+     acciones en .export__actions; el resto usa [data-codigo] y .acciones. */
+  const FAMILIA_PALETAS = ["paletas", "paletas-desde-imagen", "paletas-territorio"];
+
   const leerCssActual = (slug) => {
-    if (slug === "paletas" || slug === "paletas-desde-imagen") {
+    if (FAMILIA_PALETAS.includes(slug)) {
       const nodo = document.querySelector("[data-code]");
       return nodo ? (nodo.dataset.raw || nodo.textContent) : "";
     }
@@ -243,10 +248,9 @@
     const cfg = HERRAMIENTAS[slug];
     if (!cfg?.guarda || document.querySelector("[data-guardar-lienzo]")) return;
 
-    const destino =
-      slug === "paletas" || slug === "paletas-desde-imagen"
-        ? document.querySelector(".export__actions")
-        : document.querySelector(".acciones");
+    const destino = FAMILIA_PALETAS.includes(slug)
+      ? document.querySelector(".export__actions")
+      : document.querySelector(".acciones");
     if (!destino) return;
 
     const btn = document.createElement("button");
