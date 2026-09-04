@@ -48,7 +48,11 @@
 .neonov__marquee {
   position: relative;
   z-index: 1;
-  overflow: hidden;
+  /* clip, no hidden: con overflow:hidden el navegador puede desplazar
+     este contenedor al tabular hasta un enlace de la mitad duplicada, y
+     sin JS que lo recoloque la marquesina se queda descuadrada. clip no
+     crea contenedor de scroll, asi que ese desplazamiento no ocurre. */
+  overflow: clip;
   padding-block: 14px;
   /* fundido en los bordes para que las tarjetas entren y salgan suaves */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
@@ -463,10 +467,24 @@
 .neonov--arrastrable .neonov__marquee {
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  scrollbar-width: none;
   cursor: grab;
+  /* Sin fundido en los bordes cuando el carrusel es manipulable: la
+     mascara recorta contra el borde de la caja (mask-clip: border-box),
+     asi que se comia el anillo de foco del visor. El asomo de la tarjeta
+     siguiente ya cuenta que hay mas contenido. El fundido se queda en la
+     marquesina de CSS, que es donde tiene sentido. */
+  -webkit-mask-image: none;
+  mask-image: none;
+  /* Que el enlace enfocado no aterrice pegado al borde del visor. */
+  scroll-padding-inline: 16px;
 }
-.neonov--arrastrable .neonov__marquee::-webkit-scrollbar { display: none; }
+/* La barra se oculta solo donde el carrusel se mueve solo: ese movimiento
+   y el asomo ya avisan de que hay mas. Con movimiento reducido no hay
+   ninguna de las dos pistas, asi que la barra se queda como unica senal. */
+@media (prefers-reduced-motion: no-preference) {
+  .neonov--arrastrable .neonov__marquee { scrollbar-width: none; }
+  .neonov--arrastrable .neonov__marquee::-webkit-scrollbar { display: none; }
+}
 .neonov--arrastrable .neonov__marquee:focus-visible {
   outline: 2px solid var(--violeta);
   outline-offset: 4px;
@@ -483,15 +501,7 @@
    con el carrusel manipulable: sobre la marquesina de CSS pelearía con
    la animación. */
 @media (max-width: 640px) {
-  .neonov--arrastrable .neonov__marquee {
-    scroll-snap-type: x mandatory;
-    /* Fuera el fundido de los bordes. Tiene sentido en la marquesina,
-       donde las tarjetas entran y salen solas, pero con UNA tarjeta a la
-       vista se come su borde izquierdo y la deja lavada: medido, los
-       primeros 20 px de la tarjeta salían atenuados. */
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
+  .neonov--arrastrable .neonov__marquee { scroll-snap-type: x mandatory; }
   .neonov--arrastrable .neonov__item { scroll-snap-align: center; }
 }
 
