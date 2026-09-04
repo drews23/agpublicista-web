@@ -27,19 +27,26 @@
   z-index: 0;
 }
 
+/* Las manchas se atan al ancho del bloque en vez de sobresalir con un
+   desplazamiento negativo. Asomaban 80 px por la derecha y en pantallas
+   estrechas el propio ancho de 340 px ya no cabia, asi que el documento
+   media 446 px en un movil de 390 y el navegador encogia la pagina
+   entera para que cupiera. El desenfoque de 70 px sigue derramando el
+   resplandor fuera de la caja, que es lo que se buscaba, y esa tinta no
+   cuenta como desbordamiento. */
 .neonov::before {
-  width: 340px;
+  width: min(340px, 100%);
   height: 340px;
-  left: -90px;
+  left: 0;
   top: -60px;
   background: var(--violeta);
   opacity: 0.16;
 }
 
 .neonov::after {
-  width: 300px;
+  width: min(300px, 100%);
   height: 300px;
-  right: -80px;
+  right: 0;
   bottom: -70px;
   background: var(--turquesa);
   opacity: 0.12;

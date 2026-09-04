@@ -1289,7 +1289,10 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   .section-head { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
 }
 
-@media (max-width: 760px) {
+/* 880 y no 760: el menu de escritorio necesita 858 px fijos, asi que
+   entre 761 y 872 se salia de la pantalla y arrastraba el ancho del
+   documento. El menu plegable entra antes de que eso ocurra. */
+@media (max-width: 880px) {
   .nav-toggle { display: inline-flex; }
 
   /* Panel de vidrio: cuelga del header (top: 100% sigue su alto real),
@@ -1333,7 +1336,9 @@ html:not(.js) .compartir [data-compartir-copiar] { display: none; }
   .site-nav a { padding: 0.8rem 1rem; font-size: 1.05rem; border-radius: var(--radius-sm); }
 
   .site-nav a.nav-yt { margin-top: 0.4rem; text-align: center; border-radius: 999px; }
+}
 
+@media (max-width: 760px) {
   .site-footer__grid { grid-template-columns: 1fr; gap: 1.8rem; }
 }
 
