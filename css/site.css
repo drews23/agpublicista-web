@@ -371,6 +371,56 @@ img, svg { max-width: 100%; }
 
 .site-footer__tag { color: var(--muted); max-width: 34ch; }
 
+/* Redes: fila de píldoras con icono y nombre (pie de página y bloques
+   "también estoy en"). Con nombre visible: un icono solo no se entiende. */
+.redes,
+.site-footer .redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.redes--centro { justify-content: center; }
+
+.redes__item,
+.site-footer .redes__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.45rem 0.9rem 0.45rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+}
+
+.redes__item:hover,
+.redes__item:focus-visible,
+.site-footer .redes__item:hover,
+.site-footer .redes__item:focus-visible {
+  color: var(--text);
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+  text-decoration: none;
+}
+
+.redes__item svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .redes__item { transition: none; }
+}
+
 .site-footer__bottom {
   border-top: 1px solid var(--line);
   padding-block: 1.1rem;
