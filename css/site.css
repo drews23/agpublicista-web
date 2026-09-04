@@ -1203,6 +1203,32 @@ html:not(.js) .btn-vivo { display: none; }
 /* el botón de copiar enlace necesita JS (agpCopy): sin JS, no se muestra */
 html:not(.js) .compartir [data-compartir-copiar] { display: none; }
 
+/* Bloque de compartir: lema emotivo + la fila de botones. En los posts va
+   dentro del articulo; en el resto de paginas, como section.shell antes del
+   cierre de main. El lema es la invitacion, no un titulo. */
+.compartir-bloque {
+  margin-top: 2.6rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+section.compartir-bloque {
+  margin-top: 0;
+  padding-block: 0 3.2rem;
+  border-top: 0;
+}
+section.compartir-bloque .compartir-bloque__lema {
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+}
+.compartir-bloque__lema {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.18rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0 0 0.95rem;
+}
+
 /* 10. Utilidades ------------------------------------------------------ */
 
 .page-head {

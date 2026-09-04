@@ -60,3 +60,6 @@ hyperframes/
 
 # Estrategia y piezas de Facebook: material de trabajo, no es del sitio
 _facebook/
+
+# Sistema de OG y compartir: plantilla y generador, no es del sitio (las imagenes SI van en assets/og/)
+_og/

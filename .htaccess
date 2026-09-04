@@ -40,6 +40,10 @@ RewriteRule ^escenas[\s]3d(/|$) - [R=404,L]
 # regla es lo que los mantiene inaccesibles y sin indexar.
 RewriteRule ^_facebook(/|$) - [R=404,L]
 
+# Plantilla interna del OG antiguo: salio del repo el 4 sep 2026 pero el
+# deploy no borra archivos, asi que se corta aqui.
+RewriteRule ^assets/og/og-plantilla\.html$ - [R=404,L]
+
 # Redirecciones del sitio anterior (WordPress, hasta 2026)
 # Google todavía tiene indexadas esas URLs y hoy caen en 404: cada una es
 # una visita perdida. Se mandan al equivalente más cercano del sitio actual.
