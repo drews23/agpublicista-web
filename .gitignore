@@ -57,3 +57,6 @@ ui_kits/
 
 # Fotogramas de video en proceso, tampoco son del sitio
 hyperframes/
+
+# Estrategia y piezas de Facebook: material de trabajo, no es del sitio
+_facebook/
