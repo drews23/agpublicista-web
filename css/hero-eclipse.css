@@ -53,13 +53,20 @@
   --ecl-spot: 255, 180, 84;
 }
 
-/* Fundido con el fondo real del sitio al final de la sección */
+/* Fundido con el fondo real del sitio al final de la sección.
+   Las paradas intermedias imitan una curva suave: un degradado lineal de
+   dos colores arranca de golpe y ese arranque se ve como una banda. */
 .eclipse::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: 6em;
-  background: linear-gradient(180deg, transparent, var(--bg, #0a0a0f));
+  height: 9em;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--bg, #0a0a0f) 18%, transparent) 34%,
+    color-mix(in srgb, var(--bg, #0a0a0f) 55%, transparent) 62%,
+    color-mix(in srgb, var(--bg, #0a0a0f) 86%, transparent) 84%,
+    var(--bg, #0a0a0f) 100%);
   pointer-events: none;
   z-index: 3;
 }
@@ -149,12 +156,20 @@
   outline-offset: 3px;
 }
 
+/* OJO con el borde inferior: los haces miden max(42em, 86vh) y el
+   contenedor 42em con overflow:hidden, así que sin máscara el recorte
+   dibuja una LÍNEA DURA de lado a lado justo donde muere la luz
+   (medido el 4 sep 2026 en móvil: y=493 px). Era el defecto que se veía
+   en la portada. La máscara convierte ese corte en un desvanecido; el
+   overflow se mantiene porque sigue conteniendo los haces a lo ancho. */
 .eclipse .spotlight {
   pointer-events: none;
   position: absolute; left: 0; right: 0; top: 0; margin: 0 auto;
   transition: filter 1s ease-in-out;
   height: 42em; width: 100%;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, rgba(0, 0, 0, 0.55) 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 58%, rgba(0, 0, 0, 0.55) 78%, transparent 100%);
 }
 .eclipse .spotlight > div {
   border-radius: 0 0 50% 50%;
@@ -205,11 +220,16 @@
 
 /* ── Líneas de acento ─────────────────────────────────────────────── */
 
+/* Misma historia que .spotlight: las cuatro líneas verticales miden el
+   100% de esta caja de 42em y terminaban a la vez, en seco. Se
+   desvanecen con máscara para que la rejilla muera con la luz. */
 .eclipse .accent-lines {
   pointer-events: none;
   position: absolute; top: 0; left: 0; right: 0;
   width: 100%; height: 42em;
   z-index: 0;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
 }
 .eclipse .accent-lines > div {
   position: absolute; top: 0; right: 0; left: 0; margin: auto;
@@ -503,11 +523,19 @@
   pointer-events: none;
   z-index: 1;
 }
+/* El degradado que funde las montañas con el escenario. La banda de
+   fundido era del 80 % al 90 % (5 em sobre 50 em) y se leía como un
+   canto; ahora ocupa del 55 % al 95 %, con paradas intermedias para que
+   la entrada del color no se note. */
 .eclipse .montanas::before {
   content: ''; display: block;
   width: 100%; height: 500%;
   position: absolute; top: 0%;
-  background: linear-gradient(0deg, var(--ecl-bg) 80%, transparent 90%);
+  background: linear-gradient(0deg,
+    var(--ecl-bg) 55%,
+    color-mix(in srgb, var(--ecl-bg) 62%, transparent) 74%,
+    color-mix(in srgb, var(--ecl-bg) 24%, transparent) 86%,
+    transparent 95%);
   z-index: 2;
 }
 .eclipse .montanas > div {
