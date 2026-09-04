@@ -34,9 +34,10 @@ RewriteRule ^svg(/|$) - [R=404,L]
 RewriteRule ^escenas[\s]3d(/|$) - [R=404,L]
 
 # Material de trabajo del canal de Facebook (estrategia, plantillas y
-# piezas exportadas). Se versiona en el repositorio para tenerlo
-# respaldado, pero la raiz del repo es la raiz web, asi que aqui se corta
-# el acceso publico: no es contenido del sitio y no debe indexarse.
+# piezas exportadas). La carpeta esta fuera del repo (gitignore), pero el
+# 4 sep 2026 se subio por error en un commit y el deploy de Hostinger no
+# borra archivos, solo anade y sobrescribe: siguen en el servidor. Esta
+# regla es lo que los mantiene inaccesibles y sin indexar.
 RewriteRule ^_facebook(/|$) - [R=404,L]
 
 # Redirecciones del sitio anterior (WordPress, hasta 2026)
