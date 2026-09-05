@@ -37,3 +37,73 @@
 @media (max-width: 620px) {
   .preajustes .boton-sutil { flex-basis: calc(50% - 0.25rem); }
 }
+
+/* Vista previa fija: tamaño compacto en movil ---------------------------- *\
+
+   El mecanismo (activado por .taller--vista-fija, puesta a mano en el
+   HTML) vive en /css/codigo-web.css, seccion 7. Aqui solo el tamaño de
+   ESTA vista previa en movil, porque depende de lo que muestra su demo.
+
+   Esta pagina tiene DOS demos distintas dentro del mismo .lienzo-previa,
+   exclusivas entre si via el interruptor "Ver sobre bloque de color"
+   (foto.hidden = plano / caja.hidden = !plano en filtros.js), y el clamp
+   tiene que cubrir a las dos:
+
+   a) La foto (.demo-foto--muestra): width: min(100%, 560px), aspect-ratio
+      1200/630, o sea alto = ancho * 0.525. El "100%" es el interior de
+      .lienzo-previa. Con box-sizing: border-box en toda la cadena:
+        .shell         = ventana menos 3rem (48px)
+        .panel         = .shell menos 2px de su propio borde (1px por lado)
+        .lienzo-previa = ancho de .panel (bloque, sin mas descuentos)
+      Con 1rem (16px) de padding por lado en ESTE bloque, el ancho que le
+      queda a la foto es: ventana menos 48 menos 2 menos 32 = ventana - 82px.
+      Cadena verificada en vivo a 320px: shell 272px, panel 272px,
+      panel__head/.lienzo-previa 270px de interior (272 menos 2px de borde).
+
+      De 320 a 642px de ventana la foto no llega a los 560px de tope:
+        320px -> ancho 238px -> alto 238 * 0.525 = 124.95px
+      A 642px justo toca el tope: ancho 560px -> alto 294px, y de ahi
+      hasta el limite de este breakpoint (1020px) se queda fija en 294px.
+
+   b) El bloque de color (.demo-caja, compartido): width y height en
+      clamp(140px, 22vw, 200px), un cuadrado. Su piso de 140px no depende
+      del ancho hasta los ~636px de ventana (22vw no supera 140px antes de
+      eso), asi que en el celular mas chico pesa MAS que la foto:
+        320px -> foto 124.95px vs caja 140px -> manda la caja
+      El cruce esta en ~349px de ventana (foto = 0.525*(vw-82) supera los
+      140px de la caja justo ahi); de ahi en adelante manda la foto hasta
+      su tope de 294px, y la caja nunca vuelve a alcanzarla (su techo son
+      200px, muy por debajo del techo de la foto).
+
+   Entonces el alto de contenido que hay que cubrir es el mayor entre foto
+   y caja: 140px en el piso (320 a ~349px) y 294px en el techo (642 a
+   1020px), con la recta de la foto en medio. min-height es ese alto mas
+   2rem de padding (32px): 172px en el piso (140 + 32) y 326px en el
+   techo (294 + 32), ambos numeros exactos, sin redondeo.
+
+   El clamp() de abajo traza esa recta con calc(52.5vw - 11px): a 320px
+   da 157px (por debajo del piso 172, asi que clamp lo sube a 172, que es
+   lo correcto ahi porque manda la caja, no la foto) y a partir de ~349px
+   ya sigue la recta de la foto con medio pixel de margen a favor en cada
+   punto. Sobre 642px el propio calc supera los 326px del techo y clamp
+   lo sujeta ahi, justo donde la foto deja de crecer. */
+
+@media (max-width: 1020px) {
+  .taller--vista-fija .lienzo-previa {
+    min-height: clamp(172px, calc(52.5vw - 11px), 326px);
+    padding: 1rem;
+  }
+
+  /* Zona que ocupa la tarjeta fija, para que el foco de teclado no meta
+     un control debajo (mecanismo en la seccion 7 de codigo-web.css).
+     La tarjeta suma panel__head (62px medidos en vivo a 320px, con el
+     interruptor "Ver sobre bloque de color" ya con sus dos lineas de
+     texto: no cambia con el ancho porque ese texto nunca llega a
+     envolver a tres) mas el min-height de arriba mas 2px del borde del
+     panel. En el techo, de 640px de ventana en adelante, el navegador
+     mide 401px. Con los 84px del top y 12px de aire: 497px, redondeado
+     a 500px. */
+  :root {
+    --alto-vista-fija: 500px;
+  }
+}

@@ -2,9 +2,10 @@
    Lienzo — Categoría "Código web"
    Hoja compartida por todos los generadores CSS.
 
-   1. Estructura del taller   4. Panel de código
-   2. Vista previa            5. Piezas sueltas
-   3. Controles               6. Responsive
+   1. Estructura del taller   5. Piezas sueltas
+   2. Vista previa            6. Responsive
+   3. Controles               7. Vista previa fija (opcional)
+   4. Panel de código
 \* ------------------------------------------------------------------ */
 
 /* 1. Estructura del taller -------------------------------------------- */
@@ -386,4 +387,102 @@
   .demo-texto,
   .demo-foto,
   .familia { transition: none; }
+}
+
+/* 7. Vista previa fija (opcional) ----------------------------------------
+
+   .taller usa align-items: start: cada columna crece solo hasta su
+   propio contenido. Cuando la columna de controles (.sidebar) es bastante
+   mas alta que la de vista previa (.taller__main), esta ultima termina y
+   sale de pantalla mucho antes de que se acabe de bajar por los
+   controles: se ajustan valores sin ver el resultado, que es la razon de
+   ser de estos generadores.
+
+   Reglas opcionales, activadas SOLO con la clase .taller--vista-fija,
+   puesta a mano en el HTML de las paginas que de verdad tienen ese
+   problema. Una pagina que no lleve la clase queda exactamente igual que
+   siempre. El tamaño compacto de la vista previa en movil depende de lo
+   que muestre la demo de cada pagina (una caja no es un parrafo de
+   texto), asi que vive en el tool.css propio de cada una, cargado
+   despues de esta hoja. */
+
+.taller.taller--vista-fija {
+  /* La columna de vista previa pasa a medir lo mismo que la de
+     controles, la mas alta. Sin esto el sticky de abajo no tiene
+     recorrido: un elemento pegajoso solo se mueve dentro de su bloque
+     contenedor. */
+  align-items: stretch;
+}
+
+.taller--vista-fija .taller__main {
+  /* El alto sobrante que deja el stretch no reparte los paneles: queda
+     como espacio vacio despues del ultimo. Ya es el comportamiento por
+     defecto de un grid, se deja explicito por si esta hoja cambia ese
+     valor mas adelante. */
+  align-content: start;
+}
+
+.taller--vista-fija .taller__main > .panel:first-child {
+  /* Solo la tarjeta "Vista previa" queda fija. Los paneles que la sigan
+     dentro de .taller__main pasan por detras durante el scroll. */
+  position: sticky;
+  top: 84px;
+  z-index: 2;
+  /* En tema oscuro --panel es rgba(255, 255, 255, 0.04): casi
+     transparente. Sin esto, por la franja del titulo se verian pasar
+     los controles y textos de los paneles de atras. Se apoya ese mismo
+     --panel sobre var(--bg) para quedar opaca sin cambiar el color
+     resultante; en tema claro --panel ya es opaco y esto no cambia nada. */
+  background-color: var(--bg);
+  background-image: linear-gradient(var(--panel), var(--panel));
+}
+
+@media (max-width: 1020px) {
+  /* Una sola columna. Si el taller siguiera siendo grid aqui, cada
+     tarjeta seria un grid item con SU PROPIA fila como bloque
+     contenedor: cero recorrido para el sticky. Como bloque, el
+     contenedor de la tarjeta fija es el taller entero, que si abarca
+     todos los paneles de control. */
+  .taller--vista-fija.taller {
+    display: block;
+  }
+
+  .taller--vista-fija .taller__main {
+    display: contents;
+  }
+
+  /* El gap del grid deja de aplicar en modo bloque: se repone el mismo
+     espaciado con margen, solo entre los paneles de .taller__main (el
+     ultimo separa de .sidebar, que ya trae su propio espaciado interno
+     entre Origen/2D/3D con su gap de grid, intacto). */
+  .taller--vista-fija .taller__main > .panel {
+    margin-bottom: 1.3rem;
+  }
+
+  /* Si se navega con teclado y el foco salta a un control, que el
+     navegador lo deje visible por debajo de la tarjeta fija en vez de a
+     medio tapar.
+
+     Por que scroll-padding en la raiz y no scroll-margin en cada
+     control: scroll-margin solo entra en juego cuando el navegador
+     DECIDE desplazar, y un control tapado por la tarjeta fija le sigue
+     pareciendo visible (no sabe de solapamientos), asi que no desplazaba
+     nada. scroll-padding encoge la zona util del contenedor de
+     desplazamiento, y entonces ese control si cuenta como fuera de
+     vista. Medido en el navegador: con scroll-margin quedaban tapados 3
+     de 16 controles en animaciones y 3 de 14 en tipografia; con
+     scroll-padding, ninguno de los siete generadores falla.
+
+     El valor es la distancia del borde de arriba de la ventana al borde
+     de abajo de la tarjeta fija: los 84px de su top, mas su alto, mas un
+     poco de aire. Cada pagina mide el suyo en su propio tool.css porque
+     su vista previa mide lo suyo; aqui queda el de una tarjeta corriente.
+
+     El :has() acota la regla a las paginas que llevan la tarjeta fija:
+     /codigo-web/ (el indice de la seccion) tambien carga esta hoja. */
+  :root:has(.taller--vista-fija) {
+    scroll-padding-top: var(--alto-vista-fija, 380px);
+    /* Que el control tampoco quede a ras del borde de abajo */
+    scroll-padding-bottom: 24px;
+  }
 }

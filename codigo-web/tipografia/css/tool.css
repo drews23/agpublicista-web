@@ -48,3 +48,108 @@
 @media (prefers-reduced-motion: reduce) {
   .previa-parrafo { transition: none; }
 }
+
+/* Vista previa fija: limites de alto ------------------------------------- *\
+
+   El mecanismo (activado por .taller--vista-fija, añadida al div .taller
+   del HTML de esta pagina) vive en /css/codigo-web.css, seccion 7: lo
+   comparten todos los generadores con el mismo problema. Aqui solo el
+   tamaño de la vista previa, propio de esta pagina porque depende de un
+   titular (.demo-texto) mas un parrafo largo de verdad (.previa-parrafo):
+   los dos reciben font-size y line-height por JS (tipografia.js, funcion
+   aplicarPrevia), no por un CSS fijo. Es el UNICO de los siete
+   generadores donde el visitante controla el alto de lo que se muestra
+   (tamaño hasta 96px, altura de linea hasta 2.5), asi que es el unico
+   que necesita techo: en los demas la demo mide siempre lo mismo.
+\* ------------------------------------------------------------------ */
+
+/* Escritorio: el techo lo marca la ventana, no un numero inventado. Una
+   tarjeta con position: sticky mas alta que la ventana se queda clavada
+   arriba y su parte de abajo (aqui, el campo "Texto de ejemplo") no hay
+   forma de verla por mucho que se desplace la pagina. Medido con los dos
+   controles al maximo en 1280px de ancho: la vista previa llegaba a
+   693px y la tarjeta entera a 891px, mas alta que una ventana de 900px
+   menos los 84px del top pegajoso.
+   Los 300px que se restan: 84px de ese top, 198px del resto de la
+   tarjeta (cabecera del panel mas el campo "Texto de ejemplo", medidos
+   en vivo) y 18px de aire. El max() deja un suelo por si la ventana es
+   muy baja; ahi manda ademas el min-height de /css/codigo-web.css, que
+   por especificacion gana al max-height, y el desplazamiento interno
+   sigue dejando ver el resto. */
+@media (min-width: 1021px) {
+  .taller--vista-fija .lienzo-previa {
+    max-height: max(280px, calc(100vh - 300px));
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 1020px) {
+  /* Por que un numero fijo y no un clamp(minimo, Nvw, maximo) creciente:
+     el ancho util de .previa-tipo SI crece con la ventana (hasta su
+     propio limite de max-width: 42rem = 672px), pero eso significa MENOS
+     lineas de parrafo cuanto mas ancha es la ventana, es decir, MENOS
+     alto hace falta, justo lo contrario de lo que un clamp creciente
+     asume. El caso mas exigente es entonces el mas angosto (320px); un
+     valor fijo, valido para ese peor caso, queda seguro en TODO el rango
+     de 320 a 1020px (a los anchos mayores sobra alto, nunca falta).
+
+     Cuentas para 320px de ventana (peor caso), con box-sizing:
+     border-box: shell = min(1160px, 100vw - 3rem) = 272px; panel = 272px
+     menos 2px de borde = 270px; ancho util de .previa-tipo = 270px menos
+     el padding de aqui (1.2rem = 19.2px por lado, 38.4px en total) =
+     231.6px.
+
+     A ese ancho, con los valores por defecto de los controles (tamaño:
+     40px, altura de linea: 1.2, familia: Instrument Sans, grosor: 700),
+     el titular envuelve en 3 o 4 lineas (40px * 1.2 = 48px cada una) y el
+     parrafo de prueba, a 17px (redondeo de 40 * 0.42, la formula fija
+     del JS) con el mismo 1.2 de altura de linea (20.4px por linea),
+     envuelve en unas 11 a 13 lineas: entre 382.8px y 471.6px de
+     contenido, mas 14.4px del gap entre los dos (0.9rem) ya incluidos
+     arriba, mas 38.4px de padding (arriba y abajo). Redondeando al alza
+     por el peor de los dos casos: 510px, con margen extra por ser un
+     calculo de ancho de letras a mano, no medido en navegador: 560px de
+     techo. */
+  .taller--vista-fija .lienzo-previa {
+    padding: 1.2rem;
+    /* Suelo bajo, solo para que la caja no se vea diminuta si el tamaño
+       de fuente baja mucho (el control llega hasta 12px): el contenido
+       real de esta pagina, bastante mas alto, casi siempre lo supera.
+       Mismo valor que el piso del clamp() de escritorio en
+       /css/codigo-web.css, para no inventar un numero nuevo sin motivo. */
+    min-height: 240px;
+    /* Techo pensado para el peor caso de arriba. Es el UNICO de los seis
+       generadores con esta regla: es el unico donde el usuario controla
+       el tamaño de fuente (hasta 96px) y la altura de linea (hasta 2.5)
+       sin limite compartido con los demas. A esos extremos un solo
+       titular puede superar por si solo el resto de la pantalla.
+       Sin techo, la tarjeta "Vista previa" (position: sticky en este
+       breakpoint, ver seccion 7 de codigo-web.css) creceria sin limite y
+       en pantallas chicas taparia su propio campo "Texto de ejemplo" de
+       mas abajo mientras esta fija.
+       Por encima de 560px de contenido real (fuente y altura de linea
+       muy altas, texto de ejemplo largo, columna angosta) la muestra
+       ya no cabe. Medido en el navegador: sobresale solo por abajo,
+       porque la fila implicita de la rejilla arranca pegada al borde
+       superior, asi que basta con poder desplazarla dentro de la
+       caja; sin esto, el overflow: hidden que trae .lienzo-previa
+       cortaba la ultima linea del titular por la mitad. */
+    max-height: 560px;
+    /* Solo el eje vertical: en horizontal el texto envuelve, nunca
+       desborda, y una barra lateral ahi seria ruido. Sin
+       overscroll-behavior: al llegar al final de la muestra el gesto
+       debe seguir desplazando la pagina, que es lo que el visitante
+       espera de un bloque dentro del contenido. */
+    overflow-y: auto;
+  }
+
+  /* Zona que ocupa la tarjeta fija, para que el foco de teclado no meta
+     un control debajo (mecanismo en la seccion 7 de codigo-web.css).
+     Aqui el peor caso es el ancho mas angosto, no el mas ancho: a 320px
+     el parrafo de prueba envuelve en muchas mas lineas y el navegador
+     mide 513px de tarjeta, contra 376px a 375px de ancho y 304px de
+     640px en adelante. 84 del top + 513 + aire, redondeado: 620px. */
+  :root {
+    --alto-vista-fija: 620px;
+  }
+}

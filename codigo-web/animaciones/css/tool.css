@@ -115,3 +115,45 @@
 /* Quien pide menos movimiento no recibe la animación al cargar: el JS
    arranca la vista previa en pausa y deja el botón «Reproducir» listo.
    No se anula aquí porque ver el efecto ES la herramienta. */
+
+/* Vista previa fija: tamaño compacto en movil -------------------------- *\
+
+   El mecanismo (activado por .taller--vista-fija, ya puesta en el HTML de
+   esta pagina) vive en /css/codigo-web.css, seccion 7: lo comparten todos
+   los generadores con el mismo problema (sidebar mas alta que la vista
+   previa). Aqui solo el tamaño de la vista previa en movil, propio de
+   esta pagina porque depende de su demo: la sola .demo-caja de
+   /css/codigo-web.css (clamp(140px, 22vw, 200px), sin envoltorio propio
+   como el de transformaciones), centrada con box-sizing: border-box.
+\* ------------------------------------------------------------------ */
+
+@media (max-width: 1020px) {
+  /* .demo-caja mide como maximo clamp(140px, 22vw, 200px). Con 1rem de
+     padding por lado (2rem entre ambos), el interior de este min-height
+     nunca baja de 158px (piso, 320-452px de ancho de ventana) ni de
+     208px (techo, a partir de 572px de ancho): siempre por encima del
+     lado de la caja en ese mismo ancho (140px hasta 636px, subiendo
+     hasta 200px a partir de 909px), con un margen minimo de 8px en el
+     tramo mas ajustado (909-1020px). Verificado punto a punto en los dos
+     quiebres de cada clamp, que es donde puede fallar una formula que
+     solo se compruebe en los extremos. */
+  .taller--vista-fija .lienzo-previa {
+    min-height: clamp(190px, 42vw, 240px);
+    padding: 1rem;
+  }
+
+  /* Tarjeta fija mas alta que el generico de codigo-web.css, al reves que
+     en transformaciones: aqui el titulo trae dos botones ("Pausar" y
+     "Reiniciar") que en telefonos chicos (320-340px) bajan a dos lineas,
+     y la nota de estado bajo la vista previa tambien envuelve a varias
+     lineas con ese mismo ancho. Medido en el navegador real, esa
+     combinacion da la tarjeta mas alta de todo el rango: cabecera 92px +
+     vista previa 190px + nota 85px = 367px de contenido, 368px con el
+     borde del panel. Con los 84px del top donde queda pegada y 12px de
+     aire salen 464px, que se redondean a 470px: es la zona que ocupa la
+     tarjeta fija, para que el foco de teclado no meta un control debajo
+     (mecanismo en la seccion 7 de codigo-web.css). */
+  :root {
+    --alto-vista-fija: 470px;
+  }
+}

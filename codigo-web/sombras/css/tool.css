@@ -1,0 +1,50 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo · Generador de sombras CSS
+
+   Solo lo que NO existe en /css/codigo-web.css: el tamaño de la vista
+   previa en móvil para el mecanismo de "vista previa fija" (activado
+   por .taller--vista-fija, puesto a mano en el HTML de esta página).
+   El resto del mecanismo (columna estirada, tarjeta pegajosa, paso a
+   bloque bajo 1020px) es compartido entre todos los generadores y vive
+   en /css/codigo-web.css, sección 7.
+\* ------------------------------------------------------------------ */
+
+@media (max-width: 1020px) {
+  /* .lienzo-previa muestra un solo elemento a la vez, nunca los dos a
+     la vez (el JS de sombras.js oculta uno con [hidden] cuando activa
+     el otro): la caja de box-shadow, clamp(140px, 22vw, 200px) y
+     cuadrada, o el párrafo de text-shadow con el texto real "Sombra
+     que se lee", clamp(1.8rem, 5vw, 3rem).
+
+     Medido con ese mismo texto real: el párrafo nunca pasa de dos
+     líneas en todo el rango de 320 a 1020px de ancho de ventana, y en
+     su peor caso mide unos 66px de alto. La caja manda siempre: su
+     piso de 140px ya supera esas dos líneas de texto, y su techo de
+     200px es lo más alto que puede llegar a pedir esta vista previa.
+
+     Con box-sizing: border-box, el padding cuenta dentro del
+     min-height. Con 1rem de padding por lado, el interior nunca baja
+     de 168px (en el piso de 200px) ni de 216px (en el techo de 248px):
+     la caja entra siempre sin recortarse contra el overflow: hidden,
+     con margen de sobra en todo el rango (28px en el piso, 16px en el
+     techo, que es el punto más ajustado). */
+  .taller--vista-fija .lienzo-previa {
+    min-height: clamp(200px, 46vw, 248px);
+    padding: 1rem;
+  }
+
+  /* Zona que ocupa la tarjeta fija, para que el foco de teclado no meta
+     un control debajo (mecanismo en la sección 7 de codigo-web.css).
+     Medida en el navegador en su estado más alto (desde 560px de ancho):
+     título más botón "Sombra suave" (62px) más la vista previa en su
+     techo (248px) más el borde del panel (2px) = 312px. Con los 84px del
+     top donde queda pegada la tarjeta y 12px de aire: 408px, que se
+     redondea a 410px. */
+  :root {
+    --alto-vista-fija: 410px;
+  }
+}
+
+/* Este bloque no añade ninguna transición ni animación nueva, solo
+   tamaño y espaciado: no hay nada aquí que apagar en el bloque de
+   movimiento reducido. */

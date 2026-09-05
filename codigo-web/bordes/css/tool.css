@@ -1,0 +1,63 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo · Generador de bordes y radios CSS
+
+   Solo lo que NO existe en /css/codigo-web.css: el tamaño compacto de
+   la vista previa fija (position: sticky) en móvil.
+\* ------------------------------------------------------------------ */
+
+/* Vista previa fija: tamaño compacto en móvil -------------------------- *\
+
+   El mecanismo (activado por .taller--vista-fija, ya puesta en el HTML
+   de esta página) vive en /css/codigo-web.css, sección 7: lo comparten
+   todos los generadores con el mismo problema (columna de controles más
+   alta que la de vista previa: medido en el navegador, taller__main
+   764px contra sidebar 1443px, +679px de diferencia). Aquí solo el
+   tamaño de la vista previa en móvil, propio de esta página porque
+   depende de su demo: la sola .demo-caja de /css/codigo-web.css
+   (clamp(140px, 22vw, 200px), sin envoltorio propio, como en el
+   generador de animaciones), más el contorno.
+
+   Esta página tiene un control que las demás de la familia no tienen:
+   el contorno (outline) admite desplazamiento hacia fuera (odesp, de
+   -20px a 24px) y grosor (ogrosor, de 0px a 24px). El outline no ocupa
+   espacio en el layout, pero sí queda dentro del overflow: hidden de
+   .lienzo-previa, así que en el peor caso, los dos controles al tope a
+   la vez, el anillo llega a 24px + 24px = 48px más allá del borde de la
+   caja, en las cuatro direcciones.
+
+   Verificado en el navegador con ambos controles al máximo, de 320 a
+   1000px de ancho de ventana: con el padding genérico del sitio
+   (1.2rem en el breakpoint de 620px, o incluso los 2rem que usa el
+   tamaño de escritorio) el contorno queda recortado. Con 3rem de
+   padding no se recorta en ningún ancho del rango: por eso esta página
+   necesita más margen que el resto de la familia.
+
+   min-height replica el mismo clamp(140px, 22vw, 200px) de .demo-caja,
+   sumándole el padding en los dos extremos (2 lados x 3rem = 96px de
+   padding total: piso 140+96=236, techo 200+96=296). Al reutilizar el
+   mismo coeficiente "22vw" que ya usa la caja, el hueco libre a su
+   alrededor da siempre exactamente 48px (un lado de padding), en
+   cualquier ancho del rango, no solo en los dos quiebres del clamp: no
+   es una fórmula que se comprueba en los extremos y se confía para el
+   medio, es una que no puede fallar ahí porque la caja y el hueco
+   crecen con la misma pendiente.
+
+   La tarjeta fija completa (cabecera del panel "Vista previa" + esta
+   vista previa) mide, medida en el navegador, entre 300px (320-620px de
+   ancho) y 360px (desde 950px, donde la vista previa llega a su techo).
+\* ------------------------------------------------------------------ */
+
+@media (max-width: 1020px) {
+  .taller--vista-fija .lienzo-previa {
+    min-height: clamp(236px, calc(22vw + 96px), 296px);
+    padding: 3rem;
+  }
+
+  /* Zona que ocupa la tarjeta fija, para que el foco de teclado no meta
+     un control debajo (mecanismo en la sección 7 de codigo-web.css):
+     los 84px del top donde queda pegada, más sus 360px del peor caso,
+     más 12px de aire, redondeado a 460px. */
+  :root {
+    --alto-vista-fija: 460px;
+  }
+}

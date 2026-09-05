@@ -135,82 +135,17 @@
   .origen-btn { transition: none; }
 }
 
-/* 5. Vista previa fija mientras se bajan los controles ------------------ *\
+/* 5. Vista previa fija: tamaño compacto en movil ------------------------ *\
 
-   Problema: la columna de controles (.sidebar: Origen + 2D + 3D) es mucho
-   mas alta que la columna izquierda (.taller__main: Vista previa + CSS
-   generado). Como .taller usa align-items: start (definido en
-   /css/codigo-web.css, que aqui no se toca porque lo comparten las otras
-   seis paginas de generadores), cada columna crece solo hasta su propio
-   contenido: la izquierda termina y sale de la pantalla mucho antes de
-   que se acabe de bajar por los controles 3D de la derecha.
-
-   Todo esto se activa solo con la clase .taller--vista-fija, puesta a
-   mano en el HTML de esta pagina junto a .taller.
+   El resto del mecanismo (activado por .taller--vista-fija, ya puesta en
+   el HTML de esta pagina) vive en /css/codigo-web.css, seccion 7: lo
+   comparten todos los generadores que tienen el mismo problema. Aqui
+   solo el tamaño de la vista previa en movil, que es propio de esta
+   pagina porque depende de lo que muestra su demo (la escena 3D).
 \* ------------------------------------------------------------------ */
 
-.taller.taller--vista-fija {
-  /* La columna izquierda pasa a medir lo mismo que la de controles, que
-     es la mas alta. Sin esto, el sticky de abajo no tiene recorrido:
-     un elemento pegajoso solo se mueve dentro de su bloque contenedor. */
-  align-items: stretch;
-}
-
-.taller--vista-fija .taller__main {
-  /* El alto sobrante que deja el stretch no reparte las dos tarjetas:
-     queda como espacio vacio despues de "CSS generado". Ya es el
-     comportamiento por defecto de un grid, se deja explicito por si el
-     shared cambia ese valor mas adelante. */
-  align-content: start;
-}
-
-.taller--vista-fija .taller__main > .panel:first-child {
-  /* Solo la tarjeta "Vista previa" queda fija. "CSS generado" sigue el
-     flujo normal y pasa por detras durante el scroll. El z-index no hace
-     falta para que se pinte encima (un elemento posicionado ya lo hace
-     sobre uno estatico): esta por si mas adelante se añade algo mas al
-     taller, y queda muy por debajo del header, que va en 40. */
-  position: sticky;
-  top: 84px;
-  z-index: 2;
-  /* En tema oscuro --panel es rgba(255, 255, 255, 0.04): casi
-     transparente. Sin esto, por la franja del titulo se ven pasar los
-     sliders y los textos de los paneles de atras. Se apoya el mismo
-     --panel sobre el fondo de la pagina para dejarlo opaco SIN cambiar
-     el color resultante, y sirve igual en tema claro, donde --panel ya
-     es opaco y tapa el fondo de abajo. */
-  background-color: var(--bg);
-  background-image: linear-gradient(var(--panel), var(--panel));
-}
-
 @media (max-width: 1020px) {
-  /* Una sola columna. Aqui .taller pasa a bloque en vez de grid a
-     proposito: si se quedara como grid, cada tarjeta seria un grid item
-     y su bloque contenedor seria SU PROPIA fila, es decir, cero
-     recorrido para el sticky. Como bloque, el contenedor de la tarjeta
-     fija es .taller entero, que si abarca Origen, 2D y 3D. El gap del
-     grid deja de aplicar, asi que la separacion se repone con margen,
-     con el mismo valor (1.3rem). */
-  .taller--vista-fija.taller {
-    display: block;
-  }
-
-  .taller--vista-fija .taller__main {
-    display: contents;
-  }
-
-  .taller--vista-fija > .panel,
-  .taller--vista-fija .taller__main > .panel,
-  .taller--vista-fija .sidebar {
-    margin-bottom: 1.3rem;
-  }
-
-  .taller--vista-fija .sidebar {
-    margin-bottom: 0;
-  }
-
-  /* Vista previa compacta: fija arriba no puede comerse media pantalla.
-     La escena mide como maximo clamp(140px, 22vw, 190px) y, con
+  /* La escena mide como maximo clamp(140px, 22vw, 190px) y, con
      box-sizing: border-box, el padding cuenta dentro del min-height.
      Con 1rem de padding por lado, el interior nunca baja de 158px (en
      el piso de 190px) ni de 198px (en el techo de 230px): la escena
@@ -220,12 +155,12 @@
     padding: 1rem;
   }
 
-  /* Si se navega con teclado y el foco salta a un control de la derecha,
-     que el navegador lo deje visible por debajo de la tarjeta fija en
-     vez de a medio tapar. El valor sale de sumar el top (84px) al alto
-     tipico de la tarjeta fija en movil, con algo de margen. */
-  .taller--vista-fija .sidebar :is(input, button) {
-    scroll-margin-top: 360px;
+  /* Zona que ocupa la tarjeta fija, para que el foco de teclado no meta
+     un control debajo (mecanismo en la seccion 7 de codigo-web.css).
+     Alto medido en el navegador de 320 a 1020px: 254px hasta los 420px
+     de ancho y 294px en el techo. 84 del top + 294 + 12 de aire. */
+  :root {
+    --alto-vista-fija: 400px;
   }
 }
 
