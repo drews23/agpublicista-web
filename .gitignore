@@ -63,3 +63,6 @@ _facebook/
 
 # Sistema de OG y compartir: plantilla y generador, no es del sitio (las imagenes SI van en assets/og/)
 _og/
+
+# Pipeline de iconos 3D y assets pendientes de decision, no es del sitio
+_3d/
