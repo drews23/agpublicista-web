@@ -499,10 +499,12 @@
 }
 .neonov--arrastrable .neonov__pista { animation: none; }
 
-/* Mientras se arrastra: cursor de agarre y los enlaces desactivados,
-   para que soltar el ratón sobre una tarjeta no cuente como clic. */
+/* El cursor de agarre aparece con solo pulsar. Los enlaces se apagan
+   aparte, y solo cuando el arrastre ya se confirmó (ver pointermove en
+   novedades.js): si se apagaran desde el propio pulsar, un clic normal
+   sobre "Ver el pack" perdería su hit-test antes de soltar el ratón. */
 .neonov--arrastrable .neonov__marquee.esta-arrastrando { cursor: grabbing; }
-.neonov--arrastrable .neonov__marquee.esta-arrastrando a { pointer-events: none; }
+.neonov--arrastrable .neonov__marquee.arrastre-activo a { pointer-events: none; }
 
 /* En móvil cada gesto deja una tarjeta centrada. El imán solo se activa
    con el carrusel manipulable: sobre la marquesina de CSS pelearía con
