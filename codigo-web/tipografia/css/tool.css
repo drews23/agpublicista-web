@@ -28,7 +28,14 @@
   margin: 0;
   color: var(--muted);
   overflow-wrap: break-word;
-  transition: all 220ms var(--ease);
+  /* Solo color, nunca "all": tipografia.js (función aplicarPrevia) pisa
+     font-size, line-height, letter-spacing, word-spacing y text-indent
+     por JS en este mismo párrafo, y esas SI mueven el layout. Con "all"
+     quedaban 220ms transicionando en cada movimiento de slider, así que
+     cualquier lectura de altura hecha justo después (el propio recorte
+     de .lienzo-previa, o una medición en vivo) captaba el tamaño a medio
+     camino, no el real. */
+  transition: color 220ms var(--ease);
 }
 
 /* Fragmentos de código dentro de las ayudas de los controles */

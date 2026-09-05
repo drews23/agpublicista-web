@@ -97,7 +97,15 @@
   line-height: 1.15;
   color: var(--text);
   text-align: center;
-  transition: all 220ms var(--ease);
+  /* Solo color y sombra, nunca "all": tipografia.js pisa font-size,
+     line-height, letter-spacing, word-spacing y text-indent por JS en
+     esta misma clase, y esas SI mueven el layout. Con "all", una lectura
+     de altura hecha justo después de mover un slider (el propio motor de
+     esta pagina, o cualquier medicion en vivo) capta el tamaño a medio
+     transicionar, no el real. color/text-shadow no afectan el layout:
+     sombras.js los usa para la muestra de texto y sí conviene que
+     transicionen suave. */
+  transition: color 220ms var(--ease), text-shadow 220ms var(--ease);
 }
 
 .demo-foto {
