@@ -139,6 +139,7 @@ del canal deja de ser una lista cronológica y pasa a leerse como un catálogo:
 2. Packs de sonido
 3. Plantillas de After Effects
 4. Técnicas de Edición de Video
+5. Herramientas Creativas Gratis
 
 ### Lista de reproducción: Técnicas de Edición de Video
 
@@ -172,6 +173,44 @@ Más recursos gratis para editores en https://lienzo.tools/
 > creativomarketingdigital.com y algunos van incrustados en el portafolio de MD.
 > El canal público es íntegramente Lienzo, lo cual juega a favor del nombre
 > nuevo. Ver la nota sobre MD al final de este documento.
+
+---
+
+### Lista de reproducción: Herramientas Creativas Gratis
+
+**Creada el 4 sep 2026** para agrupar los shorts que muestran una herramienta
+del sitio en acción (el primero: el demo de Territorio cromático,
+`videos/reel-territorio-lienzo/`). No encaja en ninguna de las cuatro listas
+existentes: no es un pack para descargar ni una técnica de edición, es la
+herramienta misma funcionando.
+
+Se investigó en vidIQ un nombre con volumen de búsqueda propio y no lo hay:
+"herramientas gratis para diseñadores", "herramientas de diseño web" y
+"herramientas de diseño gráfico gratis" dan todas menos de 750/mes en México.
+Esta lista se justifica por organización del canal, no por SEO: a diferencia
+de "Técnicas de Edición de Video" (5.125/mes), que sí se eligió por su
+volumen. El nombre cubre a propósito las tres audiencias del canal (diseño,
+edición y código): paletas, favicons, QR, audio y el optimizador de SVG caben
+todos aquí según se les vaya haciendo su short.
+
+Título:
+```
+Herramientas Creativas Gratis
+```
+
+Descripción:
+```
+Demos cortos de las herramientas gratis de lienzo.tools: color, iconos,
+código y audio, siempre en el navegador, sin registro y sin instalar nada.
+Cada video muestra la herramienta funcionando de verdad.
+
+Úsalas aquí: https://lienzo.tools/herramientas/
+```
+
+> Todos los videos de esta lista son verticales (formato Short). No mezclar
+> con listas de video horizontal para que la reproducción no salte de
+> formato. El valor real de la lista no es que un Short traiga vistas desde
+> ella (llegan del feed de Shorts), sino organizar la portada del canal.
 
 ---
 
