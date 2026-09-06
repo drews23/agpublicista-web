@@ -428,3 +428,49 @@
   .dropzone,
   .saved-bar::after { transition: none; }
 }
+
+/* Estudio ---------------------------------------------------------------- */
+
+/* La banda tiene dos estados. Sin archivo: solo el cargador, centrado en
+   el lienzo. Con archivo (data-cargado): cargador fuera, taller dentro. */
+.estudio.workspace { display: block; margin-top: 0; }
+
+.estudio:not([data-cargado]) [data-solo-cargado],
+.estudio:not([data-cargado]) .previews,
+.estudio:not([data-cargado]) .code-wrap { display: none; }
+.estudio[data-cargado] .loader { display: none; }
+
+.estudio .loader {
+  margin: 0 auto;
+  max-width: 560px;
+  align-content: center;
+  height: 100%;
+}
+
+/* El lienzo reparte las dos vistas previas a lo alto disponible */
+.estudio .optimizar-lienzo { display: grid; }
+.estudio .previews {
+  height: 100%;
+  min-height: 0;
+  align-items: stretch;
+}
+.estudio .preview { display: flex; flex-direction: column; min-height: 0; }
+.estudio .preview__stage { flex: 1; min-height: 0; }
+
+/* La vista de codigo ocupa el lienzo entero con su propio scroll */
+.estudio .code-wrap { height: 100%; min-height: 0; }
+.estudio .code-wrap pre { height: 100%; max-height: none; overflow: auto; margin: 0; }
+
+/* El segmentado Comparar/Codigo en pastilla de vidrio, como las acciones */
+.estudio__acciones .segmented {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Las estadisticas dentro del cajon */
+.estudio__codigo-cuerpo { padding: 0.9rem 1rem; }
+.estudio__codigo-cuerpo .stats { border-top: 0; padding: 0; margin: 0; }

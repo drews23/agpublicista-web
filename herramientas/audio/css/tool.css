@@ -427,3 +427,41 @@
   .dropzone,
   .progreso__barra { transition: none; }
 }
+
+/* Estudio ---------------------------------------------------------------- */
+
+.estudio.workspace { display: block; margin-top: 0; }
+
+.estudio:not([data-cargado]) [data-solo-cargado],
+.estudio:not([data-cargado]) .player { display: none; }
+.estudio[data-cargado] .loader { display: none; }
+
+.estudio .loader {
+  margin: 0 auto;
+  max-width: 560px;
+  align-content: center;
+  height: 100%;
+}
+
+/* La onda manda: ocupa el alto libre y el transporte queda debajo */
+.estudio .audio-lienzo { display: grid; }
+.estudio .player { display: flex; flex-direction: column; min-height: 0; height: 100%; }
+.estudio .waveform { flex: 1; min-height: 0; height: auto; }
+
+.estudio__acciones .audio-archivo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.estudio__codigo-cuerpo { padding: 0.9rem 1rem; }
+.estudio__codigo-cuerpo .stats { border-top: 0; padding: 0; margin: 0; }
+.estudio__codigo-cuerpo .progreso { margin-top: 0.7rem; }

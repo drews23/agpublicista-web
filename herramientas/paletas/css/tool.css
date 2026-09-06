@@ -616,3 +616,19 @@
     transform: none;
   }
 }
+
+/* Estudio: la paleta ES el lienzo. Sus columnas llenan la banda y cada
+   escala estira sus pasos a lo alto disponible. Los segmentados y el
+   codigo de exportar viven ahora en panel y cajon: fuera sus margenes
+   de seccion. */
+.estudio .palette {
+  margin: 0;
+  height: 100%;
+  align-content: stretch;
+}
+.estudio__codigo-cuerpo { padding: 0.9rem 1rem; }
+.estudio__codigo-cuerpo .export__controls { margin: 0 0 0.8rem; }
+.estudio__codigo-cuerpo .export__code { margin: 0; }
+.estudio__seccion .picker__hint { margin-top: 0.6rem; }
+.estudio__seccion .status,
+.estudio__seccion .palette-note { margin: 0.7rem 0 0; font-size: 0.85rem; color: var(--muted); }

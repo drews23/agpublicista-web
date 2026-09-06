@@ -43,7 +43,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
-    <link rel="stylesheet" href="css/tool.css" />
+    <link rel="stylesheet" href="css/tool.css?v=2026090504" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -197,45 +198,43 @@
           <p class="lede reveal" style="--reveal-delay: 140ms">Escribe cualquier texto o pega un enlace y descarga el código QR al instante, en PNG o en SVG. Se genera en tu navegador: nada de lo que escribes viaja por la red.</p>
         </div>
 
-        <div class="workspace" data-workspace style="margin-top: 2rem">
-          <div class="panel">
-            <div class="panel__head">
-              <h2 class="panel__title">Vista previa</h2>
-              <span class="stat__value--small" data-nombre-archivo>, </span>
-            </div>
-            <div class="qr-preview" data-preview>
+      </section>
+
+      <section class="section estudio-shell">
+        <div class="estudio reveal" data-estudio data-workspace style="--reveal-delay: 200ms">
+          <div class="qr-preview estudio__lienzo" data-preview>
               <div class="qr-lienzo" data-lienzo hidden><canvas data-canvas width="1" height="1"></canvas></div>
               <div class="qr-preview__vacio" data-vacio>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14v7M14 19h7"/></svg>
                 <span>Completa los campos para ver tu código QR</span>
               </div>
             </div>
-            <p class="error" data-error role="alert" hidden></p>
-            <div class="stats" aria-live="polite">
-              <div class="stat"><span class="stat__label">Versión</span><span class="stat__value" data-stat-version>, </span></div>
-              <div class="stat"><span class="stat__label">Módulos</span><span class="stat__value stat__value--small" data-stat-modulos>, </span></div>
-              <div class="stat"><span class="stat__label">Corrección</span><span class="stat__value stat__value--small" data-stat-ec>, </span></div>
-              <div class="stat"><span class="stat__label">Contenido</span><span class="stat__value stat__value--small" data-stat-bytes>, </span></div>
+
+          <p class="error" data-error role="alert" hidden></p>
+
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
             </div>
-            <div class="actions">
-              <button class="btn btn--primary" type="button" data-descargar-png>Descargar PNG</button>
-              <button class="btn btn--ghost" type="button" data-descargar-svg>Descargar SVG</button>
-            </div>
-          </div>
-          <aside class="sidebar" aria-label="Ajustes">
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Contenido</h2></div>
-              <div class="settings">
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Contenido</summary>
+                <div class="settings">
                 <label class="field">
                   <span class="field__label">Texto o enlace <span class="contador" data-contador>0</span></span>
                   <textarea placeholder="https://lienzo.tools/" data-campo="contenido" rows="4">https://lienzo.tools/</textarea>
                   <span class="field__hint">Cualquier cosa: una URL, una frase, un número de referencia.</span>
                 </label>
               </div>
-            </div>
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Apariencia</h2></div>
-              <div class="settings">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Apariencia</summary>
+                <div class="settings">
                 <div class="field-row">
                   <label class="field">
                     <span class="field__label">Color</span>
@@ -267,8 +266,28 @@
                   <span class="field__hint">Cuánto puede ensuciarse o taparse el código y aún leerse. H es la más resistente; úsala si vas a imprimirlo pequeño o a ponerle un logo encima en un editor externo.</span>
                 </div>
               </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">Detalles</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-descargar-png>Descargar PNG</button>
+              <button class="btn btn--ghost" type="button" data-descargar-svg>Descargar SVG</button>
+              </span>
+            </summary>
+            <div class="estudio__codigo-cuerpo">
+              <p class="qr-archivo"><span class="stat__value--small" data-nombre-archivo>, </span></p>
+              <div class="stats" aria-live="polite">
+              <div class="stat"><span class="stat__label">Versión</span><span class="stat__value" data-stat-version>, </span></div>
+              <div class="stat"><span class="stat__label">Módulos</span><span class="stat__value stat__value--small" data-stat-modulos>, </span></div>
+              <div class="stat"><span class="stat__label">Corrección</span><span class="stat__value stat__value--small" data-stat-ec>, </span></div>
+              <div class="stat"><span class="stat__label">Contenido</span><span class="stat__value stat__value--small" data-stat-bytes>, </span></div>
+            </div>
+            </div>
+          </details>
         </div>
 
         <p class="tool-note">
@@ -430,6 +449,7 @@
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="js/vendor/qrcode-generator.js" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
     <script src="js/qr-core.js" defer></script>
     <script src="js/qr-generador.js" defer></script>
   </body>

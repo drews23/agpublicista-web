@@ -47,7 +47,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
-    <link rel="stylesheet" href="css/tool.css" />
+    <link rel="stylesheet" href="css/tool.css?v=2026090504" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -160,37 +161,11 @@
           </p>
         </div>
 
-        <div class="loader reveal" style="--reveal-delay: 200ms">
-          <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
-               aria-label="Arrastra un archivo de audio o pulsa para elegirlo">
-            <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
-                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M24 32V10" />
-              <path d="m15 19 9-9 9 9" />
-              <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" />
-            </svg>
-            <p class="dropzone__title">Arrastra tu audio aquí</p>
-            <p class="dropzone__hint">o pulsa para elegir un archivo · MP3, WAV, OGG, M4A · nada se sube a ningún servidor</p>
-            <div class="dropzone__actions">
-              <button class="btn btn--ghost" type="button" data-demo>Probar con un ejemplo</button>
-            </div>
-            <input type="file" accept="audio/*" hidden data-file />
-          </div>
-          <p class="error" data-error role="alert" hidden></p>
-        </div>
+      </section>
 
-        <p class="tool-note" data-empty>
-          Al cargar el primer archivo el navegador prepara el motor de audio; después cada
-          operación es prácticamente instantánea.
-        </p>
-
-        <div class="workspace" data-workspace data-busy="false" hidden>
-          <div class="panel">
-            <div class="panel__head">
-              <h2 class="panel__title">Onda y recorte</h2>
-              <span class="stat__value--small" data-nombre-archivo>, </span>
-            </div>
-
+      <section class="section estudio-shell">
+        <div class="estudio workspace reveal" data-estudio data-workspace data-busy="false" style="--reveal-delay: 200ms">
+          <div class="estudio__lienzo audio-lienzo">
             <div class="player">
               <div class="waveform" data-waveform>
                 <canvas data-canvas></canvas>
@@ -212,8 +187,75 @@
                 <button class="btn btn--ghost" type="button" data-reset-recorte style="margin-left: auto">Quitar recorte</button>
               </div>
             </div>
+            <div class="loader">
+          <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
+               aria-label="Arrastra un archivo de audio o pulsa para elegirlo">
+            <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M24 32V10" />
+              <path d="m15 19 9-9 9 9" />
+              <path d="M8 30v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6" />
+            </svg>
+            <p class="dropzone__title">Arrastra tu audio aquí</p>
+            <p class="dropzone__hint">o pulsa para elegir un archivo · MP3, WAV, OGG, M4A · nada se sube a ningún servidor</p>
+            <div class="dropzone__actions">
+              <button class="btn btn--ghost" type="button" data-demo>Probar con un ejemplo</button>
+            </div>
+            <input type="file" accept="audio/*" hidden data-file />
+          </div>
+          <p class="error" data-error role="alert" hidden></p>
+        </div>
+          </div>
 
-            <div class="stats" aria-live="polite">
+          <div class="estudio__acciones" data-solo-cargado>
+            <span class="audio-archivo"><span class="stat__value--small" data-nombre-archivo>, </span></span>
+            <button class="boton-sutil" type="button" data-reabrir>Cargar otro audio</button>
+          </div>
+
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio" data-solo-cargado>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes" data-solo-cargado>
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Volumen</summary>
+                <div class="settings">
+                <label class="field">
+                  <span class="field__label">Ganancia <output data-ganancia-output>0 dB</output></span>
+                  <input type="range" min="-24" max="24" step="1" value="0" data-ganancia />
+                  <span class="field__hint">Positivo sube el volumen, negativo lo baja. Se recorta a ±1 para evitar distorsión.</span>
+                </label>
+                <button class="btn btn--ghost" type="button" data-normalizar>Normalizar al máximo sin clipping</button>
+              </div>
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Velocidad</summary>
+                <div class="settings">
+                <label class="field">
+                  <span class="field__label">Velocidad <output data-velocidad-output>1.00×</output></span>
+                  <input type="range" min="0.5" max="2" step="0.05" value="1" data-velocidad />
+                  <span class="field__hint">Cambia el tono junto con la velocidad, como una cinta o un vinilo.</span>
+                </label>
+              </div>
+              </details>
+            </div>
+          </aside>
+
+          <details class="estudio__codigo" data-solo-cargado>
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">Exportar</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-descargar-wav>Descargar WAV</button>
+              <button class="btn btn--ghost" type="button" data-descargar-comprimido hidden>Descargar Opus (comprimido)</button>
+              </span>
+            </summary>
+            <div class="estudio__codigo-cuerpo">
+              <div class="stats" aria-live="polite">
               <div class="stat">
                 <span class="stat__label">Duración final</span>
                 <span class="stat__value" data-stat-duracion>, </span>
@@ -231,40 +273,15 @@
                 <span class="stat__value stat__value--small" data-stat-frecuencia>, </span>
               </div>
             </div>
-
-            <div class="progreso" data-progreso hidden><div class="progreso__barra" data-progreso-barra></div></div>
-
-            <div class="actions">
-              <button class="btn btn--primary" type="button" data-descargar-wav>Descargar WAV</button>
-              <button class="btn btn--ghost" type="button" data-descargar-comprimido hidden>Descargar Opus (comprimido)</button>
+              <div class="progreso" data-progreso hidden><div class="progreso__barra" data-progreso-barra></div></div>
             </div>
-          </div>
-
-          <aside class="sidebar" aria-label="Ajustes">
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Volumen</h2></div>
-              <div class="settings">
-                <label class="field">
-                  <span class="field__label">Ganancia <output data-ganancia-output>0 dB</output></span>
-                  <input type="range" min="-24" max="24" step="1" value="0" data-ganancia />
-                  <span class="field__hint">Positivo sube el volumen, negativo lo baja. Se recorta a ±1 para evitar distorsión.</span>
-                </label>
-                <button class="btn btn--ghost" type="button" data-normalizar>Normalizar al máximo sin clipping</button>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Velocidad</h2></div>
-              <div class="settings">
-                <label class="field">
-                  <span class="field__label">Velocidad <output data-velocidad-output>1.00×</output></span>
-                  <input type="range" min="0.5" max="2" step="0.05" value="1" data-velocidad />
-                  <span class="field__hint">Cambia el tono junto con la velocidad, como una cinta o un vinilo.</span>
-                </label>
-              </div>
-            </div>
-          </aside>
+          </details>
         </div>
+
+        <p class="tool-note" data-empty>
+          Al cargar el primer archivo el navegador prepara el motor de audio; después cada
+          operación es prácticamente instantánea.
+        </p>
 
         <p class="tool-note">
           Motor: Web Audio API nativa del navegador, sin librerías externas. El audio nunca sale de tu equipo.
@@ -417,6 +434,7 @@
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="js/audio-core.js" defer></script>
-    <script src="js/audio-editor.js" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
+    <script src="js/audio-editor.js?v=2026090504" defer></script>
   </body>
 </html>

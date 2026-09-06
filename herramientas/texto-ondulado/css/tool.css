@@ -309,3 +309,21 @@
     justify-content: center;
   }
 }
+
+/* Estudio: el componente ES el lienzo de la banda; fuera su marco propio
+   (el marco lo pone la banda) y fuera tambien el alto fijo. El fondo con
+   los dos brillos radiales se queda: es el escenario del texto. */
+.estudio .text-path {
+  height: auto;
+  border: 0;
+  border-radius: 0;
+}
+
+/* En el panel del estudio (336px) tres columnas se aprietan: dos
+   respiran. El campo ancho y la fila de color siguen a lo ancho. */
+.estudio .controls {
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem 0.9rem;
+}
+.estudio .controls__field--wide,
+.estudio .controls__checkbox { grid-column: 1 / -1; }

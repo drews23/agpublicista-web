@@ -53,7 +53,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
-    <link rel="stylesheet" href="css/tool.css" />
+    <link rel="stylesheet" href="css/tool.css?v=2026090504" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -181,7 +182,25 @@
         </div>
 
         <!-- Carga -->
-        <div class="loader reveal" style="--reveal-delay: 200ms">
+      </section>
+
+      <section class="section estudio-shell">
+        <div class="estudio workspace reveal" data-estudio data-workspace data-view="comparar" data-busy="false" style="--reveal-delay: 200ms">
+          <div class="estudio__lienzo optimizar-lienzo">
+            <div class="previews">
+              <div class="preview">
+                <p class="preview__label">Original</p>
+                <div class="preview__stage" data-preview-before></div>
+              </div>
+              <div class="preview">
+                <p class="preview__label">Optimizado</p>
+                <div class="preview__stage" data-preview-after></div>
+              </div>
+            </div>
+            <div class="code-wrap">
+              <pre data-code tabindex="0" aria-label="Código SVG optimizado"></pre>
+            </div>
+            <div class="loader">
           <div class="dropzone" data-dropzone data-over="false" role="button" tabindex="0"
                aria-label="Arrastra un archivo SVG o pulsa para elegirlo">
             <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor"
@@ -205,68 +224,30 @@
 
           <p class="error" data-error role="alert" hidden></p>
         </div>
+          </div>
 
-        <p class="tool-note" data-empty>
-          La primera optimización tarda un instante mientras carga el motor. Después es inmediata.
-        </p>
-
-        <!-- Espacio de trabajo -->
-        <div class="workspace" data-workspace data-view="comparar" data-busy="false" hidden>
-          <div class="panel">
-            <div class="panel__head">
-              <h2 class="panel__title">Resultado</h2>
-              <div class="segmented" data-view-group role="radiogroup" aria-label="Modo de vista">
+          <div class="estudio__acciones" data-solo-cargado>
+            <div class="segmented" data-view-group role="radiogroup" aria-label="Modo de vista">
                 <label><input type="radio" name="vista" value="comparar" checked /> Comparar</label>
                 <label><input type="radio" name="vista" value="codigo" /> Código</label>
               </div>
-            </div>
-
-            <div class="previews">
-              <div class="preview">
-                <p class="preview__label">Original</p>
-                <div class="preview__stage" data-preview-before></div>
-              </div>
-              <div class="preview">
-                <p class="preview__label">Optimizado</p>
-                <div class="preview__stage" data-preview-after></div>
-              </div>
-            </div>
-
-            <div class="code-wrap">
-              <pre data-code tabindex="0" aria-label="Código SVG optimizado"></pre>
-            </div>
-
-            <div class="stats" aria-live="polite">
-              <div class="stat">
-                <span class="stat__label">Original</span>
-                <span class="stat__value stat__value--small" data-stat-original>, </span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">Optimizado</span>
-                <span class="stat__value stat__value--small" data-stat-optimized>, </span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">Ahorro</span>
-                <span class="stat__value stat__value--win" data-stat-saved data-negative="false">, </span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">Con gzip</span>
-                <span class="stat__value stat__value--small" data-stat-gzip>, </span>
-              </div>
-              <div class="saved-bar" data-saved-bar aria-hidden="true"></div>
-            </div>
-
-            <div class="actions">
-              <button class="btn btn--primary" type="button" data-download>Descargar SVG</button>
-              <button class="btn btn--ghost" type="button" data-copy>Copiar código</button>
-              <button class="btn btn--ghost" type="button" data-copy-datauri>Copiar como data URI</button>
-            </div>
+            <button class="boton-sutil" type="button" data-reabrir>Cargar otro SVG</button>
           </div>
 
-          <aside class="sidebar" aria-label="Ajustes de optimización">
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Ajustes</h2></div>
-              <div class="settings">
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio" data-solo-cargado>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes de optimización" data-solo-cargado>
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Ajustes</summary>
+                <div class="estudio__seccion-cuerpo">
+                <div class="settings">
                 <label class="field">
                   <span class="field__label">Precisión decimal <output data-precision-output>3</output></span>
                   <input type="range" min="0" max="8" step="1" value="3" data-precision />
@@ -289,11 +270,12 @@
                   </span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Optimizaciones</h2></div>
-              <div class="plugins">
+                </div>
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Optimizaciones</summary>
+                <div class="estudio__seccion-cuerpo">
+                <div class="plugins">
                 <div class="plugins__actions">
                   <button type="button" data-reset>Restaurar</button>
                   <button type="button" data-all-on>Activar todo</button>
@@ -306,9 +288,47 @@
                 <p class="plugins__legend">Opcionales (pueden alterar el resultado)</p>
                 <div class="plugins__group" data-plugins-optional></div>
               </div>
+                </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo" data-solo-cargado>
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">Resultado</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-download>Descargar SVG</button>
+              <button class="btn btn--ghost" type="button" data-copy>Copiar código</button>
+              <button class="btn btn--ghost" type="button" data-copy-datauri>Copiar como data URI</button>
+              </span>
+            </summary>
+            <div class="estudio__codigo-cuerpo">
+              <div class="stats" aria-live="polite">
+              <div class="stat">
+                <span class="stat__label">Original</span>
+                <span class="stat__value stat__value--small" data-stat-original>, </span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Optimizado</span>
+                <span class="stat__value stat__value--small" data-stat-optimized>, </span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Ahorro</span>
+                <span class="stat__value stat__value--win" data-stat-saved data-negative="false">, </span>
+              </div>
+              <div class="stat">
+                <span class="stat__label">Con gzip</span>
+                <span class="stat__value stat__value--small" data-stat-gzip>, </span>
+              </div>
+              <div class="saved-bar" data-saved-bar aria-hidden="true"></div>
+            </div>
+            </div>
+          </details>
         </div>
+
+        <p class="tool-note" data-empty>
+          La primera optimización tarda un instante mientras carga el motor. Después es inmediata.
+        </p>
 
         <p class="tool-note">
           Motor: <a href="https://github.com/svg/svgo" target="_blank" rel="noopener">SVGO</a>
@@ -502,6 +522,7 @@
 
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
-    <script src="js/optimizar.js" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
+    <script src="js/optimizar.js?v=2026090504" defer></script>
   </body>
 </html>

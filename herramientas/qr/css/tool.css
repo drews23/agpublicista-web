@@ -272,3 +272,39 @@
 @media (prefers-reduced-motion: reduce) {
   .qr-lienzo { transition: none; }
 }
+
+/* Estudio ---------------------------------------------------------------- *
+   La pagina usa el layout de banda completa de /css/estudio.css: el
+   .qr-preview es el lienzo, los ajustes van en el panel flotante y las
+   descargas en el cajon. Aqui solo lo propio de esta herramienta.
+\* ------------------------------------------------------------------ */
+
+/* El aviso de ocupado seguia colgado de la clase .workspace, que ya no
+   existe: ahora cuelga del atributo, que si viaja en el div .estudio. */
+[data-workspace][data-busy="true"] .qr-lienzo { opacity: 0.6; }
+
+/* El error flota centrado sobre el lienzo, en vidrio, sin empujar nada */
+.estudio > .error {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--estudio-margen) + 4.6rem);
+  transform: translateX(-50%);
+  z-index: 3;
+  margin: 0;
+  max-width: min(520px, calc(100% - 2rem));
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Nombre de archivo y estadisticas dentro del cajon */
+.estudio__codigo-cuerpo { padding: 0.9rem 1rem; }
+.estudio__codigo-cuerpo .qr-archivo { margin: 0 0 0.6rem; color: var(--muted); font-size: 0.85rem; }
+.estudio__codigo-cuerpo .stats { border-top: 0; padding: 0; }
+
+/* El atributo hidden perdia contra el display de la clase: el estado
+   vacio se veia DEBAJO del QR ya generado. Defecto que venia de antes
+   y que la banda alta del estudio dejo a la vista. */
+.qr-preview__vacio[hidden] { display: none; }

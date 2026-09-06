@@ -12,6 +12,12 @@
   const elError = $("[data-error]");
   const notaVacio = $("[data-empty]");
   const workspace = $("[data-workspace]");
+  document.querySelector("[data-reabrir]")?.addEventListener("click", () => {
+    delete workspace.dataset.cargado;
+    const vacio = document.querySelector("[data-empty]");
+    if (vacio) vacio.hidden = false;
+    workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   const nombreArchivoEl = $("[data-nombre-archivo]");
 
   const waveform = $("[data-waveform]");
@@ -95,7 +101,9 @@
 
     nombreArchivoEl.textContent = nombre;
     notaVacio.hidden = true;
-    workspace.hidden = false;
+    /* Estudio: la banda esta siempre a la vista; "cargado" esconde el
+       cargador y muestra el taller (CSS). */
+    workspace.dataset.cargado = "true";
     limpiarError();
 
     L.dibujarOnda(canvas, buffer, { color: "#8b7bff" });

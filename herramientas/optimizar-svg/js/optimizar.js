@@ -14,6 +14,12 @@
   const demoBtn = $("[data-demo]");
   const workspace = $("[data-workspace]");
   const emptyState = $("[data-empty]");
+  const reabrir = $("[data-reabrir]");
+  reabrir?.addEventListener("click", () => {
+    delete workspace.dataset.cargado;
+    emptyState.hidden = false;
+    workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 
   const previewBefore = $("[data-preview-before]");
   const previewAfter = $("[data-preview-after]");
@@ -280,7 +286,9 @@
     source = text;
     sourceName = (name || "imagen").replace(/\.svg$/i, "");
     emptyState.hidden = true;
-    workspace.hidden = false;
+    /* Estudio: la banda esta siempre a la vista; el estado "cargado"
+       esconde el cargador y muestra panel, acciones y cajon (CSS). */
+    workspace.dataset.cargado = "true";
     renderPreview(previewBefore, source);
     showError("");
     run();

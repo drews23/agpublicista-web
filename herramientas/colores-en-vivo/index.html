@@ -53,7 +53,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
-    <link rel="stylesheet" href="css/tool.css" />
+    <link rel="stylesheet" href="css/tool.css?v=2026090504" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -178,85 +179,11 @@
       </div>
 
       <!-- Editor -->
-      <section class="section shell tool" aria-labelledby="editor-title">
+      <section class="section estudio-shell" aria-labelledby="editor-title">
         <h2 id="editor-title" class="sr-only">Editor de colores</h2>
 
-        <form class="tool__panel reveal" data-form autocomplete="off">
-          <fieldset class="roles">
-            <legend class="roles__legend">Tus cinco colores</legend>
-
-            <div class="role">
-              <label class="role__name" for="pick-texto">Texto</label>
-              <p class="role__hint" id="hint-texto">Titulares, párrafos y todo lo que se lee.</p>
-              <div class="role__inputs">
-                <input class="role__pick" type="color" id="pick-texto" data-pick="texto" value="#f4f3f8" aria-describedby="hint-texto" />
-                <label class="sr-only" for="hex-texto">Valor hexadecimal del color de texto</label>
-                <input class="role__hex" type="text" id="hex-texto" data-hex="texto" value="#f4f3f8" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-texto" />
-              </div>
-            </div>
-
-            <div class="role">
-              <label class="role__name" for="pick-fondo">Fondo</label>
-              <p class="role__hint" id="hint-fondo">El lienzo de la página. Manda en la sensación general.</p>
-              <div class="role__inputs">
-                <input class="role__pick" type="color" id="pick-fondo" data-pick="fondo" value="#0a0a0f" aria-describedby="hint-fondo" />
-                <label class="sr-only" for="hex-fondo">Valor hexadecimal del color de fondo</label>
-                <input class="role__hex" type="text" id="hex-fondo" data-hex="fondo" value="#0a0a0f" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-fondo" />
-              </div>
-            </div>
-
-            <div class="role">
-              <label class="role__name" for="pick-primario">Primario</label>
-              <p class="role__hint" id="hint-primario">Botones y enlaces. Poco espacio, mucho peso.</p>
-              <div class="role__inputs">
-                <input class="role__pick" type="color" id="pick-primario" data-pick="primario" value="#8b7bff" aria-describedby="hint-primario" />
-                <label class="sr-only" for="hex-primario">Valor hexadecimal del color primario</label>
-                <input class="role__hex" type="text" id="hex-primario" data-hex="primario" value="#8b7bff" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-primario" />
-              </div>
-            </div>
-
-            <div class="role">
-              <label class="role__name" for="pick-superficie">Superficie</label>
-              <p class="role__hint" id="hint-superficie">Tarjetas y paneles apoyados sobre el fondo.</p>
-              <div class="role__inputs">
-                <input class="role__pick" type="color" id="pick-superficie" data-pick="superficie" value="#16161f" aria-describedby="hint-superficie" />
-                <label class="sr-only" for="hex-superficie">Valor hexadecimal del color de superficie</label>
-                <input class="role__hex" type="text" id="hex-superficie" data-hex="superficie" value="#16161f" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-superficie" />
-              </div>
-            </div>
-
-            <div class="role">
-              <label class="role__name" for="pick-acento">Acento</label>
-              <p class="role__hint" id="hint-acento">Detalles y destacados. Como mucho, el 10%.</p>
-              <div class="role__inputs">
-                <input class="role__pick" type="color" id="pick-acento" data-pick="acento" value="#ffb454" aria-describedby="hint-acento" />
-                <label class="sr-only" for="hex-acento">Valor hexadecimal del color de acento</label>
-                <input class="role__hex" type="text" id="hex-acento" data-hex="acento" value="#ffb454" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-acento" />
-              </div>
-            </div>
-          </fieldset>
-
-          <div class="tool__actions">
-            <button class="btn btn--primary" type="button" data-random>Combinación aleatoria</button>
-            <button class="btn btn--ghost" type="button" data-copy-css>Copiar variables CSS</button>
-            <button class="btn btn--ghost" type="button" data-download-png>Descargar PNG</button>
-            <button class="btn btn--ghost" type="button" data-copy-hex>Copiar lista de hex</button>
-          </div>
-
-          <p class="tool__note">
-            <span data-combo-name>Combinación personalizada</span> ·
-            Pulsa la <kbd>barra espaciadora</kbd> para probar otra ·
-            La URL guarda tus colores, cópiala para compartir la paleta.
-          </p>
-        </form>
-
-        <h3 class="tool__title reveal">Vista previa en una web real</h3>
-        <p class="tool__lede reveal">
-          Todo el texto de la maqueta usa tu color de texto al 100%, sin atenuar:
-          lo que ves aquí es exactamente lo que mide el test de contraste.
-        </p>
-
-        <div class="preview-scope reveal" data-preview role="group" aria-label="Vista previa de una web de ejemplo pintada con tus cinco colores">
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 90ms">
+          <div class="preview-scope estudio__lienzo" data-preview role="group" aria-label="Vista previa de una web de ejemplo pintada con tus cinco colores">
           <p class="sr-only">Maqueta de demostración: sus botones y enlaces no son funcionales.</p>
 
           <div class="pv-chrome" aria-hidden="true">
@@ -316,13 +243,109 @@
           </div>
         </div>
 
-        <h3 class="tool__title reveal">Contraste WCAG</h3>
-        <p class="tool__lede reveal">
-          Los tres pares que deciden si tu web se lee. El mínimo para texto normal
-          es 4.5:1 (nivel AA); 7:1 alcanza AAA.
+          <div class="estudio__acciones">
+            <button class="btn btn--primary" type="button" data-random>Combinación aleatoria</button>
+          </div>
+
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Tus cinco colores">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Colores</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Los cinco roles</summary>
+                <form class="tool__panel" data-form autocomplete="off">
+                  <fieldset class="roles">
+            <legend class="roles__legend">Tus cinco colores</legend>
+
+            <div class="role">
+              <label class="role__name" for="pick-texto">Texto</label>
+              <p class="role__hint" id="hint-texto">Titulares, párrafos y todo lo que se lee.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-texto" data-pick="texto" value="#f4f3f8" aria-describedby="hint-texto" />
+                <label class="sr-only" for="hex-texto">Valor hexadecimal del color de texto</label>
+                <input class="role__hex" type="text" id="hex-texto" data-hex="texto" value="#f4f3f8" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-texto" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-fondo">Fondo</label>
+              <p class="role__hint" id="hint-fondo">El lienzo de la página. Manda en la sensación general.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-fondo" data-pick="fondo" value="#0a0a0f" aria-describedby="hint-fondo" />
+                <label class="sr-only" for="hex-fondo">Valor hexadecimal del color de fondo</label>
+                <input class="role__hex" type="text" id="hex-fondo" data-hex="fondo" value="#0a0a0f" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-fondo" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-primario">Primario</label>
+              <p class="role__hint" id="hint-primario">Botones y enlaces. Poco espacio, mucho peso.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-primario" data-pick="primario" value="#8b7bff" aria-describedby="hint-primario" />
+                <label class="sr-only" for="hex-primario">Valor hexadecimal del color primario</label>
+                <input class="role__hex" type="text" id="hex-primario" data-hex="primario" value="#8b7bff" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-primario" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-superficie">Superficie</label>
+              <p class="role__hint" id="hint-superficie">Tarjetas y paneles apoyados sobre el fondo.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-superficie" data-pick="superficie" value="#16161f" aria-describedby="hint-superficie" />
+                <label class="sr-only" for="hex-superficie">Valor hexadecimal del color de superficie</label>
+                <input class="role__hex" type="text" id="hex-superficie" data-hex="superficie" value="#16161f" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-superficie" />
+              </div>
+            </div>
+
+            <div class="role">
+              <label class="role__name" for="pick-acento">Acento</label>
+              <p class="role__hint" id="hint-acento">Detalles y destacados. Como mucho, el 10%.</p>
+              <div class="role__inputs">
+                <input class="role__pick" type="color" id="pick-acento" data-pick="acento" value="#ffb454" aria-describedby="hint-acento" />
+                <label class="sr-only" for="hex-acento">Valor hexadecimal del color de acento</label>
+                <input class="role__hex" type="text" id="hex-acento" data-hex="acento" value="#ffb454" spellcheck="false" maxlength="7" pattern="#?[0-9a-fA-F]{6}" aria-describedby="hint-acento" />
+              </div>
+            </div>
+          </fieldset>
+                </form>
+              </details>
+            </div>
+          </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">Exportar</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--ghost" type="button" data-copy-css>Copiar variables CSS</button>
+                <button class="btn btn--ghost" type="button" data-download-png>Descargar PNG</button>
+                <button class="btn btn--ghost" type="button" data-copy-hex>Copiar lista de hex</button>
+              </span>
+            </summary>
+            <div class="estudio__codigo-cuerpo">
+              <p class="tool__note">
+            <span data-combo-name>Combinación personalizada</span> ·
+            Pulsa la <kbd>barra espaciadora</kbd> para probar otra ·
+            La URL guarda tus colores, cópiala para compartir la paleta.
+          </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="shell" style="margin-top: 1.1rem;">
+          <h3 class="tool__title">Vista previa en una web real</h3>
+          <p class="tool__lede">
+          Todo el texto de la maqueta usa tu color de texto al 100%, sin atenuar:
+          lo que ves aquí es exactamente lo que mide el test de contraste.
         </p>
 
-        <div class="checks" data-checks aria-live="polite"></div>
+          <div class="checks" data-checks aria-live="polite"></div>
+        </div>
       </section>
 
       <!-- Guía -->
@@ -568,6 +591,7 @@
     <script src="/js/color-engine.js?v=2026083001" defer></script>
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
-    <script src="js/colores-en-vivo.js" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
+    <script src="js/colores-en-vivo.js?v=2026090504" defer></script>
   </body>
 </html>

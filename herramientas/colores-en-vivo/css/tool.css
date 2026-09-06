@@ -574,3 +574,32 @@
     transition: none !important;
   }
 }
+
+/* Estudio: la maqueta es el lienzo entero, como un navegador dentro de
+   la banda. La barra de chrome arriba y el sitio ocupando el resto, con
+   su propio scroll si no cabe. */
+.estudio .preview-scope {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+.estudio .preview-scope .pv-site {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+/* Los roles apilados a una columna dentro del panel angosto */
+.estudio .roles { grid-template-columns: 1fr; }
+
+/* La leyenda del fieldset repite al titulo de la seccion del panel:
+   se queda para lectores de pantalla, fuera de la vista. */
+.estudio .roles__legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

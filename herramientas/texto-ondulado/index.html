@@ -53,7 +53,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
-    <link rel="stylesheet" href="css/tool.css" />
+    <link rel="stylesheet" href="css/tool.css?v=2026090504" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -172,11 +173,12 @@
       </div>
 
       <!-- Configurador -->
-      <section class="section shell" aria-labelledby="config-title">
+      <section class="section estudio-shell" aria-labelledby="config-title">
         <h2 id="config-title" class="sr-only">Configurador de texto ondulado</h2>
 
-        <div
-          class="text-path reveal"
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 90ms">
+          <div
+          class="text-path estudio__lienzo"
           data-preview
           data-text-path
           data-text="TU TEXTO AQUÍ"
@@ -191,7 +193,19 @@
           data-letter-spacing="1"
         ></div>
 
-        <form class="controls reveal" data-controls style="--reveal-delay: 90ms">
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes del texto ondulado">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Texto y onda</summary>
+                <form class="controls" data-controls>
           <label class="controls__field controls__field--wide">
             <span>Texto</span>
             <input name="text" type="text" value="TU TEXTO AQUÍ" />
@@ -245,19 +259,23 @@
             <span>Invertir dirección</span>
           </label>
         </form>
-
-        <section class="code-panel reveal" aria-labelledby="code-title" style="--reveal-delay: 160ms">
-          <div class="code-panel__header">
-            <div>
-              <p class="eyebrow" style="margin-bottom: 0.4rem;">Componente generado</p>
-              <h2 id="code-title">Código HTML</h2>
+              </details>
             </div>
-            <button class="btn btn--primary" type="button" data-copy-button>Copiar HTML</button>
-          </div>
+          </aside>
 
-          <pre class="code-panel__code"><code data-code-output></code></pre>
-          <p class="copy-status" data-copy-status aria-live="polite"></p>
-        </section>
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">Código HTML</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copy-button>Copiar HTML</button>
+              </span>
+            </summary>
+            <div class="estudio__codigo-cuerpo">
+              <pre class="code-panel__code"><code data-code-output></code></pre>
+              <p class="copy-status" data-copy-status aria-live="polite"></p>
+            </div>
+          </details>
+        </div>
       </section>
 
       <!-- Cómo usarlo -->
@@ -500,6 +518,7 @@
     <script src="/js/text-path.js?v=2026083001" defer></script>
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
     <script src="js/configurator.js" defer></script>
   </body>
 </html>

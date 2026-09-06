@@ -14,6 +14,12 @@
    3. Panel de controles    6. Movil
 \* ------------------------------------------------------------------ */
 
+/* Dentro del estudio, el atributo hidden manda SIEMPRE: varias piezas
+   (boton Opus de audio, estado vacio del QR, campos condicionales)
+   entran y salen por [hidden], y cualquier clase con display lo pisaria
+   por especificidad. Ya paso dos veces. */
+.estudio [hidden] { display: none !important; }
+
 /* 1. Banda de trabajo ---------------------------------------------------- */
 
 /* Mas ancha que el shell de contenido (1160px) a proposito: es la zona
@@ -44,8 +50,10 @@
 
 /* La vista previa de la pagina (que conserva su clase .lienzo-previa y
    sus data-*) pasa a ocupar toda la banda. Se anulan los tamaños de
-   taller: aqui el tamaño lo pone la banda. */
-.estudio .lienzo-previa {
+   taller: aqui el tamaño lo pone la banda. Las herramientas cuyo lienzo
+   no se llama .lienzo-previa usan el alias .estudio__lienzo. */
+.estudio .lienzo-previa,
+.estudio .estudio__lienzo {
   position: absolute;
   inset: 0;
   min-height: 0;
@@ -57,7 +65,8 @@
   transition: padding 420ms var(--ease);
 }
 
-.estudio--plegado .lienzo-previa {
+.estudio--plegado .lienzo-previa,
+.estudio--plegado .estudio__lienzo {
   padding-right: calc(var(--estudio-margen) + 1rem);
 }
 
@@ -313,7 +322,8 @@
    anclada sobre la barra: la barra no se mueve y el lienzo no se
    reordena. Nada de display flex sobre <details>, que segun el motor
    se come el contenido. */
-.estudio__codigo .codigo {
+.estudio__codigo .codigo,
+.estudio__codigo .estudio__codigo-cuerpo {
   position: absolute;
   left: 0;
   right: 0;
@@ -395,7 +405,8 @@
     transform: translateY(calc(100% + var(--estudio-margen) + 2px));
   }
 
-  .estudio .lienzo-previa {
+  .estudio .lienzo-previa,
+  .estudio .estudio__lienzo {
     padding: calc(var(--estudio-margen) + 3.4rem) calc(var(--estudio-margen) + 0.4rem) calc(var(--estudio-margen) + 0.4rem);
     transition: none;
   }
@@ -405,6 +416,12 @@
   .estudio--plegado .estudio__alternar {
     top: var(--estudio-margen);
     right: var(--estudio-margen);
+  }
+
+  /* Las acciones no se meten debajo del alternador: con left y right
+     fijados, envuelven antes de tocarlo */
+  .estudio__acciones {
+    right: calc(var(--estudio-margen) + 118px);
   }
 
   /* La hoja sale por abajo: abierto apunta hacia abajo (esconder),
@@ -441,13 +458,15 @@
     width: calc(100% - var(--estudio-margen) * 2);
   }
 
-  .estudio__codigo .codigo {
+  .estudio__codigo .codigo,
+  .estudio__codigo .estudio__codigo-cuerpo {
     max-height: 34dvh;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .estudio .lienzo-previa,
+  .estudio .estudio__lienzo,
   .estudio__panel,
   .estudio__alternar,
   .estudio__alternar svg,

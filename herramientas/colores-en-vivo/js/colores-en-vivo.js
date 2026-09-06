@@ -294,17 +294,17 @@
     render();
   }
 
-  form.querySelector("[data-random]")?.addEventListener("click", randomize);
+  document.querySelector("[data-random]")?.addEventListener("click", randomize);
 
-  form.querySelector("[data-copy-css]")?.addEventListener("click", () => {
+  document.querySelector("[data-copy-css]")?.addEventListener("click", () => {
     copyText(cssBlock(), "Variables CSS copiadas.");
   });
 
-  form.querySelector("[data-copy-hex]")?.addEventListener("click", () => {
+  document.querySelector("[data-copy-hex]")?.addEventListener("click", () => {
     copyText(C.toList(current), "Lista de hex copiada.");
   });
 
-  form.querySelector("[data-download-png]")?.addEventListener("click", () => {
+  document.querySelector("[data-download-png]")?.addEventListener("click", () => {
     C.downloadPng(current, "colores-en-vivo.png");
     window.agpToast("Descargando el PNG de la paleta…");
   });

@@ -53,7 +53,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
-    <link rel="stylesheet" href="css/tool.css?v=1" />
+    <link rel="stylesheet" href="css/tool.css?v=2026090504" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -178,12 +179,33 @@
       </div>
 
       <!-- Generador -->
-      <section class="section shell" aria-labelledby="generador-title">
+      <section class="section estudio-shell" aria-labelledby="generador-title">
         <h2 id="generador-title" class="sr-only">Generador de paletas</h2>
 
-        <div class="picker reveal">
-          <div class="picker__row">
-            <div class="field">
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 90ms">
+          <div class="palette estudio__lienzo" data-palette></div>
+
+          <div class="estudio__acciones">
+            <button class="btn btn--ghost picker__random" type="button" data-random>
+              Color aleatorio
+              <kbd class="kbd">Espacio</kbd>
+            </button>
+          </div>
+
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes de la paleta">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Color base</summary>
+                <div class="estudio__seccion-cuerpo">
+                  <div class="field">
               <span class="field__label" id="base-label">Color base</span>
               <div class="field__color">
                 <label class="sr-only" for="base-color">Selector visual del color base</label>
@@ -203,20 +225,17 @@
                 />
               </div>
             </div>
-
-            <button class="btn btn--ghost picker__random" type="button" data-random>
-              Color aleatorio
-              <kbd class="kbd">Espacio</kbd>
-            </button>
-          </div>
-
-          <p class="picker__hint" id="hex-help">
+                  <p class="picker__hint" id="hex-help">
             Escribe un hex (<code>#8b7bff</code> o <code>8b7bff</code>), usa el selector o pulsa la
             barra espaciadora para probar suerte. La dirección de la página guarda tu color base:
             cópiala para compartir la paleta.
           </p>
-
-          <fieldset class="segmented" data-harmony-group>
+                </div>
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Tipo de armonía</summary>
+                <div class="estudio__seccion-cuerpo">
+                  <fieldset class="segmented" data-harmony-group>
             <legend class="segmented__legend">Tipo de armonía</legend>
 
             <label class="segmented__item">
@@ -244,37 +263,31 @@
               <span>Monocromática</span>
             </label>
           </fieldset>
-
-          <p class="status" data-status aria-live="polite">
+                  <p class="status" data-status aria-live="polite">
             Cargando la paleta…
           </p>
-        </div>
-
-        <p class="palette-note">
+                  <p class="palette-note">
           Haz clic en cualquier muestra para copiar su hex. El círculo marca el paso más
           cercano a tu color base.
         </p>
-
-        <div class="palette" data-palette></div>
-      </section>
-
-      <!-- Exportación -->
-      <section class="section shell" aria-labelledby="export-title">
-        <div class="export reveal">
-          <div class="export__head">
-            <div>
-              <p class="eyebrow" style="margin-bottom: 0.5rem;">Exportar</p>
-              <h2 id="export-title">Lleva la paleta a tu proyecto</h2>
+                </div>
+              </details>
             </div>
-            <div class="export__actions">
-              <button class="btn btn--primary" type="button" data-copy-code>Copiar código</button>
-              <button class="btn btn--ghost" type="button" data-download-png>Descargar PNG</button>
-              <button class="btn btn--ghost" type="button" data-download-svg>Descargar SVG</button>
-            </div>
-          </div>
+          </aside>
 
-          <div class="export__controls">
-            <fieldset class="segmented" data-format-group>
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">Exportar</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copy-code>Copiar código</button>
+                <button class="btn btn--ghost" type="button" data-download-png>Descargar PNG</button>
+                <button class="btn btn--ghost" type="button" data-download-svg>Descargar SVG</button>
+              </span>
+            </summary>
+            <div class="estudio__codigo-cuerpo">
+              <h2 id="export-title" class="sr-only">Lleva la paleta a tu proyecto</h2>
+              <div class="export__controls">
+                <fieldset class="segmented" data-format-group>
               <legend class="segmented__legend">Formato</legend>
 
               <label class="segmented__item">
@@ -294,8 +307,7 @@
                 <span>SVG</span>
               </label>
             </fieldset>
-
-            <fieldset class="segmented" data-scope-group>
+                <fieldset class="segmented" data-scope-group>
               <legend class="segmented__legend">Qué exportar</legend>
 
               <label class="segmented__item">
@@ -307,12 +319,16 @@
                 <span>Solo colores principales</span>
               </label>
             </fieldset>
-          </div>
-
-          <pre class="export__code"><code data-code>/* Generando la paleta… */</code></pre>
-          <p class="export__status" data-export-status aria-live="polite"></p>
+              </div>
+              <pre class="export__code"><code data-code>/* Generando la paleta… */</code></pre>
+              <p class="export__status" data-export-status aria-live="polite"></p>
+            </div>
+          </details>
         </div>
       </section>
+
+      <!-- Exportación -->
+      
 
       <!-- Accesibilidad -->
       <section class="section shell" aria-labelledby="contraste-title">
@@ -573,6 +589,7 @@
     <script src="/js/color-engine.js?v=2026083001" defer></script>
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
-    <script src="js/paletas.js?v=1" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
+    <script src="js/paletas.js" defer></script>
   </body>
 </html>

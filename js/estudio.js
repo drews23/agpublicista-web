@@ -35,6 +35,9 @@
 
   alternar?.addEventListener("click", () => {
     aplicar(!estudio.classList.contains("estudio--plegado"), true);
+    /* El lienzo cambia de ancho al plegar: las herramientas que dibujan
+       en canvas segun su contenedor (la onda de audio) escuchan resize. */
+    window.setTimeout(() => window.dispatchEvent(new Event("resize")), 520);
   });
 
   /* --- Cajon de codigo --------------------------------------------------- */
