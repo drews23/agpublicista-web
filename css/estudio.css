@@ -1,0 +1,424 @@
+/* ------------------------------------------------------------------ *\
+   Lienzo · Estudio
+   Interfaz de taller a pantalla de lienzo: la vista previa ocupa toda
+   la banda de trabajo, los controles flotan en un panel de vidrio a la
+   derecha (plegable), y el codigo generado vive en un cajon flotante
+   abajo a la izquierda con el boton de copiar siempre a la vista.
+
+   Hoja compartida entre los generadores de /codigo-web/ y las
+   herramientas de /herramientas/. Sustituye al layout .taller en las
+   paginas migradas; no toca nada en las que aun no lo estan.
+
+   1. Banda de trabajo      4. Cajon de codigo
+   2. Lienzo                5. Acciones sobre el lienzo
+   3. Panel de controles    6. Movil
+\* ------------------------------------------------------------------ */
+
+/* 1. Banda de trabajo ---------------------------------------------------- */
+
+/* Mas ancha que el shell de contenido (1160px) a proposito: es la zona
+   de trabajo, no un articulo. Sigue enmarcada para no pelearse con el
+   header ni parecer otra pagina. */
+.estudio-shell {
+  width: min(1680px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+.estudio {
+  --estudio-panel-ancho: 336px;
+  --estudio-margen: 14px;
+  position: relative;
+  /* Llena la ventana bajo el header pegajoso (84px) cuando la banda
+     llega arriba del todo; con suelo y techo para portatiles bajos y
+     monitores enormes. dvh y no vh: en movil la barra del navegador
+     aparece y desaparece. */
+  height: clamp(540px, calc(100dvh - 84px - 1.6rem), 980px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-soft);
+  isolation: isolate;
+}
+
+/* 2. Lienzo -------------------------------------------------------------- */
+
+/* La vista previa de la pagina (que conserva su clase .lienzo-previa y
+   sus data-*) pasa a ocupar toda la banda. Se anulan los tamaños de
+   taller: aqui el tamaño lo pone la banda. */
+.estudio .lienzo-previa {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  max-height: none;
+  border-radius: 0;
+  /* El contenido centrado se centra en la zona LIBRE: cuando el panel
+     esta abierto, el hueco del panel no cuenta. Transiciona al plegar. */
+  padding: calc(var(--estudio-margen) + 3.5rem) calc(var(--estudio-panel-ancho) + var(--estudio-margen) * 2) calc(var(--estudio-margen) + 4.5rem) calc(var(--estudio-margen) + 1rem);
+  transition: padding 420ms var(--ease);
+}
+
+.estudio--plegado .lienzo-previa {
+  padding-right: calc(var(--estudio-margen) + 1rem);
+}
+
+/* 3. Panel de controles -------------------------------------------------- */
+
+.estudio__panel {
+  position: absolute;
+  top: var(--estudio-margen);
+  right: var(--estudio-margen);
+  bottom: var(--estudio-margen);
+  width: var(--estudio-panel-ancho);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 4px);
+  /* Vidrio de la casa: translucido de verdad sobre el lienzo, con el
+     desenfoque haciendo el trabajo de legibilidad en ambos temas. */
+  background: color-mix(in srgb, var(--bg) 68%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--bg) 55%, transparent);
+  transition: transform 460ms var(--ease), opacity 320ms var(--ease);
+  z-index: 3;
+}
+
+/* Plegado: sale por la derecha. El JS le pone ademas [inert] para que
+   el tabulador no entre en un panel que no se ve. */
+.estudio--plegado .estudio__panel {
+  transform: translateX(calc(100% + var(--estudio-margen) + 2px));
+  opacity: 0.98;
+}
+
+.estudio__panel-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.85rem 0.95rem 0.8rem 1.05rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.estudio__panel-titulo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+}
+
+.estudio__panel-cuerpo {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.55rem 0.95rem 1rem 1.05rem;
+  scrollbar-width: thin;
+}
+
+/* Secciones plegables: la estructura <details>/<summary> del patron de
+   referencia, en el lenguaje de la casa (sin monospace ni angulos). */
+.estudio__seccion {
+  border-bottom: 1px solid var(--line);
+  padding: 0.35rem 0;
+}
+
+.estudio__seccion:last-child { border-bottom: 0; }
+
+.estudio__seccion > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.15rem;
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-radius: 8px;
+}
+
+.estudio__seccion > summary::-webkit-details-marker { display: none; }
+
+.estudio__seccion > summary::before {
+  content: "+";
+  width: 1em;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--violeta);
+}
+
+.estudio__seccion[open] > summary::before { content: "\2212"; }
+
+.estudio__seccion > summary:hover,
+.estudio__seccion > summary:focus-visible {
+  color: var(--text);
+}
+
+.estudio__seccion > summary:focus-visible {
+  outline: 2px solid var(--violeta);
+  outline-offset: 2px;
+}
+
+.estudio__seccion > .controles,
+.estudio__seccion > .estudio__seccion-cuerpo {
+  padding: 0.35rem 0.15rem 0.9rem;
+}
+
+/* Los controles existentes (.campo, .opciones, .capas...) traen su
+   estilo de codigo-web.css o de la pagina; aqui solo el respiro. */
+
+/* Boton de plegar/mostrar: pastilla flotante pegada al borde del panel,
+   que se queda en la esquina cuando el panel se va. */
+.estudio__alternar {
+  position: absolute;
+  top: var(--estudio-margen);
+  right: calc(var(--estudio-panel-ancho) + var(--estudio-margen) * 2);
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: right 460ms var(--ease), border-color 180ms ease, color 180ms ease;
+}
+
+.estudio__alternar:hover,
+.estudio__alternar:focus-visible {
+  border-color: var(--violeta);
+  color: var(--violeta);
+}
+
+.estudio__alternar:focus-visible {
+  outline: 2px solid var(--violeta);
+  outline-offset: 2px;
+}
+
+.estudio--plegado .estudio__alternar {
+  right: var(--estudio-margen);
+}
+
+/* La flecha del boton: apunta hacia donde se ira el panel */
+.estudio__alternar svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 460ms var(--ease);
+}
+
+.estudio--plegado .estudio__alternar svg {
+  transform: rotate(180deg);
+}
+
+/* 4. Cajon de codigo ------------------------------------------------------ */
+
+/* Flotante abajo a la izquierda, como la consola de un editor. La barra
+   con el boton de copiar esta SIEMPRE visible; el <pre> se abre encima. */
+.estudio__codigo {
+  position: absolute;
+  left: var(--estudio-margen);
+  bottom: var(--estudio-margen);
+  z-index: 3;
+  width: min(520px, calc(100% - var(--estudio-margen) * 2));
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 4px);
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+/* Cuando el panel derecho esta abierto y la banda es angosta, el cajon
+   cede el espacio: nunca se meten uno debajo del otro. */
+.estudio:not(.estudio--plegado) .estudio__codigo {
+  width: min(520px, calc(100% - var(--estudio-panel-ancho) - var(--estudio-margen) * 3));
+}
+
+.estudio__codigo > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem 0.5rem 0.95rem;
+  list-style: none;
+  cursor: pointer;
+  border-radius: inherit;
+}
+
+.estudio__codigo > summary::-webkit-details-marker { display: none; }
+
+.estudio__codigo > summary:focus-visible {
+  outline: 2px solid var(--violeta);
+  outline-offset: 2px;
+}
+
+.estudio__codigo-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.estudio__codigo-acciones .btn { white-space: nowrap; }
+
+.estudio__codigo-etiqueta svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 320ms var(--ease);
+  color: var(--violeta);
+}
+
+.estudio__codigo[open] .estudio__codigo-etiqueta svg {
+  transform: rotate(180deg);
+}
+
+/* Los botones de copiar viven en la barra, a la derecha, y NO abren ni
+   cierran el cajon (el JS frena el toggle del summary). */
+.estudio__codigo-acciones {
+  margin-left: auto;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.estudio__codigo-acciones .btn {
+  min-height: 38px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.86rem;
+}
+
+/* El codigo abierto se despliega HACIA ARRIBA como una lamina propia
+   anclada sobre la barra: la barra no se mueve y el lienzo no se
+   reordena. Nada de display flex sobre <details>, que segun el motor
+   se come el contenido. */
+.estudio__codigo .codigo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 8px);
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 4px);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--bg) 55%, transparent);
+  max-height: min(38dvh, 340px);
+  overflow: auto;
+}
+
+/* 5. Acciones sobre el lienzo -------------------------------------------- */
+
+/* Botones propios de cada herramienta (aleatorio, restablecer...):
+   pastillas flotantes arriba a la izquierda. */
+.estudio__acciones {
+  position: absolute;
+  top: var(--estudio-margen);
+  left: var(--estudio-margen);
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.estudio__acciones .boton-sutil {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* 6. Movil ---------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .estudio-shell {
+    width: min(1680px, 100% - 1.5rem);
+  }
+
+  .estudio {
+    --estudio-margen: 10px;
+    height: calc(100dvh - 84px - 0.9rem);
+  }
+
+  /* El panel pasa a hoja inferior: entra y sale por abajo */
+  .estudio__panel {
+    top: auto;
+    left: var(--estudio-margen);
+    right: var(--estudio-margen);
+    width: auto;
+    max-height: min(58dvh, 460px);
+  }
+
+  .estudio--plegado .estudio__panel {
+    transform: translateY(calc(100% + var(--estudio-margen) + 2px));
+  }
+
+  .estudio .lienzo-previa {
+    padding: calc(var(--estudio-margen) + 3.4rem) calc(var(--estudio-margen) + 0.4rem) calc(var(--estudio-margen) + 0.4rem);
+    transition: none;
+  }
+
+  /* El alternador sube a la esquina superior derecha, fijo */
+  .estudio__alternar,
+  .estudio--plegado .estudio__alternar {
+    top: var(--estudio-margen);
+    right: var(--estudio-margen);
+  }
+
+  /* La hoja sale por abajo: abierto apunta hacia abajo (esconder),
+     plegado hacia arriba (mostrar) */
+  .estudio__alternar svg {
+    transform: rotate(90deg);
+  }
+
+  .estudio--plegado .estudio__alternar svg {
+    transform: rotate(-90deg);
+  }
+
+  /* Barra del codigo compacta: el chevron queda como unica seña de
+     apertura, el texto no cabe con los dos botones */
+  .estudio__codigo-texto { display: none; }
+
+  .estudio__codigo > summary { padding-left: 0.75rem; }
+
+  /* El cajon de codigo: encima de la hoja cuando esta abierta seria un
+     sandwich; con el panel abierto se esconde la barra y queda solo el
+     panel (el visitante pliega para copiar). */
+  .estudio:not(.estudio--plegado) .estudio__codigo {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 240ms ease, visibility 0s 240ms;
+  }
+
+  .estudio__codigo {
+    transition: opacity 240ms ease;
+    width: calc(100% - var(--estudio-margen) * 2);
+  }
+
+  .estudio__codigo .codigo {
+    max-height: 34dvh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .estudio .lienzo-previa,
+  .estudio__panel,
+  .estudio__alternar,
+  .estudio__alternar svg,
+  .estudio__codigo-etiqueta svg {
+    transition: none;
+  }
+}

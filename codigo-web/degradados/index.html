@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="/css/codigo-web.css?v=2026090503" />
     <link rel="stylesheet" href="css/tool.css?v=2026090503" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -167,30 +168,29 @@
           </p>
         </div>
 
-        <div class="taller taller--vista-fija reveal" style="--reveal-delay: 200ms">
-          <div class="taller__main">
-            <div class="panel">
-              <div class="panel__head">
-                <h2 class="panel__title">Vista previa</h2>
-                <button class="boton-sutil" type="button" data-aleatorio>Degradado aleatorio</button>
-              </div>
-              <div class="lienzo-previa" data-previa role="img" aria-label="Vista previa del degradado generado"></div>
-            </div>
+        </section>
 
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
-              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS del degradado"></pre>
-              <div class="acciones">
-                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
-                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo el valor</button>
-              </div>
-            </div>
+      <section class="section estudio-shell">
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 200ms">
+          <div class="lienzo-previa" data-previa role="img" aria-label="Vista previa del degradado generado"></div>
+
+          <div class="estudio__acciones">
+            <button class="boton-sutil" type="button" data-aleatorio>Degradado aleatorio</button>
           </div>
 
-          <aside class="sidebar" aria-label="Ajustes del degradado">
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Ajustes</h2></div>
-              <div class="controles" data-controles>
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes del degradado">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Degradado</summary>
+                <div class="controles" data-controles>
                 <div class="campo">
                   <span class="campo__label">Tipo</span>
                   <div class="opciones" role="radiogroup" aria-label="Tipo de degradado">
@@ -214,17 +214,28 @@
                   </select>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Colores</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Colores</summary>
+                <div class="controles">
                 <div class="capas" data-paradas></div>
                 <button class="boton-sutil" type="button" data-agregar>+ Añadir color</button>
                 <p class="campo__hint">Hasta 8 paradas. El color nuevo se inserta en el hueco más ancho.</p>
               </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">CSS generado</span></span>
+              <span class="estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar el valor</button>
+              </span>
+            </summary>
+            <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS del degradado"></pre>
+          </details>
         </div>
 
         <p class="nota-taller">
@@ -383,6 +394,7 @@
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="/js/color-engine.js?v=2026083001" defer></script>
     <script src="/js/codigo-web.js?v=2026083001" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
     <script src="js/degradados.js" defer></script>
   </body>
 </html>
