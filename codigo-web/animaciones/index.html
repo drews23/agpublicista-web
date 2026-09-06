@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="/css/codigo-web.css?v=2026090503" />
     <link rel="stylesheet" href="css/tool.css?v=2026090503" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -168,38 +169,34 @@
           </p>
         </div>
 
-        <div class="taller taller--vista-fija reveal" style="--reveal-delay: 200ms">
-          <div class="taller__main">
-            <div class="panel">
-              <div class="panel__head">
-                <h2 class="panel__title">Vista previa</h2>
-                <div class="acciones-previa">
+        </section>
+
+      <section class="section estudio-shell">
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 200ms">
+          <div class="lienzo-previa lienzo-previa--liso">
+                <div class="demo-caja" data-caja>Lienzo</div>
+              </div>
+
+          <div class="estudio__acciones">
+            <div class="acciones-previa">
                   <button class="boton-sutil" type="button" data-pausa>Pausar</button>
                   <button class="boton-sutil" type="button" data-reiniciar>Reiniciar</button>
                 </div>
-              </div>
-              <div class="lienzo-previa lienzo-previa--liso">
-                <div class="demo-caja" data-caja>Lienzo</div>
-              </div>
-              <p class="nota-anim" data-estado aria-live="polite">
-                Vista previa en reproducción. Pulsa «Reiniciar» para verla otra vez desde el principio.
-              </p>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
-              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de la animación"></pre>
-              <div class="acciones">
-                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS completo</button>
-                <button class="btn btn--ghost" type="button" data-copiar-keyframes>Copiar solo los keyframes</button>
-              </div>
-            </div>
           </div>
 
-          <aside class="sidebar" aria-label="Ajustes de la animación" data-controles>
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Efecto</h2></div>
-              <div class="controles">
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes de la animación" data-controles>
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Efecto</summary>
+                <div class="controles">
                 <div class="campo">
                   <span class="campo__label">Preestablecido</span>
                   <div class="opciones" role="radiogroup" aria-label="Animación preestablecida">
@@ -221,11 +218,10 @@
                   <span class="campo__hint">Es el identificador de <code>@keyframes</code>. Solo letras, números y guiones.</span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Tiempo</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Tiempo</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Duración <span><output data-output="duracion">0.6</output> s</span></span>
                   <input type="range" min="0.1" max="5" step="0.05" value="0.6" data-control="duracion" aria-label="Duración en segundos" />
@@ -267,11 +263,10 @@
                   <span class="campo__hint">Para animaciones de entrada casi siempre quieres <code>both</code>: evita el salto del final y el parpadeo del principio.</span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Curva de aceleración</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Curva de aceleración</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Curva</span>
                   <select data-control="curva">
@@ -326,11 +321,10 @@
                   </figcaption>
                 </figure>
               </div>
-            </div>
-
-            <div class="panel" data-panel-medida hidden>
-              <div class="panel__head"><h2 class="panel__title">Movimiento a medida</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" data-panel-medida hidden open>
+                <summary>Movimiento a medida</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Opacidad inicial <output data-output="opacidad">0</output></span>
                   <input type="range" min="0" max="1" step="0.05" value="0" data-control="opacidad" aria-label="Opacidad inicial" />
@@ -356,8 +350,20 @@
                   navegador anima sin rehacer el diseño de la página.
                 </p>
               </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">CSS generado</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS completo</button>
+                <button class="btn btn--ghost" type="button" data-copiar-keyframes>Copiar solo los keyframes</button>
+              </span>
+            </summary>
+            <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de la animación"></pre>
+          </details>
         </div>
 
         <p class="nota-taller">
@@ -573,6 +579,7 @@
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="/js/codigo-web.js?v=2026083001" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
     <script src="js/animaciones.js" defer></script>
   </body>
 </html>

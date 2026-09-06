@@ -160,3 +160,12 @@
     --alto-vista-fija: 620px;
   }
 }
+
+/* Estudio: la muestra puede superar el alto de la banda con fuente y
+   altura de linea al maximo. Se permite desplazarla; "safe center" la
+   centra cuando cabe y la alinea al inicio cuando desborda, para que el
+   principio del titular nunca quede inalcanzable. */
+.estudio .lienzo-previa {
+  overflow-y: auto;
+  place-items: safe center;
+}

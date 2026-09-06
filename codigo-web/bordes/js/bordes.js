@@ -6,7 +6,9 @@
   const $ = (sel, scope = document) => scope.querySelector(sel);
   const $$ = (sel, scope = document) => [...scope.querySelectorAll(sel)];
 
-  const taller = $(".taller");
+  /* El ambito de los controles: la banda del estudio en el layout
+     nuevo, con el .taller viejo como respaldo. */
+  const taller = $("[data-estudio]") || $(".taller");
   const caja = $("[data-caja]");
   const codigo = $("[data-codigo]");
   const radios = $("[data-radios]");

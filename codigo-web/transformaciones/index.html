@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="/css/codigo-web.css?v=2026090503" />
     <link rel="stylesheet" href="css/tool.css?v=2026090503" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -168,14 +169,11 @@
           </p>
         </div>
 
-        <div class="taller taller--vista-fija reveal" style="--reveal-delay: 200ms">
-          <div class="taller__main">
-            <div class="panel">
-              <div class="panel__head">
-                <h2 class="panel__title">Vista previa</h2>
-                <button class="boton-sutil" type="button" data-reset>Restablecer</button>
-              </div>
-              <div class="lienzo-previa lienzo-previa--liso" role="img" aria-label="Vista previa del elemento transformado">
+        </section>
+
+      <section class="section estudio-shell">
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 200ms">
+          <div class="lienzo-previa lienzo-previa--liso" role="img" aria-label="Vista previa del elemento transformado">
                 <div class="escena" data-escena data-guias="1">
                   <div class="guias" aria-hidden="true"></div>
                   <div class="fantasma" aria-hidden="true"></div>
@@ -183,22 +181,24 @@
                   <div class="demo-caja" data-caja>Frente</div>
                 </div>
               </div>
-            </div>
 
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
-              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de la transformación"></pre>
-              <div class="acciones">
-                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
-                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo transform</button>
-              </div>
-            </div>
+          <div class="estudio__acciones">
+            <button class="boton-sutil" type="button" data-reset>Restablecer</button>
           </div>
 
-          <aside class="sidebar" data-controles aria-label="Ajustes de la transformación">
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Punto de origen</h2></div>
-              <div class="controles">
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" data-controles aria-label="Ajustes de la transformación">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Punto de origen</summary>
+                <div class="controles">
                 <div class="campo">
                   <span class="campo__label">Posiciones fijas</span>
                   <div class="rejilla-origen" data-origen-rejilla>
@@ -231,11 +231,10 @@
                   <span>Mostrar guías<small>Rejilla, ejes y la silueta sin transformar, con el punto de origen marcado en ámbar.</small></span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">2D</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>2D</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">translateX <span><output data-output="tx">0</output>px</span></span>
                   <input type="range" min="-150" max="150" step="1" value="0" data-control="tx" aria-label="translateX en píxeles" />
@@ -279,11 +278,10 @@
                   <span class="campo__hint">Inclinar deforma también el texto de dentro. Pasados los 30° suele leerse mal.</span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">3D</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>3D</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">rotateX <span><output data-output="rx">0</output>°</span></span>
                   <input type="range" min="-180" max="180" step="1" value="0" data-control="rx" aria-label="Rotación X en grados" />
@@ -314,8 +312,20 @@
                   <span class="campo__hint">Va en el contenedor padre. Cuanto menor es el valor, más cerca está el ojo y más brutal la deformación.</span>
                 </label>
               </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">CSS generado</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo transform</button>
+              </span>
+            </summary>
+            <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de la transformación"></pre>
+          </details>
         </div>
 
         <p class="nota-taller">
@@ -529,6 +539,7 @@
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="/js/codigo-web.js?v=2026083001" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
     <script src="js/transformaciones.js" defer></script>
   </body>
 </html>

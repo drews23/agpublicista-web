@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="/css/codigo-web.css?v=2026090503" />
     <link rel="stylesheet" href="css/tool.css?v=2026090503" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -168,20 +169,11 @@
           </p>
         </div>
 
-        <div class="taller taller--vista-fija reveal" style="--reveal-delay: 200ms" data-controles>
-          <div class="taller__main">
-            <div class="panel">
-              <div class="panel__head">
-                <h2 class="panel__title">Vista previa</h2>
-                <label class="interruptor">
-                  <input type="checkbox" data-control="plano" />
-                  <span>
-                    Ver sobre bloque de color
-                    <small>Hue-rotate e invert se leen mejor sobre color sólido.</small>
-                  </span>
-                </label>
-              </div>
-              <div class="lienzo-previa">
+        </section>
+
+      <section class="section estudio-shell">
+        <div class="estudio reveal" data-estudio data-controles style="--reveal-delay: 200ms">
+          <div class="lienzo-previa">
                 <img
                   class="demo-foto demo-foto--muestra"
                   data-foto
@@ -193,11 +185,30 @@
                 />
                 <div class="demo-caja" data-caja hidden>Lienzo</div>
               </div>
-            </div>
 
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Preajustes</h2></div>
-              <div class="preajustes">
+          <div class="estudio__acciones">
+            <label class="interruptor">
+                  <input type="checkbox" data-control="plano" />
+                  <span>
+                    Ver sobre bloque de color
+                    <small>Hue-rotate e invert se leen mejor sobre color sólido.</small>
+                  </span>
+                </label>
+          </div>
+
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes de los filtros">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Preajustes</summary>
+                <div class="preajustes">
                 <button class="boton-sutil" type="button" data-preajuste="ninguno">Ninguno</button>
                 <button class="boton-sutil" type="button" data-preajuste="byn">Blanco y negro</button>
                 <button class="boton-sutil" type="button" data-preajuste="sepia">Sepia vintage</button>
@@ -205,25 +216,10 @@
                 <button class="boton-sutil" type="button" data-preajuste="sueno">Sueño</button>
                 <button class="boton-sutil" type="button" data-preajuste="invertido">Invertido</button>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head">
-                <h2 class="panel__title">CSS generado</h2>
-                <span class="capa__nombre" data-resumen role="status" aria-live="polite">Sin filtros</span>
-              </div>
-              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de los filtros"></pre>
-              <div class="acciones">
-                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
-                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo el valor</button>
-              </div>
-            </div>
-          </div>
-
-          <aside class="sidebar" aria-label="Ajustes de los filtros">
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Filtros</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Filtros</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Desenfoque <span><output data-output="desenfoque">0</output>px</span></span>
                   <input type="range" min="0" max="20" step="0.5" value="0" data-control="desenfoque" aria-label="Desenfoque en píxeles" />
@@ -272,11 +268,10 @@
                   <input type="range" min="0" max="100" step="1" value="100" data-control="opacidad" aria-label="Opacidad en porcentaje" />
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Sombra proyectada</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Sombra proyectada</summary>
+                <div class="controles">
                 <label class="interruptor">
                   <input type="checkbox" data-control="sombra" />
                   <span>
@@ -307,8 +302,20 @@
                   </div>
                 </div>
               </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">CSS generado</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-valor>Copiar solo el valor</button>
+              </span>
+            </summary>
+            <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de los filtros"></pre>
+          </details>
         </div>
 
         <p class="nota-taller">
@@ -517,6 +524,7 @@
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="/js/codigo-web.js?v=2026083001" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
     <script src="js/filtros.js" defer></script>
   </body>
 </html>

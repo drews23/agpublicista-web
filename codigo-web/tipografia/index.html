@@ -54,7 +54,8 @@
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="/css/codigo-web.css?v=2026090503" />
-    <link rel="stylesheet" href="css/tool.css?v=2026090503" />
+    <link rel="stylesheet" href="css/tool.css?v=2026090504" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -168,15 +169,11 @@
           </p>
         </div>
 
-        <div class="taller taller--vista-fija reveal" style="--reveal-delay: 200ms">
-          <div class="taller__main">
-            <div class="panel">
-              <div class="panel__head">
-                <h2 class="panel__title">Vista previa</h2>
-                <button class="boton-sutil" type="button" data-restablecer>Restablecer</button>
-              </div>
+        </section>
 
-              <div class="lienzo-previa lienzo-previa--liso">
+      <section class="section estudio-shell">
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 200ms">
+          <div class="lienzo-previa lienzo-previa--liso">
                 <div class="previa-tipo" data-previa>
                   <p class="demo-texto" data-muestra>La tipografía también habla</p>
                   <p class="previa-parrafo" data-parrafo>
@@ -187,22 +184,24 @@
                   </p>
                 </div>
               </div>
-            </div>
 
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
-              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS del estilo de texto"></pre>
-              <div class="acciones">
-                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
-                <button class="btn btn--ghost" type="button" data-copiar-props>Copiar solo las propiedades</button>
-              </div>
-            </div>
+          <div class="estudio__acciones">
+            <button class="boton-sutil" type="button" data-restablecer>Restablecer</button>
           </div>
 
-          <aside class="sidebar" aria-label="Ajustes del estilo de texto" data-controles>
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Muestra</h2></div>
-              <div class="controles">
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes del estilo de texto" data-controles>
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Muestra</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Texto de ejemplo</span>
                   <input type="text" value="La tipografía también habla" maxlength="80" spellcheck="false" data-texto />
@@ -212,11 +211,10 @@
                   </span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Fuente</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Fuente</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Familia</span>
                   <select data-control="familia">
@@ -252,11 +250,10 @@
                   <span class="campo__hint">Sin unidad. 1.05–1.25 para titulares, 1.4–1.6 para texto corrido.</span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Espaciado y forma</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Espaciado y forma</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Interletrado <span><output data-output="interletrado">0</output> em</span></span>
                   <input type="range" min="-0.1" max="0.4" step="0.005" value="0" data-control="interletrado" aria-label="Interletrado en em" />
@@ -305,11 +302,10 @@
                   </span>
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Decoración</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Decoración</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Línea</span>
                   <select data-control="linea">
@@ -359,8 +355,20 @@
                   </span>
                 </label>
               </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">CSS generado</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-props>Copiar solo las propiedades</button>
+              </span>
+            </summary>
+            <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS del estilo de texto"></pre>
+          </details>
         </div>
 
         <p class="nota-taller">
@@ -554,6 +562,7 @@
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="/js/codigo-web.js?v=2026083001" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
     <script src="js/tipografia.js" defer></script>
   </body>
 </html>

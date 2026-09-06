@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="/css/codigo-web.css?v=2026090503" />
     <link rel="stylesheet" href="css/tool.css?v=2026090503" />
+    <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
 
     <script type="application/ld+json">
     {
@@ -168,32 +169,31 @@
           </p>
         </div>
 
-        <div class="taller taller--vista-fija reveal" style="--reveal-delay: 200ms">
-          <div class="taller__main">
-            <div class="panel">
-              <div class="panel__head">
-                <h2 class="panel__title">Vista previa</h2>
-                <button class="boton-sutil" type="button" data-organica>Forma orgánica</button>
-              </div>
-              <div class="lienzo-previa">
+        </section>
+
+      <section class="section estudio-shell">
+        <div class="estudio reveal" data-estudio style="--reveal-delay: 200ms">
+          <div class="lienzo-previa">
                 <div class="demo-caja" data-caja role="img" aria-label="Caja de ejemplo con los bordes y radios aplicados">Lienzo</div>
               </div>
-            </div>
 
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">CSS generado</h2></div>
-              <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de los bordes y radios"></pre>
-              <div class="acciones">
-                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
-                <button class="btn btn--ghost" type="button" data-copiar-radio>Copiar solo el radio</button>
-              </div>
-            </div>
+          <div class="estudio__acciones">
+            <button class="boton-sutil" type="button" data-organica>Forma orgánica</button>
           </div>
 
-          <aside class="sidebar" aria-label="Ajustes de bordes y radios">
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Radios</h2></div>
-              <div class="controles" data-radios>
+          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            <span data-alternar-texto>Ocultar</span>
+          </button>
+
+          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes de bordes y radios">
+            <div class="estudio__panel-cabecera">
+              <h2 class="estudio__panel-titulo">Ajustes</h2>
+            </div>
+            <div class="estudio__panel-cuerpo">
+              <details class="estudio__seccion" open>
+                <summary>Radios</summary>
+                <div class="controles" data-radios>
                 <label class="campo">
                   <span class="campo__label">Unidad</span>
                   <select data-control="unidad">
@@ -278,11 +278,10 @@
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Borde</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Borde</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Grosor <span><output data-output="bgrosor">2</output>px</span></span>
                   <input type="range" min="0" max="24" step="1" value="2" data-control="bgrosor" aria-label="Grosor del borde en píxeles" />
@@ -313,11 +312,10 @@
                   <input type="range" min="0" max="1" step="0.05" value="1" data-control="balfa" aria-label="Opacidad del borde" />
                 </label>
               </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel__head"><h2 class="panel__title">Contorno</h2></div>
-              <div class="controles">
+              </details>
+              <details class="estudio__seccion" open>
+                <summary>Contorno</summary>
+                <div class="controles">
                 <label class="campo">
                   <span class="campo__label">Grosor <span><output data-output="ogrosor">2</output>px</span></span>
                   <input type="range" min="0" max="24" step="1" value="2" data-control="ogrosor" aria-label="Grosor del contorno en píxeles" />
@@ -353,8 +351,20 @@
                   <span class="campo__hint">Con valores negativos el contorno se dibuja hacia dentro, encima del relleno.</span>
                 </label>
               </div>
+              </details>
             </div>
           </aside>
+
+          <details class="estudio__codigo">
+            <summary>
+              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">CSS generado</span></span>
+              <span class="acciones estudio__codigo-acciones">
+                <button class="btn btn--primary" type="button" data-copiar>Copiar CSS</button>
+                <button class="btn btn--ghost" type="button" data-copiar-radio>Copiar solo el radio</button>
+              </span>
+            </summary>
+            <pre class="codigo" data-codigo tabindex="0" aria-label="Código CSS de los bordes y radios"></pre>
+          </details>
         </div>
 
         <p class="nota-taller">
@@ -540,6 +550,7 @@
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="/js/codigo-web.js?v=2026083001" defer></script>
-    <script src="js/bordes.js" defer></script>
+    <script src="/js/estudio.js?v=2026090504" defer></script>
+    <script src="js/bordes.js?v=2026090504" defer></script>
   </body>
 </html>

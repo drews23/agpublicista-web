@@ -230,7 +230,7 @@
   left: var(--estudio-margen);
   bottom: var(--estudio-margen);
   z-index: 3;
-  width: min(520px, calc(100% - var(--estudio-margen) * 2));
+  width: min(640px, calc(100% - var(--estudio-margen) * 2));
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) - 4px);
   background: color-mix(in srgb, var(--bg) 74%, transparent);
@@ -242,7 +242,7 @@
 /* Cuando el panel derecho esta abierto y la banda es angosta, el cajon
    cede el espacio: nunca se meten uno debajo del otro. */
 .estudio:not(.estudio--plegado) .estudio__codigo {
-  width: min(520px, calc(100% - var(--estudio-panel-ancho) - var(--estudio-margen) * 3));
+  width: min(640px, calc(100% - var(--estudio-panel-ancho) - var(--estudio-margen) * 3));
 }
 
 .estudio__codigo > summary {
@@ -288,12 +288,20 @@
 }
 
 /* Los botones de copiar viven en la barra, a la derecha, y NO abren ni
-   cierran el cajon (el JS frena el toggle del summary). */
+   cierran el cajon (el JS frena el toggle del summary). Lleva tambien
+   la clase .acciones porque mi-lienzo.js inyecta ahi su boton de
+   guardar; se anula la caja que esa clase trae de codigo-web.css. */
 .estudio__codigo-acciones {
   margin-left: auto;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.4rem;
+  padding: 0;
+  border-top: 0;
 }
+
+.estudio__codigo-acciones .btn { flex: 0 1 auto; min-height: 38px; }
 
 .estudio__codigo-acciones .btn {
   min-height: 38px;
@@ -339,6 +347,27 @@
   background: color-mix(in srgb, var(--bg) 72%, transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+}
+
+/* Un interruptor suelto sobre el lienzo (p. ej. "Ver sobre bloque de
+   color" en filtros) va en pastilla de vidrio, como los botones. Su
+   letra pequeña de ayuda sobra flotando sobre el lienzo. */
+.estudio__acciones .interruptor {
+  max-width: 300px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.estudio__acciones .interruptor small { display: none; }
+
+/* Los preajustes de filtros traen su propio padding de panel; dentro de
+   una seccion del panel de vidrio se alinean al ritmo de .controles */
+.estudio__seccion .preajustes {
+  padding: 0.35rem 0.15rem 0.9rem;
 }
 
 /* 6. Movil ---------------------------------------------------------------- */
@@ -393,6 +422,10 @@
   .estudio__codigo-texto { display: none; }
 
   .estudio__codigo > summary { padding-left: 0.75rem; }
+
+  /* Con tres botones no caben pastillas sueltas: cada boton ocupa su
+     fila entera y la barra lee como una hojita de acciones. */
+  .estudio__codigo-acciones .btn { flex: 1 1 auto; justify-content: center; }
 
   /* El cajon de codigo: encima de la hoja cuando esta abierta seria un
      sandwich; con el panel abierto se esconde la barra y queda solo el
