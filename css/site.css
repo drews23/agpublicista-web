@@ -1989,23 +1989,6 @@ section.compartir-bloque .compartir-bloque__lema {
   fill: currentColor;
 }
 
-/* Desde el 11 sep 2026 los packs se arman con bibliotecas de licencia abierta
-   (Tabler, Lucide, Phosphor) y esos iconos son de TRAZO: su raíz declara
-   fill="none" y el dibujo entero vive en el stroke. La regla de arriba, escrita
-   para los iconos rellenos de los packs anteriores, se lo pisaba y los dejaba
-   convertidos en manchas sólidas. El atributo fill="none" de la raíz es lo que
-   distingue una familia de la otra, así que sirve de interruptor. */
-.art-ic svg[fill="none"] :is(path, circle, ellipse, rect, polygon, polyline, line) {
-  fill: none;
-}
-
-/* El grosor de la traza va en unidades del viewBox, no en píxeles: los 0.85
-   pensados para un lienzo de 24 son una hebra invisible en uno de 256, que es
-   el que usa Phosphor. */
-.art-ic__traza[viewBox="0 0 256 256"] :is(path, circle, ellipse, rect, polygon, polyline, line) {
-  stroke-width: 9;
-}
-
 /* la capa que repasa el contorno del icono relleno */
 .art-ic__traza {
   pointer-events: none;
