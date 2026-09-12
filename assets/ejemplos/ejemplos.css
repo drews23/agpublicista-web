@@ -1,0 +1,5 @@
+/* Los ejemplos conservan su proporción; el enlace permite ampliarlos en móvil. */
+.article-body .ejemplo-recurso, .ejemplo-recurso { margin: 1.5rem 0; }
+.ejemplo-recurso a { display: block; }
+.ejemplo-recurso img { display: block; width: 100%; height: auto; min-height: 0; max-height: none; aspect-ratio: 960 / 450; padding: 0; object-fit: contain; }
+.ejemplo-recurso figcaption { margin-top: .65rem; font-size: .9rem; line-height: 1.55; }
