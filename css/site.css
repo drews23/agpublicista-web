@@ -760,6 +760,9 @@ img, svg { max-width: 100%; }
 
 .prose h3 { font-size: 1.2rem; margin-top: 1.8em; }
 
+/* Mantiene visible el título al seguir un enlace de sección bajo la cabecera fija. */
+.prose h2[id], .prose h3[id] { scroll-margin-top: 7rem; }
+
 .prose p, .prose li { color: color-mix(in oklab, var(--text) 88%, var(--muted)); }
 
 .prose ul, .prose ol { padding-left: 1.3rem; }

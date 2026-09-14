@@ -49,7 +49,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/site.css?v=2026090405" />
+    <link rel="stylesheet" href="/css/site.css?v=2026091401" />
 
     <script type="application/ld+json">
     {
@@ -61,7 +61,7 @@
           "headline": "8 escenas 3D de desarrollo web, gratis y descargables una por una",
           "description": "Descarga gratis 8 escenas 3D de desarrollo web en .spline: velocidad, SEO, login, búsqueda, VPN, anuncios e historial. Cada una en su propio archivo.",
           "datePublished": "2026-08-26",
-          "dateModified": "2026-09-12",
+          "dateModified": "2026-09-14",
           "inLanguage": "es",
           "image": "https://lienzo.tools/assets/escenas-3d/desarrollo-web/desarrollo-web.webp",
           "author": { "@type": "Organization", "name": "Lienzo", "url": "https://lienzo.tools/" },
@@ -168,6 +168,7 @@
           <h1 class="reveal" style="--reveal-delay: 80ms">8 escenas 3D de desarrollo web, gratis y descargables una por una</h1>
           <p class="article-meta reveal" style="--reveal-delay: 140ms">
             <time datetime="2026-08-26">26 de agosto de 2026</time> &middot; Escenas 3D &middot; 6 min de lectura
+            · Actualizado el <time datetime="2026-09-14">14 de septiembre de 2026</time>
           </p>
 
           <p class="reveal" style="--reveal-delay: 200ms">
@@ -212,12 +213,7 @@
           </ul>
 
           <h2 id="piezas">Las ocho piezas, una por una</h2>
-          <p>
-            Cada tarjeta descarga un ZIP con <strong>una sola escena</strong>, su portada y el
-            LEEME. Ninguna pasa de 43 KB, as&iacute; que puedes bajarte las que te interesen sin
-            pensarlo. Si las quieres todas, el pack completo est&aacute;
-            <a href="#descargar">un poco m&aacute;s abajo</a>.
-          </p>
+          <p>Cada tarjeta descarga un ZIP con <strong>una sola escena</strong>, portada, LEEME y créditos. Los ocho ZIP individuales ocupan entre 32.220 y 44.757 bytes. Si quieres todas las escenas, el <a href="#descargar">pack completo</a> reúne las ocho piezas y el conjunto.</p>
 
           <ul class="rejilla-piezas reveal">
             <li>
@@ -338,11 +334,11 @@
           <p>
             Si prefieres tenerlo todo de una vez, este ZIP trae <strong>las ocho escenas
             sueltas m&aacute;s la escena completa con los ocho objetos juntos</strong> (nueve archivos <code>.spline</code> en total), la portada del conjunto y el
-            <code>LEEME.txt</code>. Pesa 204 KB: menos que una foto del m&oacute;vil. La descarga
+            <code>LEEME.txt</code>. Pesa aproximadamente 211 KB: menos que una foto del m&oacute;vil. La descarga
             es directa y no pide registro ni correo.
           </p>
           <p style="margin-top: 1.4em;">
-            <a class="btn btn--primary" href="https://www.mediafire.com/file/9d1d0bv8w4bf0g9/file" target="_blank" rel="noopener">Descargar las 8 escenas + el conjunto (ZIP &middot; 204 KB)</a>
+            <a class="btn btn--primary" href="https://www.mediafire.com/file/9d1d0bv8w4bf0g9/file" target="_blank" rel="noopener">Descargar las 8 escenas + el conjunto (ZIP &middot; 211 KB)</a>
           </p>
           <p>
             Si este pack te sirvi&oacute;, mira tambi&eacute;n las
@@ -398,13 +394,11 @@
             Spline solo llega el motor que lo dibuja, sin marca de agua encima y sin depender de
             un enlace ajeno.
           </p>
-          <p>
-            Aquí es donde este pack saca ventaja. Al venir cada objeto en su propio
-            <code>.spline</code> de 31 a 43 KB, puedes montar una pieza suelta en una cabecera sin
-            arrastrar las ocho: el navegador descarga solo la que vas a enseñar. El procedimiento,
-            con el código y los fallos que conviene esquivar, está en
-            <a href="/blog/como-incrustar-escena-spline-sin-iframe/">cómo incrustar una escena de Spline sin iframe</a>.
-          </p>
+          <p>Cada objeto dispone de su propio <code>.spline</code> editable. Publicar solo el objeto necesario evita incluir las otras siete piezas, pero el peso del ZIP no equivale a la descarga de la web: también cuentan la escena exportada, las texturas y el visor. El procedimiento está en <a href="/blog/como-incrustar-escena-spline-sin-iframe/">cómo incrustar una escena de Spline sin iframe</a>.</p>
+
+          <h2 id="exportar-modelo">Si necesitas el objeto como GLB</h2>
+          <p>Abre la pieza individual y usa la exportación GLB o glTF del editor. Esa salida permite integrar geometría en otro visor, pero no transfiere automáticamente los eventos, estados y efectos de la escena. Revisa el <a href="/blog/escenas-3d-gratis-para-web-spline/#elegir-exportacion">criterio para elegir formato y sus límites</a> antes de sustituir el visor de Spline.</p>
+          <p>Los ZIP de esta entrada contienen proyectos <code>.spline</code>, portadas y documentación. No contienen versiones GLB ya verificadas. Para valorar el peso final en una web, mide la exportación y su visor, además del archivo descargado.</p>
 
           <h2 id="produccion">Antes de ponerla en producci&oacute;n</h2>
           <p>
@@ -448,21 +442,9 @@
             mejor es enlazar este artículo en lugar de volver a subir el ZIP a otro sitio: así
             quien lo reciba tendrá siempre la versión actualizada.
           </p>
-          <p>
-            La intención de esta publicación es dejar claro que el contenido se presenta como
-            material propio del sitio, con una línea editorial consistente y una utilidad práctica
-            clara para tu trabajo. Si lo usas en un proyecto de cliente o una pieza comercial más
-            específica, esta guía ya te da la referencia de uso y la intención del recurso.
-          </p>
 
-          <h3>Si crees que algo no deber&iacute;a estar aqu&iacute;</h3>
-          <p>
-            Si eres el autor de alguna de estas escenas, o representas a quien lo es, y no quieres
-            que se distribuya desde aqu&iacute;, escr&iacute;beme a
-            <a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a> indicando
-            este art&iacute;culo y el archivo concreto. Retiro el enlace mientras reviso el caso, en
-            un plazo de 48 a 72 horas: primero se retira, despu&eacute;s hablamos si hace falta.
-          </p>
+          <h3>Derechos de autor</h3>
+          <p>Consulta las <a href="/licencia/">condiciones completas</a> y el <a href="/licencia/#reclamos">procedimiento para comunicar una reclamación de derechos de autor</a>.</p>
 
           <h2 id="faq">Preguntas frecuentes</h2>
 
