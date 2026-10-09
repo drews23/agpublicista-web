@@ -106,7 +106,7 @@
           "name": "¿El código QR acorta mi enlace?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Se codifica la URL completa tal como la escribes, sin pasar por ningún acortador. Así el código sigue funcionando aunque un servicio externo de acortado desaparezca."
+            "text": "No. Se codifica la URL completa, sin un acortador añadido por Lienzo. El QR no tiene una caducidad impuesta por esta herramienta, pero el enlace de destino debe seguir disponible. Si usas una URL de un acortador externo, dependes de ese servicio."
           }
         },
         {
@@ -194,7 +194,7 @@
         <div class="page-head">
           <p class="eyebrow reveal">Herramienta gratis</p>
           <h1 class="reveal" style="--reveal-delay: 80ms">Código QR para una URL</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">Pega el enlace y descarga un código QR listo para un cartel, una tarjeta o una publicación. Se genera en tu navegador y funciona para siempre: no depende de que ningún servicio intermedio siga en línea.</p>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Pega el enlace y descarga un código QR listo para un cartel, una tarjeta o una publicación. Se genera en tu navegador sin un acortador intermedio. Lienzo no impone caducidad al QR; el enlace de destino debe seguir disponible.</p>
         </div>
 
         <div class="workspace" data-workspace style="margin-top: 2rem">
@@ -283,14 +283,14 @@
             Un código QR de URL no es más que el enlace convertido en un patrón que la
             cámara de un teléfono decodifica en una fracción de segundo. No hay
             acortador, no hay redirección, no hay servicio intermedio: el enlace completo
-            queda codificado dentro del propio código, así que sigue funcionando aunque
-            esta página desaparezca dentro de diez años.
+            queda codificado dentro del propio código. Una vez descargado, no depende de
+            esta herramienta; sí depende de que la URL de destino siga disponible.
           </p>
 
           <h2>Cómo crear el código</h2>
           <ol>
             <li>Pega la URL completa (con "https://" o sin él, lo completamos igual).</li>
-            <li>Revisa la vista previa: si tu teléfono la escanea, cualquiera podrá.</li>
+            <li>Prueba el QR en el soporte final y, si puedes, con varios teléfonos. La lectura depende del tamaño, contraste, impresión y dispositivo.</li>
             <li>Descarga en PNG para imprimir o compartir, o en SVG para llevarlo a un editor de diseño.</li>
           </ol>
 
@@ -302,8 +302,8 @@
             deja de pagar su dominio, todos los códigos impresos con él dejan de funcionar
             de un día para otro, y ya ha pasado, con acortadores que llevaban años
             activos. Esta herramienta codifica tu URL completa, tal cual. El código puede
-            salir un poco más denso si el enlace es muy largo, pero seguirá funcionando
-            para siempre.
+            salir un poco más denso si el enlace es muy largo. No tiene una caducidad
+            impuesta por Lienzo, pero debes mantener disponible la página de destino.
           </p>
 
           <h2>Casos de uso habituales</h2>
@@ -313,8 +313,6 @@
             <li><strong>Carteles de evento:</strong> enlazar al registro o al mapa del lugar.</li>
             <li><strong>Menús de restaurante:</strong> apuntar a la versión digital del menú.</li>
           </ul>
-
-          <h2>Preguntas frecuentes</h2>
 
           <h2>Las demás herramientas de código QR</h2>
           <p>
@@ -327,7 +325,7 @@
           <h2 id="faq">Preguntas frecuentes</h2>
           <details class="faq-item" name="faq" open>
             <summary><h3>¿El código QR acorta mi enlace?</h3></summary>
-            <p>No. Se codifica la URL completa tal como la escribes, sin pasar por ningún acortador. Así el código sigue funcionando aunque un servicio externo de acortado desaparezca.</p>
+            <p>No. Se codifica la URL completa, sin un acortador añadido por Lienzo. El QR no tiene una caducidad impuesta por esta herramienta, pero el enlace de destino debe seguir disponible. Si usas una URL de un acortador externo, dependes de ese servicio.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Puedo cambiar a dónde apunta el código después de imprimirlo?</h3></summary>

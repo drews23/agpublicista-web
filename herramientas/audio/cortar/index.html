@@ -107,7 +107,7 @@
           "name": "¿Se sube mi audio a algún servidor?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. El archivo se decodifica y se corta dentro de tu navegador con la Web Audio API. Nunca viaja por la red, así que puedes recortar grabaciones confidenciales sin ningún riesgo."
+            "text": "No. Esta operación decodifica y corta el archivo dentro de tu navegador con la Web Audio API; no envía el audio al servidor."
           }
         },
         {
@@ -120,7 +120,7 @@
         },
         {
           "@type": "Question",
-          "name": "¿Puedo cortar con precisión de milisegundos?",
+          "name": "¿Puedo ajustar el corte con precisión de décimas de segundo?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Sí. Además de arrastrar las manijas, tienes dos campos numéricos con paso de una décima de segundo, y las flechas del teclado sobre cada manija mueven de 0,1 en 0,1 segundos (o de segundo en segundo con Mayús)."
@@ -364,14 +364,14 @@
           <h2 id="faq">Preguntas frecuentes</h2>
           <details class="faq-item" name="faq" open>
             <summary><h3>¿Se sube mi audio a algún servidor?</h3></summary>
-            <p>No. El archivo se decodifica y se corta dentro de tu navegador con la Web Audio API. Nunca viaja por la red, así que puedes recortar grabaciones confidenciales sin ningún riesgo.</p>
+            <p>No. Esta operación decodifica y corta el archivo dentro de tu navegador con la Web Audio API; no envía el audio al servidor.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Qué formatos puedo cortar?</h3></summary>
             <p>Cualquiera que tu navegador sepa reproducir: MP3, WAV, OGG, M4A/AAC y normalmente FLAC. Si un archivo no abre, suele ser porque usa un códec que ese navegador concreto no incluye.</p>
           </details>
           <details class="faq-item" name="faq">
-            <summary><h3>¿Puedo cortar con precisión de milisegundos?</h3></summary>
+            <summary><h3>¿Puedo ajustar el corte con precisión de décimas de segundo?</h3></summary>
             <p>Sí. Además de arrastrar las manijas, tienes dos campos numéricos con paso de una décima de segundo, y las flechas del teclado sobre cada manija mueven de 0,1 en 0,1 segundos (o de segundo en segundo con Mayús).</p>
           </details>
           <details class="faq-item" name="faq">

@@ -36,12 +36,9 @@
       }, 3000);
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/assets/fonts/instrument-sans/instrument-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/fraunces/fraunces-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/css/fonts.css?v=2026100901" />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="css/tool.css?v=2026090504" />
     <link rel="stylesheet" href="/css/estudio.css?v=2026090504" />
@@ -188,20 +185,20 @@
 
     <main>
       <section class="section shell">
-        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
+        <nav class="breadcrumbs" aria-label="Miga de pan">
           <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> › <span>Generador de código QR</span>
         </nav>
 
         <div class="page-head">
-          <p class="eyebrow reveal">Herramienta gratis</p>
-          <h1 class="reveal" style="--reveal-delay: 80ms">Generador de código QR</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">Escribe cualquier texto o pega un enlace y descarga el código QR al instante, en PNG o en SVG. Se genera en tu navegador: nada de lo que escribes viaja por la red.</p>
+          <p class="eyebrow">Herramienta gratis</p>
+          <h1>Generador de código QR</h1>
+          <p class="lede">Escribe cualquier texto o pega un enlace y descarga el código QR al instante, en PNG o en SVG. Se genera en tu navegador: nada de lo que escribes viaja por la red.</p>
         </div>
 
       </section>
 
       <section class="section estudio-shell">
-        <div class="estudio reveal" data-estudio data-workspace style="--reveal-delay: 200ms">
+        <div class="estudio" data-estudio data-workspace>
           <div class="qr-preview estudio__lienzo" data-preview>
               <div class="qr-lienzo" data-lienzo hidden><canvas data-canvas width="1" height="1"></canvas></div>
               <div class="qr-preview__vacio" data-vacio>
