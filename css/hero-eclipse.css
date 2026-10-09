@@ -373,45 +373,19 @@
   font-weight: 600;
   line-height: 1.1;
   color: var(--ecl-text-lo);
-  /* El barrido de brillo de la plantilla: un radial que viaja por el texto
-     vía la propiedad animable --ecl-p, sobre el degradado de la marca. */
-  background:
-    radial-gradient(2em 2em at 50% 50%,
-      transparent calc(var(--ecl-p) - 2em),
-      #fff calc(var(--ecl-p) - 1em),
-      #fff calc(var(--ecl-p) - 0.4em),
-      transparent var(--ecl-p)),
-    linear-gradient(100deg, var(--ecl-glow) 10%, var(--ecl-glow-2) 90%);
+  /* Degradado completo desde el primer pintado, sin barridos tardíos. */
+  background: linear-gradient(100deg, var(--ecl-glow) 10%, var(--ecl-glow-2) 90%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 16px rgba(var(--ecl-spot), 0.24);
-  --ecl-p: 0%;
-  animation: ecl-pulse 10s linear 1.2s infinite;
 }
 .eclipse .titular > .titular-glow {
-  background:
-    radial-gradient(2em 2em at 50% 50%,
-      transparent calc(var(--ecl-p) - 2em),
-      transparent calc(var(--ecl-p) - 1em),
-      #fff calc(var(--ecl-p) - 1em),
-      #fff calc(var(--ecl-p) - 0.4em),
-      transparent calc(var(--ecl-p) - 0.4em),
-      transparent var(--ecl-p));
+  background: linear-gradient(100deg, var(--ecl-glow) 10%, var(--ecl-glow-2) 90%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: blur(16px) opacity(0.4);
-}
-@keyframes ecl-pulse {
-  0%   { --ecl-p: 0%; }
-  50%  { --ecl-p: 300%; }
-  100% { --ecl-p: 300%; }
-}
-@property --ecl-p {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
 }
 .eclipse .titular .sr-only {
   position: absolute;
@@ -548,28 +522,34 @@
   rotate: 45deg;
 }
 .eclipse .montanas > div:nth-child(1) {
-  bottom: -240%;
-  translate: -6em 2em;
-  animation: ecl-mountain1 2s ease-out 2.4s forwards;
+  bottom: -140%;
+  --mountain-x: -6em;
+  --mountain-y: 2em;
+  translate: var(--mountain-x) var(--mountain-y);
+  animation: ecl-mountain1 2s ease-out 2.4s both;
 }
 .eclipse .montanas > div:nth-child(2) {
-  bottom: -240%;
-  translate: -2em 0em;
+  bottom: -108%;
+  --mountain-x: -2em;
+  --mountain-y: 0em;
+  translate: var(--mountain-x) var(--mountain-y);
   width: 14em; height: 20em;
-  animation: ecl-mountain2 2s ease-out 2.2s forwards;
+  animation: ecl-mountain2 2s ease-out 2.2s both;
 }
 .eclipse .montanas > div:nth-child(3) {
-  bottom: -240%;
-  translate: 6em 3em;
-  animation: ecl-mountain1 2s ease-out 2s forwards;
+  bottom: -140%;
+  --mountain-x: 6em;
+  --mountain-y: 3em;
+  translate: var(--mountain-x) var(--mountain-y);
+  animation: ecl-mountain1 2s ease-out 2s both;
 }
 @keyframes ecl-mountain1 {
-  0% { bottom: -240%; }
-  100% { bottom: -140%; }
+  0% { translate: var(--mountain-x) calc(var(--mountain-y) + 10em); }
+  100% { translate: var(--mountain-x) var(--mountain-y); }
 }
 @keyframes ecl-mountain2 {
-  0% { bottom: -240%; }
-  100% { bottom: -108%; }
+  0% { translate: var(--mountain-x) calc(var(--mountain-y) + 13.2em); }
+  100% { translate: var(--mountain-x) var(--mountain-y); }
 }
 .eclipse .montanas > div::before {
   content: ''; display: block;
