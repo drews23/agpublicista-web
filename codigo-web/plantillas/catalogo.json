@@ -1,0 +1,32 @@
+[
+  {
+    "id": "botones-cristal",
+    "title": "Botones sociales de cristal",
+    "tag": "Brillo y elevación",
+    "author": "Sabiha Samha",
+    "source": "https://codepen.io/SabihaSamha/pen/BavZEzq",
+    "zip": "animated-glassmorphic-social-buttons.zip",
+    "desc": "Cinco accesos con vidrio translúcido, reflejo de luz y elevación al pasar el cursor. Iconos SVG, colores de Lienzo y enlaces editables.",
+    "size": 108
+  },
+  {
+    "id": "botones-capas",
+    "title": "Botones sociales por capas",
+    "tag": "Color y profundidad",
+    "author": "Nick",
+    "source": "https://codepen.io/OfigenusMaximus/pen/YzaGggZ",
+    "zip": "glassmorphism-social-media-button.zip",
+    "desc": "Tres botones con una lámina de color bajo el cristal. La rotación responde al cursor y al foco del teclado; el diseño se adapta al móvil.",
+    "size": 107
+  },
+  {
+    "id": "carrusel-recursos",
+    "title": "Carrusel de recursos creativos",
+    "tag": "Explorar y guardar",
+    "author": "Lienzo",
+    "source": null,
+    "zip": null,
+    "desc": "Un carrusel propio para colecciones, productos o artículos. Desplazamiento táctil, flechas, barra de posición y favoritos; sin librerías.",
+    "size": 109
+  }
+]

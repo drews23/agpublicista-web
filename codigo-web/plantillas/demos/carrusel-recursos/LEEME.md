@@ -1,0 +1,26 @@
+# Carrusel de recursos creativos
+
+Paquete preparado por Lienzo · https://lienzo.tools/codigo-web/plantillas/
+
+## Abrir y probar
+Descomprime todo el ZIP y abre index.html en un navegador moderno. Conserva las carpetas y sus nombres. No requiere instalación, servidor, conexión a Internet ni librerías remotas para renderizar la plantilla. Los enlaces de redes o recursos sí abren páginas en Internet.
+
+## Personalizar
+1. Cambia los textos y enlaces en index.html. Los enlaces de ejemplo corresponden a Lienzo o a sus opciones de compartir.
+2. Cambia los colores en las variables de :root, al principio de styles.css. El segundo bloque define el tema claro.
+3. Ajusta espacios, tamaños y efectos dentro de la familia .lz-social o .carousel. La regla prefers-reduced-motion conserva la preferencia de accesibilidad.
+4. Para integrar solo el componente, copia su HTML, las reglas de su familia y las variables que utiliza. La clase .demo es el escenario de muestra. Cambia los selectores de body por los de tu contenedor si la página ya tiene estilos propios.
+
+## Archivos
+- index.html: estructura, enlaces y contenido.
+- styles.css: identidad y comportamiento visual.
+- script.js: selector de tema y navegación/favoritos del carrusel.
+- assets/: logo de muestra, fuentes locales y licencias tipográficas.
+- LICENSE-LIENZO.txt: licencia MIT para las aportaciones de Lienzo.
+
+
+## Créditos y condiciones
+Diseño, ilustraciones y código del carrusel: Lienzo. Este carrusel se implementó desde cero con desplazamiento nativo y no incorpora código ni imágenes del ZIP externo de Swiper.
+Fraunces: The Fraunces Project Authors. Instrument Sans: The Instrument Sans Project Authors. Ambas fuentes se incluyen bajo OFL 1.1 con sus avisos íntegros. El logo de Lienzo se incluye únicamente como ejemplo: sustitúyelo por el de tu proyecto; MIT no concede derechos sobre marcas de terceros.
+
+Los favoritos del carrusel son una demostración temporal, no una cuenta ni un servicio de almacenamiento. Se reinician al recargar. Comprueba el componente dentro de tu proyecto antes de publicarlo.
