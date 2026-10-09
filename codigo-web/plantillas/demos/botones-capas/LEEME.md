@@ -20,7 +20,7 @@ Descomprime todo el ZIP y abre index.html en un navegador moderno. Conserva las 
 - LICENSE-ORIGINAL.txt: licencia MIT y aviso de autoría original. Debe conservarse al redistribuir.
 
 ## Créditos y condiciones
-Base original: Nick · https://codepen.io/OfigenusMaximus/pen/YzaGggZ. El original se distribuyó con licencia MIT. Se conserva el aviso original íntegro. La adaptación de Lienzo añade colores, contenido, SVG locales, etiquetas accesibles, foco, movimiento reducido y diseño móvil; elimina dependencias CDN y corrige la estructura HTML.
+La adaptación de Lienzo añade colores, contenido, SVG locales, etiquetas accesibles, foco, movimiento reducido y diseño móvil; elimina dependencias CDN y corrige la estructura HTML.
 Fraunces: The Fraunces Project Authors. Instrument Sans: The Instrument Sans Project Authors. Ambas fuentes se incluyen bajo OFL 1.1 con sus avisos íntegros. El logo de Lienzo se incluye únicamente como ejemplo: sustitúyelo por el de tu proyecto; MIT no concede derechos sobre marcas de terceros.
 
 Los favoritos del carrusel son una demostración temporal, no una cuenta ni un servicio de almacenamiento. Se reinician al recargar. Comprueba el componente dentro de tu proyecto antes de publicarlo.
