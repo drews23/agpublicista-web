@@ -64,12 +64,12 @@ Efectos de sonido para videos, plantillas de edición y herramientas de diseño:
 
 Soy Andy y aquí muestro cómo se usa cada recurso de Lienzo. Lo bueno no debería estar detrás de un formulario: tomas lo que necesitas y sigues trabajando.
 
-▪ Sonido: packs de efectos en WAV para editar tus videos (transiciones, impactos, ambientes), cada uno con su guía de uso y descarga directa.
-▪ Plantillas y recursos: proyectos de After Effects sin plugins, iconos en SVG y PNG con nombres en español y escenas 3D editables.
+▪ Sonido: packs de efectos en WAV para editar tus videos (transiciones, impactos y ambientes), cada uno con su guía y descarga desde lienzo.tools.
+▪ Plantillas y recursos: proyectos editables de After Effects, iconos en SVG y PNG con nombres en español y escenas 3D para integrar en la web.
 ▪ Herramientas: editor de audio, generador de códigos QR, paletas con contraste WCAG, optimizador de SVG y más. Todo corre en tu navegador: tus archivos no se suben a ningún servidor.
 ▪ Código web: degradados, sombras, animaciones y componentes CSS listos para copiar.
 
-Uso personal y comercial, incluidos trabajos para clientes.
+Cada recurso incluye sus condiciones de uso, créditos y procedencia.
 
 Un recurso nuevo cada semana en https://lienzo.tools/
 Herramientas creativas sin fricción.

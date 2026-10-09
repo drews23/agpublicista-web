@@ -50,6 +50,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026091401" />
+    <style>
+      .ia-casos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+      .ia-caso { min-width: 0; padding: 1.3rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+      .ia-caso__uso { display: block; margin-bottom: 1rem; color: var(--muted); font-size: .82rem; }
+      .ia-caso__icono { display: block; object-fit: contain; margin-bottom: 1rem; }
+      .ia-caso__titulo { display: block; color: var(--text); line-height: 1.3; }
+      .ia-caso p { margin: .6rem 0 0; font-size: .92rem; }
+      @media (max-width: 720px) { .ia-casos { grid-template-columns: 1fr; } }
+    </style>
 
     <script type="application/ld+json">
     {
@@ -61,7 +70,7 @@
           "headline": "25 iconos de inteligencia artificial gratis, en 3 estilos",
           "description": "Descarga gratis 25 iconos de inteligencia artificial en SVG y PNG, en tres estilos: plano a color, contorno y sólido. Nombres en español.",
           "datePublished": "2026-08-27",
-          "dateModified": "2026-09-14",
+          "dateModified": "2026-09-26",
           "inLanguage": "es",
           "author": { "@type": "Organization", "name": "Lienzo", "url": "https://lienzo.tools/" },
           "publisher": {
@@ -119,12 +128,6 @@
       ]
     }
     </script>
-      <!-- AdSense: anuncios no personalizados en todo el tráfico -->
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
-    </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
-         crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="glow" aria-hidden="true"></div>
@@ -162,7 +165,7 @@
           <h1 class="reveal" style="--reveal-delay: 80ms">25 iconos de inteligencia artificial gratis, en 3 estilos</h1>
           <p class="article-meta reveal" style="--reveal-delay: 140ms">
             <time datetime="2026-08-27">27 de agosto de 2026</time> &middot; Iconos &middot; 7 min de lectura
-            · Actualizado el <time datetime="2026-09-14">14 de septiembre de 2026</time>
+            · Actualizado el <time datetime="2026-09-26">26 de septiembre de 2026</time>
           </p>
 
           <p class="reveal" style="--reveal-delay: 200ms">
@@ -222,7 +225,7 @@
           <!-- AdSense: pegar aqu&iacute; el bloque responsive cuando la cuenta est&eacute; aprobada -->
 
           <h2 id="que-incluye">Qu&eacute; incluye el pack</h2>
-          <p>El ZIP contiene <strong>150 archivos gráficos: 75 SVG y 75 PNG</strong>. Son 25 conceptos en tres estilos; también incluye el LEEME y la ficha de créditos. Las carpetas usan nombres en español:</p>
+          <p>El ZIP contiene <strong>150 archivos gráficos: 75 SVG y 75 PNG</strong>, más un archivo <code>LEEME.txt</code>. Son 25 conceptos en tres estilos. La <a href="/recursos/creditos/iconos-de-inteligencia-artificial-gratis-svg.txt">ficha de créditos</a> se descarga por separado desde esta entrada. Las carpetas usan nombres en español:</p>
           <ul>
             <li>
               <strong>25 iconos en SVG</strong>, en tres estilos: <code>svg/plano</code> (a todo
@@ -298,6 +301,30 @@
               el contorno fino del estilo anterior se pierde.
             </li>
           </ul>
+
+          <h2 id="ejemplo-ia">Prueba de uso: tres lugares de una interfaz de IA</h2>
+          <p>Estas tres piezas usan archivos reales del pack en un contexto de producto. El tamaño cambia la decisión: el estilo plano sirve como imagen protagonista; contorno acompaña una función; sólido marca una opción compacta. Compáralos sobre el tema claro y el oscuro antes de elegir para tu interfaz.</p>
+          <div class="ia-casos" role="group" aria-label="Ejemplos de los tres estilos en una interfaz">
+            <div class="ia-caso">
+              <span class="ia-caso__uso">Cabecera · plano · 64 px</span>
+              <img class="ia-caso__icono" src="/assets/ejemplos/iconos-ia/robot-plano.svg" width="64" height="64" alt="" loading="lazy" />
+              <strong class="ia-caso__titulo">Presenta tu asistente</strong>
+              <p>El color propio del icono crea un punto de entrada para una sección amplia.</p>
+            </div>
+            <div class="ia-caso">
+              <span class="ia-caso__uso">Función · contorno · 32 px</span>
+              <img class="ia-caso__icono" src="/assets/ejemplos/iconos-ia/chatbot-contorno.svg" width="32" height="32" alt="" loading="lazy" />
+              <strong class="ia-caso__titulo">Responde consultas</strong>
+              <p>El trazo acompaña el texto de una tarjeta sin competir con el título.</p>
+            </div>
+            <div class="ia-caso">
+              <span class="ia-caso__uso">Opción compacta · sólido · 24 px</span>
+              <img class="ia-caso__icono" src="/assets/ejemplos/iconos-ia/red-neuronal-solido.svg" width="24" height="24" alt="" loading="lazy" />
+              <strong class="ia-caso__titulo">Explora modelos</strong>
+              <p>Comprueba el símbolo al tamaño final: si el detalle desaparece, usa uno más simple o dale más espacio.</p>
+            </div>
+          </div>
+          <p>Los tres SVG de la muestra también están en el ZIP, dentro de <code>svg/plano/robot.svg</code>, <code>svg/contorno/chatbot.svg</code> y <code>svg/solido/red-neuronal.svg</code>. Para tu proyecto, copia esas rutas desde el pack. Mantén visible la etiqueta de cada función: el icono ayuda a reconocerla, pero no debe ser su único nombre.</p>
 
           <h2 id="cambiar-color">C&oacute;mo cambiar el color de contorno y s&oacute;lido</h2>
           <p>Para recolorear los estilos contorno y sólido, revisa los atributos de relleno del SVG. Un relleno definido dentro de una forma puede prevalecer sobre el del elemento raíz. En el estilo plano, conserva la paleta o modifica cada color por separado.</p>
