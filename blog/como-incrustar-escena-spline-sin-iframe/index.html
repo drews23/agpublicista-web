@@ -6,7 +6,7 @@
     <title>Cómo incrustar una escena de Spline sin iframe</title>
     <meta
       name="description"
-      content="Sirve el archivo .spline desde tu propio dominio y carga solo el runtime: sin iframe, sin la marca «Built with Spline» y sin depender de un enlace ajeno."
+      content="Integra una escena de Spline en tu canvas, aloja el archivo publicado y controla el encuadre. Revisa las dependencias del runtime y las condiciones de tu plan."
     />
     <link rel="canonical" href="https://lienzo.tools/blog/como-incrustar-escena-spline-sin-iframe/" />
     <meta name="theme-color" content="#0a0a0f" />
@@ -62,9 +62,9 @@
           "@type": "Article",
           "@id": "https://lienzo.tools/blog/como-incrustar-escena-spline-sin-iframe/#article",
           "headline": "Cómo incrustar una escena de Spline sin iframe",
-          "description": "Sirve el archivo .spline desde tu propio dominio y carga solo el runtime: sin iframe, sin la marca «Built with Spline» y sin depender de un enlace ajeno.",
+          "description": "Integra una escena de Spline en tu canvas, aloja el archivo publicado y controla el encuadre. Revisa las dependencias del runtime y las condiciones de tu plan.",
           "datePublished": "2026-08-28",
-          "dateModified": "2026-08-28",
+          "dateModified": "2026-10-09",
           "inLanguage": "es",
           "author": { "@type": "Organization", "name": "Lienzo", "url": "https://lienzo.tools/" },
           "publisher": {
@@ -99,7 +99,7 @@
               "name": "¿Esto elimina la marca «Built with Spline»?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Sí, porque esa marca la dibuja el visor de my.spline.design, no la escena. Al montar tú el canvas con el runtime, el visor no interviene y la marca no aparece. Ahora bien, si las condiciones de tu plan de Spline te piden atribución visible, sigues obligado a ponerla por tu cuenta: quitar el visor no cambia lo que firmaste."
+                "text": "No automáticamente. Spline permite quitar su logo en Public URLs, Viewer y Code Exports con los planes Hobby, Pro o Max. Usa la opción de Play Settings que corresponda a tu plan; montar un canvas propio no sustituye esas condiciones."
               }
             },
             {
@@ -107,7 +107,7 @@
               "name": "¿La escena se sigue viendo bien en móvil?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Mejor que con el iframe. El visor usa cámara ortográfica, así que un contenedor estrecho no encoge la escena sino que la recorta, y en pantallas pequeñas puede quedarse casi vacía. El runtime en cambio reencaja la escena al tamaño del canvas. Está verificado de 1160 a 340 píxeles de ancho sin desbordes."
+                "text": "El resultado depende de la cámara, la composición y la proporción del contenedor. Prueba el encuadre en varios anchos y en un móvil real; usar el runtime no garantiza que cualquier escena se adapte sin ajustes."
               }
             },
             {
@@ -115,7 +115,7 @@
               "name": "¿Deja de depender de Spline por completo?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No, y conviene tenerlo claro. El archivo de la escena pasa a ser tuyo y lo sirves desde tu dominio, pero el programa que la dibuja sigue siendo de Spline y se descarga de su CDN en cada visita. Esto te libera del visor, no de la tecnología. Lo que sí ganas es que tu escena no desaparece si un enlace público deja de funcionar."
+                "text": "No, y conviene tenerlo claro. Puedes servir el archivo publicado desde tu dominio si su licencia y las condiciones de exportación lo permiten, pero el programa que la dibuja sigue siendo de Spline y se descarga de su CDN en cada visita. Esto te libera del visor, no de la tecnología. Lo que sí ganas es que tu escena no desaparece si un enlace público deja de funcionar."
               }
             }
           ]
@@ -166,19 +166,22 @@
           <h1 class="reveal" style="--reveal-delay: 80ms">Cómo incrustar una escena de Spline sin iframe</h1>
           <p class="article-meta reveal" style="--reveal-delay: 140ms">
             <time datetime="2026-08-28">28 de agosto de 2026</time> · Spline · 6 min de lectura
+            · Actualizado el <time datetime="2026-10-09">9 de octubre de 2026</time>
           </p>
 
           <p class="reveal" style="--reveal-delay: 200ms">
             Publicas tu escena en Spline, copias el <code>&lt;iframe&gt;</code> que te da y
-            funciona. Pero ese iframe trae tres cosas que quizá no quieres: una petición a un
-            servidor ajeno en cada visita, la marca «Built with Spline» encima de tu escena, y la
-            dependencia de que ese enlace público siga vivo dentro de dos años.
+            funciona. Ese iframe carga la escena desde un servidor externo y depende de que
+            su enlace público siga disponible. La presencia del logo depende de las opciones
+            de exportación y de tu plan de Spline.
           </p>
           <p class="reveal" style="--reveal-delay: 260ms">
             Hay otra vía, y es más sencilla de lo que parece: <strong>el archivo lo sirves tú</strong>
             desde tu propio dominio, y de Spline solo llega el programa que lo dibuja. No es
             teoría: es exactamente lo que mueve la escena 3D de la portada de este sitio.
           </p>
+
+          <p>Este flujo aloja el archivo de la escena, pero conserva un runtime externo. No equivale a la exportación <a href="https://docs.spline.design/exporting-your-scene/web/exporting-as-self-hosted-project" target="_blank" rel="noopener">Self-Hosted de Spline</a>, que incluye el runtime y los assets y está disponible en Enterprise. Antes de reutilizar una exportación, comprueba las opciones y condiciones vigentes de tu cuenta.</p>
 
           <h2 id="por-que-no-basta">Por qué el archivo del ZIP todavía no te sirve</h2>
           <p>
@@ -215,8 +218,9 @@ a.download = 'escena.spline';
 a.click();</code></pre>
             </li>
             <li>
-              Sube ese archivo a tu servidor, junto al resto de tus recursos. A partir de aquí es
-              tuyo: se cachea como cualquier otro archivo y no depende de nadie.
+              Puedes servir y cachear el archivo desde tu dominio, respetando su licencia y las
+              condiciones de exportación. El runtime y los posibles assets externos conservan
+              sus propias dependencias.
             </li>
           </ol>
 
@@ -248,9 +252,8 @@ a.click();</code></pre>
           <h2 id="tropiezos">Tres tropiezos que te ahorran la tarde</h2>
           <p>
             <strong>La escena sale cortada por arriba y por abajo.</strong> El runtime reencaja la
-            escena al tamaño de tu canvas, así que aquí no sufres el recorte de la cámara
-            ortográfica que sí tiene el iframe: está comprobado de 1160 a 340 píxeles de ancho sin
-            un solo desborde. Pero si la escena está <em>compuesta</em> en una proporción (3:2, por
+            escena al tamaño de tu canvas, pero el encuadre también depende de la cámara.
+            Si la escena está <em>compuesta</em> en una proporción (3:2, por
             ejemplo) y tu contenedor es otra (16:9), el recorte vertical vuelve. Se arregla
             cambiando la proporción del contenedor, o bajando el zoom de la cámara en el editor
             hasta que quepa entera.
@@ -263,16 +266,18 @@ a.click();</code></pre>
           </p>
           <p>
             <strong>La escena no aparece en algunos navegadores.</strong> Mira el <em>Renderer</em>,
-            también en <strong>Export → Play Settings</strong>. Si está en «WebGPU Only», cualquier
-            navegador sin WebGPU se queda sin escena, y no lo notas, porque el tuyo seguramente sí
-            lo tiene. Ponlo en <strong>«WebGL 2 Only»</strong>: funciona en todos y además el
-            paquete que se descarga es más pequeño.
+            también en <strong>Export → Play Settings</strong>. La documentación recomienda
+            <strong>Auto</strong> para usar WebGPU cuando está disponible y volver a WebGL en
+            otros navegadores. WebGPU exclusivo puede dejar fuera a parte del público. Si eliges
+            WebGL, comprueba que el dispositivo lo soporte; ninguna opción garantiza compatibilidad universal.
+            Consulta las <a href="https://docs.spline.design/exporting-your-scene/play-settings" target="_blank" rel="noopener">opciones del renderer</a>.
           </p>
 
           <blockquote>
-            Para comprobarlo de verdad, no basta con mirarlo en tu Chrome. Renderiza la página sin
-            GPU y cuenta los colores distintos de la captura: una escena rota da unos 40-120
-            colores (es el fondo plano), y una sana, varios miles.
+            Prueba la escena en más de un navegador y en un móvil real. Comprueba que el objeto
+            aparece, responde a los controles y no impide desplazar la página. Revisa los errores
+            de consola y ofrece una imagen alternativa si falla WebGL. Contar colores de una
+            captura no permite confirmar por sí solo que la escena funciona.
           </blockquote>
 
           <h2 id="cuando-no">Cuándo no merece la pena</h2>
@@ -302,27 +307,20 @@ a.click();</code></pre>
           <details class="faq-item" name="faq">
             <summary><h3>¿Esto elimina la marca «Built with Spline»?</h3></summary>
             <p>
-              Sí, porque esa marca la dibuja el visor de <code>my.spline.design</code>, no la
-              escena. Al montar tú el <code>&lt;canvas&gt;</code> con el runtime, el visor no
-              interviene y la marca no aparece. Ahora bien, si las condiciones de tu plan de Spline
-              te piden atribución visible, sigues obligado a ponerla por tu cuenta: quitar el visor
-              no cambia lo que firmaste.
+              No automáticamente. Spline permite quitar su logo en Public URLs, Viewer y Code Exports con los planes Hobby, Pro o Max. Usa la opción de Play Settings que corresponda a tu plan; montar un canvas propio no sustituye esas condiciones. Consulta las <a href="https://docs.spline.design/exporting-your-scene/play-settings" target="_blank" rel="noopener">opciones oficiales de Play Settings</a>.
             </p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿La escena se sigue viendo bien en móvil?</h3></summary>
             <p>
-              Mejor que con el iframe. El visor usa cámara ortográfica, así que un contenedor
-              estrecho no encoge la escena sino que la <em>recorta</em>, y en pantallas pequeñas
-              puede quedarse casi vacía. El runtime en cambio reencaja la escena al tamaño del
-              canvas: verificado de 1160 a 340 píxeles de ancho sin desbordes.
+              El resultado depende de la cámara, la composición y la proporción del contenedor. Prueba el encuadre en varios anchos y en un móvil real; usar el runtime no garantiza que cualquier escena se adapte sin ajustes.
             </p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Deja de depender de Spline por completo?</h3></summary>
             <p>
-              No, y conviene tenerlo claro. El archivo de la escena pasa a ser tuyo y lo sirves
-              desde tu dominio, pero el programa que la dibuja sigue siendo de Spline y se descarga
+              No, y conviene tenerlo claro. Puedes servir el archivo publicado desde tu dominio si su licencia y las condiciones
+              de exportación lo permiten, pero el programa que la dibuja sigue siendo de Spline y se descarga
               de su CDN en cada visita. Esto te libera del visor, no de la tecnología. Lo que sí
               ganas es que tu escena no desaparece si un enlace público deja de funcionar.
             </p>

@@ -7,7 +7,10 @@
     "source": null,
     "zip": "animated-glassmorphic-social-buttons.zip",
     "desc": "Cinco accesos con vidrio translúcido, reflejo de luz y elevación al pasar el cursor. Iconos SVG, colores de Lienzo y enlaces editables.",
-    "size": 108
+    "size": 108,
+    "authorRole": "Adaptación y guía",
+    "originalAuthor": "Sabiha Samha",
+    "license": "MIT; avisos originales incluidos en LICENSE-ORIGINAL.txt"
   },
   {
     "id": "botones-capas",
@@ -17,7 +20,10 @@
     "source": null,
     "zip": "glassmorphism-social-media-button.zip",
     "desc": "Tres botones con una lámina de color bajo el cristal. La rotación responde al cursor y al foco del teclado; el diseño se adapta al móvil.",
-    "size": 107
+    "size": 107,
+    "authorRole": "Adaptación y guía",
+    "originalAuthor": "Nick",
+    "license": "MIT; avisos originales incluidos en LICENSE-ORIGINAL.txt"
   },
   {
     "id": "carrusel-recursos",

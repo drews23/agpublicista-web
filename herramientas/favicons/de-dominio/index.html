@@ -100,7 +100,7 @@
               "name": "¿Por qué no basta con pedir dominio.com/favicon.ico?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Porque muchos sitios ya no guardan el icono en esa ruta clásica: lo declaran con etiquetas link en el head, en formatos PNG o SVG, o dentro de un manifest. Los servicios de resolución siguen todas esas pistas y devuelven una imagen aunque el .ico de la raíz no exista."
+                "text": "Muchos sitios ya no lo guardan en esa ruta: lo declaran con etiquetas link, en PNG o SVG, o dentro de un manifest. Los servicios externos pueden devolver una copia disponible aunque esa ruta no exista, pero esta consulta no confirma dónde se declaró ni si es la versión actual."
               }
             },
             {
@@ -257,7 +257,7 @@
               <p class="fuente__url"></p>
             </figure>
             <figure class="fuente" id="fuente-directo">
-              <h3>El archivo original</h3>
+              <h3>Ruta clásica /favicon.ico</h3>
               <img alt="" width="64" height="64" />
               <figcaption class="fuente__estado"></figcaption>
               <p class="fuente__url"></p>
@@ -265,9 +265,9 @@
           </div>
           <p class="nota-globo" style="margin-top: 0.9rem">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 2.6 2.8 15.4 0 18M12 3c-2.8 2.6-2.8 15.4 0 18"/></svg>
-            ¿El resultado es un globo gris como este? Ese dominio no declara favicon, o Google
-            aún no lo ha indexado. El icono real, si existe, suele aparecer en «El archivo
-            original».
+            Un globo gris puede ser un icono de respaldo del servicio. No demuestra que el sitio
+            carezca de favicon. La consulta directa solo prueba <code>/favicon.ico</code>, también
+            con <code>www</code> si falla; no inspecciona las etiquetas ni el manifest de la página.
           </p>
         </div>
 
@@ -322,15 +322,13 @@
       <section class="section shell guia diferir-render" style="--alto-escritorio: 1076px; --alto-movil: 2003px">
         <h2 class="section-head">Cómo encuentra un navegador el favicon</h2>
         <p style="max-width: 72ch; color: var(--muted)">
-          Cuando visitas una página, el navegador busca el icono en un orden concreto: primero
-          las etiquetas <code>&lt;link rel="icon"&gt;</code> declaradas en el
-          <code>&lt;head&gt;</code> (puede haber varias, con distintos tamaños y formatos),
-          después el archivo <code>/favicon.ico</code> en la raíz del dominio, la convención
-          heredada de los años noventa, y por último los iconos que declare el
-          <em>manifest</em> si la página es una aplicación web. Los servicios de resolución
-          como los que compara esta herramienta hacen ese mismo recorrido por ti, guardan el
-          resultado en caché y lo sirven como imagen simple: por eso funcionan aunque el sitio
-          no tenga el <code>.ico</code> clásico.
+          Una página puede declarar iconos mediante <code>&lt;link rel="icon"&gt;</code>
+          en su <code>&lt;head&gt;</code>, usar la ruta convencional <code>/favicon.ico</code>
+          o definir iconos de aplicación en un <em>manifest</em>. Esta herramienta no rastrea
+          esas declaraciones: compara las imágenes que devuelven Google y DuckDuckGo con una
+          petición a la ruta clásica. Las copias de los servicios pueden estar desactualizadas
+          o mostrar un icono de respaldo. Para revisar tu implementación completa, comprueba
+          también el HTML y el manifest de tu sitio.
         </p>
 
         <h2 class="section-head" style="margin-top: 2rem">Tamaños que conviene conocer</h2>
@@ -381,8 +379,8 @@
             <p>
               Muchos sitios ya no lo guardan en esa ruta: lo declaran con etiquetas
               <code>&lt;link&gt;</code>, en PNG o SVG, o dentro de un <em>manifest</em>. Los
-              servicios de resolución siguen todas esas pistas y devuelven una imagen aunque el
-              <code>.ico</code> clásico no exista.
+              servicios externos pueden devolver una copia disponible aunque esa ruta no exista,
+              pero esta consulta no confirma dónde se declaró ni si es la versión actual.
             </p>
           </article>
           <article class="faq-item reveal" style="--reveal-delay: 180ms">
@@ -486,6 +484,6 @@
 
     <script src="/js/site.js?v=2026083013" defer></script>
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
-    <script src="js/de-dominio.js?v=1" defer></script>
+    <script src="js/de-dominio.js?v=20261009" defer></script>
   </body>
 </html>

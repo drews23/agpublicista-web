@@ -98,7 +98,7 @@
 
     const imgG = fGoogle.querySelector("img");
     imgG.src = u.google(64);
-    imgG.onload = () => estado(fGoogle, "Respondió. Si ves un globo gris, Google no tiene icono indexado de este dominio.", true);
+    imgG.onload = () => estado(fGoogle, "Respondió. Un globo gris puede ser un respaldo del servicio; no confirma que falte el favicon.", true);
     imgG.onerror = () => estado(fGoogle, "No cargó desde este servicio.", false);
     fGoogle.querySelector(".fuente__url").textContent = u.google(64);
 
@@ -117,10 +117,10 @@
       if (u.directoWww) {
         fDirecto.querySelector(".fuente__url").textContent = u.directoWww;
         imgR.onerror = () =>
-          estado(fDirecto, "No cargó desde esa ruta (tampoco con www). Puede estar declarado con <link> en otra — los servicios de arriba siguen esas pistas.", false);
+          estado(fDirecto, "No cargó desde esa ruta (tampoco con www). Puede estar declarado con <link> en otra. Esta herramienta no inspecciona las etiquetas ni el manifest.", false);
         imgR.src = u.directoWww;
       } else {
-        estado(fDirecto, "No cargó desde esa ruta. Puede estar declarado con <link> en otra — los servicios de arriba siguen esas pistas.", false);
+        estado(fDirecto, "No cargó desde esa ruta. Puede estar declarado con <link> en otra. Esta herramienta no inspecciona las etiquetas ni el manifest.", false);
       }
     };
     imgR.src = u.directo;
