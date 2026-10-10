@@ -1,0 +1,27 @@
+{
+  "/en/": {
+    "title": "Free Creative Resources for Video & Web Design | Lienzo",
+    "h1": "Free resources for video editing and web design",
+    "description": "Explore free sound effects, SVG icons, After Effects templates, and HTML, CSS, and JavaScript UI templates. Preview resources and check each download’s usage terms."
+  },
+  "/en/templates/": {
+    "title": "Free HTML CSS JavaScript Templates: Carousel & Buttons | Lienzo",
+    "h1": "Free HTML, CSS and JavaScript Templates",
+    "description": "Preview three free HTML, CSS, and JavaScript UI templates: an interactive carousel, glass social buttons, and layered hover buttons. Download code and setup guides."
+  },
+  "/en/blog/after-effects-text-animation/": {
+    "title": "Free After Effects Text Animation Templates | Lienzo",
+    "h1": "Free After Effects Text Animation Templates and Editing Guide",
+    "description": "Download a free kinetic typography project for After Effects. Learn how to edit text, fonts, colors and timing, then export using the step-by-step video guide."
+  },
+  "/en/blog/ai-icons/": {
+    "title": "25 Free Artificial Intelligence Icons in SVG & PNG | Lienzo",
+    "h1": "25 Free Artificial Intelligence Icons in Three Styles",
+    "description": "Download 25 artificial intelligence icon concepts in flat, outline and solid styles: 75 SVG and 75 PNG files. Compare previews, customization examples and usage terms."
+  },
+  "/en/blog/free-transition-sound-effects/": {
+    "title": "16 Free Transition Sound Effects in WAV | Lienzo",
+    "h1": "16 Free Transition Sound Effects in WAV",
+    "description": "Preview and download 16 free WAV transition sound effects, including fire, wind, magic and cybernetic sounds. Get editing tips and check the pack’s usage terms."
+  }
+}

@@ -3,6 +3,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 import json,re,hashlib
 from urllib.parse import urlsplit
+from english_search import apply_search_copy
 ROOT=Path(__file__).resolve().parents[1]
 routes=json.loads((ROOT/'scripts/english-content/code-routes.json').read_text(encoding='utf8'))
 # Localize shared states before computing asset versions.
@@ -42,6 +43,7 @@ for p in (ROOT/'en').rglob('index.html'):
   target=ROOT/route.lstrip('/')
   if route.startswith('/en/') and target.is_file() and target.suffix in ['.js','.css']:
    tag[attr]=route+'?v='+hashlib.sha256(target.read_bytes()).hexdigest()[:12]
+ apply_search_copy(s, '/'+p.relative_to(ROOT).parent.as_posix()+'/')
  p.write_text(str(s),encoding='utf8')
 # The Spanish homepage needs the same reciprocal alternates and visible switch.
 p=ROOT/'index.html';raw=p.read_text(encoding='utf8');s=BeautifulSoup(raw,'html.parser')
