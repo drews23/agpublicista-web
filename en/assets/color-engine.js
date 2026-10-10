@@ -207,13 +207,13 @@
     if (large) {
       if (ratio >= 4.5) return { nivel: "AAA", ok: true };
       if (ratio >= 3) return { nivel: "AA", ok: true };
-      return { nivel: "Insuficiente", ok: false };
+      return { nivel: "Insufficient", ok: false };
     }
 
     if (ratio >= 7) return { nivel: "AAA", ok: true };
     if (ratio >= 4.5) return { nivel: "AA", ok: true };
-    if (ratio >= 3) return { nivel: "Solo texto grande", ok: false };
-    return { nivel: "Insuficiente", ok: false };
+    if (ratio >= 3) return { nivel: "Large text only", ok: false };
+    return { nivel: "Insufficient", ok: false };
   }
 
   /** Devuelve blanco o negro según cuál se lea mejor encima del color dado. */
