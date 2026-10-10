@@ -37,7 +37,7 @@ window.LienzoQR = (() => {
       para que cada módulo caiga en píxeles enteros y no se vea borroso. */
   function dibujar(canvas, qr, opciones = {}) {
     const modulos = qr.getModuleCount();
-    const margenModulos = opciones.margen ?? 2;
+    const margenModulos = Math.max(4, opciones.margen ?? 4);
     const totalModulos = modulos + margenModulos * 2;
     const px = Math.max(1, Math.floor((opciones.tamano || 512) / totalModulos));
     const lado = px * totalModulos;
@@ -59,7 +59,40 @@ window.LienzoQR = (() => {
         }
       }
     }
+    if (opciones.logo) {
+      const logo = geometriaLogo(qr, opciones.logo);
+      ctx.save();
+      ctx.scale(px, px);
+      ctx.translate(margenModulos, margenModulos);
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      if (logo.fondo === "circulo") {
+        ctx.arc(logo.x + logo.lado / 2, logo.y + logo.lado / 2, logo.lado / 2, 0, Math.PI * 2);
+      } else if (logo.fondo === "redondeado") {
+        ctx.roundRect(logo.x, logo.y, logo.lado, logo.lado, logo.lado * 0.18);
+      } else if (logo.fondo === "blanco") {
+        ctx.rect(logo.x, logo.y, logo.lado, logo.lado);
+      }
+      ctx.fill();
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(opciones.logo.imagen, logo.ix, logo.iy, logo.ancho, logo.alto);
+      ctx.restore();
+    }
     return { modulos, px, lado };
+  }
+
+  // Caja total (incluido fondo) limitada al 12–20 % del lado del símbolo.
+  // No equivale al porcentaje de corrección y requiere comprobar lectura.
+  function geometriaLogo(qr, logo) {
+    const n = qr.getModuleCount();
+    const porcentaje = Math.min(20, Math.max(12, Number(logo.tamano) || 16));
+    const lado = n * porcentaje / 100;
+    const interior = lado * 0.76;
+    const escala = interior / Math.max(logo.imagen.naturalWidth, logo.imagen.naturalHeight);
+    const ancho = logo.imagen.naturalWidth * escala;
+    const alto = logo.imagen.naturalHeight * escala;
+    return { lado, x: (n - lado) / 2, y: (n - lado) / 2,
+      ix: (n - ancho) / 2, iy: (n - alto) / 2, ancho, alto, fondo: logo.fondo };
   }
 
   /** Construye el SVG a partir del mismo objeto qr — vectorial, escala sin
@@ -67,8 +100,9 @@ window.LienzoQR = (() => {
       imprimir en un cartel o llevarlo a un editor de diseño. */
   function construirSvg(qr, opciones = {}) {
     const modulos = qr.getModuleCount();
-    const margenModulos = opciones.margen ?? 2;
+    const margenModulos = Math.max(4, opciones.margen ?? 4);
     const total = modulos + margenModulos * 2;
+    const lado = Math.max(1, Math.floor((opciones.tamano || 1024) / total)) * total;
     const color = opciones.color || "#000000";
     const fondo = opciones.fondo || "#ffffff";
 
@@ -81,10 +115,22 @@ window.LienzoQR = (() => {
       }
     }
 
+    let imagen = "";
+    if (opciones.logo) {
+      const logo = geometriaLogo(qr, opciones.logo);
+      const x = logo.x + margenModulos, y = logo.y + margenModulos;
+      let fondoLogo = "";
+      if (logo.fondo === "circulo") {
+        fondoLogo = `<circle cx="${x + logo.lado / 2}" cy="${y + logo.lado / 2}" r="${logo.lado / 2}" fill="#ffffff"/>`;
+      } else if (logo.fondo !== "ninguno") {
+        fondoLogo = `<rect x="${x}" y="${y}" width="${logo.lado}" height="${logo.lado}" rx="${logo.fondo === "redondeado" ? logo.lado * 0.18 : 0}" fill="#ffffff"/>`;
+      }
+      imagen = fondoLogo + `<image x="${logo.ix + margenModulos}" y="${logo.iy + margenModulos}" width="${logo.ancho}" height="${logo.alto}" href="${opciones.logo.datos}" preserveAspectRatio="xMidYMid meet"/>`;
+    }
     return (
-      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges">` +
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${lado}" height="${lado}" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges">` +
       `<rect width="${total}" height="${total}" fill="${fondo}"/>` +
-      `<g fill="${color}">${rects}</g>` +
+      `<g fill="${color}">${rects}</g>${imagen}` +
       `</svg>`
     );
   }

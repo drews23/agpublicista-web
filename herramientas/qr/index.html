@@ -38,7 +38,7 @@
 
     <link rel="preload" href="/assets/fonts/instrument-sans/instrument-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/fraunces/fraunces-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/css/pages/qr.css?v=2026100902" />
+    <link rel="stylesheet" href="/css/pages/qr.css?v=20261009logo2" />
 
     <script type="application/ld+json">
     {
@@ -226,6 +226,41 @@
                 </label>
               </div>
               </details>
+
+              <details class="estudio__seccion" open>
+                <summary>Añade tu logo</summary>
+                <div class="settings qr-logo">
+                  <label class="qr-logo__zona" data-logo-zona>
+                    <span class="qr-logo__icono" aria-hidden="true">＋</span>
+                    <strong>Selecciona o arrastra tu imagen</strong>
+                    <span>PNG, JPG o WebP · hasta 5 MB</span>
+                    <input type="file" accept="image/png,image/jpeg,image/webp" data-logo-archivo aria-label="Seleccionar logo o imagen" />
+                  </label>
+                  <p class="qr-logo__estado" data-logo-error data-estado="error" role="alert" hidden></p>
+                  <div class="qr-logo__ajustes" data-logo-ajustes hidden>
+                    <div class="qr-logo__archivo">
+                      <img data-logo-miniatura alt="Logo seleccionado" width="48" height="48" />
+                      <span data-logo-nombre></span>
+                      <button type="button" class="btn" data-logo-quitar>Quitar</button>
+                    </div>
+                    <label class="field">
+                      <span class="field__label">Tamaño del logo <output data-logo-tamano-output>16 %</output></span>
+                      <input type="range" min="12" max="20" step="1" value="16" data-logo-tamano />
+                    </label>
+                    <label class="field">
+                      <span class="field__label">Fondo del logo</span>
+                      <select data-logo-fondo>
+                        <option value="redondeado">Blanco redondeado</option>
+                        <option value="blanco">Blanco cuadrado</option>
+                        <option value="circulo">Blanco circular</option>
+                        <option value="ninguno">Sin fondo adicional</option>
+                      </select>
+                    </label>
+                    <span class="field__hint">Con logo se activa la corrección H. El tamaño incluye el espacio alrededor de la imagen.</span>
+                  </div>
+                  <p class="qr-logo__estado" data-logo-estado role="status" aria-live="polite">Opcional. Tu imagen se procesa solo en este navegador.</p>
+                </div>
+              </details>
               <details class="estudio__seccion" open>
                 <summary>Apariencia</summary>
                 <div class="settings">
@@ -257,7 +292,7 @@
                     <label><input type="radio" name="ec" value="Q" data-ec /> <span>Q · 25 %</span></label>
                     <label><input type="radio" name="ec" value="H" data-ec /> <span>H · 30 %</span></label>
                   </div>
-                  <span class="field__hint">Cuánto puede ensuciarse o taparse el código y aún leerse. H es la más resistente; úsala si vas a imprimirlo pequeño o a ponerle un logo encima en un editor externo.</span>
+                  <span class="field__hint">Los porcentajes se refieren a datos recuperables, no al área que puedes tapar. Con logo se activa H; comprueba siempre el resultado impreso.</span>
                 </div>
               </div>
               </details>
@@ -319,10 +354,10 @@
           <p>
             Todo código QR guarda una copia de seguridad de sus propios datos, calculada
             matemáticamente. El nivel de corrección decide cuánta: con L, hasta un 7 % del
-            código puede estar sucio, doblado o tapado y aun así se lee; con H, hasta un
-            30 %. Más corrección hace el código un poco más denso (más cuadritos), pero
-            en la mayoría de tamaños de impresión no se nota. Si vas a ponerle un logo
-            encima en otro programa, usa H: es justo el margen que ese logo va a ocupar.
+            contenido codificado puede recuperarse; con H, aproximadamente un
+            30 %. No son porcentajes del área de la imagen que puedes tapar. Más corrección hace el código un poco más denso (más cuadritos), pero
+            en la mayoría de tamaños de impresión no se nota. Al añadir un logo aquí, se activa H y se comprueba la lectura.
+            Prueba también el archivo final con tu móvil antes de imprimirlo.
           </p>
 
           <h2>Casos de uso habituales</h2>
@@ -442,7 +477,8 @@
     <script src="/js/mi-lienzo.js?v=2026090405" defer></script>
     <script src="js/vendor/qrcode-generator.js" defer></script>
     <script src="/js/estudio.js?v=2026090504" defer></script>
-    <script src="js/qr-core.js" defer></script>
-    <script src="js/qr-generador.js" defer></script>
+    <script src="js/qr-core.js?v=20261009logo2" defer></script>
+    <script src="js/qr-logo.js?v=20261009logo2" defer></script>
+    <script src="js/qr-generador.js?v=20261009logo2" defer></script>
   </body>
 </html>

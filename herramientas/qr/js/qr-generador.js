@@ -25,6 +25,7 @@
   const radiosEc = [...document.querySelectorAll("[data-ec]")];
 
   let ultimoQr = null;
+  const logoUI = L.crearLogoUI(regenerar);
 
   function nivelEc() {
     const marcado = radiosEc.find((r) => r.checked);
@@ -54,6 +55,7 @@
     vacio.hidden = false;
     limpiarError();
     ultimoQr = null;
+    logoUI.invalidar();
     statVersion.textContent = "—";
     statModulos.textContent = "—";
     statEc.textContent = "—";
@@ -69,7 +71,9 @@
         color: colorPrimario.value,
         fondo: colorFondo.value,
         tamano: parseInt(inputTamano.value, 10),
+        logo: logoUI.opciones(),
       });
+      logoUI.comprobar(canvas, payload);
       lienzo.hidden = false;
       vacio.hidden = true;
       const modulos = qr.getModuleCount();
@@ -78,6 +82,8 @@
       statEc.textContent = nivelEc();
       statBytes.textContent = L.bytesUtf8(payload) + " bytes";
     } catch (e) {
+      ultimoQr = null;
+      logoUI.invalidar();
       lienzo.hidden = true;
       vacio.hidden = true;
       if (e && e.message === "DEMASIADO_LARGO") {
@@ -94,12 +100,13 @@
   });
   btnSvg.addEventListener("click", () => {
     if (!ultimoQr) return;
-    const svg = L.construirSvg(ultimoQr, { color: colorPrimario.value, fondo: colorFondo.value });
+    const svg = L.construirSvg(ultimoQr, { color: colorPrimario.value, fondo: colorFondo.value, tamano: Number(inputTamano.value), logo: logoUI.opciones() });
     L.descargarSvg(svg, nombreDescarga("svg"));
   });
 
   let debounce;
   function regenerar() {
+    logoUI.invalidar();
     clearTimeout(debounce);
     debounce = setTimeout(actualizar, 120);
   }
