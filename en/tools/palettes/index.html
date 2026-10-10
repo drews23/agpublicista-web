@@ -1,0 +1,170 @@
+<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color Palette Generator | Lienzo</title><meta name="description" content="Color Palette Generator by Lienzo. Try the browser tool, customize your result, and review export options and practical usage guidance. Free, no signup."><link rel="canonical" href="https://lienzo.tools/en/tools/palettes/"><link rel="alternate" hreflang="es" href="https://lienzo.tools/herramientas/paletas/">
+<link rel="alternate" hreflang="en" href="https://lienzo.tools/en/tools/palettes/">
+<link rel="alternate" hreflang="x-default" href="https://lienzo.tools/herramientas/paletas/"><meta property="og:title" content="Color Palette Generator | Lienzo"><meta property="og:description" content="Color Palette Generator by Lienzo. Try the browser tool, customize your result, and review export options and practical usage guidance. Free, no signup."><meta property="og:url" content="https://lienzo.tools/en/tools/palettes/"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><link id="page-favicon" rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/site.css?v=2026090405"><link rel="stylesheet" href="/herramientas/paletas/css/tool.css?v=2026090504"><link rel="stylesheet" href="/css/estudio.css?v=2026090504"><link rel="stylesheet" href="/en/assets/english.css?v=2026101004"><script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('agp-theme')||'light'}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Color Palette Generator", "url": "https://lienzo.tools/en/tools/palettes/", "inLanguage": "en-US", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a class="brand" href="/en/" aria-label="Lienzo home"><span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-en-header" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/templates/">Templates</a><a href="/en/blog/free-sound-effects/">Sound Effects</a><a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a class="theme-btn" href="/herramientas/paletas/" lang="es" hreflang="es" aria-label="Ver esta herramienta en español">ES</a><button class="theme-btn" type="button" data-theme-toggle aria-label="Change theme">☀</button><button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false">☰</button></div></div></header><main id="main">
+<!-- Cabecera de página -->
+<div class="page-head shell">
+<nav aria-label="Breadcrumbs" class="breadcrumbs reveal">
+<a href="/en/">Home</a> / <a href="/en/tools/">Tools</a> / <span aria-current="page">Palette generator</span>
+</nav>
+<p class="eyebrow reveal">Free tool · Color</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">Color Palette Generator</h1>
+<p class="lede reveal" style="--reveal-delay: 160ms">
+          Choose a base color to generate harmonies, a 50–950 shade scale, and contrast values. Click a swatch to copy it, or export CSS variables, Tailwind, SVG, or PNG. No signup required. Starting from a photo? You can also <a href="/en/tools/palettes/from-image/">extract an image palette</a>, or read the <a href="/en/tools/palettes/color-territory/">color territory</a>: each color’s coverage, rare accents, and where those colors occur.
+        </p>
+</div>
+<!-- Generador -->
+<section aria-labelledby="generador-title" class="section estudio-shell">
+<h2 class="sr-only" id="generador-title">Palette generator</h2>
+<div class="estudio reveal" data-estudio="" style="--reveal-delay: 90ms">
+<div class="palette estudio__lienzo" data-palette=""></div>
+<div class="estudio__acciones">
+<button class="btn btn--ghost picker__random" data-random="" type="button">
+              Random color
+              <kbd class="kbd">Space</kbd>
+</button>
+</div>
+<button aria-controls="panel-estudio" aria-expanded="true" class="estudio__alternar" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>
+<span data-alternar-texto="">Hide</span>
+</button>
+<aside aria-label="Palette settings" class="estudio__panel" id="panel-estudio">
+<div class="estudio__panel-cabecera">
+<h2 class="estudio__panel-titulo">Settings</h2>
+</div>
+<div class="estudio__panel-cuerpo">
+<details class="estudio__seccion" open="">
+<summary>Base color</summary>
+<div class="estudio__seccion-cuerpo">
+<div class="field">
+<span class="field__label" id="base-label">Base color</span>
+<div class="field__color">
+<label class="sr-only" for="base-color">Base color picker</label>
+<input data-color-picker="" id="base-color" type="color" value="#8b7bff"/>
+<label class="sr-only" for="base-hex">Base color hex code</label>
+<input aria-describedby="hex-help" autocapitalize="off" autocomplete="off" data-hex-input="" id="base-hex" maxlength="7" pattern="^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" spellcheck="false" type="text" value="#8b7bff"/>
+</div>
+</div>
+<p class="picker__hint" id="hex-help">
+            Enter a hex value (<code>#8b7bff</code> or <code>8b7bff</code>), use the picker, or press the space bar for a random color. The page URL stores your base color: copy it to share the palette.
+          </p>
+</div>
+</details>
+<details class="estudio__seccion" open="">
+<summary>Harmony type</summary>
+<div class="estudio__seccion-cuerpo">
+<fieldset class="segmented" data-harmony-group="">
+<legend class="segmented__legend">Harmony type</legend>
+<label class="segmented__item">
+<input checked="" name="armonia" type="radio" value="analoga"/>
+<span>Analogous</span>
+</label>
+<label class="segmented__item">
+<input name="armonia" type="radio" value="complementaria"/>
+<span>Complementary</span>
+</label>
+<label class="segmented__item">
+<input name="armonia" type="radio" value="complementariaDividida"/>
+<span>Split complementary</span>
+</label>
+<label class="segmented__item">
+<input name="armonia" type="radio" value="triada"/>
+<span>Triadic</span>
+</label>
+<label class="segmented__item">
+<input name="armonia" type="radio" value="tetrada"/>
+<span>Tetradic</span>
+</label>
+<label class="segmented__item">
+<input name="armonia" type="radio" value="monocromatica"/>
+<span>Monochromatic</span>
+</label>
+</fieldset>
+<p aria-live="polite" class="status" data-status="">
+            Loading the palette…
+          </p>
+<p class="palette-note">
+          Click any swatch to copy its hex value. The circle marks the shade closest to your base color.
+        </p>
+</div>
+</details>
+</div>
+</aside>
+<details class="estudio__codigo">
+<summary>
+<span class="estudio__codigo-etiqueta"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 15l6-6 6 6"></path></svg><span class="estudio__codigo-texto">Export</span></span>
+<span class="acciones estudio__codigo-acciones">
+<button class="btn btn--primary" data-copy-code="" type="button">Copy code</button>
+<button class="btn btn--ghost" data-download-png="" type="button">Download PNG</button>
+<button class="btn btn--ghost" data-download-svg="" type="button">Download SVG</button>
+</span>
+</summary>
+<div class="estudio__codigo-cuerpo">
+<h2 class="sr-only" id="export-title">Bring the palette into your project</h2>
+<div class="export__controls">
+<fieldset class="segmented" data-format-group="">
+<legend class="segmented__legend">Format</legend>
+<label class="segmented__item">
+<input checked="" name="formato" type="radio" value="css"/>
+<span>CSS variables</span>
+</label>
+<label class="segmented__item">
+<input name="formato" type="radio" value="tailwind"/>
+<span>Tailwind</span>
+</label>
+<label class="segmented__item">
+<input name="formato" type="radio" value="lista"/>
+<span>Hex list</span>
+</label>
+<label class="segmented__item">
+<input name="formato" type="radio" value="svg"/>
+<span>SVG</span>
+</label>
+</fieldset>
+<fieldset class="segmented" data-scope-group="">
+<legend class="segmented__legend">What to export</legend>
+<label class="segmented__item">
+<input checked="" name="alcance" type="radio" value="escalas"/>
+<span>Full shade scales</span>
+</label>
+<label class="segmented__item">
+<input name="alcance" type="radio" value="principales"/>
+<span>Primary colors only</span>
+</label>
+</fieldset>
+</div>
+<pre class="export__code"><code data-code="">/* Generando la paleta… */</code></pre>
+<p aria-live="polite" class="export__status" data-export-status=""></p>
+</div>
+</details>
+</div>
+</section>
+<!-- Exportación -->
+<!-- Accesibilidad -->
+<section aria-labelledby="contraste-title" class="section shell">
+<div class="section-head reveal">
+<div>
+<p class="eyebrow" style="margin-bottom: 0.6rem;">Accessibility</p>
+<h2 id="contraste-title">Contrast for each color</h2>
+<p>
+              Contrast ratios for each main color against white and black text, with WCAG 2.1 levels for normal text: 4.5:1 meets AA; 7:1 meets AAA.
+            </p>
+</div>
+</div>
+<ul class="a11y" data-a11y=""></ul>
+</section>
+<!-- Cómo usar una paleta -->
+
+<!-- FAQ -->
+
+<!-- Más del sitio -->
+
+<!-- Publicidad -->
+<div class="shell">
+
+<!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+</div>
+
+<section class="section"><div class="shell"><h2>Turn color choices into usable design tokens</h2><p>Choose a base color or load a reference image. Inspect extracted colors, shade steps, and the displayed contrast values before exporting. Rare accents and generated external accents are labeled separately: a generated suggestion is not a color found in the original photo. Contrast checks apply to the selected pair, not to every possible layout.</p><details><summary>Are image files uploaded?</summary><p>The image analysis runs in this browser. Keep a copy of the original image; export only the colors and formats you need.</p></details><p><a href="/en/tools/">Explore all tools</a> · <a href="/en/privacy/">Privacy</a> · <a href="/en/third-party-licenses/">Third-party licenses</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg class="logo-lienzo" role="img" aria-label="Lienzo" viewBox="0 0 960 260"><defs><linearGradient id="marco-en-footer" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/tools/">Creative Tools</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Resource-specific licenses apply. Keep the included notices.<span data-revocar-consentimiento style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script src="/en/assets/site.js" defer></script><script src="/en/assets/color-engine.js" defer></script><script src="/en/assets/estudio.js" defer></script><script src="/en/tools/palettes/js/paletas.js" defer></script></body></html>

@@ -1,0 +1,63 @@
+# Reviewed unchanged units, code, proper names, domains, and example addresses.
+0 dB
+1024 px
+16px
+32px
+64px
+<svg xmlns="http://www.w3.org/2000/svg" …>
+Ampersand
+Audio
+Bauhaus
+Bug
+Color
+Eclipse
+Emoji
+Emojis
+Estudio Nara
+Favicon
+H · 30 %
+Hotel
+L · 7 %
+M · 15 %
+MD Estudio Creativo · Creativo Marketing Digital
+N
+Original
+PNG 180
+PNG 32
+PNG 512
+Pixel art
+Play
+Pérez
+Q · 25 %
+QR
+SVG
+SVGO
+Tailwind
+Terminal
+U+…
+WEP
+WPA/WPA2
+amazon.com
+ana@empresa.com
+bbc.com
+canva.com
+contacto@tuempresa.com
+elpais.com
+eltiempo.com
+estudionara.com
+figma.com
+github.com
+https://
+https://lienzo.tools/
+instagram.com
+mercadolibre.com
+mozilla.org
+netflix.com
+px
+rtve.es
+spotify.com
+v
+wikipedia.org
+wordpress.org
+youtube.com
+Δ OK

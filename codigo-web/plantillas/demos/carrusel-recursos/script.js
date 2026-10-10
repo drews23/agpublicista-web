@@ -29,3 +29,21 @@ function applyFilter(){const cards=[...rail.querySelectorAll('.resource')];cards
 document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter;applyFilter()}));
 document.querySelectorAll('[data-favorite]').forEach(button=>button.addEventListener('click',()=>{const saved=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(saved));const name=button.dataset.favorite;button.setAttribute('aria-label',(saved?'Quitar de favoritos: ':'Guardar en favoritos: ')+name);status.textContent=saved?name+' guardado en esta demo.':name+' eliminado de favoritos.';if(filter==='saved'){document.querySelector('[data-filter="saved"]').focus();applyFilter()}}));
 update();
+
+// La posición se mide antes de inclinar la tarjeta: evita que el efecto oscile.
+const hoverPermitido=matchMedia('(hover: hover) and (pointer: fine)');
+const tarjetas=[...rail.querySelectorAll('.resource')];
+let tarjetaActiva=null,rectInicial=null,cuadro=0,puntero=null;
+const propiedades=['--giro-x','--giro-y','--luz-x','--luz-y','--arte-x','--arte-y'];
+function limpiarHover(){cancelAnimationFrame(cuadro);cuadro=0;if(tarjetaActiva){delete tarjetaActiva.dataset.hover;propiedades.forEach(propiedad=>tarjetaActiva.style.removeProperty(propiedad))}tarjetaActiva=null;rectInicial=null;puntero=null}
+function pintarHover(){cuadro=0;if(!tarjetaActiva||!rectInicial||!puntero)return;const x=Math.max(0,Math.min(1,(puntero.x-rectInicial.left)/rectInicial.width));const y=Math.max(0,Math.min(1,(puntero.y-rectInicial.top)/rectInicial.height));const estilo=tarjetaActiva.style;estilo.setProperty('--giro-x',((.5-y)*8).toFixed(2)+'deg');estilo.setProperty('--giro-y',((x-.5)*10).toFixed(2)+'deg');estilo.setProperty('--luz-x',(x*100).toFixed(1)+'%');estilo.setProperty('--luz-y',(y*100).toFixed(1)+'%');estilo.setProperty('--arte-x',((x-.5)*10).toFixed(2)+'px');estilo.setProperty('--arte-y',((y-.5)*8).toFixed(2)+'px')}
+tarjetas.forEach(tarjeta=>{
+  tarjeta.addEventListener('pointerenter',evento=>{if(evento.pointerType==='touch'||!hoverPermitido.matches||reduced.matches)return;limpiarHover();rectInicial=tarjeta.getBoundingClientRect();tarjetaActiva=tarjeta;tarjeta.dataset.hover='';puntero={x:evento.clientX,y:evento.clientY};cuadro=requestAnimationFrame(pintarHover)});
+  tarjeta.addEventListener('pointermove',evento=>{if(tarjetaActiva!==tarjeta)return;puntero={x:evento.clientX,y:evento.clientY};if(!cuadro)cuadro=requestAnimationFrame(pintarHover)});
+  tarjeta.addEventListener('pointerleave',limpiarHover);
+  tarjeta.addEventListener('pointercancel',limpiarHover);
+});
+rail.addEventListener('scroll',limpiarHover,{passive:true});
+window.addEventListener('resize',limpiarHover);
+hoverPermitido.addEventListener('change',limpiarHover);
+reduced.addEventListener('change',limpiarHover);

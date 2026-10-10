@@ -18,6 +18,11 @@ Descomprime todo el ZIP y abre index.html en un navegador moderno. Conserva las 
 - assets/: logo de muestra, fuentes locales y licencias tipográficas.
 - LICENSE-LIENZO.txt: licencia MIT para las aportaciones de Lienzo.
 
+## Profundidad al pasar el cursor
+Las tarjetas se inclinan suavemente y una luz acompaña al cursor; las ilustraciones se desplazan en una segunda capa. El efecto usa CSS y JavaScript propios, sin librerías. No depende del efecto para acceder a enlaces o favoritos.
+
+El teclado conserva un foco visible. En pantallas táctiles se mantiene el desplazamiento nativo. Con «reducir movimiento» se desactivan la inclinación y el brillo animado. Puedes ajustar los límites de giro dentro de pintarHover() en script.js y los colores en las variables CSS.
+
 
 ## Créditos y condiciones
 Diseño, ilustraciones y código del carrusel: Lienzo. Este carrusel se implementó desde cero con desplazamiento nativo y no incorpora código ni imágenes del ZIP externo de Swiper.

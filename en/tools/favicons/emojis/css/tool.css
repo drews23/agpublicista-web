@@ -1,0 +1,601 @@
+/* ==================================================================== *\
+   Galería de emojis — estilos de la herramienta
+   Adaptado a los tokens del sitio (/css/site.css); lenguaje visual
+   clonado de la galería de favicons (toolbar, chips, notas, FAQ).
+
+   1. Alias de tokens        5. Dock de acciones
+   2. Toolbar y chips        6. Notas + FAQ
+   3. Cuadrícula de emojis   7. Responsive y movimiento
+   4. Populares y recientes
+\* ==================================================================== */
+
+/* 1. Alias de tokens -------------------------------------------------- */
+:root {
+  --sans: var(--font-body);
+  --mono: var(--font-mono);
+  --accent: var(--violeta);
+  --accent-2: var(--turquesa);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.page-head code,
+.notes code,
+.faq-item code,
+.grupo-emojis code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+}
+
+/* enlace de salto para teclado: invisible hasta recibir foco */
+.saltar-galeria {
+  position: absolute;
+  left: -9999px;
+  padding: 0.6rem 1.1rem;
+  font: 600 0.9rem var(--sans);
+  color: var(--bg);
+  background: var(--text);
+  border-radius: 999px;
+  z-index: 80;
+}
+
+.saltar-galeria:focus-visible {
+  position: fixed;
+  left: 50%;
+  top: 0.8rem;
+  transform: translateX(-50%);
+}
+
+/* 2. Toolbar y chips --------------------------------------------------- */
+
+.toolbar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 1.7rem 0 1rem;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min(460px, 100%);
+}
+
+.search__icon {
+  position: absolute;
+  left: 0.95rem;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--faint);
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.search input {
+  width: 100%;
+  padding: 0.78rem 3rem 0.78rem 2.7rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+[data-theme="light"] .search input {
+  box-shadow: var(--shadow);
+}
+
+.search input::placeholder {
+  color: var(--faint);
+}
+
+.search input:focus {
+  outline: none;
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--line));
+  background: var(--panel-hover);
+}
+
+.search input::-webkit-search-cancel-button {
+  filter: grayscale(1) opacity(0.5);
+}
+
+.search__kbd {
+  position: absolute;
+  right: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 0.05rem 0.4rem;
+  pointer-events: none;
+}
+
+.search input:focus ~ .search__kbd {
+  opacity: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chips .chip {
+  font: 600 0.8rem/1.4 var(--font-body);
+  padding: 0.34rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.chips .chip:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+.chips .chip[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--text);
+  border-color: transparent;
+}
+
+.chip__count {
+  font-family: var(--mono);
+  font-size: 0.72em;
+  opacity: 0.55;
+  margin-left: 0.35rem;
+}
+
+/* contador de resultados y estado vacío */
+.resultado-busqueda {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--faint);
+  min-height: 1.3em;
+}
+
+.sin-resultados {
+  padding: 2.2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+.sin-resultados button {
+  margin-top: 0.7rem;
+}
+
+/* 3. Cuadrícula de emojis --------------------------------------------- */
+
+.grupo-emojis {
+  margin: 2.4rem 0 0;
+}
+
+.grupo-emojis h2 {
+  font-size: 1.45rem;
+  margin: 0 0 0.3rem;
+}
+
+.grupo-emojis__n {
+  font-family: var(--mono);
+  font-size: 0.62em;
+  font-weight: 400;
+  color: var(--faint);
+  vertical-align: 0.25em;
+  margin-left: 0.3rem;
+}
+
+.grupo-emojis h3 {
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 1.25rem 0 0.45rem;
+}
+
+.grid-emojis {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.1rem, 1fr));
+  gap: 0.3rem;
+}
+
+.gc {
+  font: inherit;
+  font-size: 1.72rem;
+  line-height: 1;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.16s, border-color 0.16s, transform 0.16s var(--ease);
+}
+
+.gc:hover {
+  background: var(--panel-hover);
+  border-color: var(--line);
+  transform: scale(1.12);
+}
+
+.gc:active {
+  transform: scale(0.94);
+}
+
+/* copiado: el mismo destello que las tarjetas del hub */
+.gc.is-copied {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+  border-color: color-mix(in oklab, var(--accent) 45%, transparent);
+}
+
+/* el sistema del visitante no dibuja este emoji */
+.gc--nosoporta {
+  opacity: 0.32;
+}
+
+.gc--nosoporta::after {
+  content: "";
+}
+
+.aviso-banderas,
+.aviso-datos {
+  font-size: 0.88rem;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 2px solid color-mix(in oklab, var(--ambar, #ffb454) 70%, transparent);
+  border-radius: 4px var(--radius) var(--radius) 4px;
+  padding: 0.75rem 0.95rem;
+  margin: 0.5rem 0 0.9rem;
+  max-width: 72ch;
+}
+
+/* 4. Populares y recientes -------------------------------------------- */
+
+.grupo-emojis--pop .grid-emojis--pop {
+  grid-template-columns: repeat(auto-fill, minmax(5.4rem, 1fr));
+  gap: 0.45rem;
+}
+
+.grid-emojis--pop li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.grid-emojis--pop .gc {
+  font-size: 2.05rem;
+  width: 3.6rem;
+}
+
+.gc__nombre {
+  font-size: 0.62rem;
+  line-height: 1.25;
+  color: var(--faint);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.recientes {
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0.8rem 0 0;
+}
+
+.recientes.tiene {
+  display: flex;
+}
+
+.recientes__rotulo {
+  font-size: 0.78rem;
+  color: var(--faint);
+  margin-right: 0.35rem;
+}
+
+.recientes .gc {
+  font-size: 1.35rem;
+  width: 2.5rem;
+  aspect-ratio: 1;
+}
+
+/* 5. Dock de acciones -------------------------------------------------- *\
+   Barra persistente inferior (no modal): se actualiza con cada clic sin
+   robar el foco. Vidrio flotante; el body reserva su alto para que nunca
+   tape contenido ni el .ad-slot.                                        */
+
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: 0.9rem;
+  transform: translateX(-50%);
+  width: min(920px, calc(100% - 1.2rem));
+  background: color-mix(in oklab, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 0.8rem 1rem;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.dock[hidden] {
+  display: none;
+}
+
+body.con-dock {
+  padding-bottom: 150px;
+}
+
+.dock__preview {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.dock__char {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.dock__meta {
+  min-width: 0;
+}
+
+.dock__nombre {
+  font-weight: 650;
+  font-size: 0.92rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 24ch;
+}
+
+.dock__code {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+.dock__favs {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.dock__favs img {
+  display: block;
+  image-rendering: auto;
+  border-radius: 3px;
+}
+
+.dock__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.dock .ghost-btn,
+.dock .primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.85rem;
+  font: 600 0.82rem var(--sans);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), border-color 0.2s, background 0.2s;
+}
+
+.dock .ghost-btn:hover {
+  border-color: var(--line-strong);
+  background: var(--panel-hover);
+}
+
+.dock .primary-btn {
+  background: linear-gradient(140deg, var(--accent), color-mix(in oklab, var(--accent-2) 70%, var(--accent)));
+  border-color: transparent;
+  color: #fff;
+}
+
+.dock .primary-btn:hover {
+  filter: brightness(1.08);
+}
+
+.dock .ghost-btn:active,
+.dock .primary-btn:active {
+  transform: scale(0.96);
+}
+
+.dock__cerrar {
+  border: 0;
+  background: transparent;
+  color: var(--faint);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  line-height: 1;
+}
+
+.dock__cerrar:hover {
+  color: var(--text);
+}
+
+/* tonos de piel: 6 muestras (neutro + 5) */
+.dock__tonos {
+  display: flex;
+  gap: 0.3rem;
+}
+
+/* display:flex le ganaría al atributo hidden: negarlo explícitamente */
+.dock__tonos[hidden] {
+  display: none;
+}
+
+.tono {
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  cursor: pointer;
+  padding: 0;
+  background: var(--panel);
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.15s var(--ease), border-color 0.15s;
+}
+
+.tono:hover {
+  transform: scale(1.15);
+}
+
+.tono[aria-pressed="true"] {
+  border-color: var(--accent);
+}
+
+/* 6. Notas + FAQ (mismo lenguaje que el hub) --------------------------- */
+
+.notes ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 0.9rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.notes li {
+  padding: 0.95rem 1.05rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 2px solid color-mix(in oklab, var(--accent) 65%, transparent);
+  border-radius: 4px var(--radius) var(--radius) 4px;
+  text-wrap: pretty;
+}
+
+.notes strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.faq-item {
+  margin: 0;
+  padding: 1.15rem 1.3rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.faq-item h3 {
+  font-size: 1.08rem;
+  margin: 0 0 0.45rem;
+}
+
+.faq-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.atribucion {
+  margin: 2rem 0 0;
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+
+/* 7. Responsive y movimiento ------------------------------------------ */
+
+@media (max-width: 700px) {
+  .grid-emojis {
+    grid-template-columns: repeat(auto-fill, minmax(2.7rem, 1fr));
+  }
+
+  .gc {
+    font-size: 1.5rem;
+    border-radius: 0.55rem;
+  }
+
+  .grupo-emojis--pop .grid-emojis--pop {
+    grid-template-columns: repeat(auto-fill, minmax(4.4rem, 1fr));
+  }
+
+  /* el dock ocupa el ancho y las acciones pasan debajo del preview */
+  .dock {
+    bottom: 0;
+    width: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    padding: 0.7rem 0.9rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.55rem;
+  }
+
+  .dock__acciones {
+    margin-left: 0;
+  }
+
+  .dock__favs {
+    display: none;
+  }
+
+  body.con-dock {
+    padding-bottom: 190px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gc,
+  .gc:hover,
+  .gc:active,
+  .tono,
+  .tono:hover,
+  .dock .ghost-btn,
+  .dock .primary-btn {
+    transition: none;
+    transform: none;
+  }
+}

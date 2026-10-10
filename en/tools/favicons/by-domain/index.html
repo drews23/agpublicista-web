@@ -1,0 +1,148 @@
+<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Favicon Lookup by Domain | Lienzo</title><meta name="description" content="Favicon Lookup by Domain by Lienzo. Try the browser tool, customize your result, and review export options and practical usage guidance. Free, no signup."><link rel="canonical" href="https://lienzo.tools/en/tools/favicons/by-domain/"><link rel="alternate" hreflang="es" href="https://lienzo.tools/herramientas/favicons/de-dominio/">
+<link rel="alternate" hreflang="en" href="https://lienzo.tools/en/tools/favicons/by-domain/">
+<link rel="alternate" hreflang="x-default" href="https://lienzo.tools/herramientas/favicons/de-dominio/"><meta property="og:title" content="Favicon Lookup by Domain | Lienzo"><meta property="og:description" content="Favicon Lookup by Domain by Lienzo. Try the browser tool, customize your result, and review export options and practical usage guidance. Free, no signup."><meta property="og:url" content="https://lienzo.tools/en/tools/favicons/by-domain/"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><link id="page-favicon" rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/css/site.css?v=2026090405"><link rel="stylesheet" href="/herramientas/favicons/de-dominio/css/tool.css?v=2"><link rel="stylesheet" href="/en/assets/english.css?v=2026101004"><script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('agp-theme')||'light'}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Favicon Lookup by Domain", "url": "https://lienzo.tools/en/tools/favicons/by-domain/", "inLanguage": "en-US", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a class="brand" href="/en/" aria-label="Lienzo home"><span class="brand__lockup"><svg class="brand__logo" viewBox="0 0 960 260" aria-hidden="true"><defs><linearGradient id="marco-en-header" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav class="site-nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/templates/">Templates</a><a href="/en/blog/free-sound-effects/">Sound Effects</a><a class="nav-yt" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ▸</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a class="theme-btn" href="/herramientas/favicons/de-dominio/" lang="es" hreflang="es" aria-label="Ver esta herramienta en español">ES</a><button class="theme-btn" type="button" data-theme-toggle aria-label="Change theme">☀</button><button class="nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false">☰</button></div></div></header><main id="main">
+<!-- Cabecera de la herramienta -->
+<section class="shell page-head">
+<nav aria-label="Breadcrumbs" class="breadcrumbs reveal">
+<a href="/en/">Home</a> / <a href="/en/tools/">Tools</a> / <a href="/en/tools/favicons/">Favicon gallery</a> / <span>Favicon by domain</span>
+</nav>
+<p class="eyebrow reveal">No account · No file uploads · Browser-based</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">Favicon Lookup by Domain</h1>
+<p class="lede reveal" style="--reveal-delay: 160ms">
+          Enter a domain, compare icon sizes and sources, and copy the URL or code <code>&lt;img&gt;</code> ready to paste. Useful for link directories, dashboards, and resource lists, with batch lookup for up to 30 domains.
+        </p>
+<!-- Demo -->
+<div class="demo reveal" style="--reveal-delay: 240ms">
+<form class="demo__form" id="demo-form">
+<div class="demo__campo">
+<label for="dominio">Domain</label>
+<input autocomplete="off" id="dominio" inputmode="url" placeholder="wikipedia.org, bbc.com, github.com…" spellcheck="false" type="text"/>
+<p aria-live="polite" class="demo__normalizado" id="normalizado"></p>
+</div>
+<button class="primary-btn" type="submit">View favicon</button>
+</form>
+<ul class="populares-dominios" id="populares-dominios">
+<li><button data-d="youtube.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=youtube.com&amp;sz=32" width="18"/>youtube.com</button></li>
+<li><button data-d="wikipedia.org" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=wikipedia.org&amp;sz=32" width="18"/>wikipedia.org</button></li>
+<li><button data-d="github.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=32" width="18"/>github.com</button></li>
+<li><button data-d="eltiempo.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=eltiempo.com&amp;sz=32" width="18"/>eltiempo.com</button></li>
+<li><button data-d="elpais.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=elpais.com&amp;sz=32" width="18"/>elpais.com</button></li>
+<li><button data-d="rtve.es" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=rtve.es&amp;sz=32" width="18"/>rtve.es</button></li>
+<li><button data-d="bbc.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=bbc.com&amp;sz=32" width="18"/>bbc.com</button></li>
+<li><button data-d="mozilla.org" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=mozilla.org&amp;sz=32" width="18"/>mozilla.org</button></li>
+<li><button data-d="wordpress.org" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=wordpress.org&amp;sz=32" width="18"/>wordpress.org</button></li>
+<li><button data-d="figma.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=figma.com&amp;sz=32" width="18"/>figma.com</button></li>
+<li><button data-d="canva.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=canva.com&amp;sz=32" width="18"/>canva.com</button></li>
+<li><button data-d="mercadolibre.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=mercadolibre.com&amp;sz=32" width="18"/>mercadolibre.com</button></li>
+<li><button data-d="netflix.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=netflix.com&amp;sz=32" width="18"/>netflix.com</button></li>
+<li><button data-d="spotify.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=spotify.com&amp;sz=32" width="18"/>spotify.com</button></li>
+<li><button data-d="instagram.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=instagram.com&amp;sz=32" width="18"/>instagram.com</button></li>
+<li><button data-d="amazon.com" type="button"><img alt="" height="18" loading="lazy" src="https://www.google.com/s2/favicons?domain=amazon.com&amp;sz=32" width="18"/>amazon.com</button></li>
+</ul>
+</div>
+</section>
+<!-- Resultado del demo (lo rellena JS) -->
+<section aria-live="polite" class="shell resultado" hidden="" id="resultado">
+<div>
+<h2>Sizes</h2>
+<div class="tallas">
+<figure class="talla"><img alt="" data-sz="16" height="16" width="16"/><figcaption>16</figcaption></figure>
+<figure class="talla"><img alt="" data-sz="32" height="32" width="32"/><figcaption>32</figcaption></figure>
+<figure class="talla"><img alt="" data-sz="64" height="64" width="64"/><figcaption>64</figcaption></figure>
+<figure class="talla talla--quiza"><img alt="" data-sz="128" height="128" width="128"/><figcaption>128</figcaption></figure>
+<figure class="talla talla--quiza"><img alt="" data-sz="256" height="256" width="256"/><figcaption>256</figcaption></figure>
+</div>
+</div>
+<div>
+<h2>How it looks in a browser tab</h2>
+<div class="tabmocks">
+<div class="tabmock tabmock--oscuro"><img alt=""/><span></span></div>
+<div class="tabmock tabmock--claro"><img alt=""/><span></span></div>
+</div>
+</div>
+<div>
+<h2>Compare three sources</h2>
+<div class="fuentes">
+<figure class="fuente" id="fuente-google">
+<h3>Google service</h3>
+<img alt="" height="64" width="64"/>
+<figcaption class="fuente__estado"></figcaption>
+<p class="fuente__url"></p>
+</figure>
+<figure class="fuente" id="fuente-ddg">
+<h3>DuckDuckGo service</h3>
+<img alt="" height="64" width="64"/>
+<figcaption class="fuente__estado"></figcaption>
+<p class="fuente__url"></p>
+</figure>
+<figure class="fuente" id="fuente-directo">
+<h3>Classic /favicon.ico path</h3>
+<img alt="" height="64" width="64"/>
+<figcaption class="fuente__estado"></figcaption>
+<p class="fuente__url"></p>
+</figure>
+</div>
+<p class="nota-globo" style="margin-top: 0.9rem">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.8 2.6 2.8 15.4 0 18M12 3c-2.8 2.6-2.8 15.4 0 18"></path></svg>
+            A gray globe can be a service fallback. It does not prove that a website lacks a favicon. Direct lookup only checks <code>/favicon.ico</code>, also with <code>www</code> if that fails; it does not inspect page tags or the manifest.
+          </p>
+</div>
+<div>
+<h2>Ready-to-use code</h2>
+<div class="snippets">
+<div class="snippet">
+<p class="snippet__uso">To display third-party favicons in lists, directories, or articles, with lazy loading and your own fallback:</p>
+<pre id="snippet-img"></pre>
+<button class="ghost-btn" data-copiar="snippet-img" type="button">Copy &lt;img&gt;</button>
+</div>
+<div class="snippet">
+<p class="snippet__uso">Only for a domain you control, the standard tag for your own <code>&lt;head&gt;</code>:</p>
+<pre id="snippet-link"></pre>
+<button class="ghost-btn" data-copiar="snippet-link" type="button">Copy &lt;link&gt;</button>
+</div>
+</div>
+<div class="acciones-resultado" style="margin-top: 0.9rem">
+<a class="ghost-btn" href="#" id="abrir-grande" rel="noopener" target="_blank">Open at 256 px in another tab</a>
+<button class="ghost-btn" data-copiar="url-grande" type="button">Copy image URL</button>
+</div>
+<p class="snippet__uso" style="margin-top: 0.5rem">
+            To save the file, open it in the other tab and use your browser's Save Image command.
+          </p>
+</div>
+</section>
+<!-- Modo lote -->
+<section class="shell">
+<details class="lote">
+<summary>Batch mode: up to 30 domains at once</summary>
+<form class="lote__cuerpo" id="lote-form">
+<label class="snippet__uso" for="lote-entrada" style="margin: 0">Paste up to 30 domains, one per line:</label>
+<textarea id="lote-entrada" placeholder="wikipedia.org github.com bbc.com" spellcheck="false"></textarea>
+<p class="lote__aviso">Lookups run six at a time to limit requests; results appear as they arrive.</p>
+<div class="acciones-resultado">
+<button class="primary-btn" type="submit">Look up domains</button>
+</div>
+<table hidden="" id="lote-tabla">
+<thead><tr><th>Favicon</th><th>Domain</th><th>Image URL</th></tr></thead>
+<tbody></tbody>
+</table>
+<div class="acciones-resultado" hidden="" id="lote-acciones">
+<button class="ghost-btn" id="lote-copiar-urls" type="button">Copy all URLs</button>
+<button class="ghost-btn" id="lote-copiar-md" type="button">Copy Markdown table</button>
+</div>
+</form>
+</details>
+</section>
+<!-- Guía -->
+
+<!-- FAQ -->
+
+<!-- Publicidad -->
+<div class="shell">
+
+<!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+</div>
+
+<section class="section"><div class="shell"><h2>Choose, customize, and test your favicon</h2><p>Browse the gallery or create an emoji or monogram icon. Copy the generated link tag into the head of your HTML page. Test the result on your actual website: browser caches can delay favicon updates. Domain lookup contacts external services; those services may return cached icons or fallback images.</p><details><summary>Will every emoji look the same?</summary><p>No. Emoji glyphs depend on the operating system and installed fonts. A PNG captures this device’s rendering; an SVG that contains text can still vary on another device.</p></details><p><a href="/en/tools/">Explore all tools</a> · <a href="/en/privacy/">Privacy</a> · <a href="/en/third-party-licenses/">Third-party licenses</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg class="logo-lienzo" role="img" aria-label="Lienzo" viewBox="0 0 960 260"><defs><linearGradient id="marco-en-footer" x1="28" x2="932" y1="11" y2="249" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8b7bff"/><stop offset=".55" stop-color="#6e5df2"/><stop offset="1" stop-color="#35d6c8"/></linearGradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"/><path d="M621 11h276a35 35 0 0 1 35 35v54"/><path d="M932 160v54a35 35 0 0 1-35 35H545"/><path d="M455 249H63a35 35 0 0 1-35-35v-54"/></g><path fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22" d="m52 84-38 46 38 46m856-92 38 46-38 46"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26" class="wordmark"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"/><ellipse cx="746" cy="130" rx="50" ry="64"/></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/tools/">Creative Tools</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Resource-specific licenses apply. Keep the included notices.<span data-revocar-consentimiento style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script src="/en/assets/site.js" defer></script><script src="/en/tools/favicons/by-domain/js/de-dominio.js?v=20261009" defer></script></body></html>

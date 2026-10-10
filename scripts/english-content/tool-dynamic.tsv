@@ -1,0 +1,270 @@
+# Reviewed dynamic interface messages. Keep protocol values and selectors unchanged.
+a	to
+y	and
+codigo-qr	qr-code
+ejemplo	sample
+pegado	pasted
+-editado.wav	-edited.wav
+-editado.	-edited.
+-corte	-trimmed
+-unido	-merged
+-velocidad	-speed
+-volumen	-volume
+-audio	-audio
+paleta-	palette-
+colores-en-vivo.png	live-colors.png
+aplicado	applied
+usar	use
+neutro	neutral
+rojo	red
+naranja	orange
+amarillo	yellow
+verde	green
+turquesa	teal
+azul	blue
+violeta	violet
+apagada	muted
+moderada	moderate
+viva	vivid
+detalles	details
+copiar	copy
+Amanecer cálido	Warm sunrise
+Armonía	Harmony
+Carbón coral	Coral charcoal
+Cielo frío	Cool sky
+Ciruela eléctrica	Electric plum
+Código copiado	Code copied
+Código copiado al portapapeles.	Code copied to clipboard.
+Grafito ámbar	Amber graphite
+Océano oscuro	Dark ocean
+Papel cálido	Warm paper
+Retro cálido	Warm retro
+botón	button
+Índigo neón	Neon indigo
+. Haz clic para añadir un punto; con las flechas mueves el último.	. Click to add a point; use the arrow keys to move the latest point.
+. Puede que usen un códec que este navegador no soporta.	. They may use a codec this browser does not support.
+API de portapapeles no disponible	Clipboard API unavailable
+Analizando a	Analyzing at
+Archivo descargado	File downloaded
+Busca entre	Search among
+Búsqueda no disponible	Search unavailable
+Candidato externo generado fuera del territorio extraído	External candidate generated outside the extracted territory
+Carga una imagen para empezar.	Upload an image to begin.
+Cargando el índice…	Loading the index…
+Clic para copiar	Click to copy
+Codepoint copiado	Code point copied
+Colores de tu foto:	Colors from your photo:
+Combinación personalizada	Custom combination
+Comida 3D	3D Food
+Comprobando lectura del QR…	Checking QR readability…
+Con esta ganancia el audio satura: se pasa	This gain causes clipping: the audio exceeds the ceiling by
+Consultando	Looking up
+Contenido dentro de tarjetas y paneles.	Content inside cards and panels.
+Contenido vacío	Empty content
+Convertir y descargar Opus	Convert and download Opus
+Convertir y descargar WAV	Convert and download WAV
+Copiado el tono neutro (los tonos aún cargaban)	Copied the default tone (skin tones were still loading)
+Data URI copiado	Data URI copied
+Data URI copiado (solo el valor del href).	Data URI copied (href value only).
+De tu foto	From your photo
+Descargando el PNG de la paleta…	Downloading the palette PNG…
+Descargando la paleta en PNG.	Downloading the palette as PNG.
+Descargando la paleta en SVG.	Downloading the palette as SVG.
+Detener reproducción	Stop playback
+Diseño 3D	3D Design
+Editaste el color a mano: vuelves a la armonía	You edited the color manually: returning to the harmony
+El HTML del componente se copió al portapapeles.	The HTML was copied to your clipboard.
+El análisis falló en este navegador.	Analysis failed in this browser.
+El clásico /favicon.ico existe en la raíz.	The standard /favicon.ico exists at the root.
+El contenido es demasiado largo para un código QR fiable. Redúcelo e inténtalo de nuevo.	The content is too long for a reliable QR code. Shorten it and try again.
+El enlace se ajustó para contrastar: el acento tal cual no llegaba a 4,5:1.	The link color was adjusted: the original accent did not reach 4.5:1 contrast.
+El enlace usa el acento tal cual: contrasta de sobra.	The link uses the original accent: it has sufficient contrast.
+El punto	Point
+El texto de los botones y enlaces principales.	Text on primary buttons and links.
+Elige PNG, JPG o WebP de hasta 5 MB.	Choose a PNG, JPG, or WebP up to 5 MB.
+Error al copiar	Copy failed
+Error en el análisis:	Analysis error:
+Escala de tonos de	Shade scale for
+Escribe un dominio, por ejemplo wikipedia.org	Enter a domain, such as wikipedia.org
+Ese archivo no parece ser de audio. Prueba con MP3, WAV, OGG, M4A o FLAC.	That file does not appear to be audio. Try MP3, WAV, OGG, M4A, or FLAC.
+Ese formato no está soportado: acepta JPG, PNG, WebP, AVIF, GIF o SVG.	Unsupported format: use JPG, PNG, WebP, AVIF, GIF, or SVG.
+Eso no parece un SVG. Revisa que el archivo o el código contenga una etiqueta <svg>.	That does not look like SVG. Check that the file or code contains an <svg> tag.
+Esta foto no tiene suficientes tonos para este estilo, así que ves la extracción fiel.	This photo lacks enough tones for this style, so the original extraction is shown.
+Esta foto tiene poco material para este estilo: se amplió el rango para encontrarlo.	This photo has few suitable colors for this style: the search range was expanded.
+Este navegador no permite crear el hilo de análisis.	This browser cannot create the analysis worker.
+Este navegador no pudo generar el archivo comprimido.	This browser could not generate the compressed file.
+Este navegador no pudo leer la pista de audio de ese archivo. Suele pasar con formatos profesionales o antiguos (ProRes, algunos MKV o AVI) cuyo códec el navegador no incluye.	This browser could not read the audio track. Professional or older formats, including ProRes and some MKV or AVI files, may require codecs the browser does not include.
+Estás justo en el borde: el audio llega al máximo sin distorsionar. No subas más.	The audio reaches the ceiling without clipping. Do not increase the gain further.
+Estéreo	Stereo
+Etiqueta <link> copiada	<link> tag copied
+Etiqueta copiada — y la pestaña ya lo estrena	Tag copied — this tab now previews it
+Etiqueta sobre primario	Label on primary color
+Externo claro para resaltados, insignias o marcas sutiles	Light external accent for highlights, badges, or subtle marks
+Externo de croma alto, lejos del territorio dominante	High-chroma external accent, far from the dominant territory
+Externo de croma bajo, más fácil de convivir que el vivo	Low-chroma external accent, more restrained than the vivid option
+Externo oscuro para botones, etiquetas o marcas fuertes de interfaz	Dark external accent for buttons, labels, or strong interface marks
+Fallo del grabador	Recorder failed
+Favicon copiado: una etiqueta, cero archivos, listo para pegar.	Favicon copied: one tag, no files, ready to paste.
+Favicon de	Favicon for
+Fiestas 3D	3D Celebrations
+HTML copiado al portapapeles	HTML copied to clipboard
+JSON copiado	JSON copied
+La foto es prácticamente monocroma: los colores extraídos son variaciones de un mismo tono.	This photo is nearly monochromatic: the extracted colors are variations of one hue.
+La imagen es totalmente transparente: no hay colores que extraer.	The image is fully transparent: there are no colors to extract.
+La imagen mide	The image contains
+La imagen no tiene medidas legibles.	The image dimensions could not be read.
+La imagen pesa más de 20 MB. Reduce su tamaño y vuelve a intentarlo.	The image exceeds 20 MB. Reduce its size and try again.
+La imagen supera los 32 megapíxeles del tope.	The image exceeds the 32-megapixel limit.
+La imagen supera los 32 megapíxeles. Redúcela y vuelve a intentarlo.	The image exceeds 32 megapixels. Resize it and try again.
+La imagen tardó demasiado en abrirse.	The image took too long to open.
+La imagen tardó demasiado en abrirse. Prueba con un archivo más pequeño.	The image took too long to open. Try a smaller file.
+Lectura comprobada. Prueba también con tu móvil antes de imprimir.	Readability checked. Also test with your phone before printing.
+Lienzo de análisis de color de la imagen	Image color analysis canvas
+Lista de hex copiada.	Hex list copied.
+Lugares 3D	3D Places
+Naturaleza 3D	3D Nature
+No cargó desde esa ruta (tampoco con www). Puede estar declarado con <link> en otra. Esta herramienta no inspecciona las etiquetas ni el manifest.	Nothing loaded from that path, including www. The favicon may be declared elsewhere with <link>. This tool does not inspect tags or the manifest.
+No cargó desde esa ruta. Puede estar declarado con <link> en otra. Esta herramienta no inspecciona las etiquetas ni el manifest.	Nothing loaded from that path. The favicon may be declared elsewhere with <link>. This tool does not inspect tags or the manifest.
+No cargó desde este servicio.	Nothing loaded from this service.
+No disponible en este navegador	Unavailable in this browser
+No hay método de copiado disponible.	No copy method is available.
+No se pudieron leer estos archivos:	These files could not be read:
+No se pudo abrir la imagen. Selecciona otro archivo.	The image could not be opened. Choose another file.
+No se pudo cargar el comprobador. Cambia un ajuste para reintentar.	The readability checker could not load. Change a setting to retry.
+No se pudo cargar el optimizador. Recarga la página para intentarlo de nuevo.	The optimizer could not load. Reload the page to try again.
+No se pudo cargar el índice de nombres, así que la búsqueda y los tonos de piel no están disponibles ahora mismo. Los emojis siguen aquí y se copian igual.	The name index could not load, so search and skin tones are temporarily unavailable. You can still browse and copy emojis.
+No se pudo copiar	Could not copy
+No se pudo copiar automáticamente. Selecciona el código y cópialo manualmente.	Could not copy automatically. Select the code and copy it manually.
+No se pudo copiar el código	Could not copy the code
+No se pudo copiar.	Could not copy.
+No se pudo copiar. Abre los detalles y copia el código manualmente.	Could not copy. Open the details and copy the code manually.
+No se pudo copiar. Intenta seleccionar el código manualmente.	Could not copy. Try selecting the code manually.
+No se pudo copiar. Selecciona el texto a mano.	Could not copy. Select the text manually.
+No se pudo copiar. Selecciona el texto y usa Ctrl + C.	Could not copy. Select the text and press Ctrl + C.
+No se pudo generar el PNG	Could not generate the PNG
+No se pudo generar el WAV. Intenta con un recorte más corto.	Could not generate the WAV. Try a shorter selection.
+No se pudo generar el WAV. Prueba con un archivo más corto.	Could not generate the WAV. Try a shorter file.
+No se pudo generar el WAV. Prueba con un fragmento más corto.	Could not generate the WAV. Try a shorter selection.
+No se pudo generar el archivo comprimido en este navegador.	Could not generate the compressed file in this browser.
+No se pudo generar el código con estos datos.	Could not generate a QR code with these values.
+No se pudo leer el archivo.	Could not read the file.
+No se pudo leer el icono.	Could not read the icon.
+No se pudo leer el icono. Recarga la página e inténtalo otra vez.	Could not read the icon. Reload the page and try again.
+No se pudo leer ese archivo. Puede que use un códec que este navegador no soporta.	Could not read that file. Its codec may not be supported by this browser.
+No se pudo leer este diseño. Reduce el logo o usa colores con más contraste.	Could not decode this design. Make the logo smaller or increase color contrast.
+No se pudo leer la imagen. Prueba a exportarla como JPG o PNG.	Could not read the image. Try exporting it as JPG or PNG.
+No se pudo leer la imagen: puede estar dañada o en un formato que el navegador no abre.	Could not read the image: it may be damaged or use an unsupported format.
+No se pudo optimizar el SVG.	Could not optimize the SVG.
+Objetos 3D	3D Objects
+Opcional. Tu imagen se procesa solo en este navegador.	Optional. Your image is processed in this browser only.
+PNG 16×16 en base64	Base64 PNG, 16×16
+Pega al menos un dominio	Paste at least one domain
+Personas 3D	3D People
+Preparando imagen…	Preparing image…
+Primero busca un dominio	Look up a domain first
+Probando	Trying
+Pulsa «ver mapa» en un color para ver dónde aparecen los tonos parecidos.	Click “view map” on a color to locate similar tones in the image.
+Punto del color	Color point
+Punto seleccionado: muévelo con las flechas.	Point selected: move it with the arrow keys.
+Reciente:	Recent:
+Red:	Network:
+Reproducir selección	Play selection
+Respondió con su copia en caché.	Returned a cached copy.
+Respondió. Un globo gris puede ser un respaldo del servicio; no confirma que falte el favicon.	A response was received. A gray globe may be a service fallback; it does not prove the favicon is missing.
+SVG copiado	SVG copied
+SVG en línea	Inline SVG
+Sin saturación. Queda	No clipping. Remaining headroom:
+Solo se aceptan archivos .svg	Only .svg files are accepted
+Símbolos 3D	3D Symbols
+Tabla Markdown copiada	Markdown table copied
+Tecnología 3D	3D Technology
+Texto blanco encima	White text on top
+Texto negro encima	Black text on top
+Texto sobre fondo	Text on background
+Texto sobre superficie	Text on surface
+Titulares y párrafos sobre el lienzo de la página.	Headings and paragraphs on the page canvas.
+Tono	Tone
+Tu color base ya no está entre los extraídos: se usa el dominante	Your base color is no longer in the extraction: using the dominant color
+Tu imagen,	Your image,
+Tu sistema no dibuja este emoji: el PNG saldría roto	Your system cannot render this emoji: the PNG would be incomplete
+URLs copiadas	URLs copied
+Variables CSS copiadas	CSS variables copied
+Variables CSS copiadas.	CSS variables copied.
+% de luz	% lightness
+% de la foto	% of the photo
+% de la foto — usar como color base	% of the photo — use as base color
+% de la imagen) ·	% of the image) ·
+(paso base)	(base step)
+(tu sistema no lo dibuja todavía)	(your system cannot render it yet)
+archivo	file
+archivos	files
+bytes en total ·	bytes total ·
+color	color
+colores	colors
+copiado	copied
+dB de margen antes del techo.	dB of headroom below the ceiling.
+dB del techo y las muestras que sobresalgan se recortarán, lo que se oye como distorsión. Baja la ganancia o pulsa «Normalizar».	dB above the ceiling. Samples will be clipped, causing distortion. Reduce the gain or click “Normalize.”
+de la imagen ·	of the image ·
+de matiz	of hue
+dominios — van llegando	domains — loading results
+emojis: “cohete”, “feliz”, “corazón”…	emojis: “rocket”, “happy”, “heart”…
+favicons…	favicons…
+fijado como color base	set as base color
+marcado	selected
+pasos de escala.	shade steps.
+pasos de escala. Base:	shade steps. Base:
+punto	point
+px · analizada a	px · analyzed at
+píxeles	pixels
+píxeles: demasiado grande para analizarla sin congelar el navegador. El tope son 32 megapíxeles.	pixels: too large to analyze without freezing the browser. The limit is 32 megapixels.
+resultados	results
+territorios extraídos · mandan	extracted territories · dominant colors:
+· aprobado	· passed
+· cobertura aproximada	· approximate coverage
+· croma media	· average chroma
+· el modo calor sombrea también los casi parecidos, más allá de esa cobertura	· heat mode also shades nearby matches beyond that coverage
+· insuficiente para texto normal	· insufficient for normal text
+· no se lee	· unreadable
+· píxel Δ OK	· pixel Δ OK
+· recortada por velocidad	· resized for speed
+· sin peticiones HTTP adicionales	· no additional HTTP requests
+· territorio Δ OK	· territory Δ OK
+— arrástralo o muévelo con las flechas; Intro lo usa como base	— drag or use arrow keys; Enter sets it as the base
+— paso	— step
+acento / fondo Δ OK	accent / background Δ OK
+acentos raros:	rare accents:
+construido en OKLCH y mantenido dentro del sRGB antes de puntuar	built in OKLCH and kept inside sRGB before scoring
+contraste sobre el fondo	contrast against the background
+croma	chroma
+croma ≥	chroma ≥
+distancia acento / fondo	accent / background distance
+distancia de tono y croma en el plano ab	hue and chroma distance in the ab plane
+en el mapa	on the map
+eso no parece un dominio	that does not look like a domain
+estéreo	stereo
+euclídea en OKLab (Δ OK), no CIEDE2000	Euclidean distance in OKLab (Δ OK), not CIEDE2000
+generado, no extraído	generated, not extracted
+los píxeles transparentes se componen sobre el fondo de la página	transparent pixels are composited over the page background
+luz	lightness
+mapa de procedencia activo para	provenance map active for
+masas de color mezcladas	mixed color masses
+media 11 × 11	11 × 11 average
+media 3 × 3	3 × 3 average
+media OKLab	OKLab mean
+neutro claro	light neutral
+neutro oscuro	dark neutral
+puntuados por distancia OKLab con objetivos de luz y croma por familia	scored by OKLab distance with lightness and chroma targets for each family
+píxel exacto	exact pixel
+píxel más cercano	nearest pixel
+rango de la familia	family range
+sin acentos raros agrupados	no clustered rare accents
+sin mapa de procedencia	no provenance map
+sin rango de luz o croma: elegido solo por distancia, separado de los demás	no lightness or chroma range: selected only by distance, separated from other colors
+territorio más cercano	nearest territory
+tu color	your color
+usable (luz acotada)	usable (bounded lightness)
+ver mapa	view map
+| Favicon | Dominio |	| Favicon | Domain |
+· pasa 4,5:1 · el enlace puede usar el acento tal cual	· passes 4.5:1 · the link can use the original accent
+· por debajo de 4,5:1 · el enlace se ajusta para contrastar	· below 4.5:1 · the link is adjusted for contrast
+» copiado. Pégalo en el <head> de tu página: esta pestaña ya lo estrena.	” copied. Paste it into your page's <head>: this tab now previews it.

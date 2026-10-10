@@ -32,7 +32,7 @@
     "author": "Lienzo",
     "source": null,
     "zip": null,
-    "desc": "Un carrusel propio para colecciones, productos o artículos. Desplazamiento táctil, flechas, barra de posición y favoritos; sin librerías.",
-    "size": 109
+    "desc": "Carrusel propio con inclinación 3D y luz al pasar el cursor, navegación táctil, flechas, posición y favoritos. Sin librerías; respeta reducir movimiento.",
+    "size": 110
   }
 ]
