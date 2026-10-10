@@ -1,0 +1,13 @@
+{
+  "/mi-lienzo/espacio.js": "/en/my-lienzo/espacio.js",
+  "/js/codigo-web.js": "/en/assets/codigo-web.js",
+  "/codigo-web/animaciones/js/animaciones.js": "/en/code/animations/js/animaciones.js",
+  "/codigo-web/bordes/js/bordes.js": "/en/code/borders/js/bordes.js",
+  "/codigo-web/componentes/js/componentes.js": "/en/code/components/js/componentes.js",
+  "/codigo-web/degradados/js/degradados.js": "/en/code/gradients/js/degradados.js",
+  "/codigo-web/filtros/js/filtros.js": "/en/code/filters/js/filtros.js",
+  "/codigo-web/sombras/js/sombras.js": "/en/code/shadows/js/sombras.js",
+  "/codigo-web/tipografia/js/tipografia.js": "/en/code/typography/js/tipografia.js",
+  "/codigo-web/transformaciones/js/transformaciones.js": "/en/code/transforms/js/transformaciones.js",
+  "/js/mi-lienzo.js": "/en/assets/my-lienzo.js"
+}

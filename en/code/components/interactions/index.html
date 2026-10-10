@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Microinteractions | Lienzo</title><meta content="Microinteractions by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." name="description"/><link href="https://lienzo.tools/en/code/components/interactions/" rel="canonical"/><link href="https://lienzo.tools/codigo-web/componentes/interacciones/" hreflang="es" rel="alternate"/>
+<link href="https://lienzo.tools/en/code/components/interactions/" hreflang="en" rel="alternate"/>
+<link href="https://lienzo.tools/codigo-web/componentes/interacciones/" hreflang="x-default" rel="alternate"/><meta content="Microinteractions" property="og:title"/><meta content="Microinteractions by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." property="og:description"/><meta content="https://lienzo.tools/en/code/components/interactions/" property="og:url"/><meta content="website" property="og:type"/><meta content="en_US" property="og:locale"/><link href="/favicon.svg" rel="icon"/><link href="/css/site.css?v=2026090405" rel="stylesheet"/><link href="/codigo-web/componentes/css/componentes.css?v=2026090404" rel="stylesheet"/><link href="/en/assets/english.css?v=2026101007" rel="stylesheet"/><script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("agp-theme")||"dark"}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Microinteractions", "url": "https://lienzo.tools/en/code/components/interactions/", "description": "Microinteractions by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.", "inLanguage": "en-US"}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a aria-label="Lienzo home" class="brand" href="/en/"><span class="brand__lockup"><svg aria-hidden="true" class="brand__logo" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-header" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav aria-label="Main navigation" class="site-nav"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/code/">Web Code</a><a href="/en/templates/">Templates</a><a data-espacio-btn="" href="/en/my-lienzo/">My Lienzo</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a aria-label="Cambiar a español" class="theme-btn language-switch" href="/codigo-web/componentes/interacciones/" hreflang="es" lang="es" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600" title="Cambiar a español"><svg aria-hidden="true" fill="none" focusable="false" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"></path></svg><span>ES</span></a><button aria-label="Change theme" class="theme-btn" data-theme-toggle="" type="button">☀</button><button aria-expanded="false" aria-label="Open menu" class="nav-toggle" data-nav-toggle="" type="button">☰</button></div></div></header><main id="main">
+<section class="section shell">
+<nav aria-label="Breadcrumb" class="breadcrumbs reveal">
+<a href="/en/">Home</a> › <a href="/en/code/">Web Code</a> › <a href="/en/code/components/">CSS Components</a> › <span>Microinteractions</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow reveal">Copy-ready code</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">Microinteractions</h1>
+<p class="lede reveal" style="--reveal-delay: 140ms">Microinteractions give feedback: a button responding to a click, a tilting card, or a number counting up. Use them selectively to support the interface.</p>
+</div>
+<section aria-labelledby="solo-css-h" class="lab-seccion" id="solo-css">
+<header class="lab-seccion__head">
+<h2 id="solo-css-h">CSS only</h2>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="elevacion">
+<div class="pieza__escenario">
+<div class="lz-eleva">Hover here</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Hover lift</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-eleva {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 1rem 1.4rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.lz-eleva:hover {
+  transform: translateY(-5px);
+  border-color: #8b7bff;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-eleva { transition: none; }
+  .lz-eleva:hover { transform: none; }
+}</template>
+<template class="receta-html">&lt;div class="lz-eleva"&gt;Hover here&lt;/div&gt;</template>
+</article>
+<article class="pieza" id="volteo">
+<div class="pieza__escenario">
+<div class="lz-volteo" tabindex="0">
+<div class="lz-volteo__interior">
+<div class="lz-volteo__cara">Front</div>
+<div class="lz-volteo__cara lz-volteo__cara--dorso">Back</div>
+</div>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Flip card</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-volteo {
+  width: 170px;
+  aspect-ratio: 4 / 3;
+  perspective: 800px;
+  cursor: pointer;
+}
+.lz-volteo__interior {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.lz-volteo:hover .lz-volteo__interior,
+.lz-volteo:focus-visible .lz-volteo__interior { transform: rotateY(180deg); }
+.lz-volteo__cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #16141f;
+  border: 1px solid #2c2938;
+  color: #f4f3f8;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  backface-visibility: hidden;
+}
+.lz-volteo__cara--dorso {
+  transform: rotateY(180deg);
+  background: linear-gradient(140deg, #251f3d, #16141f);
+  border-color: #8b7bff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-volteo__interior { transition: none; }
+}</template>
+<template class="receta-html">&lt;div class="lz-volteo" tabindex="0"&gt;
+&lt;div class="lz-volteo__interior"&gt;
+&lt;div class="lz-volteo__cara"&gt;Front&lt;/div&gt;
+&lt;div class="lz-volteo__cara lz-volteo__cara--dorso"&gt;Back&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</template>
+</article>
+<article class="pieza" id="borde-pulso">
+<div class="pieza__escenario">
+<div class="lz-pulso">Recording</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Pulsing border</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-pulso {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 1rem 1.4rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #ff7a68;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+}
+.lz-pulso::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid #ff7a68;
+  border-radius: inherit;
+  animation: lz-onda 1.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes lz-onda {
+  from { opacity: 0.9; transform: scale(1); }
+  to   { opacity: 0;   transform: scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-pulso::after { animation: none; opacity: 0; }
+}</template>
+<template class="receta-html">&lt;div class="lz-pulso"&gt;Recording&lt;/div&gt;</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="con-js-h" class="lab-seccion" id="con-js">
+<header class="lab-seccion__head">
+<h2 id="con-js-h">With a little JavaScript</h2>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="ripple">
+<div class="pieza__escenario">
+<button class="lz-ripple" data-lz-ripple="" type="button">Click here</button>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Click ripple</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-ripple {
+  position: relative;
+  min-height: 48px;
+  padding: 0 1.6rem;
+  border: 0;
+  border-radius: 12px;
+  background: #251f3d;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  overflow: hidden;
+}
+.lz-ripple .lz-onda {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(139, 123, 255, 0.4);
+  transform: scale(0);
+  animation: lz-ripple 550ms ease-out forwards;
+  pointer-events: none;
+}
+@keyframes lz-ripple {
+  to { transform: scale(2.6); opacity: 0; }
+}</template>
+<template class="receta-html">&lt;button class="lz-ripple" data-lz-ripple="" type="button"&gt;Click here&lt;/button&gt;</template>
+<template class="receta-js">// Crea la onda donde cae el clic y la retira al terminar.
+document.querySelectorAll("[data-lz-ripple]").forEach((btn) =&gt; {
+  btn.addEventListener("click", (e) =&gt; {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const caja = btn.getBoundingClientRect();
+    const onda = document.createElement("span");
+    const lado = Math.max(caja.width, caja.height);
+    onda.className = "lz-onda";
+    onda.style.width = onda.style.height = lado + "px";
+    onda.style.left = e.clientX - caja.left - lado / 2 + "px";
+    onda.style.top = e.clientY - caja.top - lado / 2 + "px";
+    btn.appendChild(onda);
+    onda.addEventListener("animationend", () =&gt; onda.remove());
+  });
+});</template>
+</article>
+<article class="pieza" id="tilt">
+<div class="pieza__escenario">
+<div class="lz-tilt" data-lz-tilt="">Move me</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">3D tilt</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-tilt {
+  display: grid;
+  place-items: center;
+  width: 170px;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(150deg, #251f3d, #16141f);
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  transition: transform 180ms ease;
+  will-change: transform;
+}</template>
+<template class="receta-html">&lt;div class="lz-tilt" data-lz-tilt=""&gt;Move me&lt;/div&gt;</template>
+<template class="receta-js">// Inclina la tarjeta hacia el cursor; vuelve al soltar.
+document.querySelectorAll("[data-lz-tilt]").forEach((el) =&gt; {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const MAX = 12; // grados
+  el.addEventListener("pointermove", (e) =&gt; {
+    const caja = el.getBoundingClientRect();
+    const x = (e.clientX - caja.left) / caja.width - 0.5;
+    const y = (e.clientY - caja.top) / caja.height - 0.5;
+    el.style.transform =
+      "perspective(600px) rotateY(" + x * MAX + "deg) rotateX(" + -y * MAX + "deg)";
+  });
+  el.addEventListener("pointerleave", () =&gt; (el.style.transform = ""));
+});</template>
+</article>
+<article class="pieza" id="foco-luz">
+<div class="pieza__escenario">
+<div class="lz-luz" data-lz-luz="">Light me up</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Cursor-following light</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-luz {
+  --x: 50%;
+  --y: 50%;
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  padding: 1rem 1.6rem;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  background:
+    radial-gradient(140px circle at var(--x) var(--y), rgba(139, 123, 255, 0.28), transparent 70%),
+    #16141f;
+}</template>
+<template class="receta-html">&lt;div class="lz-luz" data-lz-luz=""&gt;Light me up&lt;/div&gt;</template>
+<template class="receta-js">// Mueve el foco de luz con el cursor.
+document.querySelectorAll("[data-lz-luz]").forEach((el) =&gt; {
+  el.addEventListener("pointermove", (e) =&gt; {
+    const caja = el.getBoundingClientRect();
+    el.style.setProperty("--x", e.clientX - caja.left + "px");
+    el.style.setProperty("--y", e.clientY - caja.top + "px");
+  });
+});</template>
+</article>
+<article class="pieza" id="contador">
+<div class="pieza__escenario">
+<p class="lz-contador"><span data-hasta="1720" data-lz-contar="">0</span> icons</p>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Count-up animation</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-contador {
+  margin: 0;
+  color: #f4f3f8;
+  font: 700 1.9rem/1 system-ui, sans-serif;
+}
+.lz-contador span { font-variant-numeric: tabular-nums; color: #35d6c8; }</template>
+<template class="receta-html">&lt;p class="lz-contador"&gt;&lt;span data-hasta="1720" data-lz-contar=""&gt;0&lt;/span&gt; icons&lt;/p&gt;</template>
+<template class="receta-js">// Anima el número cuando el elemento entra en pantalla.
+const observador = new IntersectionObserver((entradas) =&gt; {
+  entradas.forEach((entrada) =&gt; {
+    if (!entrada.isIntersecting) return;
+    const el = entrada.target;
+    observador.unobserve(el);
+    const hasta = parseInt(el.dataset.hasta, 10);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = hasta.toLocaleString("es");
+      return;
+    }
+    const inicio = performance.now();
+    const DURACION = 1200;
+    (function pintar(t) {
+      const avance = Math.min(1, (t - inicio) / DURACION);
+      const suave = 1 - Math.pow(1 - avance, 3);
+      el.textContent = Math.round(hasta * suave).toLocaleString("es");
+      if (avance &lt; 1) requestAnimationFrame(pintar);
+    })(inicio);
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll("[data-lz-contar]").forEach((el) =&gt; observador.observe(el));</template>
+</article>
+<article class="pieza pieza--ancha" id="modal">
+<div class="pieza__escenario">
+<button class="lz-btn-modal" data-lz-abre="lz-dialogo-demo" type="button">Open modal</button>
+<dialog class="lz-modal" id="lz-dialogo-demo">
+<h3>A native dialog</h3>
+<p>The &lt;dialog&gt; element provides focus containment, Escape dismissal, and a backdrop when opened with showModal().</p>
+<button class="lz-btn-modal" data-lz-cierra="" type="button">Close</button>
+</dialog>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Native modal dialog</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-btn-modal {
+  min-height: 44px;
+  padding: 0 1.4rem;
+  border: 1px solid #3a374a;
+  border-radius: 12px;
+  background: #251f3d;
+  color: #f4f3f8;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-modal {
+  max-width: min(92vw, 380px);
+  padding: 1.6rem;
+  border: 1px solid #3a374a;
+  border-radius: 20px;
+  background: #14121d;
+  color: #e8e6f2;
+  font-family: system-ui, sans-serif;
+}
+.lz-modal::backdrop {
+  background: rgba(6, 5, 10, 0.65);
+  backdrop-filter: blur(4px);
+}
+.lz-modal h3 { margin: 0 0 0.5rem; color: #fff; }
+.lz-modal p { margin: 0 0 1.1rem; line-height: 1.5; font-size: 0.92rem; }</template>
+<template class="receta-html">&lt;button class="lz-btn-modal" data-lz-abre="lz-dialogo-demo" type="button"&gt;Open modal&lt;/button&gt;
+&lt;dialog class="lz-modal" id="lz-dialogo-demo"&gt;
+&lt;h3&gt;A native dialog&lt;/h3&gt;
+&lt;p&gt;The &amp;lt;dialog&amp;gt; element provides focus containment, Escape dismissal, and a backdrop when opened with showModal().&lt;/p&gt;
+&lt;button class="lz-btn-modal" data-lz-cierra="" type="button"&gt;Close&lt;/button&gt;
+&lt;/dialog&gt;</template>
+<template class="receta-js">// Abre el &lt;dialog&gt; como modal y lo cierra con su botón o clic fuera.
+document.querySelectorAll("[data-lz-abre]").forEach((btn) =&gt; {
+  const dialogo = document.getElementById(btn.dataset.lzAbre);
+  if (!dialogo) return;
+  btn.addEventListener("click", () =&gt; dialogo.showModal());
+  dialogo.addEventListener("click", (e) =&gt; {
+    if (e.target === dialogo) dialogo.close(); // clic en el fondo
+  });
+  dialogo.querySelectorAll("[data-lz-cierra]").forEach((cerrar) =&gt;
+    cerrar.addEventListener("click", () =&gt; dialogo.close())
+  );
+});</template>
+</article>
+<article class="pieza" id="hover-direccional">
+<div class="pieza__escenario">
+<a class="lz-direccional" data-lz-direccional="" href="#">
+<span class="lz-direccional__base"><svg aria-hidden="true" fill="none" height="34" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="34"><path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"></path></svg>Enter from a side</span>
+<span class="lz-direccional__capa">
+<strong>3D scenes</strong>
+<span>The overlay enters from the same side as the cursor.</span>
+</span>
+</a>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Direction-aware overlay</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-direccional {
+  --ax: -1;
+  --ay: 0;
+  --origen: 50% 0%;
+  position: relative;
+  display: block;
+  width: 190px;
+  aspect-ratio: 1;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  background: linear-gradient(150deg, #251f3d, #16141f);
+  color: #f4f3f8;
+  text-decoration: none;
+  overflow: hidden;
+  perspective: 520px;
+}
+.lz-direccional__base {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  height: 100%;
+  color: #a2a1b3;
+  font: 600 0.9rem system-ui, sans-serif;
+}
+/* La capa arranca de canto (90 grados) sobre el eje que marca el JS:
+   asi hay UNA transicion para los cuatro lados, sin ocho keyframes. */
+.lz-direccional__capa {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: end;
+  gap: 6px;
+  padding: 18px;
+  background: rgba(139, 123, 255, 0.94);
+  color: #0a0a12;
+  font: 0.82rem/1.4 system-ui, sans-serif;
+  transform-origin: var(--origen);
+  transform: rotate3d(var(--ax), var(--ay), 0, 90deg);
+  /* En reposo tambien es invisible: de canto, con perspectiva, la parte
+     lejana del plano se proyecta dentro de la tarjeta y se veria una franja.
+     La opacidad cae en el ultimo tercio de la salida. */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 340ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 120ms ease 220ms,
+    visibility 0s linear 340ms;
+  pointer-events: none;
+}
+.lz-direccional__capa strong { font-size: 1rem; }
+.lz-direccional.esta-dentro .lz-direccional__capa,
+.lz-direccional:focus-visible .lz-direccional__capa {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  transition: transform 340ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0s, visibility 0s;
+}
+.lz-direccional:focus-visible { outline: 2px solid #35d6c8; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-direccional__capa { transform: none; transition: opacity 200ms ease, visibility 0s linear 200ms; }
+  .lz-direccional.esta-dentro .lz-direccional__capa,
+  .lz-direccional:focus-visible .lz-direccional__capa { transition: opacity 200ms ease, visibility 0s; }
+}</template>
+<template class="receta-html">&lt;a class="lz-direccional" data-lz-direccional="" href="#"&gt;
+&lt;span class="lz-direccional__base"&gt;&lt;svg aria-hidden="true" fill="none" height="34" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="34"&gt;&lt;path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"&gt;&lt;/path&gt;&lt;/svg&gt;Enter from a side&lt;/span&gt;
+&lt;span class="lz-direccional__capa"&gt;
+&lt;strong&gt;3D scenes&lt;/strong&gt;
+&lt;span&gt;The overlay enters from the same side as the cursor.&lt;/span&gt;
+&lt;/span&gt;
+&lt;/a&gt;</template>
+<template class="receta-js">// La capa entra por el lado por el que llega el cursor y sale por el que se va.
+document.querySelectorAll("[data-lz-direccional]").forEach((el) =&gt; {
+  const LADOS = [
+    { ax: -1, ay: 0, origen: "50% 0%" },   // arriba
+    { ax: 0, ay: -1, origen: "100% 50%" }, // derecha
+    { ax: 1, ay: 0, origen: "50% 100%" },  // abajo
+    { ax: 0, ay: 1, origen: "0% 50%" },    // izquierda
+  ];
+  const lado = (e) =&gt; {
+    const c = el.getBoundingClientRect();
+    const x = (e.clientX - c.left) / c.width - 0.5;
+    const y = (e.clientY - c.top) / c.height - 0.5;
+    return Math.round(Math.atan2(y, x) / (Math.PI / 2) + 5) % 4;
+  };
+  const orienta = (i) =&gt; {
+    el.style.setProperty("--ax", LADOS[i].ax);
+    el.style.setProperty("--ay", LADOS[i].ay);
+    el.style.setProperty("--origen", LADOS[i].origen);
+  };
+  el.addEventListener("pointerenter", (e) =&gt; {
+    if (e.pointerType === "touch") return; // en tactil manda el foco
+    orienta(lado(e));
+    void el.offsetWidth; // fija la orientacion antes de animar
+    el.classList.add("esta-dentro");
+  });
+  el.addEventListener("pointerleave", (e) =&gt; {
+    orienta(lado(e));
+    el.classList.remove("esta-dentro");
+  });
+});</template>
+</article>
+<article class="pieza" id="distorsion">
+<div class="pieza__escenario">
+<div class="lz-distorsion" data-lz-distorsion="">
+<svg aria-hidden="true" class="lz-distorsion__filtro" focusable="false" height="0" width="0">
+<filter color-interpolation-filters="sRGB" id="lz-distorsion-f">
+<feturbulence basefrequency="0.014 0.03" numoctaves="2" result="ruido" seed="7" type="fractalNoise"></feturbulence>
+<fedisplacementmap in="SourceGraphic" in2="ruido" scale="0" xchannelselector="R" ychannelselector="G"></fedisplacementmap>
+</filter>
+</svg>
+<div class="lz-distorsion__visor">
+<img alt="3D navigation map" class="lz-distorsion__img esta-visible" height="640" src="/assets/escenas-3d/mapa-de-navegacion.webp" width="960"/>
+<img alt="3D data charts" class="lz-distorsion__img" height="640" loading="lazy" src="/assets/escenas-3d/graficas-de-datos.webp" width="960"/>
+<img alt="3D megaphone announcement" class="lz-distorsion__img" height="640" loading="lazy" src="/assets/escenas-3d/anuncio-con-megafono.webp" width="960"/>
+</div>
+<div aria-label="Choose image" class="lz-distorsion__puntos" role="group">
+<button aria-current="true" aria-label="Image 1" data-ir="" type="button"></button>
+<button aria-label="Image 2" data-ir="" type="button"></button>
+<button aria-label="Image 3" data-ir="" type="button"></button>
+</div>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Distorted image transition</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-distorsion {
+  display: grid;
+  gap: 10px;
+  width: min(100%, 320px);
+}
+.lz-distorsion__filtro { position: absolute; width: 0; height: 0; }
+.lz-distorsion__visor {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #16141f;
+  filter: url(#lz-distorsion-f);
+}
+.lz-distorsion__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+.lz-distorsion__img.esta-visible { opacity: 1; }
+.lz-distorsion__puntos { display: flex; justify-content: center; gap: 8px; }
+.lz-distorsion__puntos button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #3a3750;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+}
+.lz-distorsion__puntos button[aria-current="true"] { background: #8b7bff; transform: scale(1.3); }
+.lz-distorsion__puntos button:focus-visible { outline: 2px solid #8b7bff; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-distorsion__visor { filter: none; }
+  .lz-distorsion__img { transition: opacity 250ms ease; }
+  .lz-distorsion__puntos button { transition: none; }
+}</template>
+<template class="receta-html">&lt;div class="lz-distorsion" data-lz-distorsion=""&gt;
+&lt;svg aria-hidden="true" class="lz-distorsion__filtro" focusable="false" height="0" width="0"&gt;
+&lt;filter color-interpolation-filters="sRGB" id="lz-distorsion-f"&gt;
+&lt;feturbulence basefrequency="0.014 0.03" numoctaves="2" result="ruido" seed="7" type="fractalNoise"&gt;&lt;/feturbulence&gt;
+&lt;fedisplacementmap in="SourceGraphic" in2="ruido" scale="0" xchannelselector="R" ychannelselector="G"&gt;&lt;/fedisplacementmap&gt;
+&lt;/filter&gt;
+&lt;/svg&gt;
+&lt;div class="lz-distorsion__visor"&gt;
+&lt;img alt="3D navigation map" class="lz-distorsion__img esta-visible" height="640" src="/assets/escenas-3d/mapa-de-navegacion.webp" width="960"/&gt;
+&lt;img alt="3D data charts" class="lz-distorsion__img" height="640" loading="lazy" src="/assets/escenas-3d/graficas-de-datos.webp" width="960"/&gt;
+&lt;img alt="3D megaphone announcement" class="lz-distorsion__img" height="640" loading="lazy" src="/assets/escenas-3d/anuncio-con-megafono.webp" width="960"/&gt;
+&lt;/div&gt;
+&lt;div aria-label="Choose image" class="lz-distorsion__puntos" role="group"&gt;
+&lt;button aria-current="true" aria-label="Image 1" data-ir="" type="button"&gt;&lt;/button&gt;
+&lt;button aria-label="Image 2" data-ir="" type="button"&gt;&lt;/button&gt;
+&lt;button aria-label="Image 3" data-ir="" type="button"&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;</template>
+<template class="receta-js">// Cambio de imagen con distorsion: el mapa de desplazamiento del filtro SVG
+// sube y baja mientras las dos imagenes se funden. Sin librerias.
+document.querySelectorAll("[data-lz-distorsion]").forEach((raiz) =&gt; {
+  const capas = [...raiz.querySelectorAll(".lz-distorsion__img")];
+  const puntos = [...raiz.querySelectorAll("[data-ir]")];
+  const mapa = raiz.querySelector("feDisplacementMap");
+  const calmado = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let actual = 0, animando = false, pila = 1;
+  const ir = (n) =&gt; {
+    if (animando || n === actual) return;
+    animando = true;
+    const anterior = actual;
+    actual = n;
+    puntos.forEach((p, i) =&gt; p.setAttribute("aria-current", i === n ? "true" : "false"));
+    capas[n].style.zIndex = String(++pila);
+    capas[n].classList.add("esta-visible");
+    let terminado = false;
+    const termina = () =&gt; {
+      if (terminado) return;
+      terminado = true;
+      capas[anterior].classList.remove("esta-visible");
+      if (mapa) mapa.setAttribute("scale", "0");
+      animando = false;
+    };
+    if (calmado || !mapa) return void setTimeout(termina, 260);
+    const t0 = performance.now(), DUR = 900;
+    // Red: si el rAF se congela (pestana en segundo plano), remata igual
+    setTimeout(termina, DUR + 80);
+    (function paso(t) {
+      if (terminado) return;
+      const a = Math.min(1, (t - t0) / DUR);
+      mapa.setAttribute("scale", String(Math.sin(a * Math.PI) * 70));
+      if (a &lt; 1) requestAnimationFrame(paso); else termina();
+    })(t0);
+  };
+  puntos.forEach((p, i) =&gt; p.addEventListener("click", () =&gt; ir(i)));
+});</template>
+</article>
+</div>
+</section>
+</section>
+<section class="section shell"><div class="prose"><h2>Use the example in your project</h2><p>Copy the HTML and CSS for the same piece. If a JavaScript button is shown, include that script too. Keep IDs unique, update links, and test keyboard focus and small screens. These examples demonstrate front-end behavior; forms do not create accounts or submit real orders. Names, testimonials, prices, and metrics are illustrative sample content.</p><p><a href="/en/code/components/">All component categories</a> · <a href="/en/code/">CSS generators</a> · <a href="/en/templates/">Downloadable templates</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg aria-label="Lienzo" class="logo-lienzo" role="img" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-footer" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/resources/">Free Resources</a></li><li><a href="/en/blog/">Blog and Guides</a></li><li><a href="/en/about/">About Lienzo</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" rel="noopener" target="_blank">YouTube</a></li><li><a href="/en/code/">CSS Generators</a></li><li><a href="/en/code/components/">CSS Components</a></li><li><a href="/en/my-lienzo/">My Lienzo</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Code: MIT. Fonts: OFL. Keep the included license notices.<span data-revocar-consentimiento="" style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script defer="" src="/en/assets/site.js"></script><script defer="" src="/en/assets/my-lienzo.js"></script><script defer="" src="/en/code/components/js/componentes.js"></script></body></html>

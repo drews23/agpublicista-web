@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>CSS Transform Generator | Lienzo</title><meta content="CSS Transform Generator by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." name="description"/><link href="https://lienzo.tools/en/code/transforms/" rel="canonical"/><link href="https://lienzo.tools/codigo-web/transformaciones/" hreflang="es" rel="alternate"/>
+<link href="https://lienzo.tools/en/code/transforms/" hreflang="en" rel="alternate"/>
+<link href="https://lienzo.tools/codigo-web/transformaciones/" hreflang="x-default" rel="alternate"/><meta content="CSS Transform Generator" property="og:title"/><meta content="CSS Transform Generator by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." property="og:description"/><meta content="https://lienzo.tools/en/code/transforms/" property="og:url"/><meta content="website" property="og:type"/><meta content="en_US" property="og:locale"/><link href="/favicon.svg" rel="icon"/><link href="/css/site.css?v=2026090405" rel="stylesheet"/><link href="/css/codigo-web.css?v=2026090503" rel="stylesheet"/><link href="/codigo-web/transformaciones/css/tool.css?v=2026090503" rel="stylesheet"/><link href="/css/estudio.css?v=2026090504" rel="stylesheet"/><link href="/en/assets/english.css?v=2026101007" rel="stylesheet"/><script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("agp-theme")||"dark"}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSS Transform Generator", "url": "https://lienzo.tools/en/code/transforms/", "description": "CSS Transform Generator by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.", "inLanguage": "en-US"}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a aria-label="Lienzo home" class="brand" href="/en/"><span class="brand__lockup"><svg aria-hidden="true" class="brand__logo" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-header" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav aria-label="Main navigation" class="site-nav"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/code/">Web Code</a><a href="/en/templates/">Templates</a><a data-espacio-btn="" href="/en/my-lienzo/">My Lienzo</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a aria-label="Cambiar a español" class="theme-btn language-switch" href="/codigo-web/transformaciones/" hreflang="es" lang="es" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600" title="Cambiar a español"><svg aria-hidden="true" fill="none" focusable="false" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"></path></svg><span>ES</span></a><button aria-label="Change theme" class="theme-btn" data-theme-toggle="" type="button">☀</button><button aria-expanded="false" aria-label="Open menu" class="nav-toggle" data-nav-toggle="" type="button">☰</button></div></div></header><main id="main">
+<section class="section shell">
+<nav aria-label="Breadcrumb" class="breadcrumbs reveal">
+<a href="/en/">Home</a> › <a href="/en/code/">Web Code</a> › <span>Transforms</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow reveal">CSS Generator · 2D and 3D</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">CSS Transform Generator</h1>
+<p class="lede reveal" style="--reveal-delay: 140ms">
+            Translate, scale, rotate, and skew an element in real time. See the transform origin against the original outline and apply 3D perspective to the parent container.
+          </p>
+</div>
+</section>
+<section class="section estudio-shell">
+<div class="estudio reveal" data-estudio="" style="--reveal-delay: 200ms">
+<div aria-label="Transformed element preview" class="lienzo-previa lienzo-previa--liso" role="img">
+<div class="escena" data-escena="" data-guias="1">
+<div aria-hidden="true" class="guias"></div>
+<div aria-hidden="true" class="fantasma"></div>
+<span aria-hidden="true" class="marca-origen" data-marca=""></span>
+<div class="demo-caja" data-caja="">Front</div>
+</div>
+</div>
+<div class="estudio__acciones">
+<button class="boton-sutil" data-reset="" type="button">Reset</button>
+</div>
+<button aria-controls="panel-estudio" aria-expanded="true" class="estudio__alternar" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>
+<span data-alternar-texto="">Hide</span>
+</button>
+<aside aria-label="Transform settings" class="estudio__panel" data-controles="" id="panel-estudio">
+<div class="estudio__panel-cabecera">
+<h2 class="estudio__panel-titulo">Settings</h2>
+</div>
+<div class="estudio__panel-cuerpo">
+<details class="estudio__seccion" open="">
+<summary>Transform origin</summary>
+<div class="controles">
+<div class="campo">
+<span class="campo__label">Preset positions</span>
+<div class="rejilla-origen" data-origen-rejilla="">
+<button aria-label="Top left (0% 0%)" aria-pressed="false" class="origen-btn" data-origen="0 0" title="Top left" type="button"></button>
+<button aria-label="Top center (50% 0%)" aria-pressed="false" class="origen-btn" data-origen="50 0" title="Top center" type="button"></button>
+<button aria-label="Top right (100% 0%)" aria-pressed="false" class="origen-btn" data-origen="100 0" title="Top right" type="button"></button>
+<button aria-label="Center left (0% 50%)" aria-pressed="false" class="origen-btn" data-origen="0 50" title="Center left" type="button"></button>
+<button aria-label="Center (50% 50%)" aria-pressed="true" class="origen-btn" data-origen="50 50" title="Center" type="button"></button>
+<button aria-label="Center right (100% 50%)" aria-pressed="false" class="origen-btn" data-origen="100 50" title="Center right" type="button"></button>
+<button aria-label="Bottom left (0% 100%)" aria-pressed="false" class="origen-btn" data-origen="0 100" title="Bottom left" type="button"></button>
+<button aria-label="Bottom center (50% 100%)" aria-pressed="false" class="origen-btn" data-origen="50 100" title="Bottom center" type="button"></button>
+<button aria-label="Bottom right (100% 100%)" aria-pressed="false" class="origen-btn" data-origen="100 100" title="Bottom right" type="button"></button>
+</div>
+<p aria-live="polite" class="campo__hint" data-origen-nombre="">Center · 50% 50%</p>
+</div>
+<label class="campo">
+<span class="campo__label">Origin X <span><output data-output="ox">50</output>%</span></span>
+<input aria-label="Origin X as a percentage" data-control="ox" max="100" min="0" step="1" type="range" value="50"/>
+</label>
+<label class="campo">
+<span class="campo__label">Origin Y <span><output data-output="oy">50</output>%</span></span>
+<input aria-label="Origin Y as a percentage" data-control="oy" max="100" min="0" step="1" type="range" value="50"/>
+<span class="campo__hint">The pivot point for transforms. 0% 0% is the top-left corner; percentages refer to the element itself.</span>
+</label>
+<label class="interruptor">
+<input checked="" data-control="guias" type="checkbox"/>
+<span>Show guides<small>Grid, axes, and the original outline, with the transform origin marked in amber.</small></span>
+</label>
+</div>
+</details>
+<details class="estudio__seccion" open="">
+<summary>2D</summary>
+<div class="controles">
+<label class="campo">
+<span class="campo__label">translateX <span><output data-output="tx">0</output>px</span></span>
+<input aria-label="translateX in pixels" data-control="tx" max="150" min="-150" step="1" type="range" value="0"/>
+</label>
+<label class="campo">
+<span class="campo__label">translateY <span><output data-output="ty">0</output>px</span></span>
+<input aria-label="translateY in pixels" data-control="ty" max="150" min="-150" step="1" type="range" value="0"/>
+<span class="campo__hint">Positive Y values move downward along the screen's vertical axis.</span>
+</label>
+<label class="interruptor">
+<input checked="" data-control="uniforme" type="checkbox"/>
+<span>Uniform scale<small>Link both axes to preserve the element's proportions.</small></span>
+</label>
+<label class="campo">
+<span class="campo__label"><span data-etiqueta-escala="">scale</span> <output data-output="sx">1</output></span>
+<input aria-label="Horizontal scale" data-control="sx" max="2.5" min="0" step="0.05" type="range" value="1"/>
+</label>
+<label class="campo" data-campo-sy="" hidden="">
+<span class="campo__label">scaleY <output data-output="sy">1</output></span>
+<input aria-label="Vertical scale" data-control="sy" max="2.5" min="0" step="0.05" type="range" value="1"/>
+</label>
+<label class="campo">
+<span class="campo__label">rotate <span><output data-output="rot">0</output>°</span></span>
+<input aria-label="Rotation in degrees" data-control="rot" max="180" min="-180" step="1" type="range" value="0"/>
+<span class="campo__hint">Rotate clockwise in the screen plane, just like rotateZ.</span>
+</label>
+<label class="campo">
+<span class="campo__label">skewX <span><output data-output="skx">0</output>°</span></span>
+<input aria-label="Skew X in degrees" data-control="skx" max="60" min="-60" step="1" type="range" value="0"/>
+</label>
+<label class="campo">
+<span class="campo__label">skewY <span><output data-output="sky">0</output>°</span></span>
+<input aria-label="Skew Y in degrees" data-control="sky" max="60" min="-60" step="1" type="range" value="0"/>
+<span class="campo__hint">Skew also distorts text. Beyond 30°, it can become difficult to read.</span>
+</label>
+</div>
+</details>
+<details class="estudio__seccion" open="">
+<summary>3D</summary>
+<div class="controles">
+<label class="campo">
+<span class="campo__label">rotateX <span><output data-output="rx">0</output>°</span></span>
+<input aria-label="Rotation X in degrees" data-control="rx" max="180" min="-180" step="1" type="range" value="0"/>
+<span class="campo__hint">Tilt backward or forward, like a box lid.</span>
+</label>
+<label class="campo">
+<span class="campo__label">rotateY <span><output data-output="ry">0</output>°</span></span>
+<input aria-label="Rotation Y in degrees" data-control="ry" max="180" min="-180" step="1" type="range" value="0"/>
+<span class="campo__hint">Turn like a door. At 180°, the back is visible and the text is mirrored.</span>
+</label>
+<label class="campo">
+<span class="campo__label">rotateZ <span><output data-output="rz">0</output>°</span></span>
+<input aria-label="Rotation Z in degrees" data-control="rz" max="180" min="-180" step="1" type="range" value="0"/>
+<span class="campo__hint">Same rotation as rotate. Using both adds their angles.</span>
+</label>
+<label class="campo">
+<span class="campo__label">translateZ <span><output data-output="tz">0</output>px</span></span>
+<input aria-label="translateZ in pixels" data-control="tz" max="300" min="-300" step="1" type="range" value="0"/>
+<span class="campo__hint">Move toward or away from the viewer. Perspective is needed to make the depth change visible.</span>
+</label>
+<label class="campo">
+<span class="campo__label">perspective <span><output data-output="persp">800</output>px</span></span>
+<input aria-label="Perspective in pixels" data-control="persp" max="2000" min="100" step="10" type="range" value="800"/>
+<span class="campo__hint">Applied to the parent container. Smaller values produce stronger perspective distortion.</span>
+</label>
+</div>
+</details>
+</div>
+</aside>
+<details class="estudio__codigo">
+<summary>
+<span class="estudio__codigo-etiqueta"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 15l6-6 6 6"></path></svg><span class="estudio__codigo-texto">Generated CSS</span></span>
+<span class="acciones estudio__codigo-acciones">
+<button class="btn btn--primary" data-copiar="" type="button">Copy CSS</button>
+<button class="btn btn--ghost" data-copiar-valor="" type="button">Copy transform only</button>
+</span>
+</summary>
+<pre aria-label="Transform CSS code" class="codigo" data-codigo="" tabindex="0"></pre>
+</details>
+</div>
+<p class="nota-taller">
+          Looking for another property? Explore all generators in
+          <a href="/en/code/">web code</a>.
+        </p>
+</section>
+<section class="section shell"><div class="prose"><h2>Understand the origin before adding 3D</h2><p>The guide overlay marks the original box and the transform origin. Change the origin to see how the same rotation behaves around a different pivot. This generator places perspective on the parent container and writes translation, rotation, skew, and scale in a consistent order.</p><details><summary>Why does changing transform order change the result?</summary><p>Transforms combine coordinate systems. Reordering the functions changes the resulting matrix, so a rotation and translation can end in a different position. Test the order your effect requires. A transform changes visual rendering without moving surrounding layout boxes.</p></details><p><a href="/en/code/">All CSS generators</a> · <a href="/en/my-lienzo/">My Lienzo</a> · <a href="/en/tools/">Creative tools</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg aria-label="Lienzo" class="logo-lienzo" role="img" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-footer" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/resources/">Free Resources</a></li><li><a href="/en/blog/">Blog and Guides</a></li><li><a href="/en/about/">About Lienzo</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" rel="noopener" target="_blank">YouTube</a></li><li><a href="/en/code/">CSS Generators</a></li><li><a href="/en/code/components/">CSS Components</a></li><li><a href="/en/my-lienzo/">My Lienzo</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Code: MIT. Fonts: OFL. Keep the included license notices.<span data-revocar-consentimiento="" style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script defer="" src="/en/assets/site.js"></script><script defer="" src="/en/assets/my-lienzo.js"></script><script defer="" src="/en/assets/codigo-web.js"></script><script defer="" src="/en/assets/estudio.js"></script><script defer="" src="/en/code/transforms/js/transformaciones.js"></script></body></html>

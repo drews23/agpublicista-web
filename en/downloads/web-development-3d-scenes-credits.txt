@@ -1,0 +1,20 @@
+8 Free Web Development 3D Scenes — CREDITS AND TERMS
+English documentation edition: October 10, 2026.
+
+Creation in collaboration:
+Jorge Andrés Arias García / Lienzo with MD Estudio Creativo · Creativo Marketing Digital
+https://creativomarketingdigital.com/estudio-creativo-marketing-digital/
+Distribution and guide: Lienzo
+English guide: https://lienzo.tools/en/blog/web-development-3d-scenes/
+Original guide: https://lienzo.tools/blog/escenas-3d-desarrollo-web-spline/
+Original credit sheet: https://lienzo.tools/recursos/creditos/escenas-3d-desarrollo-web-spline.txt
+
+Distribution authorization is declared by the site operator. This English sheet does not independently certify new permissions or claim exclusive authorship.
+Keep individual authorship and license notices with the files.
+Usage terms: https://lienzo.tools/en/license/
+Origin and attribution: https://lienzo.tools/en/third-party-licenses/
+Share the guide; do not reupload the files as another pack.
+Spline software and export conditions remain separate.
+Corrections: contacto@lienzo.tools
+
+Original archives and Spanish documentation remain unchanged.

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Bento Layouts with CSS Grid | Lienzo</title><meta content="Bento Layouts with CSS Grid by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." name="description"/><link href="https://lienzo.tools/en/code/components/bento/" rel="canonical"/><link href="https://lienzo.tools/codigo-web/componentes/bento/" hreflang="es" rel="alternate"/>
+<link href="https://lienzo.tools/en/code/components/bento/" hreflang="en" rel="alternate"/>
+<link href="https://lienzo.tools/codigo-web/componentes/bento/" hreflang="x-default" rel="alternate"/><meta content="Bento Layouts with CSS Grid" property="og:title"/><meta content="Bento Layouts with CSS Grid by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." property="og:description"/><meta content="https://lienzo.tools/en/code/components/bento/" property="og:url"/><meta content="website" property="og:type"/><meta content="en_US" property="og:locale"/><link href="/favicon.svg" rel="icon"/><link href="/css/site.css?v=2026090405" rel="stylesheet"/><link href="/codigo-web/componentes/css/componentes.css?v=2026090404" rel="stylesheet"/><link href="/en/assets/english.css?v=2026101007" rel="stylesheet"/><script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("agp-theme")||"dark"}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Bento Layouts with CSS Grid", "url": "https://lienzo.tools/en/code/components/bento/", "description": "Bento Layouts with CSS Grid by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.", "inLanguage": "en-US"}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a aria-label="Lienzo home" class="brand" href="/en/"><span class="brand__lockup"><svg aria-hidden="true" class="brand__logo" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-header" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav aria-label="Main navigation" class="site-nav"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/code/">Web Code</a><a href="/en/templates/">Templates</a><a data-espacio-btn="" href="/en/my-lienzo/">My Lienzo</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a aria-label="Cambiar a español" class="theme-btn language-switch" href="/codigo-web/componentes/bento/" hreflang="es" lang="es" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600" title="Cambiar a español"><svg aria-hidden="true" fill="none" focusable="false" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"></path></svg><span>ES</span></a><button aria-label="Change theme" class="theme-btn" data-theme-toggle="" type="button">☀</button><button aria-expanded="false" aria-label="Open menu" class="nav-toggle" data-nav-toggle="" type="button">☰</button></div></div></header><main id="main">
+<section class="section shell">
+<nav aria-label="Breadcrumb" class="breadcrumbs reveal">
+<a href="/en/">Home</a> › <a href="/en/code/">Web Code</a> › <a href="/en/code/components/">CSS Components</a> › <span>Bento Layouts with CSS Grid</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow reveal">Copy-ready code</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">Bento Layouts with CSS Grid</h1>
+<p class="lede reveal" style="--reveal-delay: 140ms">Bento layouts divide a page into tiles of different sizes, with one clear focal point. These four examples cover a classic layout, editorial page, dashboard, and gallery, with named grid areas and mobile layouts.</p>
+</div>
+<section aria-labelledby="bento-clasico-h" class="lab-seccion" id="bento-clasico">
+<header class="lab-seccion__head">
+<h2 id="bento-clasico-h">Classic bento</h2>
+<p>A hero tile surrounded by supporting content. Named grid areas keep the layout readable, and one media query turns it into a mobile column.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="bento-4">
+<div class="pieza__escenario">
+<div class="lz-bento">
+<article class="lz-bento__celda lz-bento__celda--heroe">Hero</article>
+<article class="lz-bento__celda">Note A</article>
+<article class="lz-bento__celda">Note B</article>
+<article class="lz-bento__celda lz-bento__celda--ancha">Bottom strip</article>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Hero + 3 supporting tiles</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-bento {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "heroe notaA"
+    "heroe notaB"
+    "ancha ancha";
+}
+.lz-bento__celda {
+  display: grid;
+  place-items: center;
+  min-height: 84px;
+  padding: 1rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.9rem/1.2 system-ui, sans-serif;
+}
+.lz-bento__celda--heroe { grid-area: heroe; min-height: 182px;
+  background: linear-gradient(150deg, #251f3d, #16141f); }
+.lz-bento__celda:nth-child(2) { grid-area: notaA; }
+.lz-bento__celda:nth-child(3) { grid-area: notaB; }
+.lz-bento__celda--ancha { grid-area: ancha; }
+@media (max-width: 560px) {
+  .lz-bento {
+    grid-template-columns: 1fr;
+    grid-template-areas: "heroe" "notaA" "notaB" "ancha";
+  }
+}</template>
+<template class="receta-html">&lt;div class="lz-bento"&gt;
+&lt;article class="lz-bento__celda lz-bento__celda--heroe"&gt;Hero&lt;/article&gt;
+&lt;article class="lz-bento__celda"&gt;Note A&lt;/article&gt;
+&lt;article class="lz-bento__celda"&gt;Note B&lt;/article&gt;
+&lt;article class="lz-bento__celda lz-bento__celda--ancha"&gt;Bottom strip&lt;/article&gt;
+&lt;/div&gt;</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="bento-editorial-h" class="lab-seccion" id="bento-editorial">
+<header class="lab-seccion__head">
+<h2 id="bento-editorial-h">Editorial bento</h2>
+<p>An editorial layout with a tall text tile, two medium tiles, and a closing strip, arranged like a newspaper.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="bento-editorial-r">
+<div class="pieza__escenario">
+<div class="lz-bento-ed">
+<article class="lz-bento-ed__celda lz-bento-ed__celda--alta">Featured<br/>article</article>
+<article class="lz-bento-ed__celda">Secondary</article>
+<article class="lz-bento-ed__celda">Tertiary</article>
+<article class="lz-bento-ed__celda lz-bento-ed__celda--faja">Subscribe</article>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Editorial layout</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-bento-ed {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-areas:
+    "alta sec  ter"
+    "alta faja faja";
+}
+.lz-bento-ed__celda {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  padding: 1rem;
+  text-align: center;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.9rem/1.25 system-ui, sans-serif;
+}
+.lz-bento-ed__celda--alta { grid-area: alta; min-height: 190px;
+  background: linear-gradient(160deg, #16303a, #16141f); }
+.lz-bento-ed__celda:nth-child(2) { grid-area: sec; }
+.lz-bento-ed__celda:nth-child(3) { grid-area: ter; }
+.lz-bento-ed__celda--faja { grid-area: faja;
+  background: linear-gradient(90deg, #251f3d, #16141f); }
+@media (max-width: 560px) {
+  .lz-bento-ed {
+    grid-template-columns: 1fr;
+    grid-template-areas: "alta" "sec" "ter" "faja";
+  }
+}</template>
+<template class="receta-html">&lt;div class="lz-bento-ed"&gt;
+&lt;article class="lz-bento-ed__celda lz-bento-ed__celda--alta"&gt;Featured&lt;br/&gt;article&lt;/article&gt;
+&lt;article class="lz-bento-ed__celda"&gt;Secondary&lt;/article&gt;
+&lt;article class="lz-bento-ed__celda"&gt;Tertiary&lt;/article&gt;
+&lt;article class="lz-bento-ed__celda lz-bento-ed__celda--faja"&gt;Subscribe&lt;/article&gt;
+&lt;/div&gt;</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="bento-panel-h" class="lab-seccion" id="bento-panel">
+<header class="lab-seccion__head">
+<h2 id="bento-panel-h">Dashboard bento</h2>
+<p>A dashboard layout: metrics above, a large chart, and a list alongside. Dense placement fills available gaps.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="bento-panel-r">
+<div class="pieza__escenario">
+<div class="lz-bento-panel">
+<article class="lz-bento-panel__celda">Metric 1</article>
+<article class="lz-bento-panel__celda">Metric 2</article>
+<article class="lz-bento-panel__celda">Metric 3</article>
+<article class="lz-bento-panel__celda lz-bento-panel__celda--grafico">Chart</article>
+<article class="lz-bento-panel__celda lz-bento-panel__celda--lista">List</article>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Dashboard</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-bento-panel {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: dense;
+}
+.lz-bento-panel__celda {
+  display: grid;
+  place-items: center;
+  min-height: 74px;
+  padding: 1rem;
+  background: #16141f;
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 600 0.9rem/1.2 system-ui, sans-serif;
+}
+.lz-bento-panel__celda--grafico {
+  grid-column: span 2;
+  min-height: 150px;
+  background: linear-gradient(160deg, #251f3d, #16141f);
+}
+.lz-bento-panel__celda--lista { grid-row: span 1; min-height: 150px; }
+@media (max-width: 560px) {
+  .lz-bento-panel { grid-template-columns: 1fr; }
+  .lz-bento-panel__celda--grafico { grid-column: auto; }
+}</template>
+<template class="receta-html">&lt;div class="lz-bento-panel"&gt;
+&lt;article class="lz-bento-panel__celda"&gt;Metric 1&lt;/article&gt;
+&lt;article class="lz-bento-panel__celda"&gt;Metric 2&lt;/article&gt;
+&lt;article class="lz-bento-panel__celda"&gt;Metric 3&lt;/article&gt;
+&lt;article class="lz-bento-panel__celda lz-bento-panel__celda--grafico"&gt;Chart&lt;/article&gt;
+&lt;article class="lz-bento-panel__celda lz-bento-panel__celda--lista"&gt;List&lt;/article&gt;
+&lt;/div&gt;</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="bento-galeria-h" class="lab-seccion" id="bento-galeria">
+<header class="lab-seccion__head">
+<h2 id="bento-galeria-h">Gallery bento</h2>
+<p>A portfolio layout with square tiles and two larger focal tiles. Dense placement helps fill gaps as the grid rearranges.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="bento-galeria-r">
+<div class="pieza__escenario">
+<div class="lz-bento-gal">
+<figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande">1</figure>
+<figure class="lz-bento-gal__pieza">2</figure>
+<figure class="lz-bento-gal__pieza">3</figure>
+<figure class="lz-bento-gal__pieza">4</figure>
+<figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande">5</figure>
+<figure class="lz-bento-gal__pieza">6</figure>
+<figure class="lz-bento-gal__pieza">7</figure>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Mixed gallery</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-bento-gal {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 72px;
+  grid-auto-flow: dense;
+}
+.lz-bento-gal__pieza {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, #221e33, #16141f);
+  color: #f4f3f8;
+  border: 1px solid #2c2938;
+  border-radius: 16px;
+  font: 700 1rem/1 system-ui, sans-serif;
+}
+.lz-bento-gal__pieza--grande {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(150deg, #16303a, #16141f);
+}
+@media (max-width: 560px) {
+  .lz-bento-gal { grid-template-columns: repeat(2, 1fr); }
+}</template>
+<template class="receta-html">&lt;div class="lz-bento-gal"&gt;
+&lt;figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande"&gt;1&lt;/figure&gt;
+&lt;figure class="lz-bento-gal__pieza"&gt;2&lt;/figure&gt;
+&lt;figure class="lz-bento-gal__pieza"&gt;3&lt;/figure&gt;
+&lt;figure class="lz-bento-gal__pieza"&gt;4&lt;/figure&gt;
+&lt;figure class="lz-bento-gal__pieza lz-bento-gal__pieza--grande"&gt;5&lt;/figure&gt;
+&lt;figure class="lz-bento-gal__pieza"&gt;6&lt;/figure&gt;
+&lt;figure class="lz-bento-gal__pieza"&gt;7&lt;/figure&gt;
+&lt;/div&gt;</template>
+</article>
+</div>
+</section>
+</section>
+<section class="section shell"><div class="prose"><h2>Use the example in your project</h2><p>Copy the HTML and CSS for the same piece. If a JavaScript button is shown, include that script too. Keep IDs unique, update links, and test keyboard focus and small screens. These examples demonstrate front-end behavior; forms do not create accounts or submit real orders. Names, testimonials, prices, and metrics are illustrative sample content.</p><p><a href="/en/code/components/">All component categories</a> · <a href="/en/code/">CSS generators</a> · <a href="/en/templates/">Downloadable templates</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg aria-label="Lienzo" class="logo-lienzo" role="img" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-footer" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/resources/">Free Resources</a></li><li><a href="/en/blog/">Blog and Guides</a></li><li><a href="/en/about/">About Lienzo</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" rel="noopener" target="_blank">YouTube</a></li><li><a href="/en/code/">CSS Generators</a></li><li><a href="/en/code/components/">CSS Components</a></li><li><a href="/en/my-lienzo/">My Lienzo</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Code: MIT. Fonts: OFL. Keep the included license notices.<span data-revocar-consentimiento="" style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script defer="" src="/en/assets/site.js"></script><script defer="" src="/en/assets/my-lienzo.js"></script><script defer="" src="/en/code/components/js/componentes.js"></script></body></html>

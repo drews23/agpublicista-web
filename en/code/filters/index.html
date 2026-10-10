@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>CSS Filter Generator | Lienzo</title><meta content="CSS Filter Generator by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." name="description"/><link href="https://lienzo.tools/en/code/filters/" rel="canonical"/><link href="https://lienzo.tools/codigo-web/filtros/" hreflang="es" rel="alternate"/>
+<link href="https://lienzo.tools/en/code/filters/" hreflang="en" rel="alternate"/>
+<link href="https://lienzo.tools/codigo-web/filtros/" hreflang="x-default" rel="alternate"/><meta content="CSS Filter Generator" property="og:title"/><meta content="CSS Filter Generator by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." property="og:description"/><meta content="https://lienzo.tools/en/code/filters/" property="og:url"/><meta content="website" property="og:type"/><meta content="en_US" property="og:locale"/><link href="/favicon.svg" rel="icon"/><link href="/css/site.css?v=2026090405" rel="stylesheet"/><link href="/css/codigo-web.css?v=2026090503" rel="stylesheet"/><link href="/codigo-web/filtros/css/tool.css?v=2026090503" rel="stylesheet"/><link href="/css/estudio.css?v=2026090504" rel="stylesheet"/><link href="/en/assets/english.css?v=2026101007" rel="stylesheet"/><script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("agp-theme")||"dark"}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "CSS Filter Generator", "url": "https://lienzo.tools/en/code/filters/", "description": "CSS Filter Generator by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.", "inLanguage": "en-US"}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a aria-label="Lienzo home" class="brand" href="/en/"><span class="brand__lockup"><svg aria-hidden="true" class="brand__logo" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-header" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav aria-label="Main navigation" class="site-nav"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/code/">Web Code</a><a href="/en/templates/">Templates</a><a data-espacio-btn="" href="/en/my-lienzo/">My Lienzo</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a aria-label="Cambiar a español" class="theme-btn language-switch" href="/codigo-web/filtros/" hreflang="es" lang="es" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600" title="Cambiar a español"><svg aria-hidden="true" fill="none" focusable="false" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"></path></svg><span>ES</span></a><button aria-label="Change theme" class="theme-btn" data-theme-toggle="" type="button">☀</button><button aria-expanded="false" aria-label="Open menu" class="nav-toggle" data-nav-toggle="" type="button">☰</button></div></div></header><main id="main">
+<section class="section shell">
+<nav aria-label="Breadcrumb" class="breadcrumbs reveal">
+<a href="/en/">Home</a> › <a href="/en/code/">Web Code</a> › <span>Filters</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow reveal">CSS Generator</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">CSS Filter Generator</h1>
+<p class="lede reveal" style="--reveal-delay: 140ms">
+            The nine CSS filters plus <code>drop-shadow</code>, previewed on an actual image. Adjust the controls and copy the filter chain. Only nondefault effects appear in the code.
+          </p>
+</div>
+</section>
+<section class="section estudio-shell">
+<div class="estudio reveal" data-controles="" data-estudio="" style="--reveal-delay: 200ms">
+<div class="lienzo-previa">
+<img alt="Lienzo sample image: dark background with violet and turquoise light and the brand name" class="demo-foto demo-foto--muestra" data-foto="" decoding="async" height="630" src="/assets/og/og-home.png" width="1200"/>
+<div class="demo-caja" data-caja="" hidden="">Lienzo</div>
+</div>
+<div class="estudio__acciones">
+<label class="interruptor">
+<input data-control="plano" type="checkbox"/>
+<span>
+                    Preview on a solid color
+                    <small>Hue rotation and invert are easier to compare on a solid color.</small>
+</span>
+</label>
+</div>
+<button aria-controls="panel-estudio" aria-expanded="true" class="estudio__alternar" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>
+<span data-alternar-texto="">Hide</span>
+</button>
+<aside aria-label="Filter settings" class="estudio__panel" id="panel-estudio">
+<div class="estudio__panel-cabecera">
+<h2 class="estudio__panel-titulo">Settings</h2>
+</div>
+<div class="estudio__panel-cuerpo">
+<details class="estudio__seccion" open="">
+<summary>Presets</summary>
+<div class="preajustes">
+<button class="boton-sutil" data-preajuste="ninguno" type="button">None</button>
+<button class="boton-sutil" data-preajuste="byn" type="button">Black and white</button>
+<button class="boton-sutil" data-preajuste="sepia" type="button">Vintage sepia</button>
+<button class="boton-sutil" data-preajuste="contraste" type="button">High contrast</button>
+<button class="boton-sutil" data-preajuste="sueno" type="button">Dreamy</button>
+<button class="boton-sutil" data-preajuste="invertido" type="button">Inverted</button>
+</div>
+</details>
+<details class="estudio__seccion" open="">
+<summary>Filters</summary>
+<div class="controles">
+<label class="campo">
+<span class="campo__label">Blur <span><output data-output="desenfoque">0</output>px</span></span>
+<input aria-label="Blur in pixels" data-control="desenfoque" max="20" min="0" step="0.5" type="range" value="0"/>
+<span class="campo__hint">Blur can be expensive to render. Above 8px, this sample loses much of its detail.</span>
+</label>
+<label class="campo">
+<span class="campo__label">Brightness <span><output data-output="brillo">100</output>%</span></span>
+<input aria-label="Brightness as a percentage" data-control="brillo" max="200" min="0" step="1" type="range" value="100"/>
+</label>
+<label class="campo">
+<span class="campo__label">Contrast <span><output data-output="contraste">100</output>%</span></span>
+<input aria-label="Contrast as a percentage" data-control="contraste" max="200" min="0" step="1" type="range" value="100"/>
+</label>
+<label class="campo">
+<span class="campo__label">Saturation <span><output data-output="saturacion">100</output>%</span></span>
+<input aria-label="Saturation as a percentage" data-control="saturacion" max="300" min="0" step="1" type="range" value="100"/>
+</label>
+<label class="campo">
+<span class="campo__label">Hue rotation <span><output data-output="tono">0</output>°</span></span>
+<input aria-label="Hue rotation in degrees" data-control="tono" max="360" min="0" step="1" type="range" value="0"/>
+<span class="campo__hint">Rotate the entire color wheel. At 360°, it returns to the starting point.</span>
+</label>
+<label class="campo">
+<span class="campo__label">Grayscale <span><output data-output="gris">0</output>%</span></span>
+<input aria-label="Grayscale as a percentage" data-control="gris" max="100" min="0" step="1" type="range" value="0"/>
+</label>
+<label class="campo">
+<span class="campo__label">Sepia <span><output data-output="sepia">0</output>%</span></span>
+<input aria-label="Sepia as a percentage" data-control="sepia" max="100" min="0" step="1" type="range" value="0"/>
+</label>
+<label class="campo">
+<span class="campo__label">Invert <span><output data-output="invertir">0</output>%</span></span>
+<input aria-label="Invert as a percentage" data-control="invertir" max="100" min="0" step="1" type="range" value="0"/>
+<span class="campo__hint">At 50%, all values converge to midgray.</span>
+</label>
+<label class="campo">
+<span class="campo__label">Opacity <span><output data-output="opacidad">100</output>%</span></span>
+<input aria-label="Opacity as a percentage" data-control="opacidad" max="100" min="0" step="1" type="range" value="100"/>
+</label>
+</div>
+</details>
+<details class="estudio__seccion" open="">
+<summary>Drop shadow</summary>
+<div class="controles">
+<label class="interruptor">
+<input data-control="sombra" type="checkbox"/>
+<span>
+                    Add drop-shadow
+                    <small>Follows the visible content's alpha outline rather than its rectangular box.</small>
+</span>
+</label>
+<div class="capa campos-apagados" data-campos-sombra="">
+<label class="campo">
+<span class="campo__label">X offset <span><output data-output="sombraX">0</output>px</span></span>
+<input aria-label="Shadow: horizontal offset in pixels" data-control="sombraX" disabled="" max="40" min="-40" step="1" type="range" value="0"/>
+</label>
+<label class="campo">
+<span class="campo__label">Y offset <span><output data-output="sombraY">10</output>px</span></span>
+<input aria-label="Shadow: vertical offset in pixels" data-control="sombraY" disabled="" max="40" min="-40" step="1" type="range" value="10"/>
+</label>
+<label class="campo">
+<span class="campo__label">Blur <span><output data-output="sombraDesenfoque">18</output>px</span></span>
+<input aria-label="Shadow: blur in pixels" data-control="sombraDesenfoque" disabled="" max="60" min="0" step="1" type="range" value="18"/>
+</label>
+<div class="campo campo--color">
+<input aria-label="Shadow color" data-control="sombraColor" disabled="" type="color" value="#0a0a0f"/>
+<input aria-label="Shadow hex color" data-sombra-hex="" disabled="" spellcheck="false" type="text" value="#0a0a0f"/>
+</div>
+</div>
+</div>
+</details>
+</div>
+</aside>
+<p aria-live="polite" class="sub" data-resumen="" role="status">No filters</p><details class="estudio__codigo">
+<summary>
+<span class="estudio__codigo-etiqueta"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 15l6-6 6 6"></path></svg><span class="estudio__codigo-texto">Generated CSS</span></span>
+<span class="acciones estudio__codigo-acciones">
+<button class="btn btn--primary" data-copiar="" type="button">Copy CSS</button>
+<button class="btn btn--ghost" data-copiar-valor="" type="button">Copy value only</button>
+</span>
+</summary>
+<pre aria-label="Filter CSS code" class="codigo" data-codigo="" tabindex="0"></pre>
+</details>
+</div>
+<p class="nota-taller">
+          Need a background first? Try the
+          <a href="/en/code/gradients/">gradient generator</a>.
+        </p>
+</section>
+<section class="section shell"><div class="prose"><h2>Compare filters on visible content</h2><p>Try blur, brightness, contrast, saturation, hue rotation, grayscale, sepia, invert, and opacity. Add drop-shadow for the alpha outline of the content. Default values are omitted from the output. Filter order matters: the browser applies the chain in the written order.</p><details><summary>How is drop-shadow different from box-shadow?</summary><p>drop-shadow follows the visible alpha shape, while box-shadow follows the box. Large blur regions can be costly to render; test performance on the devices you support.</p></details><p><a href="/en/code/">All CSS generators</a> · <a href="/en/my-lienzo/">My Lienzo</a> · <a href="/en/tools/">Creative tools</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg aria-label="Lienzo" class="logo-lienzo" role="img" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-footer" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/resources/">Free Resources</a></li><li><a href="/en/blog/">Blog and Guides</a></li><li><a href="/en/about/">About Lienzo</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" rel="noopener" target="_blank">YouTube</a></li><li><a href="/en/code/">CSS Generators</a></li><li><a href="/en/code/components/">CSS Components</a></li><li><a href="/en/my-lienzo/">My Lienzo</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Code: MIT. Fonts: OFL. Keep the included license notices.<span data-revocar-consentimiento="" style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script defer="" src="/en/assets/site.js"></script><script defer="" src="/en/assets/my-lienzo.js"></script><script defer="" src="/en/assets/codigo-web.js"></script><script defer="" src="/en/assets/estudio.js"></script><script defer="" src="/en/code/filters/js/filtros.js"></script></body></html>

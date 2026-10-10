@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Buttons and Controls | Lienzo</title><meta content="Buttons and Controls by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." name="description"/><link href="https://lienzo.tools/en/code/components/buttons/" rel="canonical"/><link href="https://lienzo.tools/codigo-web/componentes/botones/" hreflang="es" rel="alternate"/>
+<link href="https://lienzo.tools/en/code/components/buttons/" hreflang="en" rel="alternate"/>
+<link href="https://lienzo.tools/codigo-web/componentes/botones/" hreflang="x-default" rel="alternate"/><meta content="Buttons and Controls" property="og:title"/><meta content="Buttons and Controls by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." property="og:description"/><meta content="https://lienzo.tools/en/code/components/buttons/" property="og:url"/><meta content="website" property="og:type"/><meta content="en_US" property="og:locale"/><link href="/favicon.svg" rel="icon"/><link href="/css/site.css?v=2026090405" rel="stylesheet"/><link href="/codigo-web/componentes/css/componentes.css?v=2026090404" rel="stylesheet"/><link href="/en/assets/english.css?v=2026101007" rel="stylesheet"/><script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("agp-theme")||"dark"}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Buttons and Controls", "url": "https://lienzo.tools/en/code/components/buttons/", "description": "Buttons and Controls by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.", "inLanguage": "en-US"}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a aria-label="Lienzo home" class="brand" href="/en/"><span class="brand__lockup"><svg aria-hidden="true" class="brand__logo" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-header" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav aria-label="Main navigation" class="site-nav"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/code/">Web Code</a><a href="/en/templates/">Templates</a><a data-espacio-btn="" href="/en/my-lienzo/">My Lienzo</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a aria-label="Cambiar a español" class="theme-btn language-switch" href="/codigo-web/componentes/botones/" hreflang="es" lang="es" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600" title="Cambiar a español"><svg aria-hidden="true" fill="none" focusable="false" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"></path></svg><span>ES</span></a><button aria-label="Change theme" class="theme-btn" data-theme-toggle="" type="button">☀</button><button aria-expanded="false" aria-label="Open menu" class="nav-toggle" data-nav-toggle="" type="button">☰</button></div></div></header><main id="main">
+<section class="section shell">
+<nav aria-label="Breadcrumb" class="breadcrumbs reveal">
+<a href="/en/">Home</a> › <a href="/en/code/">Web Code</a> › <a href="/en/code/components/">CSS Components</a> › <span>Buttons and Controls</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow reveal">Copy-ready code</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">Buttons and Controls</h1>
+<p class="lede reveal" style="--reveal-delay: 140ms">Controls are where visitors interact with your interface. These examples use 44px touch targets, visible focus, native inputs, and keyboard support.</p>
+</div>
+<section aria-labelledby="botones-base-h" class="lab-seccion" id="botones-base">
+<header class="lab-seccion__head">
+<h2 id="botones-base-h">Buttons</h2>
+<p>Four common button styles: primary, secondary, shine, and loading. Each has a minimum 44px touch target.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="boton-degradado">
+<div class="pieza__escenario">
+<button class="lz-btn lz-btn--primario" type="button">Download pack</button>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Gradient primary button</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.4rem;
+  border: 0;
+  border-radius: 12px;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+.lz-btn--primario {
+  color: #fff;
+  background: linear-gradient(135deg, #8b7bff, #5f8bff);
+  box-shadow: 0 10px 24px rgba(139, 123, 255, 0.35);
+}
+.lz-btn--primario:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.lz-btn--primario:active { transform: translateY(0); }
+.lz-btn--primario:focus-visible { outline: 2px solid #c9c1ff; outline-offset: 2px; }</template>
+<template class="receta-html">&lt;button class="lz-btn lz-btn--primario" type="button"&gt;Download pack&lt;/button&gt;</template>
+</article>
+<article class="pieza" id="boton-fantasma">
+<div class="pieza__escenario">
+<button class="lz-btn-fantasma" type="button">View details</button>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Ghost secondary button</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-btn-fantasma {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.4rem;
+  border: 1px solid #3a374a;
+  border-radius: 12px;
+  background: transparent;
+  color: #e8e6f2;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+.lz-btn-fantasma:hover { border-color: #8b7bff; background: rgba(139, 123, 255, 0.08); }
+.lz-btn-fantasma:focus-visible { outline: 2px solid #8b7bff; outline-offset: 2px; }</template>
+<template class="receta-html">&lt;button class="lz-btn-fantasma" type="button"&gt;View details&lt;/button&gt;</template>
+</article>
+<article class="pieza" id="boton-brillo">
+<div class="pieza__escenario">
+<button class="lz-btn-brillo" type="button">New</button>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Sweeping shine</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-btn-brillo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.6rem;
+  border: 1px solid #3a374a;
+  border-radius: 999px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  overflow: hidden;
+}
+.lz-btn-brillo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 600ms ease;
+}
+.lz-btn-brillo:hover::after { transform: translateX(100%); }
+@media (prefers-reduced-motion: reduce) {
+  .lz-btn-brillo::after { display: none; }
+}</template>
+<template class="receta-html">&lt;button class="lz-btn-brillo" type="button"&gt;New&lt;/button&gt;</template>
+</article>
+<article class="pieza" id="boton-carga">
+<div class="pieza__escenario">
+<button class="lz-btn-carga" data-lz-carga="" type="button">
+<span aria-hidden="true" class="lz-btn-carga__aro"></span>
+<span class="lz-btn-carga__texto">Process</span>
+</button>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Loading button</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-btn-carga {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  padding: 0 1.4rem;
+  border: 0;
+  border-radius: 12px;
+  background: #2c2938;
+  color: #f4f3f8;
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-btn-carga__aro {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  display: none;
+}
+.lz-btn-carga.esta-cargando { opacity: 0.85; pointer-events: none; }
+.lz-btn-carga.esta-cargando .lz-btn-carga__aro {
+  display: block;
+  animation: lz-girar 700ms linear infinite;
+}
+@keyframes lz-girar { to { transform: rotate(1turn); } }</template>
+<template class="receta-html">&lt;button class="lz-btn-carga" data-lz-carga="" type="button"&gt;
+&lt;span aria-hidden="true" class="lz-btn-carga__aro"&gt;&lt;/span&gt;
+&lt;span class="lz-btn-carga__texto"&gt;Process&lt;/span&gt;
+&lt;/button&gt;</template>
+<template class="receta-js">// Simula un estado de carga de 1,6 s al hacer clic.
+document.querySelectorAll("[data-lz-carga]").forEach((btn) =&gt; {
+  btn.addEventListener("click", () =&gt; {
+    btn.classList.add("esta-cargando");
+    setTimeout(() =&gt; btn.classList.remove("esta-cargando"), 1600);
+  });
+});</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="conmutadores-h" class="lab-seccion" id="conmutadores">
+<header class="lab-seccion__head">
+<h2 id="conmutadores-h">Toggles</h2>
+<p>Switches and chips built on native inputs. CSS styles them while the underlying controls retain keyboard interaction.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="switch">
+<div class="pieza__escenario">
+<label class="lz-switch">
+<input checked="" type="checkbox"/>
+<span aria-hidden="true" class="lz-switch__pista"></span>
+                Notifications
+              </label>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Switch</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #e8e6f2;
+  font: 500 0.95rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.lz-switch__pista {
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  background: #3a374a;
+  position: relative;
+  transition: background-color 180ms ease;
+  flex: 0 0 auto;
+}
+.lz-switch__pista::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 180ms ease;
+}
+.lz-switch input:checked + .lz-switch__pista { background: #35d6c8; }
+.lz-switch input:checked + .lz-switch__pista::after { transform: translateX(20px); }
+.lz-switch input:focus-visible + .lz-switch__pista {
+  outline: 2px solid #8b7bff;
+  outline-offset: 2px;
+}</template>
+<template class="receta-html">&lt;label class="lz-switch"&gt;
+&lt;input checked="" type="checkbox"/&gt;
+&lt;span aria-hidden="true" class="lz-switch__pista"&gt;&lt;/span&gt;
+  Notifications
+&lt;/label&gt;</template>
+</article>
+<article class="pieza" id="chips">
+<div class="pieza__escenario">
+<div aria-label="Filters" class="lz-chips" role="group">
+<label class="lz-chip"><input checked="" type="checkbox"/>SVG</label>
+<label class="lz-chip"><input type="checkbox"/>PNG</label>
+<label class="lz-chip"><input type="checkbox"/>WAV</label>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Filter chips</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.lz-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 0.95rem;
+  border: 1px solid #3a374a;
+  border-radius: 999px;
+  background: #16141f;
+  color: #cfcbdd;
+  font: 500 0.88rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+.lz-chip input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.lz-chip:has(input:checked) {
+  border-color: #8b7bff;
+  background: rgba(139, 123, 255, 0.14);
+  color: #fff;
+}
+.lz-chip:has(input:focus-visible) {
+  outline: 2px solid #8b7bff;
+  outline-offset: 2px;
+}</template>
+<template class="receta-html">&lt;div aria-label="Filters" class="lz-chips" role="group"&gt;
+&lt;label class="lz-chip"&gt;&lt;input checked="" type="checkbox"/&gt;SVG&lt;/label&gt;
+&lt;label class="lz-chip"&gt;&lt;input type="checkbox"/&gt;PNG&lt;/label&gt;
+&lt;label class="lz-chip"&gt;&lt;input type="checkbox"/&gt;WAV&lt;/label&gt;
+&lt;/div&gt;</template>
+</article>
+<article class="pieza" id="segmentado">
+<div class="pieza__escenario">
+<div aria-label="View" class="lz-segmento" role="group">
+<label class="lz-segmento__opcion"><input checked="" name="lz-seg" type="radio"/>Day</label>
+<label class="lz-segmento__opcion"><input name="lz-seg" type="radio"/>Week</label>
+<label class="lz-segmento__opcion"><input name="lz-seg" type="radio"/>Month</label>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Segmented control</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-segmento {
+  display: inline-flex;
+  padding: 4px;
+  gap: 2px;
+  border-radius: 12px;
+  background: #16141f;
+  border: 1px solid #2c2938;
+}
+.lz-segmento__opcion {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 1rem;
+  border-radius: 9px;
+  color: #cfcbdd;
+  font: 600 0.88rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+.lz-segmento__opcion input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.lz-segmento__opcion:has(input:checked) {
+  background: #8b7bff;
+  color: #fff;
+}
+.lz-segmento__opcion:has(input:focus-visible) {
+  outline: 2px solid #c9c1ff;
+  outline-offset: 1px;
+}</template>
+<template class="receta-html">&lt;div aria-label="View" class="lz-segmento" role="group"&gt;
+&lt;label class="lz-segmento__opcion"&gt;&lt;input checked="" name="lz-seg" type="radio"/&gt;Day&lt;/label&gt;
+&lt;label class="lz-segmento__opcion"&gt;&lt;input name="lz-seg" type="radio"/&gt;Week&lt;/label&gt;
+&lt;label class="lz-segmento__opcion"&gt;&lt;input name="lz-seg" type="radio"/&gt;Month&lt;/label&gt;
+&lt;/div&gt;</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="pestanas-h" class="lab-seccion" id="pestanas">
+<header class="lab-seccion__head">
+<h2 id="pestanas-h">Tabs</h2>
+<p>Tabs with ARIA roles, arrow-key navigation, and associated panels. The required JavaScript is included.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza pieza--ancha" id="tabs">
+<div class="pieza__escenario">
+<div class="lz-tabs" data-lz-tabs="">
+<div aria-label="Sections" class="lz-tabs__lista" role="tablist">
+<button aria-controls="lz-panel-1" aria-selected="true" id="lz-tab-1" role="tab" type="button">Overview</button>
+<button aria-controls="lz-panel-2" aria-selected="false" id="lz-tab-2" role="tab" tabindex="-1" type="button">Details</button>
+<button aria-controls="lz-panel-3" aria-selected="false" id="lz-tab-3" role="tab" tabindex="-1" type="button">History</button>
+</div>
+<div aria-labelledby="lz-tab-1" class="lz-tabs__panel" id="lz-panel-1" role="tabpanel">Overview content.</div>
+<div aria-labelledby="lz-tab-2" class="lz-tabs__panel" hidden="" id="lz-panel-2" role="tabpanel">Details content.</div>
+<div aria-labelledby="lz-tab-3" class="lz-tabs__panel" hidden="" id="lz-panel-3" role="tabpanel">History content.</div>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Keyboard-accessible tabs</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-tabs__lista {
+  display: flex;
+  gap: 0.3rem;
+  border-bottom: 1px solid #2c2938;
+}
+.lz-tabs__lista [role="tab"] {
+  border: 0;
+  background: transparent;
+  color: #cfcbdd;
+  font: 600 0.92rem/1 system-ui, sans-serif;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.lz-tabs__lista [role="tab"][aria-selected="true"] {
+  color: #fff;
+  border-bottom-color: #8b7bff;
+}
+.lz-tabs__lista [role="tab"]:focus-visible {
+  outline: 2px solid #8b7bff;
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+.lz-tabs__panel {
+  padding: 0.9rem 0.2rem;
+  color: #e8e6f2;
+  font: 400 0.92rem/1.5 system-ui, sans-serif;
+}</template>
+<template class="receta-html">&lt;div class="lz-tabs" data-lz-tabs=""&gt;
+&lt;div aria-label="Sections" class="lz-tabs__lista" role="tablist"&gt;
+&lt;button aria-controls="lz-panel-1" aria-selected="true" id="lz-tab-1" role="tab" type="button"&gt;Overview&lt;/button&gt;
+&lt;button aria-controls="lz-panel-2" aria-selected="false" id="lz-tab-2" role="tab" tabindex="-1" type="button"&gt;Details&lt;/button&gt;
+&lt;button aria-controls="lz-panel-3" aria-selected="false" id="lz-tab-3" role="tab" tabindex="-1" type="button"&gt;History&lt;/button&gt;
+&lt;/div&gt;
+&lt;div aria-labelledby="lz-tab-1" class="lz-tabs__panel" id="lz-panel-1" role="tabpanel"&gt;Overview content.&lt;/div&gt;
+&lt;div aria-labelledby="lz-tab-2" class="lz-tabs__panel" hidden="" id="lz-panel-2" role="tabpanel"&gt;Details content.&lt;/div&gt;
+&lt;div aria-labelledby="lz-tab-3" class="lz-tabs__panel" hidden="" id="lz-panel-3" role="tabpanel"&gt;History content.&lt;/div&gt;
+&lt;/div&gt;</template>
+<template class="receta-js">// Pestañas: clic + flechas izquierda/derecha, foco gestionado.
+document.querySelectorAll("[data-lz-tabs]").forEach((raiz) =&gt; {
+  const pestanas = [...raiz.querySelectorAll('[role="tab"]')];
+  function activar(tab) {
+    pestanas.forEach((t) =&gt; {
+      const activa = t === tab;
+      t.setAttribute("aria-selected", String(activa));
+      t.tabIndex = activa ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !activa;
+    });
+    tab.focus();
+  }
+  pestanas.forEach((tab, i) =&gt; {
+    tab.addEventListener("click", () =&gt; activar(tab));
+    tab.addEventListener("keydown", (e) =&gt; {
+      if (e.key !== "ArrowRight" &amp;&amp; e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const paso = e.key === "ArrowRight" ? 1 : -1;
+      activar(pestanas[(i + paso + pestanas.length) % pestanas.length]);
+    });
+  });
+});</template>
+</article>
+</div>
+</section>
+</section>
+<section class="section shell"><div class="prose"><h2>Use the example in your project</h2><p>Copy the HTML and CSS for the same piece. If a JavaScript button is shown, include that script too. Keep IDs unique, update links, and test keyboard focus and small screens. These examples demonstrate front-end behavior; forms do not create accounts or submit real orders. Names, testimonials, prices, and metrics are illustrative sample content.</p><p><a href="/en/code/components/">All component categories</a> · <a href="/en/code/">CSS generators</a> · <a href="/en/templates/">Downloadable templates</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg aria-label="Lienzo" class="logo-lienzo" role="img" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-footer" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/resources/">Free Resources</a></li><li><a href="/en/blog/">Blog and Guides</a></li><li><a href="/en/about/">About Lienzo</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" rel="noopener" target="_blank">YouTube</a></li><li><a href="/en/code/">CSS Generators</a></li><li><a href="/en/code/components/">CSS Components</a></li><li><a href="/en/my-lienzo/">My Lienzo</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Code: MIT. Fonts: OFL. Keep the included license notices.<span data-revocar-consentimiento="" style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script defer="" src="/en/assets/site.js"></script><script defer="" src="/en/assets/my-lienzo.js"></script><script defer="" src="/en/code/components/js/componentes.js"></script></body></html>

@@ -70,3 +70,5 @@ _3d/
 # Public English templates and demo assets belong to the website.
 !/en/templates/
 !/en/templates/**
+!/en/code/components/
+!/en/code/components/**

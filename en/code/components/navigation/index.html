@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Navigation with Modern CSS | Lienzo</title><meta content="Navigation with Modern CSS by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." name="description"/><link href="https://lienzo.tools/en/code/components/navigation/" rel="canonical"/><link href="https://lienzo.tools/codigo-web/componentes/navegacion/" hreflang="es" rel="alternate"/>
+<link href="https://lienzo.tools/en/code/components/navigation/" hreflang="en" rel="alternate"/>
+<link href="https://lienzo.tools/codigo-web/componentes/navegacion/" hreflang="x-default" rel="alternate"/><meta content="Navigation with Modern CSS" property="og:title"/><meta content="Navigation with Modern CSS by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." property="og:description"/><meta content="https://lienzo.tools/en/code/components/navigation/" property="og:url"/><meta content="website" property="og:type"/><meta content="en_US" property="og:locale"/><link href="/favicon.svg" rel="icon"/><link href="/css/site.css?v=2026090405" rel="stylesheet"/><link href="/codigo-web/componentes/css/componentes.css?v=2026090404" rel="stylesheet"/><link href="/en/assets/english.css?v=2026101007" rel="stylesheet"/><script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("agp-theme")||"dark"}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Navigation with Modern CSS", "url": "https://lienzo.tools/en/code/components/navigation/", "description": "Navigation with Modern CSS by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.", "inLanguage": "en-US"}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a aria-label="Lienzo home" class="brand" href="/en/"><span class="brand__lockup"><svg aria-hidden="true" class="brand__logo" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-header" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav aria-label="Main navigation" class="site-nav"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/code/">Web Code</a><a href="/en/templates/">Templates</a><a data-espacio-btn="" href="/en/my-lienzo/">My Lienzo</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a aria-label="Cambiar a español" class="theme-btn language-switch" href="/codigo-web/componentes/navegacion/" hreflang="es" lang="es" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600" title="Cambiar a español"><svg aria-hidden="true" fill="none" focusable="false" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"></path></svg><span>ES</span></a><button aria-label="Change theme" class="theme-btn" data-theme-toggle="" type="button">☀</button><button aria-expanded="false" aria-label="Open menu" class="nav-toggle" data-nav-toggle="" type="button">☰</button></div></div></header><main id="main">
+<section class="section shell">
+<nav aria-label="Breadcrumb" class="breadcrumbs reveal">
+<a href="/en/">Home</a> › <a href="/en/code/">Web Code</a> › <a href="/en/code/components/">CSS Components</a> › <span>Navigation with Modern CSS</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow reveal">Copy-ready code</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">Navigation with Modern CSS</h1>
+<p class="lede reveal" style="--reveal-delay: 140ms">Five navigation examples, most without JavaScript, using native disclosure and popover behavior. They include active states, visible keyboard focus, and reduced-motion styles. Test browser support before integration.</p>
+</div>
+<section aria-labelledby="laterales-h" class="lab-seccion" id="laterales">
+<header class="lab-seccion__head">
+<h2 id="laterales-h">Sidebars</h2>
+<p>For apps and dashboards: an icon rail that expands on hover and a grouped menu using native details elements.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="rail-lateral">
+<div class="pieza__escenario">
+<nav aria-label="Main menu" class="lz-rail">
+<a aria-current="page" href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 11 12 4l9 7"></path><path d="M5 10v10h14V10"></path></svg><span>Home</span></a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-4.2-4.2"></path></svg><span>Search</span></a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"></path></svg><span>Statistics</span></a>
+<a class="lz-rail__punto" href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"></path></svg><span>Messages</span></a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"></path><circle cx="17" cy="7" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="19" cy="17" r="2"></circle></svg><span>Settings</span></a>
+<label class="lz-rail__pin"><input type="checkbox"/><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m9 6 6 6-6 6"></path></svg><span>Pin open</span></label>
+</nav>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Expanding sidebar</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-rail {
+  --cerrado: 64px;
+  --abierto: 212px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: var(--cerrado);
+  height: 340px; /* en tu app: 100dvh */
+  padding: 10px;
+  background: #101018;
+  color: #a2a1b3;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: width 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Se abre al pasar, al enfocar con teclado o al fijarlo con el pin */
+.lz-rail:hover,
+.lz-rail:focus-within,
+.lz-rail:has(.lz-rail__pin input:checked) {
+  width: var(--abierto);
+}
+.lz-rail a,
+.lz-rail__pin {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  font: 500 0.92rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-rail svg { flex: none; width: 20px; height: 20px; }
+.lz-rail span {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 180ms ease 60ms, transform 220ms ease 60ms;
+}
+.lz-rail:hover span,
+.lz-rail:focus-within span,
+.lz-rail:has(.lz-rail__pin input:checked) span {
+  opacity: 1;
+  transform: none;
+}
+.lz-rail a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-rail a[aria-current="page"] { background: rgba(139, 123, 255, 0.18); color: #cdc5ff; }
+.lz-rail a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+/* Punto de aviso sobre el icono */
+.lz-rail__punto { position: relative; }
+.lz-rail__punto::after {
+  content: "";
+  position: absolute;
+  left: 26px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #35d6c8;
+  box-shadow: 0 0 0 2px #101018;
+}
+.lz-rail__pin { position: relative; margin-top: auto; }
+.lz-rail__pin input { position: absolute; opacity: 0; pointer-events: none; }
+.lz-rail__pin svg { transition: transform 200ms ease; }
+.lz-rail__pin:has(input:checked) svg { transform: rotate(90deg); }
+.lz-rail__pin:has(input:focus-visible) { outline: 2px solid #8b7bff; outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-rail, .lz-rail span, .lz-rail__pin svg { transition: none; }
+}</template>
+<template class="receta-html">&lt;nav aria-label="Main menu" class="lz-rail"&gt;
+&lt;a aria-current="page" href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M3 11 12 4l9 7"&gt;&lt;/path&gt;&lt;path d="M5 10v10h14V10"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Home&lt;/span&gt;&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;circle cx="11" cy="11" r="6"&gt;&lt;/circle&gt;&lt;path d="m20 20-4.2-4.2"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Search&lt;/span&gt;&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Statistics&lt;/span&gt;&lt;/a&gt;
+&lt;a class="lz-rail__punto" href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M4 5h16v11H9l-5 4z"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Messages&lt;/span&gt;&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"&gt;&lt;/path&gt;&lt;circle cx="17" cy="7" r="2"&gt;&lt;/circle&gt;&lt;circle cx="9" cy="12" r="2"&gt;&lt;/circle&gt;&lt;circle cx="19" cy="17" r="2"&gt;&lt;/circle&gt;&lt;/svg&gt;&lt;span&gt;Settings&lt;/span&gt;&lt;/a&gt;
+&lt;label class="lz-rail__pin"&gt;&lt;input type="checkbox"/&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="m9 6 6 6-6 6"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Pin open&lt;/span&gt;&lt;/label&gt;
+&lt;/nav&gt;</template>
+</article>
+<article class="pieza" id="menu-app">
+<div class="pieza__escenario">
+<nav aria-label="Application menu" class="lz-menu">
+<div class="lz-menu__marca"><i aria-hidden="true"></i>Studio</div>
+<details class="lz-menu__grupo" open="">
+<summary>Work</summary>
+<a aria-current="page" href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 6h6l2 2h10v11H3z"></path></svg>Projects<span class="lz-menu__num">12</span></a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg>Favorites</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 4v11m-5-5 5 5 5-5M4 20h16"></path></svg>Downloads</a>
+</details>
+<details class="lz-menu__grupo" open="">
+<summary>Account</summary>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"></path></svg>Notifications<span class="lz-menu__num">3</span></a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"></path><circle cx="17" cy="7" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="19" cy="17" r="2"></circle></svg>Settings</a>
+</details>
+<a class="lz-menu__cuenta" href="#"><i aria-hidden="true"></i><span>Andrea Ruiz<small>Pro plan</small></span></a>
+</nav>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">App menu with collapsible groups</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-menu {
+  width: 236px;
+  padding: 12px;
+  background: #101018;
+  color: #a2a1b3;
+  border: 1px solid #2c2938;
+  border-radius: 18px;
+  font: 500 0.9rem/1.2 system-ui, sans-serif;
+}
+.lz-menu__marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding: 8px 10px 14px;
+  border-bottom: 1px solid #2c2938;
+  color: #f4f3f8;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.lz-menu__marca i {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+}
+/* Grupos plegables con <details>: sin JS y accesibles de serie */
+.lz-menu__grupo summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 12px 10px 6px;
+  color: #6f6e7f;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.lz-menu__grupo summary::-webkit-details-marker { display: none; }
+.lz-menu__grupo summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 200ms ease;
+}
+.lz-menu__grupo[open] summary::after { transform: rotate(45deg); }
+.lz-menu__grupo summary:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; border-radius: 8px; }
+.lz-menu a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+.lz-menu a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-menu a[aria-current="page"] { background: rgba(139, 123, 255, 0.16); color: #cdc5ff; }
+.lz-menu a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 3px;
+  background: #8b7bff;
+}
+.lz-menu a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+.lz-menu svg { flex: none; width: 18px; height: 18px; }
+.lz-menu__num {
+  margin-left: auto;
+  min-width: 22px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #35d6c8;
+  color: #0a0a12;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+}
+.lz-menu__cuenta {
+  height: auto;
+  margin-top: 10px;
+  padding: 12px 10px;
+  border-top: 1px solid #2c2938;
+  border-radius: 0 0 10px 10px;
+  color: #f4f3f8;
+}
+.lz-menu__cuenta i {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb454, #ff7a68);
+}
+.lz-menu__cuenta small { display: block; margin-top: 2px; color: #6f6e7f; font-weight: 400; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-menu__grupo summary::after { transition: none; }
+}</details></template>
+<template class="receta-html">&lt;nav aria-label="Application menu" class="lz-menu"&gt;
+&lt;div class="lz-menu__marca"&gt;&lt;i aria-hidden="true"&gt;&lt;/i&gt;Studio&lt;/div&gt;
+&lt;details class="lz-menu__grupo" open=""&gt;
+&lt;summary&gt;Work&lt;/summary&gt;
+&lt;a aria-current="page" href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M3 6h6l2 2h10v11H3z"&gt;&lt;/path&gt;&lt;/svg&gt;Projects&lt;span class="lz-menu__num"&gt;12&lt;/span&gt;&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"&gt;&lt;/path&gt;&lt;/svg&gt;Favorites&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M12 4v11m-5-5 5 5 5-5M4 20h16"&gt;&lt;/path&gt;&lt;/svg&gt;Downloads&lt;/a&gt;
+&lt;/details&gt;
+&lt;details class="lz-menu__grupo" open=""&gt;
+&lt;summary&gt;Account&lt;/summary&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"&gt;&lt;/path&gt;&lt;/svg&gt;Notifications&lt;span class="lz-menu__num"&gt;3&lt;/span&gt;&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M4 7h11M19 7h1M4 12h3M11 12h9M4 17h13M21 17h-1"&gt;&lt;/path&gt;&lt;circle cx="17" cy="7" r="2"&gt;&lt;/circle&gt;&lt;circle cx="9" cy="12" r="2"&gt;&lt;/circle&gt;&lt;circle cx="19" cy="17" r="2"&gt;&lt;/circle&gt;&lt;/svg&gt;Settings&lt;/a&gt;
+&lt;/details&gt;
+&lt;a class="lz-menu__cuenta" href="#"&gt;&lt;i aria-hidden="true"&gt;&lt;/i&gt;&lt;span&gt;Andrea Ruiz&lt;small&gt;Pro plan&lt;/small&gt;&lt;/span&gt;&lt;/a&gt;
+&lt;/nav&gt;</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="movil-h" class="lab-seccion" id="movil">
+<header class="lab-seccion__head">
+<h2 id="movil-h">Mobile and tabs</h2>
+<p>For websites: a popover drawer, a mobile bottom bar with safe-area spacing, and tabs with a sliding indicator.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="cajon-popover">
+<div class="pieza__escenario">
+<button class="lz-cajon__abrir" popovertarget="lz-cajon-menu" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>Menu</button>
+<nav aria-label="Navigation menu" class="lz-cajon" id="lz-cajon-menu" popover="">
+<header class="lz-cajon__cabeza">
+<strong>Lienzo</strong>
+<button aria-label="Close menu" class="lz-cajon__cerrar" popovertarget="lz-cajon-menu" popovertargetaction="hide" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+</header>
+<a aria-current="page" href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 11 12 4l9 7"></path><path d="M5 10v10h14V10"></path></svg>Home</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"></path></svg>Resources</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"></path></svg>Tools</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"></path></svg>Blog</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Contact</a>
+</nav>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Popover navigation drawer</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">/* Sin JS: el atributo popover abre, cierra con Escape, atrapa el clic fuera
+   y pinta el fondo con ::backdrop. El navegador hace el trabajo. */
+.lz-cajon__abrir,
+.lz-cajon__cerrar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid #2c2938;
+  border-radius: 999px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 600 0.9rem system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-cajon__abrir svg, .lz-cajon__cerrar svg { width: 18px; height: 18px; }
+.lz-cajon__abrir:hover, .lz-cajon__cerrar:hover { border-color: #8b7bff; }
+.lz-cajon__abrir:focus-visible, .lz-cajon__cerrar:focus-visible { outline: 2px solid #8b7bff; outline-offset: 3px; }
+.lz-cajon__cerrar { width: 42px; padding: 0; justify-content: center; }
+.lz-cajon {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(320px, 85vw);
+  height: 100dvh;
+  margin: 0;
+  padding: 18px;
+  border: 0;
+  border-right: 1px solid #2c2938;
+  background: #101018;
+  color: #a2a1b3;
+  font: 500 0.95rem/1.2 system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transform: translateX(-100%);
+  transition:
+    transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    display 320ms allow-discrete,
+    overlay 320ms allow-discrete;
+}
+.lz-cajon:popover-open { transform: none; }
+@starting-style {
+  .lz-cajon:popover-open { transform: translateX(-100%); }
+}
+.lz-cajon::backdrop {
+  background: rgba(10, 10, 15, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: opacity 320ms ease, display 320ms allow-discrete, overlay 320ms allow-discrete;
+  opacity: 1;
+}
+@starting-style {
+  .lz-cajon:popover-open::backdrop { opacity: 0; }
+}
+.lz-cajon__cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 4px 4px 14px;
+  border-bottom: 1px solid #2c2938;
+  color: #f4f3f8;
+  font-size: 1.05rem;
+}
+.lz-cajon a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 46px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+.lz-cajon a svg { width: 20px; height: 20px; }
+.lz-cajon a:hover { background: #1a1826; color: #f4f3f8; }
+.lz-cajon a[aria-current="page"] { background: rgba(139, 123, 255, 0.16); color: #cdc5ff; }
+.lz-cajon a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-cajon, .lz-cajon::backdrop { transition: none; }
+}</template>
+<template class="receta-html">&lt;button class="lz-cajon__abrir" popovertarget="lz-cajon-menu" type="button"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M4 7h16M4 12h16M4 17h16"&gt;&lt;/path&gt;&lt;/svg&gt;Menu&lt;/button&gt;
+&lt;nav aria-label="Navigation menu" class="lz-cajon" id="lz-cajon-menu" popover=""&gt;
+&lt;header class="lz-cajon__cabeza"&gt;
+&lt;strong&gt;Lienzo&lt;/strong&gt;
+&lt;button aria-label="Close menu" class="lz-cajon__cerrar" popovertarget="lz-cajon-menu" popovertargetaction="hide" type="button"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M6 6l12 12M18 6 6 18"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/header&gt;
+&lt;a aria-current="page" href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M3 11 12 4l9 7"&gt;&lt;/path&gt;&lt;path d="M5 10v10h14V10"&gt;&lt;/path&gt;&lt;/svg&gt;Home&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"&gt;&lt;/path&gt;&lt;/svg&gt;Resources&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M4 20v-8M10 20V5M16 20v-6M2 20h20"&gt;&lt;/path&gt;&lt;/svg&gt;Tools&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M4 5h16v11H9l-5 4z"&gt;&lt;/path&gt;&lt;/svg&gt;Blog&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;circle cx="12" cy="8" r="4"&gt;&lt;/circle&gt;&lt;path d="M4 21a8 8 0 0 1 16 0"&gt;&lt;/path&gt;&lt;/svg&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</template>
+</article>
+<article class="pieza" id="barra-inferior">
+<div class="pieza__escenario">
+<nav aria-label="Main navigation" class="lz-barra-inf">
+<a aria-current="page" href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 11 12 4l9 7"></path><path d="M5 10v10h14V10"></path></svg>Home</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-4.2-4.2"></path></svg>Search</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"></path></svg>Resources</a>
+<a class="lz-barra-inf__punto" href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"></path></svg>Notifications</a>
+<a href="#"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Account</a>
+</nav>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Mobile bottom bar</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-barra-inf {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  max-width: 360px;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  background: rgba(16, 16, 24, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+/* Variante pegada al borde inferior de la pantalla */
+.lz-barra-inf--fija {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 50;
+  max-width: none;
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+}
+.lz-barra-inf a {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  color: #a2a1b3;
+  text-decoration: none;
+  font: 600 0.68rem/1 system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  transition: color 160ms ease, background 160ms ease;
+}
+.lz-barra-inf svg { width: 22px; height: 22px; }
+.lz-barra-inf a:hover { color: #f4f3f8; }
+.lz-barra-inf a[aria-current="page"] { color: #cdc5ff; background: rgba(139, 123, 255, 0.16); }
+.lz-barra-inf a:focus-visible { outline: 2px solid #8b7bff; outline-offset: -2px; }
+.lz-barra-inf__punto { position: relative; }
+.lz-barra-inf__punto::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: calc(50% - 16px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff7a68;
+  box-shadow: 0 0 0 2px #101018;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lz-barra-inf a { transition: none; }
+}</template>
+<template class="receta-html">&lt;nav aria-label="Main navigation" class="lz-barra-inf"&gt;
+&lt;a aria-current="page" href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M3 11 12 4l9 7"&gt;&lt;/path&gt;&lt;path d="M5 10v10h14V10"&gt;&lt;/path&gt;&lt;/svg&gt;Home&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;circle cx="11" cy="11" r="6"&gt;&lt;/circle&gt;&lt;path d="m20 20-4.2-4.2"&gt;&lt;/path&gt;&lt;/svg&gt;Search&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M12 3 3 8l9 5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"&gt;&lt;/path&gt;&lt;/svg&gt;Resources&lt;/a&gt;
+&lt;a class="lz-barra-inf__punto" href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20h4"&gt;&lt;/path&gt;&lt;/svg&gt;Notifications&lt;/a&gt;
+&lt;a href="#"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;circle cx="12" cy="8" r="4"&gt;&lt;/circle&gt;&lt;path d="M4 21a8 8 0 0 1 16 0"&gt;&lt;/path&gt;&lt;/svg&gt;Account&lt;/a&gt;
+&lt;/nav&gt;</template>
+</article>
+<article class="pieza" id="pestanas-indicador">
+<div class="pieza__escenario">
+<nav aria-label="Sections" class="lz-pestanas">
+<a aria-current="page" href="#">Home</a>
+<a href="#">Resources</a>
+<a href="#">Blog</a>
+<a href="#">Contact</a>
+<i aria-hidden="true" class="lz-pestanas__ind"></i>
+</nav>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Tabs with sliding indicator</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-pestanas {
+  --n: 4;   /* numero de pestañas */
+  --i: 0;   /* la activa, contando desde 0 */
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  width: min(100%, 420px);
+  padding: 6px;
+  border: 1px solid #2c2938;
+  border-radius: 999px;
+  background: #101018;
+}
+.lz-pestanas a {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  border-radius: 999px;
+  color: #a2a1b3;
+  text-decoration: none;
+  font: 600 0.86rem/1 system-ui, sans-serif;
+  transition: color 180ms ease;
+}
+.lz-pestanas a:hover,
+.lz-pestanas a[aria-current="page"] { color: #f4f3f8; }
+.lz-pestanas a:focus-visible { outline: 2px solid #35d6c8; outline-offset: -2px; }
+/* El indicador es uno solo: se desliza hasta la pestaña que manda */
+.lz-pestanas__ind {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: calc((100% - 12px) / var(--n));
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b7bff, #6e5df2);
+  transform: translateX(calc(var(--i) * 100%));
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* La pestaña actual fija la posicion de reposo... */
+.lz-pestanas:has(&gt; a:nth-child(2)[aria-current="page"]) { --i: 1; }
+.lz-pestanas:has(&gt; a:nth-child(3)[aria-current="page"]) { --i: 2; }
+.lz-pestanas:has(&gt; a:nth-child(4)[aria-current="page"]) { --i: 3; }
+/* ...y el cursor o el teclado la mueven de visita */
+.lz-pestanas:has(&gt; a:nth-child(1):is(:hover, :focus-visible)) { --i: 0; }
+.lz-pestanas:has(&gt; a:nth-child(2):is(:hover, :focus-visible)) { --i: 1; }
+.lz-pestanas:has(&gt; a:nth-child(3):is(:hover, :focus-visible)) { --i: 2; }
+.lz-pestanas:has(&gt; a:nth-child(4):is(:hover, :focus-visible)) { --i: 3; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-pestanas__ind, .lz-pestanas a { transition: none; }
+}</template>
+<template class="receta-html">&lt;nav aria-label="Sections" class="lz-pestanas"&gt;
+&lt;a aria-current="page" href="#"&gt;Home&lt;/a&gt;
+&lt;a href="#"&gt;Resources&lt;/a&gt;
+&lt;a href="#"&gt;Blog&lt;/a&gt;
+&lt;a href="#"&gt;Contact&lt;/a&gt;
+&lt;i aria-hidden="true" class="lz-pestanas__ind"&gt;&lt;/i&gt;
+&lt;/nav&gt;</template>
+</article>
+</div>
+</section>
+</section>
+<section class="section shell"><div class="prose"><h2>Use the example in your project</h2><p>Copy the HTML and CSS for the same piece. If a JavaScript button is shown, include that script too. Keep IDs unique, update links, and test keyboard focus and small screens. These examples demonstrate front-end behavior; forms do not create accounts or submit real orders. Names, testimonials, prices, and metrics are illustrative sample content.</p><p><a href="/en/code/components/">All component categories</a> · <a href="/en/code/">CSS generators</a> · <a href="/en/templates/">Downloadable templates</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg aria-label="Lienzo" class="logo-lienzo" role="img" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-footer" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/resources/">Free Resources</a></li><li><a href="/en/blog/">Blog and Guides</a></li><li><a href="/en/about/">About Lienzo</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" rel="noopener" target="_blank">YouTube</a></li><li><a href="/en/code/">CSS Generators</a></li><li><a href="/en/code/components/">CSS Components</a></li><li><a href="/en/my-lienzo/">My Lienzo</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Code: MIT. Fonts: OFL. Keep the included license notices.<span data-revocar-consentimiento="" style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script defer="" src="/en/assets/site.js"></script><script defer="" src="/en/assets/my-lienzo.js"></script><script defer="" src="/en/code/components/js/componentes.js"></script></body></html>

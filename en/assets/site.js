@@ -222,7 +222,7 @@
 
     cerrar: () => cerrarModal(null),
 
-    confirmar({ titulo, sub = "", textoOk = "Confirmar", textoNo = "Cancelar", peligro = false }) {
+    confirmar({ titulo, sub = "", textoOk = "Confirm", textoNo = "Cancel", peligro = false }) {
       return this.abrir({
         titulo,
         sub,
@@ -235,7 +235,7 @@
       }).then((v) => v === true);
     },
 
-    pedirTexto({ titulo, sub = "", valorInicial = "", placeholder = "", textoOk = "Guardar" }) {
+    pedirTexto({ titulo, sub = "", valorInicial = "", placeholder = "", textoOk = "Save" }) {
       return this.abrir({
         titulo,
         sub,
@@ -243,7 +243,7 @@
           '<input class="modal__campo" type="text" maxlength="80" data-modal-texto ' +
           `placeholder="${esc(placeholder)}" value="${esc(valorInicial)}" />`,
         acciones: [
-          { texto: "Cancelar", valor: null },
+          { texto: "Cancel", valor: null },
           { texto: textoOk, estilo: "primary", valor: (raiz) => raiz.querySelector("[data-modal-texto]").value.trim() || null },
         ],
       });

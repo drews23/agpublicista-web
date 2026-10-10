@@ -41,3 +41,26 @@
 .english-chapters li{font-variant-numeric:tabular-nums}
 @media(max-width:620px){.english-icon-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.english-icon-grid li{padding:16px 8px!important;min-height:122px}.english-icon-grid svg{width:40px;height:40px}.english-icon-use-cases{grid-template-columns:1fr}}
 @media(max-width:620px){.english-document{padding-top:24px}.english-prose{margin-top:28px}.english-prose .btn{max-width:100%;white-space:normal;text-align:center}.english-prose h2{margin-top:2.2rem}}
+
+/* Catalog pages keep the reading width for prose and give cards more room. */
+.english-directory{max-width:none}
+.english-directory>p,.english-directory>ul{max-width:800px}
+.english-catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:28px 0 48px}
+.english-catalog-card{display:flex;flex-direction:column;min-width:0;padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.english-catalog-card .english-catalog-label{font-size:.72rem;line-height:1.5;letter-spacing:.035em;color:var(--teal,var(--text));margin:0 0 16px}
+.english-catalog-card h3{margin:0 0 16px;font-family:"Fraunces",serif;font-size:1.45rem;line-height:1.25}
+.english-catalog-card h3 a{color:var(--text);text-decoration:none}
+.english-catalog-card>p:not(.english-catalog-label){font-size:.9rem;line-height:1.65;margin:0 0 24px}
+.english-catalog-action{margin-top:auto;font-size:.85rem;font-weight:600;text-underline-offset:4px}
+.english-catalog a:focus-visible{outline:2px solid var(--text);outline-offset:5px;border-radius:3px}
+@media(max-width:960px){.english-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.english-catalog{grid-template-columns:1fr;gap:14px}.english-catalog-card{padding:22px}}
+.english-scene{padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.english-scene-stage{position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;border-radius:10px}
+.english-scene-stage img{display:block;width:100%;height:100%;object-fit:contain}
+.english-scene-stage img[hidden]{display:none}
+.english-scene-stage iframe{position:absolute;inset:0;width:1200px;height:800px;border:0;transform-origin:top left}
+.english-scene-controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.english-scene-controls button:disabled{opacity:.5;cursor:default}
+.english-scene-status{font-size:.8rem;line-height:1.5;margin:12px 0 0}
+.english-scene-cover{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;border-radius:10px;margin-bottom:20px}

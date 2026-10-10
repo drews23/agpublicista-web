@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Form Fields | Lienzo</title><meta content="Form Fields by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." name="description"/><link href="https://lienzo.tools/en/code/components/forms/" rel="canonical"/><link href="https://lienzo.tools/codigo-web/componentes/formularios/" hreflang="es" rel="alternate"/>
+<link href="https://lienzo.tools/en/code/components/forms/" hreflang="en" rel="alternate"/>
+<link href="https://lienzo.tools/codigo-web/componentes/formularios/" hreflang="x-default" rel="alternate"/><meta content="Form Fields" property="og:title"/><meta content="Form Fields by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup." property="og:description"/><meta content="https://lienzo.tools/en/code/components/forms/" property="og:url"/><meta content="website" property="og:type"/><meta content="en_US" property="og:locale"/><link href="/favicon.svg" rel="icon"/><link href="/css/site.css?v=2026090405" rel="stylesheet"/><link href="/codigo-web/componentes/css/componentes.css?v=2026090404" rel="stylesheet"/><link href="/en/assets/english.css?v=2026101007" rel="stylesheet"/><script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("agp-theme")||"dark"}catch(e){}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Form Fields", "url": "https://lienzo.tools/en/code/components/forms/", "description": "Form Fields by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.", "inLanguage": "en-US"}</script></head><body><a class="sr-only" href="#main">Skip to content</a><header class="site-header"><div class="shell site-header__inner">
+<a aria-label="Lienzo home" class="brand" href="/en/"><span class="brand__lockup"><svg aria-hidden="true" class="brand__logo" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-header" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-header)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg><span class="brand__tagline">Creative tools, less friction</span></span></a>
+<nav aria-label="Main navigation" class="site-nav"><a href="/en/">Home</a><a href="/en/tools/">Tools</a><a href="/en/code/">Web Code</a><a href="/en/templates/">Templates</a><a data-espacio-btn="" href="/en/my-lienzo/">My Lienzo</a></nav>
+<div style="display:flex;gap:.5rem;align-items:center"><a aria-label="Cambiar a español" class="theme-btn language-switch" href="/codigo-web/componentes/formularios/" hreflang="es" lang="es" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600" title="Cambiar a español"><svg aria-hidden="true" fill="none" focusable="false" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"></path></svg><span>ES</span></a><button aria-label="Change theme" class="theme-btn" data-theme-toggle="" type="button">☀</button><button aria-expanded="false" aria-label="Open menu" class="nav-toggle" data-nav-toggle="" type="button">☰</button></div></div></header><main id="main">
+<section class="section shell">
+<nav aria-label="Breadcrumb" class="breadcrumbs reveal">
+<a href="/en/">Home</a> › <a href="/en/code/">Web Code</a> › <a href="/en/code/components/">CSS Components</a> › <span>Form Fields</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow reveal">Copy-ready code</p>
+<h1 class="reveal" style="--reveal-delay: 80ms">Form Fields</h1>
+<p class="lede reveal" style="--reveal-delay: 140ms">Forms are where visitors do the work. These styled examples keep native keyboard behavior, focus, and autofill while fitting the surrounding interface.</p>
+</div>
+<section aria-labelledby="campos-texto-h" class="lab-seccion" id="campos-texto">
+<header class="lab-seccion__head">
+<h2 id="campos-texto-h">Text fields</h2>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="campo-flotante">
+<div class="pieza__escenario">
+<label class="lz-flotante">
+<input placeholder=" " type="text"/>
+<span>Your name</span>
+</label>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Floating label</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-flotante {
+  position: relative;
+  display: block;
+  max-width: 260px;
+  font-family: system-ui, sans-serif;
+}
+.lz-flotante input {
+  width: 100%;
+  min-height: 52px;
+  padding: 1.2rem 0.9rem 0.4rem;
+  border: 1px solid #3a374a;
+  border-radius: 12px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 400 0.95rem/1 system-ui, sans-serif;
+}
+.lz-flotante span {
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  translate: 0 -50%;
+  color: #a8a4b8;
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: top 160ms ease, font-size 160ms ease, color 160ms ease;
+}
+/* :placeholder-shown al revés: si NO se muestra el placeholder, hay texto. */
+.lz-flotante input:focus + span,
+.lz-flotante input:not(:placeholder-shown) + span {
+  top: 0.85rem;
+  font-size: 0.72rem;
+  color: #8b7bff;
+}
+.lz-flotante input:focus {
+  outline: 0;
+  border-color: #8b7bff;
+  box-shadow: 0 0 0 3px rgba(139, 123, 255, 0.22);
+}</template>
+<template class="receta-html">&lt;label class="lz-flotante"&gt;
+&lt;input placeholder=" " type="text"/&gt;
+&lt;span&gt;Your name&lt;/span&gt;
+&lt;/label&gt;</template>
+</article>
+<article class="pieza" id="campo-busqueda">
+<div class="pieza__escenario">
+<label class="lz-buscador">
+<svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="11" cy="11" fill="none" r="7" stroke="currentColor" stroke-width="2"></circle><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input aria-label="Search" placeholder="Search icons…" type="search"/>
+<kbd>/</kbd>
+</label>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Search field</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-buscador {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 300px;
+  min-height: 48px;
+  padding: 0 0.9rem;
+  border: 1px solid #3a374a;
+  border-radius: 999px;
+  background: #16141f;
+  color: #a8a4b8;
+  font-family: system-ui, sans-serif;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.lz-buscador:focus-within {
+  border-color: #8b7bff;
+  box-shadow: 0 0 0 3px rgba(139, 123, 255, 0.22);
+}
+.lz-buscador svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.lz-buscador input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #f4f3f8;
+  font: 400 0.95rem/1 system-ui, sans-serif;
+  outline: 0;
+}
+.lz-buscador kbd {
+  padding: 0.15rem 0.5rem;
+  border: 1px solid #3a374a;
+  border-bottom-width: 2px;
+  border-radius: 7px;
+  font: 600 0.75rem/1 ui-monospace, monospace;
+  color: #cfcbdd;
+}</template>
+<template class="receta-html">&lt;label class="lz-buscador"&gt;
+&lt;svg aria-hidden="true" viewbox="0 0 24 24"&gt;&lt;circle cx="11" cy="11" fill="none" r="7" stroke="currentColor" stroke-width="2"&gt;&lt;/circle&gt;&lt;path d="m16.5 16.5 4 4" stroke="currentColor" stroke-linecap="round" stroke-width="2"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;input aria-label="Search" placeholder="Search icons…" type="search"/&gt;
+&lt;kbd&gt;/&lt;/kbd&gt;
+&lt;/label&gt;</template>
+</article>
+<article class="pieza" id="area-contador">
+<div class="pieza__escenario">
+<label class="lz-area">
+<span class="lz-area__titulo">Message</span>
+<textarea data-lz-contador="" maxlength="140" placeholder="Type here…" rows="3"></textarea>
+<span aria-live="polite" class="lz-area__cuenta" data-lz-cuenta="">0 / 140</span>
+</label>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Textarea with counter</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-area {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 300px;
+  font-family: system-ui, sans-serif;
+}
+.lz-area__titulo { color: #cfcbdd; font-size: 0.85rem; font-weight: 600; }
+.lz-area textarea {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #3a374a;
+  border-radius: 12px;
+  background: #16141f;
+  color: #f4f3f8;
+  font: 400 0.95rem/1.5 system-ui, sans-serif;
+  resize: vertical;
+}
+.lz-area textarea:focus {
+  outline: 0;
+  border-color: #8b7bff;
+  box-shadow: 0 0 0 3px rgba(139, 123, 255, 0.22);
+}
+.lz-area__cuenta { justify-self: end; color: #a8a4b8; font-size: 0.78rem;
+  font-variant-numeric: tabular-nums; }</template>
+<template class="receta-html">&lt;label class="lz-area"&gt;
+&lt;span class="lz-area__titulo"&gt;Message&lt;/span&gt;
+&lt;textarea data-lz-contador="" maxlength="140" placeholder="Type here…" rows="3"&gt;&lt;/textarea&gt;
+&lt;span aria-live="polite" class="lz-area__cuenta" data-lz-cuenta=""&gt;0 / 140&lt;/span&gt;
+&lt;/label&gt;</template>
+<template class="receta-js">// Actualiza el contador de caracteres del textarea.
+document.querySelectorAll("[data-lz-contador]").forEach((area) =&gt; {
+  const cuenta = area.parentElement.querySelector("[data-lz-cuenta]");
+  const max = area.getAttribute("maxlength") || "∞";
+  const pintar = () =&gt; (cuenta.textContent = area.value.length + " / " + max);
+  area.addEventListener("input", pintar);
+  pintar();
+});</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="seleccion-h" class="lab-seccion" id="seleccion">
+<header class="lab-seccion__head">
+<h2 id="seleccion-h">Selection</h2>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="checkbox">
+<div class="pieza__escenario">
+<label class="lz-check">
+<input checked="" type="checkbox"/>
+<span aria-hidden="true" class="lz-check__caja">
+<svg viewbox="0 0 24 24"><path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg>
+</span>
+                I agree to receive the pack
+              </label>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Styled checkbox</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #e8e6f2;
+  font: 500 0.93rem/1.3 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lz-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lz-check__caja {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #3a374a;
+  border-radius: 7px;
+  color: #06251f;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  flex: 0 0 auto;
+}
+.lz-check__caja svg { width: 14px; height: 14px; opacity: 0; transition: opacity 120ms ease; }
+.lz-check input:checked + .lz-check__caja {
+  background: #35d6c8;
+  border-color: #35d6c8;
+}
+.lz-check input:checked + .lz-check__caja svg { opacity: 1; }
+.lz-check input:focus-visible + .lz-check__caja {
+  outline: 2px solid #8b7bff;
+  outline-offset: 2px;
+}</template>
+<template class="receta-html">&lt;label class="lz-check"&gt;
+&lt;input checked="" type="checkbox"/&gt;
+&lt;span aria-hidden="true" class="lz-check__caja"&gt;
+&lt;svg viewbox="0 0 24 24"&gt;&lt;path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  I agree to receive the pack
+&lt;/label&gt;</template>
+</article>
+<article class="pieza" id="radio-tarjetas">
+<div class="pieza__escenario">
+<div aria-label="Format" class="lz-radios" role="radiogroup">
+<label class="lz-radio-caja"><input checked="" name="lz-fmt" type="radio"/><strong>SVG</strong><span>Editable vector</span></label>
+<label class="lz-radio-caja"><input name="lz-fmt" type="radio"/><strong>PNG</strong><span>Ready to paste</span></label>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Card radio buttons</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-radios {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 0.6rem;
+  max-width: 320px;
+}
+.lz-radio-caja {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #3a374a;
+  border-radius: 14px;
+  background: #16141f;
+  cursor: pointer;
+  font-family: system-ui, sans-serif;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+.lz-radio-caja input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lz-radio-caja strong { color: #f4f3f8; font-size: 0.95rem; }
+.lz-radio-caja span { color: #a8a4b8; font-size: 0.8rem; }
+.lz-radio-caja:has(input:checked) {
+  border-color: #8b7bff;
+  background: rgba(139, 123, 255, 0.1);
+}
+.lz-radio-caja:has(input:focus-visible) {
+  outline: 2px solid #8b7bff;
+  outline-offset: 2px;
+}</template>
+<template class="receta-html">&lt;div aria-label="Format" class="lz-radios" role="radiogroup"&gt;
+&lt;label class="lz-radio-caja"&gt;&lt;input checked="" name="lz-fmt" type="radio"/&gt;&lt;strong&gt;SVG&lt;/strong&gt;&lt;span&gt;Editable vector&lt;/span&gt;&lt;/label&gt;
+&lt;label class="lz-radio-caja"&gt;&lt;input name="lz-fmt" type="radio"/&gt;&lt;strong&gt;PNG&lt;/strong&gt;&lt;span&gt;Ready to paste&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</template>
+</article>
+<article class="pieza" id="rango">
+<div class="pieza__escenario">
+<label class="lz-rango">
+                Volume
+                <input data-lz-rango="" max="100" min="0" type="range" value="65"/>
+</label>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Range slider with fill</h3>
+<span class="lab-aviso-js" title="JavaScript included">JS</span>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+<button class="pieza__btn" data-copiar="receta-js" type="button">Copy JS</button>
+</div>
+<template class="receta-css">.lz-rango {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 260px;
+  color: #cfcbdd;
+  font: 600 0.85rem/1 system-ui, sans-serif;
+}
+.lz-rango input {
+  --nivel: 65%;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8b7bff var(--nivel), #2c2938 var(--nivel));
+  cursor: pointer;
+}
+.lz-rango input::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #8b7bff;
+}
+.lz-rango input::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #8b7bff;
+}
+.lz-rango input:focus-visible {
+  outline: 2px solid #8b7bff;
+  outline-offset: 4px;
+}</template>
+<template class="receta-html">&lt;label class="lz-rango"&gt;
+  Volume
+  &lt;input data-lz-rango="" max="100" min="0" type="range" value="65"/&gt;
+&lt;/label&gt;</template>
+<template class="receta-js">// Mantiene el relleno de la pista sincronizado con el valor.
+document.querySelectorAll("[data-lz-rango]").forEach((rango) =&gt; {
+  const pintar = () =&gt; {
+    const pct = ((rango.value - rango.min) / (rango.max - rango.min)) * 100;
+    rango.style.setProperty("--nivel", pct + "%");
+  };
+  rango.addEventListener("input", pintar);
+  pintar();
+});</template>
+</article>
+</div>
+</section>
+<section aria-labelledby="composicion-h" class="lab-seccion" id="composicion">
+<header class="lab-seccion__head">
+<h2 id="composicion-h">Complete layout</h2>
+<p>A complete sign-in and sign-up card with a CSS flip and native browser validation. This is a front-end demo; it has no authentication service.</p>
+</header>
+<div class="lab-galeria">
+<article class="pieza" id="acceso-volteo">
+<div class="pieza__escenario">
+<div class="lz-acceso">
+<input class="lz-acceso__modo" id="lz-acceso-modo" type="checkbox"/>
+<label class="lz-acceso__cambio" for="lz-acceso-modo"><span>Sign in</span><i aria-hidden="true"></i><span>Create account</span></label>
+<div class="lz-acceso__tarjeta">
+<form action="#" class="lz-acceso__cara lz-acceso__cara--frente" method="post">
+<h4>Sign in</h4>
+<label class="lz-acceso__campo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="14" rx="2.5" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg><input autocomplete="email" name="correo" placeholder="Your email" required="" type="email"/></label>
+<label class="lz-acceso__campo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><input autocomplete="current-password" minlength="8" name="clave" placeholder="Your password" required="" type="password"/></label>
+<button class="lz-acceso__btn" type="button">Sign in</button>
+<a class="lz-acceso__enlace" href="#">Forgot your password?</a>
+</form>
+<form action="#" class="lz-acceso__cara lz-acceso__cara--dorso" method="post">
+<h4>Create account</h4>
+<label class="lz-acceso__campo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg><input autocomplete="name" name="nombre" placeholder="Your name" required="" type="text"/></label>
+<label class="lz-acceso__campo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="14" rx="2.5" width="18" x="3" y="5"></rect><path d="m3 7 9 6 9-6"></path></svg><input autocomplete="email" name="correo" placeholder="Your email" required="" type="email"/></label>
+<label class="lz-acceso__campo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="10" rx="2" width="14" x="5" y="11"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><input autocomplete="new-password" minlength="8" name="clave" placeholder="Create a password" required="" type="password"/></label>
+<button class="lz-acceso__btn" type="button">Create account</button>
+</form>
+</div>
+</div>
+</div>
+<div class="pieza__pie">
+<h3 class="pieza__nombre">Flip sign-in and sign-up form</h3>
+<button class="pieza__btn" data-copiar="receta-css" type="button">Copy CSS</button>
+<button class="pieza__btn" data-copiar="receta-html" type="button">Copy HTML</button>
+</div>
+<template class="receta-css">.lz-acceso {
+  width: min(100%, 360px);
+  color: #f4f3f8;
+  font: 500 0.92rem/1.4 system-ui, sans-serif;
+}
+.lz-acceso__modo { position: absolute; opacity: 0; pointer-events: none; }
+/* El interruptor: un checkbox y su etiqueta, nada mas */
+.lz-acceso__cambio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 18px;
+  color: #6f6e7f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.lz-acceso__cambio span:first-child { color: #f4f3f8; }
+.lz-acceso__cambio i {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  background: #2c2938;
+}
+.lz-acceso__cambio i::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b7bff, #35d6c8);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cambio i::after { transform: translateX(22px); }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cambio span:first-child { color: #6f6e7f; }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cambio span:last-child { color: #f4f3f8; }
+.lz-acceso__modo:focus-visible + .lz-acceso__cambio i { outline: 2px solid #8b7bff; outline-offset: 3px; }
+/* Las dos caras giran en el mismo espacio; la oculta deja de ser enfocable */
+.lz-acceso__tarjeta { position: relative; height: 380px; perspective: 1000px; }
+.lz-acceso__cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  padding: 28px;
+  border: 1px solid #2c2938;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #1a1826, #101018);
+  backface-visibility: hidden;
+  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 300ms;
+}
+.lz-acceso__cara--dorso { transform: rotateY(180deg); visibility: hidden; }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--frente { transform: rotateY(-180deg); visibility: hidden; }
+.lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--dorso { transform: none; visibility: visible; }
+.lz-acceso h4 { margin: 0 0 6px; font: 700 1.3rem/1.1 system-ui, sans-serif; text-align: center; }
+.lz-acceso__campo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid #2c2938;
+  border-radius: 12px;
+  background: #0c0b12;
+  color: #a2a1b3;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.lz-acceso__campo svg { flex: none; width: 18px; height: 18px; }
+.lz-acceso__campo input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: #f4f3f8;
+  font: inherit;
+  outline: none;
+}
+.lz-acceso__campo input::placeholder { color: #6f6e7f; }
+.lz-acceso__campo:focus-within { border-color: #8b7bff; color: #cdc5ff; }
+/* Solo avisa cuando la persona ya ha interactuado con el campo */
+.lz-acceso__campo:has(input:user-invalid) { border-color: #ff7a68; color: #ff7a68; }
+.lz-acceso__btn {
+  height: 46px;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8b7bff, #6e5df2);
+  color: #fff;
+  font: 700 0.95rem system-ui, sans-serif;
+  cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.lz-acceso__btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.lz-acceso__btn:focus-visible { outline: 2px solid #35d6c8; outline-offset: 3px; }
+.lz-acceso__enlace { color: #a2a1b3; font-size: 0.82rem; text-align: center; text-decoration: none; }
+.lz-acceso__enlace:hover { color: #f4f3f8; text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) {
+  .lz-acceso__cara { transform: none; opacity: 1; transition: opacity 250ms ease, visibility 0s 250ms; }
+  .lz-acceso__cara--dorso { opacity: 0; }
+  .lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--frente { transform: none; opacity: 0; }
+  .lz-acceso:has(.lz-acceso__modo:checked) .lz-acceso__cara--dorso { opacity: 1; }
+  .lz-acceso__cambio i::after, .lz-acceso__btn { transition: none; }
+}</template>
+<template class="receta-html">&lt;div class="lz-acceso"&gt;
+&lt;input class="lz-acceso__modo" id="lz-acceso-modo" type="checkbox"/&gt;
+&lt;label class="lz-acceso__cambio" for="lz-acceso-modo"&gt;&lt;span&gt;Sign in&lt;/span&gt;&lt;i aria-hidden="true"&gt;&lt;/i&gt;&lt;span&gt;Create account&lt;/span&gt;&lt;/label&gt;
+&lt;div class="lz-acceso__tarjeta"&gt;
+&lt;form action="#" class="lz-acceso__cara lz-acceso__cara--frente" method="post"&gt;
+&lt;h4&gt;Sign in&lt;/h4&gt;
+&lt;label class="lz-acceso__campo"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;rect height="14" rx="2.5" width="18" x="3" y="5"&gt;&lt;/rect&gt;&lt;path d="m3 7 9 6 9-6"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;input autocomplete="email" name="correo" placeholder="Your email" required="" type="email"/&gt;&lt;/label&gt;
+&lt;label class="lz-acceso__campo"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;rect height="10" rx="2" width="14" x="5" y="11"&gt;&lt;/rect&gt;&lt;path d="M8 11V8a4 4 0 0 1 8 0v3"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;input autocomplete="current-password" minlength="8" name="clave" placeholder="Your password" required="" type="password"/&gt;&lt;/label&gt;
+&lt;button class="lz-acceso__btn" type="submit"&gt;Sign in&lt;/button&gt;
+&lt;a class="lz-acceso__enlace" href="#"&gt;Forgot your password?&lt;/a&gt;
+&lt;/form&gt;
+&lt;form action="#" class="lz-acceso__cara lz-acceso__cara--dorso" method="post"&gt;
+&lt;h4&gt;Create account&lt;/h4&gt;
+&lt;label class="lz-acceso__campo"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;circle cx="12" cy="8" r="4"&gt;&lt;/circle&gt;&lt;path d="M4 21a8 8 0 0 1 16 0"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;input autocomplete="name" name="nombre" placeholder="Your name" required="" type="text"/&gt;&lt;/label&gt;
+&lt;label class="lz-acceso__campo"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;rect height="14" rx="2.5" width="18" x="3" y="5"&gt;&lt;/rect&gt;&lt;path d="m3 7 9 6 9-6"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;input autocomplete="email" name="correo" placeholder="Your email" required="" type="email"/&gt;&lt;/label&gt;
+&lt;label class="lz-acceso__campo"&gt;&lt;svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"&gt;&lt;rect height="10" rx="2" width="14" x="5" y="11"&gt;&lt;/rect&gt;&lt;path d="M8 11V8a4 4 0 0 1 8 0v3"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;input autocomplete="new-password" minlength="8" name="clave" placeholder="Create a password" required="" type="password"/&gt;&lt;/label&gt;
+&lt;button class="lz-acceso__btn" type="submit"&gt;Create account&lt;/button&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+&lt;/div&gt;</template>
+</article>
+</div>
+</section>
+</section>
+<section class="section shell"><div class="prose"><h2>Use the example in your project</h2><p>Copy the HTML and CSS for the same piece. If a JavaScript button is shown, include that script too. Keep IDs unique, update links, and test keyboard focus and small screens. These examples demonstrate front-end behavior; forms do not create accounts or submit real orders. Names, testimonials, prices, and metrics are illustrative sample content.</p><p><a href="/en/code/components/">All component categories</a> · <a href="/en/code/">CSS generators</a> · <a href="/en/templates/">Downloadable templates</a></p></div></section></main><footer class="site-footer"><div class="shell"><div class="site-footer__grid"><div><a href="/en/"><svg aria-label="Lienzo" class="logo-lienzo" role="img" viewbox="0 0 960 260"><defs><lineargradient gradientunits="userSpaceOnUse" id="marco-en-footer" x1="28" x2="932" y1="11" y2="249"><stop offset="0" stop-color="#8b7bff"></stop><stop offset=".55" stop-color="#6e5df2"></stop><stop offset="1" stop-color="#35d6c8"></stop></lineargradient></defs><g fill="none" stroke="url(#marco-en-footer)" stroke-linecap="round" stroke-width="22"><path d="M28 100V46a35 35 0 0 1 35-35h468"></path><path d="M621 11h276a35 35 0 0 1 35 35v54"></path><path d="M932 160v54a35 35 0 0 1-35 35H545"></path><path d="M455 249H63a35 35 0 0 1-35-35v-54"></path></g><path d="m52 84-38 46 38 46m856-92 38 46-38 46" fill="none" stroke="#ffb454" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path><g class="wordmark" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"><path d="M160 68v124h72m44-124v124M400 68h-80v124h80m-80-64h62m62 64V68l84 124V68m44 0h80l-80 124h80"></path><ellipse cx="746" cy="130" rx="50" ry="64"></ellipse></g></svg></a><p class="site-footer__tag">Free templates, practical demos, and code you can customize.</p></div><div><h4>Explore</h4><ul><li><a href="/en/resources/">Free Resources</a></li><li><a href="/en/blog/">Blog and Guides</a></li><li><a href="/en/about/">About Lienzo</a></li><li><a href="/en/templates/">Web Templates</a></li><li><a href="/en/templates/#how-to-use">Setup and customization</a></li><li><a href="/en/blog/free-sound-effects/">Sound Effects</a></li><li><a href="/en/#icons">Icon Packs</a></li><li><a href="/en/#after-effects">After Effects</a></li><li><a href="/en/license/">Lienzo License</a></li><li><a href="/en/contact/">Contact</a></li><li><a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" rel="noopener" target="_blank">YouTube</a></li><li><a href="/en/code/">CSS Generators</a></li><li><a href="/en/code/components/">CSS Components</a></li><li><a href="/en/my-lienzo/">My Lienzo</a></li></ul></div><div><h4>Contact and policies</h4><ul><li><a href="mailto:contacto@lienzo.tools">contacto@lienzo.tools</a></li><li><a href="/en/legal/">Legal notice</a></li><li><a href="/en/privacy/">Privacy policy</a></li><li><a href="/en/cookies/">Cookie policy</a></li><li><a href="/en/third-party-licenses/">Third-party licenses</a></li></ul></div></div><div class="site-footer__bottom"><span>© 2026 Lienzo · lienzo.tools</span><span>Code: MIT. Fonts: OFL. Keep the included license notices.<span data-revocar-consentimiento="" style="display:none"> · <a href="#">Privacy and cookie settings</a></span></span></div></div></footer><script defer="" src="/en/assets/site.js"></script><script defer="" src="/en/assets/my-lienzo.js"></script><script defer="" src="/en/code/components/js/componentes.js"></script></body></html>

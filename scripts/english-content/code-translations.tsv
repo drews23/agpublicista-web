@@ -1,0 +1,790 @@
+Inicio	Home
+Código web	Web Code
+código web	web code
+Generadores CSS	CSS Generators
+generadores CSS	CSS generators
+Plantillas web	Web Templates
+Degradados	Gradients
+Sombras	Shadows
+Bordes y radios	Borders and Radius
+Filtros	Filters
+Transformaciones	Transforms
+Animaciones	Animations
+Tipografía	Typography
+Componentes CSS	CSS Components
+herramientas	tools
+Herramientas	Tools
+optimizador de SVG	SVG optimizer
+generador de paletas	palette generator
+colores en vivo	live color preview
+blog	blog
+Miga de pan	Breadcrumb
+Ruta de navegación	Breadcrumb
+Generador CSS	CSS Generator
+Generador de animaciones CSS	CSS Animation Generator
+Generador de bordes y radios CSS	CSS Border and Radius Generator
+Generador de degradados CSS	CSS Gradient Generator
+Generador de filtros CSS	CSS Filter Generator
+Generador de sombras CSS	CSS Shadow Generator
+Generador de estilos de texto CSS	CSS Typography Generator
+Generador de transform CSS	CSS Transform Generator
+Generador CSS · 2D y 3D	CSS Generator · 2D and 3D
+Pausar	Pause
+Reiniciar	Restart
+Ocultar	Hide
+Ajustes	Settings
+Efecto	Effect
+Preestablecido	Preset
+Aparecer	Fade in
+Deslizar	Slide in
+Escalar	Scale
+Rebotar	Bounce
+Latido	Pulse
+Sacudir	Shake
+Girar	Spin
+A medida	Custom
+Nombre de la animación	Animation name
+Tiempo	Timing
+Duración	Duration
+Retardo	Delay
+Repeticiones	Iterations
+Repetir sin fin	Repeat forever
+Equivale a	Equivalent to
+Dirección	Direction
+normal (siempre hacia delante	normal (always forward
+reverse) siempre hacia atrás	reverse) always backward
+alternate (ida y vuelta	alternate (forward and back
+alternate-reverse) vuelta e ida	alternate-reverse) back and forward
+Modo de relleno	Fill mode
+none (no conserva nada	none (retain no styles
+forwards) se queda en el último fotograma	forwards) retain the last frame
+backwards (adopta el primero durante el retardo	backwards (apply the first frame during the delay
+both) las dos cosas	both) both behaviors
+Curva de aceleración	Easing curve
+Curva	Curve
+cubic-bezier a medida	custom cubic-bezier
+Movimiento a medida	Custom motion
+Opacidad inicial	Starting opacity
+Desplazamiento X	X offset
+Desplazamiento Y	Y offset
+Escala inicial	Starting scale
+Giro inicial	Starting rotation
+Solo	Only
+y	and
+CSS generado	Generated CSS
+Copiar CSS completo	Copy full CSS
+Copiar solo los keyframes	Copy keyframes only
+generador de degradados	gradient generator
+Ajustes de la animación	Animation settings
+Animación preestablecida	Animation preset
+Duración en segundos	Duration in seconds
+Retardo en segundos	Delay in seconds
+Curva de aceleración ease-out	Ease-out easing curve
+Desplazamiento inicial en X en píxeles	Starting X offset in pixels
+Desplazamiento inicial en Y en píxeles	Starting Y offset in pixels
+Giro inicial en grados	Starting rotation in degrees
+Código CSS de la animación	Animation CSS code
+Forma orgánica	Organic shape
+Radios	Corner radius
+Unidad	Unit
+Píxeles (px)	Pixels (px)
+Porcentaje (%)	Percentage (%)
+Las cuatro esquinas	All four corners
+Una esquina cada vez	Individual corners
+Radios elípticos	Elliptical radii
+Superior izquierda	Top left
+Radio	Radius
+Vertical	Vertical
+Superior derecha	Top right
+Inferior derecha	Bottom right
+Inferior izquierda	Bottom left
+Borde	Border
+Grosor	Width
+Estilo	Style
+Sólido	Solid
+Trazos	Dashed
+Puntos	Dotted
+Doble	Double
+Color	Color
+Opacidad	Opacity
+Contorno	Outline
+Desplazamiento	Offset
+Copiar CSS	Copy CSS
+Copiar solo el radio	Copy radius only
+Caja de ejemplo con los bordes y radios aplicados	Example box with border and radius applied
+Ajustes de bordes y radios	Border and radius settings
+Radio de las cuatro esquinas	Radius of all four corners
+Código CSS de los bordes y radios	Border and radius CSS code
+Código listo para copiar	Copy-ready code
+14 piezas	14 pieces
+Formas y recortes	Shapes and Clipping
+CSS listo para copiar · Gratis	Copy-ready CSS · Free
+9 piezas	9 pieces
+Estados de carga	Loading States
+5 piezas	5 pieces
+Navegación	Navigation
+Vidrio y neón	Glass and Neon
+4 piezas	4 pieces
+8 piezas	8 pieces
+Botones y controles	Buttons and Controls
+6 piezas	6 pieces
+Tarjetas	Cards
+7 piezas	7 pieces
+Formularios	Forms
+Datos y métricas	Data and Metrics
+10 piezas	10 pieces
+Microinteracciones	Microinteractions
+Degradado aleatorio	Random gradient
+Degradado	Gradient
+Tipo	Type
+Lineal	Linear
+Radial	Radial
+Cónico	Conic
+Ángulo	Angle
+Ángulo inicial	Starting angle
+Forma	Shape
+Círculo	Circle
+Elipse	Ellipse
+Colores	Colors
++ Añadir color	+ Add color
+Copiar el valor	Copy value
+Vista previa del degradado generado	Generated gradient preview
+Ajustes del degradado	Gradient settings
+Tipo de degradado	Gradient type
+Ángulo del degradado en grados	Gradient angle in degrees
+Código CSS del degradado	Gradient CSS code
+Ver sobre bloque de color	Preview on a solid color
+Preajustes	Presets
+Ninguno	None
+Blanco y negro	Black and white
+Sepia vintage	Vintage sepia
+Alto contraste	High contrast
+Sueño	Dreamy
+Invertido	Inverted
+Desenfoque	Blur
+Brillo	Brightness
+Contraste	Contrast
+Saturación	Saturation
+Giro de tono	Hue rotation
+Escala de grises	Grayscale
+Sepia	Sepia
+Inversión	Invert
+Sombra proyectada	Drop shadow
+Añadir drop-shadow	Add drop-shadow
+Copiar solo el valor	Copy value only
+Ajustes de los filtros	Filter settings
+Color de la sombra	Shadow color
+Valor hexadecimal del color de la sombra	Shadow hex color
+Código CSS de los filtros	Filter CSS code
+Tarjeta	Card
+Sombra que se lee	A shadow you can see
+Sombra suave	Soft shadow
+Propiedad	Property
+Fondo de la vista previa	Preview background
+Radio de la caja	Box radius
+Capas	Layers
++ Añadir capa	+ Add layer
+1 capa activa.	1 active layer.
+índice de generadores CSS	CSS generator index
+Ajustes de la sombra	Shadow settings
+Tipo de sombra	Shadow type
+Color de fondo de la vista previa	Preview background color
+Valor hexadecimal del fondo de la vista previa	Preview background hex color
+Radio de la caja de ejemplo en píxeles	Example box radius in pixels
+Código CSS de la sombra	Shadow CSS code
+La tipografía también habla	Typography speaks, too
+Restablecer	Reset
+Muestra	Sample
+Texto de ejemplo	Sample text
+Fuente	Font
+Familia	Family
+Instrument Sans (cuerpo del sitio)	Instrument Sans (site body font)
+Fraunces (titulares del sitio)	Fraunces (site heading font)
+Serif del sistema	System serif
+Sans-serif del sistema	System sans-serif
+Monoespaciada del sistema	System monospace
+Tamaño	Size
+Negrita	Bold
+Altura de línea	Line height
+Espaciado y forma	Spacing and appearance
+Interletrado	Letter spacing
+En	In
+Espacio entre palabras	Word spacing
+Sangría de primera línea	First-line indent
+Transformación	Transform
+Ninguna	None
+MAYÚSCULAS	UPPERCASE
+minúsculas	lowercase
+Iniciales En Mayúscula	Capitalize Each Word
+Alineación	Alignment
+Izquierda	Left
+Centro	Center
+Derecha	Right
+Justificado	Justify
+Versalitas	Small caps
+Decoración	Decoration
+Línea	Line
+Subrayado	Underline
+Línea superior	Overline
+Tachado	Line through
+Estilo de línea	Line style
+Continua	Solid
+Punteada	Dotted
+Discontinua	Dashed
+Ondulada	Wavy
+Grosor de la línea	Line thickness
+Usar el color del texto	Use text color
+Separación del subrayado	Underline offset
+Copiar solo las propiedades	Copy properties only
+Ajustes del estilo de texto	Text style settings
+Código CSS del estilo de texto	Text style CSS code
+Frente	Front
+Punto de origen	Transform origin
+Posiciones fijas	Preset positions
+Centro · 50% 50%	Center · 50% 50%
+Origen X	Origin X
+Origen Y	Origin Y
+Mostrar guías	Show guides
+Escala uniforme	Uniform scale
+Copiar solo transform	Copy transform only
+Vista previa del elemento transformado	Transformed element preview
+Ajustes de la transformación	Transform settings
+Arriba izquierda	Top left
+Arriba centro	Top center
+Arriba derecha	Top right
+Centro izquierda	Center left
+Centro derecha	Center right
+Abajo izquierda	Bottom left
+Abajo centro	Bottom center
+Abajo derecha	Bottom right
+Origen X en porcentaje	Origin X as a percentage
+Origen Y en porcentaje	Origin Y as a percentage
+Escala horizontal	Horizontal scale
+Escala vertical	Vertical scale
+Código CSS de la transformación	Transform CSS code
+Mi lienzo	My Lienzo
+Tu espacio	Your workspace
+Mi lienzo necesita JavaScript	My Lienzo requires JavaScript
+Guardar en Mi lienzo	Save to My Lienzo
+Bento grid con CSS Grid	Bento Layouts with CSS Grid
+Bento clásico	Classic bento
+Héroe	Hero
+Nota A	Note A
+Nota B	Note B
+Franja inferior	Bottom strip
+Héroe + 3 satélites	Hero + 3 supporting tiles
+Copiar HTML	Copy HTML
+Bento editorial	Editorial bento
+Artículo	Featured
+principal	article
+Secundario	Secondary
+Terciario	Tertiary
+Suscríbete	Subscribe
+Portada editorial	Editorial layout
+Bento de panel	Dashboard bento
+Métrica 1	Metric 1
+Métrica 2	Metric 2
+Métrica 3	Metric 3
+Gráfico	Chart
+Lista	List
+Panel de control	Dashboard
+Bento de galería	Gallery bento
+Galería mixta	Mixed gallery
+Botones	Buttons
+Descargar pack	Download pack
+Principal degradado	Gradient primary button
+Ver detalles	View details
+Secundario fantasma	Ghost secondary button
+Novedad	New
+Brillo que recorre	Sweeping shine
+Procesar	Process
+Botón de carga	Loading button
+Copiar JS	Copy JS
+Conmutadores	Toggles
+Notificaciones	Notifications
+Interruptor (switch)	Switch
+Chips de filtro	Filter chips
+Día	Day
+Semana	Week
+Mes	Month
+Control segmentado	Segmented control
+Pestañas	Tabs
+Resumen	Overview
+Detalles	Details
+Historial	History
+Contenido del resumen.	Overview content.
+Contenido de los detalles.	Details content.
+Contenido del historial.	History content.
+Pestañas con teclado	Keyboard-accessible tabs
+Incluye su JavaScript	JavaScript included
+Vista	View
+Secciones	Sections
+Esqueletos	Skeletons
+Líneas de texto	Text lines
+Tarjeta completa	Full card
+Fila de lista	List row
+Indicadores sin porcentaje	Indeterminate indicators
+Cargando	Loading
+Anillo giratorio	Spinning ring
+Enviando	Sending
+Puntos que rebotan	Bouncing dots
+Barra indeterminada	Indeterminate bar
+Progreso que se puede medir	Determinate progress
+Barra de progreso	Progress bar
+Anillo de porcentaje	Percentage ring
+Convirtiendo a WAV	Converting to WAV
+Todo ocurre en tu navegador	Processing runs in your browser
+Panel procesando	Processing panel
+Cargando el artículo	Loading the article
+Cargando la tarjeta	Loading the card
+Cargando los comentarios	Loading comments
+Procesando el archivo	Processing the file
+Subiendo el archivo	Uploading the file
+Exportando el audio	Exporting audio
+Datos: métricas y filas	Data: Metrics and Rows
+Métricas	Metrics
+Descargas	Downloads
+12.480	12,480
+▲ 18,2 % este mes	▲ 18.2% this month
+Visitas · 7 días	Visits · 7 days
+Métrica con variación	Metric with change
+Sparkline de barras	Bar sparkline
+Subiendo pack…	Uploading pack…
+Filas y estados	Rows and states
+hace 2 min · 84 MB	2 min ago · 84 MB
+en cola · 1,2 MB	queued · 1.2 MB
+Listo	Ready
+En cola	Queued
+Fila de lista densa	Dense list row
+Esqueleto de carga	Loading skeleton
+Formato	Format
+Iconos de cocina	Kitchen icons
+4.812	4,812
+Sonidos de suspenso	Suspense sounds
+3.104	3,104
+Escenas 3D	3D scenes
+1.987	1,987
+Tabla compacta	Compact table
+Tendencia semanal al alza	Rising weekly trend
+Formas y recortes CSS	CSS Shapes and Clipping
+Proporciones fijas	Fixed aspect ratios
+Caja 1:1	1:1 box
+Caja 16:9	16:9 box
+Caja retrato 3:4	3:4 portrait box
+Radios con intención	Purposeful corner radii
+Suave (12px)	Soft (12px)
+Tarjeta (24px)	Card (24px)
+Píldora	Pill
+Blob orgánico	Organic blob
+Recortes con clip-path	Clipping with clip-path
+Chaflán	Chamfer
+Chaflán en esquinas	Chamfered corners
+Mordida	Cutout
+Esquina mordida	Corner cutout
+Siguiente	Next
+Panel flecha	Arrow panel
+Pestaña	Tab
+Pestaña superior	Top tab
+Marcos degradados	Gradient frames
+Marco vivo	Vivid frame
+Borde degradado	Gradient border
+Órbita	Orbit
+Marco cónico giratorio	Rotating conic frame
+Mira HUD	HUD reticle
+Esquinas técnicas	Technical corners
+Campos de formulario	Form Fields
+Campos de texto	Text fields
+Tu nombre	Your name
+Etiqueta flotante	Floating label
+Campo de búsqueda	Search field
+Mensaje	Message
+Textarea con contador	Textarea with counter
+Selección	Selection
+Acepto recibir el pack	I agree to receive the pack
+Checkbox dibujado	Styled checkbox
+Vector editable	Editable vector
+Listo para pegar	Ready to paste
+Radios como tarjetas	Card radio buttons
+Volumen	Volume
+Deslizador con nivel	Range slider with fill
+Composición completa	Complete layout
+Entrar	Sign in
+Crear cuenta	Create account
+¿Olvidaste la contraseña?	Forgot your password?
+Acceso con volteo: entrar o crear cuenta	Flip sign-in and sign-up form
+Buscar	Search
+Buscar iconos…	Search icons…
+Escribe aquí…	Type here…
+Tu correo	Your email
+Tu contraseña	Your password
+Crea una contraseña	Create a password
+Solo CSS	CSS only
+Pasa el cursor	Hover here
+Elevación al pasar	Hover lift
+Dorso	Back
+Tarjeta que se voltea	Flip card
+Grabando	Recording
+Borde con pulso	Pulsing border
+Con un poco de JS	With a little JavaScript
+Haz clic aquí	Click here
+Onda al hacer clic (ripple)	Click ripple
+Muéveme	Move me
+Inclinación 3D (tilt)	3D tilt
+Ilumíname	Light me up
+Luz que sigue al cursor	Cursor-following light
+iconos	icons
+Contador que sube	Count-up animation
+Abrir modal	Open modal
+Un dialog de verdad	A native dialog
+El elemento <dialog> trae foco atrapado, tecla Escape y fondo oscurecido de serie.	The <dialog> element provides focus containment, Escape dismissal, and a backdrop when opened with showModal().
+Cerrar	Close
+Ventana modal nativa	Native modal dialog
+Entra por un lado	Enter from a side
+La capa llega desde el lado por el que entra el cursor.	The overlay enters from the same side as the cursor.
+Capa que entra por donde llega el cursor	Direction-aware overlay
+Cambio de imagen con distorsión	Distorted image transition
+Mapa de navegación en 3D	3D navigation map
+Gráficas de datos en 3D	3D data charts
+Anuncio con megáfono en 3D	3D megaphone announcement
+Elegir imagen	Choose image
+Imagen 1	Image 1
+Imagen 2	Image 2
+Imagen 3	Image 3
+Navegación con CSS moderno	Navigation with Modern CSS
+Laterales	Sidebars
+Estadísticas	Statistics
+Mensajes	Messages
+Fijar abierto	Pin open
+Rail lateral que se expande	Expanding sidebar
+Estudio	Studio
+Trabajo	Work
+Proyectos	Projects
+Favoritos	Favorites
+Cuenta	Account
+Avisos	Notifications
+Plan Pro	Pro plan
+Menú de app con grupos plegables	App menu with collapsible groups
+Móvil y pestañas	Mobile and tabs
+Menú	Menu
+Recursos	Resources
+Contacto	Contact
+Cajón de navegación con popover	Popover navigation drawer
+Barra inferior móvil	Mobile bottom bar
+Pestañas con indicador deslizante	Tabs with sliding indicator
+Menú principal	Main menu
+Menú de la aplicación	Application menu
+Menú de navegación	Navigation menu
+Cerrar el menú	Close menu
+Navegación principal	Main navigation
+Superficies: vidrio y neón	Surfaces: Glass and Neon
+Vidrio esmerilado (glassmorphism)	Frosted glass (glassmorphism)
+Panel de vidrio	Glass panel
+Vidrio ligero	Light glass
+capas de blur	blur layers
+Vidrio profundo	Deep glass
+Borde encendido	Glowing border
+Vidrio con borde de luz	Glass with a glowing border
+Neón	Neon
+NEÓN	NEON
+Borde de neón	Neon border
+abierto	open
+Texto de neón	Neon text
+EN VIVO	LIVE
+Neón con latido	Pulsing neon
+Fondos con carácter	Distinctive backgrounds
+Malla aurora	Aurora mesh
+Rejilla técnica	Technical grid
+Grano	Grain
+Ruido fino	Fine noise
+Personas y testimonios	People and testimonials
+Directora de arte	Art director
+Identidad, editorial y motion para marcas que quieren verse vivas.	Identity, editorial, and motion design for expressive brands.
+Tarjeta de perfil	Profile card
+Entregamos el rediseño dos semanas antes gracias a estos componentes.	We delivered the redesign two weeks early thanks to these components.
+Luis M.: desarrollador freelance	Luis M.: freelance developer
+Testimonio con comilla	Testimonial with quotation mark
+Producto y acción	Product and action
+/mes	/month
+Proyectos ilimitados	Unlimited projects
+Exportación en 4K	4K export
+Soporte prioritario	Priority support
+Empezar	Get started
+Tarjeta de precio	Pricing card
+Colección nocturna	Night collection
+12 fondos · gratis	12 backgrounds · free
+Imagen con velo de texto	Image with text overlay
+400 archivos · 0,4 MB	400 files · 0.4 MB
+Fila de descarga	Download row
+Mensual	Monthly
+Anual	Annual
+2 meses gratis	2 months free
+Exportación en SVG y PNG	SVG and PNG export
+Soporte por correo	Email support
+/año	/year
+Ahorras $24	Save $24
+Todo lo del plan mensual	Everything in the monthly plan
+Dos meses de regalo	Two months free
+Precio a doble cara con profundidad	Two-sided pricing card with depth
+Descargar	Download
+Mueve un control, mira el resultado, copia el CSS. Sin registros, sin build y sin memorizar sintaxis: la vista previa siempre te dice la verdad antes de pegar nada en tu proyecto.	Adjust a control, preview the result, and copy the CSS. No signup or build step. Check your design before adding it to your project.
+Carrusel y botones sociales editables: vista previa interactiva y descarga del código completo.	Customizable carousel and social buttons: interactive previews and complete code downloads.
+HTML · CSS · ZIP con guía	HTML · CSS · ZIP with guide
+Lineales, radiales y cónicos, con paradas de color, opacidad y ángulo editables.	Linear, radial, and conic gradients with editable color stops, opacity, and angle.
+box-shadow y text-shadow con varias capas, para profundidad que no se ve barata.	Layered box-shadow and text-shadow effects for controlled depth.
+Radios por esquina, bordes y contornos. Incluye los radios asimétricos tipo gota.	Individual corner radii, borders, and outlines, including asymmetric organic shapes.
+Desenfoque, brillo, contraste, saturación y sepia sobre una imagen de verdad.	Preview blur, brightness, contrast, saturation, and sepia on an actual image.
+Rotar, escalar, inclinar y desplazar, con perspectiva 3D y punto de origen.	Rotate, scale, skew, and translate with 3D perspective and transform origin controls.
+Keyframes y transiciones con curvas de aceleración y control de la línea de tiempo.	Keyframe animations with editable easing curves, timing, and playback controls.
+Interletrado, altura de línea, transformación y decoración del texto, en vivo.	Live letter spacing, line height, text transforms, and decoration.
+78 piezas hechas y copiables: glass, neón, bento grid, botones, tarjetas, formularios, navegación y microinteracciones.	78 copy-ready examples: glass, neon, bento grids, buttons, cards, forms, navigation, and microinteractions.
+9 categorías · CSS listo para copiar	10 categories · copy-ready CSS
+Elige un efecto, ajusta el tiempo y dibuja la curva de aceleración. Te llevas el bloque	Choose an effect, adjust its timing, and shape its easing curve. Copy the
+ y la propiedad	 and the property
+listos para pegar, con el respeto por quien pide menos movimiento ya incluido.	ready to paste, with reduced-motion handling included.
+Cada preestablecido trae su tiempo y su curva recomendados. A partir de ahí, todo es tuyo.	Each preset includes suggested timing and easing. Customize either to suit your design.
+Es el identificador de	This identifies the
+. Solo letras, números y guiones.	. Use letters, numbers, and hyphens only.
+. Úsalo solo en indicadores de carga o adornos discretos.	. Reserve infinite playback for loading indicators or subtle decoration.
+Para animaciones de entrada casi siempre quieres	For entrance animations, consider
+: evita el salto del final y el parpadeo del principio.	: it helps prevent a jump at the end and a flash at the start.
+Horizontal: el tiempo que pasa. Vertical: lo que ha avanzado la animación. La bolita ámbar recorre la curva al ritmo real del efecto.	Horizontal: elapsed time. Vertical: animation progress. The amber dot follows the easing curve at the effect's actual pace.
+: son las dos propiedades que el navegador anima sin rehacer el diseño de la página.	: these properties can animate without recalculating page layout.
+¿Buscas otro efecto? Toda la colección está en	Looking for another effect? Explore
+, y el	, or use the
+te prepara el fondo sobre el que se va a mover esto.	to prepare a background for your animation.
+Redondea las cuatro esquinas o cada una por separado, prueba los radios elípticos que dan las formas orgánicas, y compara borde y contorno en la misma caja. El CSS se escribe solo mientras mueves los controles.	Round all corners together or edit each one. Try elliptical radii for organic shapes and compare borders with outlines. The CSS updates as you adjust the controls.
+El porcentaje se mide contra el ancho y el alto de la caja, así que la curva se adapta al tamaño. Es lo que hace posibles las formas orgánicas.	Percentages refer to the box width and height, allowing the curve to adapt to its size and form organic shapes.
+Despliega un control independiente para cada esquina.	Show a separate control for each corner.
+Dos valores por esquina separados por «/»: horizontal y vertical.	Two values per corner, separated by a slash: horizontal and vertical.
+Con 0 el borde desaparece del CSS generado.	At 0, the border is omitted from the generated CSS.
+El estilo doble necesita al menos 3px para que se distingan las dos líneas.	A double border needs at least 3px to show both lines clearly.
+El contorno (	The outline (
+) se dibuja por encima del diseño y	) is drawn over the design and
+no ocupa espacio en el layout	does not take up layout space
+: puedes engordarlo o quitarlo y nada se mueve. Un	: changing or removing it does not shift surrounding elements. A
+ de 4px, en cambio, agranda la caja 8px o le come relleno por dentro.	4px border, by contrast, adds 8px to the box dimensions or uses inner space, depending on box-sizing.
+de 4px, en cambio, agranda la caja 8px o le come relleno por dentro.	4px border, by contrast, adds 8px to the box dimensions or uses inner space, depending on box-sizing.
+Con valores negativos el contorno se dibuja hacia dentro, encima del relleno.	Negative offsets draw the outline inward, over the padding.
+¿Ya tienes la forma? Ponle fondo con el	Have your shape? Create its background with the
+o vuelve al índice de	or return to the index of
+Una galería de componentes de interfaz con el código a un clic: cada pieza que ves aquí se copia tal cual y funciona en cualquier proyecto, sin librerías, sin frameworks y sin configuración.	Explore interface examples with copyable code. Adapt the HTML and CSS to your project; interactive pieces include their JavaScript when needed. No framework required.
+Chaflanes, flechas, blobs y marcos degradados con clip-path y border-radius.	Chamfers, arrows, blobs, and gradient frames using clip-path and border-radius.
+Esqueletos con brillo, spinners, barras y anillos de progreso.	Shimmering skeletons, spinners, progress bars, and rings.
+Rail lateral que se expande, menú de app con grupos, cajón con popover, barra inferior móvil y pestañas con indicador.	Expanding sidebar, grouped app menu, popover drawer, mobile bottom bar, and tabs with an indicator.
+Glassmorphism con backdrop-filter, neón por capas y fondos aurora.	Glassmorphism with backdrop-filter, layered neon, and aurora backgrounds.
+Cuatro bento grids con grid-template-areas y colapso móvil resuelto.	Four bento grids using grid-template-areas with responsive mobile layouts.
+Botones con estados de verdad, switch, chips, segmentado y pestañas con teclado.	Buttons with interactive states, switches, chips, segmented controls, and keyboard-accessible tabs.
+Perfil, precio, testimonio, imagen con velo y fila de descarga.	Profile, pricing, testimonial, image overlay, and download cards.
+Etiqueta flotante, buscador, contador, checkbox, radios-tarjeta y range.	Floating labels, search, counters, checkboxes, card radio buttons, and range inputs.
+Métricas, sparkline sin librería, progreso, lista con estados, skeleton y tabla.	Metrics, a library-free sparkline, progress, status rows, skeletons, and a table.
+Elevación, volteo, ripple, tilt 3D, luz de cursor, contador y modal nativo.	Hover lift, flips, ripples, 3D tilt, cursor light, counters, and native dialogs.
+Lineales, radiales y cónicos. Mueve los colores, ajusta la opacidad y llévate el CSS listo para pegar. Todo pasa en tu navegador, en tiempo real.	Create linear, radial, and conic gradients. Move color stops, adjust opacity, and copy the CSS. Generation runs in your browser in real time.
+0° va de abajo hacia arriba y avanza en sentido horario. Las diagonales (120–135°) suelen verse más naturales.	0° runs from bottom to top, increasing clockwise. Try 120–135° for a diagonal gradient.
+Hasta 8 paradas. El color nuevo se inserta en el hueco más ancho.	Up to 8 stops. A new color is added in the widest gap.
+¿Buscas la paleta antes que el degradado? Empieza por el	Need a palette first? Start with the
+Los nueve filtros de CSS más	The nine CSS filters plus
+, probados sobre una imagen de verdad. Mueve los controles, mira el resultado y copia la cadena. Solo sale en el código lo que de verdad cambia algo.	, previewed on an actual image. Adjust the controls and copy the filter chain. Only nondefault effects appear in the code.
+Hue-rotate e invert se leen mejor sobre color sólido.	Hue rotation and invert are easier to compare on a solid color.
+El más caro de todos. Por encima de 8 px ya no se lee nada de la imagen.	Blur can be expensive to render. Above 8px, this sample loses much of its detail.
+Rota la rueda de color entera. A 360° vuelve al punto de partida.	Rotate the entire color wheel. At 360°, it returns to the starting point.
+Al 50 % todo se vuelve gris medio: ahí es donde se cruzan los valores.	At 50%, all values converge to midgray.
+Sigue el contorno real del contenido, no su caja.	Follows the visible content's alpha outline rather than its rectangular box.
+¿Necesitas el fondo antes que el filtro? Pásate por el	Need a background first? Try the
+Imagen de muestra de Lienzo: fondo oscuro con manchas de luz violeta y turquesa y el nombre de la marca	Lienzo sample image: dark background with violet and turquoise light and the brand name
+box-shadow y text-shadow con todas las capas que necesites. Ajusta desenfoque, extensión y color, júzgalo sobre un fondo real y llévate el CSS listo para pegar. Todo pasa en tu navegador, en tiempo real.	Create layered box-shadow and text-shadow effects. Adjust blur, spread, and color, preview against a background, and copy the CSS. Processing runs in your browser.
+Una sombra solo existe en contexto: cámbialo para ver si aguanta sobre claro y sobre oscuro.	Change the background to check your shadow on both light and dark surfaces.
+No sale en el CSS generado: está aquí para juzgar la sombra sobre la forma real.	Not included in the generated CSS. Use this to preview the shadow on a rounded box.
+Hasta 5 capas. La primera de la lista se dibuja encima de las demás, así que conviene que sea la más pequeña y densa.	Up to 5 layers. The first is drawn on top; try making it the smallest and darkest.
+¿El fondo antes que la sombra? Pásate por el	Need a background first? Try the
+o vuelve al	or return to the
+Tamaño, grosor, altura de línea, interletrado, alineación y decoración. Escribe tu propio texto, míralo en un titular y en un párrafo de verdad, y llévate el CSS listo para pegar.	Adjust font size, weight, line height, spacing, alignment, and decoration. Preview your text as a heading and a paragraph, then copy the CSS.
+Un párrafo de prueba sirve para lo que una sola línea no puede: ver si el texto respira. Aquí se nota de verdad la altura de línea, cómo se comporta el interletrado en frases largas y qué les pasa a los espacios cuando justificas una columna estrecha.	A sample paragraph reveals what one line cannot: rhythm, line height, spacing across longer sentences, and the gaps that justified text creates in a narrow column.
+El párrafo mantiene el mismo estilo a un tamaño menor: así ves cómo la altura de línea sin unidad se adapta sola a cada tamaño.	The paragraph uses the same style at a smaller size, showing how unitless line height adapts to each font size.
+Solo las fuentes que esta página ya carga, para no traer dependencias nuevas. En tu proyecto, cambia el nombre en	Only fonts already available on this page are listed. In your project, change the name in
+por el de la tuya.	to your own font.
+Fraunces e Instrument Sans son variables de 400 a 700. Fuera de ese rango el navegador simula el grosor, y eso siempre se nota.	This page uses Fraunces and Instrument Sans at weights 400–700. Outside that range, the browser may synthesize the requested weight.
+Sin unidad. 1.05–1.25 para titulares, 1.4–1.6 para texto corrido.	Unitless. Try 1.05–1.25 for headings and 1.4–1.6 for body text.
+para que escale con el tamaño. Negativo solo en titulares grandes; positivo en textos en mayúsculas.	so spacing scales with the font size. Use negative values cautiously on large headings and positive values for uppercase text.
+En negativo, la primera línea sobresale (sangría francesa).	Negative values create a hanging first line.
+Convierte las minúsculas en mayúsculas pequeñas con	Convert lowercase letters to small capitals with
+. Si la fuente no las trae, el navegador las simula.	. If the font has no small caps, the browser may synthesize them.
+En 0 se queda en	At 0, it stays on
+: el grosor lo decide la propia fuente.	: the font determines the thickness.
+Es el comportamiento por defecto (	This is the default behavior (
+). Desmárcalo para pintar la línea de otro color.	). Uncheck it to use a different line color.
+Solo para el subrayado. En 0 se queda en	Applies only to underlines. At 0, it stays on
+; sube un par de píxeles y el trazo deja de cortar las letras con rabito.	; increase it slightly to give letter descenders more space.
+¿Vas a poner este texto sobre un fondo de color? Compruébalo antes en el	Placing text on a colored background? Preview it with the
+Desplaza, escala, gira e inclina un elemento y mira el resultado al instante. Con el punto de origen marcado sobre la silueta original (lo que casi nadie explica) y la perspectiva 3D en su sitio: el contenedor padre.	Translate, scale, rotate, and skew an element in real time. See the transform origin against the original outline and apply 3D perspective to the parent container.
+Es el alfiler sobre el que pivota todo. 0% 0% es la esquina superior izquierda; el porcentaje se mide sobre el propio elemento.	The pivot point for transforms. 0% 0% is the top-left corner; percentages refer to the element itself.
+Rejilla, ejes y la silueta sin transformar, con el punto de origen marcado en ámbar.	Grid, axes, and the original outline, with the transform origin marked in amber.
+Los valores positivos de Y bajan: el eje vertical de la pantalla crece hacia abajo.	Positive Y values move downward along the screen's vertical axis.
+Enlaza los dos ejes para que el elemento no se deforme.	Link both axes to preserve the element's proportions.
+Gira en el plano de la pantalla, en sentido horario. Es exactamente lo mismo que rotateZ.	Rotate clockwise in the screen plane, just like rotateZ.
+Inclinar deforma también el texto de dentro. Pasados los 30° suele leerse mal.	Skew also distorts text. Beyond 30°, it can become difficult to read.
+Vuelca el elemento hacia atrás o hacia delante, como la tapa de una caja.	Tilt backward or forward, like a box lid.
+Gira como una puerta. A 180° verás el reverso, con el texto en espejo.	Turn like a door. At 180°, the back is visible and the text is mirrored.
+El mismo giro que rotate. Si usas los dos, los ángulos se suman.	Same rotation as rotate. Using both adds their angles.
+Acerca o aleja el elemento del ojo. Sin perspectiva declarada no se nota nada.	Move toward or away from the viewer. Perspective is needed to make the depth change visible.
+Va en el contenedor padre. Cuanto menor es el valor, más cerca está el ojo y más brutal la deformación.	Applied to the parent container. Smaller values produce stronger perspective distortion.
+¿Buscas otra propiedad? Todos los generadores están en	Looking for another property? Explore all generators in
+El bento organiza una portada como una caja japonesa: compartimentos de distinto tamaño donde cada pieza tiene su lugar y una manda. Estos cuatro layouts cubren portada, editorial, panel y galería: cada uno con su mapa de áreas legible y su colapso móvil resuelto.	Bento layouts divide a page into tiles of different sizes, with one clear focal point. These four examples cover a classic layout, editorial page, dashboard, and gallery, with named grid areas and mobile layouts.
+Una pieza protagonista y satélites alrededor. grid-template-areas hace legible el mapa y lo colapsa a una columna en móvil con una sola media query.	A hero tile surrounded by supporting content. Named grid areas keep the layout readable, and one media query turns it into a mobile column.
+Pensado para portadas: una celda de texto alta, dos medianas y una faja de cierre. Las áreas se leen como un periódico.	An editorial layout with a tall text tile, two medium tiles, and a closing strip, arranged like a newspaper.
+El formato dashboard: métricas arriba, gráfico grande, lista al lado. Con dense, Grid rellena los huecos que deja el flujo.	A dashboard layout: metrics above, a large chart, and a list alongside. Dense placement fills available gaps.
+Para portafolios: celdas cuadradas con dos protagonistas del doble de tamaño. auto-flow dense evita los huecos al reordenarse.	A portfolio layout with square tiles and two larger focal tiles. Dense placement helps fill gaps as the grid rearranges.
+Los controles son la parte de la interfaz que la gente toca. Estos vienen con lo que casi nunca trae un snippet: área táctil de 44 píxeles, foco visible, controles nativos debajo del maquillaje y teclado funcionando.	Controls are where visitors interact with your interface. These examples use 44px touch targets, visible focus, native inputs, and keyboard support.
+Cuatro botones que cubren el 90 % de una interfaz: el principal, el secundario, el de brillo y el de carga. Área táctil mínima de 44px en todos.	Four common button styles: primary, secondary, shine, and loading. Each has a minimum 44px touch target.
+Switch y chips construidos sobre controles nativos: el input sigue ahí, accesible y con teclado; el CSS solo lo viste.	Switches and chips built on native inputs. CSS styles them while the underlying controls retain keyboard interaction.
+Pestañas accesibles de verdad: roles ARIA, flechas del teclado y paneles asociados. El JS mide 20 líneas y está incluido.	Tabs with ARIA roles, arrow-key navigation, and associated panels. The required JavaScript is included.
+Lo que ve el usuario mientras espera dice tanto como el resultado. Nueve piezas de CSS puro para esa espera: esqueletos que reservan el sitio, indicadores que no mienten sobre el tiempo y progreso que sí se puede medir. Todas accesibles y todas con su respuesta a	Nine loading examples: skeletons that reserve space, indeterminate indicators, and measurable progress. The examples include accessible labels and reduced-motion handling with
+Un esqueleto imita la forma de lo que va a llegar: bloques del tamaño real del contenido, con un brillo que los recorre. Evita el salto de maquetación porque reserva el espacio antes de tener los datos.	A skeleton approximates the incoming content with correctly sized blocks and a sweeping shimmer. Reserving space helps reduce layout shifts.
+Cuando no sabes cuánto falta, la interfaz solo puede decir «sigo trabajando». Estos tres lo dicen de tres formas distintas, y ninguno miente sobre el tiempo que queda.	When the remaining time is unknown, use an indeterminate indicator. These three examples show activity without inventing a completion estimate.
+Si conoces el porcentaje, enséñalo. Un número real baja la ansiedad de la espera mucho más que cualquier animación, y permite que el lector decida si le da tiempo a hacer otra cosa.	Show the percentage when it is known. Real progress helps people judge the wait and decide whether to do something else.
+Los datos convencen cuando se leen a la primera. Estas piezas cubren el panel típico completo (la cifra con su variación, la tendencia en miniatura, la lista con estados y la tabla) sin una librería de gráficos.	Readable dashboard examples: a metric and its change, a small trend chart, status rows, and a table. No chart library needed.
+La caja rectangular es solo el punto de partida. Con clip-path, border-radius y un par de trucos de fondo, el mismo div se convierte en chaflán, flecha, pestaña o blob, sin imágenes y sin SVG externos.	A rectangular box is only the starting point. Use clip-path, border-radius, and backgrounds to create chamfers, arrows, tabs, and blobs without image files or external SVG.
+aspect-ratio mantiene la caja estable aunque el contenido cambie: la base de cualquier rejilla que no salta.	aspect-ratio keeps the box proportions stable as content changes, helping prevent grid layout shifts.
+El radio no es decoración: comunica jerarquía. Pocos valores, usados siempre igual, y la interfaz se ve ordenada sola.	Corner radius can communicate hierarchy. Reuse a small, consistent set of values for an orderly interface.
+clip-path recorta la caja sin imágenes ni pseudoelementos. El recorte se lleva consigo fondo, borde visual y contenido.	clip-path clips the box, its visible background, and its content without images or extra pseudo-elements.
+El truco de los dos fondos: uno pinta el interior (padding-box) y otro el borde (border-box). Un borde degradado sin pseudoelementos.	Two backgrounds create the frame: one fills the padding box and the other fills the border box. No pseudo-elements required.
+El formulario es donde el visitante trabaja, y donde más se nota el cuidado. Estos campos están construidos sobre los controles nativos (con su teclado, su foco y su autorrelleno intactos) y vestidos para estar a la altura del resto de tu interfaz.	Forms are where visitors do the work. These styled examples keep native keyboard behavior, focus, and autofill while fitting the surrounding interface.
+Un formulario entero, no un campo suelto: entrar y crear cuenta en la misma tarjeta, con el cambio hecho en CSS y la validación nativa del navegador.	A complete sign-in and sign-up card with a CSS flip and native browser validation. This is a front-end demo; it has no authentication service.
+Una microinteracción es la respuesta física de la interfaz: el botón que acusa el clic, la tarjeta que se inclina hacia ti, el número que sube al entrar en pantalla. Bien dosificadas, son la diferencia entre una página que funciona y una que se siente viva.	Microinteractions give feedback: a button responding to a click, a tilting card, or a number counting up. Use them selectively to support the interface.
+Cinco piezas que resuelven cómo se mueve la gente por una app o un sitio, casi todas sin JavaScript: el navegador ya sabe plegar, abrir cajones y atrapar el foco si le pides lo correcto. Cada una trae su estado activo, su foco visible por teclado y su respeto a quien pide menos movimiento.	Five navigation examples, most without JavaScript, using native disclosure and popover behavior. They include active states, visible keyboard focus, and reduced-motion styles. Test browser support before integration.
+Para apps y paneles: un rail de iconos que crece al pasar el cursor, y un menú completo con grupos que se pliegan con el elemento details.	For apps and dashboards: an icon rail that expands on hover and a grouped menu using native details elements.
+Para sitios: el cajón que se abre con el atributo popover, la barra inferior de móvil con su zona segura, y las pestañas con un solo indicador que se desliza.	For websites: a popover drawer, a mobile bottom bar with safe-area spacing, and tabs with a sliding indicator.
+El material de una interfaz se decide en la superficie: vidrio que deja pasar el fondo, neón que emite luz propia, ruido que da textura. Aquí están las tres, con su física explicada y su código completo.	Surface styles define the feel of an interface: translucent glass, glowing neon, and textured noise. Explore the effects and copy their code.
+backdrop-filter desenfoca lo que hay detrás del panel. Para que se aprecie, el fondo debe tener algo que desenfocar: color, foto o degradado.	backdrop-filter blurs content behind the panel. The background needs visible variation, such as a photo or gradient, for the effect to stand out.
+El neón CSS son capas de la misma luz a distinta escala: un resplandor pegado, otro medio y otro amplio. Sin la capa amplia parece subrayado, no luz.	CSS neon layers tight, medium, and wide glows of the same color. The wide glow creates the impression of emitted light.
+Tres fondos que sostienen una sección entera sin una sola imagen: malla de color, rejilla técnica y ruido fino.	Three image-free backgrounds for full sections: a color mesh, technical grid, and fine noise.
+La tarjeta es la unidad de contenido de la web moderna: casi todo lo que muestras (una persona, un plan, una descarga) acaba viviendo en una. Estas cinco cubren los casos que más se repiten, con jerarquía tipográfica ya resuelta.	Cards organize people, pricing, testimonials, and downloads. These examples provide reusable layouts and typographic hierarchy. All names, prices, and testimonials shown here are sample content.
+Ana García	Ana García
+Guarda lo que creas con las herramientas, marca tus favoritas y sigue tu racha creativa. Sin cuentas ni contraseñas: todo vive en tu navegador.	Save palettes and CSS, favorite tools, and track your creative activity. No account or password. Workspace data stays in this browser.
+El espacio personal se guarda y se muestra directamente en tu navegador, por eso requiere JavaScript activado. Las	The workspace is saved and displayed in your browser and requires JavaScript. The
+Siete generadores y una galería de 78 componentes hechos, todo funcionando en tu navegador. Si buscas herramientas de diseño en vez de código, están en	Seven generators and a gallery of 78 examples run in your browser. Find more design utilities in
+Código copiado	Code copied
+CSS copiado	CSS copied
+No se pudo copiar	Could not copy
+No se pudo copiar.	Could not copy.
+Copiado ✓	Copied ✓
+Prepara tu lienzo	Set up My Lienzo
+Un minuto y listo. Sin cuentas, sin contraseñas, sin correos.	Ready in a minute. No account, password, or email.
+¿Cómo te llamamos?	What should we call you?
+Tu nombre o alias	Your name or nickname
+A qué te dedicas	Your role
+¿Qué te trae por aquí?	What brings you here?
+Tu color favorito	Your favorite color
+Tu color	Your color
+Elegir otro color	Choose another color
+Crear mi espacio	Create my workspace
+Tu espacio vive solo en este navegador. Podrás exportarlo cuando quieras.	Your workspace stays in this browser. Export a backup whenever you need one.
+Guarda lo que creas	Save your work
+Paletas y CSS de los generadores, con nombre y listos para copiar.	Named palettes and generated CSS, ready to copy.
+Tus herramientas, a mano	Your tools, within reach
+Marca favoritas, mira cuáles usas más y desbloquea insignias.	Favorite tools, see which you use most, and unlock badges.
+Privado de verdad	Stored locally
+Nada sale de tu equipo. Exporta tu lienzo cuando quieras llevarlo contigo.	Workspace data is stored in this browser. Export a backup to move it to another device.
+Tu lienzo está listo ✦	Your workspace is ready ✦
+Violeta	Violet
+Turquesa	Turquoise
+Ámbar	Amber
+Exportar	Export
+Importar	Import
+Empezar de cero	Start over
+creaciones guardadas	saved creations
+herramientas probadas	tools tried
+insignias logradas	badges earned
+días creando	creative days
+Tus creaciones	Your creations
+Eliminar	Delete
+Aquí aparecerá lo que guardes. Busca el botón	Your saved work appears here. Look for
+ en las herramientas.	 in the tools.
+Ir a los generadores CSS	Open CSS generators
+Tus herramientas	Your tools
+Quitar de favoritas	Remove from favorites
+Marcar como favorita	Add to favorites
+uso	use
+usos	uses
+sugerida para ti	suggested for you
+sin estrenar	not tried yet
+Insignias	Badges
+Sigue el proceso en YouTube	Watch the process on YouTube
+Cada semana, recursos gratis y procesos creativos reales en el canal de Andy Publicista. Tu lienzo y el canal se llevan muy bien.	Explore free resources and creative workflows on the Lienzo YouTube channel. Original tutorials may be in Spanish.
+Suscribirme	Subscribe
+Lienzo exportado ✦	Workspace exported ✦
+Lienzo importado ✦	Workspace imported ✦
+Ese archivo no parece un lienzo exportado.	That file is not a valid workspace backup.
+El archivo no parece un lienzo exportado.	That file is not a valid workspace backup.
+¿Empezar de cero?	Start over?
+Se borrarán tu perfil, tus creaciones y tus favoritos de este navegador. Exporta antes si quieres conservarlos.	This deletes your English profile, creations, and favorites from this browser. Export first to keep a backup.
+Borrar todo	Delete all
+Lienzo en blanco. Cuando quieras, lo volvemos a preparar.	Workspace cleared. Set it up again whenever you are ready.
+¿Eliminar esta creación?	Delete this creation?
+Creación eliminada.	Creation deleted.
+Añadida a tus favoritas ✦	Added to favorites ✦
+Quitada de favoritas.	Removed from favorites.
+Galería de favicons	Favicon Gallery
+Galería de emojis	Emoji Gallery
+Favicon por dominio	Favicon by Domain
+Texto ondulado	Wavy Text
+Generador de paletas	Palette Generator
+Extraer paleta de imagen	Image Palette Extractor
+Territorio cromático	Color Territory Explorer
+Colores en vivo	Live Color Preview
+Optimizador de SVG	SVG Optimizer
+Degradados CSS	CSS Gradients
+Sombras CSS	CSS Shadows
+Bordes CSS	CSS Borders
+Filtros CSS	CSS Filters
+Transformaciones CSS	CSS Transforms
+Animaciones CSS	CSS Animations
+Tipografía CSS	CSS Typography
+Paleta	Palette
+Sombra	Shadow
+Transformación	Transform
+Animación	Animation
+Primer trazo	First stroke
+Preparaste tu lienzo	You set up your workspace
+Coleccionista	Collector
+Guardaste 3 creaciones	You saved 3 creations
+Explorador	Explorer
+Probaste 5 herramientas	You tried 5 tools
+Constante	Consistent
+Volviste 3 días distintos	You visited on 3 different days
+Ojo clínico	Keen eye
+Marcaste un favorito	You favorited a tool
+Archivista	Archivist
+Exportaste tu lienzo	You exported your workspace
+Todavía no hay nada para guardar.	There is nothing to save yet.
+Aún no preparaste tu lienzo	Set up your workspace first
+Créalo en un minuto: sin cuentas ni contraseñas. Todo queda guardado en tu navegador.	Set it up in a minute. No account or password. Workspace data stays in your browser.
+Ahora no	Not now
+Crear mi lienzo	Create My Lienzo
+Guardar en tu lienzo	Save to My Lienzo
+Ponle un nombre para encontrarla después.	Give it a name so you can find it later.
+Nombre de la creación	Creation name
+Guardado en tu lienzo ✦	Saved to My Lienzo ✦
+Reproducir	Play
+Vista previa en reproducción.	Preview playing.
+Vista previa en pausa.	Preview paused.
+Animación reiniciada.	Animation restarted.
+Tu sistema pide menos movimiento, así que la vista previa empieza en pausa. Pulsa «Reproducir» cuando quieras verla.	Your system requests reduced motion, so the preview starts paused. Select Play when you want to watch it.
+Forma orgánica generada	Organic shape generated
+Extensión	Spread
+Interior (inset)	Inner shadow (inset)
+Sin sombra.	No shadow.
+Fina	Thin
+Extraligera	Extra light
+Ligera	Light
+Media	Medium
+Seminegrita	Semibold
+Extranegrita	Extra bold
+Negra	Black
+Propiedades copiadas	Properties copied
+Keyframes copiados	Keyframes copied
+inset: se dibuja por dentro del borde	inset: drawn inside the border
+Sombra interior	Inner shadow
+Receta de 3 capas aplicada	Three-layer preset applied
+Sin filtros	No filters
+1 filtro activo	1 active filter
+Filtro	Filter
