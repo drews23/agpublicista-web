@@ -167,7 +167,7 @@ This English sheet is separate from the unchanged original archive.
     source=re.sub(r'<!-- Lienzo language alternatives -->\s*(?:<link[^>]+hreflang=[^>]+>\s*)+','',source)
     source=source.replace('</head>','<!-- Lienzo language alternatives -->\n'+templates.head_links('/blog/'+es+'/', '/en/blog/'+en+'/')+'\n</head>',1)
     if 'data-english-switch' not in source:
-        source=source.replace('<button class="theme-btn"',f'<a class="theme-btn" data-english-switch href="/en/blog/{en}/" lang="en" hreflang="en" aria-label="Read this page in English">EN</a><button class="theme-btn"',1)
+        source=source.replace('<button class="theme-btn"',f'<a class="theme-btn language-switch" data-english-switch href="/en/blog/{en}/" lang="en" hreflang="en" aria-label="Switch to English" title="Switch to English" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"/></svg><span>EN</span></a><button class="theme-btn"',1)
     after=sha(str(BeautifulSoup(source,'html.parser').main))
     if before!=after: raise ValueError(f'Spanish main changed: {es}')
     path.write_text(source,encoding='utf-8')

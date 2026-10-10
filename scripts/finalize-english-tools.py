@@ -13,7 +13,7 @@ for es,en in routes.items():
  preserved[str(p.relative_to(ROOT)).replace('\\','/')]=hashlib.sha256(main.encode()).hexdigest()
  alternate='\n'.join(f'<link rel="alternate" hreflang="{lang}" href="https://lienzo.tools{url}">' for lang,url in [('es',es),('en',en),('x-default',es)])
  if not re.search(r'<link[^>]+hreflang="en"',source):source=source.replace('</head>',alternate+'\n</head>')
- switch=f'<a class="theme-btn" href="{en}" lang="en" hreflang="en" aria-label="Open this tool in English">EN</a>\n'
+ switch=f'<a class="theme-btn language-switch" href="{en}" lang="en" hreflang="en" aria-label="Switch to English" title="Switch to English" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"/></svg><span>EN</span></a>\n'
  if not re.search(r'<a[^>]+hreflang="en"',source):source=re.sub(r'(<button\b[^>]*data-theme-toggle)',lambda m:switch+m.group(),source,count=1)
  assert re.search(r'<main\b.*?</main>',source,re.S).group()==main
  p.write_text(source,encoding='utf-8')

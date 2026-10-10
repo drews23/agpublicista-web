@@ -66,3 +66,7 @@ _og/
 
 # Pipeline de iconos 3D y assets pendientes de decision, no es del sitio
 _3d/
+
+# Public English templates and demo assets belong to the website.
+!/en/templates/
+!/en/templates/**
