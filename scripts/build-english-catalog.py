@@ -5,7 +5,7 @@ switch are added to Spanish pages; their main content is checked byte for byte.
 """
 from pathlib import Path
 from bs4 import BeautifulSoup
-import copy, hashlib, html, json, re
+import copy, hashlib, html, importlib.util, json, re
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -132,6 +132,10 @@ for es,en,title,description in PAGES:
  graph.append({'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':ORIGIN+'/en/'},{'@type':'ListItem','position':2,'name':title,'item':canonical}]})
  head=BeautifulSoup(header_base,'html.parser');switch=head.select_one('.language-switch');switch['href']='/'+es+'/';switch['aria-label']='Cambiar a español';switch['title']='Cambiar a español'
  document=f'''<!doctype html><html lang="en-US" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} | Lienzo</title><meta name="description" content="{esc(description)}"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="es" href="{ORIGIN}/{es}/"><link rel="alternate" hreflang="en" href="{canonical}"><link rel="alternate" hreflang="x-default" href="{ORIGIN}/{es}/"><meta property="og:type" content="{'article' if video else 'website'}"><meta property="og:site_name" content="Lienzo"><meta property="og:locale" content="en_US"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>try{{document.documentElement.dataset.theme=localStorage.getItem('agp-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}}catch(e){{}}</script><link rel="stylesheet" href="/css/site.css?v=2026090405"><link rel="stylesheet" href="/en/assets/english.css?v=2026101005"><script type="application/ld+json">{json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False)}</script></head><body>{head}<main class="shell english-document"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/en/">Home</a> › <span>{esc(title)}</span></nav><article class="english-prose{' english-directory' if en in ['blog','resources'] else ''}">{body}</article><p class="translation-source"><a href="/{es}/" lang="es">Read the original Spanish page</a> · English edition reviewed October 10, 2026.</p></main>{footer_base}<script src="/en/assets/site.js?v=2026101001" defer></script></body></html>'''
+ if en=='about':
+  about_spec=importlib.util.spec_from_file_location('english_about',ROOT/'scripts/build-english-about.py')
+  about_module=importlib.util.module_from_spec(about_spec);about_spec.loader.exec_module(about_module)
+  document=about_module.render_about(document)
  target=ROOT/'en'/en/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(document,encoding='utf-8')
  alternates='\n'.join(f'<link rel="alternate" hreflang="{lang}" href="{url}">' for lang,url in [('es',ORIGIN+'/'+es+'/'),('en',canonical),('x-default',ORIGIN+'/'+es+'/')])
  if not soup.select_one('link[hreflang=en]'):source=source.replace('</head>',alternates+'\n</head>',1)

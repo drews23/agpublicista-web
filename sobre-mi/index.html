@@ -6,7 +6,7 @@
     <title>Andrés García | Publicista, director de arte y diseñador web</title>
     <meta
       name="description"
-      content="Conoce a Andrés García, publicista y director de arte detrás de Lienzo. Estrategia, branding, diseño web, motion y contenido original."
+      content="Conoce a Andrés García, creador de Lienzo y fundador de MD Estudio Creativo. Publicidad, branding, diseño web y sistemas digitales con IA."
     />
     <link rel="canonical" href="https://lienzo.tools/sobre-mi/" />
     <meta name="theme-color" content="#0a0a0f" />
@@ -53,6 +53,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
+    <link rel="stylesheet" href="/css/pages/about.css?v=2026101101" />
 
     <script type="application/ld+json">
     {
@@ -73,16 +74,18 @@
           "@id": "https://lienzo.tools/sobre-mi/#person",
           "name": "Andrés García",
           "alternateName": "Andy",
+          "image": "https://lienzo.tools/assets/andres-garcia-lienzo.webp",
           "url": "https://lienzo.tools/sobre-mi/",
           "jobTitle": "Publicista y director de arte",
-          "description": "Licenciado en Publicidad por UCES (Buenos Aires). Fundador y director de estrategia de MD Estudio Creativo, y la persona detrás de Lienzo.",
+          "description": "Licenciado en Publicidad por UCES (Buenos Aires), fundador y director de estrategia de MD Estudio Creativo y creador de Lienzo. Conecta branding, diseño web, contenido y sistemas digitales con IA desde Bogotá, con experiencia en Colombia, Argentina y Brasil.",
           "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad de Ciencias Empresariales y Sociales (UCES)" },
-          "knowsAbout": ["Estrategia digital", "Branding e identidad de marca", "Diseño web", "Optimización de conversión (CRO/UX)", "Motion graphics", "Social media"],
+          "knowsAbout": ["Estrategia digital", "Branding e identidad de marca", "Diseño web", "Optimización de conversión (CRO/UX)", "Motion graphics", "Social media", "Agentes de inteligencia artificial", "Automatización", "SEO técnico"],
           "worksFor": { "@id": "https://lienzo.tools/#org" },
           "sameAs": [
             "https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg",
             "https://www.linkedin.com/in/licenciado-andr%C3%A9s-garc%C3%ADa-/",
-            "https://creativomarketingdigital.com/equipo/andres-garcia/"
+            "https://creativomarketingdigital.com/equipo/andres-garcia/",
+            "https://cv.creativomarketingdigital.com/"
           ]
         },
         {
@@ -126,45 +129,84 @@
     </header>
 
     <main>
-      <section class="section shell">
-        <div class="page-head">
-          <p class="eyebrow reveal">Sobre mí</p>
-          <h1 class="reveal" style="--reveal-delay: 80ms">Andrés García, publicista y <span class="fancy">director de arte</span></h1>
-          <p class="lede reveal" style="--reveal-delay: 160ms">
-            Diseñador web, publicista y director de arte con enfoque en branding, estrategia
-            digital y contenido útil para marcas y proyectos en español. Aquí explico quién
-            está detrás de Lienzo y qué valor aporta este sitio, con criterio propio y un
-            enfoque en recursos originales, claros y aplicables.
-          </p>
+      <section class="shell about-hero" aria-labelledby="about-title">
+        <div class="about-profile reveal">
+          <figure class="about-profile__photo">
+            <img src="/assets/andres-garcia-lienzo.webp" srcset="/assets/andres-garcia-lienzo-480.webp 480w, /assets/andres-garcia-lienzo.webp 800w" sizes="(max-width: 760px) calc(100vw - 3rem), 440px" width="800" height="800" alt="Andrés García, creador de Lienzo, con lentes y blazer beige" fetchpriority="high" />
+            <figcaption class="about-profile__caption">La persona detrás de Lienzo</figcaption>
+          </figure>
+          <div class="about-profile__body">
+            <p class="about-profile__name">Andrés García <span aria-hidden="true">↗</span></p>
+            <p class="about-profile__role">Publicista · Director de arte · Diseñador web</p>
+            <div class="about-profile__links" aria-label="Perfiles profesionales">
+              <a href="https://www.linkedin.com/in/licenciado-andr%C3%A9s-garc%C3%ADa-/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              <a href="https://creativomarketingdigital.com/equipo/andres-garcia/" target="_blank" rel="noopener">MD Estudio Creativo ↗</a>
+              <a href="https://cv.creativomarketingdigital.com/" target="_blank" rel="noopener">Mi CV ↗</a>
+              <a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">YouTube ↗</a>
+            </div>
+          </div>
         </div>
+        <div class="about-intro reveal" style="--reveal-delay: 100ms">
+          <p class="eyebrow">Sobre mí · Hola, soy Andy</p>
+          <h1 id="about-title">Andrés García.<br>Diseño con <span class="fancy">intención.</span></h1>
+          <p class="about-intro__lede">Soy publicista, director de arte y fundador de MD Estudio Creativo. Conecto estrategia, diseño y tecnología para crear marcas y sistemas digitales. En Lienzo comparto herramientas, recursos y procesos que puedes aplicar a tus proyectos.</p>
+          <ul class="about-skills" aria-label="Especialidades">
+            <li>Branding</li><li>Estrategia digital</li><li>Diseño web</li><li>Motion graphics</li><li>SEO / CRO</li><li>IA y automatización</li>
+          </ul>
+          <div class="about-intro__cta">
+            <a class="btn btn--primary" href="/recursos/">Explora lo que comparto <span aria-hidden="true">↗</span></a>
+            <a class="btn btn--ghost" href="#hablemos">Hablemos</a>
+          </div>
+          <p class="about-note">Licenciado en Publicidad · UCES, Buenos Aires<br>Desde Bogotá · Experiencia en Colombia, Argentina y Brasil</p>
+        </div>
+      </section>
 
-        <div class="prose reveal" style="--reveal-delay: 240ms">
-          <h2>Qué hago</h2>
+      <section class="section shell about-story" aria-labelledby="about-story-title">
+        <div class="about-story__label">
+          <p class="eyebrow">Diseñar. Resolver. Compartir.</p>
+          <h2 id="about-story-title">Del concepto al archivo final.</h2>
+          <p>Este es mi recorrido y la idea que mueve a Lienzo: compartir recursos claros, útiles y aplicables.</p>
+        </div>
+        <div class="prose">
+          <h2>Estrategia, creatividad y operación</h2>
           <p>
-            Soy <strong>licenciado en Publicidad</strong> por la UCES (Buenos Aires) y llevo
-            más de una década trabajando donde el diseño y la estrategia se cruzan: identidad
-            visual y branding, diseño web, dirección de arte, social media y motion graphics.
-            Me gusta pensar cada proyecto completo, desde el concepto hasta el archivo final
-            que se publica, cuidando que todo comunique lo mismo: la marca.
+            Soy <strong>licenciado en Publicidad por la Universidad de Ciencias Empresariales y Sociales (UCES)</strong>,
+            en Buenos Aires. Mi trayectoria reúne más de una década de trabajo en Colombia,
+            Argentina y Brasil, entre estrategia de marca, campañas, contenido y desarrollo digital.
+            Trabajo desde Bogotá, en español e inglés.
           </p>
           <p>
-            Ese recorrido empezó en la estrategia 360° y hoy está más cerca del trabajo
-            operativo: lo que de verdad mueve el negocio de un cliente. Dirijo
-            <a href="https://creativomarketingdigital.com/equipo/andres-garcia/" target="_blank" rel="noopener">MD Estudio Creativo</a>,
-            donde acompaño a marcas en estrategia digital, posicionamiento, optimización de
-            conversión y, últimamente, agentes de IA aplicados a sectores concretos.
+            Soy fundador y director de estrategia de
+            <a href="https://creativomarketingdigital.com/equipo/andres-garcia/" target="_blank" rel="noopener">MD Estudio Creativo</a>.
+            Allí conecto posicionamiento, identidad visual, publicidad y diseño web con lo que
+            ocurre después del clic: atención, captación, agendamiento y seguimiento.
+            Desarrollo sitios, aplicaciones y agentes de IA integrados con la operación del negocio.
           </p>
           <p>
-            Además del trabajo con clientes, comparto lo que aprendo en
+            Esa mirada también guía a Lienzo: me interesa que una idea se convierta en algo
+            que puedas usar. En
             <a href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg" target="_blank" rel="noopener">Lienzo · Recursos creativos</a>,
-            mi canal de YouTube. Ahí muestro procesos reales de diseño, publico plantillas y
-            packs descargables, y explico técnicas que puedes aplicar en tus propios proyectos.
+            mi canal de YouTube, muestro procesos de diseño y edición. En este sitio reúno las
+            herramientas, plantillas, descargas y explicaciones que acompañan a esos videos.
           </p>
+
+          <p>Si quieres conocer mi trayectoria profesional y formación en detalle, puedes ver <a href="https://cv.creativomarketingdigital.com/" target="_blank" rel="noopener">mi CV digital</a>.</p>
+
+          <h2>Formación y herramientas</h2>
+          <p>Me formé en Publicidad en UCES entre 2015 y 2020. Antes cursé estudios de Diseño Gráfico en la Universidad Jorge Tadeo Lozano, entre 2007 y 2009, sin completar ese programa. Mi formación complementaria incluye Google Ads Display, Google Analytics y el certificado de inglés EF SET, recogidos en mi CV.</p>
+          <p>Combino dirección creativa, branding y motion graphics con SEO, experiencia de usuario y analítica. Según el proyecto, trabajo con Next.js, Astro, Flutter y Firebase, además de las API de WhatsApp e Instagram y modelos de IA para construir automatizaciones.</p>
+
+          <h2>Proyectos que llevan esa idea a la práctica</h2>
+          <p>En mi trabajo profesional, diseño y desarrollo se encuentran con necesidades concretas. Estos proyectos están documentados en MD:</p>
+          <ul>
+            <li><a href="https://creativomarketingdigital.com/portafolio/luna-whatsapp-bot/" target="_blank" rel="noopener"><strong>Luna · Agente de IA en WhatsApp</strong></a>: atención de consultas, agendamiento, confirmaciones y derivación al equipo cuando hace falta.</li>
+            <li><a href="https://creativomarketingdigital.com/portafolio/mago-del-color-app/" target="_blank" rel="noopener"><strong>Aplicación de El Mago del Color</strong></a>: una aplicación desarrollada con Flutter y Firebase, conectada con el ecosistema digital del negocio.</li>
+          </ul>
 
           <h2>Qué vas a encontrar en este sitio</h2>
           <p>
             Lienzo (en lienzo.tools) es la extensión del canal: una caja de herramientas
-            en español pensada para creadores, diseñadores y emprendedores.
+            en español e inglés pensada para creadores, diseñadores y emprendedores.
           </p>
           <ul>
             <li>
@@ -202,7 +244,7 @@
         </div>
       </section>
 
-      <section class="section shell diferir-render" style="--alto-escritorio: 654px; --alto-movil: 585px">
+      <section id="hablemos" class="section shell diferir-render" style="--alto-escritorio: 654px; --alto-movil: 585px; scroll-margin-top: 6rem;">
         <div class="card reveal" style="align-items: center; text-align: center; padding: clamp(2rem, 5vw, 3.4rem);">
           <p class="eyebrow" style="justify-content: center;">Hablemos</p>
           <h2 style="max-width: 24ch; margin-inline: auto;">¿Tienes una duda, una idea o un proyecto?</h2>

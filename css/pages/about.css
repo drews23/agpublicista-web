@@ -1,0 +1,36 @@
+/* Sobre mí: retrato editorial, aislado del resto del sitio. */
+.about-hero { display: grid; grid-template-columns: minmax(0, .86fr) minmax(0, 1.2fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; padding-block: clamp(2.5rem, 6vw, 5rem); }
+.about-profile { position: relative; border: 1px solid var(--line-strong); border-radius: 26px; background: var(--bg-soft); box-shadow: var(--shadow); overflow: hidden; }
+.about-profile__photo { position: relative; margin: 0; border-bottom: 1px solid var(--line); }
+.about-profile__photo img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.about-profile__caption { position: absolute; inset: auto 1rem 1rem; display: flex; gap: .65rem; align-items: center; width: fit-content; padding: .45rem .8rem; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--bg); color: var(--text); font-size: .75rem; }
+.about-profile__caption::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--turquesa); }
+.about-profile__body { padding: 1.4rem 1.6rem 1.6rem; }
+.about-profile__name { margin: 0 0 .2rem; font: 560 1.6rem/1.2 var(--font-display); letter-spacing: normal; }
+.about-profile__role { color: var(--muted); font-size: .9rem; margin-bottom: 1.1rem; }
+.about-profile__links { display: flex; flex-wrap: wrap; gap: .65rem; }
+.about-profile__links a { font-size: .83rem; padding: .45rem .8rem; border-radius: 999px; border: 1px solid var(--line-strong); text-decoration: none; transition: background .2s, border-color .2s; }
+.about-profile__links a:hover { background: var(--panel-hover); border-color: var(--violeta); }
+.about-intro h1 { font-size: clamp(2.5rem, 4.8vw, 4.2rem); letter-spacing: normal; line-height: 1.08; margin-bottom: 1.4rem; }
+.about-intro .fancy { color: var(--turquesa); }
+.about-intro__lede { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--muted); max-width: 48ch; }
+.about-skills { display: flex; flex-wrap: wrap; gap: .55rem; padding: 0; margin: 1.6rem 0 2rem; list-style: none; }
+.about-skills li { padding: .35rem .8rem; border: 1px solid var(--line); border-radius: 999px; font-size: .8rem; color: var(--text); background: var(--panel); }
+.about-intro__cta { display: flex; gap: .75rem; flex-wrap: wrap; }
+.about-note { margin: 1.3rem 0 0; font-size: .8rem; color: var(--muted); }
+.about-story { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: clamp(2rem, 6vw, 5rem); border-top: 1px solid var(--line-strong); }
+.about-story__label h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); max-width: 15ch; letter-spacing: normal; }
+.about-story__label p:not(.eyebrow) { color: var(--muted); max-width: 28ch; }
+.about-story .prose { max-width: none; margin: 0; }
+.about-story .prose h2 { letter-spacing: normal; }
+.about-story .prose h2:first-child { margin-top: 0; }
+.about-story .prose h2:not(:first-child) { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.about-hero a:focus-visible, .about-story a:focus-visible { outline: 3px solid var(--violeta); outline-offset: 5px; }
+@media (max-width: 760px) {
+  .about-hero { grid-template-columns: 1fr; gap: 2.4rem; }
+  .about-profile { max-width: 440px; width: 100%; margin-inline: auto; }
+  .about-intro h1 { font-size: clamp(2.4rem, 8.6vw, 3.5rem); }
+  .about-story { grid-template-columns: 1fr; gap: 1.5rem; }
+  .about-story__label h2, .about-story__label p:not(.eyebrow) { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) { .about-profile__links a { transition: none; } }
