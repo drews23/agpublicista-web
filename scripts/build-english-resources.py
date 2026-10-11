@@ -87,6 +87,9 @@ for index,(es,en,title,description,size) in enumerate(PAGES):
     urls=[a['href'] for a in soup.main.select('a[href*="mediafire.com"]')]
     if len(urls)!=1: raise ValueError(f'Expected one download: {es}')
     label=f'Download the original ZIP · {size}' if size else 'Download the After Effects project (.rar)'
+    if en == 'after-effects-text-animation':
+        urls = ['https://www.mediafire.com/file/ihrcbfouidgcu3h/after+effect+text+animation+pack+EN.zip/file']
+        label = 'Download the English After Effects project (.zip)'
     body=body.replace('{{DOWNLOAD}}',f'<p><a class="btn btn--primary" href="{html.escape(urls[0],quote=True)}" target="_blank" rel="noopener noreferrer">{label} ↗</a></p>')
     if index<6:
         preview=copy.deepcopy(soup.main.select_one('.muestra-iconos'))
