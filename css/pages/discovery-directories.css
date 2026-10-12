@@ -1,0 +1,53 @@
+/* Shared directory navigation; the existing cards and brand tokens stay in use. */
+.directory-layout {padding-block: 0 48px;}
+.directory-index {margin-block: 20px 44px; scroll-margin-top: 120px;}
+.directory-index__label {margin: 0 0 14px; font-size: .88rem; color: var(--muted);}
+.directory-index ul {display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; list-style: none; padding: 0; margin: 0;}
+.directory-index li {padding: 0; margin: 0; min-width: 0;}
+.directory-index a {display: flex; flex-direction: column; gap: 7px; height: 100%; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); color: var(--text); text-decoration: none;}
+.directory-index a:hover {border-color: var(--turquesa);}
+.directory-index strong {font-size: 1rem; line-height: 1.4;}
+.directory-index span {font-size: .8rem; line-height: 1.5; color: var(--muted);}
+.directory-layout .directory-index ul {grid-template-columns: repeat(4,minmax(0,1fr));}
+.resource-groups {width: min(var(--shell),100% - 3rem); margin-inline: auto;}
+.directory-group {padding-block: 36px 48px; border-top: 1px solid var(--line); scroll-margin-top: 120px; min-width: 0;}
+.directory-group__head {display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 24px;}
+.directory-group__head h2 {margin: 0 0 12px; font: 600 clamp(1.7rem,3vw,2.3rem)/1.2 var(--font-display); letter-spacing: normal;}
+.directory-group__head p {margin: 0; max-width: 65ch; color: var(--muted); line-height: 1.65;}
+.directory-group__count {display: inline-flex; align-items: center; justify-content: center; min-width: 30px; min-height: 30px; padding: 3px 8px; margin-left: 12px; border: 1px solid var(--line); border-radius: 999px; vertical-align: middle; font: 600 .8rem/1 var(--font-body); color: var(--muted);}
+.directory-back {flex-shrink: 0; display: inline-flex; align-items: center; min-height: 44px; font-size: .8rem; color: var(--text); text-underline-offset: 4px;}
+.directory-group .card-grid {grid-template-columns: repeat(3,minmax(0,1fr));}
+.directory-group .card-grid:has(>.card:nth-child(2):last-child) {grid-template-columns: repeat(2,minmax(0,1fr));}
+.directory-group .card {min-width: 0;}
+.directory-group .card h3,.directory-upcoming h2,#herramientas h2,#herramientas h3,#tools h2,#tools h3 {letter-spacing: normal;}
+.english-home #tools .card__tag {align-self: flex-start;}
+.directory-upcoming {padding-block: 32px; border-top: 1px solid var(--line);}
+.directory-upcoming>.card-grid {max-width: 380px;}
+.directory-upcoming .card {opacity: .7;}
+.directory-tool-links {display: flex; flex-wrap: wrap; gap: 12px 24px; margin-block: 24px; color: var(--muted); line-height: 1.7;}
+.directory-tool-links a {display: inline-flex; align-items: center; min-height: 44px; color: var(--text); text-underline-offset: 4px;}
+.directory-editions {color: var(--muted); max-width: 72ch; line-height: 1.7; margin-block: 20px 36px;}
+.directory-template-format {font-size: .72rem; color: var(--muted); line-height: 1.5;}
+.english-directory .directory-index ul {list-style: none; padding: 0; margin: 0;}
+.english-directory .directory-index li {padding: 0; margin: 0;}
+.english-directory .directory-index a,.english-directory .directory-back {color: var(--text);}
+.english-directory .directory-group h2 {margin-top: 0; letter-spacing: normal;}
+.english-directory .directory-group .english-catalog {margin: 0;}
+.english-directory .directory-group .english-catalog-card h3 {margin-top: 0; letter-spacing: normal;}
+.english-directory .directory-group .card__tag {position: static; align-self: flex-start;}
+.english-directory .directory-group .card h3 {margin-top: 10px; letter-spacing: normal;}
+.directory-index a:focus-visible,.directory-back:focus-visible,.directory-tool-links a:focus-visible {outline: 2px solid var(--turquesa); outline-offset: 4px;}
+#plantillas-web,#herramientas-online,#browser-tools,#packs,#herramientas,#tools {scroll-margin-top: 120px;}
+@media(max-width: 960px) {
+  .directory-layout .directory-index ul {grid-template-columns: repeat(2,minmax(0,1fr));}
+  .directory-group .card-grid {grid-template-columns: repeat(2,minmax(0,1fr));}
+}
+@media(max-width: 620px) {
+  .directory-index ul {grid-template-columns: repeat(2,minmax(0,1fr));}
+  .directory-index a {padding: 14px;}
+  .directory-index span {font-size: .75rem;}
+  .directory-group {padding-block: 28px 36px;}
+  .directory-group__head {flex-direction: column; gap: 4px; margin-bottom: 18px;}
+  .directory-group .card-grid,.directory-group .card-grid:has(>.card:nth-child(2):last-child) {grid-template-columns: 1fr;}
+  .directory-tool-links {gap: 8px 16px;}
+}
