@@ -44,38 +44,68 @@
     alScroll();
   }
 
-  /* Navegación móvil: panel de vidrio + velo que atenúa el contenido */
+  /* Navegación móvil compartida: cierre, foco y cambio de ancho. */
+  const nav = document.querySelector(".site-nav");
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const unifiedHeader = document.querySelector("[data-unified-header]");
+  const mobileNav = window.matchMedia(unifiedHeader ? "(max-width: 1100px)" : "(max-width: 880px)");
+  const englishNav = root.lang.startsWith("en");
   const scrim = document.createElement("div");
   scrim.className = "nav-scrim";
   scrim.setAttribute("aria-hidden", "true");
   document.body.append(scrim);
 
-  const ponerNav = (nav, open) => {
+  const ponerNav = (open, returnFocus = false) => {
+    if (!nav || !navToggle) return;
+    open = open && mobileNav.matches;
     nav.classList.toggle("is-open", open);
     scrim.classList.toggle("is-visible", open);
     document.body.classList.toggle("is-locked", open);
-    document.querySelector("[data-nav-toggle]")?.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", englishNav
+      ? (open ? "Close menu" : "Open menu")
+      : (open ? "Cerrar menú" : "Abrir menú"));
+    if (open) nav.querySelector("a[href]")?.focus();
+    else if (returnFocus) navToggle.focus();
   };
 
-  document.addEventListener("click", (event) => {
-    const navToggle = event.target.closest("[data-nav-toggle]");
-    const nav = document.querySelector(".site-nav");
-    if (!nav) return;
+  if (nav && navToggle) {
+    ponerNav(false);
+    unifiedHeader?.classList.add("navigation-ready");
+  }
 
-    if (navToggle) {
-      ponerNav(nav, !nav.classList.contains("is-open"));
+  document.addEventListener("click", (event) => {
+    if (!nav || !navToggle) return;
+    if (event.target.closest("[data-nav-toggle]")) {
+      ponerNav(!nav.classList.contains("is-open"));
       return;
     }
-
-    if (nav.classList.contains("is-open") && !event.target.closest(".site-nav")) {
-      ponerNav(nav, false);
-    }
+    if (!nav.classList.contains("is-open")) return;
+    if (event.target.closest(".site-nav a[href]")) ponerNav(false);
+    else if (!event.target.closest(".site-nav")) ponerNav(false, event.target === scrim);
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-    const nav = document.querySelector(".site-nav.is-open");
-    if (nav) ponerNav(nav, false);
+    if (!nav?.classList.contains("is-open")) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      ponerNav(false, true);
+    } else if (event.key === "Tab" && unifiedHeader) {
+      const controls = [...unifiedHeader.querySelectorAll("a[href], button:not([disabled])")]
+        .filter((element) => element.getClientRects().length && getComputedStyle(element).visibility !== "hidden");
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first.focus();
+      }
+    }
+  });
+
+  mobileNav.addEventListener("change", () => {
+    const focusWasInNav = nav?.contains(document.activeElement);
+    ponerNav(false);
+    if (mobileNav.matches && focusWasInNav) navToggle?.focus();
   });
 
   /* Animaciones de entrada */
