@@ -7,10 +7,11 @@ Después de ejecutar generadores antiguos de inglés que reconstruyen esas pági
 ```powershell
 python scripts/build-home-discovery.py
 python scripts/build-discovery-directories.py
+python scripts/build-home-layout.py
 python scripts/build-primary-navigation.py
 ```
 
-El primer script conserva los seis accesos y el carrusel manual. El segundo conserva las categorías de los directorios y la selección de herramientas. Los dos admiten ejecución repetida sin cambios adicionales. No es necesario ejecutar los generadores amplios de inglés para actualizar estos bloques.
+El primer script conserva los seis accesos y el carrusel manual. El segundo conserva las categorías de los directorios y la selección de herramientas. El tercero compacta ambas portadas: conserva el hero español, el carrusel manual y las herramientas; organiza el catálogo en cinco familias y destaca tres guías. Los pasos admiten ejecución repetida sin cambios adicionales. No es necesario ejecutar los generadores amplios de inglés para actualizar estos bloques.
 
 La taxonomía y el orden se mantienen en el segundo script. Para incorporar un recurso nuevo hay que añadir su tarjeta a la página correspondiente y su ruta al grupo que le corresponda. Las categorías utilizan enlaces ancla nativos; todo el inventario permanece visible sin JavaScript.
 

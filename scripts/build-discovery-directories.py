@@ -91,8 +91,11 @@ def group(key, title, description, markup, en, grid='card-grid', count=None):
 
 
 def attach_css(source):
-    source = re.sub(r'<link[^>]*href="/css/pages/discovery-directories.css[^>]*>', '', source)
-    return source.replace('</head>', f'<link rel="stylesheet" href="{CSS}"></head>', 1)
+    pattern = r'<link[^>]*href="/css/pages/discovery-directories.css[^>]*>'
+    link = f'<link rel="stylesheet" href="{CSS}">'
+    if re.search(pattern, source):
+        return re.sub(pattern, lambda _: link, source)
+    return source.replace('</head>', link + '</head>', 1)
 
 
 def code_card(en):
@@ -227,8 +230,9 @@ def organize_resources(en=False):
         tail = tail.replace('The original Spanish guides explain web integration and player dependencies.','Each guide explains web integration and player dependencies.')
         tail = tail.replace('Web Code (Spanish)','CSS generators')
         tail = tail.replace('<h2>Tools that work in your browser</h2>',f'<h2 id="{tools_key}">Tools that work in your browser</h2>')
-        home = (ROOT/'en/index.html').read_text(encoding='utf-8')
-        templates = [card for route,card in cards(home).items() if route.startswith('/en/templates/#')]
+        # The full catalog retains its cards when the home page is simplified.
+        template_source = source if 'id="web-templates"' in source else (ROOT/'en/index.html').read_text(encoding='utf-8')
+        templates = [card for route,card in cards(template_source).items() if route.startswith('/en/templates/#')]
         assert len(templates)==3
         template_section = group(template_key,'Web templates','Three standalone HTML, CSS, and JavaScript designs. Try each demo, then download its English ZIP.', ''.join(templates),True,count='3')
         template_section = template_section.replace('</section>','<p><a href="/en/templates/">Preview all templates and read the setup guide ↗</a></p></section>')
@@ -302,6 +306,8 @@ def organize_home(en=False):
     else:
         # Insert before the remaining downloadable resources, after the introductory prose.
         match = re.search(r'<section\b[^>]*>\s*<div class="section-head reveal">\s*<div>\s*<p class="eyebrow"[^>]*>Recursos descargables',source)
+        if not match:
+            match = re.search(r'<section\b[^>]*id="home-catalog"[^>]*>', source)
         assert match
         source = source[:match.start()]+block+'\n'+source[match.start():]
     source = re.sub(r'\n[ \t]+(?=\n)', '\n', source)

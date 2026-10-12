@@ -19,6 +19,7 @@ Después de regeneradores antiguos, ejecutar al final:
 ```powershell
 python scripts/build-home-discovery.py
 python scripts/build-discovery-directories.py
+python scripts/build-home-layout.py
 python scripts/build-primary-navigation.py
 python scripts/build-primary-navigation.py --check
 ```
