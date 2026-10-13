@@ -62,6 +62,34 @@
     return `<span class="muestra-caja" style="${esc(decls)}" aria-hidden="true">Ag</span>`;
   };
 
+  // Both onboarding and the dashboard use the same validated restore flow.
+  const enlazarImportacion = () => {
+    const archivo = app.querySelector("[data-archivo]");
+    app.querySelector("[data-importar]").addEventListener("click", () => archivo.click());
+    archivo.addEventListener("change", async () => {
+      const f = archivo.files?.[0];
+      if (!f) return;
+      try {
+        if (f.size > 7000000) throw new Error('El respaldo supera el límite de 7 MB.');
+        const texto = await f.text();
+        window.AGLienzo.validarRespaldo(texto);
+        const actual = window.AGLienzo.datos();
+        const hayDatos = actual.perfil || actual.creaciones.length || actual.favoritos.length || Object.keys(actual.visitas).length;
+        if (hayDatos) {
+          const seguro = await window.AGModal.confirmar({titulo:'¿Sustituir este espacio?', sub:'Importar sustituye este espacio, incluidos el perfil, las creaciones y los favoritos. Exporta antes para conservar una copia.', textoOk:'Sustituir e importar', textoNo:'Cancelar', peligro:true});
+          if (!seguro) return;
+        }
+        window.AGLienzo.importar(texto);
+        window.agpToast?.('Respaldo importado');
+        if (window.AGLienzo.perfil()) vistaTablero(); else vistaCrear();
+      } catch (error) {
+        window.agpToast?.(error.message || 'Ese archivo no es un respaldo válido de Mi Lienzo.', "error");
+      } finally {
+        archivo.value = "";
+      }
+    });
+  };
+
   /* --- Estado A: crear el espacio ------------------------------------ */
 
   const vistaCrear = () => {
@@ -101,6 +129,7 @@
             </fieldset>
             <button class="btn btn--primary" type="submit">Crear mi espacio</button>
           </form>
+          <p>Importa una copia JSON sin crear un perfil.</p><button class="btn btn--ghost" type="button" data-importar>Importar respaldo</button><input type="file" accept="application/json,.json" data-archivo hidden />
           <p class="espacio-crear__nota">Tu espacio vive solo en este navegador. Podrás exportarlo cuando quieras.</p>
         </div>
 
@@ -129,6 +158,7 @@
         </div>
       </div>`;
 
+    enlazarImportacion();
     const form = app.querySelector("[data-form-crear]");
     const colorPropio = form.querySelector("[data-color-propio]");
     const propioWrap = colorPropio.closest(".espacio-color--propio");
@@ -196,6 +226,7 @@
             <input type="file" accept="application/json,.json" data-archivo hidden />
           </div>
         </header>
+        <p class="sub" data-import-warning>Importar sustituye este espacio, incluidos el perfil, las creaciones y los favoritos. Exporta antes para conservar una copia.</p>
 
         <div class="tablero__stats">
           <div class="stat"><b>${d.creaciones.length}</b><span>creaciones guardadas</span></div>
@@ -283,19 +314,7 @@
       vistaTablero();
     });
 
-    const archivo = app.querySelector("[data-archivo]");
-    app.querySelector("[data-importar]").addEventListener("click", () => archivo.click());
-    archivo.addEventListener("change", async () => {
-      const f = archivo.files?.[0];
-      if (!f) return;
-      try {
-        window.AGLienzo.importar(await f.text());
-        window.agpToast?.("Lienzo importado ✦");
-        vistaTablero();
-      } catch {
-        window.agpToast?.("Ese archivo no parece un lienzo exportado.", "error");
-      }
-    });
+    enlazarImportacion();
 
     app.querySelector("[data-borrar]").addEventListener("click", async () => {
       const seguro = await window.AGModal.confirmar({

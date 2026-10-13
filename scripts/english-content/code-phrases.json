@@ -3708,5 +3708,14 @@
   "Receta de 3 capas aplicada": "Three-layer preset applied",
   "Sin filtros": "No filters",
   "1 filtro activo": "1 active filter",
-  "Filtro": "Filter"
+  "Filtro": "Filter",
+  "Importa una copia JSON sin crear un perfil.": "Import a JSON backup without creating a profile.",
+  "Importar respaldo": "Import backup",
+  "Importar sustituye este espacio, incluidos el perfil, las creaciones y los favoritos. Exporta antes para conservar una copia.": "Import replaces this workspace, including its profile, creations, and favorites. Export first to keep a copy.",
+  "¿Sustituir este espacio?": "Replace this workspace?",
+  "Sustituir e importar": "Replace and import",
+  "Ese archivo no es un respaldo válido de Mi Lienzo.": "That file is not a valid workspace backup.",
+  "Respaldo importado": "Workspace imported",
+  "El respaldo supera el límite de 7 MB.": "The backup exceeds the 7 MB limit.",
+  "No se pudo guardar el respaldo en este navegador. Tu espacio anterior se conserva.": "The backup could not be saved in this browser. Your previous workspace is unchanged."
 }

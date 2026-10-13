@@ -63,6 +63,34 @@
     return `<span class="muestra-caja" style="${esc(decls)}" aria-hidden="true">Ag</span>`;
   };
 
+  // Both onboarding and the dashboard use the same validated restore flow.
+  const enlazarImportacion = () => {
+    const archivo = app.querySelector("[data-archivo]");
+    app.querySelector("[data-importar]").addEventListener("click", () => archivo.click());
+    archivo.addEventListener("change", async () => {
+      const f = archivo.files?.[0];
+      if (!f) return;
+      try {
+        if (f.size > 7000000) throw new Error('The backup exceeds the 7 MB limit.');
+        const texto = await f.text();
+        window.AGLienzo.validarRespaldo(texto);
+        const actual = window.AGLienzo.datos();
+        const hayDatos = actual.perfil || actual.creaciones.length || actual.favoritos.length || Object.keys(actual.visitas).length;
+        if (hayDatos) {
+          const seguro = await window.AGModal.confirmar({titulo:'Replace this workspace?', sub:'Import replaces this workspace, including its profile, creations, and favorites. Export first to keep a copy.', textoOk:'Replace and import', textoNo:'Cancel', peligro:true});
+          if (!seguro) return;
+        }
+        window.AGLienzo.importar(texto);
+        window.agpToast?.('Workspace imported');
+        if (window.AGLienzo.perfil()) vistaTablero(); else vistaCrear();
+      } catch (error) {
+        window.agpToast?.(error.message || 'That file is not a valid workspace backup.', "error");
+      } finally {
+        archivo.value = "";
+      }
+    });
+  };
+
   /* --- Estado A: crear el espacio ------------------------------------ */
 
   const vistaCrear = () => {
@@ -102,6 +130,7 @@
             </fieldset>
             <button class="btn btn--primary" type="submit">Create my workspace</button>
           </form>
+          <p>Import a JSON backup without creating a profile.</p><button class="btn btn--ghost" type="button" data-importar>Import backup</button><input type="file" accept="application/json,.json" data-archivo hidden />
           <p class="espacio-crear__nota">Your workspace stays in this browser. Export a backup whenever you need one.</p>
         </div>
 
@@ -130,6 +159,7 @@
         </div>
       </div>`;
 
+    enlazarImportacion();
     const form = app.querySelector("[data-form-crear]");
     const colorPropio = form.querySelector("[data-color-propio]");
     const propioWrap = colorPropio.closest(".espacio-color--propio");
@@ -197,6 +227,7 @@
             <input type="file" accept="application/json,.json" data-archivo hidden />
           </div>
         </header>
+        <p class="sub" data-import-warning>Import replaces this workspace, including its profile, creations, and favorites. Export first to keep a copy.</p>
 
         <div class="tablero__stats">
           <div class="stat"><b>${d.creaciones.length}</b><span>saved creations</span></div>
@@ -284,20 +315,7 @@
       vistaTablero();
     });
 
-    const archivo = app.querySelector("[data-archivo]");
-    app.querySelector("[data-importar]").addEventListener("click", () => archivo.click());
-    archivo.addEventListener("change", async () => {
-      const f = archivo.files?.[0];
-      if (!f) return;
-      try {
-        if (f.size > 7000000) throw new Error("Backup too large.");
-        window.AGLienzo.importar(await f.text());
-        window.agpToast?.("Workspace imported ✦");
-        vistaTablero();
-      } catch {
-        window.agpToast?.("That file is not a valid workspace backup.", "error");
-      }
-    });
+    enlazarImportacion();
 
     app.querySelector("[data-borrar]").addEventListener("click", async () => {
       const seguro = await window.AGModal.confirmar({

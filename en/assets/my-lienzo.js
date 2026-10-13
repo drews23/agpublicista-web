@@ -166,19 +166,29 @@
       return JSON.stringify(datos, null, 2);
     },
 
+    validarRespaldo(texto) {
+      const fail = () => { throw new Error('That file is not a valid workspace backup.'); };
+      let d;
+      try { if (typeof texto !== "string" || texto.length > 7000000) return fail(); d = JSON.parse(texto); } catch { return fail(); }
+      const object = x => x !== null && typeof x === "object" && !Array.isArray(x);
+      const string = (x, max) => typeof x === "string" && x.length <= max;
+      const number = x => Number.isFinite(x) && x >= 0;
+      if (!object(d) || d.v !== 1) return fail();
+      if (d.perfil !== null && (!object(d.perfil) || !string(d.perfil.nombre, 24) || !string(d.perfil.rol, 40) || !/^#[0-9a-f]{6}$/i.test(d.perfil.color) || !number(d.perfil.creado))) return fail();
+      if (!Array.isArray(d.creaciones) || d.creaciones.length > MAX_CREACIONES || !d.creaciones.every(c => object(c) && typeof c.id === "string" && /^[a-zA-Z0-9_-]{1,100}$/.test(c.id) && Object.hasOwn(NOMBRE_TIPO, c.tipo) && string(c.titulo, 200) && string(c.css, 100000) && number(c.fecha)) || new Set(d.creaciones.map(c => c.id)).size !== d.creaciones.length) return fail();
+      if (!Array.isArray(d.favoritos) || d.favoritos.length > Object.keys(HERRAMIENTAS).length || !d.favoritos.every(x => typeof x === "string" && Object.hasOwn(HERRAMIENTAS, x)) || new Set(d.favoritos).size !== d.favoritos.length) return fail();
+      if (!object(d.visitas) || !Object.entries(d.visitas).every(([key,v]) => Object.hasOwn(HERRAMIENTAS,key) && object(v) && Number.isSafeInteger(v.n) && v.n >= 0 && number(v.ultima))) return fail();
+      if (!Array.isArray(d.dias) || d.dias.length > MAX_DIAS || !d.dias.every(x => typeof x === "string" && /^\d{4}-\d{2}-\d{2}$/.test(x) && Number.isFinite(Date.parse(x)) && new Date(x).toISOString().slice(0,10) === x)) return fail();
+      if (d.flags !== undefined && (!object(d.flags) || (d.flags.exporto !== undefined && typeof d.flags.exporto !== "boolean"))) return fail();
+      return { ...VACIO(), perfil: d.perfil === null ? null : {nombre:d.perfil.nombre,rol:d.perfil.rol,color:d.perfil.color,creado:d.perfil.creado}, creaciones:d.creaciones.map(({id,tipo,titulo,css,fecha}) => ({id,tipo,titulo,css,fecha})), favoritos:[...d.favoritos], visitas:Object.fromEntries(Object.entries(d.visitas).map(([key,v]) => [key,{n:v.n,ultima:v.ultima}])), dias:[...d.dias], flags:{exporto:d.flags?.exporto === true} };
+    },
+
     importar(texto) {
-      const datos = JSON.parse(texto);
-      if (typeof datos !== "object" || !datos || datos.v !== 1) {
-        throw new Error("That file is not a valid workspace backup.");
-      }
-      const safeString = (x, max) => typeof x === "string" && x.length <= max;
-      const kinds = Object.keys(NOMBRE_TIPO);
-      if (datos.perfil !== null && (!datos.perfil || !safeString(datos.perfil.nombre, 24) || !safeString(datos.perfil.rol, 40) || !/^#[0-9a-f]{6}$/i.test(datos.perfil.color) || !Number.isFinite(datos.perfil.creado))) throw new Error("Invalid profile.");
-      if (!Array.isArray(datos.creaciones) || datos.creaciones.length > MAX_CREACIONES || !datos.creaciones.every(c => c && typeof c.id === "string" && /^[a-zA-Z0-9_-]{1,100}$/.test(c.id) && kinds.includes(c.tipo) && safeString(c.titulo, 200) && safeString(c.css, 100000) && Number.isFinite(c.fecha))) throw new Error("Invalid creations.");
-      if (!Array.isArray(datos.favoritos) || datos.favoritos.length > Object.keys(HERRAMIENTAS).length || !datos.favoritos.every(x => Object.hasOwn(HERRAMIENTAS,x))) throw new Error("Invalid favorites.");
-      if (!datos.visitas || typeof datos.visitas !== "object" || Array.isArray(datos.visitas) || !Object.entries(datos.visitas).every(([k,v]) => Object.hasOwn(HERRAMIENTAS,k) && v && Number.isFinite(v.n) && v.n >= 0 && Number.isFinite(v.ultima))) throw new Error("Invalid visits.");
-      if (!Array.isArray(datos.dias) || datos.dias.length > MAX_DIAS || !datos.dias.every(x => /^\d{4}-\d{2}-\d{2}$/.test(x))) throw new Error("Invalid dates.");
-      escribir({ ...VACIO(), perfil: datos.perfil, creaciones: datos.creaciones, favoritos: datos.favoritos, visitas: datos.visitas, dias: datos.dias, flags: {exporto: datos.flags?.exporto === true} });
+      const datos = this.validarRespaldo(texto);
+      // Validate everything before the single storage write. Storage failure must not report success.
+      try { localStorage.setItem(CLAVE, JSON.stringify(datos)); }
+      catch { throw new Error('The backup could not be saved in this browser. Your previous workspace is unchanged.'); }
+      window.dispatchEvent(new CustomEvent("lienzo:cambio"));
     },
 
     borrarTodo() {

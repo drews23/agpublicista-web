@@ -28,3 +28,7 @@ La pasada también identifica las tres plantillas web en la introducción españ
 `build-discovery-directories.py`, `build-home-layout.py` y el finalizador inglés aplican esta misma función. Para una corrección editorial pequeña, ejecutar únicamente `catalog_copy.py`; no hace falta reconstruir el sitio. El CSS de las acciones es independiente: `css/pages/catalog-copy.css`.
 
 Pruebas de esta tanda: `output/catalog-copy-2026-10-13/qa.py` comprueba conservación de enlaces, metadatos, imágenes, SVG, scripts, controles e identificadores, una acción por tarjeta e idempotencia. También ejecuta los generadores de directorios y portadas en una copia aislada, sin reconstruir el checkout activo. Las observaciones de navegador se guardan en la misma carpeta.
+
+## Conservar el escenario de portada
+
+La composición original Eclipse se mantiene mediante `scripts/home_stage.py` y `css/pages/home-eclipse.css`. El espaciador y la geometría de los triángulos no deben ocultarse ni compactarse: hacerlo recorta la decoración. El fondo inglés comparte el arte original, conservando su texto y enlaces. `build-home-layout.py` aplica esta restauración al final y no reconstruye un escenario inglés ya presente. Para corregir solo el hero, usar `python scripts/home_stage.py`, sin regenerar catálogos.

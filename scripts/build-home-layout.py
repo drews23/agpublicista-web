@@ -82,10 +82,11 @@ def build():
         path = ROOT / name
         source = path.read_text(encoding='utf-8')
         if en:
-            hero = ranges.element(source, tag='section', class_name='page-head')
-            h1 = ranges.element(hero, tag='h1')
-            new = f'<section class="section page-head home-intro">'+ '<p class="eyebrow">CREATE WITH LIENZO</p>' + h1 + '<p class="lede">Free sound effects, SVG icons, After Effects projects, and HTML, CSS, and JavaScript templates. Preview the resource and choose what works for your next video or website.</p><div class="home-intro__actions"><a class="btn btn--primary" href="/en/resources/">Explore free resources ↗</a><a class="btn btn--ghost" href="/en/tools/">Open creative tools ↗</a></div><p class="home-intro__note">Free resources. Practical guides. Usage terms on each download.</p></section>'
-            source = source.replace(hero, new, 1)
+            if 'english-eclipse' not in source:
+                hero = ranges.element(source, tag='section', class_name='page-head')
+                h1 = ranges.element(hero, tag='h1')
+                new = f'<section class="section page-head home-intro">'+ '<p class="eyebrow">CREATE WITH LIENZO</p>' + h1 + '<p class="lede">Free sound effects, SVG icons, After Effects projects, and HTML, CSS, and JavaScript templates. Preview the resource and choose what works for your next video or website.</p><div class="home-intro__actions"><a class="btn btn--primary" href="/en/resources/">Explore free resources ↗</a><a class="btn btn--ghost" href="/en/tools/">Open creative tools ↗</a></div><p class="home-intro__note">Free resources. Practical guides. Usage terms on each download.</p></section>'
+                source = source.replace(hero, new, 1)
         else:
             hero = ranges.element(source, tag='section', class_name='eclipse')
             new = hero.replace('class="eclipse"', 'class="eclipse home-intro"')
@@ -122,7 +123,8 @@ def build():
         source = re.sub(r'<link[^>]*href="/css/pages/home-layout.css[^>]*>', '', source)
         source = source.replace('</head>', css+'</head>', 1)
         from catalog_copy import enhance_catalog_copy
-        path.write_text(enhance_catalog_copy(source, '/en/' if en else '/'), encoding='utf-8')
+        from home_stage import restore_stage
+        path.write_text(restore_stage(enhance_catalog_copy(source, '/en/' if en else '/'), en), encoding='utf-8')
     print('Simplified ES and EN home sections; catalogs and individual resources untouched.')
 
 

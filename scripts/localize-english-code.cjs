@@ -48,21 +48,13 @@ for(const [src,dest]of Object.entries(jobs)){
  if(src==='/js/mi-lienzo.js'){
   code=code.replace('"agp-lienzo"','"agp-en-lienzo"');
   code=code.replace('document.querySelector(".export__actions")','document.querySelector(".export__actions, .acciones")');
-  // Validate backups before any write. Keep schema and enum compatibility with Spanish exports.
-  code=code.replace('escribir({ ...VACIO(), ...datos });',`const safeString = (x, max) => typeof x === "string" && x.length <= max;
-      const kinds = Object.keys(NOMBRE_TIPO);
-      if (datos.perfil !== null && (!datos.perfil || !safeString(datos.perfil.nombre, 24) || !safeString(datos.perfil.rol, 40) || !/^#[0-9a-f]{6}$/i.test(datos.perfil.color) || !Number.isFinite(datos.perfil.creado))) throw new Error("Invalid profile.");
-      if (!Array.isArray(datos.creaciones) || datos.creaciones.length > MAX_CREACIONES || !datos.creaciones.every(c => c && typeof c.id === "string" && /^[a-zA-Z0-9_-]{1,100}$/.test(c.id) && kinds.includes(c.tipo) && safeString(c.titulo, 200) && safeString(c.css, 100000) && Number.isFinite(c.fecha))) throw new Error("Invalid creations.");
-      if (!Array.isArray(datos.favoritos) || datos.favoritos.length > Object.keys(HERRAMIENTAS).length || !datos.favoritos.every(x => Object.hasOwn(HERRAMIENTAS,x))) throw new Error("Invalid favorites.");
-      if (!datos.visitas || typeof datos.visitas !== "object" || Array.isArray(datos.visitas) || !Object.entries(datos.visitas).every(([k,v]) => Object.hasOwn(HERRAMIENTAS,k) && v && Number.isFinite(v.n) && v.n >= 0 && Number.isFinite(v.ultima))) throw new Error("Invalid visits.");
-      if (!Array.isArray(datos.dias) || datos.dias.length > MAX_DIAS || !datos.dias.every(x => /^\\d{4}-\\d{2}-\\d{2}$/.test(x))) throw new Error("Invalid dates.");
-      escribir({ ...VACIO(), perfil: datos.perfil, creaciones: datos.creaciones, favoritos: datos.favoritos, visitas: datos.visitas, dias: datos.dias, flags: {exporto: datos.flags?.exporto === true} });`);
+  // The Spanish source now owns the same validation and atomic import flow.
+
  }
  if(src==='/mi-lienzo/espacio.js'){
   code=code.replace('const ROLES =','const roleLabel = r => ({"Diseño":"Design","Contenido":"Content","Explorando":"Exploring"}[r] || r);\n  const ROLES =');
   code=code.replace('${rol}</span>','${roleLabel(rol)}</span>').replace('${esc(perfil.rol)}','${esc(roleLabel(perfil.rol))}');
   code=code.replace('"mi-lienzo.json"','"my-lienzo.json"');
-  code=code.replace('window.AGLienzo.importar(await f.text());','if (f.size > 7000000) throw new Error("Backup too large.");\n        window.AGLienzo.importar(await f.text());');
  }
  parse(code);const target=path.join(root,dest);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,code);
  reports.push({source:src,target:dest,translations:edits.length});
