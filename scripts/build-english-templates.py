@@ -13,7 +13,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'codigo-web/plantillas'
 TARGET = ROOT / 'en/templates'
-VERSION = '2026101002'
+VERSION = '2026101201'
 ORIGIN = 'https://lienzo.tools'
 
 TEXT = {
@@ -81,7 +81,8 @@ DEMO_TEXT = {
  'Texto en movimiento': 'Text Animation', 'Plantillas editables de After Effects.': 'Customizable After Effects templates.',
  'Paletas con intención': 'Color Palettes', 'Encuentra colores que funcionan juntos.': 'Find colors that work together.',
  'Componentes web': 'Web Templates', 'Piezas de interfaz listas para copiar.': 'Ready-to-customize HTML, CSS, and JS.',
- 'Código': 'Code', 'Explorar recurso ↗': 'Explore resource (Spanish) ↗',
+ 'Redes sociales y compartir': 'Social links and sharing',
+ 'Código': 'Code', 'Explorar recurso ↗': 'Explore resource ↗',
  'Guardar en favoritos: ': 'Save to favorites: ', 'Quitar de favoritos: ': 'Remove from favorites: ',
  'Todavía no hay favoritos.': 'No favorites yet.', 'Vuelve a Todos y guarda un recurso con el corazón.': 'Go back to All and use the heart to save a resource.',
  'Posición del carrusel': 'Carousel position',
@@ -186,9 +187,11 @@ def build():
             if child.is_dir(): shutil.copytree(child, dest / child.name, dirs_exist_ok=True)
             elif child.name != 'LEEME.md': shutil.copy2(child, dest / child.name)
         html = translate(src.joinpath('index.html').read_text(encoding='utf-8'), DEMO_TEXT).replace('lang="es"', 'lang="en-US"')
-        # The final card leads to this translated collection; other examples are clearly labeled Spanish.
+        # Keep every carousel destination within the reviewed English collection.
         html = html.replace(f'{ORIGIN}/codigo-web/componentes/', f'{ORIGIN}/en/templates/')
-        html = html.replace('href="https://lienzo.tools/en/templates/" target="_blank" rel="noopener noreferrer">Explore resource (Spanish)', 'href="https://lienzo.tools/en/templates/" target="_blank" rel="noopener noreferrer">Explore resource')
+        html = html.replace(f'{ORIGIN}/blog/efectos-de-sonido-para-videos-gratis/', f'{ORIGIN}/en/blog/free-sound-effects/')
+        html = html.replace(f'{ORIGIN}/blog/animacion-de-texto-after-effects/', f'{ORIGIN}/en/blog/after-effects-text-animation/')
+        html = html.replace(f'{ORIGIN}/herramientas/paletas/', f'{ORIGIN}/en/tools/palettes/')
         html = html.replace('text=Descubre%20recursos%20creativos%20en%20', 'text=Explore%20free%20web%20templates%20at%20')
         dest.joinpath('index.html').write_text(html, encoding='utf-8')
         js = translate(src.joinpath('script.js').read_text(encoding='utf-8'), DEMO_TEXT)
@@ -196,13 +199,17 @@ def build():
         title = DEMO_TEXT[{'carrusel-recursos':'Carrusel de recursos creativos','botones-cristal':'Botones sociales de cristal','botones-capas':'Botones sociales por capas'}[slug]]
         own = slug == 'carrusel-recursos'
         credits = ('Original carousel design, illustrations, and code by Lienzo. Built from scratch with native scrolling; it does not include code or images from the external Swiper ZIP. Hover tilt and cursor-following light use local CSS and JavaScript. Keyboard focus remains visible; touch scrolling works natively and reduced-motion preferences disable tilt.' if own else 'Lienzo adaptation: colors, content, local SVG icons, accessible labels, visible focus, reduced-motion support, and mobile layout. Remote CDN dependencies were removed and the HTML structure was corrected. Original author: ' + ('Sabiha Samha.' if slug == 'botones-cristal' else 'Nick.') + ' The original MIT notice is included unchanged.')
-        demo_note = 'Carousel favorites are temporary demo state, not an account or storage service. They reset on reload. Untranslated resource examples are labeled Spanish. ' if own else ''
+        demo_note = 'Carousel favorites are temporary demo state, not an account or storage service. They reset on reload. ' if own else ''
         dest.joinpath('README.md').write_text(README.format(title=title, behavior=', carousel navigation, and temporary favorites' if own else '', original='' if own else '- LICENSE-ORIGINAL.txt: original MIT license and copyright notice; preserve it when redistributing.\n', credits=credits, demo_note=demo_note), encoding='utf-8')
         zipname = slug + '-lienzo-en.zip'
         zippath = ROOT / 'recursos/descargas/plantillas-web' / zipname
         with zipfile.ZipFile(zippath, 'w', zipfile.ZIP_DEFLATED) as archive:
             for file in sorted(dest.rglob('*')):
-                if file.is_file(): archive.write(file, Path(slug) / file.relative_to(dest))
+                if file.is_file():
+                    info = zipfile.ZipInfo((Path(slug) / file.relative_to(dest)).as_posix(), (2026, 10, 12, 0, 0, 0))
+                    info.compress_type = zipfile.ZIP_DEFLATED
+                    info.external_attr = 0o644 << 16
+                    archive.writestr(info, file.read_bytes())
         oldname = {'carrusel-recursos':'carrusel-recursos-lienzo.zip','botones-cristal':'botones-cristal-lienzo.zip','botones-capas':'botones-capas-lienzo.zip'}[slug]
         catalog = re.sub(re.escape(oldname) + r'(?:\?v=[^"\s]+)?', zipname + '?v=' + VERSION, catalog)
         # download names must remain filenames rather than URL query strings.

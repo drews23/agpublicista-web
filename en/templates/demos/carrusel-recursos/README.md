@@ -22,4 +22,4 @@ Extract the entire ZIP and open index.html in a modern browser. Keep the folder 
 Original carousel design, illustrations, and code by Lienzo. Built from scratch with native scrolling; it does not include code or images from the external Swiper ZIP. Hover tilt and cursor-following light use local CSS and JavaScript. Keyboard focus remains visible; touch scrolling works natively and reduced-motion preferences disable tilt.
 Fraunces: The Fraunces Project Authors. Instrument Sans: The Instrument Sans Project Authors. Both fonts are included under OFL 1.1 with their full notices. Replace the sample Lienzo logo with your own. MIT does not grant rights to third-party trademarks.
 
-Carousel favorites are temporary demo state, not an account or storage service. They reset on reload. Untranslated resource examples are labeled Spanish. Test the code within your project before publishing it.
+Carousel favorites are temporary demo state, not an account or storage service. They reset on reload. Test the code within your project before publishing it.
