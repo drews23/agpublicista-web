@@ -147,6 +147,8 @@ def build():
   top=top.replace('<a href="/en/templates/">Web Templates</a>','<a href="/en/tools/">Tools</a><a href="/en/templates/">Templates</a>')
   main['id']=main.get('id','main')
   output=f'''<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title} | Lienzo</title><meta name="description" content="{html.escape(desc)}"><link rel="canonical" href="{base.ORIGIN+en}">{base.head_links(es,en)}<meta property="og:title" content="{title} | Lienzo"><meta property="og:description" content="{html.escape(desc)}"><meta property="og:url" content="{base.ORIGIN+en}"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><link id="page-favicon" rel="icon" href="/favicon.svg">{''.join(styles)}<link rel="stylesheet" href="/en/assets/english.css?v=2026101004"><script>document.documentElement.classList.add('js');try{{document.documentElement.dataset.theme=localStorage.getItem('agp-theme')||'light'}}catch(e){{}}</script><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head><body><a class="sr-only" href="#{main['id']}">Skip to content</a>{top}{main}{base.footer()}{''.join(scripts)}</body></html>'''
+  from qr_formats import enhance_qr_formats
+  output = enhance_qr_formats(output, en)
   target=ROOT/en.strip('/')/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(base.theme_logo(output),encoding='utf-8')
  # Copy assets with the same relative dependency structure. JS localization is a separate guarded pass.
  for p in (ROOT/'herramientas').rglob('*'):

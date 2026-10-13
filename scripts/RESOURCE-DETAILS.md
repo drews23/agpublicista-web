@@ -13,3 +13,9 @@ The summary deliberately does not promise a minimum After Effects version, a plu
 English template destinations and accessible names are maintained in `build-english-templates.py`. After changing a demo, rebuild its corresponding English ZIP and update the download query version in `en/templates/index.html`. ZIP entries use fixed metadata so unchanged contents produce reproducible archives. Do not replace the Spanish demos or archives.
 
 Local verification for this tranche is in `output/resource-details-2026-10-12/`: structural comparisons against HEAD, ZIP CRC and demo equivalence, responsive observations, and screenshots. These checks do not represent production publication or verification of the externally hosted MediaFire archives.
+
+## QR formats and AI icon shortcuts (October 13, 2026)
+
+The narrow pass also maintains summaries on both AI icon guides. The existing Spanish video and English style comparison remain the preview targets. Native fragment links focus the preview, download, and terms headings/sections. The inventory distinguishes 25 concepts from 75 SVG and 75 PNG files; the original ZIP and separate credits remain unchanged. The English source removes obsolete Spanish labels only for guides that already have English editions.
+
+`qr_formats.py` adds six English format links before the main QR editor, with scoped `qr-formats.css`. The editor itself continues to handle text/links. The six dedicated pages, engines, export controls, and Spanish QR page remain unchanged. This enhancer runs from the narrow pass, the English tool builder, and the finalizer through `enhance_document`. No broad regeneration is needed.
