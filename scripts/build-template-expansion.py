@@ -164,7 +164,7 @@ LICENSE-LIENZO.txt cubre esta implementación bajo MIT. Conserva el aviso al red
 
 def enhance_collection(raw,route):
  if route not in ['/codigo-web/plantillas/','/en/templates/']:return raw
- en=route.startswith('/en/');lang='en' if en else 'es';s=BeautifulSoup(raw,'html.parser');grid=s.select_one('.templates-grid');assert grid
+ en=route.startswith('/en/');lang='en' if en else 'es';s=BeautifulSoup(raw,'html.parser');grid=s.select_one('[data-template-library]') or s.select_one('.templates-grid');assert grid
  intro=s.select_one('.templates-head .lede')
  if intro:intro.string=('Preview eight free HTML, CSS, and JavaScript UI templates, then download the source code. Add cards, SVG icons, carousels, or social buttons to an existing website; these are reusable UI pieces, not complete website themes.' if en else 'Prueba ocho piezas de interfaz en HTML, CSS y JavaScript: carruseles, tarjetas, iconos animados y botones sociales. Descarga su código para integrarlo en tu web; no son sitios completos ni temas instalables.')
  for old in grid.select('[data-template-expansion]'):old.decompose()
@@ -191,13 +191,14 @@ def enhance_collection(raw,route):
   for node in data.get('@graph',[data]):
    if node.get('@type') in ['CollectionPage','WebPage'] and 'description' in node:node['description']=s.select_one('meta[name=description]')['content']
    if node.get('@type')=='ItemList':
-    node['itemListElement']=[{'@type':'ListItem','position':i,'name':a.h2.get_text(' ',strip=True),'url':'https://lienzo.tools'+route+'#'+a['id']} for i,a in enumerate(grid.select('article.template'),1)]
+    node['itemListElement']=[{'@type':'ListItem','position':i,'name':a.find(['h2','h3']).get_text(' ',strip=True),'url':'https://lienzo.tools'+route+'#'+a['id']} for i,a in enumerate(grid.select('article.template'),1)]
   script.string=json.dumps(data,ensure_ascii=False,indent=2)
  from template_shortcuts import enhance_shortcuts
  markup=enhance_shortcuts(str(s),route)
  path=ROOT/route.lstrip('/')/'plantillas.js'
  if path.exists():markup=re.sub(r'(src="(?:\./)?plantillas.js)\?v=[^"]+',r'\1?v='+hashlib.sha256(path.read_bytes()).hexdigest()[:12],markup)
- return markup
+ from template_catalog_layout import enhance_template_catalog
+ return enhance_template_catalog(markup,route)
 
 
 

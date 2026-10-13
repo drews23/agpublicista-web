@@ -1,5 +1,9 @@
 # Generación de los directorios de Lienzo
 
+## Biblioteca de plantillas por categorías
+
+`python scripts/template_catalog_layout.py` organiza los dos catálogos de ocho plantillas en cuatro categorías visibles, con comparación nativa desplegable. Conserva todas las rutas y descargas. Diseño, fuentes, integración e instrucciones de verificación en `scripts/TEMPLATE-LIBRARY.md`. El generador de ampliación aplica esta pasada y el módulo de accesos reconoce la estructura nueva. No regenerar demos, ZIP ni portadas para cambiar esta presentación.
+
 ## Ampliación de plantillas del 13 de octubre de 2026
 
 Los directorios de recursos incorporan cinco plantillas nuevas, con ocho recursos de interfaz en cada idioma. `python scripts/build-template-expansion.py` genera las demos y los diez ZIP, y actualiza únicamente las colecciones y sus secciones de recursos. Sus fuentes editables, alcance, procedencia, límites y pruebas se explican en `scripts/TEMPLATE-EXPANSION.md`. El organizador de recursos y los generadores ingleses aplican esta misma pasada para conservar las nuevas tarjetas. No ejecutar generadores amplios para editar una plantilla individual. Las portadas conservan el diseño original y usan un titular sin el antiguo número tres.

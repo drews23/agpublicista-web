@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "project": {
+    "name": "Lienzo",
+    "productType": "Bilingual creative resource library",
+    "stack": [
+      "static HTML",
+      "CSS",
+      "vanilla JavaScript",
+      "Python content generators"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "css/site.css",
+      "css/pages/template-library.css"
+    ],
+    "components": [
+      "codigo-web/plantillas/plantillas.css",
+      "codigo-web/plantillas/plantillas.js",
+      "en/templates/plantillas.js"
+    ],
+    "assets": [
+      "assets"
+    ],
+    "instructions": []
+  },
+  "design": {
+    "colorMode": "light and dark",
+    "colors": {
+      "darkBackground": "#0a0a0f",
+      "lightBackground": "#f6f4ef",
+      "violetDark": "#8b7bff",
+      "violetLight": "#5b46e8",
+      "mintDark": "#35d6c8",
+      "mintLight": "#0d9488"
+    },
+    "typography": {
+      "display": "Fraunces",
+      "body": "Instrument Sans",
+      "tracking": "normal for display and body text"
+    },
+    "spacing": {},
+    "radius": {
+      "card": "16px"
+    },
+    "shadows": {},
+    "motion": {
+      "microInteraction": "200-240ms",
+      "reducedMotion": "required"
+    },
+    "density": "editorial, spacious"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [
+      "existing btn classes",
+      "native details/summary",
+      "native dialog",
+      "native anchor navigation",
+      "existing template cards"
+    ],
+    "patterns": [
+      "four visible category sections",
+      "numbered category index",
+      "responsive comparison table",
+      "one shared preview dialog"
+    ]
+  },
+  "constraints": {
+    "must": [
+      "Preserve Spanish and US-English independently",
+      "Preserve existing template URLs, ZIPs, demos, header and footer",
+      "Use project tokens and fonts",
+      "Keep every resource accessible without filtering",
+      "Respect keyboard and reduced motion"
+    ],
+    "avoid": [
+      "React or Tailwind migration for this static site",
+      "Runtime video framework for website UI",
+      "Tight Fraunces tracking",
+      "Autoplay in catalog",
+      "Unverified claims about traffic or SEO outcomes"
+    ]
+  },
+  "decisions": [
+    {
+      "date": "2026-10-13",
+      "status": "local implementation for review",
+      "decision": "Editorial template library with four numbered categories, existing previews, and a progressively disclosed eight-resource comparison. User requested elegant, creative, professional design with ui-ux-pro-max, 21st-ui-build, ui-styling and hyperframes."
+    }
+  ],
+  "evidence": [
+    {
+      "type": "local source",
+      "path": "css/site.css"
+    },
+    {
+      "type": "catalog metadata inspiration",
+      "url": "https://21st.dev/@ibrandify/components/editorial-service-list"
+    },
+    {
+      "type": "catalog metadata inspiration",
+      "url": "https://21st.dev/@mohammadshehadeh/components/comparison-02"
+    }
+  ],
+  "generatedAt": "2026-10-13T11:26:09.112Z"
+}

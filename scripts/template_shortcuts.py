@@ -7,6 +7,9 @@ def enhance_shortcuts(raw, route):
     lang = ROUTES.get(route)
     if not lang:
         return raw
+    if 'data-template-library' in raw:
+        from template_catalog_layout import enhance_template_catalog
+        return enhance_template_catalog(raw, route)
     en = lang == 'en'
     labels = ['Carousel', 'Glass buttons', 'Layered buttons'] if en else ['Carrusel', 'Botones de cristal', 'Botones por capas']
     ids = ['carrusel-recursos', 'botones-cristal', 'botones-capas']

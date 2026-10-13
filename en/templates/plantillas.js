@@ -23,7 +23,7 @@
       event.preventDefault();
       opener = link;
       const card = link.closest('.template');
-      title.textContent = card.querySelector('h2').textContent;
+      title.textContent = card.querySelector('h2, h3').textContent;
       download.href = card.querySelector('[download]').href;
       download.download = card.querySelector('[download]').download;
       full.href = link.href;
