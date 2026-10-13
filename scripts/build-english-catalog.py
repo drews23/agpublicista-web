@@ -136,6 +136,8 @@ for es,en,title,description in PAGES:
   about_spec=importlib.util.spec_from_file_location('english_about',ROOT/'scripts/build-english-about.py')
   about_module=importlib.util.module_from_spec(about_spec);about_spec.loader.exec_module(about_module)
   document=about_module.render_about(document)
+ from guide_categories import enhance_guides
+ document=enhance_guides(document, '/en/'+en+'/')
  target=ROOT/'en'/en/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(document,encoding='utf-8')
  alternates='\n'.join(f'<link rel="alternate" hreflang="{lang}" href="{url}">' for lang,url in [('es',ORIGIN+'/'+es+'/'),('en',canonical),('x-default',ORIGIN+'/'+es+'/')])
  if not soup.select_one('link[hreflang=en]'):source=source.replace('</head>',alternates+'\n</head>',1)

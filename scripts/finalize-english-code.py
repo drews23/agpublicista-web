@@ -47,7 +47,8 @@ for p in (ROOT/'en').rglob('index.html'):
  from resource_details import enhance_document
  from catalog_copy import enhance_catalog_copy
  route = '/'+p.relative_to(ROOT).parent.as_posix()+'/'
- p.write_text(enhance_catalog_copy(enhance_document(str(s), route), route),encoding='utf8')
+ from guide_categories import enhance_guides
+ p.write_text(enhance_guides(enhance_catalog_copy(enhance_document(str(s), route), route), route),encoding='utf8')
 # The Spanish homepage needs the same reciprocal alternates and visible switch.
 p=ROOT/'index.html';raw=p.read_text(encoding='utf8');s=BeautifulSoup(raw,'html.parser')
 links=''.join(f'<link rel="alternate" hreflang="{lang}" href="https://lienzo.tools{route}">' for lang,route in [('es','/'),('en','/en/'),('x-default','/')])

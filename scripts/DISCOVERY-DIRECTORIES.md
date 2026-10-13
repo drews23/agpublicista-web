@@ -32,3 +32,11 @@ Pruebas de esta tanda: `output/catalog-copy-2026-10-13/qa.py` comprueba conserva
 ## Conservar el escenario de portada
 
 La composición original Eclipse se mantiene mediante `scripts/home_stage.py` y `css/pages/home-eclipse.css`. El espaciador y la geometría de los triángulos no deben ocultarse ni compactarse: hacerlo recorta la decoración. El fondo inglés comparte el arte original, conservando su texto y enlaces. `build-home-layout.py` aplica esta restauración al final y no reconstruye un escenario inglés ya presente. Para corregir solo el hero, usar `python scripts/home_stage.py`, sin regenerar catálogos.
+
+## Categorías de Guías
+
+`python scripts/guide_categories.py` organiza únicamente los índices /blog/ y /en/blog/. Conserva las veinte tarjetas existentes de cada idioma, con su HTML, ilustraciones, textos, metadatos de tarjeta y destinos intactos. Las cinco familias son sonidos, After Effects, iconos, 3D/Spline y SVG/color. No modifica los artículos ni crea rutas nuevas.
+
+La navegación usa enlaces ancla nativos a secciones con tabindex=-1 y margen para la cabecera fija. Todas las tarjetas permanecen visibles sin JavaScript. Los enlaces de regreso llevan al índice de categorías. El CSS propio usa los tokens del sitio y mantiene los estilos originales de las tarjetas. El orden del ItemList inglés acompaña el nuevo orden visible; se conservan todas sus URL y nombres.
+
+El generador del catálogo inglés y su finalizador aplican esta pasada al índice. Tras editar o añadir tarjetas españolas, ejecutar el módulo directamente; ante una tarjeta sin categoría, el script se detiene para evitar omitirla. La pasada es idempotente incluso después de serializar el HTML. No ejecutar generadores amplios para reorganizar estas dos páginas. Verificación local en output/guide-categories-2026-10-13/.
