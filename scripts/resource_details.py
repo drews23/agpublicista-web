@@ -4,6 +4,7 @@ import re
 from resource_related import enhance_related, PAGES as RELATED_PAGES
 from template_shortcuts import enhance_shortcuts
 from qr_formats import enhance_qr_formats
+from resource_access import enhance_access, PAGES as ACCESS_PAGES
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -16,6 +17,7 @@ PAGES = {
 }
 
 def enhance_document(raw, route):
+    raw = enhance_access(raw, route)
     raw = enhance_qr_formats(raw, route)
     raw = enhance_shortcuts(raw, route)
     raw = enhance_related(raw, route)
@@ -59,7 +61,7 @@ def enhance_document(raw, route):
     return raw
 
 if __name__ == '__main__':
-    for route in dict.fromkeys([*RELATED_PAGES, *PAGES, '/en/tools/qr/']):
+    for route in dict.fromkeys([*RELATED_PAGES, *PAGES, *ACCESS_PAGES, '/en/tools/qr/']):
         path = ROOT / route.strip('/') / 'index.html'
         raw = path.read_text(encoding='utf-8')
         updated = enhance_document(raw, route)
