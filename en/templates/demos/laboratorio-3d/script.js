@@ -1,176 +1,301 @@
-/* Lienzo template demos: local state only; no analytics, requests or storage. */
+/* Lienzo material lab. Brand-only presets, local state, no external dependencies. */
 (() => {
   'use strict';
   const root = document.body;
   const en = document.documentElement.lang.startsWith('en');
   const say = (es, us) => en ? us : es;
-  const kind = root.dataset.template;
-  const status = document.querySelector('[data-status]');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let motion = !reduced.matches;
-  const params = new URLSearchParams(location.search);
-  root.dataset.view = ['component', 'thumbnail'].includes(params.get('view')) ? params.get('view') : 'full';
-  const notify = text => { status.textContent = text; };
-  const theme = value => {
-    root.dataset.theme = value;
-    document.querySelector('[data-theme-toggle]').textContent = value === 'dark' ? say('Tema claro', 'Light theme') : say('Tema oscuro', 'Dark theme');
-  };
-  document.querySelector('[data-theme-toggle]').addEventListener('click', () => {
-    theme(root.dataset.theme === 'dark' ? 'light' : 'dark');
-    if (parent !== window) parent.postMessage({type:'lienzo:theme-changed', theme:root.dataset.theme}, '*');
-  });
-  addEventListener('message', event => {
-    if (event.source === parent && event.data?.type === 'lienzo:theme' && ['light','dark'].includes(event.data.theme)) theme(event.data.theme);
-  });
-  const accent = document.querySelector('[data-accent]');
-  accent.addEventListener('input', () => root.style.setProperty('--accent', accent.value));
+  const palette = {violet:'#8b7bff', mint:'#35d6c8', amber:'#ffb454'};
+  const accentNames = {violet:say('Violeta','Violet'), mint:say('Menta','Mint'), amber:say('Ámbar','Amber')};
+  const data = document.querySelector('[data-designs]');
+  const designs = JSON.parse(data.textContent);
+  const defaults = structuredClone(designs);
+  const byKey = new Map(designs.map(item => [item.key,item]));
+  const gallery = document.querySelector('.lab-grid');
+  const detail = document.querySelector('[data-detail-dialog]');
+  const codeDialog = document.querySelector('[data-code-dialog]');
+  const stage = document.querySelector('[data-stage]');
+  const previous = document.querySelector('[data-prev]');
+  const next = document.querySelector('[data-next]');
+  const choices = [...document.querySelectorAll('[data-choose]')];
+  const themeButton = document.querySelector('[data-theme-toggle]');
   const motionButton = document.querySelector('[data-motion-toggle]');
-  function syncMotion() {
-    root.dataset.motion = motion && !reduced.matches ? 'on' : 'off';
-    motionButton.setAttribute('aria-pressed', String(root.dataset.motion === 'on'));
-    motionButton.disabled = reduced.matches;
-    motionButton.textContent = reduced.matches ? say('Movimiento reducido del sistema', 'System reduced motion') : root.dataset.motion === 'on' ? say('Pausar efectos', 'Pause effects') : say('Activar efectos', 'Enable effects');
-    root.dispatchEvent(new Event('lienzo:motion'));
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const nameField = document.querySelector('[data-name]');
+  const descriptionField = document.querySelector('[data-description]');
+  const depthField = document.querySelector('[data-depth]');
+  const tiltField = document.querySelector('[data-tilt]');
+  const params = new URLSearchParams(location.search);
+  root.dataset.view = ['component','thumbnail'].includes(params.get('view')) ? params.get('view') : 'full';
+  let selected = designs[0].key, motion = root.dataset.motion !== 'off';
+  let opener = null, codeOpener = null, activePointer = null, pointerFrame = 0;
+  const tests = new Map();
+
+  function notify(message) {
+    document.querySelector('[data-status]').textContent = message;
+    document.querySelector('[data-dialog-status]').textContent = detail.open ? message : '';
   }
-  motionButton.addEventListener('click', () => { motion = !motion; syncMotion(); });
-  reduced.addEventListener('change', () => { motion = !reduced.matches; syncMotion(); });
-  syncMotion();
-  async function copy(text) {
+  const enabled = () => motion && !reduced.matches;
+  const originalCard = key => [...gallery.querySelectorAll('[data-card-key]')].find(card => card.dataset.cardKey === key);
+  function cleanMotion(card) {
+    card.classList.remove('is-testing');
+    ['--rx','--ry','--lift','--light-x','--light-y'].forEach(name => card.style.removeProperty(name));
+    card.querySelector('[data-test]')?.setAttribute('aria-pressed','false');
+  }
+  function updateCard(card, item) {
+    card.style.setProperty('--tone',palette[item.accent]);
+    card.style.setProperty('--depth',item.depth+'px');
+    card.style.setProperty('--tilt',String(item.tilt));
+    card.setAttribute('aria-label',item.name);
+    card.querySelector('[data-card-name]').textContent = item.name;
+    card.querySelector('[data-card-description]').textContent = item.description;
+    const prefix = {'data-test':say('Probar profundidad de ','Test depth for '),'data-cycle':say('Cambiar acento de ','Change accent for '),'data-card-copy':say('Copiar HTML de ','Copy HTML for ')};
+    for (const [attribute,text] of Object.entries(prefix)) card.querySelector('['+attribute+']')?.setAttribute('aria-label',text+item.name);
+    card.querySelector('[data-test]')?.toggleAttribute('disabled',!enabled());
+  }
+  function preview(holder,item) {
+    const clone = originalCard(item.key).cloneNode(true);
+    cleanMotion(clone);
+    clone.classList.add('lab-card--preview');
+    const signature = document.createElement('p');
+    signature.className = 'lab-card__signature'; signature.textContent = 'LIENZO / MATERIAL STUDY';
+    clone.querySelector('.lab-card__actions')?.replaceWith(signature);
+    holder.replaceChildren(clone);
+  }
+  function render() {
+    for (const item of designs) updateCard(originalCard(item.key),item);
+    const item = byKey.get(selected), index = designs.indexOf(item);
+    preview(document.querySelector('[data-stage-card]'),item);
+    preview(document.querySelector('[data-detail-card]'),item);
+    document.querySelector('[data-selected-name]').textContent = item.name;
+    document.querySelector('[data-selected-use]').textContent = item.use;
+    document.querySelector('[data-selected-accent]').textContent = accentNames[item.accent];
+    document.querySelector('[data-selected-depth]').textContent = item.depth+' px';
+    document.querySelector('[data-current]').textContent = String(index+1).padStart(2,'0');
+    document.querySelector('[data-total]').textContent = String(designs.length).padStart(2,'0');
+    document.querySelector('[data-count]').textContent = String(designs.length).padStart(2,'0');
+    document.querySelector('[data-detail-title]').textContent = item.name;
+    document.querySelector('[data-deck-open]').setAttribute('aria-label',say('Personalizar ','Customize ')+item.name);
+    choices.forEach(button => {
+      button.setAttribute('aria-current',String(button.dataset.choose === selected));
+      button.setAttribute('aria-label',say('Mostrar ','Show ')+byKey.get(button.dataset.choose).name);
+    });
+    if(root.classList.contains('lab-single')){
+      document.querySelector('h1').textContent=item.name;
+      document.querySelector('[data-hero-lead]').textContent=item.description;
+      gallery.setAttribute('aria-label',item.name);
+      document.title=item.name+' | Lienzo';
+    }
+    previous.disabled = index === 0; next.disabled = index === designs.length-1;
+    document.querySelectorAll('[data-accent]').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.accent === item.accent)));
+    document.querySelector('[data-depth-output]').textContent = item.depth+' px';
+    document.querySelector('[data-tilt-output]').textContent = item.tilt+'°';
+    document.querySelector('[data-detail-test]').disabled = !enabled();
+  }
+  function fillForm() {
+    const item = byKey.get(selected);
+    nameField.value = item.name; descriptionField.value = item.description;
+    depthField.value = item.depth; tiltField.value = item.tilt;
+  }
+  function choose(key, announce=true) {
+    if (!byKey.has(key)) return;
+    selected = key; render(); fillForm();
+    if (announce) notify(`${designs.indexOf(byKey.get(key))+1} ${say('de','of')} ${designs.length}: ${byKey.get(key).name}.`);
+  }
+  function go(delta) {
+    const index = designs.indexOf(byKey.get(selected));
+    const target = Math.max(0,Math.min(designs.length-1,index+delta));
+    if (target !== index) choose(designs[target].key);
+  }
+  previous.addEventListener('click',() => go(-1));
+  next.addEventListener('click',() => go(1));
+  choices.forEach(button => button.addEventListener('click',() => choose(button.dataset.choose)));
+  stage.addEventListener('keydown',event => {
+    if (event.target !== stage || event.altKey || event.ctrlKey || event.metaKey) return;
+    const map = {ArrowLeft:0,ArrowRight:1,Home:2,End:3};
+    if (!Object.hasOwn(map,event.key)) return;
+    event.preventDefault();
+    if (map[event.key] < 2) go(map[event.key] ? 1 : -1);
+    else choose(designs[map[event.key] === 2 ? 0 : designs.length-1].key);
+  });
+  let gesture = null;
+  stage.addEventListener('pointerdown',event => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    gesture = {id:event.pointerId,x:event.clientX,y:event.clientY};
+    stage.setPointerCapture(event.pointerId);
+  });
+  stage.addEventListener('pointerup',event => {
+    if (!gesture || gesture.id !== event.pointerId) return;
+    const x = event.clientX-gesture.x, y = event.clientY-gesture.y;
+    gesture = null;
+    if (Math.abs(x) >= 45 && Math.abs(x) > Math.abs(y)*1.4) go(x < 0 ? 1 : -1);
+  });
+  stage.addEventListener('pointercancel',() => {gesture=null;});
+
+  function stopTests() {
+    for (const timer of tests.values()) clearTimeout(timer);
+    tests.clear(); cancelAnimationFrame(pointerFrame); pointerFrame=0; activePointer=null;
+    document.querySelectorAll('.lab-card').forEach(cleanMotion);
+  }
+  function testEffect(key) {
+    if (!enabled()) return;
+    if (tests.has(key)) clearTimeout(tests.get(key));
+    document.querySelectorAll('[data-card-key="'+key+'"]').forEach(card => {
+      cleanMotion(card); card.classList.add('is-testing');
+      const item=byKey.get(key);
+      card.style.setProperty('--rx',(-item.tilt*.7)+'deg');
+      card.style.setProperty('--ry',item.tilt+'deg');
+      card.style.setProperty('--lift',(-item.depth*.12)+'px');
+      card.querySelector('[data-test]')?.setAttribute('aria-pressed','true');
+    });
+    tests.set(key,setTimeout(() => {
+      document.querySelectorAll('[data-card-key="'+key+'"]').forEach(cleanMotion);
+      tests.delete(key);
+    },1250));
+    notify(say('Prueba de profundidad: ','Depth preview: ')+byKey.get(key).name+'.');
+  }
+  root.addEventListener('pointerover',event => {
+    const card = event.target.closest('.lab-card');
+    if (!card || card.contains(event.relatedTarget) || !enabled() || event.pointerType === 'touch' || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    activePointer = {card,rect:card.getBoundingClientRect()};
+  });
+  root.addEventListener('pointermove',event => {
+    if (!activePointer || !enabled() || event.pointerType === 'touch') return;
+    if (!activePointer.card.isConnected) {activePointer=null;return;}
+    const {card,rect} = activePointer;
+    const x = Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
+    const y = Math.max(0,Math.min(1,(event.clientY-rect.top)/rect.height));
+    const tilt = byKey.get(card.dataset.cardKey).tilt;
+    cancelAnimationFrame(pointerFrame);
+    pointerFrame = requestAnimationFrame(() => {
+      card.style.setProperty('--rx',((.5-y)*tilt*2).toFixed(2)+'deg');
+      card.style.setProperty('--ry',((x-.5)*tilt*2).toFixed(2)+'deg');
+      card.style.setProperty('--light-x',(x*100).toFixed(1)+'%');
+      card.style.setProperty('--light-y',(y*100).toFixed(1)+'%');
+    });
+  });
+  root.addEventListener('pointerout',event => {
+    if (!activePointer || activePointer.card.contains(event.relatedTarget)) return;
+    cancelAnimationFrame(pointerFrame);
+    const card=activePointer.card; activePointer=null;
+    if (!tests.has(card.dataset.cardKey)) cleanMotion(card);
+  });
+  document.addEventListener('visibilitychange',() => {if(document.hidden) stopTests();});
+  addEventListener('pagehide',stopTests,{once:true});
+
+  function theme(value) {
+    root.dataset.theme=value;
+    themeButton.setAttribute('aria-pressed',String(value==='dark'));
+    themeButton.setAttribute('aria-label',value==='dark'?say('Activar tema claro','Switch to light theme'):say('Activar tema oscuro','Switch to dark theme'));
+  }
+  themeButton.addEventListener('click',() => {
+    theme(root.dataset.theme==='dark'?'light':'dark');
+    if(parent!==window) parent.postMessage({type:'lienzo:theme-changed',theme:root.dataset.theme},'*');
+  });
+  addEventListener('message',event => {
+    if(event.source===parent && event.data?.type==='lienzo:theme' && ['dark','light'].includes(event.data.theme)) theme(event.data.theme);
+  });
+  function motionState() {
+    stopTests();root.dataset.motion=enabled()?'on':'off';
+    motionButton.disabled=reduced.matches;
+    motionButton.setAttribute('aria-pressed',String(enabled()));
+    motionButton.setAttribute('aria-label',reduced.matches?say('Movimiento reducido del sistema','System reduced motion'):enabled()?say('Pausar efectos','Pause effects'):say('Activar efectos','Enable effects'));
+    render();
+  }
+  motionButton.addEventListener('click',() => {motion=!motion;motionState();});
+  reduced.addEventListener('change',motionState);
+
+  function openEditor(key,button) {
+    choose(key,false);opener=button;detail.showModal();
+    document.querySelector('[data-dialog-status]').textContent='';
+    detail.scrollTop=0;
+  }
+  gallery.addEventListener('click',event => {
+    const button=event.target.closest('button');
+    const card=button?.closest('[data-card-key]');if(!card)return;
+    const key=card.dataset.cardKey;
+    if(button.hasAttribute('data-open'))openEditor(key,button);
+    if(button.hasAttribute('data-test'))testEffect(key);
+    if(button.hasAttribute('data-cycle')){
+      const keys=Object.keys(palette),item=byKey.get(key);
+      item.accent=keys[(keys.indexOf(item.accent)+1)%keys.length];render();
+      if(key===selected)fillForm();
+      notify(`${item.name}: ${accentNames[item.accent]}.`);
+    }
+    if(button.hasAttribute('data-card-copy')){choose(key,false);copy(exportDocument(key),button);}
+  });
+  document.querySelector('[data-deck-open]').addEventListener('click',event => openEditor(selected,event.currentTarget));
+  document.querySelector('[data-close]').addEventListener('click',() => detail.close());
+  detail.addEventListener('close',() => {stopTests();opener?.focus({preventScroll:true});});
+  document.querySelector('[data-detail-test]').addEventListener('click',() => testEffect(selected));
+  document.querySelector('[data-editor]').addEventListener('submit',event => event.preventDefault());
+  nameField.addEventListener('input',() => {
+    byKey.get(selected).name=nameField.value.trim()||defaults.find(item=>item.key===selected).name;render();
+  });
+  descriptionField.addEventListener('input',() => {
+    byKey.get(selected).description=descriptionField.value.trim()||defaults.find(item=>item.key===selected).description;render();
+  });
+  [nameField,descriptionField].forEach(field=>field.addEventListener('blur',fillForm));
+  document.querySelectorAll('[data-accent]').forEach(button=>button.addEventListener('click',()=>{
+    byKey.get(selected).accent=button.dataset.accent;render();
+  }));
+  depthField.addEventListener('input',()=>{byKey.get(selected).depth=Number(depthField.value);render();});
+  tiltField.addEventListener('input',()=>{byKey.get(selected).tilt=Number(tiltField.value);render();});
+  document.querySelector('[data-reset]').addEventListener('click',()=>{
+    const item=byKey.get(selected);Object.assign(item,structuredClone(defaults.find(d=>d.key===selected)));
+    render();fillForm();notify(say('Tarjeta restablecida.','Card reset.'));
+  });
+  for(const dialog of [detail,codeDialog])dialog.addEventListener('click',event=>{
+    if(event.target!==dialog)return;
+    const r=dialog.getBoundingClientRect();
+    if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();
+  });
+
+  function exportDocument(key) {
+    const item=byKey.get(key),clone=document.documentElement.cloneNode(true);
+    clone.querySelector('body').removeAttribute('data-view');
+    clone.querySelector('body').classList.add('lab-single');
+    clone.querySelectorAll('dialog').forEach(dialog=>dialog.removeAttribute('open'));
+    clone.querySelectorAll('.lab-grid>[data-card-key]').forEach(card=>{if(card.dataset.cardKey!==key)card.remove();});
+    clone.querySelectorAll('[data-choose]').forEach(button=>{if(button.dataset.choose!==key)button.remove();});
+    clone.querySelectorAll('[data-card-key]').forEach(cleanMotion);
+    clone.querySelector('[data-deck-jump]')?.remove();
+    clone.querySelector('h1').textContent=item.name;
+    clone.querySelector('[data-hero-lead]').textContent=item.description;
+    clone.querySelector('title').textContent=item.name+' | Lienzo';
+    clone.querySelector('.lab-grid').setAttribute('aria-label',item.name);
+    clone.querySelectorAll('[data-status],[data-dialog-status]').forEach(element=>element.textContent='');
+    clone.querySelector('[data-designs]').textContent=JSON.stringify([item]).replace(/</g,'\\u003c');
+    clone.querySelector('[data-code-dialog] textarea').textContent='';
+    return '<!doctype html>\n<!-- '+say('Conserva styles.css, script.js y assets/ del ZIP.','Keep styles.css, script.js and assets/ from the ZIP.')+' -->\n'+clone.outerHTML;
+  }
+  async function copy(text,button) {
     try {
-      const policy = document.permissionsPolicy || document.featurePolicy;
-      const clipboardAllowed = !policy || policy.allowsFeature('clipboard-write');
-      if (navigator.clipboard && window.isSecureContext && clipboardAllowed) { await navigator.clipboard.writeText(text); }
+      const policy=document.permissionsPolicy||document.featurePolicy;
+      if(navigator.clipboard&&isSecureContext&&(!policy||policy.allowsFeature('clipboard-write')))await navigator.clipboard.writeText(text);
       else {
-        const field = document.createElement('textarea'); field.value = text; field.className = 'ln-sr'; document.body.append(field); field.select();
-        let success; try { success = document.execCommand('copy'); } finally { field.remove(); }
-        if (!success) throw Error('Clipboard unavailable');
+        const field=document.createElement('textarea');field.value=text;field.className='lab-sr';root.append(field);field.select();
+        let ok;try{ok=document.execCommand('copy');}finally{field.remove();}if(!ok)throw Error('Clipboard unavailable');
       }
-      notify(say('Código copiado.', 'Code copied.'));
+      notify(say('Código copiado. Conserva los archivos locales del ZIP.','Code copied. Keep the local files from the ZIP.'));
     } catch {
-      const dialog = document.querySelector('[data-code-dialog]'); const field = dialog.querySelector('textarea');
-      field.value = text; dialog.showModal(); field.focus(); field.select();
+      codeOpener=button||document.activeElement;
+      codeDialog.querySelector('textarea').value=text;codeDialog.showModal();
+      codeDialog.querySelector('textarea').focus();codeDialog.querySelector('textarea').select();
     }
   }
-  document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
-  document.querySelectorAll('dialog').forEach(dialog => dialog.addEventListener('click', event => { if (event.target === dialog) { const box = dialog.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close(); } }));
-  const html = node => {
-    const page = document.documentElement.cloneNode(true);
-    const main = page.querySelector('[data-component]');
-    if (node !== document.querySelector('[data-component]') && main) main.replaceChildren(node.cloneNode(true));
-    page.querySelector('body').removeAttribute('data-view');
-    page.querySelectorAll('dialog').forEach(dialog => dialog.removeAttribute('open'));
-    page.querySelector('[data-status]').textContent = '';
-    return '<!doctype html>\n<!-- ' + say('Conserva styles.css, script.js y assets/ del ZIP.','Keep styles.css, script.js, and assets/ from the ZIP.') + ' -->\n' + page.outerHTML;
-  };
-
-  let selected = kind === 'tarjetas-hover' ? document.querySelector('.ln-hover') : document.querySelector('[data-component]');
-  document.querySelector('[data-copy-html]')?.addEventListener('click', () => copy(html(selected)));
-  document.querySelector('[data-copy-css]')?.addEventListener('click', () => copy(document.querySelector('[data-source-css]').textContent));
-
-  if (kind === 'laboratorio-3d') {
-    const cards = [...document.querySelectorAll('.ln-shape')]; const detail = document.querySelector('[data-detail-dialog]');
-    cards.forEach(card => {
-      let pending = 0;
-      card.addEventListener('pointermove', event => {
-        if (root.dataset.motion === 'off' || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-        cancelAnimationFrame(pending); pending = requestAnimationFrame(() => {
-          const r = card.getBoundingClientRect(); const x = (event.clientX-r.left)/r.width; const y=(event.clientY-r.top)/r.height;
-          card.style.setProperty('--rx',`${(0.5-y)*9}deg`); card.style.setProperty('--ry',`${(x-0.5)*9}deg`);
-          card.style.setProperty('--px',`${x*100}%`);card.style.setProperty('--py',`${y*100}%`);
-        });
-      });
-      card.addEventListener('pointerleave', () => {cancelAnimationFrame(pending);card.style.removeProperty('--rx');card.style.removeProperty('--ry');});
-      card.querySelector('[data-detail-open]').addEventListener('click', () => {
-        selected = card; detail.querySelector('h2').textContent = card.querySelector('h2').textContent;
-        detail.querySelector('[data-detail-copy]').textContent = card.dataset.description;
-        detail.querySelector('pre').textContent = card.outerHTML;
-        detail.showModal();
-      });
-    });
-    detail.querySelector('[data-detail-html]').addEventListener('click',()=>copy(html(selected)));
-    detail.querySelector('[data-detail-css]').addEventListener('click',()=>copy(document.querySelector('[data-source-css]').textContent));
-  }
-
-  if (kind === 'tarjetas-producto') {
-    const cart = new Map(); const list = document.querySelector('[data-cart-list]'); const total = document.querySelector('[data-cart-total]');
-    const money = amount => new Intl.NumberFormat(en?'en-US':'es-CO',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(amount);
-    const render = () => {
-      list.replaceChildren(); let sum=0; let quantity=0;
-      for (const [key,item] of cart) {
-        sum+=item.price*item.quantity;quantity+=item.quantity;
-        const row=document.createElement('li'); const name=document.createElement('span');name.className='ln-cart-name';name.textContent=`${item.name} · ${item.color}`;
-        const count=document.createElement('span');count.textContent=`${item.quantity} × ${money(item.price)}`;
-        const remove=document.createElement('button');remove.type='button';remove.className='ln-button';remove.textContent=say('Quitar uno','Remove one');remove.setAttribute('aria-label',say('Quitar uno: ','Remove one: ')+item.name+' · '+item.color);
-        remove.addEventListener('click',()=>{item.quantity--;if(!item.quantity)cart.delete(key);render();(list.querySelector('button') || document.querySelector('#cart-title')).focus();notify(say('Selección actualizada.','Selection updated.'));});
-        row.append(name,count,remove);list.append(row);
-      }
-      document.querySelector('[data-cart-count]').textContent=String(quantity);total.textContent=money(sum);
-      document.querySelector('[data-cart-empty]').hidden=cart.size>0;
-    };
-    document.querySelectorAll('.ln-product').forEach(card=>{
-      card.querySelectorAll('[data-swatch]').forEach(button=>button.addEventListener('click',()=>{
-        card.querySelectorAll('[data-swatch]').forEach(x=>x.setAttribute('aria-pressed',String(x===button)));
-        card.style.setProperty('--product-color',button.dataset.color);card.dataset.variant=button.dataset.swatch;
-        card.querySelector('[data-color-name]').textContent=button.dataset.swatch;
-      }));
-      card.querySelector('[data-wish]').addEventListener('click',event=>{const b=event.currentTarget;const active=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(active));b.textContent=active?'♥':'♡';notify(active?say('Guardado en esta demo.','Saved in this demo.'):say('Quitado de esta demo.','Removed from this demo.'));});
-      card.querySelector('[data-add]').addEventListener('click',()=>{
-        const key=card.id+'-'+card.dataset.variant;const current=cart.get(key);
-        if(current){if(current.quantity>=20){notify(say('Límite de la demo: 20 por variante.','Demo limit: 20 per variant.'));return;}current.quantity++;}
-        else cart.set(key,{name:card.querySelector('h2').textContent,color:card.dataset.variant,price:Number(card.dataset.price),quantity:1});
-        render();notify(say('Añadido a la selección de prueba.','Added to the demo selection.'));
-      });
-    });render();
-  }
-
-  if (kind === 'iconos-animados') {
-    let icon=document.querySelector('[data-icon]');const size=document.querySelector('[data-size]');const speed=document.querySelector('[data-speed]');
-    document.querySelectorAll('[data-icon]').forEach(button=>button.addEventListener('click',()=>{icon=button;document.querySelectorAll('[data-icon]').forEach(x=>x.setAttribute('aria-pressed',String(x===button)));document.querySelector('[data-icon-name]').textContent=button.dataset.name;}));
-    const sync=()=>{root.style.setProperty('--icon-size',size.value+'px');root.style.setProperty('--duration',speed.value+'s');document.querySelector('[data-size-output]').textContent=size.value+' px';document.querySelector('[data-speed-output]').textContent=speed.value+' s';};
-    size.addEventListener('input',sync);speed.addEventListener('input',sync);sync();
-    const exported=()=>{
-      const vector=icon.querySelector('svg').cloneNode(true);vector.removeAttribute('aria-hidden');vector.setAttribute('xmlns','http://www.w3.org/2000/svg');vector.setAttribute('role','img');vector.setAttribute('aria-label',icon.dataset.name);vector.setAttribute('width',size.value);vector.setAttribute('height',size.value);vector.setAttribute('color',accent.value);
-      const group=vector.querySelector('g');group.setAttribute('class','ln-export-mark');
-      const style=document.createElementNS('http://www.w3.org/2000/svg','style');
-      const ordinal=[...document.querySelectorAll('[data-icon]')].indexOf(icon)+1;
-      const gesture=ordinal%4===0?'stroke-dashoffset:0':ordinal%3===0?'transform:rotate(12deg)':'transform:translateY(-1.5px) scale(.94)';
-      const start=ordinal%4===0?'stroke-dasharray:85;stroke-dashoffset:35;':'';
-      style.textContent=`.ln-export-mark{${start}transform-origin:12px 12px;animation:ln-gesture ${speed.value}s ease-in-out infinite alternate}@keyframes ln-gesture{to{${gesture}}}@media(prefers-reduced-motion:reduce){.ln-export-mark{animation:none}}`;
-      if(root.dataset.motion==='off')style.textContent='.ln-export-mark{animation:none}';vector.prepend(style);return new XMLSerializer().serializeToString(vector);
-    };
-    document.querySelector('[data-copy-svg]').addEventListener('click',()=>copy(exported()));
-    document.querySelector('[data-download-svg]').addEventListener('click',()=>{const blob=new Blob([exported()],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='lienzo-'+icon.dataset.icon+'.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify(say('SVG preparado para descargar.','SVG ready to download.'));});
-  }
-
-  if(kind === 'carrusel-progreso') {
-    const track=document.querySelector('[data-track]');const slides=[...track.querySelectorAll('.ln-slide')];const dots=[...document.querySelectorAll('[data-slide]')];
-    const previous=document.querySelector('[data-prev]');const next=document.querySelector('[data-next]');const play=document.querySelector('[data-play]');
-    let index=0, wanted=false, timer=0, hovering=false, scheduled=0;
-    const paused=()=>!wanted||root.dataset.motion==='off'||document.hidden||hovering||document.querySelector('.ln-carousel').contains(document.activeElement);
-    const schedule=()=>{clearTimeout(timer);if(!paused())timer=setTimeout(()=>go((index+1)%slides.length),4500);};
-    const update=()=>{
-      index=Math.max(0,Math.min(slides.length-1,Math.round(track.scrollLeft/track.clientWidth)));
-      dots.forEach((dot,i)=>dot.setAttribute('aria-current',String(i===index)));previous.disabled=index===0;next.disabled=index===slides.length-1;
-      document.querySelector('[data-counter]').textContent=`${index+1} / ${slides.length}`;
-      document.querySelector('[data-progress]').style.setProperty('--progress',`${((index+1)/slides.length)*100}%`);
-      slides.forEach((slide,i)=>{const distance=(slide.offsetLeft-track.offsetLeft-track.scrollLeft)/track.clientWidth;const art=slide.querySelector('.ln-scene-art');art.style.setProperty('--shift',`${distance*-35}px`);art.style.setProperty('--turn',`${distance*8}deg`);art.style.setProperty('--scale',String(Math.max(.8,1-Math.abs(distance)*.12)));});
-    };
-    function go(i){track.scrollTo({left:slides[i].offsetLeft-track.offsetLeft,behavior:root.dataset.motion==='off'?'instant':'smooth'});schedule();}
-    previous.addEventListener('click',()=>go(Math.max(0,index-1)));next.addEventListener('click',()=>go(Math.min(slides.length-1,index+1)));dots.forEach((dot,i)=>dot.addEventListener('click',()=>go(i)));
-    track.addEventListener('keydown',event=>{if(event.target!==track)return;const map={ArrowRight:Math.min(index+1,slides.length-1),ArrowLeft:Math.max(index-1,0),Home:0,End:slides.length-1};if(Object.hasOwn(map,event.key)){event.preventDefault();go(map[event.key]);}});
-    track.addEventListener('scroll',()=>{cancelAnimationFrame(scheduled);scheduled=requestAnimationFrame(update);clearTimeout(timer);schedule();},{passive:true});
-    const carousel=document.querySelector('.ln-carousel');carousel.addEventListener('pointerenter',()=>{hovering=true;schedule();});carousel.addEventListener('pointerleave',()=>{hovering=false;schedule();});
-    carousel.addEventListener('focusin',schedule);carousel.addEventListener('focusout',()=>requestAnimationFrame(schedule));document.addEventListener('visibilitychange',schedule);
-    play.addEventListener('click',()=>{wanted=!wanted;play.setAttribute('aria-pressed',String(wanted));play.textContent=wanted?say('Detener avance automático','Stop autoplay'):say('Activar avance automático','Enable autoplay');schedule();notify(wanted?say('Avance activado. Se pausa con foco, cursor o pestaña oculta.','Autoplay enabled. Pauses on focus, hover, or a hidden tab.'):say('Avance automático detenido.','Autoplay stopped.'));});
-    root.addEventListener('lienzo:motion',()=>{if(root.dataset.motion==='off'){wanted=false;play.setAttribute('aria-pressed','false');play.textContent=say('Activar avance automático','Enable autoplay');}play.disabled=reduced.matches;schedule();update();});
-    play.disabled=reduced.matches;new ResizeObserver(update).observe(track);update();
-  }
-
-  if(kind === 'tarjetas-hover') {
-    document.querySelectorAll('.ln-hover').forEach(card=>{
-      card.querySelector('[data-test-effect]').addEventListener('click',event=>{const active=card.classList.toggle('is-active');event.currentTarget.setAttribute('aria-pressed',String(active));});
-      card.querySelector('[data-select-effect]').addEventListener('click',()=>{selected=card;document.querySelector('[data-selected-name]').textContent=card.querySelector('h2').textContent;notify(say('Ejemplo seleccionado para copiar.','Example selected for copying.'));});
-    });
-    const duration=document.querySelector('[data-speed]');duration.addEventListener('input',()=>{root.style.setProperty('--duration',duration.value+'s');document.querySelector('[data-speed-output]').textContent=duration.value+' s';});
-  }
+  document.querySelector('[data-copy-html]').addEventListener('click',event=>copy(exportDocument(selected),event.currentTarget));
+  document.querySelector('[data-copy-css]').addEventListener('click',event=>copy(document.querySelector('[data-source-css]').textContent,event.currentTarget));
+  document.querySelector('[data-code-close]').addEventListener('click',()=>codeDialog.close());
+  codeDialog.addEventListener('close',()=>codeOpener?.focus({preventScroll:true}));
+  document.querySelector('[data-download]').addEventListener('click',()=>{
+    const blob=new Blob([exportDocument(selected)],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
+    const link=document.createElement('a');link.href=url;link.download='lienzo-'+selected+'.html';root.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    notify(say('HTML descargado. Conserva CSS, JS y assets/ del ZIP.','HTML downloaded. Keep CSS, JS, and assets/ from the ZIP.'));
+  });
+  document.querySelectorAll('a[href="#lab-grid"],a[href="#lab-deck"]').forEach(link=>link.addEventListener('click',event=>{
+    const target=document.querySelector(link.getAttribute('href'));if(!target)return;
+    event.preventDefault();target.scrollIntoView({behavior:enabled()?'smooth':'instant',block:'start'});target.focus({preventScroll:true});
+  }));
+  theme(root.dataset.theme);motionState();fillForm();
 })();

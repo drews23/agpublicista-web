@@ -1,29 +1,20 @@
-# 3D Glass Card Lab
+# 3D Glass Card Lab — Lienzo
 
-Six glass cards with depth, light, and pointer tilt. Explore their details, choose an accent, and copy the selected design's HTML and CSS.
+Six distinct material studies: orb glass, precision cut, neon relief, cinema wide, light prism, and floating layers. Layered surfaces, concentric relief, a wide bento card, directional light, and a six-design focus deck preserve the supplied reference's visual and interactive structure. The implementation is new Lienzo HTML, CSS, and JavaScript.
 
-## Open and customize
+## Open and use
+Extract the whole ZIP and open index.html. Fonts, logo, CSS, and JavaScript are local. No CDN, installation, API, backend, or build step. The standalone demo starts dark; the site preview follows its parent theme.
 
-Extract the entire ZIP and open index.html. Keep styles.css, script.js, and assets/ beside it. No package manager, remote fonts, framework, server or API key is required. The demo starts in dark mode; the toolbar changes theme and accent locally.
+Move a mouse over a card for pointer tilt. Use Test effect for a short depth demonstration, including on touchscreens and with a keyboard. Change accent cycles only through the logo's violet, mint, and amber. Copy HTML exports that card. Customize opens a native editor with live title/description, three brand accents, layer depth (0–48 px), and maximum tilt (0–14 degrees). Reset restores only the selected card. Settings apply per card and reset on reload.
 
-Edit labels, links and sample content in index.html. The main variables are defined under .ln-demo in styles.css: --bg, --panel, --ink, --muted, --line, --accent and --duration. Local fonts are loaded from assets/ with their OFL notices. Replace the sample Lienzo logo for your own project.
+The focus deck presents all six designs. Use previous/next, numbered controls, ArrowLeft/ArrowRight/Home/End while focusing its stage, or a horizontal swipe. Vertical gestures retain normal page scrolling. Manual navigation stops at either end. There is no autoplay. Escape closes the editor and restores focus. System reduced motion or Pause effects disables pointer tilt and test animation; static depth remains.
 
-## Integrating the UI
+## Integrate and export
+Copy HTML and Download HTML produce a complete single-card example document with its current text, accent, depth, and tilt. Keep styles.css, script.js, and assets/ beside it. The editor and its controls remain functional. Copy CSS includes the whole scoped stylesheet. This is not a dependency-free fragment or a preconfigured React component. Use the full ZIP as the integration reference and preserve the ln-lab container, data attributes, scripts, and dialogs you need.
 
-Copy the desired HTML and use styles.css. Keep a wrapper with class ln-demo so its tokens and font settings apply. Interactive controls also require script.js and the surrounding toolbar, status region and relevant dialog elements shown in the complete demo. Copy HTML provides a complete example document, retaining the controls and dialogs needed by script.js. In the 3D lab and hover pack, selecting a design limits the component grid to that card. Keep the CSS, JS and assets beside the copied HTML. It is not an automatically configured React component. For a smaller integration, adapt the script queries to your wrapper and keep the required data attributes. Copy CSS includes the whole stylesheet; remove unused sections only after testing. The complete ZIP is the working reference.
+Only colors from assets/logo-lienzo.svg are used as chromatic tokens: #8b7bff, #6e5df2, #35d6c8, #ffb454, plus white and the site's black neutral. Other surfaces are blends and transparency derived from those tokens. No 3D icon pack is included; its use is reserved for other templates at the owner's request. The material relief is CSS geometry. Local fonts are Fraunces and Instrument Sans, with normal display tracking.
 
-These are reusable UI demos, not complete website themes or installable WordPress themes. React requires JSX attributes and event lifecycle adaptation. Test your final links and content in the browsers and devices you support.
+## Credits and limits
+New Lienzo implementation for the collaboration with MD Estudio Creativo identified by the owner: https://creativomarketingdigital.com/ . The supplied neon-glass-3d-cards-ui-lab.zip and screen recording were reviewed as references. Their original source is not redistributed or relicensed. See SOURCE-NOTES.md. Lienzo code: MIT; fonts: OFL; marks retain their trademark rights. Preserve the notices when sharing.
 
-## Keyboard, touch and motion
-
-Use Tab and Enter for controls. Dialogs support Escape and return focus. Pointer tilt runs only with a fine pointer; CSS focus states and touch preview controls cover other input methods. Motion follows prefers-reduced-motion and the toolbar pause control. No download or feature requires hover.
-
-## Local state and limitations
-
-Demo state is kept in memory and resets on reload. Nothing is uploaded. There is no account, cloud sync, payment service, analytics or backend. Any external link only opens when activated. Automatic carousel advance starts off, pauses on focus, hover and a hidden tab, and is disabled with system reduced motion. Product prices and objects are examples; the selection does not place orders.
-
-## Credits and licenses
-
-Original Lienzo implementation prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied ZIP neon-glass-3d-cards-ui-lab.zip was inspected as a visual/functional reference; its source code, third-party author links and remote artwork are not distributed here. SOURCE-NOTES.md records that boundary.
-
-LICENSE-LIENZO.txt covers this implementation under MIT. Keep the notice when redistributing. Fonts retain their separate OFL notices. Brand marks remain their owners' trademarks; the MIT code license does not transfer trademark rights.
+This is a reusable UI example, not a complete store, an installable WordPress theme, or an analytics service. No accounts, persistence, uploads, orders, or payments. The only downloads are files created locally by your interaction and the ZIP from Lienzo. Test your final text and integration in the browsers you support.

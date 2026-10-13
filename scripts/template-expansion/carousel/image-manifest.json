@@ -1,0 +1,34 @@
+[
+  {
+    "file": "sneaker-mint.webp",
+    "width": 1100,
+    "height": 825,
+    "bytes": 142460,
+    "sha256": "f95f5821c98588109e20453e089d00193e94b44ba56e3c6e2735955adaf5016c",
+    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+  },
+  {
+    "file": "sneaker-violet.webp",
+    "width": 1100,
+    "height": 825,
+    "bytes": 159530,
+    "sha256": "2d057e2a7a31bc1097768386fa5c38df72a27b6df2305de8ef78415449dcf516",
+    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+  },
+  {
+    "file": "sneaker-amber.webp",
+    "width": 1100,
+    "height": 825,
+    "bytes": 145110,
+    "sha256": "1883753bc1621fffaa8376921a3c990028787f0812629f402c8efd3320ce299f",
+    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+  },
+  {
+    "file": "sneaker-coral.webp",
+    "width": 1100,
+    "height": 825,
+    "bytes": 156670,
+    "sha256": "f380d42fc55884d1296442b3fcb23d8b6bd23dc78ffc85c7bbc20e621d5c22e0",
+    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+  }
+]

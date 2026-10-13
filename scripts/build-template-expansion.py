@@ -74,6 +74,12 @@ def component(slug,en):
 
 
 def document(slug,lang):
+ if slug=='laboratorio-3d':
+  from card_lab_showcase import document as lab_document
+  return lab_document(lang)
+ if slug=='carrusel-progreso':
+  from carousel_showcase import document as product_document
+  return product_document(lang)
  en=lang=='en';tr=lambda a,b:b if en else a;c=CONTENT[slug][lang]
  toolbar=f'<label class="ln-field">{tr("Acento","Accent")}<input type="color" data-accent value="#8b7bff"></label>'
  if slug=='iconos-animados':toolbar+=f'<label class="ln-field">{tr("Tamaño","Size")}<input type="range" data-size min="24" max="96" value="48"><output data-size-output>48 px</output></label>'
@@ -84,7 +90,13 @@ def document(slug,lang):
  return f'''<!doctype html><html lang="{'en-US' if en else 'es'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>{escape(c['title'])} | Lienzo</title><meta name="description" content="{escape(c['desc'],quote=True)}"><link rel="icon" href="assets/logo-lienzo.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><script src="script.js" defer></script></head><body class="ln-demo" data-template="{slug}" data-theme="dark" data-motion="on"><header class="ln-header"><a class="ln-brand" href="https://lienzo.tools/{'en/' if en else ''}"><img src="assets/logo-lienzo.svg" width="145" height="40" alt="Lienzo"><span>CREATIVE UI / 2026</span></a><a href="{'README.md' if en else 'LEEME.md'}">{tr('Guía y créditos','Guide and credits')}</a></header><main class="ln-main"><div class="ln-hero"><p class="ln-eyebrow">{escape(c['tag'])}</p><h1>{escape(c['intro'])}</h1><p class="ln-lead">{escape(c['lead'])}</p></div><section class="ln-toolbar" aria-label="{tr('Personalizar demostración','Customize demo')}">{toolbar}</section>{component(slug,en)}{exports}<p class="ln-status" data-status role="status" aria-live="polite"></p><details class="ln-help"><summary>{tr('Cómo llevarlo a tu proyecto','Use it in your project')}</summary><p>{use}</p></details></main><footer class="ln-footer"><span>{tr('Versión Lienzo · Código MIT · Fuentes OFL','Lienzo edition · MIT code · OFL fonts')}</span><a href="https://creativomarketingdigital.com/" rel="noopener" target="_blank">{tr('Colaboración: MD Estudio Creativo','Collaboration: MD Estudio Creativo')}</a></footer><dialog class="ln-dialog" data-code-dialog aria-labelledby="copy-title">{button(tr('Cerrar','Close'),'data-close')}<h2 id="copy-title">{tr('Copia el código','Copy the code')}</h2><p>{tr('Selecciona el texto y usa Ctrl+C o Cmd+C.','Select the text and press Ctrl+C or Cmd+C.')}</p><textarea aria-label="{tr('Código para copiar','Code to copy')}" readonly rows="12" style="width:100%;max-width:100%"></textarea></dialog><script type="text/plain" data-source-css>{(SOURCE/'styles.css').read_text(encoding='utf-8-sig')}</script></body></html>'''
 
 
-def thumbnail(slug):
+def thumbnail(slug,lang='es'):
+ if slug=='laboratorio-3d':
+  from card_lab_showcase import thumbnail as lab_thumbnail
+  return lab_thumbnail(lang)
+ if slug=='carrusel-progreso':
+  from carousel_showcase import thumbnail as product_thumbnail
+  return product_thumbnail()
  i=list(CONTENT).index(slug);labels=['3D / SIX FORMS','PRODUCT / COLOR','SVG / 12 ICONS','SCROLL / PROGRESS','CSS / SIX EFFECTS'];colors=['#8b7bff','#35d6c8','#ffb454','#8b7bff','#ff7a68']
  blocks=''
  if i==2:
@@ -96,6 +108,12 @@ def thumbnail(slug):
 
 
 def readme(slug,lang):
+ if slug=='laboratorio-3d':
+  from card_lab_showcase import readme as lab_readme
+  return lab_readme(lang)
+ if slug=='carrusel-progreso':
+  from carousel_showcase import readme as product_readme
+  return product_readme(lang)
  en=lang=='en';c=CONTENT[slug][lang]
  if en:
   body=f'''# {c['title']}
@@ -171,7 +189,9 @@ def enhance_collection(raw,route):
  for slug,item in CONTENT.items():
   c=item[lang];archive=f'{slug}-lienzo'+('-en' if en else '')+'.zip';zp=ROOT/'recursos/descargas/plantillas-web'/archive;size=(zp.stat().st_size+1023)//1024 if zp.exists() else 0;v=hashlib.sha256(zp.read_bytes()).hexdigest()[:12] if zp.exists() else 'pending'
   guide='README.md' if en else 'LEEME.md';tr=lambda a,b:b if en else a
-  card=f'''<article class="template" id="{slug}" tabindex="-1" data-template-expansion><div class="template__visual" aria-hidden="true"><img src="demos/{slug}/preview.svg" width="600" height="320" loading="lazy" decoding="async" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="template__body"><p class="template__tag">{escape(c['tag'])}</p><h2>{escape(c['title'])}</h2><p class="template__description">{escape(c['desc'])}</p><ul class="template__meta" aria-label="{tr('Características','Features')}"><li>HTML + CSS + JS</li><li>ZIP · {size} KB</li></ul><div class="template__actions"><a class="btn btn--primary" data-preview="{slug}" aria-haspopup="dialog" href="demos/{slug}/">{tr('Probar plantilla','Try template')}</a><a class="btn btn--ghost" href="/recursos/descargas/plantillas-web/{archive}?v={v}" download="{archive}">{tr('Descargar ZIP','Download ZIP')} ↓</a></div><details class="template__credit"><summary>{tr('Guía y créditos','Guide and credits')}</summary><p>{tr('Versión Lienzo preparada para la colaboración con MD Estudio Creativo. Código nuevo MIT; referencias y fuentes documentadas en el ZIP.','Lienzo edition prepared for the collaboration with MD Estudio Creativo. New MIT code; references and font notices documented in the ZIP.')} <a href="demos/{slug}/{guide}">{tr('Leer la guía de uso','Read the guide')}</a>.</p></details></div></article>'''
+  preview_path=ROOT/route.strip('/')/'demos'/slug/'preview.svg'
+  preview_version=('?v='+hashlib.sha256(preview_path.read_bytes()).hexdigest()[:12]) if slug in ['carrusel-progreso','laboratorio-3d'] and preview_path.exists() else ''
+  card=f'''<article class="template" id="{slug}" tabindex="-1" data-template-expansion><div class="template__visual" aria-hidden="true"><img src="demos/{slug}/preview.svg{preview_version}" width="600" height="320" loading="lazy" decoding="async" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="template__body"><p class="template__tag">{escape(c['tag'])}</p><h2>{escape(c['title'])}</h2><p class="template__description">{escape(c['desc'])}</p><ul class="template__meta" aria-label="{tr('Características','Features')}"><li>HTML + CSS + JS</li><li>ZIP · {size} KB</li></ul><div class="template__actions"><a class="btn btn--primary" data-preview="{slug}" aria-haspopup="dialog" href="demos/{slug}/">{tr('Probar plantilla','Try template')}</a><a class="btn btn--ghost" href="/recursos/descargas/plantillas-web/{archive}?v={v}" download="{archive}">{tr('Descargar ZIP','Download ZIP')} ↓</a></div><details class="template__credit"><summary>{tr('Guía y créditos','Guide and credits')}</summary><p>{tr('Versión Lienzo preparada para la colaboración con MD Estudio Creativo. Código nuevo MIT; referencias y fuentes documentadas en el ZIP.','Lienzo edition prepared for the collaboration with MD Estudio Creativo. New MIT code; references and font notices documented in the ZIP.')} <a href="demos/{slug}/{guide}">{tr('Leer la guía de uso','Read the guide')}</a>.</p></details></div></article>'''
   grid.append(BeautifulSoup(card,'html.parser').article)
  frame=s.select_one('[data-preview-dialog] iframe')
  if frame and 'allow-downloads' not in frame.get('sandbox',[]):frame['sandbox']=[*frame.get('sandbox',[]),'allow-downloads']
@@ -238,15 +258,21 @@ def enhance_resources(raw,route):
  return updated
 
 
-def build():
+def build(only=None):
  for lang,base in [('es','codigo-web/plantillas'),('en','en/templates')]:
-  for slug in CONTENT:
+  for slug in (only or CONTENT):
    dest=ROOT/base/'demos'/slug;dest.mkdir(parents=True,exist_ok=True)
    assets=dest/'assets';assets.mkdir(exist_ok=True)
    for p in (ROOT/'codigo-web/plantillas/demos/carrusel-recursos/assets').iterdir():shutil.copy2(p,assets/p.name)
    for name in ['styles.css','script.js']:dest.joinpath(name).write_text((SOURCE/name).read_text(encoding='utf-8-sig'),encoding='utf8')
+   if slug=='carrusel-progreso':
+    from carousel_showcase import copy_assets
+    copy_assets(dest)
+   if slug=='laboratorio-3d':
+    from card_lab_showcase import copy_assets
+    copy_assets(dest)
    dest.joinpath('index.html').write_text(document(slug,lang),encoding='utf8')
-   dest.joinpath('preview.svg').write_text(thumbnail(slug),encoding='utf8')
+   dest.joinpath('preview.svg').write_text(thumbnail(slug,lang),encoding='utf8')
    dest.joinpath('README.md' if lang=='en' else 'LEEME.md').write_text(readme(slug,lang),encoding='utf8')
    shutil.copy2(ROOT/'codigo-web/plantillas/demos/carrusel-recursos/LICENSE-LIENZO.txt',dest/'LICENSE-LIENZO.txt')
    reference=CONTENT[slug]['source']
@@ -260,6 +286,13 @@ The project owner identified the materials as part of the collaboration with MD 
 
 El responsable del proyecto identificó los materiales como parte de la colaboración con MD Estudio Creativo. El archivo aportado se conserva intacto fuera de esta distribución. Algunos archivos contienen créditos de terceros y no incluyen licencia. Esta descarga contiene HTML/CSS/JavaScript nuevo de Lienzo e ilustraciones vectoriales locales, sin redistribuir esas fuentes. El aviso MIT de este paquete no cubre el código de referencia. No se crea ni se presume aquí un documento de autorización.
 '''
+   if slug=='carrusel-progreso':
+    note=note.replace('locally drawn vector artwork','locally created product-concept artwork').replace('e ilustraciones vectoriales locales','y recortes conceptuales de producto creados para esta demo')
+    note+='\nSwiper 12.2.0 is bundled locally from the official npm package under MIT; see assets/LICENSE-SWIPER.txt. Product cutouts were generated specifically for Lienzo and do not use the reference\'s Nike images.\n\nSwiper 12.2.0 se incluye localmente desde el paquete npm oficial bajo MIT; consulta assets/LICENSE-SWIPER.txt. Los recortes de producto se generaron para Lienzo y no utilizan las imágenes Nike de la referencia.\n'
+    note+='\nThe supplied visual reference credits Tim Guignard / Codocular. Its code and remote product photos are not included in this download.\n\nLa referencia visual aportada acredita a Tim Guignard / Codocular. Su código y sus fotografías remotas de producto no se incluyen en esta descarga.\n'
+   if slug=='laboratorio-3d':
+    note=note.replace('locally drawn vector artwork','CSS material geometry created for this demo').replace('e ilustraciones vectoriales locales','y geometría de material creada con CSS para esta demo')
+    note+='\nThe supplied screen recording was reviewed with the archive to preserve six structural forms, layered glass relief, the wide cinema card, and a navigable focus deck. Chromatic tokens are limited to the Lienzo logo palette; there is no external 3D icon pack in this template.\n\nLa grabación aportada se revisó junto al archivo para conservar seis formas estructurales, relieves de cristal por capas, tarjeta cinema amplia y mesa navegable. Los tokens cromáticos se limitan a la paleta del logo Lienzo; esta plantilla no incorpora el pack externo de iconos 3D.\n'
    dest.joinpath('SOURCE-NOTES.md').write_text(note,encoding='utf8')
    archive=ROOT/'recursos/descargas/plantillas-web'/(slug+'-lienzo'+('-en' if lang=='en' else '')+'.zip');archive.parent.mkdir(parents=True,exist_ok=True)
    with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
@@ -271,12 +304,16 @@ El responsable del proyecto identificó los materiales como parte de la colabora
  entries=[item for item in json.loads(inventory.read_text(encoding='utf8')) if item['id'] not in CONTENT]
  for slug,item in CONTENT.items():
   z=ROOT/'recursos/descargas/plantillas-web'/(slug+'-lienzo.zip')
-  entries.append({'id':slug,'title':item['es']['title'],'tag':item['es']['tag'],'author':'Lienzo','collaboration':'MD Estudio Creativo','source':None,'zip':z.name,'desc':item['es']['desc'],'size':(z.stat().st_size+1023)//1024,'authorRole':'Implementación, ilustración y guía','license':'MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md'})
+  entries.append({'id':slug,'title':item['es']['title'],'tag':item['es']['tag'],'author':'Lienzo','collaboration':'MD Estudio Creativo','source':None,'zip':z.name,'desc':item['es']['desc'],'size':(z.stat().st_size+1023)//1024,'authorRole':'Implementación, ilustración y guía','license':('MIT; Swiper 12.2.0 MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md' if slug=='carrusel-progreso' else 'MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md')})
  inventory.write_text(json.dumps(entries,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
  for route in ['/codigo-web/plantillas/','/en/templates/']:
   p=ROOT/route.lstrip('/')/'index.html';p.write_text(enhance_collection(p.read_text(encoding='utf8'),route),encoding='utf8')
  for route in ['/recursos/','/en/resources/']:
   p=ROOT/route.lstrip('/')/'index.html';p.write_text(enhance_resources(p.read_text(encoding='utf8'),route),encoding='utf8')
- print('Built five resources in ES/EN, ten standalone ZIPs, and both collections.')
+ print('Built '+str(len(only or CONTENT))+' resources in ES/EN and updated both collections.')
 
-if __name__=='__main__':build()
+if __name__=='__main__':
+ import argparse
+ parser=argparse.ArgumentParser(description=__doc__)
+ parser.add_argument('--only',choices=list(CONTENT),action='append',help='Regenerate only this resource; repeat for multiple resources.')
+ build(parser.parse_args().only)

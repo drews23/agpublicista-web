@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / 'css/pages/template-library.css'
 GROUPS = [
     ('carruseles', 'carousels', 'Carruseles', 'Carousels',
-     'Da ritmo a una colección de recursos o a una historia por escenas.',
-     'Give a resource collection or a scene-by-scene story its own rhythm.',
+     'Explora recursos o presenta tus productos con movimiento.',
+     'Explore resources or present your products in motion.',
      ['carrusel-recursos', 'carrusel-progreso']),
     ('tarjetas', 'cards', 'Tarjetas', 'Cards',
      'Destaca una idea, presenta un producto o añade una interacción con intención.',
@@ -29,8 +29,8 @@ GROUPS = [
 ]
 CHOICES = {
     'carrusel-recursos': ('Una colección navegable', 'A browsable collection', 'Contenido, enlaces y colores', 'Content, links, and colors', 'HTML + CSS + JS'),
-    'carrusel-progreso': ('Una historia en cuatro escenas', 'A four-scene story', 'Escenas, colores y ritmo', 'Scenes, colors, and timing', 'HTML + CSS + JS'),
-    'laboratorio-3d': ('Destacar una idea con profundidad', 'Giving an idea depth', 'Seis formas, acento y contenido', 'Six shapes, accent, and content', 'HTML + CSS + JS'),
+    'carrusel-progreso': ('Exhibir cuatro productos con profundidad', 'Showcasing four products with depth', 'Productos, imágenes, colores y ritmo', 'Products, images, colors, and timing', 'HTML + CSS + JS'),
+    'laboratorio-3d': ('Destacar una idea con profundidad', 'Giving an idea depth', 'Texto, paleta de marca, capas e inclinación', 'Text, brand palette, layers, and tilt', 'HTML + CSS + JS'),
     'tarjetas-producto': ('Probar una interfaz de producto', 'Trying a product interface', 'Productos, variantes y precios de ejemplo', 'Products, variants, and sample prices', 'HTML + CSS + JS'),
     'tarjetas-hover': ('Añadir respuesta a una tarjeta', 'Adding feedback to a card', 'Seis efectos, acento y duración', 'Six effects, accent, and duration', 'HTML + CSS + JS'),
     'botones-cristal': ('Cinco accesos sociales', 'Five social links', 'Enlaces, iconos y colores', 'Links, icons, and colors', 'HTML + CSS'),
@@ -67,7 +67,9 @@ def enhance_template_catalog(raw, route):
     index = 'template-categories' if en else 'categorias-plantillas'
     compare = 'compare-templates' if en else 'comparar-plantillas'
     how = 'how-to-use' if en else 'como-usarlas'
-    hero = f'''<div class="templates-head page-head catalog-hero"><div class="catalog-hero__copy"><p class="eyebrow">HTML · CSS · JAVASCRIPT</p><h1>{escape(title)}</h1><p class="catalog-hero__statement">{tr('Elige una pieza.<br>Hazla tuya.', 'Find your piece.<br>Make it yours.')}</p><p class="lede">{tr('Ocho piezas de interfaz para dar forma a tu próxima web. Explora, prueba los controles y descarga el código para adaptarlo a tu proyecto.', 'Eight UI templates for your next website. Explore the designs, try the controls, and download the code to make them your own.')}</p><div class="catalog-hero__actions"><a class="btn btn--primary" href="#{index}">{tr('Explorar plantillas', 'Explore templates')} <span aria-hidden="true">↓</span></a><a class="catalog-text-link" href="#{how}">{tr('Cómo empezar', 'How to get started')} <span aria-hidden="true">↗</span></a></div></div><div class="catalog-hero__art" aria-hidden="true"><span class="catalog-art__label">LIENZO / {tr('BIBLIOTECA WEB', 'WEB LIBRARY')}</span><div class="catalog-art__window catalog-art__window--back"><span class="catalog-art__bar"><i></i><i></i><i></i><span>cards.css</span></span><img src="demos/laboratorio-3d/preview.svg" alt="" width="600" height="320" decoding="async"></div><div class="catalog-art__window catalog-art__window--front"><span class="catalog-art__bar"><i></i><i></i><i></i><span>your-next-idea.html</span></span><img src="demos/tarjetas-producto/preview.svg" alt="" width="600" height="320" decoding="async"></div><span class="catalog-art__badge">&lt;/&gt; <span>{tr('Código para crear', 'Code to create')}</span></span></div></div>'''
+    preview_path=ROOT/route.strip('/')/'demos/laboratorio-3d/preview.svg'
+    preview_version=('?v='+hashlib.sha256(preview_path.read_bytes()).hexdigest()[:12]) if preview_path.exists() else ''
+    hero = f'''<div class="templates-head page-head catalog-hero"><div class="catalog-hero__copy"><p class="eyebrow">HTML · CSS · JAVASCRIPT</p><h1>{escape(title)}</h1><p class="catalog-hero__statement">{tr('Elige una pieza.<br>Hazla tuya.', 'Find your piece.<br>Make it yours.')}</p><p class="lede">{tr('Ocho piezas de interfaz para dar forma a tu próxima web. Explora, prueba los controles y descarga el código para adaptarlo a tu proyecto.', 'Eight UI templates for your next website. Explore the designs, try the controls, and download the code to make them your own.')}</p><div class="catalog-hero__actions"><a class="btn btn--primary" href="#{index}">{tr('Explorar plantillas', 'Explore templates')} <span aria-hidden="true">↓</span></a><a class="catalog-text-link" href="#{how}">{tr('Cómo empezar', 'How to get started')} <span aria-hidden="true">↗</span></a></div></div><div class="catalog-hero__art" aria-hidden="true"><span class="catalog-art__label">LIENZO / {tr('BIBLIOTECA WEB', 'WEB LIBRARY')}</span><div class="catalog-art__window catalog-art__window--back"><span class="catalog-art__bar"><i></i><i></i><i></i><span>cards.css</span></span><img src="demos/laboratorio-3d/preview.svg{preview_version}" alt="" width="600" height="320" decoding="async"></div><div class="catalog-art__window catalog-art__window--front"><span class="catalog-art__bar"><i></i><i></i><i></i><span>your-next-idea.html</span></span><img src="demos/tarjetas-producto/preview.svg" alt="" width="600" height="320" decoding="async"></div><span class="catalog-art__badge">&lt;/&gt; <span>{tr('Código para crear', 'Code to create')}</span></span></div></div>'''
     bar = f'''<div class="templates-bar catalog-meta"><p><strong>08</strong> {tr('plantillas para personalizar', 'templates to customize')}</p><p>{tr('Gratis · Sin registro · Código incluido', 'Free · No signup · Source code included')}</p></div>'''
     links = []
     groups = []

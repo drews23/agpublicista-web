@@ -3,17 +3,17 @@
     "source": "neon-glass-3d-cards-ui-lab.zip",
     "es": {
       "title": "Laboratorio de tarjetas 3D",
-      "tag": "Seis formas, una identidad",
-      "desc": "Seis tarjetas de cristal con profundidad, luz e inclinación. Prueba sus detalles, elige un acento y copia el HTML y CSS del diseño seleccionado.",
-      "intro": "El volumen también comunica.",
-      "lead": "Seis maneras de dar profundidad a una interfaz. Explora la forma, prueba el foco y encuentra la que encaja en tu proyecto."
+      "tag": "Cristal, luz e identidad",
+      "desc": "Seis formas con cristal por capas, relieves e inclinación 3D. Personaliza cada tarjeta con la paleta Lienzo, prueba el efecto y exporta tu diseño. Incluye galería navegable.",
+      "intro": "Seis formas. La misma identidad.",
+      "lead": "Superficies que responden a tu movimiento, ajustes por tarjeta y una mesa de pruebas para llevar cada diseño a tu proyecto."
     },
     "en": {
       "title": "3D Glass Card Lab",
-      "tag": "Six shapes. One identity.",
-      "desc": "Six glass cards with depth, light, and pointer tilt. Explore their details, choose an accent, and copy the selected design's HTML and CSS.",
-      "intro": "Give your interface dimension.",
-      "lead": "Six ways to add depth to an interface. Explore each shape, try keyboard focus, and find the right fit for your project."
+      "tag": "Glass, light, and identity",
+      "desc": "Six forms with layered glass, relief, and 3D tilt. Customize each card with the Lienzo palette, test its depth, and export your design. Includes a navigable focus deck.",
+      "intro": "Six forms. One identity.",
+      "lead": "Surfaces that respond to your movement, per-card settings, and a focus deck to bring each design to your next project."
     },
     "referenceSha256": "cd301d592025e569c1a37a79968ac69fa44d4a3802e4f1d3e44fa056c0b6a506"
   },
@@ -57,17 +57,17 @@
     "source": "swiper-js-carousel-with-progress-animations.zip",
     "es": {
       "title": "Carrusel con progreso y profundidad",
-      "tag": "Cuatro escenas en movimiento",
-      "desc": "Cuatro escenas con ilustración local, progreso y animación ligada al desplazamiento. Flechas, teclado, gesto táctil y reproducción automática opcional.",
-      "intro": "Una historia, escena a escena.",
-      "lead": "Una presentación amplia para destacar ideas. Desliza, usa las flechas o activa el avance automático. Tú controlas el ritmo."
+      "tag": "El producto, en primer plano",
+      "desc": "Cuatro productos con recortes transparentes, tarjeta central y vistas laterales. Imagen, sombra, texto y fondo sincronizados al arrastrar. Incluye teclado, progreso y avance opcional.",
+      "intro": "El producto, en primer plano.",
+      "lead": "Una composición de producto con profundidad, arrastre y movimiento coordinado. Ajusta el ritmo y explora sus detalles."
     },
     "en": {
       "title": "Progress & Depth Carousel",
-      "tag": "Four scenes in motion",
-      "desc": "Four scenes with local artwork, progress, and scroll-linked animation. Arrow buttons, keyboard and touch navigation, plus optional autoplay.",
-      "intro": "Tell it one scene at a time.",
-      "lead": "A wide presentation for ideas worth highlighting. Swipe, use the arrows, or enable autoplay. You set the pace."
+      "tag": "The product takes center stage",
+      "desc": "Four products with transparent cutouts, a centered card, and lateral previews. Image, shadow, text, and background move together as you drag. Includes keyboard controls, progress, and optional autoplay.",
+      "intro": "The product takes center stage.",
+      "lead": "A product composition with depth, drag navigation, and synchronized movement. Set the pace and explore each design."
     },
     "referenceSha256": "e7d8c6bf1c41c667a7e98d93d7968f0f057e84dab7d12065b83ba7fff52f3953"
   },

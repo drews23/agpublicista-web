@@ -38,13 +38,13 @@
   {
     "id": "laboratorio-3d",
     "title": "Laboratorio de tarjetas 3D",
-    "tag": "Seis formas, una identidad",
+    "tag": "Cristal, luz e identidad",
     "author": "Lienzo",
     "collaboration": "MD Estudio Creativo",
     "source": null,
     "zip": "laboratorio-3d-lienzo.zip",
-    "desc": "Seis tarjetas de cristal con profundidad, luz e inclinación. Prueba sus detalles, elige un acento y copia el HTML y CSS del diseño seleccionado.",
-    "size": 121,
+    "desc": "Seis formas con cristal por capas, relieves e inclinación 3D. Personaliza cada tarjeta con la paleta Lienzo, prueba el efecto y exporta tu diseño. Incluye galería navegable.",
+    "size": 171,
     "authorRole": "Implementación, ilustración y guía",
     "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   },
@@ -77,15 +77,15 @@
   {
     "id": "carrusel-progreso",
     "title": "Carrusel con progreso y profundidad",
-    "tag": "Cuatro escenas en movimiento",
+    "tag": "El producto, en primer plano",
     "author": "Lienzo",
     "collaboration": "MD Estudio Creativo",
     "source": null,
     "zip": "carrusel-progreso-lienzo.zip",
-    "desc": "Cuatro escenas con ilustración local, progreso y animación ligada al desplazamiento. Flechas, teclado, gesto táctil y reproducción automática opcional.",
-    "size": 121,
+    "desc": "Cuatro productos con recortes transparentes, tarjeta central y vistas laterales. Imagen, sombra, texto y fondo sincronizados al arrastrar. Incluye teclado, progreso y avance opcional.",
+    "size": 774,
     "authorRole": "Implementación, ilustración y guía",
-    "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
+    "license": "MIT; Swiper 12.2.0 MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   },
   {
     "id": "tarjetas-hover",

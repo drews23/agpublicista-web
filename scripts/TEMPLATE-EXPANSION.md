@@ -6,10 +6,10 @@ Entrega local del 13 de octubre de 2026, sobre `cd21dda`. Amplía los catálogos
 
 | Recurso | Contenido y mejoras |
 | --- | --- |
-| `laboratorio-3d` | Seis formas de tarjeta con profundidad, luz e inclinación para puntero preciso. Detalle en diálogo nativo, foco de teclado, acento editable y copia del diseño elegido. |
+| `laboratorio-3d` | Seis geometrías de cristal con planos separados, relieves concéntricos y tarjeta panorámica. Editor por tarjeta: texto, paleta del logo, profundidad e inclinación. Prueba táctil, galería navegable y copia/descarga de un documento personalizado. |
 | `tarjetas-producto` | Tres productos ficticios con ilustraciones SVG locales. Variantes que cambian el dibujo, favoritos y selección de demostración con cantidades, retirada de unidades y totales. |
 | `iconos-animados` | Doce SVG originales. Selección, tamaño, color, velocidad, copia y descarga del icono con su animación y regla de movimiento reducido. |
-| `carrusel-progreso` | Cuatro escenas ilustradas con desplazamiento nativo, progreso y profundidad ligada al scroll. Flechas, indicadores, Home/End, teclado y gesto táctil. Avance automático opcional. |
+| `carrusel-progreso` | Cuatro productos con recortes transparentes, tarjeta central y vistas laterales. Imagen, tarjeta, sombra, texto y fondo ligados al progreso de Swiper. Arrastre, gesto táctil, flechas, indicadores, Home/End, detalles y avance opcional. |
 | `tarjetas-hover` | Seis efectos distintos: luz, elevación, barrido, giro, capas y revelado. Foco visible, prueba táctil, duración editable y copia de un diseño. |
 
 Son piezas de interfaz reutilizables en HTML, CSS y JavaScript. No son sitios completos, temas instalables ni componentes React preparados. Los ejemplos de producto no realizan pagos ni pedidos. Su estado vive en memoria y se reinicia al recargar; el máximo por variante es veinte unidades. No hay cuentas, almacenamiento persistente, peticiones remotas, analítica ni backend en las cinco demos nuevas.
@@ -22,9 +22,25 @@ Las fuentes y las ilustraciones son locales. El avance automático comienza apag
 python scripts/build-template-expansion.py
 ```
 
+Para actualizar únicamente el carrusel de productos en ambos idiomas, sin reconstruir las otras demos ni sus ZIP:
+
+```powershell
+python scripts/build-template-expansion.py --only carrusel-progreso
+```
+
+Para actualizar exclusivamente el laboratorio 3D en ambos idiomas, conservando incluso las reparaciones locales del carrusel:
+
+```powershell
+python scripts/build-template-expansion.py --only laboratorio-3d
+```
+
 Requiere Python y BeautifulSoup (`beautifulsoup4`), ya utilizados en este repositorio. No incorpora una dependencia de producción ni necesita los ZIP de referencia en la máquina de compilación.
 
 Editar el contenido ES/en-US y las huellas de referencia en `scripts/template-expansion/content.json`; los estilos y el comportamiento comunes, en `styles.css` y `script.js` de esa misma carpeta. La estructura HTML, las ilustraciones SVG, las guías, las vistas estáticas y el empaquetado se generan en `build-template-expansion.py`. No editar primero una demo generada: la siguiente ejecución sustituye sus archivos.
+
+Excepción especializada: el carrusel de productos se genera desde `scripts/carousel_showcase.py` y `scripts/template-expansion/carousel/`. Esa carpeta contiene su CSS/JS, cuatro imágenes WebP transparentes, la captura real de miniatura y Swiper 12.2.0 con su MIT. El constructor delega HTML, guía, miniatura y archivos de este recurso; no carga el antiguo comportamiento de escenas del archivo común. `scripts/CAROUSEL-SHOWCASE.md` documenta la reparación solicitada, el contrato visual y las pruebas actuales. El catálogo versiona su miniatura, y el HTML versiona CSS/JS por contenido para evitar reutilizar la adaptación anterior desde la caché.
+
+El laboratorio 3D también tiene implementación especializada: `scripts/card_lab_showcase.py` y `scripts/template-expansion/card-lab/`. Los relieves se construyen con CSS; no incluye el catálogo de iconos 3D, reservado para próximas plantillas por petición del usuario. Usa exclusivamente colores del logo y sus mezclas con blanco/negro neutro. Sus dos miniaturas son capturas reales localizadas. `scripts/CARD-LAB-SHOWCASE.md` detalla su editor, exportación y verificación. `thumbnail(slug, lang='es')` conserva compatibilidad con llamadas anteriores y permite seleccionar la miniatura del idioma correcto.
 
 El generador produce diez carpetas de demo, cinco por idioma, y diez ZIP con un directorio raíz por recurso. Cada ZIP contiene HTML, CSS, JS, fuentes locales, sus avisos OFL, el logo de muestra, guía localizada, aviso MIT y `SOURCE-NOTES.md`. La guía explica integración, controles, estado local y límites. La acción Copiar HTML entrega un documento de ejemplo completo con los controles y diálogos necesarios; en el laboratorio y el pack hover limita la cuadrícula al diseño seleccionado. No entrega un fragmento autónomo sin sus archivos vecinos.
 
@@ -34,7 +50,7 @@ Los ZIP utilizan fechas internas fijas y las tarjetas incluyen una query basada 
 
 Los cinco ZIP aportados en `D:\octubre 2026\lienzo\Nueva carpeta` se conservaron intactos. Sus nombres y SHA-256 constan en el manifiesto de contenido y en cada `SOURCE-NOTES.md`. Se revisaron como referencias visuales y funcionales. Se encontraron dependencias remotas, referencias rotas, créditos de terceros en algunos archivos y ausencia de archivos de licencia.
 
-Esta entrega utiliza código nuevo de Lienzo e ilustraciones locales; no redistribuye el código ni las imágenes remotas de esas referencias. El responsable del proyecto identificó los materiales como parte de su colaboración con MD Estudio Creativo. Los créditos reflejan esa declaración sin crear autorizaciones, atribuir a Lienzo derechos de terceros ni extender el MIT nuevo a las referencias. Las fuentes conservan sus licencias OFL y los logos sus derechos de marca. Los originales y las extracciones de investigación quedan fuera del conjunto de publicación.
+Esta entrega utiliza código nuevo de Lienzo e ilustraciones locales; no redistribuye el código ni las imágenes remotas de esas referencias. El carrusel incluye además Swiper desde su paquete npm oficial con su licencia MIT independiente; los recortes conceptuales se generaron para Lienzo. El responsable del proyecto identificó los materiales como parte de su colaboración con MD Estudio Creativo. Los créditos reflejan esa declaración sin crear autorizaciones, atribuir a Lienzo derechos de terceros ni extender el MIT nuevo a las referencias. Las fuentes conservan sus licencias OFL y los logos sus derechos de marca. Los originales y las extracciones de investigación quedan fuera del conjunto de publicación.
 
 ## Previsualizaciones aisladas y fuentes
 
@@ -57,6 +73,8 @@ El generador estrecho actualiza los dos catálogos, sus inventarios y las seccio
 Las portadas solo cambian el titular que decía tres plantillas. Se conservan los triángulos, el fondo Eclipse, la navegación y el resto del contenido. Su fuente `build-home-discovery.py` utiliza el mismo texto sin un número fijo.
 
 ## Verificación local
+
+Este apartado registra la verificación inicial de las cinco plantillas. La reparación posterior del carrusel tiene evidencia independiente en `output/carousel-repair-2026-10-13/`; no usar los resultados iniciales para justificar su nuevo diseño. La entrega inicial y la reorganización del catálogo ya se publicaron en los commits `4f728bc`, `9734220` y `cd99981`. La reparación posterior todavía es local.
 
 Evidencia de paquetes y DOM simulado en `output/templates-expansion-2026-10-13/`. Evidencia del navegador real aislado, autorizada expresamente por el usuario, en `output/playwright/lienzo-template-expansion/`.
 

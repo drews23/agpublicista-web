@@ -1,29 +1,20 @@
-# Carrusel con progreso y profundidad
+# Carrusel con progreso y profundidad — Lienzo Form
 
-Cuatro escenas con ilustración local, progreso y animación ligada al desplazamiento. Flechas, teclado, gesto táctil y reproducción automática opcional.
+Cuatro conceptos de calzado con recortes transparentes, tarjeta central, vistas laterales y movimiento coordinado de imagen, sombra, tarjeta, texto y fondo. Sustituye el anterior pase de escenas genéricas y recupera la estructura de exhibición de productos de la referencia.
 
-## Abrir y personalizar
+## Abrir
+Descomprime la carpeta completa y abre index.html. Todo es local: imágenes, fuentes, Swiper 12.2.0, CSS y JS. Sin instalación, CDN, servidor, clave API, cuenta ni compilación. La demo independiente comienza en claro; la previsualización de Lienzo sincroniza el tema con su ventana principal.
 
-Descomprime la carpeta completa y abre index.html. Conserva styles.css, script.js y assets/ junto al HTML. No necesitas instalar paquetes, fuentes remotas, un framework, un servidor ni una clave API. La demo comienza en oscuro; los controles cambian el tema y el acento localmente.
+## Controles
+Arrastra con ratón o desliza horizontalmente. Usa anterior/siguiente, los cuatro indicadores, o enfoca el escenario y pulsa flechas izquierda/derecha, Inicio o Fin. Toca un producto lateral para centrarlo. Ver detalles abre un diálogo nativo; Escape lo cierra y devuelve el foco. El avance opcional comienza apagado y espera 6,5 segundos por producto. Su indicador muestra el tiempo transcurrido. Se pausa con cursor, interacción de teclado, arrastre, diálogos, transiciones y pestaña oculta. El movimiento reducido del sistema desactiva el avance y las transiciones. El control de profundidad también detiene el avance automático.
 
-Edita textos, enlaces y contenido de ejemplo en index.html. Las variables principales están en .ln-demo al comienzo de styles.css: --bg, --panel, --ink, --muted, --line, --accent y --duration. Las fuentes locales están en assets/, con sus avisos OFL. Sustituye el logo de muestra por el de tu proyecto.
+## Personalizar
+Sustituye assets/sneaker-*.webp por tus imágenes transparentes. Edita nombres, categorías, precios y textos alternativos en los cuatro artículos de index.html. Mantén coherente el bloque data-products del mismo documento, que alimenta el diálogo. Los precios USD son ejemplos; la interfaz no realiza pedidos ni pagos. Personalizar permite ajustar la transición (350–1400 ms) y el acento de interfaz. Cambia --product-color para cada tarjeta y la paleta al principio de styles.css. Las fuentes locales son Fraunces e Instrument Sans.
 
-## Integrar la interfaz
+La imagen, sombra, escala, máscaras de texto y fondo se calculan a partir del progreso de cada slide de Swiper. script.js contiene inicialización, teclado limitado al escenario, ajuste según velocidad del gesto, foco del diálogo, avance opcional, preferencias de movimiento y mensajes de tema. Conserva juntos escenario, navegación, diálogos, datos y scripts. Copiar HTML completo incluye esos controles y dependencias; no entrega un fragmento autónomo. Conserva assets/ junto al documento. El ZIP completo es la referencia de integración funcional.
 
-Copia el HTML elegido y usa styles.css. Conserva un contenedor con clase ln-demo para aplicar variables y tipografía. Los controles interactivos también necesitan script.js, la barra de ajustes, la región de estado y los diálogos correspondientes que aparecen en la demo completa. Copiar HTML entrega un documento de ejemplo completo, con los controles y diálogos que necesita script.js. En el laboratorio 3D y el pack hover, seleccionar un diseño limita la cuadrícula a esa tarjeta. Conserva CSS, JS y assets junto al HTML copiado; no es un componente React configurado automáticamente. Para una integración más pequeña, adapta los selectores del script al contenedor y conserva los atributos data- necesarios. Copiar CSS incluye la hoja completa: elimina las secciones sin uso solo después de probar. El ZIP completo es la referencia funcional.
+## Archivos y créditos
+Implementación nueva de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . El ZIP de carrusel Swiper aportado se revisó como referencia visual y de movimiento; no se redistribuyen su código ni sus imágenes remotas de Nike. Se generaron cuatro conceptos de producto sin marcas para esta demo. Son ilustraciones de diseño, no mercancía real. Consulta SOURCE-NOTES.md y assets/LICENSE-SWIPER.txt. Código Lienzo: MIT; Swiper incluido: MIT; fuentes: OFL. Conserva esos avisos al redistribuir. Los logos conservan los derechos de marca de sus titulares.
 
-Son demostraciones de interfaz reutilizables, no temas completos ni temas instalables de WordPress. React requiere adaptar atributos a JSX y listeners a su ciclo de vida. Comprueba tus enlaces y contenido final en los navegadores y dispositivos que vayas a admitir.
-
-## Teclado, toque y movimiento
-
-Usa Tab y Enter en los controles. Los diálogos admiten Escape y devuelven el foco. La inclinación solo se activa con puntero preciso; el foco y los botones de prueba permiten usar otras entradas. El movimiento respeta prefers-reduced-motion y el botón de pausa. Ninguna descarga ni función exige hover.
-
-## Estado local y límites
-
-El estado de la demo vive en memoria y se reinicia al recargar. No se sube contenido. No hay cuenta, sincronización, pagos, analítica ni backend. Los enlaces externos solo se abren al activarlos. El avance automático del carrusel comienza apagado, se pausa con foco, cursor y pestaña oculta, y se desactiva con movimiento reducido del sistema. Los productos y sus precios son ejemplos; la selección no realiza pedidos.
-
-## Créditos y licencias
-
-Implementación original de Lienzo preparada para la colaboración con MD Estudio Creativo indicada por el responsable del proyecto: https://creativomarketingdigital.com/ . El ZIP aportado swiper-js-carousel-with-progress-animations.zip se revisó como referencia visual y funcional; no se distribuyen aquí su código, enlaces de autoría externos ni imágenes remotas. SOURCE-NOTES.md documenta este límite.
-
-LICENSE-LIENZO.txt cubre esta implementación bajo MIT. Conserva el aviso al redistribuir. Las fuentes mantienen sus licencias OFL independientes. Los logos conservan los derechos de marca de sus titulares; MIT no transfiere esos derechos.
+## Límites
+Ejemplo de interfaz reutilizable, no tienda completa, integración de pagos, tema instalable de WordPress ni componente React listo. React requiere adaptar marcado y ciclo de vida. Sin analítica, persistencia, cuentas, backend ni solicitudes externas. Los ajustes se reinician al recargar. Revisa tus imágenes finales y prueba tu contenido antes de integrarlo.

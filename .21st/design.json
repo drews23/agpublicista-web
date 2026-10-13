@@ -18,7 +18,13 @@
     "components": [
       "codigo-web/plantillas/plantillas.css",
       "codigo-web/plantillas/plantillas.js",
-      "en/templates/plantillas.js"
+      "en/templates/plantillas.js",
+      "scripts/carousel_showcase.py",
+      "scripts/template-expansion/carousel/styles.css",
+      "scripts/template-expansion/carousel/script.js",
+      "scripts/card_lab_showcase.py",
+      "scripts/template-expansion/card-lab/styles.css",
+      "scripts/template-expansion/card-lab/script.js"
     ],
     "assets": [
       "assets"
@@ -49,7 +55,17 @@
       "microInteraction": "200-240ms",
       "reducedMotion": "required"
     },
-    "density": "editorial, spacious"
+    "density": "editorial, spacious",
+    "resourcePalette": {
+      "source": "assets/logo-lienzo.svg",
+      "violet": "#8b7bff",
+      "violetDeep": "#6e5df2",
+      "mint": "#35d6c8",
+      "amber": "#ffb454",
+      "white": "#fff",
+      "siteNeutral": "#0a0a0f",
+      "rule": "New resource UI uses only these colors and their blends/transparency."
+    }
   },
   "components": {
     "installed": [],
@@ -70,10 +86,11 @@
   "constraints": {
     "must": [
       "Preserve Spanish and US-English independently",
-      "Preserve existing template URLs, ZIPs, demos, header and footer",
+      "Preserve template URLs, header, footer and unrelated resources; redesign a demo and its ZIP only when explicitly requested",
       "Use project tokens and fonts",
       "Keep every resource accessible without filtering",
-      "Respect keyboard and reduced motion"
+      "Respect keyboard and reduced motion",
+      "Use only the logo palette for new template accents; reserve the existing 3D icon pack for later templates as requested by the owner."
     ],
     "avoid": [
       "React or Tailwind migration for this static site",
@@ -88,6 +105,16 @@
       "date": "2026-10-13",
       "status": "local implementation for review",
       "decision": "Editorial template library with four numbered categories, existing previews, and a progressively disclosed eight-resource comparison. User requested elegant, creative, professional design with ui-ux-pro-max, 21st-ui-build, ui-styling and hyperframes."
+    },
+    {
+      "date": "2026-10-13",
+      "status": "local implementation for review; not published",
+      "decision": "Repair carrusel-progreso ES/en-US to restore the supplied product-carousel reference: four transparent original product cutouts, floating images beyond pastel center cards, lateral previews, synchronized image/card/shadow/text/background progress with locally bundled MIT Swiper 12.2.0. Keep Fraunces tracking normal, light/dark themes, keyboard and reduced motion; adapt compact preview to mobile frame height. Use a real screenshot thumbnail. Other seven demos and ZIPs remain unchanged."
+    },
+    {
+      "date": "2026-10-13",
+      "status": "local implementation for review; not published",
+      "decision": "Restore laboratorio-3d from the supplied video and archive: six distinct CSS glass structures, layered relief, wide cinema card, bento layout and navigable focus deck. Add independent per-card text/brand accent/depth/tilt, touch test, reset and functional single-card HTML export. Use only logo colors and their blends, Fraunces/Instrument Sans, keyboard and reduced motion. Do not use the existing 3D icon pack; it is reserved for upcoming templates. Preserve the pending carousel repair and both languages."
     }
   ],
   "evidence": [
