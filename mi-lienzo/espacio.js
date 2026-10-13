@@ -145,14 +145,14 @@
             <span class="espacio-porque__icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span>
             <div>
               <h3>Tus herramientas, a mano</h3>
-              <p>Marca favoritas, mira cuáles usas más y desbloquea insignias.</p>
+              <p>Marca tus herramientas favoritas, consulta tus visitas y desbloquea insignias.</p>
             </div>
           </div>
           <div class="card">
             <span class="espacio-porque__icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
             <div>
-              <h3>Privado de verdad</h3>
-              <p>Nada sale de tu equipo. Exporta tu lienzo cuando quieras llevarlo contigo.</p>
+              <h3>Guardado en este navegador</h3>
+              <p>Mi Lienzo guarda tu espacio localmente. Exporta un respaldo para llevarlo a otro navegador.</p>
             </div>
           </div>
         </div>
@@ -230,9 +230,9 @@
 
         <div class="tablero__stats">
           <div class="stat"><b>${d.creaciones.length}</b><span>creaciones guardadas</span></div>
-          <div class="stat"><b>${visitadas}<small style="color:var(--faint)">/${Object.keys(window.AGLienzo.HERRAMIENTAS).length}</small></b><span>herramientas probadas</span></div>
+          <div class="stat"><b>${visitadas}<small style="color:var(--faint)">/${Object.keys(window.AGLienzo.HERRAMIENTAS).length}</small></b><span>herramientas visitadas</span></div>
           <div class="stat"><b>${logradas}<small style="color:var(--faint)">/6</small></b><span>insignias logradas</span></div>
-          <div class="stat"><b>${d.dias.length}</b><span>días creando</span></div>
+          <div class="stat"><b>${d.dias.length}</b><span>días con visitas</span></div>
         </div>
 
         <section aria-labelledby="titulo-creaciones">
@@ -262,6 +262,7 @@
 
         <section aria-labelledby="titulo-herr">
           <h3 id="titulo-herr">Tus herramientas</h3>
+          <p class="sub" data-favorites-note>Los favoritos guardan accesos a las herramientas. QR y audio no guardan aquí sus archivos ni ajustes.</p>
           <ul class="herr-lista">
             ${herramientas
               .map(
@@ -269,7 +270,7 @@
               <li class="herr">
                 <button class="herr__estrella" type="button" data-fav="${h.slug}" aria-pressed="${h.fav}" aria-label="${h.fav ? "Quitar de favoritas" : "Marcar como favorita"}: ${esc(h.nombre)}">${h.fav ? "★" : "☆"}</button>
                 <a href="${h.ruta}">${esc(h.nombre)}</a>
-                <span class="veces">${h.veces ? `${h.veces} ${h.veces === 1 ? "uso" : "usos"}` : h.sugerida ? "sugerida para ti" : "sin estrenar"}</span>
+                <span class="veces">${h.veces ? `${h.veces} ${h.veces === 1 ? "visita" : "visitas"}` : h.sugerida ? "sugerida para ti" : "sin visitas"}</span>
               </li>`
               )
               .join("")}
@@ -294,7 +295,7 @@
         <div class="tablero__conecta">
           <div>
             <h3>Sigue el proceso en YouTube</h3>
-            <p>Cada semana, recursos gratis y procesos creativos reales en el canal de Andy Publicista. Tu lienzo y el canal se llevan muy bien.</p>
+            <p>Mira demostraciones de los recursos y tutoriales de personalización en el canal de Lienzo. Consulta la descarga y sus condiciones en la ficha de cada recurso.</p>
           </div>
           <a class="btn btn--primary" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg?sub_confirmation=1" target="_blank" rel="noopener">Suscribirme</a>
         </div>
@@ -366,6 +367,8 @@
         const ahora = window.AGLienzo.favorito(btn.dataset.fav);
         btn.textContent = ahora ? "★" : "☆";
         btn.setAttribute("aria-pressed", String(ahora));
+        const nombre = window.AGLienzo.HERRAMIENTAS[btn.dataset.fav].nombre;
+        btn.setAttribute("aria-label", `${ahora ? "Quitar de favoritas" : "Marcar como favorita"}: ${nombre}`);
         window.agpToast?.(ahora ? "Añadida a tus favoritas ✦" : "Quitada de favoritas.");
       })
     );

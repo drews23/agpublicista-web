@@ -146,14 +146,14 @@
             <span class="espacio-porque__icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span>
             <div>
               <h3>Your tools, within reach</h3>
-              <p>Favorite tools, see which you use most, and unlock badges.</p>
+              <p>Favorite tools, review your visits, and unlock badges.</p>
             </div>
           </div>
           <div class="card">
             <span class="espacio-porque__icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
             <div>
-              <h3>Stored locally</h3>
-              <p>Workspace data is stored in this browser. Export a backup to move it to another device.</p>
+              <h3>Stored in this browser</h3>
+              <p>My Lienzo stores your workspace locally. Export a backup to move it to another browser.</p>
             </div>
           </div>
         </div>
@@ -231,9 +231,9 @@
 
         <div class="tablero__stats">
           <div class="stat"><b>${d.creaciones.length}</b><span>saved creations</span></div>
-          <div class="stat"><b>${visitadas}<small style="color:var(--faint)">/${Object.keys(window.AGLienzo.HERRAMIENTAS).length}</small></b><span>tools tried</span></div>
+          <div class="stat"><b>${visitadas}<small style="color:var(--faint)">/${Object.keys(window.AGLienzo.HERRAMIENTAS).length}</small></b><span>tools visited</span></div>
           <div class="stat"><b>${logradas}<small style="color:var(--faint)">/6</small></b><span>badges earned</span></div>
-          <div class="stat"><b>${d.dias.length}</b><span>creative days</span></div>
+          <div class="stat"><b>${d.dias.length}</b><span>days with visits</span></div>
         </div>
 
         <section aria-labelledby="titulo-creaciones">
@@ -263,6 +263,7 @@
 
         <section aria-labelledby="titulo-herr">
           <h3 id="titulo-herr">Your tools</h3>
+          <p class="sub" data-favorites-note>Favorites save links to tools. QR and audio files and settings are not saved here.</p>
           <ul class="herr-lista">
             ${herramientas
               .map(
@@ -270,7 +271,7 @@
               <li class="herr">
                 <button class="herr__estrella" type="button" data-fav="${h.slug}" aria-pressed="${h.fav}" aria-label="${h.fav ? "Remove from favorites" : "Add to favorites"}: ${esc(h.nombre)}">${h.fav ? "★" : "☆"}</button>
                 <a href="${h.ruta}">${esc(h.nombre)}</a>
-                <span class="veces">${h.veces ? `${h.veces} ${h.veces === 1 ? "use" : "uses"}` : h.sugerida ? "suggested for you" : "not tried yet"}</span>
+                <span class="veces">${h.veces ? `${h.veces} ${h.veces === 1 ? "visit" : "visits"}` : h.sugerida ? "suggested for you" : "not visited yet"}</span>
               </li>`
               )
               .join("")}
@@ -295,7 +296,7 @@
         <div class="tablero__conecta">
           <div>
             <h3>Watch the process on YouTube</h3>
-            <p>Explore free resources and creative workflows on the Lienzo YouTube channel. Original tutorials may be in Spanish.</p>
+            <p>Watch resource demos and customization tutorials on the Lienzo channel. Find downloads and usage terms on each resource page. Some tutorials are in Spanish.</p>
           </div>
           <a class="btn btn--primary" href="https://www.youtube.com/channel/UCy_2wR8sPyJDMQsM-jVwsRg?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
         </div>
@@ -367,6 +368,8 @@
         const ahora = window.AGLienzo.favorito(btn.dataset.fav);
         btn.textContent = ahora ? "★" : "☆";
         btn.setAttribute("aria-pressed", String(ahora));
+        const nombre = window.AGLienzo.HERRAMIENTAS[btn.dataset.fav].nombre;
+        btn.setAttribute("aria-label", `${ahora ? "Remove from favorites" : "Add to favorites"}: ${nombre}`);
         window.agpToast?.(ahora ? "Added to favorites ✦" : "Removed from favorites.");
       })
     );

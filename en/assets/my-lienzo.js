@@ -15,6 +15,8 @@
   /* Registro de herramientas: única fuente de verdad para nombres, rutas
      y qué se puede guardar desde cada una. */
   const HERRAMIENTAS = {
+    qr: { nombre: "QR Code Generator", ruta: "/en/tools/qr/" },
+    audio: { nombre: "Audio Editor", ruta: "/en/tools/audio/" },
     favicons: { nombre: "Favicon Gallery", ruta: "/en/tools/favicons/" },
     "favicons-emojis": { nombre: "Emoji Gallery", ruta: "/en/tools/favicons/emojis/" },
     "favicon-dominio": { nombre: "Favicon by Domain", ruta: "/en/tools/favicons/by-domain/" },
@@ -152,7 +154,7 @@
       return [
         { id: "primer-trazo", nombre: "First stroke", desc: "You set up your workspace", ok: !!d.perfil },
         { id: "coleccionista", nombre: "Collector", desc: "You saved 3 creations", ok: d.creaciones.length >= 3 },
-        { id: "explorador", nombre: "Explorer", desc: "You tried 5 tools", ok: visitadas >= 5 },
+        { id: "explorador", nombre: "Explorer", desc: "You visited 5 tools", ok: visitadas >= 5 },
         { id: "constante", nombre: "Consistent", desc: "You visited on 3 different days", ok: d.dias.length >= 3 },
         { id: "ojo-clinico", nombre: "Keen eye", desc: "You favorited a tool", ok: d.favoritos.length >= 1 },
         { id: "archivista", nombre: "Archivist", desc: "You exported your workspace", ok: !!d.flags.exporto },
