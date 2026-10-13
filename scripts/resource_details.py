@@ -2,6 +2,7 @@
 from pathlib import Path
 import re
 from resource_related import enhance_related, PAGES as RELATED_PAGES
+from template_shortcuts import enhance_shortcuts
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -12,6 +13,7 @@ PAGES = {
 }
 
 def enhance_document(raw, route):
+    raw = enhance_shortcuts(raw, route)
     raw = enhance_related(raw, route)
     if route not in PAGES:
         return raw
