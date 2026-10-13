@@ -1,29 +1,23 @@
-# Animated SVG Icons
+# Animated SVG Icons — Lienzo Motion Icons
 
-Twelve SVG icons with animation and visible keyboard focus. Customize color, size, and speed; copy or download an icon with its animation.
+Twelve original 64-unit SVG drawings and twelve semantic gestures: play/ripple, heartbeat, sparkle, bell/clapper, forward arrow, confirmation, search, download/tray, message lines, layered folder, settings, and connecting links. Motion animates parts with transform and opacity; it is not the same full-icon bounce repeated twelve times.
 
 ## Open and customize
 
-Extract the entire ZIP and open index.html. Keep styles.css, script.js, and assets/ beside it. No package manager, remote fonts, framework, server or API key is required. The demo starts in dark mode; the toolbar changes theme and accent locally.
+Extract the full ZIP and open index.html. No server, framework, account, API, storage, or network is needed. CSS, JS, local fonts, OFL notices, twelve SVG assets, and this guide are included. The web interface needs its neighboring files. Every exported SVG is self-contained and needs no JS or external asset.
 
-Edit labels, links and sample content in index.html. The main variables are defined under .ln-demo in styles.css: --bg, --panel, --ink, --muted, --line, --accent and --duration. Local fonts are loaded from assets/ with their OFL notices. Replace the sample Lienzo logo for your own project.
+Each icon keeps independent settings: accessible label (56 characters), Lienzo accent (violet/mint/amber), outline/duotone finish, output size 24–160 px, stroke weight 1.2–3.6 viewBox units, gesture duration 400–1600 ms, and interaction/once-on-load/gentle-loop trigger. Reset affects only the selected icon. Settings stay in memory and reset on reload. Arrow keys, Home, and End navigate the icon selector. Replay and the staggered collection test also work with touch. Motion defaults to interaction; loops are opt-in.
 
-## Integrating the UI
+## Export SVG or the collection
 
-Copy the desired HTML and use styles.css. Keep a wrapper with class ln-demo so its tokens and font settings apply. Interactive controls also require script.js and the surrounding toolbar, status region and relevant dialog elements shown in the complete demo. Copy HTML provides a complete example document, retaining the controls and dialogs needed by script.js. In the 3D lab and hover pack, selecting a design limits the component grid to that card. Keep the CSS, JS and assets beside the copied HTML. It is not an automatically configured React component. For a smaller integration, adapt the script queries to your wrapper and keep the required data attributes. Copy CSS includes the whole stylesheet; remove unused sections only after testing. The complete ZIP is the working reference.
+Copy SVG/Download exports the current icon in animated or static form. Clipboard-denied environments offer selectable code. Download my 12 SVGs creates a ZIP locally with all current settings, README, and MIT notice. That ZIP contains the SVGs, not a saved copy of the editor. The animated SVG includes its own scoped CSS, keyframes, safe accessible label, fixed palette values, dimensions, stroke weight, and system reduced-motion rule. The static form omits motion CSS and focusability. No SVG IDs or external references are required, so multiple icons can coexist inline.
 
-These are reusable UI demos, not complete website themes or installable WordPress themes. React requires JSX attributes and event lifecycle adaptation. Test your final links and content in the browsers and devices you support.
+Inline SVG can respond to its own pointer/focus; interaction SVGs have tabindex=0. A decorative use should instead remove tabindex/role/aria-label and set aria-hidden=true, with its parent button/link labeled. SVG in img does not receive the outer element's hover: use once-on-load or loop for that case, or inline markup for interaction. Many graphic editors/social platforms ignore CSS animation; use static SVG there. This is CSS motion in SVG, not Lottie, GIF, or a video. Browser support and appearance should be checked in the consuming application.
 
-## Keyboard, touch and motion
+Demo pause and hidden/offscreen/modal pausing affect the preview, not the chosen export format. Exported SVG honors prefers-reduced-motion. A host site's pause can set .ln-motion-icon .mi-a/.mi-b/.mi-c {animation:none!important}. The before/rest preview stays static.
 
-Use Tab and Enter for controls. Dialogs support Escape and return focus. Pointer tilt runs only with a fine pointer; CSS focus states and touch preview controls cover other input methods. Motion follows prefers-reduced-motion and the toolbar pause control. No download or feature requires hover.
+## Source and credits
 
-## Local state and limitations
+New drawings, CSS motion, interface, and local ZIP writer authored for Lienzo. scripts/animated_icons_showcase.py owns geometry, keyframes, metadata, guides, and generated SVG assets; scripts/template-expansion/animated-icons owns UI CSS/JS and localized real thumbnails. Rebuild only iconos-animados. The supplied svg-animated-icons (2).zip remains an unchanged visual reference; its source code is not distributed. No third-party authorship or permission is invented. Existing 3D library assets are not needed for these original line/duotone SVGs.
 
-Demo state is kept in memory and resets on reload. Nothing is uploaded. There is no account, cloud sync, payment service, analytics or backend. Any external link only opens when activated. Automatic carousel advance starts off, pauses on focus, hover and a hidden tab, and is disabled with system reduced motion. Product prices and objects are examples; the selection does not place orders.
-
-## Credits and licenses
-
-Original Lienzo implementation prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied ZIP svg-animated-icons (2).zip was inspected as a visual/functional reference; its source code, third-party author links and remote artwork are not distributed here. SOURCE-NOTES.md records that boundary.
-
-LICENSE-LIENZO.txt covers this implementation under MIT. Keep the notice when redistributing. Fonts retain their separate OFL notices. Brand marks remain their owners' trademarks; the MIT code license does not transfer trademark rights.
+Prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . New code and drawings are MIT under LICENSE-LIENZO.txt; fonts retain OFL notices. SOURCE-NOTES.md records provenance. Logo colors only; normal Fraunces tracking. Brand marks retain their owners' rights.

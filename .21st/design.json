@@ -24,7 +24,17 @@
       "scripts/template-expansion/carousel/script.js",
       "scripts/card_lab_showcase.py",
       "scripts/template-expansion/card-lab/styles.css",
-      "scripts/template-expansion/card-lab/script.js"
+      "scripts/template-expansion/card-lab/script.js",
+      "scripts/product_cards_showcase.py",
+      "scripts/template-expansion/product-cards/styles.css",
+      "scripts/template-expansion/product-cards/script.js",
+      "scripts/hover_cards_showcase.py",
+      "scripts/template-expansion/hover-cards/styles.css",
+      "scripts/template-expansion/hover-cards/script.js",
+      "scripts/template-expansion/hover-cards/icons-manifest.json",
+      "scripts/animated_icons_showcase.py",
+      "scripts/template-expansion/animated-icons/styles.css",
+      "scripts/template-expansion/animated-icons/script.js"
     ],
     "assets": [
       "assets"
@@ -90,7 +100,7 @@
       "Use project tokens and fonts",
       "Keep every resource accessible without filtering",
       "Respect keyboard and reduced motion",
-      "Use only the logo palette for new template accents; reserve the existing 3D icon pack for later templates as requested by the owner."
+      "Use only the logo palette for new template accents. The owner explicitly selected six existing 3D library icons for tarjetas-hover; preserve their originals and geometry and keep palette-adapted copies documented separately from MIT code. Laboratory/product retain their prior illustrations."
     ],
     "avoid": [
       "React or Tailwind migration for this static site",
@@ -108,13 +118,28 @@
     },
     {
       "date": "2026-10-13",
-      "status": "local implementation for review; not published",
+      "status": "published in 7d5c9c3; publicly verified in the conversation",
       "decision": "Repair carrusel-progreso ES/en-US to restore the supplied product-carousel reference: four transparent original product cutouts, floating images beyond pastel center cards, lateral previews, synchronized image/card/shadow/text/background progress with locally bundled MIT Swiper 12.2.0. Keep Fraunces tracking normal, light/dark themes, keyboard and reduced motion; adapt compact preview to mobile frame height. Use a real screenshot thumbnail. Other seven demos and ZIPs remain unchanged."
     },
     {
       "date": "2026-10-13",
-      "status": "local implementation for review; not published",
+      "status": "published in 7d5c9c3; publicly verified in the conversation",
       "decision": "Restore laboratorio-3d from the supplied video and archive: six distinct CSS glass structures, layered relief, wide cinema card, bento layout and navigable focus deck. Add independent per-card text/brand accent/depth/tilt, touch test, reset and functional single-card HTML export. Use only logo colors and their blends, Fraunces/Instrument Sans, keyboard and reduced motion. Do not use the existing 3D icon pack; it is reserved for upcoming templates. Preserve the pending carousel repair and both languages."
+    },
+    {
+      "date": "2026-10-13",
+      "status": "local implementation for review; not published",
+      "decision": "Rebuild tarjetas-producto ES/en-US from the supplied Ahmod Musa product-card archive and screen recording: rotating light edge, floating original vector products, badges, illustrative ratings/prices, real finish variants and favorites. Add pointer-directed tilt/light, independent content/price/motion settings, product detail modal, variant-aware quantity selection with integer-cent totals, and working single-card/collection HTML export. Logo colors only, normal Fraunces spacing, keyboard/touch/reduced motion, compositor border rotation and visibility pausing. Keep other seven resources unchanged; do not use the reserved 3D icon pack. Capture localized real thumbnails."
+    },
+    {
+      "date": "2026-10-13",
+      "status": "local implementation for review; not published",
+      "decision": "Rebuild tarjetas-hover ES/en-US to preserve six complete reference families: neon, lift, sweep/reveal, rotation/glass, gradient, and float. Add independent editor, before/after comparison, controlled touch/keyboard previews and working single-card/collection HTML exports. User specifically requested more sophisticated icons from their 1720-SVG library: select bulb, layers, wand, cube, gradient, rocket; preserve geometry and adapt copies to logo tones. Retain asset conditions separately from MIT interface code. Keep product changes and all other resources intact. Use localized real thumbnails and content hashes. Reduced motion, pause, visible-only continuous animations, safe links and unbroken long-content layout required."
+    },
+    {
+      "date": "2026-10-13",
+      "status": "local implementation for review; not published",
+      "decision": "Evolve iconos-animados ES/en-US into Motion Icons: twelve original 64-unit SVG drawings and distinct semantic part-level transform/opacity gestures. Use an editorial selection/stage/settings workbench with a static rest sample, logo palette, normal Fraunces tracking, independent label/color/finish/size/stroke/duration/trigger, opt-in slow loops, touch/keyboard/reduced motion, and self-contained animated/static SVG or custom ZIP export. Keep code scoped, SVG XML valid, multiple copies independent, and downloadable samples local. Preserve the pending product/hover improvements and all unrelated resources. Use localized real thumbnails; no reference geometry, 3D library asset, third-party animation code, or framework migration."
     }
   ],
   "evidence": [

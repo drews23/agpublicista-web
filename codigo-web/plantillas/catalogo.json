@@ -51,13 +51,13 @@
   {
     "id": "tarjetas-producto",
     "title": "Tarjetas de producto de cristal",
-    "tag": "Producto, variantes y selección",
+    "tag": "Luz, acabados y personalización",
     "author": "Lienzo",
     "collaboration": "MD Estudio Creativo",
     "source": null,
     "zip": "tarjetas-producto-lienzo.zip",
-    "desc": "Tres tarjetas con ilustraciones SVG, variantes de color, favoritos y una selección de compra de demostración. Sin pagos ni servidor.",
-    "size": 121,
+    "desc": "Tres productos con SVG detallados, borde de luz animado e inclinación. Acabados, favoritos, vista ampliada, selección con cantidades y editor por tarjeta. Exporta HTML funcional.",
+    "size": 175,
     "authorRole": "Implementación, ilustración y guía",
     "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   },
@@ -69,8 +69,8 @@
     "collaboration": "MD Estudio Creativo",
     "source": null,
     "zip": "iconos-animados-lienzo.zip",
-    "desc": "Doce iconos SVG con animaciones y foco accesible. Personaliza color, tamaño y velocidad; copia o descarga el SVG seleccionado con su animación.",
-    "size": 121,
+    "desc": "Doce SVG con gestos propios y ajustes independientes de color, acabado, tamaño, trazo y activación. Compara reposo y movimiento; exporta un SVG animado, estático o tu colección personalizada.",
+    "size": 159,
     "authorRole": "Implementación, ilustración y guía",
     "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   },
@@ -95,8 +95,8 @@
     "collaboration": "MD Estudio Creativo",
     "source": null,
     "zip": "tarjetas-hover-lienzo.zip",
-    "desc": "Seis efectos distintos: luz, elevación, barrido, giro, capas y revelado. Pruébalos con ratón, teclado o toque y copia cada ejemplo con su CSS.",
-    "size": 121,
+    "desc": "Luz neón, elevación, barrido/revelado, giro 3D, degradado y flotación. Personaliza cada tarjeta, compara antes/después y exporta HTML funcional. Prueba con cursor, teclado o toque.",
+    "size": 191,
     "authorRole": "Implementación, ilustración y guía",
     "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   }

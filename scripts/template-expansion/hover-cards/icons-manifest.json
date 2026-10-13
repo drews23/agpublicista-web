@@ -1,0 +1,152 @@
+[
+  {
+    "effect": "glow",
+    "libraryId": "679c6ce6",
+    "name": "Idea",
+    "source": "herramientas/favicons/iconos3d/679c6ce6.svg",
+    "sourceSha256": "c8d241711a1a5991f20e181c3aa41dd86dce0d6bea9b6119a5fbca56c2bfb6ac",
+    "changes": "Vector presentation colors mapped to logo-tone/white/neutral-black blends; original geometry preserved.",
+    "outputs": [
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/glow-mint.svg",
+        "sha256": "b31265b7158212ecb7a7ba67aba4b9ea587ab36b03c86b07468ac44ec17cbc7a",
+        "bytes": 7431
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/glow-violet.svg",
+        "sha256": "a49f2787b6f41403500c64694fcefc65c922c4057bf4806127bd56add2b041cd",
+        "bytes": 7472
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/glow-amber.svg",
+        "sha256": "61843f34549d16df6ae839990092ad68dc678a72c4e0b4948c20aaebfa2f6c62",
+        "bytes": 7469
+      }
+    ]
+  },
+  {
+    "effect": "lift",
+    "libraryId": "edbff264",
+    "name": "Capas",
+    "source": "herramientas/favicons/iconos3d/edbff264.svg",
+    "sourceSha256": "46d3d097dc646cc66420e4c4d2f50234e8d27d2c2879acfb7179c91d0255bfd4",
+    "changes": "Vector presentation colors mapped to logo-tone/white/neutral-black blends; original geometry preserved.",
+    "outputs": [
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/lift-mint.svg",
+        "sha256": "910cc78f6e6aaf15830c1d925a43fa1f12b94abda718c2990e9b03dc9c80690f",
+        "bytes": 5961
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/lift-violet.svg",
+        "sha256": "9354a8ec14084f3e48293adf36d20362f24b4689c68af14be5e865aedab1c07d",
+        "bytes": 5976
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/lift-amber.svg",
+        "sha256": "582b5df0883feea242761bfb5f597bf9e0b94d2839fe7e3fcb37150836480198",
+        "bytes": 5967
+      }
+    ]
+  },
+  {
+    "effect": "sweep",
+    "libraryId": "83a82de2",
+    "name": "Varita mágica",
+    "source": "herramientas/favicons/iconos3d/83a82de2.svg",
+    "sourceSha256": "6141652d2a5d184e359a5b32129cd834ecff820165daad094367252b724baf8f",
+    "changes": "Vector presentation colors mapped to logo-tone/white/neutral-black blends; original geometry preserved.",
+    "outputs": [
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/sweep-mint.svg",
+        "sha256": "24c19a096325853811199237acc9c386871adb2279d2868a901b7a824d62556b",
+        "bytes": 9884
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/sweep-violet.svg",
+        "sha256": "171cdc23d42d8138eeedaed9b2b7f1da2a45c44ccc168ac4f484dd8125e253ba",
+        "bytes": 9913
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/sweep-amber.svg",
+        "sha256": "ed2c2c71aa474139c67092b5cbcdf37c768c336fe475fddf914642fbd6372eca",
+        "bytes": 9909
+      }
+    ]
+  },
+  {
+    "effect": "rotate",
+    "libraryId": "50ad3a46",
+    "name": "Diseño 3D",
+    "source": "herramientas/favicons/iconos3d/50ad3a46.svg",
+    "sourceSha256": "6f0fcf55d1bf4ba0c38b0d6ce31d005ab0477f9f04208dcae5ae3dc41a16d2a1",
+    "changes": "Vector presentation colors mapped to logo-tone/white/neutral-black blends; original geometry preserved.",
+    "outputs": [
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/rotate-mint.svg",
+        "sha256": "daa49ef30dc5f798be5deccce30d10caad47ceb86131f90552ac087b4bada883",
+        "bytes": 11012
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/rotate-violet.svg",
+        "sha256": "796a83a7e824f39405405b0a7ad172b58085c5790f540ac7b237590511474139",
+        "bytes": 11027
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/rotate-amber.svg",
+        "sha256": "42988b79310cda415c66c9e5af7679bd07e25f516e31a7249ee14659f1512bf7",
+        "bytes": 11018
+      }
+    ]
+  },
+  {
+    "effect": "gradient",
+    "libraryId": "19b28796",
+    "name": "Degradado",
+    "source": "herramientas/favicons/iconos3d/19b28796.svg",
+    "sourceSha256": "146d0d30215726f0a3dc2b99f27809e5658ec7e76721b0a6ae4755cb1e5a501c",
+    "changes": "Vector presentation colors mapped to logo-tone/white/neutral-black blends; original geometry preserved.",
+    "outputs": [
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/gradient-mint.svg",
+        "sha256": "87fe45854d0ebab123e45ce14039b1e087bf896817d1ce7bd95acdcec64fa5b6",
+        "bytes": 6500
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/gradient-violet.svg",
+        "sha256": "aaf7caeff2238cf1bc2c3aa3780cc5c2e87768f3ce3c3e03d1b98c2817e29381",
+        "bytes": 6503
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/gradient-amber.svg",
+        "sha256": "15bb185977932c995787e7d22f5f38745477393631fba0d2816f465af8905046",
+        "bytes": 6501
+      }
+    ]
+  },
+  {
+    "effect": "float",
+    "libraryId": "74bb0ce3",
+    "name": "Cohete",
+    "source": "herramientas/favicons/iconos3d/74bb0ce3.svg",
+    "sourceSha256": "c26f8c288d2a7cc0be3a3d8c9675712924a1d6c83a87770b1227d27697957e3f",
+    "changes": "Vector presentation colors mapped to logo-tone/white/neutral-black blends; original geometry preserved.",
+    "outputs": [
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/float-mint.svg",
+        "sha256": "175b3787a37c3c3e016ff42c0ae025569f4d17b07e2dcbd7faccc1ff85c8188b",
+        "bytes": 6602
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/float-violet.svg",
+        "sha256": "3f11064e655e0374f0f4b67d00e45e61faaab131fe2fedcca08df80eb05d4e8f",
+        "bytes": 6604
+      },
+      {
+        "path": "scripts/template-expansion/hover-cards/icons/float-amber.svg",
+        "sha256": "d161afece53b14f90298cffc61c59bdfb015cc64ec5a96d2539bd21f838f4ca0",
+        "bytes": 6611
+      }
+    ]
+  }
+]

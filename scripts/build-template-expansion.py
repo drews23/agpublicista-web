@@ -74,6 +74,15 @@ def component(slug,en):
 
 
 def document(slug,lang):
+ if slug=='iconos-animados':
+  from animated_icons_showcase import document as icons_document
+  return icons_document(lang)
+ if slug=='tarjetas-hover':
+  from hover_cards_showcase import document as hover_document
+  return hover_document(lang)
+ if slug=='tarjetas-producto':
+  from product_cards_showcase import document as cards_document
+  return cards_document(lang)
  if slug=='laboratorio-3d':
   from card_lab_showcase import document as lab_document
   return lab_document(lang)
@@ -91,6 +100,15 @@ def document(slug,lang):
 
 
 def thumbnail(slug,lang='es'):
+ if slug=='iconos-animados':
+  from animated_icons_showcase import thumbnail as icons_thumbnail
+  return icons_thumbnail(lang)
+ if slug=='tarjetas-hover':
+  from hover_cards_showcase import thumbnail as hover_thumbnail
+  return hover_thumbnail(lang)
+ if slug=='tarjetas-producto':
+  from product_cards_showcase import thumbnail as cards_thumbnail
+  return cards_thumbnail(lang)
  if slug=='laboratorio-3d':
   from card_lab_showcase import thumbnail as lab_thumbnail
   return lab_thumbnail(lang)
@@ -108,6 +126,15 @@ def thumbnail(slug,lang='es'):
 
 
 def readme(slug,lang):
+ if slug=='iconos-animados':
+  from animated_icons_showcase import readme as icons_readme
+  return icons_readme(lang)
+ if slug=='tarjetas-hover':
+  from hover_cards_showcase import readme as hover_readme
+  return hover_readme(lang)
+ if slug=='tarjetas-producto':
+  from product_cards_showcase import readme as cards_readme
+  return cards_readme(lang)
  if slug=='laboratorio-3d':
   from card_lab_showcase import readme as lab_readme
   return lab_readme(lang)
@@ -190,7 +217,7 @@ def enhance_collection(raw,route):
   c=item[lang];archive=f'{slug}-lienzo'+('-en' if en else '')+'.zip';zp=ROOT/'recursos/descargas/plantillas-web'/archive;size=(zp.stat().st_size+1023)//1024 if zp.exists() else 0;v=hashlib.sha256(zp.read_bytes()).hexdigest()[:12] if zp.exists() else 'pending'
   guide='README.md' if en else 'LEEME.md';tr=lambda a,b:b if en else a
   preview_path=ROOT/route.strip('/')/'demos'/slug/'preview.svg'
-  preview_version=('?v='+hashlib.sha256(preview_path.read_bytes()).hexdigest()[:12]) if slug in ['carrusel-progreso','laboratorio-3d'] and preview_path.exists() else ''
+  preview_version=('?v='+hashlib.sha256(preview_path.read_bytes()).hexdigest()[:12]) if slug in ['carrusel-progreso','laboratorio-3d','tarjetas-producto','tarjetas-hover','iconos-animados'] and preview_path.exists() else ''
   card=f'''<article class="template" id="{slug}" tabindex="-1" data-template-expansion><div class="template__visual" aria-hidden="true"><img src="demos/{slug}/preview.svg{preview_version}" width="600" height="320" loading="lazy" decoding="async" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="template__body"><p class="template__tag">{escape(c['tag'])}</p><h2>{escape(c['title'])}</h2><p class="template__description">{escape(c['desc'])}</p><ul class="template__meta" aria-label="{tr('Características','Features')}"><li>HTML + CSS + JS</li><li>ZIP · {size} KB</li></ul><div class="template__actions"><a class="btn btn--primary" data-preview="{slug}" aria-haspopup="dialog" href="demos/{slug}/">{tr('Probar plantilla','Try template')}</a><a class="btn btn--ghost" href="/recursos/descargas/plantillas-web/{archive}?v={v}" download="{archive}">{tr('Descargar ZIP','Download ZIP')} ↓</a></div><details class="template__credit"><summary>{tr('Guía y créditos','Guide and credits')}</summary><p>{tr('Versión Lienzo preparada para la colaboración con MD Estudio Creativo. Código nuevo MIT; referencias y fuentes documentadas en el ZIP.','Lienzo edition prepared for the collaboration with MD Estudio Creativo. New MIT code; references and font notices documented in the ZIP.')} <a href="demos/{slug}/{guide}">{tr('Leer la guía de uso','Read the guide')}</a>.</p></details></div></article>'''
   grid.append(BeautifulSoup(card,'html.parser').article)
  frame=s.select_one('[data-preview-dialog] iframe')
@@ -271,6 +298,15 @@ def build(only=None):
    if slug=='laboratorio-3d':
     from card_lab_showcase import copy_assets
     copy_assets(dest)
+   if slug=='tarjetas-producto':
+    from product_cards_showcase import copy_assets
+    copy_assets(dest)
+   if slug=='tarjetas-hover':
+    from hover_cards_showcase import copy_assets
+    copy_assets(dest)
+   if slug=='iconos-animados':
+    from animated_icons_showcase import copy_assets
+    copy_assets(dest,lang)
    dest.joinpath('index.html').write_text(document(slug,lang),encoding='utf8')
    dest.joinpath('preview.svg').write_text(thumbnail(slug,lang),encoding='utf8')
    dest.joinpath('README.md' if lang=='en' else 'LEEME.md').write_text(readme(slug,lang),encoding='utf8')
@@ -293,6 +329,13 @@ El responsable del proyecto identificó los materiales como parte de la colabora
    if slug=='laboratorio-3d':
     note=note.replace('locally drawn vector artwork','CSS material geometry created for this demo').replace('e ilustraciones vectoriales locales','y geometría de material creada con CSS para esta demo')
     note+='\nThe supplied screen recording was reviewed with the archive to preserve six structural forms, layered glass relief, the wide cinema card, and a navigable focus deck. Chromatic tokens are limited to the Lienzo logo palette; there is no external 3D icon pack in this template.\n\nLa grabación aportada se revisó junto al archivo para conservar seis formas estructurales, relieves de cristal por capas, tarjeta cinema amplia y mesa navegable. Los tokens cromáticos se limitan a la paleta del logo Lienzo; esta plantilla no incorpora el pack externo de iconos 3D.\n'
+   if slug=='tarjetas-producto':
+    note+='\nThe supplied archive credits Ahmod Musa. It and screen-20261013-084440~2.mp4 were reviewed to retain the animated edge, floating products, badges, rating/price hierarchy, variants, and favorites. This package uses new Lienzo code and nine original SVG product studies, with no reference source, emoji artwork, remote fonts, or review data. Its selection, editor, and HTML export are newly implemented. All product names, prices, and ratings are illustrative. Logo palette only; existing 3D icon packs are not included.\n\nEl ZIP aportado acredita a Ahmod Musa. Se revisó junto a screen-20261013-084440~2.mp4 para conservar borde animado, producto flotante, etiquetas, jerarquía de valoración/precio, variantes y favoritos. Este paquete utiliza código nuevo Lienzo y nueve estudios originales de producto en SVG; no incluye código, emojis, fuentes remotas ni cifras de opiniones de referencia. Selección, editor y exportación HTML son nuevos. Productos, precios y valoraciones son ilustrativos. Solo paleta del logo; no incluye los packs existentes de iconos 3D.\n'
+   if slug=='iconos-animados':
+    note+='\nTwelve newly drawn 64-unit SVGs have semantic part-level transform/opacity gestures and independent label, brand accent, finish, dimensions, stroke, duration, and trigger settings. A working editing workbench compares rest and motion and exports self-contained animated/static SVGs or a personalized collection ZIP locally. No reference geometry, icon font, remote images, 3D library asset, or third-party animation package is redistributed. The supplied reference remains unchanged. New code and vector drawings retain this package\'s MIT notice.\n\nDoce SVG nuevos en 64 unidades tienen gestos por partes con transform/opacity y ajustes independientes de nombre, acento de marca, acabado, tamaño, trazo, duración y activación. La mesa funcional compara reposo y movimiento y exporta SVG autónomos animados/estáticos o un ZIP personalizado de la colección en local. No redistribuye geometría de referencia, fuentes de iconos, imágenes remotas, assets de biblioteca 3D ni paquetes de animación ajenos. La referencia aportada se conserva intacta. Código y dibujos nuevos mantienen el aviso MIT del paquete.\n'
+   if slug=='tarjetas-hover':
+    note=note.replace('and locally drawn vector artwork', 'and selected vector icons from the existing Lienzo library')
+    note+='\nThe archive and screen-20261013-155959~2.mp4 were inspected. The archive contains nine cards and overlapping slide/float selectors. Six complete families preserve neon glow, elevation, shine/reveal, rotation/glass tilt, gradient pulse, and floating motion without duplicate selector collisions. The interface code is newly authored for Lienzo. At the explicit request of the owner, six 3D SVG icons from the existing Lienzo library are included with palette adaptations and a separate provenance notice. It includes an independent editor, before/after comparison, keyboard/touch preview, and working HTML export. No reference code, emojis, or remote assets are redistributed. The selected local-library icons keep their resource conditions; MIT covers only the new interface code. No third-party authorship is invented where the supplied archive has none.\n\nSe inspeccionaron ZIP y screen-20261013-155959~2.mp4. El ZIP contiene nueve tarjetas y selectores solapados de barrido/flotación. Seis familias completas conservan neón, elevación, barrido/revelado, giro/cristal, degradado pulsante y flotación sin colisiones. El código de interfaz es nuevo de Lienzo. Por petición expresa del responsable se incluyen seis SVG 3D de la biblioteca existente con adaptaciones de paleta y aviso separado de procedencia. Incluye editor independiente, comparación antes/después, prueba con teclado/toque y exportación HTML funcional. No redistribuye código, emojis ni assets remotos de referencia. Los iconos seleccionados conservan sus condiciones; MIT cubre el código nuevo. No inventa autoría cuando el ZIP aportado no la indica.\n'
    dest.joinpath('SOURCE-NOTES.md').write_text(note,encoding='utf8')
    archive=ROOT/'recursos/descargas/plantillas-web'/(slug+'-lienzo'+('-en' if lang=='en' else '')+'.zip');archive.parent.mkdir(parents=True,exist_ok=True)
    with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:

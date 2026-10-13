@@ -1,29 +1,27 @@
-# Seis efectos hover para tarjetas
+# Seis efectos hover para tarjetas — Lienzo Hover Atelier
 
-Seis efectos distintos: luz, elevación, barrido, giro, capas y revelado. Pruébalos con ratón, teclado o toque y copia cada ejemplo con su CSS.
+Seis familias distintas: luz neón, elevación, barrido/revelado, giro 3D, degradado vivo y flotación. HTML/CSS/JS nuevo Lienzo, iconos SVG 3D seleccionados de la biblioteca Lienzo, fuentes locales, foco de teclado, prueba táctil, temas claro/oscuro y movimiento reducido.
 
-## Abrir y personalizar
+## Abrir, editar y exportar
 
-Descomprime la carpeta completa y abre index.html. Conserva styles.css, script.js y assets/ junto al HTML. No necesitas instalar paquetes, fuentes remotas, un framework, un servidor ni una clave API. La demo comienza en oscuro; los controles cambian el tema y el acento localmente.
+Descomprime todo el ZIP y abre index.html. Sin servidor, framework, paquetes, API, red, cuenta, analítica ni almacenamiento. Conserva styles.css, script.js, assets/ y los avisos de licencia.
 
-Edita textos, enlaces y contenido de ejemplo en index.html. Las variables principales están en .ln-demo al comienzo de styles.css: --bg, --panel, --ink, --muted, --line, --accent y --duration. Las fuentes locales están en assets/, con sus avisos OFL. Sustituye el logo de muestra por el de tu proyecto.
+Personalizar edita una tarjeta: título, descripción, texto/destino del enlace, acento Lienzo, duración 200–1000 ms, intensidad 0–100%, radio 16–40 px y curva suave/precisa/elástica. Se refleja de inmediato en la galería y comparación antes/después. Restablecer solo afecta a esa tarjeta. Anterior/siguiente cambia de tarjeta sin perder ajustes. Probar/Repetir muestra temporalmente el efecto; Probar los seis prueba la colección. La pausa y el movimiento reducido detienen efectos móviles y mantienen contenido legible. Hover y foco funcionan sin JavaScript; editor y prueba táctil necesitan el script.
 
-## Integrar la interfaz
+Copiar HTML/Descargar HTML exporta un documento funcional de la tarjeta actual y sus ajustes, o la colección. NO es un archivo completamente autónomo: necesita CSS, JS y assets/ del ZIP junto al HTML. Si el portapapeles se rechaza, ofrece texto seleccionable. Conserva tema y pausa, limpia pruebas temporales y escapa texto introducido. Los enlaces admiten HTTP(S), mailto, /ruta, ./archivo, ../archivo y #fragmento; rechaza esquemas JavaScript/data y barras invertidas. Editar un enlace no lo abre automáticamente. Los enlaces de recursos se abren únicamente al pulsarlos.
 
-Copia el HTML elegido y usa styles.css. Conserva un contenedor con clase ln-demo para aplicar variables y tipografía. Los controles interactivos también necesitan script.js, la barra de ajustes, la región de estado y los diálogos correspondientes que aparecen en la demo completa. Copiar HTML entrega un documento de ejemplo completo, con los controles y diálogos que necesita script.js. En el laboratorio 3D y el pack hover, seleccionar un diseño limita la cuadrícula a esa tarjeta. Conserva CSS, JS y assets junto al HTML copiado; no es un componente React configurado automáticamente. Para una integración más pequeña, adapta los selectores del script al contenedor y conserva los atributos data- necesarios. Copiar CSS incluye la hoja completa: elimina las secciones sin uso solo después de probar. El ZIP completo es la referencia funcional.
+## Editar fuentes e integrar
 
-Son demostraciones de interfaz reutilizables, no temas completos ni temas instalables de WordPress. React requiere adaptar atributos a JSX y listeners a su ciclo de vida. Comprueba tus enlaces y contenido final en los navegadores y dispositivos que vayas a admitir.
+El bloque JSON data-effects guarda key, name, description, label, href, accent, duration, intensity, radius, easing y category. Claves: glow, lift, sweep, rotate, gradient, float. Acentos: mint, violet, amber. Los SVG cargan uno de tres acabados vectoriales locales para el acento actual. El script valida y limita números. Aplica texto con textContent y destinos con una lista de protocolos admitidos. Estado en memoria; se reinicia al recargar.
 
-## Teclado, toque y movimiento
+Conserva .ln-hover-lab y los hooks data-*/diálogos relevantes al integrar, o adapta el inicio al contenedor. Es HTML/CSS/JS estático, no un componente React ni un tema WordPress. El ZIP completo es la referencia funcional. Los colores se limitan al logo Lienzo y mezclas con blanco/negro neutro. Fraunces conserva su espaciado normal.
 
-Usa Tab y Enter en los controles. Los diálogos admiten Escape y devuelven el foco. La inclinación solo se activa con puntero preciso; el foco y los botones de prueba permiten usar otras entradas. El movimiento respeta prefers-reduced-motion y el botón de pausa. Ninguna descarga ni función exige hover.
+## Movimiento y rendimiento
 
-## Estado local y límites
+Las capas animadas usan transform y opacity. El barrido/revelado se desplaza con transform, sin animar top/left. La luz neón cambia la opacidad de una sombra estática. Giro de degradado y flotación solo corren al estar visibles; pausa manual, movimiento reducido, pestaña oculta y fondo de modales los detienen. Luz/inclinación de puntero usan geometría guardada y escrituras agrupadas con requestAnimationFrame, sin bucle JS permanente. IntersectionObserver detiene trabajo fuera de pantalla. La comparación anterior queda estática; solo la posterior prueba el efecto. Las mediciones locales no garantizan FPS universales.
 
-El estado de la demo vive en memoria y se reinicia al recargar. No se sube contenido. No hay cuenta, sincronización, pagos, analítica ni backend. Los enlaces externos solo se abren al activarlos. El avance automático del carrusel comienza apagado, se pausa con foco, cursor y pestaña oculta, y se desactiva con movimiento reducido del sistema. Los productos y sus precios son ejemplos; la selección no realiza pedidos.
+## Procedencia y licencias
 
-## Créditos y licencias
+Se inspeccionaron ultimate-css-card-animation-pack-6-unique-hover-effects.zip y screen-20261013-155959~2.mp4 como referencia. El ZIP contiene nueve tarjetas con clases/nombres repetidos; los selectores compartidos sobrescriben parte del barrido/revelado y la flotación. Esta implementación agrupa las capacidades visuales en seis familias completas, conservando matices de cristal/perspectiva y neón sin colisiones. No redistribuye código, emojis ni estilos de referencia. No inventa autoría ni autorizaciones. El responsable pidió expresamente usar su biblioteca 3D. Incluye seis SVG seleccionados con tres adaptaciones de paleta; assets/ICONS-NOTICE.txt y el manifiesto fuente documentan procedencia y cambios de color sin modificar geometría. El aviso MIT del código no cambia la licencia de estos assets.
 
-Implementación original de Lienzo preparada para la colaboración con MD Estudio Creativo indicada por el responsable del proyecto: https://creativomarketingdigital.com/ . El ZIP aportado ultimate-css-card-animation-pack-6-unique-hover-effects.zip se revisó como referencia visual y funcional; no se distribuyen aquí su código, enlaces de autoría externos ni imágenes remotas. SOURCE-NOTES.md documenta este límite.
-
-LICENSE-LIENZO.txt cubre esta implementación bajo MIT. Conserva el aviso al redistribuir. Las fuentes mantienen sus licencias OFL independientes. Los logos conservan los derechos de marca de sus titulares; MIT no transfiere esos derechos.
+Preparado para la colaboración Lienzo con MD Estudio Creativo identificada por el responsable: https://creativomarketingdigital.com/ . Código MIT en LICENSE-LIENZO.txt; fuentes con OFL. SOURCE-NOTES.md documenta procedencia. MIT no transfiere derechos de marca.

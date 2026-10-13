@@ -1,0 +1,34 @@
+LIENZO — SELECTED 3D LIBRARY ICONS / ICONOS 3D SELECCIONADOS
+
+Six local-library SVGs, each with mint, violet and amber presentation variants:
+Idea (679c6ce6), Capas (edbff264), Varita mágica (83a82de2),
+Diseño 3D (50ad3a46), Degradado (19b28796), Cohete (74bb0ce3).
+
+The project owner explicitly requested these icons from the existing Lienzo
+library and previously identified the resource collection as a collaboration
+with MD Estudio Creativo, with permission to distribute through Lienzo.
+Collaboration: https://creativomarketingdigital.com/estudio-creativo-marketing-digital/
+Resource conditions: https://lienzo.tools/licencia/
+
+This package preserves the original vector geometry and maps its presentation
+colors to Lienzo logo tones with white/neutral-black blends. The source files
+in the main library are unchanged. Source IDs, hashes and output hashes are
+recorded in scripts/template-expansion/hover-cards/icons-manifest.json in the
+Lienzo project. No third-party authorship is invented from absent metadata.
+LICENSE-LIENZO.txt licenses the newly written interface code; it does not
+relicense these library illustrations or transfer trademark rights. Retain
+this provenance notice with the selected icons and apply the stated resource
+conditions. This notice is not a newly signed rights authorization.
+
+El responsable pidió expresamente estos iconos de su biblioteca y previamente
+identificó la colección como una colaboración con MD Estudio Creativo, con
+permiso de distribución mediante Lienzo. Los enlaces anteriores documentan
+la atribución y las condiciones del recurso.
+
+Se conserva la geometría original y se adaptan los colores de presentación
+a los tonos del logo con mezclas de blanco/negro neutro. Los originales de
+la biblioteca no se modifican. Los IDs y hashes constan en el manifiesto
+fuente del proyecto. No se inventa autoría a partir de metadatos ausentes.
+MIT cubre el código nuevo de interfaz; no cambia la licencia de los iconos
+ni transfiere marcas. Conserva este aviso de procedencia y las condiciones
+indicadas. No es una autorización de derechos firmada nueva.

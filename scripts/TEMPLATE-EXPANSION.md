@@ -7,10 +7,10 @@ Entrega local del 13 de octubre de 2026, sobre `cd21dda`. Amplía los catálogos
 | Recurso | Contenido y mejoras |
 | --- | --- |
 | `laboratorio-3d` | Seis geometrías de cristal con planos separados, relieves concéntricos y tarjeta panorámica. Editor por tarjeta: texto, paleta del logo, profundidad e inclinación. Prueba táctil, galería navegable y copia/descarga de un documento personalizado. |
-| `tarjetas-producto` | Tres productos ficticios con ilustraciones SVG locales. Variantes que cambian el dibujo, favoritos y selección de demostración con cantidades, retirada de unidades y totales. |
-| `iconos-animados` | Doce SVG originales. Selección, tamaño, color, velocidad, copia y descarga del icono con su animación y regla de movimiento reducido. |
+| `tarjetas-producto` | Tres productos con nueve SVG propios, borde luminoso e inclinación. Vista ampliada y editor por tarjeta, acabados, favoritos, selección por variante con cantidades/totales y exportación HTML funcional. |
+| `iconos-animados` | Doce SVG originales de 64 unidades con gestos semánticos por partes. Mesa de edición, comparación en reposo, ajustes independientes de nombre/color/acabado/tamaño/trazo/duración/activación y exportación SVG animada/estática o ZIP personalizado. |
 | `carrusel-progreso` | Cuatro productos con recortes transparentes, tarjeta central y vistas laterales. Imagen, tarjeta, sombra, texto y fondo ligados al progreso de Swiper. Arrastre, gesto táctil, flechas, indicadores, Home/End, detalles y avance opcional. |
-| `tarjetas-hover` | Seis efectos distintos: luz, elevación, barrido, giro, capas y revelado. Foco visible, prueba táctil, duración editable y copia de un diseño. |
+| `tarjetas-hover` | Seis familias completas: neón, elevación, barrido/revelado, giro 3D, degradado vivo y flotación. Iconos SVG 3D de la biblioteca Lienzo en tres acabados de marca, editor independiente, comparación antes/después y exportación HTML de una tarjeta o colección. |
 
 Son piezas de interfaz reutilizables en HTML, CSS y JavaScript. No son sitios completos, temas instalables ni componentes React preparados. Los ejemplos de producto no realizan pagos ni pedidos. Su estado vive en memoria y se reinicia al recargar; el máximo por variante es veinte unidades. No hay cuentas, almacenamiento persistente, peticiones remotas, analítica ni backend en las cinco demos nuevas.
 
@@ -33,6 +33,30 @@ Para actualizar exclusivamente el laboratorio 3D en ambos idiomas, conservando i
 ```powershell
 python scripts/build-template-expansion.py --only laboratorio-3d
 ```
+
+Para actualizar únicamente las tarjetas de producto y sus descargas ES/en-US:
+
+```powershell
+python scripts/build-template-expansion.py --only tarjetas-producto
+```
+
+Este recurso usa `scripts/product_cards_showcase.py` y `scripts/template-expansion/product-cards/`, con SVG propios, miniaturas reales y CSS/JS especializados. `scripts/PRODUCT-CARDS-SHOWCASE.md` documenta referencia, diferencial, límites y pruebas. Las exportaciones necesitan conservar CSS/JS/assets del ZIP; la selección es una demostración local, sin pedidos ni pagos.
+
+Para actualizar únicamente el pack hover y sus descargas ES/en-US:
+
+```powershell
+python scripts/build-template-expansion.py --only tarjetas-hover
+```
+
+Sus fuentes son `scripts/hover_cards_showcase.py` y `scripts/template-expansion/hover-cards/`. Se inspeccionaron el ZIP original y la grabación `screen-20261013-155959~2.mp4`; las nueve tarjetas de referencia se agrupan en seis familias sin colisiones de selectores. Por solicitud posterior expresa del usuario, este recurso sí incorpora seis iconos de la biblioteca 3D existente, con geometría preservada y tres adaptaciones a la paleta del logo. `scripts/prepare-hover-icons.py` prepara las copias; `icons-manifest.json` conserva sus huellas y `ICONS-NOTICE.txt` distingue las condiciones de los assets del MIT del código nuevo. No se modifican los originales ni se incorporan esos iconos en el laboratorio o las tarjetas de producto. `scripts/HOVER-CARDS-SHOWCASE.md` documenta las pruebas y los límites de rendimiento. Las dos miniaturas son capturas reales localizadas.
+
+Para actualizar exclusivamente los iconos animados y sus descargas ES/en-US:
+
+```powershell
+python scripts/build-template-expansion.py --only iconos-animados
+```
+
+`scripts/animated_icons_showcase.py` genera los doce dibujos, CSS de cada gesto, HTML, metadatos y guías; `scripts/template-expansion/animated-icons/` contiene el CSS/JS de interfaz y las capturas reales localizadas. Cada SVG exportado incluye sus estilos, animación, dimensiones, nombre accesible y movimiento reducido: sí es autónomo, a diferencia de los documentos HTML de las otras demos. El ZIP personalizado contiene doce SVG y avisos, no un editor guardado. Un SVG en img no recibe hover del elemento exterior; elegir una vez/bucle para ese uso o insertar el código SVG en HTML. `scripts/ANIMATED-ICONS-SHOWCASE.md` detalla el diferencial y las pruebas. La regla de color del logo y el tracking normal permanecen.
 
 Requiere Python y BeautifulSoup (`beautifulsoup4`), ya utilizados en este repositorio. No incorpora una dependencia de producción ni necesita los ZIP de referencia en la máquina de compilación.
 

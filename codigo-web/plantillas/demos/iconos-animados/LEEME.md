@@ -1,29 +1,23 @@
-# Iconos SVG animados
+# Iconos SVG animados — Lienzo Motion Icons
 
-Doce iconos SVG con animaciones y foco accesible. Personaliza color, tamaño y velocidad; copia o descarga el SVG seleccionado con su animación.
+Doce dibujos SVG originales en una cuadrícula de 64 unidades, con doce gestos semánticos: reproducir/onda, latido, destello, campana/badajo, flecha, confirmación, búsqueda, descarga/bandeja, líneas de mensaje, carpeta por capas, ajustes y enlace. Cada gesto mueve partes con transform y opacity; no repite un rebote completo del icono.
 
 ## Abrir y personalizar
 
-Descomprime la carpeta completa y abre index.html. Conserva styles.css, script.js y assets/ junto al HTML. No necesitas instalar paquetes, fuentes remotas, un framework, un servidor ni una clave API. La demo comienza en oscuro; los controles cambian el tema y el acento localmente.
+Descomprime el ZIP completo y abre index.html. Sin servidor, framework, cuenta, API, almacenamiento ni red. Incluye CSS, JS, fuentes locales/OFL, doce SVG y guía. La interfaz necesita sus archivos vecinos. Cada SVG exportado sí es autónomo, sin JS ni assets externos.
 
-Edita textos, enlaces y contenido de ejemplo en index.html. Las variables principales están en .ln-demo al comienzo de styles.css: --bg, --panel, --ink, --muted, --line, --accent y --duration. Las fuentes locales están en assets/, con sus avisos OFL. Sustituye el logo de muestra por el de tu proyecto.
+Cada icono conserva ajustes independientes: nombre accesible (56 caracteres), acento Lienzo (violeta/menta/ámbar), acabado línea/duotono, tamaño 24–160 px, grosor 1.2–3.6 unidades del viewBox, duración 400–1600 ms y activación al interactuar/una vez al cargar/bucle suave. Restablecer solo afecta al icono actual. Estado en memoria; se reinicia al recargar. Flechas, Inicio y Fin recorren el selector. Repetir y la prueba escalonada de la colección funcionan con toque. La activación inicial es por interacción; el bucle es opcional.
 
-## Integrar la interfaz
+## Exportar SVG o colección
 
-Copia el HTML elegido y usa styles.css. Conserva un contenedor con clase ln-demo para aplicar variables y tipografía. Los controles interactivos también necesitan script.js, la barra de ajustes, la región de estado y los diálogos correspondientes que aparecen en la demo completa. Copiar HTML entrega un documento de ejemplo completo, con los controles y diálogos que necesita script.js. En el laboratorio 3D y el pack hover, seleccionar un diseño limita la cuadrícula a esa tarjeta. Conserva CSS, JS y assets junto al HTML copiado; no es un componente React configurado automáticamente. Para una integración más pequeña, adapta los selectores del script al contenedor y conserva los atributos data- necesarios. Copiar CSS incluye la hoja completa: elimina las secciones sin uso solo después de probar. El ZIP completo es la referencia funcional.
+Copiar SVG/Descargar exporta el icono actual animado o estático. Si falla el portapapeles, ofrece código seleccionable. Descargar mis 12 SVG crea localmente un ZIP con los ajustes actuales, LEEME y aviso MIT. Ese ZIP contiene SVG, no una copia guardada del editor. El SVG animado incorpora CSS acotado, keyframes, nombre accesible escapado, colores de marca, tamaño, trazo y regla de movimiento reducido. El estático omite CSS de movimiento y foco. No necesita IDs ni referencias externas: varios iconos pueden convivir insertados en el mismo HTML.
 
-Son demostraciones de interfaz reutilizables, no temas completos ni temas instalables de WordPress. React requiere adaptar atributos a JSX y listeners a su ciclo de vida. Comprueba tus enlaces y contenido final en los navegadores y dispositivos que vayas a admitir.
+El SVG insertado en HTML responde al cursor/foco propio; la variante por interacción incluye tabindex=0. Si es decorativo, retira tabindex/role/aria-label, añade aria-hidden=true y etiqueta el botón/enlace que lo contiene. Un SVG en img no recibe el hover exterior: usa Una vez al cargar/Bucle suave en ese caso, o inserta el código para interacción. Muchos editores gráficos y redes ignoran animación CSS; usa el SVG estático allí. Es animación CSS en SVG, no Lottie, GIF ni vídeo. Comprueba compatibilidad en la aplicación donde se integre.
 
-## Teclado, toque y movimiento
+Pausa de demo, fuera de pantalla, pestaña oculta o modal afectan a la previsualización, no al formato elegido para exportar. El SVG respeta prefers-reduced-motion. Un sitio anfitrión puede desactivar el movimiento con .ln-motion-icon .mi-a/.mi-b/.mi-c {animation:none!important}. La muestra de reposo permanece estática.
 
-Usa Tab y Enter en los controles. Los diálogos admiten Escape y devuelven el foco. La inclinación solo se activa con puntero preciso; el foco y los botones de prueba permiten usar otras entradas. El movimiento respeta prefers-reduced-motion y el botón de pausa. Ninguna descarga ni función exige hover.
+## Fuentes y créditos
 
-## Estado local y límites
+Dibujos, movimiento, interfaz y escritor ZIP local nuevos para Lienzo. scripts/animated_icons_showcase.py contiene geometría, keyframes, metadatos, guías y SVG generados; scripts/template-expansion/animated-icons contiene CSS/JS de interfaz y miniaturas reales localizadas. Regenerar solo iconos-animados. svg-animated-icons (2).zip se conserva como referencia visual intacta; no se redistribuye su código. No se inventa autoría ni autorización de terceros. Estos SVG de línea/duotono no necesitan assets de la biblioteca 3D.
 
-El estado de la demo vive en memoria y se reinicia al recargar. No se sube contenido. No hay cuenta, sincronización, pagos, analítica ni backend. Los enlaces externos solo se abren al activarlos. El avance automático del carrusel comienza apagado, se pausa con foco, cursor y pestaña oculta, y se desactiva con movimiento reducido del sistema. Los productos y sus precios son ejemplos; la selección no realiza pedidos.
-
-## Créditos y licencias
-
-Implementación original de Lienzo preparada para la colaboración con MD Estudio Creativo indicada por el responsable del proyecto: https://creativomarketingdigital.com/ . El ZIP aportado svg-animated-icons (2).zip se revisó como referencia visual y funcional; no se distribuyen aquí su código, enlaces de autoría externos ni imágenes remotas. SOURCE-NOTES.md documenta este límite.
-
-LICENSE-LIENZO.txt cubre esta implementación bajo MIT. Conserva el aviso al redistribuir. Las fuentes mantienen sus licencias OFL independientes. Los logos conservan los derechos de marca de sus titulares; MIT no transfiere esos derechos.
+Preparado para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . Código y dibujos nuevos MIT en LICENSE-LIENZO.txt; fuentes conservan OFL. SOURCE-NOTES.md documenta procedencia. Solo paleta del logo y tracking normal de Fraunces. Los logos conservan derechos de sus titulares.

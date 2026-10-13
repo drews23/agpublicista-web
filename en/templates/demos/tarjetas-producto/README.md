@@ -1,29 +1,29 @@
-# Glass Product Cards
+# Glass Product Cards — Lienzo Objects
 
-Three product cards with SVG artwork, color variants, favorites, and a demo shopping selection. No payments or server required.
+Three original product concepts with detailed local SVG artwork, a rotating light border, layered pointer tilt, finish variants, favorites, and a functional local selection.
 
 ## Open and customize
 
-Extract the entire ZIP and open index.html. Keep styles.css, script.js, and assets/ beside it. No package manager, remote fonts, framework, server or API key is required. The demo starts in dark mode; the toolbar changes theme and accent locally.
+Extract the complete ZIP. Open index.html directly; no server, package install, network, API key, or framework is needed. Keep styles.css, script.js, and assets/ beside the HTML. Fonts, logo, nine product illustrations, and license notices are local.
 
-Edit labels, links and sample content in index.html. The main variables are defined under .ln-demo in styles.css: --bg, --panel, --ink, --muted, --line, --accent and --duration. Local fonts are loaded from assets/ with their OFL notices. Replace the sample Lienzo logo for your own project.
+Use Customize on a card to edit its name, description, sample USD price, optional previous price, maximum tilt (0–10 degrees), border period (4–16 seconds), and light intensity. Each card has independent settings. Finish buttons update the illustration and accent, including the detail view. Reset affects only that card. Products, prices, ratings, and reviews are illustrative, not customer evidence or a real sale.
 
-## Integrating the UI
+For source edits, the JSON block data-products contains product content, features, sample ratings, price and previous price in integer cents, finish, tilt, speed, and glow. Supported keys are audio, watch, laptop; finishes are mint, amber, violet. Use nonnegative prices up to 9,999,999 cents, previous price higher than current price to display a discount, tilt 0–10, speed 4–16, glow 0–100. The script validates data on initialization. HTML is rendered with textContent for user input; exported JSON escapes markup delimiters. Brand colors derive only from the Lienzo logo and neutral black/white.
 
-Copy the desired HTML and use styles.css. Keep a wrapper with class ln-demo so its tokens and font settings apply. Interactive controls also require script.js and the surrounding toolbar, status region and relevant dialog elements shown in the complete demo. Copy HTML provides a complete example document, retaining the controls and dialogs needed by script.js. In the 3D lab and hover pack, selecting a design limits the component grid to that card. Keep the CSS, JS and assets beside the copied HTML. It is not an automatically configured React component. For a smaller integration, adapt the script queries to your wrapper and keep the required data attributes. Copy CSS includes the whole stylesheet; remove unused sections only after testing. The complete ZIP is the working reference.
+## Details and selection
 
-These are reusable UI demos, not complete website themes or installable WordPress themes. React requires JSX attributes and event lifecycle adaptation. Test your final links and content in the browsers and devices you support.
+Click the product image to open details, view the larger illustration, choose a finish and quantity, and add to the demo. The selection groups by product AND finish, supports quantity changes/removal, and recalculates integer-cent totals. Maximum 20 units per product and finish. Editing a sample price updates existing selection lines. Favorites and selection stay in memory and reset on reload. No payment, order, shipping, user account, analytics, storage, or remote service is included.
 
-## Keyboard, touch and motion
+## Export and integration
 
-Use Tab and Enter for controls. Dialogs support Escape and return focus. Pointer tilt runs only with a fine pointer; CSS focus states and touch preview controls cover other input methods. Motion follows prefers-reduced-motion and the toolbar pause control. No download or feature requires hover.
+Copy HTML or Download HTML in the editor exports a complete document with just the current card, its settings, detail editor, and local selection. The collection buttons export all cards with current settings. Export starts with an empty selection and resets favorites. Keep the exported file beside styles.css, script.js, and assets/ from the ZIP. The HTML is NOT fully self-contained: it depends on those local files. It works on file:// and a static web server. Clipboard-denied environments offer a selectable-text dialog instead. The copied selection summary is text only.
 
-## Local state and limitations
+To integrate into a larger page, scope this demo with .ln-products, preserve the relevant data-* hooks/dialogs, and adapt initialization to your wrapper. This is static HTML/CSS/JS, not a WordPress theme, React component, or real e-commerce backend. Wire real product inventory and checkout yourself.
 
-Demo state is kept in memory and resets on reload. Nothing is uploaded. There is no account, cloud sync, payment service, analytics or backend. Any external link only opens when activated. Automatic carousel advance starts off, pauses on focus, hover and a hidden tab, and is disabled with system reduced motion. Product prices and objects are examples; the selection does not place orders.
+## Motion and accessibility
+
+The light border rotates with CSS transform, rather than recalculating a gradient angle every frame. Pointer movement is batched with requestAnimationFrame and only uses cached geometry while hovering. Product float, tilt, and border motion pause with reduced motion, the toolbar pause control, offscreen visibility, hidden tabs, and dialogs. Static cards remain readable without JavaScript. Native buttons, labeled swatches, visible focus, modal Escape/focus return, and touch effect preview support keyboard and touch. Light and dark themes synchronize with the Lienzo catalog preview.
 
 ## Credits and licenses
 
-Original Lienzo implementation prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied ZIP neon-glow-glass-product-card-animated-css-property-gradient-border-no-js (2).zip was inspected as a visual/functional reference; its source code, third-party author links and remote artwork are not distributed here. SOURCE-NOTES.md records that boundary.
-
-LICENSE-LIENZO.txt covers this implementation under MIT. Keep the notice when redistributing. Fonts retain their separate OFL notices. Brand marks remain their owners' trademarks; the MIT code license does not transfer trademark rights.
+New Lienzo implementation for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied reference archive credits Ahmod Musa; the archive and screen recording were inspected, not redistributed. None of its source, emoji artwork, remote fonts, third-party marketing links, or review figures is included. Product SVGs were drawn specifically for this implementation. SOURCE-NOTES.md records provenance. LICENSE-LIENZO.txt applies to this code; fonts keep their OFL notices. MIT does not transfer trademark rights.
