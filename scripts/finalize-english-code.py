@@ -45,7 +45,9 @@ for p in (ROOT/'en').rglob('index.html'):
    tag[attr]=route+'?v='+hashlib.sha256(target.read_bytes()).hexdigest()[:12]
  apply_search_copy(s, '/'+p.relative_to(ROOT).parent.as_posix()+'/')
  from resource_details import enhance_document
- p.write_text(enhance_document(str(s), '/'+p.relative_to(ROOT).parent.as_posix()+'/'),encoding='utf8')
+ from catalog_copy import enhance_catalog_copy
+ route = '/'+p.relative_to(ROOT).parent.as_posix()+'/'
+ p.write_text(enhance_catalog_copy(enhance_document(str(s), route), route),encoding='utf8')
 # The Spanish homepage needs the same reciprocal alternates and visible switch.
 p=ROOT/'index.html';raw=p.read_text(encoding='utf8');s=BeautifulSoup(raw,'html.parser')
 links=''.join(f'<link rel="alternate" hreflang="{lang}" href="https://lienzo.tools{route}">' for lang,route in [('es','/'),('en','/en/'),('x-default','/')])

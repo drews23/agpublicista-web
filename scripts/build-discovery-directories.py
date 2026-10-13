@@ -160,7 +160,8 @@ def organize_tools(en=False):
         source = source.replace('Herramientas de diseño gratis — generadores SVG online','Herramientas creativas gratis: QR, audio, color, SVG y CSS')
         source = source.replace('Generadores SVG online gratis y sin registro: galería de favicons, texto ondulado animado y más herramientas de diseño para copiar y pegar en tu web.', description)
     source = update_schema(source)
-    path.write_text(attach_css(source), encoding='utf-8')
+    from catalog_copy import enhance_catalog_copy
+    path.write_text(enhance_catalog_copy(attach_css(source), '/en/tools/' if en else '/herramientas/'), encoding='utf-8')
 
 
 RESOURCE_GROUPS = [
@@ -276,7 +277,8 @@ def organize_resources(en=False):
     if not en:
         source = source.replace('<main>','<main data-catalog-page>',1)
     source = update_schema(source)
-    path.write_text(attach_css(source),encoding='utf-8')
+    from catalog_copy import enhance_catalog_copy
+    path.write_text(enhance_catalog_copy(attach_css(source), '/en/resources/' if en else '/recursos/'),encoding='utf-8')
 
 
 def organize_home(en=False):
@@ -311,7 +313,8 @@ def organize_home(en=False):
         assert match
         source = source[:match.start()]+block+'\n'+source[match.start():]
     source = re.sub(r'\n[ \t]+(?=\n)', '\n', source)
-    path.write_text(attach_css(source),encoding='utf-8')
+    from catalog_copy import enhance_catalog_copy
+    path.write_text(enhance_catalog_copy(attach_css(source), '/en/' if en else '/'),encoding='utf-8')
 
 
 def build():

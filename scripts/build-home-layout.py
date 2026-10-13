@@ -121,7 +121,8 @@ def build():
         css = f'<link rel="stylesheet" href="/{css_path}?v={version}">'
         source = re.sub(r'<link[^>]*href="/css/pages/home-layout.css[^>]*>', '', source)
         source = source.replace('</head>', css+'</head>', 1)
-        path.write_text(source, encoding='utf-8')
+        from catalog_copy import enhance_catalog_copy
+        path.write_text(enhance_catalog_copy(source, '/en/' if en else '/'), encoding='utf-8')
     print('Simplified ES and EN home sections; catalogs and individual resources untouched.')
 
 

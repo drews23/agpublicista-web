@@ -1,0 +1,3 @@
+/* The whole card remains the link. This label makes its next action explicit. */
+.card > .catalog-action { display: block; margin-top: .75rem; color: var(--text); font-size: .85rem; font-weight: 600; line-height: 1.5; }
+.card:hover > .catalog-action, .card:focus-visible > .catalog-action { text-decoration: underline; text-underline-offset: .2em; }

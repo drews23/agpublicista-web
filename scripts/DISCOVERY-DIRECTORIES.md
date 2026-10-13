@@ -18,3 +18,13 @@ La taxonomía y el orden se mantienen en el segundo script. Para incorporar un r
 El último paso conserva la cabecera común ES/EN después de cualquier reconstrucción. Véase `scripts/PRIMARY-NAVIGATION.md` para sus rutas, utilidades y comprobaciones de preservación.
 
 Antes de publicar, comprobar ambos idiomas, las rutas de las tarjetas, los enlaces de categoría, los metadatos, los listados estructurados, el tema claro/oscuro y el reflujo móvil. No atribuir mejoras de tráfico o conversión a esta reorganización sin medición.
+
+## Mensajes y acciones de las tarjetas
+
+`python scripts/catalog_copy.py` aplica una pasada limitada a las dos portadas y los cuatro directorios de herramientas y recursos. Mantiene los destinos, títulos, ilustraciones, cantidades y metadatos. Las tarjetas explican su siguiente acción según el recurso; las etiquetas de formato existentes se conservan. Las tarjetas de guías de portada mantienen sus llamadas originales.
+
+La pasada también identifica las tres plantillas web en la introducción española, sustituye promesas semanales por invitaciones sin periodicidad y describe el ahorro SVG como dependiente del archivo. El directorio español explica los distintos formatos y el acceso externo de la búsqueda de favicons, en lugar de afirmar que todas las herramientas generan SVG.
+
+`build-discovery-directories.py`, `build-home-layout.py` y el finalizador inglés aplican esta misma función. Para una corrección editorial pequeña, ejecutar únicamente `catalog_copy.py`; no hace falta reconstruir el sitio. El CSS de las acciones es independiente: `css/pages/catalog-copy.css`.
+
+Pruebas de esta tanda: `output/catalog-copy-2026-10-13/qa.py` comprueba conservación de enlaces, metadatos, imágenes, SVG, scripts, controles e identificadores, una acción por tarjeta e idempotencia. También ejecuta los generadores de directorios y portadas en una copia aislada, sin reconstruir el checkout activo. Las observaciones de navegador se guardan en la misma carpeta.
