@@ -215,6 +215,9 @@ def build():
         # download names must remain filenames rather than URL query strings.
         catalog = catalog.replace(f'download="{zipname}?v={VERSION}"', f'download="{zipname}"')
         catalog = catalog.replace(f'demos/{slug}/LEEME.md', f'demos/{slug}/README.md')
+    from resource_related import enhance_related, INTRO_ES
+    catalog = catalog.replace(INTRO_ES, 'Preview three free HTML, CSS, and JavaScript UI templates, then download the source code. Add a carousel or social buttons to an existing website; these downloads are reusable UI pieces, not complete website themes.')
+    catalog = enhance_related(catalog, '/en/templates/')
     TARGET.joinpath('index.html').write_text(catalog, encoding='utf-8')
     TARGET.joinpath('plantillas.js').write_text(translate(SOURCE.joinpath('plantillas.js').read_text(encoding='utf-8'), {'Tema claro':'Light theme','Tema oscuro':'Dark theme','Demo interactiva: ':'Interactive demo: '}), encoding='utf-8')
     assets = ROOT / 'en/assets'

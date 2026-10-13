@@ -4,6 +4,8 @@ The four reviewed articles have a short resource summary before their first prev
 
 Run `python scripts/resource_details.py` after regenerating those articles. This narrow pass preserves the rest of each document. It is also called by the English resource builder and finalizer. Do not run broad English generators merely to refresh these summaries: those generators own other pages and may require the existing navigation and discovery final passes afterward.
 
+The same pass maintains related-resource cards on all six reviewed pages, including both template collections. Their content is defined in `resource_related.py`: three recommendations per task with destinations in the current language. English article sources and the template builder preserve the same cards. The Spanish template introduction identifies the downloads as reusable UI pieces; the two Spanish article closings invite users to continue without promising a weekly release. Neither pass changes downloads, previews, licenses, metadata, or the rest of the guides.
+
 The summary deliberately does not promise a minimum After Effects version, a plugin-free project, or unverified audio specifications. Spanish text animations retain their RAR download; the independent English project uses its English ZIP. Both transition articles retain the original 16-WAV RAR.
 
 English template destinations and accessible names are maintained in `build-english-templates.py`. After changing a demo, rebuild its corresponding English ZIP and update the download query version in `en/templates/index.html`. ZIP entries use fixed metadata so unchanged contents produce reproducible archives. Do not replace the Spanish demos or archives.

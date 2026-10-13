@@ -1,0 +1,18 @@
+.resource-related { margin-block: 4rem; }
+#related-resources, #related-resources-title { scroll-margin-top: 7rem; }
+.english-prose > .resource-related { width: 100%; max-width: none; }
+.resource-related h2 { margin: 0 0 .9rem; font-size: clamp(1.65rem, 3vw, 2.2rem); letter-spacing: normal; }
+.resource-related__intro { margin: 0 0 1.5rem; color: var(--muted); }
+.resource-related .resource-related__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding: 0; margin: 0; list-style: none; }
+.resource-related .resource-related__grid > li { margin: 0; padding: 0; min-width: 0; }
+.resource-related a.resource-related__card { display: flex; flex-direction: column; height: 100%; padding: 1.35rem; color: var(--text); background: var(--panel); border: 1px solid var(--line-strong); border-radius: 1rem; text-decoration: none; }
+.resource-related__card h3 { margin: .8rem 0; font-size: 1.35rem; line-height: 1.25; letter-spacing: normal; }
+.resource-related__card p { margin: 0 0 1.3rem; color: var(--muted); line-height: 1.65; }
+.resource-related__type { color: var(--muted); font-size: .8rem; font-weight: 600; }
+.resource-related__action { margin-top: auto; color: var(--violeta); font-weight: 600; }
+.resource-related .resource-related__card:hover { border-color: var(--violeta); }
+.resource-related .resource-related__card:hover .resource-related__action { text-decoration: underline; text-underline-offset: .2em; }
+.resource-related .resource-related__card:focus-visible { outline: 3px solid var(--violeta); outline-offset: 4px; }
+.resource-related__footer { margin: 1.5rem 0 0; line-height: 1.8; }
+.resource-related .resource-related__footer a { color: var(--violeta); text-underline-offset: .2em; }
+@media (max-width: 700px) { .resource-related .resource-related__grid { grid-template-columns: 1fr; } }

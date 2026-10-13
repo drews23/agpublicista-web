@@ -1,6 +1,7 @@
 """Apply the reviewed resource summaries without regenerating article content."""
 from pathlib import Path
 import re
+from resource_related import enhance_related, PAGES as RELATED_PAGES
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -11,6 +12,7 @@ PAGES = {
 }
 
 def enhance_document(raw, route):
+    raw = enhance_related(raw, route)
     if route not in PAGES:
         return raw
     lang, kind, preview, download, terms = PAGES[route]
@@ -39,10 +41,10 @@ def enhance_document(raw, route):
     return raw
 
 if __name__ == '__main__':
-    for route in PAGES:
+    for route in RELATED_PAGES:
         path = ROOT / route.strip('/') / 'index.html'
         raw = path.read_text(encoding='utf-8')
         updated = enhance_document(raw, route)
         if updated != raw:
             path.write_text(updated, encoding='utf-8')
-    print('Four resource summaries applied; article content retained.')
+    print('Four resource summaries and six related sections applied; article content retained.')
