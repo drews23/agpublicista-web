@@ -1,6 +1,6 @@
 /* Lienzo: modifica estas variables para adaptar la identidad. */
-@font-face{font-family:Fraunces;src:url(assets/fraunces.woff2) format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"Instrument Sans";src:url(assets/instrument.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:Fraunces;src:url(assets/fraunces.woff2?v=20261013cors) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(assets/instrument.woff2?v=20261013cors) format("woff2");font-weight:400 700;font-display:swap}
 :root{--fondo:#0a0a0f;--tinta:#f4f3f8;--suave:#b1b0c3;--violeta:#8b7bff;--turquesa:#35d6c8;--ambar:#ffb454;--linea:#ffffff24;--panel:#ffffff09;color-scheme:dark}
 [data-theme="light"]{--fondo:#f6f4ef;--tinta:#17161f;--suave:#5d5c6e;--violeta:#5b46e8;--turquesa:#087f76;--ambar:#a35b04;--linea:#17161f24;--panel:#ffffffb8;color-scheme:light}
 *{box-sizing:border-box}body{margin:0;min-height:100svh;background:var(--fondo);color:var(--tinta);font-family:"Instrument Sans",sans-serif}a{color:inherit}button{font:inherit;cursor:pointer}svg{width:28px;height:28px;flex:none}a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--ambar);outline-offset:6px}
