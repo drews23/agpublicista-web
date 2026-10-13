@@ -112,4 +112,9 @@ ErrorDocument 404 /404.html
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # Las vistas aisladas de plantillas tienen origen opaco. Solo sus fuentes
+  # publicas necesitan CORS; los iframe conservan su aislamiento de origen.
+  <FilesMatch "\.(woff2?|ttf|otf)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
 </IfModule>

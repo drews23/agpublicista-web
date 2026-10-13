@@ -1,0 +1,92 @@
+{
+  "laboratorio-3d": {
+    "source": "neon-glass-3d-cards-ui-lab.zip",
+    "es": {
+      "title": "Laboratorio de tarjetas 3D",
+      "tag": "Seis formas, una identidad",
+      "desc": "Seis tarjetas de cristal con profundidad, luz e inclinación. Prueba sus detalles, elige un acento y copia el HTML y CSS del diseño seleccionado.",
+      "intro": "El volumen también comunica.",
+      "lead": "Seis maneras de dar profundidad a una interfaz. Explora la forma, prueba el foco y encuentra la que encaja en tu proyecto."
+    },
+    "en": {
+      "title": "3D Glass Card Lab",
+      "tag": "Six shapes. One identity.",
+      "desc": "Six glass cards with depth, light, and pointer tilt. Explore their details, choose an accent, and copy the selected design's HTML and CSS.",
+      "intro": "Give your interface dimension.",
+      "lead": "Six ways to add depth to an interface. Explore each shape, try keyboard focus, and find the right fit for your project."
+    },
+    "referenceSha256": "cd301d592025e569c1a37a79968ac69fa44d4a3802e4f1d3e44fa056c0b6a506"
+  },
+  "tarjetas-producto": {
+    "source": "neon-glow-glass-product-card-animated-css-property-gradient-border-no-js (2).zip",
+    "es": {
+      "title": "Tarjetas de producto de cristal",
+      "tag": "Producto, variantes y selección",
+      "desc": "Tres tarjetas con ilustraciones SVG, variantes de color, favoritos y una selección de compra de demostración. Sin pagos ni servidor.",
+      "intro": "Un producto. Muchos matices.",
+      "lead": "Cambia el color, guarda una idea y prueba una selección de productos. Una interfaz completa para explorar; los precios son ejemplos."
+    },
+    "en": {
+      "title": "Glass Product Cards",
+      "tag": "Products, variants, and selection",
+      "desc": "Three product cards with SVG artwork, color variants, favorites, and a demo shopping selection. No payments or server required.",
+      "intro": "One product. More possibilities.",
+      "lead": "Choose a color, save an idea, and try the product selection. A complete interface to explore; all prices are examples."
+    },
+    "referenceSha256": "81a1260fe623e6787f0eda125daa9a46931f60d25be97a9e863cc3a14976c293"
+  },
+  "iconos-animados": {
+    "source": "svg-animated-icons (2).zip",
+    "es": {
+      "title": "Iconos SVG animados",
+      "tag": "Doce gestos para tu interfaz",
+      "desc": "Doce iconos SVG con animaciones y foco accesible. Personaliza color, tamaño y velocidad; copia o descarga el SVG seleccionado con su animación.",
+      "intro": "Los pequeños gestos importan.",
+      "lead": "Una biblioteca de doce iconos dibujados para Lienzo. Ajusta su apariencia y lleva cada gesto a tu interfaz, sin fuentes de iconos."
+    },
+    "en": {
+      "title": "Animated SVG Icons",
+      "tag": "Twelve gestures for your interface",
+      "desc": "Twelve SVG icons with animation and visible keyboard focus. Customize color, size, and speed; copy or download an icon with its animation.",
+      "intro": "Small gestures. Clear signals.",
+      "lead": "Twelve icons drawn for Lienzo. Customize their appearance and bring each gesture into your interface, without icon fonts."
+    },
+    "referenceSha256": "cf73b4e42fc7dc45fd65326166b6d7222faeccacf80e48be7ec3a45fbca8d8f8"
+  },
+  "carrusel-progreso": {
+    "source": "swiper-js-carousel-with-progress-animations.zip",
+    "es": {
+      "title": "Carrusel con progreso y profundidad",
+      "tag": "Cuatro escenas en movimiento",
+      "desc": "Cuatro escenas con ilustración local, progreso y animación ligada al desplazamiento. Flechas, teclado, gesto táctil y reproducción automática opcional.",
+      "intro": "Una historia, escena a escena.",
+      "lead": "Una presentación amplia para destacar ideas. Desliza, usa las flechas o activa el avance automático. Tú controlas el ritmo."
+    },
+    "en": {
+      "title": "Progress & Depth Carousel",
+      "tag": "Four scenes in motion",
+      "desc": "Four scenes with local artwork, progress, and scroll-linked animation. Arrow buttons, keyboard and touch navigation, plus optional autoplay.",
+      "intro": "Tell it one scene at a time.",
+      "lead": "A wide presentation for ideas worth highlighting. Swipe, use the arrows, or enable autoplay. You set the pace."
+    },
+    "referenceSha256": "e7d8c6bf1c41c667a7e98d93d7968f0f057e84dab7d12065b83ba7fff52f3953"
+  },
+  "tarjetas-hover": {
+    "source": "ultimate-css-card-animation-pack-6-unique-hover-effects.zip",
+    "es": {
+      "title": "Seis efectos hover para tarjetas",
+      "tag": "Movimiento con intención",
+      "desc": "Seis efectos distintos: luz, elevación, barrido, giro, capas y revelado. Pruébalos con ratón, teclado o toque y copia cada ejemplo con su CSS.",
+      "intro": "Haz que el detalle responda.",
+      "lead": "Seis tratamientos para transformar una tarjeta sencilla. El mismo efecto funciona con el foco del teclado y tiene un control de prueba para pantallas táctiles."
+    },
+    "en": {
+      "title": "Six CSS Card Hover Effects",
+      "tag": "Motion with purpose",
+      "desc": "Six distinct effects: glow, lift, sweep, rotation, layers, and reveal. Try pointer, keyboard, or touch controls and copy each example with its CSS.",
+      "intro": "Make every detail respond.",
+      "lead": "Six treatments for a simple card. Every effect responds to keyboard focus and includes a preview control for touchscreens."
+    },
+    "referenceSha256": "5e31fde9fa8c38d3aa9adcf7c7300ea717c55a142381c3fd8e7d02b84d6b0a04"
+  }
+}

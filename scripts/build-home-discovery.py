@@ -21,7 +21,7 @@ FAMILIES = [
     ('Escenas 3D','3D scenes','Archivos para Spline','Editable Spline files','/blog/escenas-3d-desarrollo-web-spline/','/en/blog/web-development-3d-scenes/'),
 ]
 CARDS = [
-    ('HTML · CSS · JavaScript','HTML · CSS · JavaScript','Tres plantillas, muchas posibilidades','Three templates. Your next idea.',
+    ('HTML · CSS · JavaScript','HTML · CSS · JavaScript','Plantillas para tu próxima idea','Templates for your next idea.',
      'Prueba el carrusel y los botones sociales de cristal o por capas. Descarga el código para adaptarlo a tu web.',
      'Try the carousel, glass social buttons, and layered social buttons. Download the code and make it your own.',
      'Probar plantillas','Try the templates','/codigo-web/plantillas/','/en/templates/','templates-{lang}.webp',False),

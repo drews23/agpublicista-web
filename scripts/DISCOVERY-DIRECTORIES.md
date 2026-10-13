@@ -1,5 +1,9 @@
 # Generación de los directorios de Lienzo
 
+## Ampliación de plantillas del 13 de octubre de 2026
+
+Los directorios de recursos incorporan cinco plantillas nuevas, con ocho recursos de interfaz en cada idioma. `python scripts/build-template-expansion.py` genera las demos y los diez ZIP, y actualiza únicamente las colecciones y sus secciones de recursos. Sus fuentes editables, alcance, procedencia, límites y pruebas se explican en `scripts/TEMPLATE-EXPANSION.md`. El organizador de recursos y los generadores ingleses aplican esta misma pasada para conservar las nuevas tarjetas. No ejecutar generadores amplios para editar una plantilla individual. Las portadas conservan el diseño original y usan un titular sin el antiguo número tres.
+
 Los directorios de herramientas y recursos reutilizan las tarjetas y rutas de las páginas existentes. `build-discovery-directories.py` organiza ambos idiomas y la selección de herramientas de las dos portadas. No genera descargas, traduce proyectos ni modifica las herramientas individuales.
 
 Después de ejecutar generadores antiguos de inglés que reconstruyen esas páginas, ejecutar los pasos de descubrimiento al final:

@@ -1,4 +1,4 @@
-/* Una única ventana nativa para las tres demos; los ZIP son archivos reales. */
+/* Una única ventana nativa para las demos; los ZIP son archivos reales. */
 (() => {
   const dialog = document.querySelector('[data-preview-dialog]');
   const frame = dialog.querySelector('iframe');
@@ -8,7 +8,7 @@
   const stage = dialog.querySelector('[data-preview-stage]');
   const loading = dialog.querySelector('[data-preview-loading]');
   const themeButton = dialog.querySelector('[data-preview-theme]');
-  const allowed = new Set(['botones-cristal', 'botones-capas', 'carrusel-recursos']);
+  const allowed = new Set(['botones-cristal', 'botones-capas', 'carrusel-recursos', 'laboratorio-3d', 'tarjetas-producto', 'iconos-animados', 'carrusel-progreso', 'tarjetas-hover']);
   let opener = null;
   let theme = 'dark';
 

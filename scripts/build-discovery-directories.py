@@ -278,7 +278,11 @@ def organize_resources(en=False):
         source = source.replace('<main>','<main data-catalog-page>',1)
     source = update_schema(source)
     from catalog_copy import enhance_catalog_copy
-    path.write_text(enhance_catalog_copy(attach_css(source), '/en/resources/' if en else '/recursos/'),encoding='utf-8')
+    import importlib.util
+    expansion_spec=importlib.util.spec_from_file_location('template_expansion',ROOT/'scripts/build-template-expansion.py')
+    expansion=importlib.util.module_from_spec(expansion_spec);expansion_spec.loader.exec_module(expansion)
+    route='/en/resources/' if en else '/recursos/'
+    path.write_text(expansion.enhance_resources(enhance_catalog_copy(attach_css(source),route),route),encoding='utf-8')
 
 
 def organize_home(en=False):

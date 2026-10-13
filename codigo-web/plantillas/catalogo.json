@@ -34,5 +34,70 @@
     "zip": null,
     "desc": "Carrusel propio con inclinación 3D y luz al pasar el cursor, navegación táctil, flechas, posición y favoritos. Sin librerías; respeta reducir movimiento.",
     "size": 110
+  },
+  {
+    "id": "laboratorio-3d",
+    "title": "Laboratorio de tarjetas 3D",
+    "tag": "Seis formas, una identidad",
+    "author": "Lienzo",
+    "collaboration": "MD Estudio Creativo",
+    "source": null,
+    "zip": "laboratorio-3d-lienzo.zip",
+    "desc": "Seis tarjetas de cristal con profundidad, luz e inclinación. Prueba sus detalles, elige un acento y copia el HTML y CSS del diseño seleccionado.",
+    "size": 121,
+    "authorRole": "Implementación, ilustración y guía",
+    "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
+  },
+  {
+    "id": "tarjetas-producto",
+    "title": "Tarjetas de producto de cristal",
+    "tag": "Producto, variantes y selección",
+    "author": "Lienzo",
+    "collaboration": "MD Estudio Creativo",
+    "source": null,
+    "zip": "tarjetas-producto-lienzo.zip",
+    "desc": "Tres tarjetas con ilustraciones SVG, variantes de color, favoritos y una selección de compra de demostración. Sin pagos ni servidor.",
+    "size": 121,
+    "authorRole": "Implementación, ilustración y guía",
+    "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
+  },
+  {
+    "id": "iconos-animados",
+    "title": "Iconos SVG animados",
+    "tag": "Doce gestos para tu interfaz",
+    "author": "Lienzo",
+    "collaboration": "MD Estudio Creativo",
+    "source": null,
+    "zip": "iconos-animados-lienzo.zip",
+    "desc": "Doce iconos SVG con animaciones y foco accesible. Personaliza color, tamaño y velocidad; copia o descarga el SVG seleccionado con su animación.",
+    "size": 121,
+    "authorRole": "Implementación, ilustración y guía",
+    "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
+  },
+  {
+    "id": "carrusel-progreso",
+    "title": "Carrusel con progreso y profundidad",
+    "tag": "Cuatro escenas en movimiento",
+    "author": "Lienzo",
+    "collaboration": "MD Estudio Creativo",
+    "source": null,
+    "zip": "carrusel-progreso-lienzo.zip",
+    "desc": "Cuatro escenas con ilustración local, progreso y animación ligada al desplazamiento. Flechas, teclado, gesto táctil y reproducción automática opcional.",
+    "size": 121,
+    "authorRole": "Implementación, ilustración y guía",
+    "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
+  },
+  {
+    "id": "tarjetas-hover",
+    "title": "Seis efectos hover para tarjetas",
+    "tag": "Movimiento con intención",
+    "author": "Lienzo",
+    "collaboration": "MD Estudio Creativo",
+    "source": null,
+    "zip": "tarjetas-hover-lienzo.zip",
+    "desc": "Seis efectos distintos: luz, elevación, barrido, giro, capas y revelado. Pruébalos con ratón, teclado o toque y copia cada ejemplo con su CSS.",
+    "size": 121,
+    "authorRole": "Implementación, ilustración y guía",
+    "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   }
 ]

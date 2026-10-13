@@ -1,4 +1,4 @@
-"""Add native, language-specific shortcuts to the three template cards."""
+"""Add native, language-specific shortcuts to the available template cards."""
 import re
 
 ROUTES = {'/codigo-web/plantillas/': 'es', '/en/templates/': 'en'}
@@ -10,6 +10,10 @@ def enhance_shortcuts(raw, route):
     en = lang == 'en'
     labels = ['Carousel', 'Glass buttons', 'Layered buttons'] if en else ['Carrusel', 'Botones de cristal', 'Botones por capas']
     ids = ['carrusel-recursos', 'botones-cristal', 'botones-capas']
+    additions = [('laboratorio-3d','Laboratorio 3D','3D lab'),('tarjetas-producto','Productos','Products'),('iconos-animados','Iconos animados','Animated icons'),('carrusel-progreso','Carrusel con progreso','Progress carousel'),('tarjetas-hover','Efectos hover','Hover effects')]
+    for target, es_label, en_label in additions:
+        if re.search(r'<article\b[^>]*\bid="'+target+r'"', raw):
+            ids.append(target); labels.append(en_label if en else es_label)
     label = 'Jump to a template' if en else 'Ir a una plantilla'
     block = '<!-- template-shortcuts:start --><nav class="templates-shortcuts" aria-label="'+label+'"><span class="templates-shortcuts__label">'+label+'</span><ul>'+''.join(f'<li><a href="#{target}">{text}</a></li>' for target,text in zip(ids,labels))+'</ul></nav><!-- template-shortcuts:end -->'
     marker = r'<!-- template-shortcuts:start -->.*?<!-- template-shortcuts:end -->'
