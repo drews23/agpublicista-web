@@ -180,6 +180,12 @@ def build():
     catalog = re.sub(r'src="/js/site.js\?v=[^"]+"', f'src="/en/assets/site.js?v={VERSION}"', catalog)
     catalog = re.sub(r'src="plantillas.js\?v=[^"]+"', f'src="plantillas.js?v={VERSION}"', catalog)
     for slug in ['carrusel-recursos', 'botones-cristal', 'botones-capas']:
+        if slug == 'carrusel-recursos':
+            from resource_carousel_showcase import build as build_resource_carousel
+            build_resource_carousel('en')
+            catalog = catalog.replace('carrusel-recursos-lienzo.zip', 'carrusel-recursos-lienzo-en.zip')
+            catalog = catalog.replace('demos/carrusel-recursos/LEEME.md', 'demos/carrusel-recursos/README.md')
+            continue
         src = SOURCE / 'demos' / slug
         dest = TARGET / 'demos' / slug
         dest.mkdir(parents=True, exist_ok=True)

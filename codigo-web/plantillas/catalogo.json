@@ -28,12 +28,12 @@
   {
     "id": "carrusel-recursos",
     "title": "Carrusel de recursos creativos",
-    "tag": "Explorar y guardar",
+    "tag": "Colección, profundidad y edición",
     "author": "Lienzo",
     "source": null,
     "zip": null,
-    "desc": "Carrusel propio con inclinación 3D y luz al pasar el cursor, navegación táctil, flechas, posición y favoritos. Sin librerías; respeta reducir movimiento.",
-    "size": 110
+    "desc": "Seis recursos con arte por capas, luz e inclinación. Busca, filtra y guarda favoritos; cambia entre carrusel y cuadrícula, edita cada tarjeta y exporta tu colección.",
+    "size": 119
   },
   {
     "id": "laboratorio-3d",

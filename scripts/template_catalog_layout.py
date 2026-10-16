@@ -28,7 +28,7 @@ GROUPS = [
      ['iconos-animados']),
 ]
 CHOICES = {
-    'carrusel-recursos': ('Una colección navegable', 'A browsable collection', 'Contenido, enlaces y colores', 'Content, links, and colors', 'HTML + CSS + JS'),
+    'carrusel-recursos': ('Explorar una colección creativa', 'Browsing a creative collection', 'Texto, enlaces, acento y disposición', 'Text, links, accent, and layout', 'HTML + CSS + JS'),
     'carrusel-progreso': ('Exhibir cuatro productos con profundidad', 'Showcasing four products with depth', 'Productos, imágenes, colores y ritmo', 'Products, images, colors, and timing', 'HTML + CSS + JS'),
     'laboratorio-3d': ('Destacar una idea con profundidad', 'Giving an idea depth', 'Texto, paleta de marca, capas e inclinación', 'Text, brand palette, layers, and tilt', 'HTML + CSS + JS'),
     'tarjetas-producto': ('Presentar productos y probar su selección', 'Showcasing products and trying a selection', 'Contenido, acabados, precios, luz e inclinación', 'Content, finishes, prices, light, and tilt', 'HTML + CSS + JS'),
@@ -116,7 +116,8 @@ def enhance_template_catalog(raw, route):
     if controller.exists():
         version = hashlib.sha256(controller.read_bytes()).hexdigest()[:12]
         updated = re.sub(r'(src="(?:\./)?plantillas\.js)\?v=[^"]+',r'\1?v='+version,updated)
-    return updated
+    from resource_carousel_showcase import enhance as enhance_resource_carousel
+    return enhance_resource_carousel(updated, route)
 
 
 if __name__ == '__main__':

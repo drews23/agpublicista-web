@@ -1,31 +1,18 @@
-# Carrusel de recursos creativos
+# Carrusel de recursos creativos - Lienzo
 
-Paquete preparado por Lienzo · https://lienzo.tools/codigo-web/plantillas/
+Seis escenas propias: audio, motion, web, iconos SVG, color y profundidad. HTML, CSS, JavaScript e ilustraciones CSS/SVG originales. Sin dependencias, CDN, cuenta, API, compilación ni backend.
 
-## Abrir y probar
-Descomprime todo el ZIP y abre index.html en un navegador moderno. Conserva las carpetas y sus nombres. No requiere instalación, servidor, conexión a Internet ni librerías remotas para renderizar la plantilla. Los enlaces de redes o recursos sí abren páginas en Internet.
+## Abrir y usar
+Descomprime el ZIP completo y abre index.html. Conserva styles.css, script.js y assets/ juntos. Navega con desplazamiento táctil nativo, arrastre con ratón, anterior/siguiente, posición, indicadores o enfoca el carrusel y usa flechas/Inicio/Fin. Los enlaces solo se abren al activarlos. Alterna carrusel/cuadrícula, busca, elige una categoría y combínala con Favoritos. Favoritos y ajustes viven en memoria y se reinician al recargar; no son el servicio Mi Lienzo.
 
 ## Personalizar
-1. Cambia los textos y enlaces en index.html. Los enlaces de ejemplo corresponden a Lienzo o a sus opciones de compartir.
-2. Cambia los colores en las variables de :root, al principio de styles.css. El segundo bloque define el tema claro.
-3. Ajusta espacios, tamaños y efectos dentro de la familia .lz-social o .carousel. La regla prefers-reduced-motion conserva la preferencia de accesibilidad.
-4. Para integrar solo el componente, copia su HTML, las reglas de su familia y las variables que utiliza. La clase .demo es el escenario de muestra. Cambia los selectores de body por los de tu contenedor si la página ya tiene estilos propios.
+Usa Editar tarjeta o Personalizar. Cada tarjeta conserva título, descripción, categoría visible, enlace HTTP(S) y acento violeta/menta/ámbar independientes. Los filtros usan identificadores estables: cambiar el nombre visible de la categoría no crea un filtro nuevo. Restaurar tarjeta recupera su contenido inicial. También puedes editar el HTML y su JSON data-resource-state correspondiente; ese JSON alimenta el editor. Las variables de paleta están identificadas en styles.css. Sustituye el logo de muestra por el tuyo.
 
-## Archivos
-- index.html: estructura, enlaces y contenido.
-- styles.css: identidad y comportamiento visual.
-- script.js: selector de tema y navegación/favoritos del carrusel.
-- assets/: logo de muestra, fuentes locales y licencias tipográficas.
-- LICENSE-LIENZO.txt: licencia MIT para las aportaciones de Lienzo.
+## Movimiento y accesibilidad
+Inclinación y paralaje solo con puntero preciso; como máximo un frame pendiente por actualización del puntero. El arte se mueve únicamente con hover/foco. Profundidad y Pausar movimiento son controles independientes. Movimiento reducido desactiva animación e inclinación. Sin avance automático ni bucle JavaScript permanente. Teclado, foco visible, diálogos nativos, Escape, retorno de foco, temas claro/oscuro y vista táctil. Los modos component/thumbnail por query sirven al catálogo Lienzo.
 
-## Profundidad al pasar el cursor
-Las tarjetas se inclinan suavemente y una luz acompaña al cursor; las ilustraciones se desplazan en una segunda capa. El efecto usa CSS y JavaScript propios, sin librerías. No depende del efecto para acceder a enlaces o favoritos.
+## Exportar e integrar
+Código abre un documento HTML completo con tus ajustes para copiar o descargar. Conserva textos, enlaces, colores, tema y controles; filtros y favoritos temporales se reinician. Ponlo junto a styles.css, script.js y assets/ del ZIP. El HTML NO es autónomo. Conserva juntos el contenedor data-resource-carousel, controles y diálogos. Clases acotadas con rc-. Varias copias completas pueden inicializarse de forma independiente con IDs distintos. React o WordPress requieren adaptación: no es un sitio completo ni un tema instalable.
 
-El teclado conserva un foco visible. En pantallas táctiles se mantiene el desplazamiento nativo. Con «reducir movimiento» se desactivan la inclinación y el brillo animado. Puedes ajustar los límites de giro dentro de pintarHover() en script.js y los colores en las variables CSS.
-
-
-## Créditos y condiciones
-Diseño, ilustraciones y código del carrusel: Lienzo. Este carrusel se implementó desde cero con desplazamiento nativo y no incorpora código ni imágenes del ZIP externo de Swiper.
-Fraunces: The Fraunces Project Authors. Instrument Sans: The Instrument Sans Project Authors. Ambas fuentes se incluyen bajo OFL 1.1 con sus avisos íntegros. El logo de Lienzo se incluye únicamente como ejemplo: sustitúyelo por el de tu proyecto; MIT no concede derechos sobre marcas de terceros.
-
-Los favoritos del carrusel son una demostración temporal, no una cuenta ni un servicio de almacenamiento. Se reinician al recargar. Comprueba el componente dentro de tu proyecto antes de publicarlo.
+## Créditos y licencias
+Implementación e ilustraciones nuevas de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . No se redistribuyen código ni imágenes del ZIP externo de referencia Swiper o de componentes de 21st. LICENSE-LIENZO.txt cubre el código original bajo MIT. Fraunces e Instrument Sans locales conservan sus avisos OFL en assets/. El logo de muestra conserva sus derechos de marca. Mantén los avisos al compartir.

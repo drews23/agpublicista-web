@@ -34,7 +34,10 @@
       "scripts/template-expansion/hover-cards/icons-manifest.json",
       "scripts/animated_icons_showcase.py",
       "scripts/template-expansion/animated-icons/styles.css",
-      "scripts/template-expansion/animated-icons/script.js"
+      "scripts/template-expansion/animated-icons/script.js",
+      "scripts/resource_carousel_showcase.py",
+      "scripts/template-expansion/resource-carousel/styles.css",
+      "scripts/template-expansion/resource-carousel/script.js"
     ],
     "assets": [
       "assets"
@@ -140,6 +143,11 @@
       "date": "2026-10-13",
       "status": "local implementation for review; not published",
       "decision": "Evolve iconos-animados ES/en-US into Motion Icons: twelve original 64-unit SVG drawings and distinct semantic part-level transform/opacity gestures. Use an editorial selection/stage/settings workbench with a static rest sample, logo palette, normal Fraunces tracking, independent label/color/finish/size/stroke/duration/trigger, opt-in slow loops, touch/keyboard/reduced motion, and self-contained animated/static SVG or custom ZIP export. Keep code scoped, SVG XML valid, multiple copies independent, and downloadable samples local. Preserve the pending product/hover improvements and all unrelated resources. Use localized real thumbnails; no reference geometry, 3D library asset, third-party animation code, or framework migration."
+    },
+    {
+      "date": "2026-10-15",
+      "status": "local implementation for review; not published",
+      "decision": "Renew carrusel-recursos ES/en-US as an editorial six-scene collection with original CSS/SVG layered artwork, pointer light/tilt, scoped motion, native scroll/touch/mouse drag, category/search/favorites, grid view, independent card editor/reset and functional HTML export with local dependencies. Preserve logo palette, normal Fraunces spacing, local fonts, keyboard/reduced motion, existing URLs and all other resources. Use localized real WebP previews and narrow deterministic generation; no framework, third-party code, remote assets or persistent storage."
     }
   ],
   "evidence": [

@@ -1,25 +1,18 @@
-# Interactive Resource Carousel
+# Interactive Resource Carousel - Lienzo
 
-Prepared by Lienzo · https://lienzo.tools/en/templates/
+Six original resource scenes: sound, motion, web, SVG icons, color, and depth. Original HTML, CSS, JavaScript and CSS/SVG artwork. No dependencies, CDN, account, API, build step, or backend.
 
-## Open and try
-Extract the entire ZIP and open index.html in a modern browser. Keep the folder structure and filenames. Rendering the template needs no installation, server, Internet connection, or remote libraries. Social and resource links open Internet pages.
+## Open and use
+Extract the complete ZIP and open index.html. Keep styles.css, script.js and assets/ together. Browse with native touch scrolling, mouse dragging, previous/next, the position slider, dots, or focus the rail and use arrows/Home/End. Links open only when activated. Switch between carousel and grid, search, choose a category, and optionally combine it with Favorites. Favorites and edits live in memory and reset on reload; they are not the My Lienzo service.
 
 ## Customize
-1. Edit text and links in index.html. Sample links point to Lienzo or social sharing pages.
-2. Adjust colors in the :root variables at the top of styles.css. The next block defines the light theme.
-3. Adjust spacing, sizes, and effects in the .lz-social or .carousel rules. Keep prefers-reduced-motion support.
-4. To integrate the relevant code, copy its HTML, CSS rules, and required variables. The .demo class provides the sample setting. Scope body selectors to your own container if your site already has global styles.
+Use Edit card or Customize. Each card has independent title, description, visible category, HTTP(S) link, and violet/mint/amber accent. Category filters use stable resource IDs: changing a displayed category does not create a new filter. Reset card restores its initial content. Alternatively edit the card HTML and the matching data-resource-state JSON; that JSON is the source of the editor. Change the labeled palette variables in styles.css for your project. Replace the example logo with your own.
 
-## Files
-- index.html: structure, links, and content.
-- styles.css: visual design.
-- script.js: theme switching, carousel navigation, and temporary favorites.
-- assets/: sample logo, local fonts, and font licenses.
-- LICENSE-LIENZO.txt: MIT license for Lienzo's contributions.
+## Motion and accessibility
+Pointer tilt and parallax run only for a precise pointer, with a single queued animation frame per pointer update. Artwork moves only on hover/focus. Depth and Pause motion are separate controls. Reduced motion disables tilt and animation. No autoplay or perpetual JavaScript loop. The layout supports touch, visible focus, native dialogs, Escape, focus return, and both themes. Component/thumbnail query modes serve the Lienzo catalog.
 
-## Credits and conditions
-Original carousel design, illustrations, and code by Lienzo. Built from scratch with native scrolling; it does not include code or images from the external Swiper ZIP. Hover tilt and cursor-following light use local CSS and JavaScript. Keyboard focus remains visible; touch scrolling works natively and reduced-motion preferences disable tilt.
-Fraunces: The Fraunces Project Authors. Instrument Sans: The Instrument Sans Project Authors. Both fonts are included under OFL 1.1 with their full notices. Replace the sample Lienzo logo with your own. MIT does not grant rights to third-party trademarks.
+## Export and integrate
+Source opens a complete edited HTML document, which you can copy or download. It keeps your text, links, colors, theme and controls; temporary filters/favorites reset. Place it beside styles.css, script.js and assets/ from this ZIP. HTML alone is NOT standalone. Keep the main data-resource-carousel wrapper and its controls/dialogs together. All classes are scoped with rc-. Multiple complete widgets can initialize independently with distinct IDs. A React/WordPress integration needs adaptation; this is not a complete website or installable theme.
 
-Carousel favorites are temporary demo state, not an account or storage service. They reset on reload. Test the code within your project before publishing it.
+## Credits and licenses
+New implementation and artwork by Lienzo, prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . No source code or imagery from the external Swiper reference ZIP or 21st components is redistributed. LICENSE-LIENZO.txt covers original code under MIT. Local Fraunces and Instrument Sans fonts keep their OFL notices in assets/. The sample logo retains its trademark rights. Preserve the notices when sharing.

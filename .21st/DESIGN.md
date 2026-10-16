@@ -1,5 +1,9 @@
 # Lienzo: contexto de diseño
 
+## Carrusel de recursos creativos - 15 octubre de 2026
+
+Renovación local sobre b0016d1. Composición editorial con seis escenas originales CSS/SVG de audio, motion, web, iconos, color y profundidad. Paleta exclusivamente logo y mezclas; Fraunces de espaciado normal e Instrument Sans local. Navegación nativa, filtros/búsqueda/favoritos, cuadrícula, editor independiente y exportación HTML funcional con dependencias locales. Movimiento por interacción, pausa/profundidad y preferencias del sistema; sin avance automático, frameworks, almacenamiento o solicitudes externas. Miniaturas reales localizadas y generación estrecha. Conservar otras demos, ZIP y chrome. Referencias 21st solo por metadatos: Carousel 34486, Interactive 3D Card Carousel 31657 y Linear Carousel 20150; no se recuperó código. Contrato y evidencia en scripts/RESOURCE-CAROUSEL-SHOWCASE.md. Pendiente de revisión del usuario y autorización de publicación.
+
 Sitio estático bilingüe en HTML, CSS y JavaScript. Tokens de color, tipografía y radios en css/site.css. Fraunces para títulos e Instrument Sans para texto. Conservar el espaciado normal de Fraunces y comprobar claro y oscuro de forma independiente.
 
 ## Plantillas: dirección local del 13 de octubre de 2026
