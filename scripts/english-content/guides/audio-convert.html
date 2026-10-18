@@ -1,0 +1,21 @@
+<section class="section shell" data-reviewed-guide="audio-convert"><div class="prose">
+  <h2>Choose an audio output for your next step</h2>
+  <p>This converter decodes a local file with the browser's Web Audio API. It exports <strong>16-bit PCM WAV</strong> or, when supported, compressed audio through MediaRecorder. It does not upload your audio, offer an MP3 encoder, or restore details already lost in a compressed recording.</p>
+  <h3>Convert, preview, and verify</h3>
+  <ol>
+    <li>Drop a file or select it from your device. MP3, WAV, M4A/AAC, OGG, and FLAC input support depends on your browser and the actual codec, not just the filename extension.</li>
+    <li>Check the waveform, duration, decoded sample rate, and original size. Play a section before converting.</li>
+    <li>Choose WAV for an editing workflow. Choose the compressed option when your receiving app supports the format your browser can record.</li>
+    <li>Keep stereo for spatial effects or music. Select mono deliberately for a voice recording: the tool averages the channels, which can alter stereo material.</li>
+    <li>Download and open the result in the intended editor or player. Listen to the beginning and end, and compare its duration with the original.</li>
+  </ol>
+  <h3>WAV size: a calculation you can check</h3>
+  <p>For this tool's PCM output, file size is <code>44 + frames × channels × 2</code> bytes. A 10-second buffer at 48,000 Hz contains 480,000 frames: stereo is <strong>1,920,044 bytes</strong>, and mono is <strong>960,044 bytes</strong>. These are calculated examples, not promised compression results. Your output follows the decoded sample rate shown by the tool, which may differ from the source rate.</p>
+  <h3>What does “compressed” download?</h3>
+  <p>The tool checks <code>audio/webm;codecs=opus</code>, then <code>audio/ogg;codecs=opus</code>, then the browser's <code>audio/webm</code> support. The extension is <code>.webm</code> or <code>.ogg</code>, rather than an MP3 with a renamed extension. The generic WebM fallback does not explicitly select a codec. If recording is unsupported, the secondary compressed download is hidden; use WAV.</p>
+  <p>Compressed export records playback, so allow approximately the audio's duration and keep the tab open. The displayed compressed size is an estimate; the encoder chooses the actual result. There is no universal “10 times smaller” guarantee or adjustable bitrate control here.</p>
+  <p>Use WAV when exact sample boundaries matter. Native compressed recording can change the timing at the edges: in our Chromium check, a one-second test decoded to 0.96 seconds. Check the downloaded beginning and ending before using compressed output for synchronized effects or seamless loops.</p>
+  <details><summary>Does converting MP3 to WAV improve quality?</summary><p>No. WAV makes the decoded audio available for editing, but it cannot recover discarded MP3 information. This exporter writes 16-bit PCM; it is not an archival, bit-for-bit copy of a higher-resolution original. Keep your source file.</p></details>
+  <details><summary>Why does a file fail to load or export?</summary><p>The browser may not support its codec, or the device may lack memory for the decoded audio and output buffer. Try a shorter file in a current browser. Renaming an extension does not convert a file. Use a desktop editor for unsupported formats or long sessions.</p></details>
+  <p>Need another operation? <a href="/en/tools/audio/trim/">Trim audio</a>, <a href="/en/tools/audio/merge/">merge clips</a>, or <a href="/en/tools/audio/">open the full editor</a>. <a href="/en/privacy/">Privacy</a>.</p>
+</div></section>

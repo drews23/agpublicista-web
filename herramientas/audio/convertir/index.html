@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Convertir audio online gratis a WAV u Opus | Lienzo</title>
-    <meta name="description" content="Convierte MP3, M4A, OGG o FLAC a WAV sin pérdida o a Opus comprimido, dentro del navegador. Gratis, sin registro y sin que el archivo salga de tu equipo." />
+    <meta name="description" content="Convierte MP3, M4A, OGG o FLAC a WAV PCM de 16 bits sin comprimir o a Opus comprimido, dentro del navegador. Gratis, sin registro y sin que el archivo salga de tu equipo." />
     <link rel="canonical" href="https://lienzo.tools/herramientas/audio/convertir/" />
     <meta name="theme-color" content="#0a0a0f" />
 
@@ -46,8 +46,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="../css/tool.css" />
 
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -55,7 +54,7 @@
       "@id": "https://lienzo.tools/herramientas/audio/convertir/#app",
       "name": "Conversor de audio de Lienzo",
       "url": "https://lienzo.tools/herramientas/audio/convertir/",
-      "description": "Herramienta para convertir archivos de audio a WAV sin pérdida o a Opus comprimido dentro del navegador, sin subir el archivo a ningún servidor.",
+      "description": "Herramienta para convertir archivos de audio a WAV PCM de 16 bits sin comprimir o a Opus comprimido dentro del navegador, sin subir el archivo a ningún servidor.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Web",
       "inLanguage": "es",
@@ -115,7 +114,7 @@
           "name": "¿Qué formatos puedo convertir?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "De entrada, cualquiera que tu navegador sepa reproducir: MP3, WAV, OGG, M4A/AAC y normalmente FLAC. De salida, WAV sin pérdida u Opus comprimido."
+            "text": "De entrada, cualquiera que tu navegador sepa reproducir: MP3, WAV, OGG, M4A/AAC y normalmente FLAC. De salida, WAV sin comprimir u Opus comprimido."
           }
         },
         {
@@ -123,7 +122,7 @@
           "name": "¿Por qué no puedo exportar a MP3?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Porque los navegadores traen decodificador de MP3 pero no codificador. Ofrecerlo exigiría cargar una librería externa pesada, y para prácticamente cualquier uso actual Opus da mejor calidad ocupando menos."
+            "text": "Esta herramienta no incluye un codificador MP3. Ofrece WAV PCM de 16 bits y grabación comprimida cuando el navegador la admite. Si tu programa exige MP3, utiliza un editor que incorpore esa salida."
           }
         },
         {
@@ -139,7 +138,7 @@
           "name": "¿Convertir a WAV mejora la calidad de un MP3?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Lo que se perdió al comprimir en MP3 no vuelve. Lo que consigues es un archivo sin pérdida a partir de ese momento, que es justo lo que quieres antes de seguir editando."
+            "text": "No. Lo que se perdió al comprimir en MP3 no vuelve. Obtienes PCM de 16 bits sin comprimir para seguir editando; no una copia idéntica de un original de mayor resolución."
           }
         },
         {
@@ -147,14 +146,13 @@
           "name": "¿Qué gano convirtiendo a mono?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "La mitad del tamaño en WAV, y ningún inconveniente si la grabación es de voz o si los dos canales son idénticos. Para música o para audio con efecto estéreo real, mejor no tocarlo."
+            "text": "En una fuente estéreo, reduce a la mitad los datos PCM del WAV, sin contar la cabecera. Promedia los canales y puede cambiar el sonido o cancelar información; escucha el resultado. Una fuente que ya sea mono no reduce sus canales."
           }
         }
       ]
     }
   ]
-}
-    </script>
+}</script>
       <!-- AdSense: anuncios no personalizados en todo el tráfico -->
     <script>
       (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
@@ -195,7 +193,7 @@
         <div class="page-head">
           <p class="eyebrow reveal">Herramienta gratis</p>
           <h1 class="reveal" style="--reveal-delay: 80ms">Convertir audio</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">Pasa cualquier audio que tu navegador sepa leer a WAV sin pérdida o a Opus comprimido. Sin cola de espera, sin registro y sin que el archivo salga de tu equipo.</p>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Pasa cualquier audio que tu navegador sepa leer a WAV PCM de 16 bits sin comprimir o a Opus comprimido. Sin cola de espera, sin registro y sin que el archivo salga de tu equipo.</p>
         </div>
 
         <div class="loader reveal" style="--reveal-delay: 200ms">
@@ -214,7 +212,7 @@
           <p class="error" data-error role="alert" hidden></p>
         </div>
 
-        <p class="tool-note" data-empty>El formato de salida y la calidad se eligen después de cargar el archivo.</p>
+        <p class="tool-note" data-empty>Elige WAV o la salida comprimida compatible después de cargar el archivo.</p>
 
         <div class="workspace" data-workspace data-busy="false" hidden>
           <div class="panel">
@@ -271,15 +269,15 @@
                   <label>
                     <input type="radio" name="formato" value="wav" checked data-formato />
                     <span>
-                      WAV sin pérdida
-                      <small>Lo abre cualquier editor. Instantáneo, pero pesa bastante.</small>
+                      WAV sin comprimir
+                      <small>PCM de 16 bits para editores compatibles. Rápido de exportar, pero ocupa más.</small>
                     </span>
                   </label>
                   <label>
                     <input type="radio" name="formato" value="comprimido" data-formato data-formato-comprimido />
                     <span>
                       Opus comprimido
-                      <small>Pesa hasta 10 veces menos. Tarda lo que dura el audio.</small>
+                      <small>El tamaño depende del material y del navegador. Graba aproximadamente en tiempo real.</small>
                     </span>
                   </label>
                 </div>
@@ -288,7 +286,7 @@
                   <span>
                     Convertir a mono
                     <span></span>
-                    <small>Mezcla los dos canales en uno. Reduce el peso a la mitad en WAV.</small>
+                    <small>Promedia los canales. Reduce a la mitad los datos de un WAV estéreo; puede alterar su imagen sonora.</small>
                   </span>
                 </label>
               </div>
@@ -314,32 +312,30 @@
           <h2>Cómo convertir un audio</h2>
           <ol>
             <li>Arrastra el archivo que quieres convertir.</li>
-            <li>Elige WAV (sin pérdida, instantáneo) u Opus (comprimido, tarda lo que dura el audio).</li>
+            <li>Elige WAV (PCM de 16 bits, sin comprimir) u Opus (comprimido, tarda lo que dura el audio).</li>
             <li>Descarga el resultado.</li>
           </ol>
 
           <h2>Cuál elegir: WAV u Opus</h2>
           <p>
-            <strong>WAV</strong> guarda cada muestra tal cual, sin comprimir. Es el formato
-            que espera cualquier editor de video o de audio, y es la opción correcta si el
+            <strong>WAV</strong> guarda cada muestra tal cual, sin comprimir. Es un formato habitual en editores de video y audio, y es la opción correcta si el
             archivo va a seguir editándose. A cambio pesa mucho: un minuto en estéreo a
             48 kHz son unos 11 MB. Se genera al instante.
           </p>
           <p>
             <strong>Opus</strong> es el códec libre que usan las videollamadas y buena
-            parte de la web moderna; con la misma calidad percibida pesa muchísimo menos
-            que un MP3. Es la opción para compartir o publicar. La contrapartida honesta:
+            parte de la web moderna; puede reducir el tamaño para compartir en aplicaciones compatibles. El resultado depende del audio y del codificador del navegador. La contrapartida honesta:
             el navegador solo sabe generarlo reproduciendo el audio en tiempo real, así
             que convertir cinco minutos tarda cinco minutos. No es un límite artificial,
-            es lo único que ofrece el navegador sin cargar una librería de codificación
+            es el mecanismo de compresión implementado aquí sin cargar una librería de codificación
             de varios megabytes.
           </p>
 
           <h2>Por qué no hay salida en MP3</h2>
           <p>
-            Porque ningún navegador trae un codificador de MP3, solo un decodificador.
+            Porque esta herramienta no incorpora un codificador de MP3.
             Generarlo aquí exigiría descargar una librería externa pesada y, siendo
-            francos, para todo lo que hoy hace un MP3 el Opus lo hace mejor y más ligero.
+            francos, la compatibilidad de Opus y WebM debe comprobarse en el reproductor de destino.
             Preferimos decirlo claro antes que ofrecer una casilla que en realidad
             entrega otra cosa.
           </p>
@@ -349,7 +345,7 @@
             <li><strong>Editar video:</strong> pasar un MP3 a WAV porque el editor lo trata mejor.</li>
             <li><strong>Publicar en web:</strong> pasar un WAV pesado a Opus para que la página cargue rápido.</li>
             <li><strong>Compatibilidad:</strong> convertir un M4A que un programa antiguo no abre.</li>
-            <li><strong>Ahorro de espacio:</strong> reducir una grabación larga sin que se note en la voz.</li>
+            <li><strong>Ahorro de espacio:</strong> reducir una grabación comprobando después la calidad de la voz.</li>
           </ul>
 
           <h2>Qué puedes hacer con el resultado</h2>
@@ -366,18 +362,19 @@
             el <a href="/herramientas/audio/">editor de audio</a> las reúne en una sola pantalla.
           </p>
 
-          <h2 id="faq">Preguntas frecuentes</h2>
+          <div data-reviewed-addition="audio-convert"><p data-compressed-boundary-note>Para cortes exactos por muestra, usa WAV. La grabación comprimida nativa puede modificar los límites: en nuestra prueba con Chromium, un archivo de un segundo se decodificó a 0,96 segundos. Revisa el inicio y el final descargados antes de usar la salida comprimida en efectos sincronizados o bucles.</p><h3>Tamaño y formato que puedes comprobar</h3><p>El exportador WAV escribe PCM de 16 bits. La cuenta es <code>44 + fotogramas de audio × canales × 2</code> bytes. Un búfer de 10 segundos a 48.000 Hz tiene 480.000 fotogramas: ocupa <strong>1.920.044 bytes en estéreo</strong> o <strong>960.044 en mono</strong>. Es un ejemplo calculado, no una promesa de compresión. La frecuencia mostrada corresponde al audio decodificado y puede diferir de la original.</p><p>La salida comprimida utiliza el formato que admita MediaRecorder: primero WebM/Opus, después Ogg/Opus y, como alternativa, WebM sin fijar explícitamente el códec. La extensión descargada es <code>.webm</code> u <code>.ogg</code>. El tamaño comprimido mostrado es una estimación, no un tamaño garantizado; no hay control de bitrate.</p><p>Guarda el original y escucha el principio y el final de la descarga en el programa de destino. WAV no recupera información perdida en MP3 ni conserva bit a bit un original de mayor resolución. Mezclar a mono promedia los canales y puede alterar material estéreo. La memoria del dispositivo y los códecs del navegador limitan los archivos que puedes procesar.</p></div>
+<h2 id="faq">Preguntas frecuentes</h2>
           <details class="faq-item" name="faq" open>
             <summary><h3>¿Se sube mi archivo a algún servidor?</h3></summary>
             <p>No. La conversión ocurre entera dentro de tu navegador, así que el audio nunca sale de tu equipo ni queda una copia en ningún sitio.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Qué formatos puedo convertir?</h3></summary>
-            <p>De entrada, cualquiera que tu navegador sepa reproducir: MP3, WAV, OGG, M4A/AAC y normalmente FLAC. De salida, WAV sin pérdida u Opus comprimido.</p>
+            <p>De entrada, cualquiera que tu navegador sepa reproducir: MP3, WAV, OGG, M4A/AAC y normalmente FLAC. De salida, WAV sin comprimir u Opus comprimido.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Por qué no puedo exportar a MP3?</h3></summary>
-            <p>Porque los navegadores traen decodificador de MP3 pero no codificador. Ofrecerlo exigiría cargar una librería externa pesada, y para prácticamente cualquier uso actual Opus da mejor calidad ocupando menos.</p>
+            <p>Esta herramienta no incluye un codificador MP3. Ofrece WAV PCM de 16 bits y grabación comprimida cuando el navegador la admite. Si tu programa exige MP3, utiliza un editor que incorpore esa salida.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Por qué la conversión a Opus tarda tanto?</h3></summary>
@@ -385,11 +382,11 @@
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Convertir a WAV mejora la calidad de un MP3?</h3></summary>
-            <p>No. Lo que se perdió al comprimir en MP3 no vuelve. Lo que consigues es un archivo sin pérdida a partir de ese momento, que es justo lo que quieres antes de seguir editando.</p>
+            <p>No. Lo que se perdió al comprimir en MP3 no vuelve. Obtienes PCM de 16 bits sin comprimir para seguir editando; no una copia idéntica de un original de mayor resolución.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Qué gano convirtiendo a mono?</h3></summary>
-            <p>La mitad del tamaño en WAV, y ningún inconveniente si la grabación es de voz o si los dos canales son idénticos. Para música o para audio con efecto estéreo real, mejor no tocarlo.</p>
+            <p>En una fuente estéreo, reduce a la mitad los datos PCM del WAV, sin contar la cabecera. Promedia los canales y puede cambiar el sonido o cancelar información; escucha el resultado. Una fuente que ya sea mono no reduce sus canales.</p>
           </details>
         </div>
 

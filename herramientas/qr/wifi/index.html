@@ -45,8 +45,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="../css/tool.css?v=20261009logo2" />
 
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -106,7 +105,7 @@
           "name": "¿Mi contraseña de WiFi se sube a algún servidor?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. El código se construye y se dibuja completamente en tu navegador. La contraseña nunca se envía a ningún sitio — es exactamente el tipo de dato para el que esta garantía importa más."
+            "text": "No. El código se construye y se dibuja completamente en tu navegador. La contraseña nunca se envía a ningún sitio: es exactamente el tipo de dato para el que esta garantía importa más."
           }
         },
         {
@@ -114,7 +113,7 @@
           "name": "¿Funciona con cualquier teléfono?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Con iPhones desde iOS 11 y con la mayoría de Android actuales (a través de la cámara o Google Lens), sí, de forma nativa. En Android más antiguos puede hacer falta una app lectora de QR aparte."
+            "text": "Depende del teléfono, su lector y la configuración de red. Algunos reconocen el código y ofrecen conectarse; otros solo muestran los datos. Prueba el archivo descargado con los dispositivos que lo usarán."
           }
         },
         {
@@ -122,7 +121,7 @@
           "name": "¿Qué tipo de seguridad elijo?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Si no lo sabes con certeza, elige WPA/WPA2: es el estándar en prácticamente cualquier router doméstico o comercial de los últimos 15 años. WEP es un formato antiguo y ya poco usado; «Abierta» es solo para redes públicas sin contraseña."
+            "text": "Consulta la configuración del router y elige el modo correspondiente. WPA/WPA2 es la opción para redes con esa seguridad; WEP sirve para configuraciones antiguas y no se recomienda como nueva protección. «Abierta» genera un código sin contraseña."
           }
         },
         {
@@ -152,8 +151,7 @@
       ]
     }
   ]
-}
-    </script>
+}</script>
       <!-- AdSense: anuncios no personalizados en todo el tráfico -->
     <script>
       (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
@@ -191,7 +189,7 @@
         <div class="page-head">
           <p class="eyebrow reveal">Herramienta gratis</p>
           <h1 class="reveal" style="--reveal-delay: 80ms">Código QR para WiFi</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">Pega tu red y tu contraseña, y obtén un código que conecta al instante al escanearlo con la cámara. Nadie tiene que teclear ni ver la contraseña real.</p>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Comparte el acceso a tu red con un QR. Un teléfono compatible puede conectarse sin teclear la clave. El código contiene la contraseña y un lector puede mostrarla: compártelo solo con personas autorizadas.</p>
         </div>
 
         <div class="workspace" data-workspace style="margin-top: 2rem">
@@ -336,7 +334,7 @@
           <h2>Cómo crear el código</h2>
           <ol>
             <li>Escribe el nombre exacto de tu red (SSID) y la contraseña.</li>
-            <li>Elige el tipo de seguridad: WPA/WPA2 es lo normal en cualquier router de los últimos 15 años.</li>
+            <li>Elige el tipo de seguridad: elige el modo que coincida con la configuración de tu router.</li>
             <li>Descarga el código e imprímelo o compártelo con quien necesite conectarse.</li>
           </ol>
 
@@ -366,18 +364,19 @@
             <a href="/herramientas/qr/">generador de código QR</a> acepta cualquier texto.
           </p>
 
-          <h2 id="faq">Preguntas frecuentes</h2>
+          <div data-reviewed-addition="qr-wifi"><h3>Comprueba los datos, incluidos los símbolos</h3><p>Ejemplo ficticio: red <code>Ejemplo-Invitados</code>, clave <code>Demo;Visita:2026</code> y seguridad WPA/WPA2. El lector debe recuperar el punto y coma y los dos puntos sin cambios. La herramienta escapa esos separadores automáticamente; no añadas barras de escape a mano. Esta prueba no conecta a una red si no existe un router configurado con esos datos.</p><p>El nombre de red distingue mayúsculas y minúsculas; este formulario elimina sus espacios al principio y al final. La contraseña conserva sus espacios. Las opciones disponibles son WPA/WPA2, WEP y abierta: no hay configuración dedicada de WPA3, certificados de empresa ni portales de acceso. Verifica ese requisito con tu red.</p></div>
+<h2 id="faq">Preguntas frecuentes</h2>
           <details class="faq-item" name="faq" open>
             <summary><h3>¿Mi contraseña de WiFi se sube a algún servidor?</h3></summary>
             <p>No. El código se construye y se dibuja completamente en tu navegador. La contraseña nunca se envía a ningún sitio: es exactamente el tipo de dato para el que esta garantía importa más.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Funciona con cualquier teléfono?</h3></summary>
-            <p>Con iPhones desde iOS 11 y con la mayoría de Android actuales (a través de la cámara o Google Lens), sí, de forma nativa. En Android más antiguos puede hacer falta una app lectora de QR aparte.</p>
+            <p>Depende del teléfono, su lector y la configuración de red. Algunos reconocen el código y ofrecen conectarse; otros solo muestran los datos. Prueba el archivo descargado con los dispositivos que lo usarán.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Qué tipo de seguridad elijo?</h3></summary>
-            <p>Si no lo sabes con certeza, elige WPA/WPA2: es el estándar en prácticamente cualquier router doméstico o comercial de los últimos 15 años. WEP es un formato antiguo y ya poco usado; «Abierta» es solo para redes públicas sin contraseña.</p>
+            <p>Consulta la configuración del router y elige el modo correspondiente. WPA/WPA2 es la opción para redes con esa seguridad; WEP sirve para configuraciones antiguas y no se recomienda como nueva protección. «Abierta» genera un código sin contraseña.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Qué es una red oculta y cuándo activar esa opción?</h3></summary>

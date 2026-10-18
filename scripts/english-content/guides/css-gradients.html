@@ -1,0 +1,28 @@
+<section class="section shell" data-reviewed-guide="css-gradients"><div class="prose">
+  <h2>Build a CSS gradient for a real interface</h2>
+  <p>Choose linear, radial, or conic, then adjust up to eight color stops. Each stop has a color, opacity, and position. The preview and copied rule come from the same settings; no image export or JavaScript library is needed to use the generated background.</p>
+  <h3>Choose the direction your design needs</h3>
+  <ul>
+    <li><strong>Linear:</strong> a transition along a straight axis. At 0° the direction is bottom to top; at 90° it is left to right. Try 135° for a diagonal card background.</li>
+    <li><strong>Radial:</strong> a circle or ellipse expanding from the center. Use it for a spotlight behind a product. The angle setting does not apply to a radial gradient.</li>
+    <li><strong>Conic:</strong> colors sweep around the center. The angle changes where the sweep starts. Useful for a decorative dial; a colored circle alone does not provide an accessible data chart.</li>
+  </ul>
+  <h3>Three examples in the Lienzo palette</h3>
+  <p>These independent CSS examples use the same native functions as the generator. They are reference values; use the copy controls above for your current settings.</p>
+  <pre><code>/* Diagonal card */
+background: linear-gradient(135deg, #8b7bff 0%, #35d6c8 100%);
+
+/* Centered spotlight */
+background: radial-gradient(circle at center, #35d6c8 0%, #6e5df2 100%);
+
+/* Circular color sweep */
+background: conic-gradient(from 0deg at center, #8b7bff 0%, #35d6c8 50%, #8b7bff 100%);</code></pre>
+  <h3>Stops, transparency, and a clean seam</h3>
+  <p>Move a stop to control where a color is reached, not how wide its swatch is in the settings panel. Adjacent stops at the same position create a hard edge. Lower opacity lets the background beneath show through, so test on the actual surface. For a smooth conic loop, make the first and last colors match; different endpoints create a visible seam.</p>
+  <h3>Copy and test in context</h3>
+  <p><strong>Copy CSS</strong> includes the <code>.degradado</code> selector and background declaration. <strong>Copy value</strong> returns only the gradient function, suitable for your own <code>background</code> property. Check the result at mobile and desktop widths: the angle can stay the same while the shape of the box changes the visible transition.</p>
+  <p>For text over a gradient, check contrast at every color behind the letters, including translucent areas. A good result at one endpoint does not certify the whole background. If needed, add an opaque text surface. Use <a href="/en/tools/live-colors/">Live Color Preview</a> for individual color pairs and test the final design separately.</p>
+  <details><summary>Why do I see bands or a line in the gradient?</summary><p>A conic seam can come from mismatched first and last colors. Broad tonal bands can depend on the display, color depth, and chosen colors. Try another stop or a smaller transition area. An optional subtle noise layer can mask banding, but is not part of this generator's output and adds another asset to maintain.</p></details>
+  <details><summary>Can I animate the generated gradient?</summary><p>The copied code is a static background. Animation needs additional CSS; the generator does not add keyframes. If you animate it in your project, consider rendering cost and a reduced-motion alternative.</p></details>
+  <p><a href="/en/code/">All CSS generators</a> · <a href="/en/tools/palettes/">Color palettes</a> · <a href="/en/templates/">Downloadable web templates</a></p>
+</div></section>

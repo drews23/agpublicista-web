@@ -45,8 +45,7 @@
     <link rel="stylesheet" href="/css/site.css?v=2026090405" />
     <link rel="stylesheet" href="../css/tool.css?v=20261009logo2" />
 
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -114,7 +113,7 @@
           "name": "¿Es obligatorio llenar todos los campos?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Con el nombre y al menos un dato de contacto (teléfono o correo) el código ya funciona. Los demás campos son opcionales."
+            "text": "No. La vista previa puede comenzar con un nombre, apellido, teléfono o correo. Para que el contacto resulte útil, recomendamos nombre y un medio de contacto. Empresa, cargo y sitio web son opcionales."
           }
         },
         {
@@ -130,7 +129,7 @@
           "name": "¿Funciona igual en iPhone y Android?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sí, el formato vCard es un estándar reconocido por la app de Contactos de ambos sistemas al escanear con la cámara nativa."
+            "text": "La compatibilidad depende del lector y del dispositivo. Algunos ofrecen crear el contacto y otros muestran el texto o necesitan otra app. Comprueba el resultado en los teléfonos de tus destinatarios."
           }
         },
         {
@@ -138,7 +137,7 @@
           "name": "¿Puedo actualizar el contacto después de que alguien lo guardó?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No automáticamente: cada escaneo crea un contacto nuevo con los datos de ese momento. Si cambias tus datos, un código nuevo no actualiza el contacto ya guardado por esa persona."
+            "text": "No. Escanear permite revisar los datos, y la persona decide si los guarda. Un QR nuevo no actualiza la agenda ajena ni cambia la información de un código ya impreso."
           }
         },
         {
@@ -146,14 +145,13 @@
           "name": "¿Puedo incluir varios teléfonos o correos?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Esta herramienta genera un teléfono y un correo por código, que cubre el caso más común. Para necesidades más complejas (varios números, varias direcciones) haría falta editar el archivo vCard a mano después de descargarlo."
+            "text": "Esta herramienta ofrece un teléfono y un correo por código. Las descargas son imágenes PNG o SVG, no un archivo vCard editable. Para varios números necesitas otra solución o una página de contacto enlazada mediante un QR de URL."
           }
         }
       ]
     }
   ]
-}
-    </script>
+}</script>
       <!-- AdSense: anuncios no personalizados en todo el tráfico -->
     <script>
       (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
@@ -315,17 +313,14 @@
 
       <section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3400px">
         <div class="prose">
-          <h2>Una tarjeta de presentación que se guarda sola</h2>
+          <h2>Una tarjeta de presentación lista para guardar</h2>
           <p>
-            Este código usa el formato <strong>vCard</strong>, el estándar que ya entiende
-            cualquier agenda de contactos moderna. Al escanearlo, el teléfono no abre una
-            página web: abre directamente la pantalla de "Crear nuevo contacto" con todos
-            los campos ya rellenos.
+            Este código contiene una <strong>vCard 3.0</strong> con los datos que completes. Un lector compatible puede ofrecer crear un contacto; la persona revisa los campos y confirma el guardado. Algunas cámaras muestran el texto o requieren otra app lectora.
           </p>
 
           <h2>Cómo crear el código</h2>
           <ol>
-            <li>Completa los campos que quieras incluir, solo el nombre y un dato de contacto son necesarios.</li>
+            <li>Completa los campos que quieras compartir. La vista previa puede empezar con nombre, apellido, teléfono o correo; para una tarjeta útil, incluye un nombre y una forma de contacto.</li>
             <li>Revisa la vista previa: prueba a escanearla con tu propio teléfono antes de imprimir.</li>
             <li>Descarga en PNG para una tarjeta impresa, o en SVG para un diseño más grande.</li>
           </ol>
@@ -354,14 +349,15 @@
             <a href="/herramientas/qr/">generador de código QR</a> acepta cualquier texto.
           </p>
 
-          <h2 id="faq">Preguntas frecuentes</h2>
+          <div data-reviewed-addition="qr-contact"><h3>Una prueba antes de imprimir</h3><p>Prueba con el nombre ficticio <strong>Alex Rivera</strong>, la empresa <strong>Estudio Ejemplo</strong> y el correo <code>alex@example.com</code>. Descarga la imagen y comprueba que el lector recibe esos valores. Son datos de demostración, no un contacto real. La herramienta codifica vCard 3.0 y ofrece un teléfono y un correo.</p><p>PNG y SVG son imágenes del código, no un archivo <code>.vcf</code>. Un QR de contacto conserva los datos dentro del patrón. Si prefieres mantener una página que puedas actualizar, usa un <a href="/herramientas/qr/url/">QR de URL</a> hacia una página bajo tu control. Ninguna de las dos opciones actualiza por sí sola la agenda de otra persona.</p></div>
+<h2 id="faq">Preguntas frecuentes</h2>
           <details class="faq-item" name="faq" open>
             <summary><h3>¿Qué pasa exactamente al escanear el código?</h3></summary>
             <p>El teléfono reconoce el formato vCard y abre la pantalla de «Nuevo contacto» con el nombre, teléfono, correo y demás campos ya completados. Solo falta confirmar para guardarlo en la agenda.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Es obligatorio llenar todos los campos?</h3></summary>
-            <p>No. Con el nombre y al menos un dato de contacto (teléfono o correo) el código ya funciona. Los demás campos son opcionales.</p>
+            <p>No. La vista previa puede comenzar con un nombre, apellido, teléfono o correo. Para que el contacto resulte útil, recomendamos nombre y un medio de contacto. Empresa, cargo y sitio web son opcionales.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Mis datos se suben a algún servidor?</h3></summary>
@@ -369,15 +365,15 @@
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Funciona igual en iPhone y Android?</h3></summary>
-            <p>Sí, el formato vCard es un estándar reconocido por la app de Contactos de ambos sistemas al escanear con la cámara nativa.</p>
+            <p>La compatibilidad depende del lector y del dispositivo. Algunos ofrecen crear el contacto y otros muestran el texto o necesitan otra app. Comprueba el resultado en los teléfonos de tus destinatarios.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Puedo actualizar el contacto después de que alguien lo guardó?</h3></summary>
-            <p>No automáticamente: cada escaneo crea un contacto nuevo con los datos de ese momento. Si cambias tus datos, un código nuevo no actualiza el contacto ya guardado por esa persona.</p>
+            <p>No. Escanear permite revisar los datos, y la persona decide si los guarda. Un QR nuevo no actualiza la agenda ajena ni cambia la información de un código ya impreso.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Puedo incluir varios teléfonos o correos?</h3></summary>
-            <p>Esta herramienta genera un teléfono y un correo por código, que cubre el caso más común. Para necesidades más complejas (varios números, varias direcciones) haría falta editar el archivo vCard a mano después de descargarlo.</p>
+            <p>Esta herramienta ofrece un teléfono y un correo por código. Las descargas son imágenes PNG o SVG, no un archivo vCard editable. Para varios números necesitas otra solución o una página de contacto enlazada mediante un QR de URL.</p>
           </details>
         </div>
 

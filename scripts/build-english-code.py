@@ -105,6 +105,8 @@ def build():
    intro=main.select_one('p.sub') or main.select_one('h1 + p')
    if intro:intro.string='Save palettes and CSS, favorite tools, and export a backup. No account required. Your workspace stays in this browser.'
    for n in main.select('noscript'):n.clear();n.append('Enable JavaScript to use your local workspace. The tools and blog remain available.')
+  elif key=='gradients':
+   guide=(CONTENT/'guides/css-gradients.html').read_text(encoding='utf8')
   elif '/componentes/' in es:
    guide='<section class="section shell"><div class="prose"><h2>Use the example in your project</h2><p>Copy the HTML and CSS for the same piece. If a JavaScript button is shown, include that script too. Keep IDs unique, update links, and test keyboard focus and small screens. These examples demonstrate front-end behavior; forms do not create accounts or submit real orders. Names, testimonials, prices, and metrics are illustrative sample content.</p><p><a href="/en/code/components/">All component categories</a> · <a href="/en/code/">CSS generators</a> · <a href="/en/templates/">Downloadable templates</a></p></div></section>'
   else:
@@ -120,6 +122,7 @@ def build():
   elif es=='/codigo-web/':title='Free CSS Generators and Interface Examples'
   else:title=main.h1.get_text(' ',strip=True)
   desc=f'{title} by Lienzo. Preview and customize in your browser, copy reusable code, and follow practical guidance. Free, no signup.' if es!='/mi-lienzo/' else 'Save color palettes, CSS snippets, and favorite tools in My Lienzo. No account or cloud sync. Export and import a JSON backup in your browser.'
+  if key=='gradients':desc=json.loads((CONTENT/'guides/descriptions.json').read_text(encoding='utf8'))['css-gradients']
   styles=''.join(f'<link rel="stylesheet" href="{html.escape(urljoin(es,x["href"]))}">' for x in s.select('link[rel=stylesheet]') if not x['href'].startswith('http'))
   scripts=['<script src="/en/assets/site.js" defer></script>','<script src="/en/assets/my-lienzo.js" defer></script>']
   for x in s.select('script[src]'):

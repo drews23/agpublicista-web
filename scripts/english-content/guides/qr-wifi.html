@@ -1,0 +1,20 @@
+<section class="section shell" data-reviewed-guide="qr-wifi"><div class="prose">
+  <h2>Share Wi-Fi access without dictating a password</h2>
+  <p>A Wi-Fi QR code contains the network name, security setting, password, and optional hidden-network flag. A compatible phone can offer to join the network after scanning. It still needs to be within range of that network; the code does not provide internet access by itself.</p>
+  <h3>Choose settings that match your router</h3>
+  <ol>
+    <li>Enter the exact network name, also called the SSID. Match uppercase and lowercase letters. This form trims spaces at the beginning and end of the network name.</li>
+    <li>Choose <strong>WPA/WPA2</strong> if that matches your network. The <strong>WEP</strong> option is for a legacy configuration; it is not a recommendation to use WEP. <strong>Open</strong> creates a code without a password.</li>
+    <li>Enter the password as configured, including any spaces or symbols. The tool escapes reserved Wi-Fi payload characters such as semicolons and backslashes; do not add escape characters yourself.</li>
+    <li>Enable <strong>Hidden network</strong> only when the router is configured not to broadcast its name. This flag does not hide or encrypt the QR contents.</li>
+    <li>Download PNG or SVG, then scan it with a phone that is not already connected. Check the offered network before joining.</li>
+  </ol>
+  <h3>Try a fictional guest-network example</h3>
+  <p>Enter SSID <code>Example-Guest</code>, password <code>Demo;Guest:2026</code>, and WPA/WPA2. A decoder should return the same name and password, including the semicolon and colon. This only tests the data: it cannot connect unless a real router has matching settings.</p>
+  <h3>Treat the QR image like the password</h3>
+  <p><strong>The credentials are embedded, not encrypted.</strong> A reader can display them. Anyone with a photograph of the code may recover them. For a café, studio, or accommodation, consider a separate guest network and place the code where authorized guests can access it. Generate and replace the code whenever the network name or password changes.</p>
+  <details><summary>Does it support WPA3 or a business login portal?</summary><p>The controls offer WPA/WPA2, WEP, and open-network payloads. There is no dedicated WPA3, enterprise identity/certificate, or captive-portal setup. Do not assume this QR completes a web login or an enterprise authentication flow. Check your network and device requirements.</p></details>
+  <details><summary>Why can my phone read it but not connect?</summary><p>Check range, the exact SSID, password, security mode, and hidden-network flag. A scanner may decode the text without supporting a join action. A changed password invalidates an old printed code even when that code still scans correctly.</p></details>
+  <details><summary>Is the password uploaded?</summary><p>The generator builds and draws the QR in your browser. It does not upload the entered network credentials. The downloaded QR still contains them, so control who can keep or scan that image.</p></details>
+  <p><a href="/en/tools/qr/">All QR options</a> · <a href="/en/tools/qr/contact/">Contact QR</a> · <a href="/en/privacy/">Privacy</a></p>
+</div></section>

@@ -84,6 +84,9 @@ GUIDES={
  '':('Pick the tool for the job','Create QR codes, edit audio, optimize SVG, explore color palettes, generate favicons, or customize a wavy text effect. The individual pages explain inputs, export options, and browser limitations. There is no account requirement. Domain favicon lookup uses external services; other file-editing operations run in the browser.','Do I need to install software?','No installation is required for these browser tools. Use a current browser, keep your source files, and verify the exported result before publishing.'),
 }
 def guide(key):
+ reviewed={'qr/contacto':'qr-contact','qr/wifi':'qr-wifi','audio/convertir':'audio-convert'}
+ if key in reviewed:
+  return (CONTENT/'guides'/f'{reviewed[key]}.html').read_text(encoding='utf-8')
  family=key.split('/')[0];heading,body,q,a=GUIDES[family]
  return f'<section class="section"><div class="shell"><h2>{heading}</h2><p>{body}</p><details><summary>{q}</summary><p>{a}</p></details><p><a href="/en/tools/">Explore all tools</a> · <a href="/en/privacy/">Privacy</a> · <a href="/en/third-party-licenses/">Third-party licenses</a></p></div></section>'
 def build():
@@ -142,6 +145,9 @@ def build():
    if src.startswith('/js/color-engine.js'):mapped='/en/assets/color-engine.js'
    scripts.append(f'<script src="{html.escape(mapped)}"'+(' type="module"' if script.get('type')=='module' else ' defer')+'></script>')
   desc=f'{title} by Lienzo. Try the browser tool, customize your result, and review export options and practical usage guidance. Free, no signup.'
+  reviewed_key={'qr/contacto':'qr-contact','qr/wifi':'qr-wifi','audio/convertir':'audio-convert'}.get(key)
+  if reviewed_key:
+   desc=json.loads((CONTENT/'guides/descriptions.json').read_text(encoding='utf8'))[reviewed_key]
   schema={'@context':'https://schema.org','@type':'WebApplication','name':title,'url':base.ORIGIN+en,'inLanguage':'en-US','applicationCategory':'MultimediaApplication','operatingSystem':'Web browser','offers':{'@type':'Offer','price':'0','priceCurrency':'USD'}}
   top=base.header().replace('href="/codigo-web/plantillas/" lang="es"',f'href="{es}" lang="es"').replace('Ver esta colección en español','Ver esta herramienta en español')
   top=top.replace('<a href="/en/templates/">Web Templates</a>','<a href="/en/tools/">Tools</a><a href="/en/templates/">Templates</a>')
