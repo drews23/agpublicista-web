@@ -8,7 +8,7 @@
   const stage = dialog.querySelector('[data-preview-stage]');
   const loading = dialog.querySelector('[data-preview-loading]');
   const themeButton = dialog.querySelector('[data-preview-theme]');
-  const allowed = new Set(['botones-cristal', 'botones-capas', 'carrusel-recursos', 'laboratorio-3d', 'tarjetas-producto', 'iconos-animados', 'carrusel-progreso', 'tarjetas-hover']);
+  const allowed = new Set(['botones-cristal', 'botones-capas', 'carrusel-recursos', 'laboratorio-3d', 'tarjetas-producto', 'iconos-animados', 'carrusel-progreso', 'tarjetas-hover', 'escenas-css', 'galeria-expandible', 'menu-indicador', 'menu-contextual', 'imagen-particulas', 'tarjeta-perfil']);
   let opener = null;
   let theme = 'dark';
 

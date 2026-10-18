@@ -1,0 +1,4 @@
+{
+  "es": {"items": [{"title": "Materia viva", "description": "Ideas que encuentran otra forma.", "accent": "violet", "strength": 0.6, "radius": 0.32, "speed": 0.65, "pointSize": 1, "quality": "adaptive", "interaction": "repel", "palette": "original", "composition": "orbit", "imageData": ""}], "active": 0, "dispersed": false},
+  "en": {"items": [{"title": "Living matter", "description": "Ideas finding another form.", "accent": "violet", "strength": 0.6, "radius": 0.32, "speed": 0.65, "pointSize": 1, "quality": "adaptive", "interaction": "repel", "palette": "original", "composition": "orbit", "imageData": ""}], "active": 0, "dispersed": false}
+}

@@ -282,7 +282,8 @@ def enhance_resources(raw,route):
  scripts=list(re.finditer(r'<script\b[^>]*type="application/ld\+json"[^>]*>.*?</script>',updated,re.S))
  for previous,new in reversed(list(zip(scripts,s.select('script[type="application/ld+json"]')))):
   updated=updated[:previous.start()]+str(new)+updated[previous.end():]
- return updated
+ from templates_v2 import enhance_resources as enhance_v2_resources
+ return enhance_v2_resources(updated,route)
 
 
 def build(only=None):

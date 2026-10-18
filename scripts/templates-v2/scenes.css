@@ -1,0 +1,74 @@
+/* Lienzo Scene Atelier: six complete illustrations, not miniature placeholders. */
+[data-kind=scenes] .v2-stage{padding:0;min-height:0;background:var(--page)}
+[data-kind=scenes] .v2-toolbar{gap:12px}
+[data-kind=scenes] .v2-toolbar-label{display:none}
+[data-kind=scenes] .v2-toolbar>.v2-row{width:100%}
+[data-kind=scenes] [data-play-all]{margin-right:auto}
+[data-kind=scenes] .v2-bottom{background:var(--surface)}
+.cs-atelier{padding:26px}
+.cs-intro{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:0 0 23px}
+.cs-edition{display:flex;align-items:center;gap:15px;margin:0;font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.cs-edition>span:first-child{font-weight:750;color:var(--text);border-right:1px solid var(--line);padding-right:15px}
+.cs-intro>p:last-child{margin:0;font-size:12px;color:var(--muted);max-width:295px;text-align:right}
+.cs-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.cs-card{position:relative;min-width:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:15px;background:var(--surface);overflow:hidden;--scene-color:#8b7bff;--cs-play:paused}
+.cs-card::before{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;border:1px solid transparent;z-index:1;transition:border-color .2s}
+.cs-card:focus-within::before,.cs-card:hover::before{border-color:color-mix(in srgb,var(--scene-color),transparent 35%)}
+.cs-card[data-active=true] .cs-card-index{color:var(--text);border-color:color-mix(in srgb,var(--scene-color),transparent 35%)}
+.cs-card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 19px 0}
+.cs-card-index{display:grid;place-items:center;font-variant-numeric:tabular-nums;font-size:11px;width:29px;height:29px;border:1px solid var(--line);border-radius:50%;color:var(--muted)}
+.cs-card-category{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.cs-art-button{display:block;width:100%;border:0;background:none;color:inherit;text-align:inherit;position:relative;padding:4px 9px 9px;touch-action:manipulation;isolation:isolate}
+.cs-art-button:focus-visible{outline-offset:-5px;border-radius:12px}
+.cs-art-button::before{content:'';position:absolute;inset:12px 14px 22px;border-radius:50%;background:radial-gradient(ellipse,color-mix(in srgb,var(--scene-color),transparent 93%),transparent 70%);pointer-events:none;z-index:-1}
+.cs-scene{position:relative;width:100%;max-width:420px;aspect-ratio:360/260;margin:auto;--font-sans:Instrument}
+.cs-scene svg{width:100%;height:100%;display:block}
+.cs-card .cs-scene,.cs-card .cs-scene *,.cs-card .cs-scene *::before,.cs-card .cs-scene *::after{animation-play-state:var(--cs-play,paused)!important}
+.v2-shell.v2-paused .cs-scene,.v2-shell.v2-paused .cs-scene *,.v2-shell.v2-paused .cs-scene *::before,.v2-shell.v2-paused .cs-scene *::after{animation-play-state:paused!important}
+.cs-play-hint{display:flex;align-items:center;justify-content:center;gap:6px;position:absolute;right:19px;bottom:6px;padding:4px 8px;font-size:10px;background:var(--page);border:1px solid var(--line);border-radius:30px;opacity:0;transition:opacity .18s;color:var(--muted)}
+.cs-play-hint svg{width:12px;height:12px}
+.cs-art-button:hover .cs-play-hint,.cs-art-button:focus-visible .cs-play-hint{opacity:1}
+.cs-card-copy{padding:0 20px 18px;flex:1;display:flex;flex-direction:column}
+.cs-card-copy h2{font-size:25px;font-weight:480;line-height:1.17;letter-spacing:normal;margin:0 0 10px;overflow-wrap:anywhere}
+.cs-card-copy>p{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 21px;min-height:40px;overflow-wrap:anywhere}
+.cs-card-actions{display:flex;align-items:center;gap:8px;margin-top:auto}
+.cs-detail-button{margin-right:auto;display:inline-flex;gap:12px;align-items:center;min-height:44px;padding:7px 0;border:0;background:none;font-size:12px;color:var(--text)}
+.cs-detail-button svg{width:17px;height:17px;color:var(--scene-color);transition:transform .2s}
+.cs-detail-button:hover svg{transform:translateX(3px)}
+.cs-small-button{flex:none;display:grid;place-items:center;width:40px;min-width:40px;height:40px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--page);color:var(--muted)}
+.cs-small-button svg{width:17px;height:17px}
+.cs-small-button:hover{background:var(--surface2);color:var(--text)}
+.cs-note{display:flex;justify-content:space-between;gap:20px;padding-top:22px;font-size:10px;color:var(--muted)}
+.cs-sequence-status{font-size:12px;margin:0;color:var(--muted)}
+.cs-sequence-status:not(:empty){padding-top:18px}
+.cs-scene-nav{display:none;gap:8px;flex-wrap:wrap;padding-bottom:20px}
+.cs-scene-nav button{display:flex;align-items:center;gap:9px;min-height:44px;padding:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:9px;color:var(--muted);font-size:11px}
+.cs-scene-nav button span:first-child{font-size:10px;font-variant-numeric:tabular-nums;opacity:.65}
+.cs-scene-nav button[aria-pressed=true]{border-color:var(--accent);color:var(--text)}
+.cs-atelier[data-view=detail] .cs-scene-nav{display:flex}
+.cs-board[data-view=detail]{grid-template-columns:1fr}
+.cs-board[data-view=detail] .cs-card:not([data-active=true]){display:none}
+.cs-board[data-view=detail] .cs-card{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,1fr);align-items:center;gap:0 25px;padding:24px}
+.cs-board[data-view=detail] .cs-card-top{grid-column:1/-1;padding:0 0 12px}
+.cs-board[data-view=detail] .cs-art-button{padding:0 0 10px}
+.cs-board[data-view=detail] .cs-scene{max-width:550px}
+.cs-board[data-view=detail] .cs-card-copy{padding:0 22px 0 0}
+.cs-board[data-view=detail] .cs-card-copy h2{font-size:clamp(32px,3.4vw,48px);max-width:370px}
+.cs-board[data-view=detail] .cs-card-copy>p{font-size:15px;line-height:1.7;max-width:370px;margin-bottom:30px}
+.cs-board[data-view=detail] .cs-small-button{width:44px;height:44px}
+.cs-board[data-view=detail] .cs-detail-button{font-size:12px}
+.cs-board[data-view=detail] .cs-detail-button svg{transform:rotate(180deg)}
+html[data-view=thumbnail] .cs-intro,html[data-view=thumbnail] .cs-note,html[data-view=thumbnail] .cs-sequence-status,html[data-view=thumbnail] .cs-play-hint{display:none}
+html[data-view=thumbnail] .cs-atelier{padding:14px}
+html[data-view=thumbnail] .cs-board{gap:12px}
+html[data-view=thumbnail] .cs-card-top{padding:11px 12px 0}
+html[data-view=thumbnail] .cs-card-copy{padding:0 14px 15px}
+html[data-view=thumbnail] .cs-card-copy h2{font-size:21px;margin:0}
+html[data-view=thumbnail] .cs-card-copy>p,html[data-view=thumbnail] .cs-card-actions{display:none}
+html[data-reduced=true] .cs-scene *,html[data-reduced=true] .cs-scene *::before,html[data-reduced=true] .cs-scene *::after{animation:none!important}
+.cs-card[data-still=true] .cs-scene *,.cs-card[data-still=true] .cs-scene *::before,.cs-card[data-still=true] .cs-scene *::after{animation:none!important}
+@media(max-width:1100px){.cs-board{grid-template-columns:repeat(2,minmax(0,1fr))}.cs-intro{align-items:flex-start}.cs-intro>p:last-child{max-width:210px}.cs-card-copy h2{font-size:27px}}
+@media(max-width:760px){.cs-atelier{padding:18px}.cs-intro{padding-bottom:18px;display:block}.cs-intro>p:last-child{max-width:none;text-align:left;font-size:12px;margin-top:12px}.cs-board{gap:14px}.cs-card-top{padding:14px 14px 0}.cs-art-button{padding:1px 1px 9px}.cs-card-copy{padding:0 15px 15px}.cs-card-copy h2{font-size:24px}.cs-card-copy>p{font-size:12px}.cs-card-actions{gap:6px}.cs-detail-button{font-size:11px;gap:8px}.cs-small-button{width:38px;min-width:38px;height:40px;padding:9px}.cs-note{display:block;font-size:10px;line-height:1.6}.cs-note>span{display:block}.cs-board[data-view=detail] .cs-card{grid-template-columns:1fr;padding:18px}.cs-board[data-view=detail] .cs-card-copy{padding:12px 6px 0}.cs-board[data-view=detail] .cs-card-copy h2{font-size:34px}.cs-board[data-view=detail] .cs-card-copy>p{max-width:none}.cs-scene-nav{gap:6px}.cs-scene-nav button{padding:8px 10px}.cs-play-hint{opacity:1;right:12px;font-size:9px}}
+@media(max-width:580px){.cs-board{grid-template-columns:1fr}.cs-atelier{padding:16px}.cs-card-top{padding:16px 17px 0}.cs-art-button{padding:0 8px 10px}.cs-card-copy{padding:0 19px 19px}.cs-card-copy h2{font-size:29px}.cs-card-copy>p{font-size:14px;min-height:0}.cs-small-button{width:44px;min-width:44px;height:44px}.cs-detail-button{font-size:13px}.cs-edition{font-size:9px;gap:12px}.cs-edition>span:first-child{padding-right:12px}.cs-board[data-view=detail] .cs-card{padding:14px}.cs-board[data-view=detail] .cs-card-copy h2{font-size:31px}[data-kind=scenes] .v2-toolbar>.v2-row{gap:8px}[data-kind=scenes] [data-play-all]{margin-right:0}[data-kind=scenes] .v2-segmented{flex:1}[data-kind=scenes] .v2-segmented button{flex:1}}
+@media(max-width:760px){.cs-play-hint{font-size:11px;padding:5px 9px;bottom:3px}.cs-play-hint svg{width:13px;height:13px}}
+@media(prefers-reduced-motion:reduce){.cs-scene *,.cs-scene *::before,.cs-scene *::after{animation:none!important}.cs-card::before,.cs-play-hint,.cs-detail-button svg{transition:none}}

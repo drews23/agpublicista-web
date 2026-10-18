@@ -1,0 +1,36 @@
+{
+  "es": {
+    "navWorkspace": "Estudio de navegación interactivo", "navStudio": "ESTUDIO", "navDemo": "Demo editable",
+    "navLandmark": "Destinos del estudio", "navEditDestination": "Editar destino", "navCompact": "Solo iconos",
+    "navKeyboardHorizontal": "Izquierda / derecha: explorar · Enter: abrir · Inicio / Fin: extremos",
+    "navKeyboardVertical": "Arriba / abajo: explorar · Enter: abrir · Inicio / Fin: extremos",
+    "navOverview": "El punto de partida", "navLibrary": "La colección", "navBuild": "A tu manera", "navShortlist": "Tu selección", "navIdentity": "La identidad",
+    "navExplore": "Explorar la colección", "navHomeCaption": "Cinco destinos. Una dirección clara.", "navOriginalArtwork": "Arte original · Lienzo",
+    "navResourceTemplates": "Plantillas web", "navResourceCode": "Recursos de código", "navResourceTools": "Herramientas creativas", "navResourceDesign": "Diseño", "navResourceUtility": "Utilidades",
+    "navVisitResource": "Ver en Lienzo", "navNewTab": "Abre una nueva pestaña", "navSave": "Guardar", "navUnsave": "Quitar de guardados",
+    "navFilter": "Mostrar", "navAll": "Todos los recursos", "navDestinationOrder": "Tus cinco destinos", "navYourStructure": "Tu menú, tu estructura.",
+    "navBuildHelp": "Edita cada destino, cambia sus enlaces y elige una orientación. El JSON exporta la configuración; el HTML completo conserva la interacción junto a sus archivos.",
+    "navExportConfig": "Descargar configuración", "navEmptyTitle": "Espacio para nuevas ideas.", "navEmptyBody": "Guarda recursos desde la colección para encontrarlos aquí durante esta sesión.",
+    "navVisitLienzo": "Explorar Lienzo", "navOriginal": "Creación original", "navSaved": "Recurso añadido a tu selección local.", "navRemoved": "Recurso retirado de tu selección local.",
+    "navDestinationChanged": "Destino abierto: {name}", "navConfigSaved": "Configuración JSON descargada. No incluye los archivos HTML, CSS o JavaScript.",
+    "navLabel": "Etiqueta del menú", "navHeadline": "Titular del destino", "navSymbol": "Icono del destino",
+    "navSymbol0": "Inicio", "navSymbol1": "Capas", "navSymbol2": "Crear", "navSymbol3": "Favoritos", "navSymbol4": "Perfil"
+  },
+  "en": {
+    "navWorkspace": "Interactive navigation studio", "navStudio": "STUDIO", "navDemo": "Editable demo",
+    "navLandmark": "Studio destinations", "navEditDestination": "Edit destination", "navCompact": "Icons only",
+    "navKeyboardHorizontal": "Left / right: explore · Enter: open · Home / End: first / last",
+    "navKeyboardVertical": "Up / down: explore · Enter: open · Home / End: first / last",
+    "navOverview": "The starting point", "navLibrary": "The collection", "navBuild": "Make it yours", "navShortlist": "Your shortlist", "navIdentity": "The identity",
+    "navExplore": "Explore the collection", "navHomeCaption": "Five destinations. One clear direction.", "navOriginalArtwork": "Original artwork · Lienzo",
+    "navResourceTemplates": "Web templates", "navResourceCode": "Code resources", "navResourceTools": "Creative tools", "navResourceDesign": "Design", "navResourceUtility": "Utilities",
+    "navVisitResource": "View on Lienzo", "navNewTab": "Opens a new tab", "navSave": "Save", "navUnsave": "Remove from saved",
+    "navFilter": "Show", "navAll": "All resources", "navDestinationOrder": "Your five destinations", "navYourStructure": "Your menu. Your structure.",
+    "navBuildHelp": "Edit each destination, set its link, and choose an orientation. Export the settings as JSON, or use the full HTML with its supporting files to keep the interaction.",
+    "navExportConfig": "Download settings", "navEmptyTitle": "Make room for new ideas.", "navEmptyBody": "Save resources from the collection to find them here during this session.",
+    "navVisitLienzo": "Explore Lienzo", "navOriginal": "Original work", "navSaved": "Resource added to your local shortlist.", "navRemoved": "Resource removed from your local shortlist.",
+    "navDestinationChanged": "Destination opened: {name}", "navConfigSaved": "Settings downloaded as JSON. HTML, CSS, and JavaScript files are not included in the JSON.",
+    "navLabel": "Menu label", "navHeadline": "Destination headline", "navSymbol": "Destination icon",
+    "navSymbol0": "Home", "navSymbol1": "Layers", "navSymbol2": "Create", "navSymbol3": "Favorites", "navSymbol4": "Profile"
+  }
+}

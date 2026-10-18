@@ -1,0 +1,39 @@
+<div class="pf-layout" data-pf-layout="editorial">
+  <article class="pf-card" data-profile-card aria-labelledby="pf-profile-name">
+    <div class="pf-cover">
+      <span class="pf-demo">{{demo}}</span><span class="pf-edition" aria-hidden="true">LIENZO / 01</span>
+      <div class="pf-orbits" aria-hidden="true"><i></i><i></i><i></i><i></i><span>✳</span></div>
+      <span class="pf-cover-type" data-cover-initials aria-hidden="true">MV</span>
+      <div class="pf-cover-caption" aria-hidden="true"><span>{{pfCoverLineOne}}<br>{{pfCoverLineTwo}}<br>{{pfCoverLineThree}}</span><span>↗</span></div>
+      <div class="pf-avatar" data-avatar><span data-initials>MV</span><img data-avatar-image alt="" hidden></div>
+    </div>
+    <div class="pf-body">
+      <p class="pf-location"><span data-pf-location-icon aria-hidden="true"></span><span data-profile-location></span></p>
+      <h2 id="pf-profile-name" data-profile-name></h2>
+      <p class="pf-role" data-profile-role></p>
+      <p class="pf-bio" data-profile-bio></p>
+      <div class="pf-skills" data-profile-skills aria-label="{{pfSkillsLabel}}"></div>
+      <div class="pf-card-actions"><a class="v2-button v2-primary" data-profile-email><span>{{contact}}</span><span data-pf-mail-icon aria-hidden="true"></span></a><a class="v2-icon-button" data-profile-link target="_blank" rel="noopener noreferrer" aria-label="{{link}}"></a><button type="button" class="v2-icon-button" data-vcard aria-label="{{vcard}}" title="{{vcard}}"></button></div>
+      <button type="button" class="pf-copy-email" data-pf-copy-email><span data-pf-copy-icon aria-hidden="true"></span><span data-pf-email-label></span></button>
+      <label class="pf-copy-fallback" data-pf-copy-fallback hidden><span>{{pfManualEmail}}</span><input type="text" data-pf-email-value readonly aria-label="{{email}}"></label>
+    </div>
+    <div class="pf-signature"><span>{{pfSignature}}</span><span aria-hidden="true">✳</span><span>LIENZO</span></div>
+  </article>
+  <section class="pf-work" aria-labelledby="pf-work-title">
+    <div class="pf-section-top"><p class="v2-eyebrow">LIENZO / {{selected}}</p><span class="pf-sample-note">{{pfSampleWork}}</span></div>
+    <h2 id="pf-work-title" data-profile-headline></h2>
+    <div class="pf-tabs" role="tablist" aria-label="{{pfSections}}"><button type="button" role="tab" id="pf-tab-work" aria-controls="pf-panel-work" aria-selected="true" data-pf-tab="work">{{projects}}<span aria-hidden="true">02</span></button><button type="button" role="tab" id="pf-tab-about" aria-controls="pf-panel-about" aria-selected="false" tabindex="-1" data-pf-tab="about">{{about}}<span aria-hidden="true">↗</span></button></div>
+    <div id="pf-panel-work" role="tabpanel" aria-labelledby="pf-tab-work" data-pf-panel="work">
+      <div class="pf-projects">
+        <article class="pf-project" data-pf-project="0"><button class="pf-project-open" type="button" data-pf-open-project="0" aria-label="{{pfOpenFirst}}"><span class="pf-project-art" data-pf-art="0" aria-hidden="true"></span><span class="pf-project-index" aria-hidden="true">01 / LIENZO</span><span class="pf-project-preview"><span>{{pfPreview}}</span><span aria-hidden="true">↗</span></span></button><div class="pf-project-caption"><div><p data-pf-project-category="0"></p><h3 data-pf-project-title="0"></h3></div><a data-project-link="0" target="_blank" rel="noopener noreferrer" aria-label="{{pfVisitFirst}}"></a></div></article>
+        <article class="pf-project" data-pf-project="1"><button class="pf-project-open" type="button" data-pf-open-project="1" aria-label="{{pfOpenSecond}}"><span class="pf-project-art" data-pf-art="1" aria-hidden="true"></span><span class="pf-project-index" aria-hidden="true">02 / LIENZO</span><span class="pf-project-preview"><span>{{pfPreview}}</span><span aria-hidden="true">↗</span></span></button><div class="pf-project-caption"><div><p data-pf-project-category="1"></p><h3 data-pf-project-title="1"></h3></div><a data-project-link="1" target="_blank" rel="noopener noreferrer" aria-label="{{pfVisitSecond}}"></a></div></article>
+      </div>
+      <p class="pf-work-footnote"><span aria-hidden="true">✳</span>{{pfWorkFootnote}}</p>
+    </div>
+    <div id="pf-panel-about" role="tabpanel" aria-labelledby="pf-tab-about" data-pf-panel="about" hidden>
+      <div class="pf-about"><p class="pf-about-label">{{pfApproach}}</p><p class="pf-about-text" data-profile-about></p><div class="pf-process"><article><span>01</span><h3>{{pfProcessOne}}</h3><p>{{pfProcessOneText}}</p></article><article><span>02</span><h3>{{pfProcessTwo}}</h3><p>{{pfProcessTwoText}}</p></article><article><span>03</span><h3>{{pfProcessThree}}</h3><p>{{pfProcessThreeText}}</p></article></div><a class="pf-about-link" data-profile-about-link target="_blank" rel="noopener noreferrer">{{link}}<span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+</div>
+<div class="pf-photo-tools" data-pf-photo-tools hidden><span>{{pfFraming}}</span><label>{{pfVertical}}<input type="range" min="0" max="100" step="1" value="50" data-pf-photo-y><output data-pf-photo-y-output>50%</output></label><label>{{pfZoom}}<input type="range" min="100" max="180" step="1" value="100" data-pf-photo-zoom><output data-pf-photo-zoom-output>1×</output></label></div>
+<dialog class="v2-dialog pf-project-dialog" data-pf-project-dialog aria-labelledby="pf-project-dialog-title"><div class="v2-dialog-head"><span class="v2-eyebrow">{{pfSampleWork}}</span><button type="button" class="v2-icon-button" data-pf-close-project aria-label="{{close}}">×</button></div><div class="pf-dialog-art" data-pf-dialog-art aria-hidden="true"></div><p class="pf-dialog-category" data-pf-dialog-category></p><h2 id="pf-project-dialog-title" data-pf-dialog-title></h2><p data-pf-dialog-description></p><div class="pf-dialog-actions"><a class="v2-button v2-primary" data-pf-dialog-link target="_blank" rel="noopener noreferrer">{{pfVisitProject}} ↗</a><label class="v2-button v2-upload pf-project-upload"><span>{{pfProjectImage}}</span><input type="file" accept="image/png,image/jpeg,image/webp" data-pf-project-upload aria-label="{{pfProjectImage}}"></label><button type="button" class="v2-text-button" data-pf-remove-project-image>{{pfOriginalImage}}</button></div><p class="pf-local-note">{{pfImageHelp}}</p><p class="pf-project-status" data-pf-project-status role="status"></p></dialog>

@@ -1,0 +1,22 @@
+{
+  "es": {
+    "active": 0, "layout": "horizontal", "compact": false, "savedResources": [0, 2], "collectionFilter": "all",
+    "items": [
+      {"title":"Inicio", "headline":"Tu próxima idea empieza aquí.", "description":"Un pequeño estudio para explorar, elegir y construir. Cada destino tiene su propio espacio; la luz te acompaña sin perder el rumbo.", "href":"#destination-0", "symbol":"home", "accent":"violet"},
+      {"title":"Colección", "headline":"Diseñado para crear.", "description":"Una selección de accesos reales a Lienzo. Filtra, explora y guarda tus favoritos en esta demostración local.", "href":"#destination-1", "symbol":"layers", "accent":"mint"},
+      {"title":"Crear", "headline":"Dale tu propia dirección.", "description":"Personaliza las etiquetas, los titulares, los iconos y los enlaces de cada destino. Todo cambia en la vista previa.", "href":"#destination-2", "symbol":"plus", "accent":"amber"},
+      {"title":"Guardados", "headline":"Las ideas que se quedan.", "description":"Tu selección vive aquí durante la sesión. El HTML exportado conserva la selección actual; no hay cuentas ni sincronización.", "href":"#destination-3", "symbol":"heart", "accent":"violet"},
+      {"title":"Perfil", "headline":"Una identidad que conecta.", "description":"Lienzo reúne recursos para diseñar, editar y construir con intención. Esta presentación es un ejemplo editable, sin datos personales ficticios.", "href":"#destination-4", "symbol":"user", "accent":"mint"}
+    ]
+  },
+  "en": {
+    "active": 0, "layout": "horizontal", "compact": false, "savedResources": [0, 2], "collectionFilter": "all",
+    "items": [
+      {"title":"Home", "headline":"Your next idea starts here.", "description":"A small studio for exploring, choosing, and building. Every destination has room to breathe; the light follows without losing your place.", "href":"#destination-0", "symbol":"home", "accent":"violet"},
+      {"title":"Collection", "headline":"Made for making.", "description":"A curated set of real links to Lienzo. Filter, explore, and save your favorites in this local demo.", "href":"#destination-1", "symbol":"layers", "accent":"mint"},
+      {"title":"Create", "headline":"Give it your own direction.", "description":"Customize each destination's label, headline, icon, and link. See every change in the preview.", "href":"#destination-2", "symbol":"plus", "accent":"amber"},
+      {"title":"Saved", "headline":"Keep the ideas that matter.", "description":"Your shortlist stays here for the session. The exported HTML keeps the current selection; there are no accounts or syncing.", "href":"#destination-3", "symbol":"heart", "accent":"violet"},
+      {"title":"Profile", "headline":"An identity that connects.", "description":"Lienzo brings together resources for thoughtful design, editing, and building. This editable example uses no fictional personal details.", "href":"#destination-4", "symbol":"user", "accent":"mint"}
+    ]
+  }
+}

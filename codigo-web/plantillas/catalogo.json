@@ -99,5 +99,77 @@
     "size": 191,
     "authorRole": "Implementación, ilustración y guía",
     "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
+  },
+  {
+    "id": "escenas-css",
+    "title": "Escenas CSS animadas",
+    "tag": "Ilustración, detalle y movimiento",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "escenas-css-lienzo.zip",
+    "desc": "Seis escenas de interfaz con mecanismos propios: código, velocidad, contenido vivo, dispositivos, conexiones e ideas. Personaliza cada composición y descarga una escena independiente.",
+    "size": 238,
+    "authorRole": "Implementación original y guía",
+    "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
+  },
+  {
+    "id": "galeria-expandible",
+    "title": "Galería de paneles expandibles",
+    "tag": "Cinco mundos. Un solo lienzo.",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "galeria-expandible-lienzo.zip",
+    "desc": "Paisajes originales por capas, profundidad sutil y cinco historias que se abren a tu ritmo. Personaliza cada panel o sustituye el fondo por tu propia fotografía.",
+    "size": 244,
+    "authorRole": "Implementación original y guía",
+    "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
+  },
+  {
+    "id": "menu-indicador",
+    "title": "Navegación de cristal con indicador",
+    "tag": "Cinco destinos. Una dirección clara.",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "menu-indicador-lienzo.zip",
+    "desc": "Un estudio interactivo con indicador activo y exploración independientes, cinco destinos útiles, favoritos locales, filtros, iconos editables y navegación horizontal o vertical.",
+    "size": 132,
+    "authorRole": "Implementación original y guía",
+    "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
+  },
+  {
+    "id": "menu-contextual",
+    "title": "Menú contextual de recursos",
+    "tag": "Cada acción tiene su lugar.",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "menu-contextual-lienzo.zip",
+    "desc": "Una mesa creativa con tres composiciones originales, búsqueda, favoritos y dos vistas. Abre un menú de cristal que edita, duplica, cambia el acento y retira recursos con deshacer.",
+    "size": 132,
+    "authorRole": "Implementación original y guía",
+    "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
+  },
+  {
+    "id": "imagen-particulas",
+    "title": "Estudio de imagen y partículas",
+    "tag": "Materia viva. Hecha para explorar.",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "imagen-particulas-lienzo.zip",
+    "desc": "Convierte una imagen local en una composición que responde al movimiento. Tres artes originales, atracción y repulsión, color, dispersión y captura PNG, con densidad adaptable o hasta 600.000 puntos.",
+    "size": 132,
+    "authorRole": "Implementación original y guía",
+    "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
+  },
+  {
+    "id": "tarjeta-perfil",
+    "title": "Tarjeta de perfil creativo",
+    "tag": "Identidad que se ve. Trabajo que se explora.",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "tarjeta-perfil-lienzo.zip",
+    "desc": "Un portafolio editorial con monograma, retrato local con encuadre, proyectos ampliables y composición adaptable. Edita tu historia, imágenes y enlaces; exporta el HTML y tu contacto vCard.",
+    "size": 133,
+    "authorRole": "Implementación original y guía",
+    "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   }
 ]

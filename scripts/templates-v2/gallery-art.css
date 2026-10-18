@@ -1,0 +1,31 @@
+/* Motion stays inside each depth layer. The gallery owns wrapper parallax. */
+.eg-art-original{position:absolute;inset:0;overflow:hidden;background:#111;pointer-events:none;isolation:isolate}
+.eg-art-original>svg{display:block;width:100%;height:100%;overflow:hidden}
+.eg-art-original .eg-art-valley-cloud{animation:eg-art-cloud calc(29s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-valley-mist{animation:eg-art-mist calc(19s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-valley-river{animation:eg-art-river calc(8s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-forest-light{animation:eg-art-light calc(16s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-forest-fern{animation:eg-art-fern calc(11s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-forest-haze{animation:eg-art-mist calc(25s * var(--eg-speed,1)) ease-in-out calc(-7s * var(--eg-speed,1)) infinite}
+.eg-art-original .eg-art-forest-leaves{animation:eg-art-leaves calc(9s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-dunes-wind{animation:eg-art-sand calc(13s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-dunes-sheen{animation:eg-art-sheen calc(17s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-architecture-light{animation:eg-art-architecture-sun calc(22s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-coast-cloud{animation:eg-art-cloud calc(33s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-coast-current{animation:eg-art-current calc(12s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original .eg-art-coast-foam{animation:eg-art-foam calc(7s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-art-original *{animation-play-state:var(--eg-art-play,paused)!important}
+
+@keyframes eg-art-cloud{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(calc(17px * var(--eg-energy,.65)));opacity:.75}}
+@keyframes eg-art-mist{0%,100%{transform:translateX(0);opacity:.8}50%{transform:translateX(calc(-20px * var(--eg-energy,.65)));opacity:1}}
+@keyframes eg-art-river{0%,100%{transform:translate(0,0);opacity:.75}50%{transform:translate(calc(2px * var(--eg-energy,.65)),calc(5px * var(--eg-energy,.65)));opacity:1}}
+@keyframes eg-art-light{0%,100%{opacity:.8;transform:translateX(0)}50%{opacity:1;transform:translateX(calc(9px * var(--eg-energy,.65)))}}
+@keyframes eg-art-fern{0%,100%{transform:rotate(0deg)}50%{transform:rotate(calc(1.2deg * var(--eg-energy,.65)))}}
+@keyframes eg-art-leaves{0%,100%{transform:rotate(0deg)}50%{transform:rotate(calc(-1.5deg * var(--eg-energy,.65)))}}
+@keyframes eg-art-sand{0%,100%{transform:translateX(0);opacity:.8}50%{transform:translateX(calc(10px * var(--eg-energy,.65)));opacity:1}}
+@keyframes eg-art-sheen{0%,100%{opacity:.65}50%{opacity:1}}
+@keyframes eg-art-architecture-sun{0%,100%{transform:translateX(0);opacity:.75}50%{transform:translateX(calc(-9px * var(--eg-energy,.65)));opacity:1}}
+@keyframes eg-art-current{0%,100%{transform:translate(0,0);opacity:.75}50%{transform:translate(calc(-4px * var(--eg-energy,.65)),calc(5px * var(--eg-energy,.65)));opacity:1}}
+@keyframes eg-art-foam{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(calc(-5px * var(--eg-energy,.65)));opacity:1}}
+
+@media(prefers-reduced-motion:reduce){.eg-art-original *{animation:none!important;transition:none!important}}

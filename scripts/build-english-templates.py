@@ -245,6 +245,8 @@ def build():
         if '/en/assets/english.css' not in home_markup:
             home_markup = home_markup.replace('</head>', f'<link rel="stylesheet" href="/en/assets/english.css?v={VERSION}"></head>')
         home.write_text(home_markup, encoding='utf-8')
+    from templates_v2 import build as build_templates_v2
+    build_templates_v2(language='en')
     print('English templates collection built; Spanish pages were not changed.')
 
 if __name__ == '__main__':
