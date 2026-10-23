@@ -534,7 +534,7 @@ box-shadow y text-shadow con varias capas, para profundidad que no se ve barata.
 Radios por esquina, bordes y contornos. Incluye los radios asimétricos tipo gota.	Individual corner radii, borders, and outlines, including asymmetric organic shapes.
 Desenfoque, brillo, contraste, saturación y sepia sobre una imagen de verdad.	Preview blur, brightness, contrast, saturation, and sepia on an actual image.
 Rotar, escalar, inclinar y desplazar, con perspectiva 3D y punto de origen.	Rotate, scale, skew, and translate with 3D perspective and transform origin controls.
-Keyframes y transiciones con curvas de aceleración y control de la línea de tiempo.	Keyframe animations with editable easing curves, timing, and playback controls.
+36 preajustes con secuencias, curvas y progreso editable. Exporta CSS o un ejemplo HTML autónomo, sin CDN.	36 presets with staggered sequences, easing, and scrubbable progress. Export CSS or a standalone HTML example, without a CDN.
 Interletrado, altura de línea, transformación y decoración del texto, en vivo.	Live letter spacing, line height, text transforms, and decoration.
 78 piezas hechas y copiables: glass, neón, bento grid, botones, tarjetas, formularios, navegación y microinteracciones.	78 copy-ready examples: glass, neon, bento grids, buttons, cards, forms, navigation, and microinteractions.
 9 categorías · CSS listo para copiar	10 categories · copy-ready CSS

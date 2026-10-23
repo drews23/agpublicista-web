@@ -12,6 +12,28 @@ import importlib.util, json, re, html, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 CONTENT=ROOT/'scripts/english-content'
 REPORT=ROOT/'_historial_chat/2026-10-10-english-seo'
+# CSS Motion Studio owns both languages in one shared runtime and dedicated view.
+MOTION_STUDIO_SHARED_ASSETS=frozenset({
+ '/codigo-web/animaciones/js/motion-engine.js',
+ '/codigo-web/animaciones/js/studio-controller.js',
+ '/codigo-web/animaciones/css/motion-studio.css',
+})
+
+def refresh_motion_studio_english():
+ """Refresh only the current English hub, retaining its own page chrome.
+
+ Studio-only updates use ``python scripts/motion-studio-view.py --write``;
+ no broad English-code pipeline is needed for that task.
+ """
+ target=ROOT/'en/code/animations/index.html'
+ if not target.is_file():raise FileNotFoundError('CSS Motion Studio requires the existing English hub as its chrome source.')
+ current=target.read_text(encoding='utf8')
+ motion_spec=importlib.util.spec_from_file_location('lienzo_motion_studio_view',ROOT/'scripts/motion-studio-view.py')
+ motion=importlib.util.module_from_spec(motion_spec);motion_spec.loader.exec_module(motion)
+ render=getattr(motion,'render_page',None) or motion.build_page
+ rendered=render(current,'en')
+ if rendered!=current:target.write_text(rendered,encoding='utf8',newline='\n')
+
 spec=importlib.util.spec_from_file_location('base',ROOT/'scripts/build-english-templates.py')
 base=importlib.util.module_from_spec(spec);spec.loader.exec_module(base)
 SEGMENTS={'degradados':'gradients','sombras':'shadows','bordes':'borders','filtros':'filters','transformaciones':'transforms','animaciones':'animations','tipografia':'typography','componentes':'components','formas':'shapes','carga':'loading','navegacion':'navigation','superficies':'surfaces','bento':'bento','botones':'buttons','tarjetas':'cards','formularios':'forms','datos':'data','interacciones':'interactions'}
@@ -43,6 +65,7 @@ def tr(value):
 def remap(value,es):
  if value.startswith(('#','mailto:','data:','http')):return value
  path=urljoin(es,value);parts=urlsplit(path)
+ if parts.path in MOTION_STUDIO_SHARED_ASSETS:return path
  if parts.path in ROUTES:return ROUTES[parts.path]+('?' + parts.query if parts.query else '')+('#'+parts.fragment if parts.fragment else '')
  if parts.path.startswith('/codigo-web/') and '/js/' in parts.path:
   return PAGES.get(es,es)+'js/'+parts.path.split('/js/')[-1]
@@ -61,6 +84,7 @@ WORKSPACE='''<section class="section shell"><div class="prose"><h2>Your work, sa
 ASSETS={'/js/codigo-web.js':'/en/assets/codigo-web.js','/js/mi-lienzo.js':'/en/assets/my-lienzo.js','/js/estudio.js':'/en/assets/estudio.js','/js/color-engine.js':'/en/assets/color-engine.js','/mi-lienzo/espacio.js':'/en/my-lienzo/espacio.js','/codigo-web/componentes/js/componentes.js':'/en/code/components/js/componentes.js'}
 def build():
  REPORT.mkdir(parents=True,exist_ok=True)
+ preserve_motion_studio=False
  reports=[];jsmap={}
  snapshot={}
  for p in [*(ROOT/'codigo-web').rglob('*'),*(ROOT/'mi-lienzo').rglob('*'),ROOT/'js/mi-lienzo.js',ROOT/'js/codigo-web.js']:
@@ -68,7 +92,13 @@ def build():
  snap=REPORT/'phase-seven-source-snapshot.json'
  if not snap.exists():snap.write_text(json.dumps(snapshot,indent=2),encoding='utf8')
  for es,en in PAGES.items():
-  source=ROOT/es.strip('/')/'index.html';raw=source.read_text(encoding='utf8');s=BeautifulSoup(raw,'html.parser');main=s.main
+  source=ROOT/es.strip('/')/'index.html';raw=source.read_text(encoding='utf8')
+  if es=='/codigo-web/animaciones/':
+   motion_target=ROOT/'en/code/animations/index.html'
+   if 'data-motion-studio' in raw or (motion_target.is_file() and 'data-motion-studio' in motion_target.read_text(encoding='utf8')):
+    preserve_motion_studio=True
+    continue
+  s=BeautifulSoup(raw,'html.parser');main=s.main
   before=hashlib.sha256(re.search(r'<main\b.*?</main>',raw,re.S).group().encode()).hexdigest()
   for tag in list(main.find_all(recursive=False)):
    if 'diferir-render' in tag.get('class',[]) or (es=='/mi-lienzo/' and not (tag.select_one('[data-espacio-app],h1') or tag.has_attr('data-espacio-app'))):tag.decompose()
@@ -129,7 +159,7 @@ def build():
    src=urljoin(es,x['src']);path=urlsplit(src).path
    if 'googlesyndication' in src or path in ['/js/site.js','/js/mi-lienzo.js']:continue
    mapped=ASSETS.get(path,remap(src,es));scripts.append(f'<script src="{mapped}" defer></script>')
-   if path not in ['/js/estudio.js','/js/color-engine.js']:jsmap[path]=urlsplit(mapped).path
+   if path not in ['/js/estudio.js','/js/color-engine.js'] and path not in MOTION_STUDIO_SHARED_ASSETS:jsmap[path]=urlsplit(mapped).path
   top=BeautifulSoup(base.theme_logo(base.header()),'html.parser');switch=top.select_one('.language-switch');switch['href']=es;switch['aria-label']='Cambiar a español'
   canonical=base.ORIGIN+en
   schema={'@context':'https://schema.org','@type':'WebApplication' if es=='/mi-lienzo/' or '/componentes/' not in es and es!='/codigo-web/' else 'CollectionPage','name':title,'url':canonical,'description':desc,'inLanguage':'en-US'}
@@ -152,5 +182,6 @@ def build():
  for en in PAGES.values():
   if '<loc>'+base.ORIGIN+en+'</loc>' not in xml:xml=xml.replace('</urlset>',f'<url><loc>{base.ORIGIN+en}</loc><lastmod>2026-10-10</lastmod></url>\n</urlset>')
  p.write_text(xml,encoding='utf8')
+ if preserve_motion_studio:refresh_motion_studio_english()
  print(json.dumps({'pages':len(PAGES),'missing':len(missing)}))
 if __name__=='__main__':build()

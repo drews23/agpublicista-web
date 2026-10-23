@@ -41,7 +41,15 @@ function walk(node,parent,edits){
  for(const [k,v]of Object.entries(node)){if(k==='loc'||k==='range')continue;if(Array.isArray(v))v.forEach(x=>walk(x,node,edits));else if(v&&typeof v==='object')walk(v,node,edits);}
 }
 const reports=[];
+// These files already contain their own ES/en-US labels. Never translate a
+// shared runtime or copy it into an English-only parallel implementation.
+const sharedMotionStudioAssets=new Set([
+ '/codigo-web/animaciones/js/motion-engine.js',
+ '/codigo-web/animaciones/js/studio-controller.js',
+ '/codigo-web/animaciones/css/motion-studio.css',
+]);
 for(const [src,dest]of Object.entries(jobs)){
+ if(sharedMotionStudioAssets.has(src))continue;
  let code=fs.readFileSync(path.join(root,src),'utf8'),edits=[];
  walk(parse(code),null,edits);
  for(const e of edits.sort((a,b)=>b.start-a.start))code=code.slice(0,e.start)+e.value+code.slice(e.end);
@@ -58,6 +66,25 @@ for(const [src,dest]of Object.entries(jobs)){
  }
  parse(code);const target=path.join(root,dest);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,code);
  reports.push({source:src,target:dest,translations:edits.length});
+}
+// Refresh only the existing English Motion Studio view after other code assets
+// are localized. Its own renderer keeps the chrome and current asset hashes.
+// Standalone studio updates: python scripts/motion-studio-view.py --write
+const motionStudioHub=path.join(root,'en/code/animations/index.html');
+if(fs.existsSync(motionStudioHub)&&fs.readFileSync(motionStudioHub,'utf8').includes('data-motion-studio')){
+ const {spawnSync}=require('child_process');
+ const refresh=spawnSync(process.env.PYTHON||'python',['-X','utf8','-c',[
+  'import importlib.util',
+  'from pathlib import Path',
+  "p=Path('scripts/motion-studio-view.py')",
+  "s=importlib.util.spec_from_file_location('lienzo_motion_studio_view',p)",
+  'm=importlib.util.module_from_spec(s);s.loader.exec_module(m)',
+  "p=Path('en/code/animations/index.html')",
+  "before=p.read_text(encoding='utf-8')",
+  "after=(getattr(m,'render_page',None) or m.build_page)(before,'en')",
+  "p.write_text(after,encoding='utf-8',newline='\\n') if after!=before else None",
+ ].join('\n')],{cwd:root,encoding:'utf8',windowsHide:true});
+ if(refresh.error||refresh.status!==0)throw Error('CSS Motion Studio English refresh failed: '+(refresh.error?.message||refresh.stderr||refresh.stdout));
 }
 fs.writeFileSync(path.join(root,'_historial_chat/2026-10-10-english-seo/code-js-localization.json'),JSON.stringify(reports,null,2));
 console.log(JSON.stringify({files:reports.length,translations:reports.reduce((n,x)=>n+x.translations,0)}));
