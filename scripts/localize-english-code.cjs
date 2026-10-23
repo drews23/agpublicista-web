@@ -48,8 +48,14 @@ const sharedMotionStudioAssets=new Set([
  '/codigo-web/animaciones/js/studio-controller.js',
  '/codigo-web/animaciones/css/motion-studio.css',
 ]);
+const sharedLoadingStudioAssets=new Set([
+ '/codigo-web/componentes/carga/js/loading-engine.js',
+ '/codigo-web/componentes/carga/js/loading-runtime.js',
+ '/codigo-web/componentes/carga/js/loading-controller.js',
+ '/codigo-web/componentes/carga/css/loading-studio.css',
+]);
 for(const [src,dest]of Object.entries(jobs)){
- if(sharedMotionStudioAssets.has(src))continue;
+ if(sharedMotionStudioAssets.has(src)||sharedLoadingStudioAssets.has(src))continue;
  let code=fs.readFileSync(path.join(root,src),'utf8'),edits=[];
  walk(parse(code),null,edits);
  for(const e of edits.sort((a,b)=>b.start-a.start))code=code.slice(0,e.start)+e.value+code.slice(e.end);
@@ -85,6 +91,24 @@ if(fs.existsSync(motionStudioHub)&&fs.readFileSync(motionStudioHub,'utf8').inclu
   "p.write_text(after,encoding='utf-8',newline='\\n') if after!=before else None",
  ].join('\n')],{cwd:root,encoding:'utf8',windowsHide:true});
  if(refresh.error||refresh.status!==0)throw Error('CSS Motion Studio English refresh failed: '+(refresh.error?.message||refresh.stderr||refresh.stdout));
+}
+// The loading editor has its own bilingual view and original shared runtime.
+// Rebuild only its existing English page, preserving that page's header/footer.
+const loadingStudioHub=path.join(root,'en/code/components/loading/index.html');
+if(fs.existsSync(loadingStudioHub)&&fs.readFileSync(loadingStudioHub,'utf8').includes('data-loading-studio')){
+ const {spawnSync}=require('child_process');
+ const refresh=spawnSync(process.env.PYTHON||'python',['-X','utf8','-c',[
+  'import importlib.util',
+  'from pathlib import Path',
+  "p=Path('scripts/loading-studio-view.py')",
+  "s=importlib.util.spec_from_file_location('lienzo_loading_studio_view',p)",
+  'm=importlib.util.module_from_spec(s);s.loader.exec_module(m)',
+  "p=Path('en/code/components/loading/index.html')",
+  "before=p.read_text(encoding='utf-8')",
+  "after=m.build_page(before,'en')",
+  "p.write_text(after,encoding='utf-8',newline='\\n') if after!=before else None",
+ ].join('\n')],{cwd:root,encoding:'utf8',windowsHide:true});
+ if(refresh.error||refresh.status!==0)throw Error('Loading Studio English refresh failed: '+(refresh.error?.message||refresh.stderr||refresh.stdout));
 }
 fs.writeFileSync(path.join(root,'_historial_chat/2026-10-10-english-seo/code-js-localization.json'),JSON.stringify(reports,null,2));
 console.log(JSON.stringify({files:reports.length,translations:reports.reduce((n,x)=>n+x.translations,0)}));

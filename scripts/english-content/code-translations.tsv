@@ -569,7 +569,7 @@ Con valores negativos el contorno se dibuja hacia dentro, encima del relleno.	Ne
 o vuelve al índice de	or return to the index of
 Una galería de componentes de interfaz con el código a un clic: cada pieza que ves aquí se copia tal cual y funciona en cualquier proyecto, sin librerías, sin frameworks y sin configuración.	Explore interface examples with copyable code. Adapt the HTML and CSS to your project; interactive pieces include their JavaScript when needed. No framework required.
 Chaflanes, flechas, blobs y marcos degradados con clip-path y border-radius.	Chamfers, arrows, blobs, and gradient frames using clip-path and border-radius.
-Esqueletos con brillo, spinners, barras y anillos de progreso.	Shimmering skeletons, spinners, progress bars, and rings.
+Nueve patrones editables con estados, progreso accesible y exportación HTML, CSS y JavaScript.	Nine customizable patterns with states, accessible progress, and HTML, CSS, and JavaScript exports.
 Rail lateral que se expande, menú de app con grupos, cajón con popover, barra inferior móvil y pestañas con indicador.	Expanding sidebar, grouped app menu, popover drawer, mobile bottom bar, and tabs with an indicator.
 Glassmorphism con backdrop-filter, neón por capas y fondos aurora.	Glassmorphism with backdrop-filter, layered neon, and aurora backgrounds.
 Cuatro bento grids con grid-template-areas y colapso móvil resuelto.	Four bento grids using grid-template-areas with responsive mobile layouts.
