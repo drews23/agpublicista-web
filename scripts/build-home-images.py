@@ -16,8 +16,6 @@ OUT = ROOT / "assets/responsive/home"
 
 
 def build(check=False):
-    page = ROOT / "index.html"
-    html = page.read_text(encoding="utf-8")
     records = {}
     processed = {}
 
@@ -60,14 +58,18 @@ def build(check=False):
                 records[name] = {"source": url, "width": width, "height": thumb.height, "bytes": len(data), "original_bytes": (ROOT / url.lstrip('/')).stat().st_size}
             entries.append(f"{url} {image.width}w")
         tag = re.sub(r'\s+(?:srcset|sizes)="[^\"]*"', '', tag)
-        return tag.replace(' />', f' srcset="{", ".join(entries)}" sizes="{sizes}" />')
+        # HTML de ES y EN contiene >, /> y /> con espacio: cubrir las tres formas.
+        return re.sub(r'\s*/?>$', f' srcset="{", ".join(entries)}" sizes="{sizes}">', tag)
 
-    updated = re.sub(r'<img\b[^>]*>', image_tag, html)
-    if check:
-        if updated != html:
-            raise SystemExit("Regenerar srcset de portada")
-    else:
-        page.write_text(updated, encoding="utf-8")
+    for name in ['index.html', 'en/index.html']:
+        page = ROOT / name
+        html = page.read_text(encoding="utf-8")
+        updated = re.sub(r'<img\b[^>]*>', image_tag, html)
+        if check:
+            if updated != html:
+                raise SystemExit("Regenerar srcset de portada: " + name)
+        else:
+            page.write_text(updated, encoding="utf-8")
     print(json.dumps({"variants": len(records), "bytes": sum(r['bytes'] for r in records.values()), "files": records}, ensure_ascii=False, indent=2))
 
 

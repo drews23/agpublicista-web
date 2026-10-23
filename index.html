@@ -677,6 +677,286 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
 .neonov__flot{animation: none;}
 .neonov__card,.neonov__cta{transition: none;}
 .neonov__card:hover{transform: none;}}
+[data-unified-header] .brand{flex-shrink: 0;}
+[data-unified-header] .site-nav{gap: .15rem;}
+[data-unified-header] .site-nav a{white-space: nowrap; padding: .65rem .7rem;}
+[data-unified-header] .site-nav a[aria-current="location"],[data-unified-header] .espacio-btn[aria-current="page"]{color: var(--text); background: var(--panel); box-shadow: inset 0 0 0 1px var(--line);}
+[data-unified-header] a:focus-visible,[data-unified-header] button:focus-visible{outline: 2px solid var(--violeta); outline-offset: 4px;}
+[data-unified-header] .nav-toggle{min-width: 44px; min-height: 44px; align-items: center; justify-content: center;}
+[data-unified-header] .theme-btn{min-height: 44px; min-width: 44px;}
+@media (max-width: 1100px){[data-unified-header] .site-header__inner{position: relative;}
+[data-unified-header] .nav-toggle{display: inline-flex;}
+[data-unified-header] .site-nav{position: absolute; top: 100%; left: -.75rem; right: -.75rem; z-index: 39; display: flex; flex-direction: column; align-items: stretch; gap: .3rem; margin-top: .55rem; padding: .9rem; background: var(--vidrio-bg-fuerte); border: 1px solid var(--vidrio-linea); border-radius: var(--radius-lg); box-shadow: var(--vidrio-sombra); backdrop-filter: blur(24px) saturate(1.8); -webkit-backdrop-filter: blur(24px) saturate(1.8); max-height: calc(100dvh - 120px); overflow-y: auto; overscroll-behavior: contain; opacity: 0; visibility: hidden; transform: translateY(-14px) scale(.98); transform-origin: top center; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;}
+[data-unified-header] .site-nav.is-open{opacity: 1; visibility: visible; transform: none; pointer-events: auto;}
+[data-unified-header] .site-nav a{padding: .8rem 1rem; font-size: 1.05rem; border-radius: var(--radius-sm);}
+[data-unified-header]:not(.navigation-ready) .site-header__inner{flex-wrap: wrap;}
+[data-unified-header]:not(.navigation-ready) .nav-toggle{display: none;}
+[data-unified-header]:not(.navigation-ready) .site-nav{position: static; order: 3; width: 100%; margin: 0; max-height: none; opacity: 1; visibility: visible; transform: none; pointer-events: auto;}}
+@media (max-width: 480px){[data-unified-header] .site-header__inner{gap: .5rem;}
+[data-unified-header] .brand__logo{width: 132px;}
+[data-unified-header] .brand__tagline{max-width: 132px; font-size: .55rem;}
+[data-unified-header] .site-header__inner > div:last-child{gap: .25rem !important;}
+[data-unified-header] .language-switch{min-width: 55px !important; padding-inline: .4rem !important;}}
+@supports not (backdrop-filter: blur(1px)){[data-unified-header] .site-nav{background: var(--bg-soft);}}
+@media (max-width: 380px){[data-unified-header] .site-header__inner{flex-wrap: wrap;}
+[data-unified-header] .brand{flex-basis: 100%; justify-content: center;}
+[data-unified-header] .site-header__inner > div:last-child{margin-inline: auto;}
+[data-unified-header] .site-nav{max-height: calc(100dvh - 180px);}}
+@media (prefers-reduced-motion: reduce){[data-unified-header] .site-nav{transition: none;}}
+.directory-layout{padding-block: 0 48px;}
+.directory-index{margin-block: 20px 44px; scroll-margin-top: 120px;}
+.directory-index__label{margin: 0 0 14px; font-size: .88rem; color: var(--muted);}
+.directory-index ul{display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; list-style: none; padding: 0; margin: 0;}
+.directory-index li{padding: 0; margin: 0; min-width: 0;}
+.directory-index a{display: flex; flex-direction: column; gap: 7px; height: 100%; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); color: var(--text); text-decoration: none;}
+.directory-index a:hover{border-color: var(--turquesa);}
+.directory-index strong{font-size: 1rem; line-height: 1.4;}
+.directory-index span{font-size: .8rem; line-height: 1.5; color: var(--muted);}
+.directory-layout .directory-index ul{grid-template-columns: repeat(4,minmax(0,1fr));}
+.resource-groups{width: min(var(--shell),100% - 3rem); margin-inline: auto;}
+.directory-group{padding-block: 36px 48px; border-top: 1px solid var(--line); scroll-margin-top: 120px; min-width: 0;}
+.directory-group__head{display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 24px;}
+.directory-group__head h2{margin: 0 0 12px; font: 600 clamp(1.7rem,3vw,2.3rem)/1.2 var(--font-display); letter-spacing: normal;}
+.directory-group__head p{margin: 0; max-width: 65ch; color: var(--muted); line-height: 1.65;}
+.directory-group__count{display: inline-flex; align-items: center; justify-content: center; min-width: 30px; min-height: 30px; padding: 3px 8px; margin-left: 12px; border: 1px solid var(--line); border-radius: 999px; vertical-align: middle; font: 600 .8rem/1 var(--font-body); color: var(--muted);}
+.directory-back{flex-shrink: 0; display: inline-flex; align-items: center; min-height: 44px; font-size: .8rem; color: var(--text); text-underline-offset: 4px;}
+.directory-group .card-grid{grid-template-columns: repeat(3,minmax(0,1fr));}
+.directory-group .card-grid:has(>.card:nth-child(2):last-child){grid-template-columns: repeat(2,minmax(0,1fr));}
+.directory-group .card{min-width: 0;}
+.directory-group .card h3,.directory-upcoming h2,#herramientas h2,#herramientas h3,#tools h2,#tools h3{letter-spacing: normal;}
+.english-home #tools .card__tag{align-self: flex-start;}
+.directory-upcoming{padding-block: 32px; border-top: 1px solid var(--line);}
+.directory-upcoming>.card-grid{max-width: 380px;}
+.directory-upcoming .card{opacity: .7;}
+.directory-tool-links{display: flex; flex-wrap: wrap; gap: 12px 24px; margin-block: 24px; color: var(--muted); line-height: 1.7;}
+.directory-tool-links a{display: inline-flex; align-items: center; min-height: 44px; color: var(--text); text-underline-offset: 4px;}
+.directory-editions{color: var(--muted); max-width: 72ch; line-height: 1.7; margin-block: 20px 36px;}
+.directory-template-format{font-size: .72rem; color: var(--muted); line-height: 1.5;}
+.english-directory .directory-index ul{list-style: none; padding: 0; margin: 0;}
+.english-directory .directory-index li{padding: 0; margin: 0;}
+.english-directory .directory-index a,.english-directory .directory-back{color: var(--text);}
+.english-directory .directory-group h2{margin-top: 0; letter-spacing: normal;}
+.english-directory .directory-group .english-catalog{margin: 0;}
+.english-directory .directory-group .english-catalog-card h3{margin-top: 0; letter-spacing: normal;}
+.english-directory .directory-group .card__tag{position: static; align-self: flex-start;}
+.english-directory .directory-group .card h3{margin-top: 10px; letter-spacing: normal;}
+.directory-index a:focus-visible,.directory-back:focus-visible,.directory-tool-links a:focus-visible{outline: 2px solid var(--turquesa); outline-offset: 4px;}
+#plantillas-web,#herramientas-online,#browser-tools,#packs,#herramientas,#tools{scroll-margin-top: 120px;}
+@media (max-width: 960px){.directory-layout .directory-index ul{grid-template-columns: repeat(2,minmax(0,1fr));}
+.directory-group .card-grid{grid-template-columns: repeat(2,minmax(0,1fr));}}
+@media (max-width: 620px){.directory-index ul{grid-template-columns: repeat(2,minmax(0,1fr));}
+.directory-index a{padding: 14px;}
+.directory-index span{font-size: .75rem;}
+.directory-group{padding-block: 28px 36px;}
+.directory-group__head{flex-direction: column; gap: 4px; margin-bottom: 18px;}
+.directory-group .card-grid,.directory-group .card-grid:has(>.card:nth-child(2):last-child){grid-template-columns: 1fr;}
+.directory-tool-links{gap: 8px 16px;}}
+.home-families{padding-block: 34px 28px;}
+.home-families,#selection-title{scroll-margin-top: 120px;}
+.home-families__label{margin: 0 0 16px; color: var(--muted); font-size: .88rem;}
+.home-families__grid{display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 10px; list-style: none; padding: 0; margin: 0;}
+.home-families__grid li{min-width: 0;}
+.home-families a{display: flex; flex-direction: column; justify-content: center; gap: 6px; height: 100%; min-height: 94px; padding: 16px; border: 1px solid var(--line); border-radius: 16px; color: var(--text); text-decoration: none; background: var(--bg-soft); transition: border-color .2s, background-color .2s;}
+.home-families a:hover{border-color: var(--turquesa); background: color-mix(in srgb,var(--turquesa) 6%,var(--bg-soft));}
+.home-families strong{font-size: .95rem; line-height: 1.3;}
+.home-families span{font-size: .76rem; line-height: 1.4; color: var(--muted);}
+.home-selection{padding-block: 48px 64px; min-width: 0;}
+.home-selection .section-head{margin-bottom: 20px;}
+.home-selection h2,.home-selection h3{letter-spacing: normal;}
+.home-selection .section-head p:not(.eyebrow){max-width: 62ch;}
+.home-selection__toolbar{display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 16px;}
+.home-selection__hint{font-size: .83rem; color: var(--muted); margin: 0;}
+.home-selection__controls{display: flex; gap: 8px; flex-shrink: 0;}
+.home-selection__controls[hidden]{display: none;}
+.home-selection__controls button{min-height: 44px; min-width: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-soft); color: var(--text); font: 600 .82rem/1.3 var(--font-body); cursor: pointer;}
+.home-selection__controls button:hover:not(:disabled){border-color: var(--turquesa);}
+.home-selection__controls button:disabled{opacity: .4; cursor: default;}
+.home-selection__track{display: flex; gap: 22px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 3px; padding: 6px 3px 22px; list-style: none; margin: 0; scrollbar-width: thin; scrollbar-color: var(--violeta) transparent;}
+.home-selection__item{flex: 0 0 calc((100% - 44px)/3); min-width: 0; scroll-snap-align: start;}
+.home-selection__card{display: flex; flex-direction: column; height: 100%; padding: 18px; border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(145deg,color-mix(in srgb,var(--violeta) 10%,var(--bg-soft)),var(--bg-soft) 60%,color-mix(in srgb,var(--turquesa) 6%,var(--bg-soft)));}
+.home-selection__visual{position: relative; aspect-ratio: 16/10; overflow: hidden; border-radius: 14px; margin: 0 0 20px; background: #0b0b12;}
+.home-selection__visual img{position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain;}
+.home-selection__visual--object img{padding: 16px; box-sizing: border-box;}
+.home-selection__track.is-dragging{cursor: grabbing; scroll-snap-type: none; user-select: none;}
+.home-selection__tag{color: var(--muted); font: 600 .7rem/1.4 var(--font-body); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 10px;}
+.home-selection h3{font: 600 clamp(1.25rem,2vw,1.6rem)/1.18 var(--font-display); margin: 0 0 12px; text-wrap: balance;}
+.home-selection__description{font-size: .9rem; line-height: 1.6; color: var(--muted); margin: 0 0 24px;}
+.home-selection__card .btn{margin-top: auto; align-self: flex-start; font-size: .82rem; min-height: 44px;}
+.home-families a:focus-visible,.home-selection a:focus-visible,.home-selection button:focus-visible,.home-selection__track:focus-visible{outline: 2px solid var(--turquesa); outline-offset: 4px;}
+@media (max-width: 1000px){.home-families__grid{grid-template-columns: repeat(3,minmax(0,1fr));}
+.home-selection__item{flex-basis: calc((100% - 22px)/2);}}
+@media (max-width: 600px){.home-families{padding-block: 24px;}
+.home-families__grid{grid-template-columns: repeat(2,minmax(0,1fr));}
+.home-families a{min-height: 84px; padding: 14px;}
+.home-selection{padding-block: 32px 48px;}
+.home-selection__toolbar{align-items: flex-start; flex-direction: column; gap: 12px;}
+.home-selection__track{gap: 16px;}
+.home-selection__item{flex-basis: 88%;}}
+@media (prefers-reduced-motion: reduce){.home-families a{transition: none;}}
+.card > .catalog-action{display: block; margin-top: .75rem; color: var(--text); font-size: .85rem; font-weight: 600; line-height: 1.5;}
+.card:hover > .catalog-action,.card:focus-visible > .catalog-action{text-decoration: underline; text-underline-offset: .2em;}
+.home-intro h1,.home-catalog h2,.home-catalog h3,.home-guides h2,.home-guides h3,.home-trust h2{letter-spacing:normal;}
+.home-intro__actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;}
+.home-intro__actions a{min-height:48px;}
+.home-intro__note{font:400 .82rem/1.6 var(--font-body);color:var(--muted);margin:18px 0 0;}
+.english-home .home-intro:not(.eclipse){padding-block:64px 40px;max-width:850px;}
+.english-home .home-intro:not(.eclipse) h1{font-size:clamp(2.3rem,5vw,4rem);line-height:1.12;max-width:20ch;margin-block:12px 20px;}
+.english-home .home-intro:not(.eclipse) .lede{max-width:65ch;font-size:1.05rem;line-height:1.65;}
+.english-home .home-intro__actions{justify-content:flex-start;margin-top:24px;}
+.eclipse.home-intro .home-intro__note{color:var(--ecl-text-hi);max-width:60ch;text-align:center;}
+.eclipse.home-intro .home-intro__secondary{background:transparent;border-color:var(--ecl-line-soft);}
+.eclipse.home-intro .home-intro__secondary::before{display:none;}
+.english-eclipse .english-hero-copy{position:relative;z-index:4;width:min(850px,100% - 48px);margin-inline:auto;padding-top:10em;text-align:center;color:var(--ecl-text-hi);}
+.english-eclipse .english-hero-copy h1{font-size:clamp(2.3rem,5vw,4rem);line-height:1.12;max-width:20ch;margin:12px auto 20px;color:var(--ecl-text-hi);}
+.english-eclipse .english-hero-copy .lede{max-width:65ch;margin-inline:auto;font-size:1.05rem;line-height:1.65;color:var(--ecl-text-hi);}
+.english-eclipse .home-intro__actions{margin-top:24px;justify-content:center;}
+.english-eclipse .home-intro__actions a{color:var(--ecl-text-hi);background:var(--ecl-panel);border-color:var(--ecl-line);}
+.english-eclipse .home-intro__note{padding-top:18px;}
+main > section[aria-label="Qué es Lienzo"]{padding-block:0 24px;text-align:center;color:var(--muted);}
+main > section[aria-label="Qué es Lienzo"] p{margin:0 auto;max-width:64ch;line-height:1.65;}
+.home-catalog,.home-guides,.home-trust{padding-block:48px;scroll-margin-top:110px;}
+.home-catalog .section-head p:not(.eyebrow){max-width:65ch;}
+.home-catalog__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.home-catalog__item{display:grid;grid-template-columns:80px 1fr 24px;align-items:start;gap:16px;padding:24px;color:var(--text);text-decoration:none;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--panel);scroll-margin-top:120px;}
+.home-catalog__item:first-child{grid-column:1/-1;}
+.home-catalog__item h3{font:600 1.35rem/1.25 var(--font-display);margin:0 0 10px;}
+.home-catalog__item p{font-size:.9rem;line-height:1.65;color:var(--muted);margin:0;max-width:70ch;}
+.home-catalog__format{font:600 .72rem/1.6 var(--font-body);color:var(--turquesa);padding-block:4px;}
+:root[data-theme="light"] .home-catalog__format{color:var(--text);}
+.home-catalog__arrow{color:var(--violeta);font-size:1.3rem;}
+.home-catalog__item:hover{background:var(--panel-hover);border-color:var(--violeta);}
+.home-guide .card__body{display:flex;flex-direction:column;height:100%;}
+.home-guide .card__tag{align-self:flex-start;}
+.home-guide__cta{margin-top:auto;padding-top:20px;color:var(--text);font-size:.88rem;font-weight:600;}
+.home-trust{display:grid;grid-template-columns:2fr 1fr;gap:32px;border-top:1px solid var(--line);}
+.home-trust h2{font:600 clamp(1.8rem,3vw,2.5rem)/1.2 var(--font-display);margin:0 0 16px;}
+.home-trust p:not(.eyebrow){max-width:60ch;color:var(--muted);line-height:1.7;}
+.home-trust__links{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:8px;}
+.home-trust__links a{color:var(--text);text-underline-offset:5px;padding-block:12px;min-height:44px;}
+.home-catalog a:focus-visible,.home-guides a:focus-visible,.home-trust a:focus-visible,.home-intro a:focus-visible{outline:2px solid var(--turquesa);outline-offset:4px;}
+@media (max-width:700px){.home-catalog__grid,.home-trust{grid-template-columns:1fr;}
+.home-catalog__item{grid-template-columns:1fr 20px;gap:10px;padding:22px;}
+.home-catalog__format{grid-column:1;}
+.home-catalog__item>div{grid-column:1;}
+.home-catalog__arrow{grid-column:2;grid-row:1;}
+.home-catalog,.home-guides,.home-trust{padding-block:32px;}
+.eclipse.home-intro{min-height:67em;}
+.english-eclipse.home-intro{min-height:78em;}
+.english-eclipse .english-hero-copy{padding-top:8em;}
+.english-eclipse .english-hero-copy h1{font-size:clamp(2rem,8vw,3rem);}
+.eclipse.english-eclipse .montanas{top:auto;bottom:10em;}
+.eclipse.home-intro .home-intro__actions{flex-direction:column;align-items:center;gap:10px;}
+.eclipse.home-intro .home-intro__actions a{min-width:215px;}
+.english-home .home-intro:not(.eclipse){padding-block:36px 24px;}
+.english-home .home-intro:not(.eclipse) h1{font-size:clamp(2rem,8vw,3rem);}}
+.eclipse{--_factor: min(600px, 80vh); --_size: min(var(--_factor), 80vw); font-size: max(calc(var(--_size) * 0.03), 10px); --ecl-bg: #07060d; --ecl-glow: #8b7bff; --ecl-glow-2: #35d6c8; --ecl-line: #c7bfff; --ecl-line-soft: rgba(199, 191, 255, 0.18); --ecl-text-hi: #efeaff; --ecl-text-lo: #b3a8ff; --ecl-spot: 139, 123, 255; --ecl-panel: #14121f; position: relative; overflow: hidden; background: var(--ecl-bg) linear-gradient(0deg, rgba(139, 123, 255, 0.05), rgba(53, 214, 200, 0.05)); min-height: 47em;}
+.eclipse.eclipse--oro{--ecl-glow: #ffb454; --ecl-glow-2: #ffd39b; --ecl-line: #ffd9a8; --ecl-line-soft: rgba(255, 217, 168, 0.18); --ecl-text-hi: #fff3e2; --ecl-text-lo: #ffcf94; --ecl-spot: 255, 180, 84;}
+.eclipse::after{content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 9em; background: linear-gradient(180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--bg, #0a0a0f) 18%, transparent) 34%,
+    color-mix(in srgb, var(--bg, #0a0a0f) 55%, transparent) 62%,
+    color-mix(in srgb, var(--bg, #0a0a0f) 86%, transparent) 84%,
+    var(--bg, #0a0a0f) 100%); pointer-events: none; z-index: 3;}
+.eclipse h1,.eclipse p{margin: 0; padding: 0;}
+.eclipse .cabecera{display: flex; width: 100%; justify-content: center; padding: 2em; position: absolute; top: 0; left: 0; right: 0; margin: 0 auto; opacity: 0; translate: 0 -1em; animation: ecl-load 2s ease-in 1.6s forwards, ecl-up 1.4s ease-out 1.6s forwards;}
+.eclipse .disco{position: relative; width: 1.8em; height: 1.8em; border-radius: 50%; background: #000; border: none; padding: 0; box-shadow: 0 0 1em 0 var(--ecl-glow); cursor: pointer; transition: box-shadow 1s ease-in-out, scale 400ms var(--rebote, cubic-bezier(0.34, 1.56, 0.64, 1));}
+.eclipse .disco::after{content: ""; position: absolute; inset: -0.35em; border-radius: 50%; border: 1px solid var(--ecl-glow); opacity: 0; animation: ecl-latido 3.2s ease-out 3.4s infinite; pointer-events: none;}
+@keyframes ecl-latido{0% { transform: scale(0.85); opacity: 0; } 25% { opacity: 0.75; } 100% { transform: scale(2.1); opacity: 0; }}
+.eclipse .disco:hover,.eclipse .disco:focus-visible{scale: 1.18;}
+.eclipse .disco-pista{position: absolute; top: 3.4em; left: 50%; translate: -50% 0; font-size: 0.92em; letter-spacing: 0.06em; white-space: nowrap; color: var(--ecl-text-lo); opacity: 0; transition: opacity 260ms ease, translate 260ms ease; pointer-events: none;}
+.eclipse .cabecera:hover .disco-pista,.eclipse .disco:focus-visible ~ .disco-pista{opacity: 0.85; translate: -50% 0.3em;}
+.eclipse .disco:hover,.eclipse .disco:focus-visible{box-shadow: -0.3em 0.1em 0.3em 0 #ffb454;}
+.eclipse.eclipse--oro .disco:hover,.eclipse.eclipse--oro .disco:focus-visible{box-shadow: -0.3em 0.1em 0.3em 0 #8b7bff;}
+.eclipse .disco:focus-visible{outline: 2px solid var(--ecl-line); outline-offset: 3px;}
+.eclipse .spotlight{pointer-events: none; position: absolute; left: 0; right: 0; top: 0; margin: 0 auto; transition: filter 1s ease-in-out; height: 42em; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, rgba(0, 0, 0, 0.55) 78%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 58%, rgba(0, 0, 0, 0.55) 78%, transparent 100%);}
+.eclipse .spotlight > div{border-radius: 0 0 50% 50%; position: absolute; left: 0; right: 0; margin: 0 auto; top: 3em; width: 30em; height: max(42em, 86vh); background-image: conic-gradient(from 0deg at 50% -5%,
+    transparent 45%,
+    rgba(var(--ecl-spot), 0.3) 49%,
+    rgba(var(--ecl-spot), 0.5) 50%,
+    rgba(var(--ecl-spot), 0.3) 51%,
+    transparent 55%); transform-origin: 50% 0; filter: blur(15px) opacity(0.5); z-index: 0; animation: ecl-load 2s ease-in-out forwards, ecl-loadrot 2s ease-in-out forwards, ecl-spotlight 21s ease-in-out infinite reverse;}
+.eclipse .spotlight > div:nth-child(1){rotate: 20deg; animation: ecl-load 2s ease-in-out forwards, ecl-loadrot 2s ease-in-out forwards, ecl-spotlight 17s ease-in-out infinite;}
+.eclipse .spotlight > div:nth-child(2){rotate: -20deg; animation: ecl-load 2s ease-in-out forwards, ecl-loadrot 2s ease-in-out forwards, ecl-spotlight 14s ease-in-out infinite;}
+@keyframes ecl-loadrot{0% { rotate: 0deg; scale: 0; } 100% { scale: 1; }}
+@keyframes ecl-spotlight{0% { transform: rotateZ(0deg) scale(1);    filter: blur(15px) opacity(0.5); } 20% { transform: rotateZ(-1deg) scale(1.2); filter: blur(16px) opacity(0.6); } 40% { transform: rotateZ(2deg) scale(1.3);  filter: blur(14px) opacity(0.4); } 60% { transform: rotateZ(-2deg) scale(1.2); filter: blur(15px) opacity(0.6); } 80% { transform: rotateZ(1deg) scale(1.1);  filter: blur(13px) opacity(0.4); } 100% { transform: rotateZ(0deg) scale(1);    filter: blur(15px) opacity(0.5); }}
+.eclipse canvas.particulas{position: absolute; inset: 0; pointer-events: none; animation: ecl-load 0.4s ease-in-out forwards; z-index: 1; width: 100%; height: 100%;}
+.eclipse .accent-lines{pointer-events: none; position: absolute; top: 0; left: 0; right: 0; width: 100%; height: 42em; z-index: 0; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);}
+.eclipse .accent-lines > div{position: absolute; top: 0; right: 0; left: 0; margin: auto; height: 100%; width: 100%;}
+.eclipse .accent-lines > div:nth-child(1) > div{position: absolute; top: 0; right: 0; left: 0; margin: auto; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--ecl-line-soft), transparent); opacity: 0; scale: 0; animation: ecl-accentload 2s ease-out 2.4s forwards;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1){top: 6em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2){top: 11em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(3){top: 16em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(4){top: 24em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(5){top: 29em;}
+.eclipse .accent-lines > div:nth-child(2) > div{position: absolute; top: 0; right: 0; left: 0; margin: auto; width: 1px; height: 100%; background: var(--ecl-line-soft); opacity: 0; scale: 0; animation: ecl-accentload 2s ease-out 2s forwards;}
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(1){left: 24em;}
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(2){left: 34em;}
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(3){right: 24em;}
+.eclipse .accent-lines > div:nth-child(2) > div:nth-child(4){right: 34em;}
+@keyframes ecl-accentload{0% { opacity: 0; scale: 0; } 100% { opacity: 1; scale: 1; }}
+.eclipse .accent-lines > div:nth-child(1) > div::before,.eclipse .accent-lines > div:nth-child(1) > div::after{content: ""; display: none; position: absolute; width: 0.2em; height: 0.2em; border-radius: 1em; background: var(--ecl-glow); left: 0; right: 0; margin: auto; translate: 0 -1px; opacity: 0; scale: 0; animation: ecl-accentload 2s ease-out 4.4s forwards;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(3)::before{display: block; left: 24em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(3)::after{display: block; right: 24em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(4)::before{display: block; left: 24em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(4)::after{display: block; right: 24em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(5)::before{display: block; left: 24em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(5)::after{display: block; right: 24em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::before,.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::after{display: block; width: 5em; height: 1px; border-radius: 0; animation: ecl-accentload2 2s ease-out 2.4s forwards;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::before{right: 24em; rotate: 45deg; translate: -2.5em 2.5em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::after{right: 24em; rotate: -45deg; translate: -2.5em 2.5em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::before,.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::after{display: block; width: 5em; height: 1px; border-radius: 0; animation: ecl-accentload3 2s ease-out 2.4s forwards;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::before{left: 24em; rotate: 45deg; translate: 2.5em 7.5em;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::after{left: 24em; rotate: -45deg; translate: 2.5em 7.5em;}
+@keyframes ecl-accentload2{0% { opacity: 0; scale: 0; transform: rotate(360deg); } 50% { scale: 0; } 100% { opacity: 0.12; scale: 1; transform: rotate(0deg); }}
+@keyframes ecl-accentload3{0% { opacity: 0; scale: 0; transform: rotate(-360deg); } 50% { scale: 0; } 100% { opacity: 0.12; scale: 1; transform: rotate(0deg); }}
+.eclipse .sub-eyebrow{position: absolute; left: 0; right: 0; top: 13em; margin: auto; height: fit-content; opacity: 0.7; translate: 0; z-index: 2;}
+@keyframes ecl-load3{0% { opacity: 0; } 100% { opacity: 0.7; }}
+.eclipse .sub-eyebrow p{font-size: 1.1em; position: relative; width: fit-content; margin: auto; letter-spacing: 0.08em; color: var(--ecl-text-hi); text-shadow: 0 2px 16px rgba(var(--ecl-spot), 0.24); background: linear-gradient(0deg, var(--ecl-text-hi) 0, var(--ecl-text-lo) 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+.eclipse .sub-eyebrow p::before,.eclipse .sub-eyebrow p::after{position: absolute; top: 60%; display: block; content: ""; width: 5em; height: 1px; opacity: 0; animation: ecl-load2 1.4s ease-in-out 0s forwards, ecl-up 1.4s ease-out 0s forwards;}
+@keyframes ecl-load2{0% { opacity: 0; } 100% { opacity: 0.3; }}
+.eclipse .sub-eyebrow p::before{background: linear-gradient(-90deg, var(--ecl-glow) 0%, transparent 100%); right: 120%; translate: -5em 0;}
+.eclipse .sub-eyebrow p::after{background: linear-gradient(90deg, var(--ecl-glow) 0%, transparent 100%); left: 120%; translate: 5em 0;}
+.eclipse .titular{position: absolute; left: 0; right: 0; top: 16em; margin: auto; height: 20em; padding-top: 2em; translate: 0 -1.6em; opacity: 1; z-index: 2;}
+@keyframes ecl-load{0% { opacity: 0; } 100% { opacity: 1; }}
+.eclipse .titular > *{position: absolute; left: 0; right: 0; margin: auto; width: fit-content; font-family: "Fraunces", Georgia, serif; font-style: italic; font-size: 7em; font-weight: 600; line-height: 1.1; color: var(--ecl-text-lo); background: linear-gradient(100deg, var(--ecl-glow) 10%, var(--ecl-glow-2) 90%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 16px rgba(var(--ecl-spot), 0.24);}
+.eclipse .titular > .titular-glow{background: linear-gradient(100deg, var(--ecl-glow) 10%, var(--ecl-glow-2) 90%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: blur(16px) opacity(0.4);}
+.eclipse .titular .sr-only{position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;}
+.eclipse .pie{position: absolute; left: 0; right: 0; top: 26.9em; display: flex; flex-direction: column; align-items: center; gap: 1.4em; z-index: 2; padding: 0 1em;}
+.eclipse .lema{font-size: 1.35em; line-height: 1.55; width: fit-content; max-width: 34em; text-align: center; opacity: 1; translate: 0; color: var(--ecl-text-hi); text-shadow: 0 2px 16px rgba(var(--ecl-spot), 0.24); background: linear-gradient(0deg, var(--ecl-text-hi) 0, var(--ecl-text-lo) 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+@keyframes ecl-up{100% { translate: 0; }}
+.eclipse .cta{position: relative; width: fit-content; min-width: 11em; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 20em; border: 1px solid rgba(199, 191, 255, 0.2); padding: 0.55em 1.6em 0.45em; background: var(--ecl-panel); text-decoration: none; white-space: nowrap; z-index: 2; opacity: 1; translate: 0; transition: background 0.5s;}
+.eclipse .cta::before{content: ""; display: block; position: absolute; left: 0; top: 0; border-radius: 20em; width: 100%; height: 100%; background: rgba(var(--ecl-spot), 0.55) radial-gradient(farthest-side at 50% 100%, var(--ecl-line), transparent); opacity: 0.1; transition: all 0.4s ease-in-out;}
+.eclipse .cta:hover::before,.eclipse .cta:focus-visible::before{opacity: 0.3;}
+.eclipse .cta:focus-visible{outline: 2px solid var(--ecl-line); outline-offset: 3px;}
+.eclipse .cta .cta-texto{background: linear-gradient(0deg, var(--ecl-text-hi), var(--ecl-text-lo)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.2em; font-weight: 600; line-height: 142%;}
+.eclipse .montanas{position: absolute; left: 0; right: 0; top: 33em; margin: auto; width: 100%; height: 10em; pointer-events: none; z-index: 1;}
+.eclipse .montanas::before{content: ""; display: block; width: 100%; height: 500%; position: absolute; top: 0%; background: linear-gradient(0deg,
+    var(--ecl-bg) 55%,
+    color-mix(in srgb, var(--ecl-bg) 62%, transparent) 74%,
+    color-mix(in srgb, var(--ecl-bg) 24%, transparent) 86%,
+    transparent 95%); z-index: 2;}
+.eclipse .montanas > div{box-shadow: -1em -0.2em 0.4em -1.1em var(--ecl-line), inset 0em 0em 0em 2px var(--ecl-line), inset 0.2em 0.3em 0.2em -0.2em var(--ecl-line), inset 10.2em 10.3em 2em -10em rgba(var(--ecl-spot), 0.18); background: var(--ecl-panel); z-index: 1; filter: brightness(0.8); position: absolute; left: 0; right: 0; margin: auto; width: 20em; height: 20em; rotate: 45deg;}
+.eclipse .montanas > div:nth-child(1){bottom: -140%; --mountain-x: -6em; --mountain-y: 2em; translate: var(--mountain-x) var(--mountain-y); animation: ecl-mountain1 2s ease-out 2.4s both;}
+.eclipse .montanas > div:nth-child(2){bottom: -108%; --mountain-x: -2em; --mountain-y: 0em; translate: var(--mountain-x) var(--mountain-y); width: 14em; height: 20em; animation: ecl-mountain2 2s ease-out 2.2s both;}
+.eclipse .montanas > div:nth-child(3){bottom: -140%; --mountain-x: 6em; --mountain-y: 3em; translate: var(--mountain-x) var(--mountain-y); animation: ecl-mountain1 2s ease-out 2s both;}
+@keyframes ecl-mountain1{0% { translate: var(--mountain-x) calc(var(--mountain-y) + 10em); } 100% { translate: var(--mountain-x) var(--mountain-y); }}
+@keyframes ecl-mountain2{0% { translate: var(--mountain-x) calc(var(--mountain-y) + 13.2em); } 100% { translate: var(--mountain-x) var(--mountain-y); }}
+.eclipse .montanas > div::before{content: ""; display: block; background: repeating-radial-gradient(at 100% 100%, transparent 0%, rgba(199, 191, 255, 0.13) 2px, transparent 4px); width: 12em; height: 12em; position: absolute; left: 0; top: 0; border-bottom-right-radius: 100%;}
+.eclipse .espaciador{height: 43.5em; pointer-events: none;}
+@media (prefers-reduced-motion: reduce){.eclipse .disco::after{animation: none; opacity: 0.45; transform: scale(1.25);}
+.eclipse .disco:hover,.eclipse .disco:focus-visible{scale: 1;}
+.eclipse .cabecera,.eclipse .spotlight > div,.eclipse .accent-lines > div:nth-child(1) > div,.eclipse .accent-lines > div:nth-child(2) > div,.eclipse .accent-lines > div:nth-child(1) > div::before,.eclipse .accent-lines > div:nth-child(1) > div::after,.eclipse .sub-eyebrow,.eclipse .sub-eyebrow p::before,.eclipse .sub-eyebrow p::after,.eclipse .titular,.eclipse .titular > *,.eclipse .lema,.eclipse .cta{animation: none !important; opacity: 1; translate: 0; scale: 1;}
+.eclipse .sub-eyebrow{opacity: 0.7;}
+.eclipse .sub-eyebrow p::before,.eclipse .sub-eyebrow p::after{opacity: 0.3;}
+.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::before,.eclipse .accent-lines > div:nth-child(1) > div:nth-child(1)::after,.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::before,.eclipse .accent-lines > div:nth-child(1) > div:nth-child(2)::after{opacity: 0.12;}
+.eclipse .montanas > div:nth-child(1){animation: none; bottom: -140%;}
+.eclipse .montanas > div:nth-child(2){animation: none; bottom: -108%;}
+.eclipse .montanas > div:nth-child(3){animation: none; bottom: -140%;}
+.eclipse canvas.particulas{display: none;}}
+@media (max-width: 640px){.eclipse{min-height: 52em;}
+.eclipse .lema{font-size: 1.5em; max-width: 20em;}
+.eclipse .montanas{top: 37em;}
+.eclipse .espaciador{height: 48em;}}
     </style>
 
     <script type="application/ld+json">
@@ -713,7 +993,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
          crossorigin="anonymous"></script>
-  <link rel="alternate" hreflang="es" href="https://lienzo.tools/"><link rel="alternate" hreflang="en" href="https://lienzo.tools/en/"><link rel="alternate" hreflang="x-default" href="https://lienzo.tools/"><link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d"><link rel="stylesheet" href="/css/pages/discovery-directories.css?v=2026101201"><link rel="stylesheet" href="/css/pages/home-discovery.css?v=2026101202"><link rel="stylesheet" href="/css/pages/catalog-copy.css?v=2026101301"><link rel="stylesheet" href="/css/pages/home-layout.css?v=85728d7acbf8"><link rel="stylesheet" href="/css/pages/home-eclipse.css?v=6cee2a2cb1f0"></head>
+  <link rel="alternate" hreflang="es" href="https://lienzo.tools/"><link rel="alternate" hreflang="en" href="https://lienzo.tools/en/"><link rel="alternate" hreflang="x-default" href="https://lienzo.tools/"></head>
   <body>
     <div class="glow" aria-hidden="true"></div>
 
@@ -732,8 +1012,79 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
         </div>
       </div>
     </header>
+<script id="home-navigation">
+(() => {
+  "use strict";
+  const root = document.documentElement;
+/* Navegación móvil compartida: cierre, foco y cambio de ancho. */
+  if (!document.querySelector('[data-unified-header].navigation-ready')) {
+    const nav = document.querySelector(".site-nav");
+    const navToggle = document.querySelector("[data-nav-toggle]");
+    const unifiedHeader = document.querySelector("[data-unified-header]");
+    const mobileNav = window.matchMedia(unifiedHeader ? "(max-width: 1100px)" : "(max-width: 880px)");
+    const englishNav = root.lang.startsWith("en");
+    const scrim = document.createElement("div");
+    scrim.className = "nav-scrim";
+    scrim.setAttribute("aria-hidden", "true");
+    document.body.append(scrim);
 
-    <main>
+    const ponerNav = (open, returnFocus = false) => {
+      if (!nav || !navToggle) return;
+      open = open && mobileNav.matches;
+      nav.classList.toggle("is-open", open);
+      scrim.classList.toggle("is-visible", open);
+      document.body.classList.toggle("is-locked", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      navToggle.setAttribute("aria-label", englishNav
+        ? (open ? "Close menu" : "Open menu")
+        : (open ? "Cerrar menú" : "Abrir menú"));
+      if (open) nav.querySelector("a[href]")?.focus();
+      else if (returnFocus) navToggle.focus();
+    };
+
+    if (nav && navToggle) {
+      ponerNav(false);
+      unifiedHeader?.classList.add("navigation-ready");
+    }
+
+    document.addEventListener("click", (event) => {
+      if (!nav || !navToggle) return;
+      if (event.target.closest("[data-nav-toggle]")) {
+        ponerNav(!nav.classList.contains("is-open"));
+        return;
+      }
+      if (!nav.classList.contains("is-open")) return;
+      if (event.target.closest(".site-nav a[href]")) ponerNav(false);
+      else if (!event.target.closest(".site-nav")) ponerNav(false, event.target === scrim);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!nav?.classList.contains("is-open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        ponerNav(false, true);
+      } else if (event.key === "Tab" && unifiedHeader) {
+        const controls = [...unifiedHeader.querySelectorAll("a[href], button:not([disabled])")]
+          .filter((element) => element.getClientRects().length && getComputedStyle(element).visibility !== "hidden");
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault(); first.focus();
+        }
+      }
+    });
+
+    mobileNav.addEventListener("change", () => {
+      const focusWasInNav = nav?.contains(document.activeElement);
+      ponerNav(false);
+      if (mobileNav.matches && focusWasInNav) navToggle?.focus();
+    });
+
+  }
+})();
+</script>
+<main>
       <!-- Hero "Eclipse" — composición adaptada a los tokens Lienzo.
            Ver css/hero-eclipse.css y js/hero-eclipse.js (MIT, adaptado de
            codepen.io/RAFA3L). El disco de arriba alterna violeta↔ámbar. -->
@@ -784,7 +1135,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
       </section>
 
       <!-- El propósito del sitio, conservado bajo el hero -->
-      <div class="shell"><!-- home-discovery:start --><nav class="home-families" id="explore-families" aria-label="¿Qué quieres crear?"><p class="home-families__label">¿Qué quieres crear?</p><ul class="home-families__grid"><li><a href="/codigo-web/plantillas/"><strong>Plantillas web</strong><span>HTML · CSS · JavaScript</span></a></li><li><a href="/herramientas/"><strong>Herramientas</strong><span>Color, SVG, audio y QR</span></a></li><li><a href="/blog/efectos-de-sonido-para-videos-gratis/"><strong>Sonidos</strong><span>Packs para tus videos</span></a></li><li><a href="/blog/animacion-de-texto-after-effects/"><strong>After Effects</strong><span>Texto, títulos y motion</span></a></li><li><a href="/recursos/#iconos"><strong>Iconos</strong><span>Packs SVG y PNG</span></a></li><li><a href="/blog/escenas-3d-desarrollo-web-spline/"><strong>Escenas 3D</strong><span>Archivos para Spline</span></a></li></ul></nav><!-- home-discovery:end --><!-- home-discovery:start --><section class="home-selection" data-discovery aria-labelledby="selection-title"><div class="section-head"><div><p class="eyebrow">SELECCIÓN LIENZO</p><h2 id="selection-title">Recursos para explorar</h2><p>Plantillas, sonidos, motion y herramientas creativas. Empieza por algo que puedas usar en tu próximo proyecto.</p></div><a class="more" href="/recursos/">Explorar todos los recursos ↗</a></div><div class="home-selection__toolbar"><p class="home-selection__hint" id="selection-hint">Explora a tu ritmo. Desliza o usa las flechas del teclado.</p><div class="home-selection__controls" data-discovery-controls hidden><button type="button" data-discovery-previous aria-controls="selection-track">Anterior</button><button type="button" data-discovery-next aria-controls="selection-track">Siguiente</button></div></div><ul class="home-selection__track" id="selection-track" data-discovery-track aria-label="Recursos para explorar" aria-describedby="selection-hint"><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual"><img src="/assets/discovery/templates-es.webp" alt="" width="720" height="440" loading="lazy" decoding="async"></div><p class="home-selection__tag">HTML · CSS · JavaScript</p><h3>Plantillas para tu próxima idea</h3><p class="home-selection__description">Prueba el carrusel y los botones sociales de cristal o por capas. Descarga el código para adaptarlo a tu web.</p><a class="btn btn--primary" href="/codigo-web/plantillas/">Probar plantillas ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual"><img src="/assets/discovery/text-animation-es.webp" alt="" width="720" height="440" loading="lazy" decoding="async"></div><p class="home-selection__tag">Proyecto AEP</p><h3>Dale movimiento a tus textos</h3><p class="home-selection__description">Tipografía cinética, entradas y cursores animados. Mira la vista previa y consulta la guía del proyecto.</p><a class="btn btn--primary" href="/blog/animacion-de-texto-after-effects/">Ver animaciones ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual home-selection__visual--object"><img src="/assets/3d/sonido-transiciones.webp" alt="" width="720" height="440" loading="lazy" decoding="async"></div><p class="home-selection__tag">Biblioteca de sonido</p><h3>El sonido que acompaña tu edición</h3><p class="home-selection__description">Explora transiciones, glitch, suspenso y más. Escucha las muestras y elige el pack que necesita tu video.</p><a class="btn btn--primary" href="/blog/efectos-de-sonido-para-videos-gratis/">Escuchar y descargar ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual home-selection__visual--object"><img src="/assets/3d/qr.webp" alt="" width="720" height="440" loading="lazy" decoding="async"></div><p class="home-selection__tag">Herramienta de navegador</p><h3>Un QR con tu propia marca</h3><p class="home-selection__description">Añade tu logo, personaliza los colores y exporta en PNG o SVG. Prueba la lectura antes de imprimir.</p><a class="btn btn--primary" href="/herramientas/qr/">Crear mi QR ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual"><img src="/assets/iconos/ia-3-estilos.webp" alt="" width="720" height="440" loading="lazy" decoding="async"></div><p class="home-selection__tag">Iconos SVG + PNG</p><h3>Inteligencia artificial, en tres estilos</h3><p class="home-selection__description">Robots, chatbots y redes neuronales: 25 conceptos para interfaces, presentaciones y contenido visual.</p><a class="btn btn--primary" href="/blog/iconos-de-inteligencia-artificial-gratis-svg/">Explorar iconos ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual home-selection__visual--object"><img src="/assets/escenas-3d/desarrollo-web/desarrollo-web.webp" alt="" width="720" height="440" loading="lazy" decoding="async"></div><p class="home-selection__tag">Escenas editables · Spline</p><h3>Una nueva dimensión para tu web</h3><p class="home-selection__description">Ocho escenas de desarrollo web, cada una en su archivo editable. Consulta cómo personalizarlas e integrarlas.</p><a class="btn btn--primary" href="/blog/escenas-3d-desarrollo-web-spline/">Ver escenas 3D ↗</a></article></li></ul></section><!-- home-discovery:end --></div>
+      <div class="shell"><!-- home-discovery:start --><nav class="home-families" id="explore-families" aria-label="¿Qué quieres crear?"><p class="home-families__label">¿Qué quieres crear?</p><ul class="home-families__grid"><li><a href="/codigo-web/plantillas/"><strong>Plantillas web</strong><span>HTML · CSS · JavaScript</span></a></li><li><a href="/herramientas/"><strong>Herramientas</strong><span>Color, SVG, audio y QR</span></a></li><li><a href="/blog/efectos-de-sonido-para-videos-gratis/"><strong>Sonidos</strong><span>Packs para tus videos</span></a></li><li><a href="/blog/animacion-de-texto-after-effects/"><strong>After Effects</strong><span>Texto, títulos y motion</span></a></li><li><a href="/recursos/#iconos"><strong>Iconos</strong><span>Packs SVG y PNG</span></a></li><li><a href="/blog/escenas-3d-desarrollo-web-spline/"><strong>Escenas 3D</strong><span>Archivos para Spline</span></a></li></ul></nav><!-- home-discovery:end --><!-- home-discovery:start --><section class="home-selection" data-discovery aria-labelledby="selection-title"><div class="section-head"><div><p class="eyebrow">SELECCIÓN LIENZO</p><h2 id="selection-title">Recursos para explorar</h2><p>Plantillas, sonidos, motion y herramientas creativas. Empieza por algo que puedas usar en tu próximo proyecto.</p></div><a class="more" href="/recursos/">Explorar todos los recursos ↗</a></div><div class="home-selection__toolbar"><p class="home-selection__hint" id="selection-hint">Explora a tu ritmo. Desliza o usa las flechas del teclado.</p><div class="home-selection__controls" data-discovery-controls hidden><button type="button" data-discovery-previous aria-controls="selection-track">Anterior</button><button type="button" data-discovery-next aria-controls="selection-track">Siguiente</button></div></div><ul class="home-selection__track" id="selection-track" data-discovery-track aria-label="Recursos para explorar" aria-describedby="selection-hint"><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual"><img src="/assets/discovery/templates-es.webp" alt="" width="720" height="440" loading="lazy" decoding="async" srcset="/assets/responsive/home/discovery--templates-es-324.webp 324w, /assets/discovery/templates-es.webp 720w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc((100vw - 72px) / 2), 400px"></div><p class="home-selection__tag">HTML · CSS · JavaScript</p><h3>Plantillas para tu próxima idea</h3><p class="home-selection__description">Prueba el carrusel y los botones sociales de cristal o por capas. Descarga el código para adaptarlo a tu web.</p><a class="btn btn--primary" href="/codigo-web/plantillas/">Probar plantillas ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual"><img src="/assets/discovery/text-animation-es.webp" alt="" width="720" height="440" loading="lazy" decoding="async" srcset="/assets/responsive/home/discovery--text-animation-es-320.webp 320w, /assets/discovery/text-animation-es.webp 720w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc((100vw - 72px) / 2), 400px"></div><p class="home-selection__tag">Proyecto AEP</p><h3>Dale movimiento a tus textos</h3><p class="home-selection__description">Tipografía cinética, entradas y cursores animados. Mira la vista previa y consulta la guía del proyecto.</p><a class="btn btn--primary" href="/blog/animacion-de-texto-after-effects/">Ver animaciones ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual home-selection__visual--object"><img src="/assets/3d/sonido-transiciones.webp" alt="" width="720" height="440" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--sonido-transiciones-320.webp 320w, /assets/3d/sonido-transiciones.webp 512w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc((100vw - 72px) / 2), 400px"></div><p class="home-selection__tag">Biblioteca de sonido</p><h3>El sonido que acompaña tu edición</h3><p class="home-selection__description">Explora transiciones, glitch, suspenso y más. Escucha las muestras y elige el pack que necesita tu video.</p><a class="btn btn--primary" href="/blog/efectos-de-sonido-para-videos-gratis/">Escuchar y descargar ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual home-selection__visual--object"><img src="/assets/3d/qr.webp" alt="" width="720" height="440" loading="lazy" decoding="async" srcset="/assets/3d/qr.webp 512w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc((100vw - 72px) / 2), 400px"></div><p class="home-selection__tag">Herramienta de navegador</p><h3>Un QR con tu propia marca</h3><p class="home-selection__description">Añade tu logo, personaliza los colores y exporta en PNG o SVG. Prueba la lectura antes de imprimir.</p><a class="btn btn--primary" href="/herramientas/qr/">Crear mi QR ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual"><img src="/assets/iconos/ia-3-estilos.webp" alt="" width="720" height="440" loading="lazy" decoding="async" srcset="/assets/responsive/home/iconos--ia-3-estilos-270.webp 270w, /assets/iconos/ia-3-estilos.webp 810w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc((100vw - 72px) / 2), 400px"></div><p class="home-selection__tag">Iconos SVG + PNG</p><h3>Inteligencia artificial, en tres estilos</h3><p class="home-selection__description">Robots, chatbots y redes neuronales: 25 conceptos para interfaces, presentaciones y contenido visual.</p><a class="btn btn--primary" href="/blog/iconos-de-inteligencia-artificial-gratis-svg/">Explorar iconos ↗</a></article></li><li class="home-selection__item" data-discovery-card><article class="home-selection__card"><div class="home-selection__visual home-selection__visual--object"><img src="/assets/escenas-3d/desarrollo-web/desarrollo-web.webp" alt="" width="720" height="440" loading="lazy" decoding="async" srcset="/assets/responsive/home/escenas-3d--desarrollo-web--desarrollo-web-321.webp 321w, /assets/responsive/home/escenas-3d--desarrollo-web--desarrollo-web-639.webp 639w, /assets/escenas-3d/desarrollo-web/desarrollo-web.webp 1920w" sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) calc((100vw - 72px) / 2), 400px"></div><p class="home-selection__tag">Escenas editables · Spline</p><h3>Una nueva dimensión para tu web</h3><p class="home-selection__description">Ocho escenas de desarrollo web, cada una en su archivo editable. Consulta cómo personalizarlas e integrarlas.</p><a class="btn btn--primary" href="/blog/escenas-3d-desarrollo-web-spline/">Ver escenas 3D ↗</a></article></li></ul></section><!-- home-discovery:end --></div>
       <section class="section shell" aria-label="Qué es Lienzo"><p>Prueba, personaliza y crea. Las guías de Lienzo te acompañan desde la vista previa hasta tu proyecto.</p></section>
 
             <!-- Lo más reciente (marquesina neon-glass) -->
@@ -796,7 +1147,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
 <section class="section shell" id="herramientas"><div class="section-head"><div><p class="eyebrow">HERRAMIENTAS GRATIS</p><h2>Herramientas para tu próxima idea</h2><p>Crea un QR con tu marca, edita audio, prepara una paleta o genera SVG y CSS para tu sitio.</p></div><a class="more" href="/herramientas/">Explorar todas las herramientas ↗</a></div><div class="card-grid"><a class="card reveal" href="/herramientas/qr/">
             <span class="card__tag">QR</span>
             <div class="card__art card__art--3d" aria-hidden="true">
-              <img class="icono-3d" src="/assets/3d/qr.webp" alt="" width="512" height="512" loading="lazy" decoding="async" />
+              <img class="icono-3d" src="/assets/3d/qr.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--qr-256.webp 256w, /assets/3d/qr.webp 512w" sizes="104px">
             </div>
             <h3>Generador de código QR</h3>
             <p>URL, WiFi, contacto, correo, SMS o texto. Colores propios, PNG o SVG, sin registro y sin subir nada a un servidor.</p>
@@ -804,7 +1155,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
           <span class="catalog-action">Crear QR ↗</span></a><a class="card reveal" href="/herramientas/audio/">
             <span class="card__tag">Audio</span>
             <div class="card__art card__art--3d" aria-hidden="true">
-              <img class="icono-3d" src="/assets/3d/audio.webp" alt="" width="512" height="512" loading="lazy" decoding="async" />
+              <img class="icono-3d" src="/assets/3d/audio.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/3d/audio.webp 512w" sizes="104px">
             </div>
             <h3>Editor de audio</h3>
             <p>Recorta, une, convierte, sube el volumen y cambia la velocidad de tus audios. Todo en el navegador, sin subir nada.</p>
@@ -812,7 +1163,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
           <span class="catalog-action">Editar audio ↗</span></a><a class="card reveal" href="/herramientas/paletas/">
             <span class="card__tag">Color</span>
             <div class="card__art card__art--3d" aria-hidden="true">
-              <img class="icono-3d" src="/assets/3d/paletas.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--paletas-256.webp 256w, /assets/3d/paletas.webp 512w" sizes="104px" />
+              <img class="icono-3d" src="/assets/3d/paletas.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--paletas-256.webp 256w, /assets/3d/paletas.webp 512w" sizes="104px">
             </div>
             <h3>Generador de paletas</h3>
             <p>Armonías cromáticas y escalas del 50 al 950 con contraste WCAG, listas para exportar a CSS, Tailwind, SVG o PNG.</p>
@@ -820,7 +1171,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
           <span class="catalog-action">Crear paleta ↗</span></a><a class="card reveal" href="/herramientas/optimizar-svg/">
             <span class="card__tag">SVG</span>
             <div class="card__art card__art--3d" aria-hidden="true">
-              <img class="icono-3d" src="/assets/3d/optimizar-svg.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--optimizar-svg-256.webp 256w, /assets/3d/optimizar-svg.webp 512w" sizes="104px" />
+              <img class="icono-3d" src="/assets/3d/optimizar-svg.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--optimizar-svg-256.webp 256w, /assets/3d/optimizar-svg.webp 512w" sizes="104px">
             </div>
             <h3>Optimizador de SVG</h3>
             <p>Limpia el código SVG y compara el tamaño antes y después, sin subir el archivo. El ahorro depende del SVG original.</p>
@@ -828,7 +1179,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
           <span class="catalog-action">Optimizar SVG ↗</span></a><a class="card reveal" href="/herramientas/favicons/">
             <span class="card__tag">SVG</span>
             <div class="card__art card__art--3d" aria-hidden="true">
-              <img class="icono-3d" src="/assets/3d/favicons.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--favicons-256.webp 256w, /assets/3d/favicons.webp 512w" sizes="104px" />
+              <img class="icono-3d" src="/assets/3d/favicons.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--favicons-256.webp 256w, /assets/3d/favicons.webp 512w" sizes="104px">
             </div>
             <h3>Galería de favicons</h3>
             <p>60 favicons SVG listos para copiar como etiqueta <code>&lt;link&gt;</code>, más generadores de emoji y monograma.</p>
@@ -836,7 +1187,7 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
           <span class="catalog-action">Explorar favicons ↗</span></a><a class="card reveal" href="/codigo-web/">
             <span class="card__tag card__tag--turquesa">CSS</span>
             <div class="card__art card__art--3d" aria-hidden="true">
-              <img class="icono-3d" src="/assets/3d/codigo-web.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--codigo-web-256.webp 256w, /assets/3d/codigo-web.webp 512w" sizes="104px" />
+              <img class="icono-3d" src="/assets/3d/codigo-web.webp" alt="" width="512" height="512" loading="lazy" decoding="async" srcset="/assets/responsive/home/3d--codigo-web-256.webp 256w, /assets/3d/codigo-web.webp 512w" sizes="104px">
             </div>
             <h3>Código web</h3>
             <p>Siete generadores de CSS: degradados, sombras, bordes, filtros, transformaciones, animaciones y tipografía.</p>
@@ -911,8 +1262,8 @@ section.compartir-bloque .compartir-bloque__lema{padding-top: 1.5rem; border-top
       </div>
     </footer>
 
-    <script src="/js/hero-eclipse.js?v=2026083010" defer></script>
-    <script src="/js/site.js?v=b20ebe58b7cf" defer></script>
+    <script src="/js/hero-eclipse.js?v=b2f278aa6532" defer></script>
+    <script src="/js/site.js?v=419967f684ea" defer></script>
     <script src="/js/mi-lienzo.js?v=4364bb214cd7" defer></script>
-  <script src="/js/home-discovery.js?v=2026101202" defer></script></body>
+  <script src="/js/home-discovery.js?v=4f2b0a8e7d9a" defer></script></body>
 </html>

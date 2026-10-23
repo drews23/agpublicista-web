@@ -38,17 +38,25 @@
   var activo = false;      /* hero visible y pestaña al frente */
   var rafId = 0;
 
-  function medir() {
-    var caja = seccion.getBoundingClientRect();
+  var dim = { ancho: 0, alto: 0 };
+  var ultimoDpr = 0;
+
+  function dimensionar(ancho, alto) {
     /* Tope de DPR en 2: nitidez sin pagar el costo de pantallas 3x */
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(caja.width * dpr);
-    canvas.height = Math.round(caja.height * dpr);
+    if (!ancho || !alto || (dim.ancho === ancho && dim.alto === alto && ultimoDpr === dpr)) return;
+    dim = { ancho: ancho, alto: alto };
+    ultimoDpr = dpr;
+    canvas.width = Math.round(ancho * dpr);
+    canvas.height = Math.round(alto * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    return { ancho: caja.width, alto: caja.height };
+    poblar();
   }
 
-  var dim = medir();
+  function medirRespaldo() {
+    var caja = seccion.getBoundingClientRect();
+    dimensionar(caja.width, caja.height);
+  }
 
   function Particula() {
     this.reiniciar();
@@ -63,18 +71,17 @@
     this.inicioDesvanecer = Date.now() + this.esperaDesvanecer;
     this.desvaneciendo = false;
   };
-  Particula.prototype.avanzar = function () {
+  Particula.prototype.avanzar = function (ahora) {
     this.y -= this.velocidad;
     if (this.y < 0) this.reiniciar();
-    if (!this.desvaneciendo && Date.now() > this.inicioDesvanecer) this.desvaneciendo = true;
+    if (!this.desvaneciendo && ahora > this.inicioDesvanecer) this.desvaneciendo = true;
     if (this.desvaneciendo) {
       this.opacidad -= 0.008;
       if (this.opacidad <= 0) this.reiniciar();
     }
   };
-  Particula.prototype.dibujar = function () {
+  Particula.prototype.dibujar = function (oro) {
     /* Tinte según el modo: frío (violeta/blanco) o ámbar */
-    var oro = seccion.classList.contains('eclipse--oro');
     var r, g, b;
     if (oro) {
       r = 255; g = 210 - Math.random() * 60; b = 120 - Math.random() * 60;
@@ -93,10 +100,12 @@
 
   function cuadro() {
     if (!activo) { rafId = 0; return; }
+    var ahora = Date.now();
+    var oro = seccion.classList.contains('eclipse--oro');
     ctx.clearRect(0, 0, dim.ancho, dim.alto);
     for (var i = 0; i < particulas.length; i++) {
-      particulas[i].avanzar();
-      particulas[i].dibujar();
+      particulas[i].avanzar(ahora);
+      particulas[i].dibujar(oro);
     }
     rafId = requestAnimationFrame(cuadro);
   }
@@ -111,9 +120,24 @@
     if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
   }
 
+  /* El navegador entrega el tamaño después del layout: no se fuerza un
+     getBoundingClientRect síncrono durante el primer renderizado. */
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function (entradas) {
+      var entrada = entradas[0];
+      var caja = entrada.borderBoxSize && (entrada.borderBoxSize[0] || entrada.borderBoxSize);
+      dimensionar(caja ? caja.inlineSize : entrada.contentRect.width,
+        caja ? caja.blockSize : entrada.contentRect.height);
+    }).observe(seccion);
+  } else {
+    requestAnimationFrame(medirRespaldo);
+  }
+
+  var visible = false;
   /* Solo anima mientras el hero está a la vista… */
   var visor = new IntersectionObserver(function (entradas) {
-    if (entradas[0].isIntersecting && !document.hidden) arrancar();
+    visible = entradas[0].isIntersecting;
+    if (visible && !document.hidden) arrancar();
     else frenar();
   }, { threshold: 0.05 });
   visor.observe(seccion);
@@ -121,18 +145,16 @@
   /* …y la pestaña, al frente. */
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) frenar();
-    else if (seccion.getBoundingClientRect().bottom > 0) arrancar();
+    else if (visible) arrancar();
   });
 
   var esperaRedim = 0;
   window.addEventListener('resize', function () {
     clearTimeout(esperaRedim);
     esperaRedim = setTimeout(function () {
-      dim = medir();
-      poblar();
+      if ('ResizeObserver' in window) dimensionar(dim.ancho, dim.alto);
+      else medirRespaldo();
     }, 150);
   });
 
-  poblar();
-  arrancar();
 })();

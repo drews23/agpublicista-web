@@ -11,8 +11,15 @@
     controls.hidden = false;
     track.tabIndex = 0;
     const update = () => {
-      previous.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+      const atStart = track.scrollLeft <= 2;
+      const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+      if (previous.disabled !== atStart) previous.disabled = atStart;
+      if (next.disabled !== atEnd) next.disabled = atEnd;
+    };
+    let updateFrame = 0;
+    const scheduleUpdate = () => {
+      if (updateFrame) return;
+      updateFrame = requestAnimationFrame(() => { updateFrame = 0; update(); });
     };
     const move = direction => {
       const card = track.firstElementChild;
@@ -71,8 +78,13 @@
       if (bounds.left < viewport.left) track.scrollBy({left: bounds.left - viewport.left, behavior: 'instant'});
       else if (bounds.right > viewport.right) track.scrollBy({left: bounds.right - viewport.right, behavior: 'instant'});
     });
-    track.addEventListener('scroll', update, {passive: true});
-    window.addEventListener('resize', update, {passive: true});
-    update();
+    track.addEventListener('scroll', scheduleUpdate, {passive: true});
+    if ('ResizeObserver' in window) {
+      // El tamaño ya está calculado. No forzar layout justo después de mostrar controles.
+      new ResizeObserver(update).observe(track);
+    } else {
+      window.addEventListener('resize', scheduleUpdate, {passive: true});
+      scheduleUpdate();
+    }
   });
 })();
