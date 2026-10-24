@@ -16,3 +16,10 @@ Código abre un documento HTML completo con tus ajustes para copiar o descargar.
 
 ## Créditos y licencias
 Implementación e ilustraciones nuevas de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . No se redistribuyen código ni imágenes del ZIP externo de referencia Swiper o de componentes de 21st. LICENSE-LIENZO.txt cubre el código original bajo MIT. Fraunces e Instrument Sans locales conservan sus avisos OFL en assets/. El logo de muestra conserva sus derechos de marca. Mantén los avisos al compartir.
+
+
+## Mesa de edición
+El botón Ajustes pliega el inspector sin restablecer el trabajo. La vista previa permanece estable durante la edición. Conserva editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css y template-brand.js junto al CSS, JavaScript, HTML y assets originales. Estos archivos locales no necesitan red ni instalación.
+
+## Tu marca
+Lienzo es la identidad de ejemplo predeterminada. Tu marca admite colores principal, secundario y acento libres, fondo/texto opcionales, fuentes del sistema y archivos WOFF2/WOFF/TTF/OTF locales de hasta 5 MB por función. Los cambios se aplican en directo a la pieza y son independientes de Aplicar/Cancelar contenido. Las exportaciones HTML completas incluyen el perfil y las fuentes adjuntas; conserva las dependencias del ZIP junto al HTML. Los SVG de iconos incluyen sus colores y no necesitan JavaScript; esos dibujos no tienen texto visible y no usan la fuente del editor. Adjunta únicamente fuentes que puedas utilizar y redistribuir. Ningún archivo sale del navegador.

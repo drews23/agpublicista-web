@@ -1,5 +1,6 @@
 """The Lienzo product-carousel variant, preserving the reference's visual contract."""
 from pathlib import Path
+from editor_legacy_layout import document as editor_document, guide as editor_guide, copy_assets as copy_editor_assets, copy_file as copy_editor_file
 from html import escape
 import base64
 import hashlib
@@ -29,6 +30,7 @@ def icon(key):
     return '<svg viewBox="0 0 24 24" aria-hidden="true">'+ICONS[key]+'</svg>'
 
 
+@editor_document('carrusel-progreso')
 def document(lang):
     en=lang=='en';tr=lambda es,us:us if en else es
     slides=[];items=[];auras=[];dots=[]
@@ -73,11 +75,13 @@ def thumbnail():
 
 
 def copy_assets(destination):
+    copy_editor_assets(destination)
     for file in (SOURCE/'images').glob('*.webp'):shutil.copy2(file,destination/'assets'/file.name)
     for file in (SOURCE/'vendor').iterdir():shutil.copy2(file,destination/'assets'/file.name)
-    for name in ['styles.css','script.js']:shutil.copy2(SOURCE/name,destination/name)
+    for name in ['styles.css','script.js']:copy_editor_file(SOURCE/name,destination/name)
 
 
+@editor_guide
 def readme(lang):
     if lang=='en':
         return '''# Progress & Depth Carousel — Lienzo Form

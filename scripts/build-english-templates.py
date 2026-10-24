@@ -41,6 +41,7 @@ TEXT = {
  'Adaptación y guía: Lienzo.': 'Adaptation and guide: Lienzo.',
  '. Licencia MIT incluida.': '. MIT license included.',
  'Demo interactiva · código incluido en el ZIP': 'Interactive demo · code included in the ZIP',
+ 'Ayuda y demo completa': 'Help and full demo',
  'Prueba los controles de la plantilla. Móvil simula un ancho de hasta 390 px.': 'Try the template controls. Mobile preview simulates a width of up to 390 px.',
  'Abrir demo en otra pestaña ↗': 'Open demo in a new tab ↗',
  'Plantillas disponibles': 'Available templates', 'Características': 'Features',
@@ -199,6 +200,9 @@ def build():
         html = html.replace(f'{ORIGIN}/blog/animacion-de-texto-after-effects/', f'{ORIGIN}/en/blog/after-effects-text-animation/')
         html = html.replace(f'{ORIGIN}/herramientas/paletas/', f'{ORIGIN}/en/tools/palettes/')
         html = html.replace('text=Descubre%20recursos%20creativos%20en%20', 'text=Explore%20free%20web%20templates%20at%20')
+        from editor_legacy_layout import adapt_markup, copy_assets as copy_editor_assets, guide_note as editor_guide_note
+        html = adapt_markup(html, slug, 'en')
+        copy_editor_assets(dest)
         dest.joinpath('index.html').write_text(html, encoding='utf-8')
         js = translate(src.joinpath('script.js').read_text(encoding='utf-8'), DEMO_TEXT)
         dest.joinpath('script.js').write_text(js, encoding='utf-8')
@@ -207,6 +211,8 @@ def build():
         credits = ('Original carousel design, illustrations, and code by Lienzo. Built from scratch with native scrolling; it does not include code or images from the external Swiper ZIP. Hover tilt and cursor-following light use local CSS and JavaScript. Keyboard focus remains visible; touch scrolling works natively and reduced-motion preferences disable tilt.' if own else 'Lienzo adaptation: colors, content, local SVG icons, accessible labels, visible focus, reduced-motion support, and mobile layout. Remote CDN dependencies were removed and the HTML structure was corrected. Original author: ' + ('Sabiha Samha.' if slug == 'botones-cristal' else 'Nick.') + ' The original MIT notice is included unchanged.')
         demo_note = 'Carousel favorites are temporary demo state, not an account or storage service. They reset on reload. ' if own else ''
         dest.joinpath('README.md').write_text(README.format(title=title, behavior=', carousel navigation, and temporary favorites' if own else '', original='' if own else '- LICENSE-ORIGINAL.txt: original MIT license and copyright notice; preserve it when redistributing.\n', credits=credits, demo_note=demo_note), encoding='utf-8')
+        guide_path = dest / 'README.md'
+        guide_path.write_text(guide_path.read_text(encoding='utf-8') + editor_guide_note('en'), encoding='utf-8')
         zipname = slug + '-lienzo-en.zip'
         zippath = ROOT / 'recursos/descargas/plantillas-web' / zipname
         with zipfile.ZipFile(zippath, 'w', zipfile.ZIP_DEFLATED) as archive:

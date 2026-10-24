@@ -27,3 +27,10 @@ El borde gira con CSS transform, sin recalcular el ángulo de un degradado en ca
 ## Créditos y licencias
 
 Implementación nueva Lienzo para la colaboración con MD Estudio Creativo identificada por el responsable: https://creativomarketingdigital.com/ . La referencia aportada acredita a Ahmod Musa; se inspeccionaron ZIP y vídeo sin redistribuirlos. No incluye su código, emojis, fuentes remotas, enlaces promocionales de terceros ni cifras de opiniones. Los SVG de producto se dibujaron para esta implementación. SOURCE-NOTES.md documenta procedencia. LICENSE-LIENZO.txt cubre este código; las fuentes conservan OFL. MIT no transfiere derechos de marca.
+
+
+## Mesa de edición
+El botón Ajustes pliega el inspector sin restablecer el trabajo. La vista previa permanece estable durante la edición. Conserva editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css y template-brand.js junto al CSS, JavaScript, HTML y assets originales. Estos archivos locales no necesitan red ni instalación.
+
+## Tu marca
+Lienzo es la identidad de ejemplo predeterminada. Tu marca admite colores principal, secundario y acento libres, fondo/texto opcionales, fuentes del sistema y archivos WOFF2/WOFF/TTF/OTF locales de hasta 5 MB por función. Los cambios se aplican en directo a la pieza y son independientes de Aplicar/Cancelar contenido. Las exportaciones HTML completas incluyen el perfil y las fuentes adjuntas; conserva las dependencias del ZIP junto al HTML. Los SVG de iconos incluyen sus colores y no necesitan JavaScript; esos dibujos no tienen texto visible y no usan la fuente del editor. Adjunta únicamente fuentes que puedas utilizar y redistribuir. Ningún archivo sale del navegador.

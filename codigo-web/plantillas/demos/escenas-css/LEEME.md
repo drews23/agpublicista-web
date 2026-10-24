@@ -17,7 +17,7 @@ Cada escena conserva título, descripción, acento, ritmo e intensidad independi
 
 ## Dos exportaciones HTML
 - El icono de descarga de cada escena crea un **HTML independiente** con esa escena. Incluye ilustración, CSS, fuentes, sus avisos, licencia del código y control de pausa. No necesita archivos vecinos ni solicitudes de red. Las fuentes hacen que pese más que el SVG aislado. Configura tus metadatos y sustituye el contenido de muestra antes de publicarlo.
-- Obtener HTML en la barra exporta el **estudio completo personalizado**. Conserva ese HTML junto a studio.css, studio.js, component.css, component.js y assets/ del ZIP. Esta exportación del estudio completo no es autónoma.
+- Obtener HTML en la barra exporta el **estudio completo personalizado**. Conserva ese HTML junto a editor-workspace.css, editor-workspace.js, studio.css, studio.js, component.css, component.js y assets/ del ZIP. Esta exportación del estudio completo no es autónoma.
 
 ## Movimiento e integración
 Cada mecanismo tiene su propio ciclo. --scene-color cambia el acento principal; --cs-speed multiplica los tiempos; --cs-energy ajusta amplitudes. --cs-play controla ejecución/pausa. El estudio detiene escenas fuera de vista, pestañas en segundo plano, diálogos abiertos, pausa manual y movimiento reducido del sistema. El modo reducido y la intensidad cero muestran el dibujo estático. CSS anima las piezas; no hay un bucle permanente de fotogramas JavaScript. El rendimiento depende del dispositivo y no se garantiza una tasa de FPS.
@@ -26,3 +26,13 @@ Usa el HTML independiente como punto de partida de integración. Conserva avisos
 
 ## Créditos
 Implementación e ilustraciones originales de Lienzo, preparadas dentro de la colaboración con MD Estudio Creativo indicada por el responsable del proyecto: https://creativomarketingdigital.com/ . Consulta LICENSE-LIENZO.txt y SOURCE-NOTES.md. Fraunces e Instrument Sans mantienen sus avisos OFL. Las referencias y las marcas tienen derechos separados; la licencia del código nuevo no otorga derechos sobre ellas.
+
+
+## Espacio de edición estable
+
+Abre Ajustes para conservar la vista junto al formulario. Aplicar confirma los cambios de contenido; Cancelar descarta los campos sin aplicar. Ocultar ajustes conserva esos campos. Los controles de imagen y movimiento se actualizan al instante y están identificados por separado. Conserva editor-workspace.css y editor-workspace.js junto al HTML, también al descargar un HTML editado.
+
+
+## Tu marca
+
+Elige tus tres colores de acento en Tu marca. Los colores opcionales de superficie/texto y las fuentes de títulos/cuerpo afectan solo a la pieza reutilizable; la interfaz de edición conserva la identidad de Lienzo. La marca se actualiza al instante y es independiente de Aplicar/Cancelar contenido. Las fuentes locales permanecen en el navegador y se integran en el HTML exportado. Usa solo fuentes que tengas permiso de distribuir. Conserva template-brand.css y template-brand.js junto al HTML del estudio completo; las exportaciones de escena/panel incorporan sus estilos de marca actuales.

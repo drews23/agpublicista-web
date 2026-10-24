@@ -52,7 +52,7 @@
     syncTheme();
   });
   window.addEventListener('message', event => {
-    if (!dialog.open || event.source !== frame.contentWindow || event.data?.type !== 'lienzo:theme-changed') return;
+    if (!dialog.open || event.source !== frame.contentWindow || !['null', location.origin].includes(event.origin) || event.data?.type !== 'lienzo:theme-changed') return;
     if (!['light', 'dark'].includes(event.data.theme)) return;
     theme = event.data.theme;
     themeButton.textContent = theme === 'dark' ? 'Light theme' : 'Dark theme';

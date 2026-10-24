@@ -35,3 +35,13 @@ The controls do not export video or an image sequence. Save PNG captures one fra
 The customized HTML requires `studio.css`, `studio.js`, `component.css`, `component.js`, and `assets/` beside it. It is not standalone. An uploaded image is embedded as data in the HTML configuration, which increases its size. The ZIP and customized HTML omit the hosted demo’s `noindex` directive. Set your own metadata before publishing.
 
 Preserve accessible names, focus states, motion preferences, and the catalog theme bridge’s parent-window validation. Adapt component selectors if integrating multiple instances on one page. Original code and generative artwork use `LICENSE-LIENZO.txt`; reference material is not redistributed or covered by that license. See `SOURCE-NOTES.md` and font OFL notices. Collaboration identified by the project owner: https://creativomarketingdigital.com/ .
+
+
+## Stable editing workspace
+
+Open Settings to keep the preview beside the form. Apply commits content changes; Cancel discards unapplied fields. Hiding Settings preserves those fields. Image and motion controls update immediately and are labeled separately. Keep editor-workspace.css and editor-workspace.js beside the HTML, including when using a downloaded edited HTML.
+
+
+## Your brand
+
+Choose your own three accent colors in Your brand. Optional surface/text colors and display/body fonts apply only to the reusable piece, while the authoring interface keeps Lienzo identity. Brand changes apply immediately and are independent of content Apply/Cancel. Local font uploads stay in the browser and are embedded in exported HTML. Use only fonts you have permission to distribute. Keep template-brand.css and template-brand.js beside full-studio HTML; individual scene/panel exports embed their current brand styles.

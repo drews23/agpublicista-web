@@ -35,3 +35,13 @@ Resource cards open real links in a new tab. Replace their destinations in the `
 Favorites, filtering, and edits live in memory. Reloading discards changes; exported HTML keeps its exported state. No data is sent, browser storage is not used, and there is no backend.
 
 The palette uses Lienzo's violet, mint, amber, and neutrals. Instrument Sans and Fraunces are bundled locally; keep their OFL notices. Preserve the license and attribution notices included in the package.
+
+
+## Stable editing workspace
+
+Open Settings to keep the preview beside the form. Apply commits content changes; Cancel discards unapplied fields. Hiding Settings preserves those fields. Image and motion controls update immediately and are labeled separately. Keep editor-workspace.css and editor-workspace.js beside the HTML, including when using a downloaded edited HTML.
+
+
+## Your brand
+
+Choose your own three accent colors in Your brand. Optional surface/text colors and display/body fonts apply only to the reusable piece, while the authoring interface keeps Lienzo identity. Brand changes apply immediately and are independent of content Apply/Cancel. Local font uploads stay in the browser and are embedded in exported HTML. Use only fonts you have permission to distribute. Keep template-brand.css and template-brand.js beside full-studio HTML; individual scene/panel exports embed their current brand styles.

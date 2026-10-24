@@ -35,3 +35,13 @@ Los enlaces reales de las tarjetas abren una nueva pestaña. Puedes sustituir su
 La selección, el filtro y las ediciones viven en memoria. Recargar la página descarta esos cambios; el HTML exportado conserva el estado exportado. No se envían datos, no se utiliza almacenamiento del navegador y no existe un backend.
 
 La paleta utiliza los colores de Lienzo: violeta, menta, ámbar y neutros. Instrument Sans y Fraunces se incluyen localmente; conserva sus avisos OFL. Conserva también los avisos de licencia y atribución incluidos en el paquete.
+
+
+## Espacio de edición estable
+
+Abre Ajustes para conservar la vista junto al formulario. Aplicar confirma los cambios de contenido; Cancelar descarta los campos sin aplicar. Ocultar ajustes conserva esos campos. Los controles de imagen y movimiento se actualizan al instante y están identificados por separado. Conserva editor-workspace.css y editor-workspace.js junto al HTML, también al descargar un HTML editado.
+
+
+## Tu marca
+
+Elige tus tres colores de acento en Tu marca. Los colores opcionales de superficie/texto y las fuentes de títulos/cuerpo afectan solo a la pieza reutilizable; la interfaz de edición conserva la identidad de Lienzo. La marca se actualiza al instante y es independiente de Aplicar/Cancelar contenido. Las fuentes locales permanecen en el navegador y se integran en el HTML exportado. Usa solo fuentes que tengas permiso de distribuir. Conserva template-brand.css y template-brand.js junto al HTML del estudio completo; las exportaciones de escena/panel incorporan sus estilos de marca actuales.

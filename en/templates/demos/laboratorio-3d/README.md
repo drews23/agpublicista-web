@@ -18,3 +18,10 @@ Only colors from assets/logo-lienzo.svg are used as chromatic tokens: #8b7bff, #
 New Lienzo implementation for the collaboration with MD Estudio Creativo identified by the owner: https://creativomarketingdigital.com/ . The supplied neon-glass-3d-cards-ui-lab.zip and screen recording were reviewed as references. Their original source is not redistributed or relicensed. See SOURCE-NOTES.md. Lienzo code: MIT; fonts: OFL; marks retain their trademark rights. Preserve the notices when sharing.
 
 This is a reusable UI example, not a complete store, an installable WordPress theme, or an analytics service. No accounts, persistence, uploads, orders, or payments. The only downloads are files created locally by your interaction and the ZIP from Lienzo. Test your final text and integration in the browsers you support.
+
+
+## Editing workspace
+The Settings button folds the inspector without resetting your work. The preview stays in place while you edit. Keep editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css, and template-brand.js beside the original CSS, JavaScript, HTML and assets. These local files need no network or installation.
+
+## Your brand
+Lienzo is the default sample identity. Your brand accepts custom primary, secondary, and accent colors, optional surface/text colors, system fonts, and local WOFF2/WOFF/TTF/OTF font files up to 5 MB per role. Changes apply live to the component; they are separate from content Apply/Cancel. Full HTML exports embed the brand profile and uploaded fonts; keep the ZIP dependencies alongside the HTML. SVG icon exports embed their chosen colors and need no JavaScript; these drawings contain no visible text and do not use the editor’s font. Only upload fonts you are allowed to use and redistribute. No upload leaves the browser.

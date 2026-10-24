@@ -295,7 +295,7 @@
     const notices=JSON.stringify(data.notices).replace(/</g,'\\u003c');
     const styles=fontCSS+'\n'+data.css+'\n'+[
       '*{box-sizing:border-box}body{margin:0;padding:clamp(20px,5vw,64px);background:'+background+';color:'+foreground+';font:16px/1.6 Instrument,sans-serif}',
-      '.cs-export{width:min(100%,680px);margin:auto;--font-sans:Instrument;--scene-color:'+color+';--cs-speed:'+Math.max(.3,Number(item.duration)/3000)+';--cs-energy:'+(item.intensity??1)+';--cs-play:running}',
+      '.cs-export{width:min(100%,680px);margin:auto;--font-sans:var(--brand-font-body,Instrument);--scene-color:'+color+';--cs-speed:'+Math.max(.3,Number(item.duration)/3000)+';--cs-energy:'+(item.intensity??1)+';--cs-play:running}',
       '.cs-scene{width:min(100%,520px);aspect-ratio:360/260;margin:auto}.cs-scene svg{display:block;width:100%;height:100%}',
       '.cs-scene,.cs-scene *,.cs-scene *::before,.cs-scene *::after{animation-play-state:var(--cs-play,paused)!important}',
       'h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(30px,5vw,46px);letter-spacing:normal;line-height:1.15;margin:20px 0 14px;overflow-wrap:anywhere}p{opacity:.75;margin:0 0 24px;overflow-wrap:anywhere}',
@@ -310,7 +310,7 @@
     ].join('');
     const html='<!doctype html><html lang="'+(ui.lang||document.documentElement.lang)+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+escape(item.title)+' · Lienzo</title><style>'+styles+'</style></head><body><main class="cs-export" data-still="'+String(Number(item.intensity??1)===0)+'">'+illustration+'<h1>'+escape(item.title)+'</h1><p>'+escape(item.description)+'</p><button type="button" aria-pressed="false">'+escape(ui.pause)+'</button><footer>'+escape(ui.standaloneCredit)+'</footer></main><script type="application/json" data-licenses>'+notices+'</script><script>'+script+'</script></body></html>';
     const name=item.title.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase();
-    a.download(html,'lienzo-escena-'+String(index+1).padStart(2,'0')+'-'+name+'.html');
+    a.download(a.brand?.decorateHTML(html,{selector:'.cs-export'}) || html,'lienzo-escena-'+String(index+1).padStart(2,'0')+'-'+name+'.html');
     a.status(ui.sceneDownloaded);
   }
   a.setup({render,fields:[

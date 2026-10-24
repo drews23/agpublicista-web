@@ -153,9 +153,10 @@
     clone.querySelector('[data-track]').removeAttribute('style');
     clone.querySelectorAll('.swiper-slide').forEach(slide=>{slide.setAttribute('style','--product-color:'+slide.dataset.productColor);slide.className='swiper-slide';slide.removeAttribute('aria-hidden');});
     clone.querySelector('[data-status]').textContent='';
+    window.LienzoLegacyBrand?.decorateClone(clone);
     copy('<!doctype html>\n<!-- '+say('Conserva styles.css, script.js y assets/ del ZIP.','Keep styles.css, script.js and assets/ from the ZIP.')+' -->\n'+clone.outerHTML);
   });
-  document.querySelector('[data-copy-css]').addEventListener('click',()=>copy(document.querySelector('[data-source-css]').textContent));
+  document.querySelector('[data-copy-css]').addEventListener('click',()=>copy(document.querySelector('[data-source-css]').textContent+'\n'+(window.LienzoLegacyBrand?.css('.showcase')||'')));
   addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
   theme(root.dataset.theme);motionState();
 })();

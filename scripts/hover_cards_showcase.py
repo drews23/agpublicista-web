@@ -1,5 +1,6 @@
 """Six original Lienzo interaction families preserving the supplied hover reference."""
 from pathlib import Path
+from editor_legacy_layout import document as editor_document, guide as editor_guide, copy_assets as copy_editor_assets, copy_file as copy_editor_file
 from html import escape
 import base64
 import hashlib
@@ -46,6 +47,7 @@ def card(item,lang):
     return f'''<article class="hc-card hc-card--{key}" data-effect="{key}" style="--tone:{PALETTE[item['accent']]};--duration:450ms;--amount:.65;--radius:24px" aria-label="{name}"><div class="hc-scene"><div class="hc-backplate" aria-hidden="true"></div><div class="hc-float-shell"><div class="hc-face"><div class="hc-gradient" aria-hidden="true"></div><div class="hc-halo" aria-hidden="true"></div><div class="hc-reveal" aria-hidden="true"></div><div class="hc-sheen" aria-hidden="true"></div><div class="hc-face__content"><p class="hc-card__index"><span>{item['category']}</span><span class="hc-card__marker" aria-hidden="true"></span></p><div class="hc-art"><img class="hc-object" data-object src="assets/{key}-{item['accent']}.svg" width="160" height="160" alt="" aria-hidden="true"></div><h2 data-card-name>{name}</h2><p class="hc-card__description" data-card-description>{escape(item['description'])}</p><a class="hc-card__link" data-card-link href="{item['href']}" target="_blank" rel="noopener"><span>{escape(item['label'])}</span>{icon('arrow')}</a></div></div></div></div><div class="hc-card__tools"><button type="button" class="hc-test" data-test aria-pressed="false" aria-label="{tr('Probar efecto: ','Test effect: ')}{name}">{icon('play')}<span>{tr('Probar','Try')}</span></button><button type="button" class="hc-tool" data-edit aria-label="{tr('Personalizar ','Customize ')}{name}">{icon('sliders')}<span>{tr('Personalizar','Customize')}</span></button><button type="button" class="hc-tool" data-card-copy aria-label="{tr('Copiar HTML de ','Copy HTML for ')}{name}">{icon('code')}<span>HTML</span></button></div></article>'''
 
 
+@editor_document('tarjetas-hover')
 def document(lang):
     en=lang=='en';tr=lambda es,us:us if en else es;items=localized(lang)
     version=lambda name:hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()[:12]
@@ -66,8 +68,9 @@ def document(lang):
 
 
 def copy_assets(dest):
+    copy_editor_assets(dest)
     for name in ['styles.css','script.js']:
-        shutil.copy2(SOURCE/name,dest/name)
+        copy_editor_file(SOURCE/name,dest/name)
     for path in (SOURCE/'icons').glob('*.svg'):
         shutil.copy2(path,dest/'assets'/path.name)
     shutil.copy2(SOURCE/'ICONS-NOTICE.txt',dest/'assets/ICONS-NOTICE.txt')
@@ -80,6 +83,7 @@ def thumbnail(lang='es'):
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#0a0a0f"/><text x="40" y="300" fill="#35d6c8" font-family="sans-serif" font-size="50">LIENZO / HOVER ATELIER</text></svg>'
 
 
+@editor_guide
 def readme(lang):
     if lang=='en':
         return '''# Six CSS Card Hover Effects — Lienzo Hover Atelier

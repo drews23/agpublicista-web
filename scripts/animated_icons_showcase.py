@@ -1,5 +1,6 @@
 """Lienzo Motion Icons: twelve original SVGs with semantic, independent gestures."""
 from pathlib import Path
+from editor_legacy_layout import document as editor_document, guide as editor_guide, copy_assets as copy_editor_assets, copy_file as copy_editor_file
 from html import escape
 import base64
 import hashlib
@@ -110,6 +111,7 @@ def settings(lang):
     return [{'key':x['key'],'label':x[lang],'accent':x['accent'],'size':112,'stroke':2.2,'duration':1000,'style':'duotone','trigger':'interact'} for x in ICONS]
 
 
+@editor_document('iconos-animados')
 def document(lang):
     en = lang == 'en'
     tr = lambda es, us: us if en else es
@@ -133,8 +135,9 @@ def document(lang):
 
 
 def copy_assets(dest,lang='es'):
+    copy_editor_assets(dest)
     for name in ['styles.css','script.js']:
-        shutil.copy2(SOURCE/name, dest/name)
+        copy_editor_file(SOURCE/name, dest/name)
     for item in ICONS:
         (dest/'assets'/f'lienzo-{item["key"]}.svg').write_text(svg(item,lang).replace('aria-hidden="true"',f'role="img" aria-label="{item[lang]}" tabindex="0"'),encoding='utf8')
 
@@ -146,6 +149,7 @@ def thumbnail(lang='es'):
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#0a0a0f"/><text x="40" y="300" fill="#8b7bff" font-size="48" font-family="sans-serif">LIENZO / MOTION ICONS</text></svg>'
 
 
+@editor_guide
 def readme(lang):
     if lang=='en':
         return '''# Animated SVG Icons — Lienzo Motion Icons

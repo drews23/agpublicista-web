@@ -2,7 +2,7 @@
 (() => {
   'use strict';
 
-  const VIOLET = '#8b7bff', DEEP = '#6e5df2', MINT = '#35d6c8', AMBER = '#ffb454';
+  const VIOLET = 'var(--violet,#8b7bff)', DEEP = 'var(--brand-deep,#6e5df2)', MINT = 'var(--mint,#35d6c8)', AMBER = 'var(--amber,#ffb454)';
   const WHITE = '#fff', BLACK = '#111', INK = '#242424';
   let serial = 0;
   const p = (d, fill, attrs = '') => `<path d="${d}" fill="${fill}" ${attrs}/>`;
@@ -31,7 +31,7 @@
 
   function valley(id) {
     const url = name => `url(#${id(name)})`;
-    const accent = 'var(--eg-accent,#8b7bff)';
+    const accent = 'var(--eg-accent,var(--violet,#8b7bff))';
     const left = 'M-100 500L65 440L142 350L240 430L317 325L404 448L485 500L548 630L462 810L329 1020H-100Z';
     const right = 'M1300 398L1157 320L1085 386L1000 285L901 395L821 366L748 481L703 640L762 812L911 1040H1300Z';
     const defs = linear(id('sky'), [['0', DEEP], ['.48', accent], ['1', WHITE]]) + radial(id('sun-halo'), [['0', WHITE, .76], ['.32', WHITE, .23], ['1', WHITE, 0]]) + linear(id('far'), [['0', WHITE, .26], ['.42', accent, .88], ['1', DEEP]]) + linear(id('left'), [['0', accent], ['.54', DEEP], ['1', BLACK]]) + linear(id('right'), [['0', accent], ['.6', DEEP], ['1', BLACK]], 'gradientTransform="rotate(28 .5 .5)"') + linear(id('river'), [['0', WHITE, .32], ['.22', MINT, .88], ['.67', accent], ['1', MINT]]) + radial(id('ray'), [['0', WHITE, .09], ['.5', WHITE, .025], ['1', WHITE, 0]], 'cx=".6" cy=".2" r=".75"') + linear(id('bank'), [['0', DEEP], ['1', BLACK]]) + clip(id('left-clip'), p(left, WHITE)) + clip(id('right-clip'), p(right, WHITE));
@@ -57,7 +57,7 @@
 
   function forest(id) {
     const url = name => `url(#${id(name)})`;
-    const accent = 'var(--eg-accent,#35d6c8)';
+    const accent = 'var(--eg-accent,var(--mint,#35d6c8))';
     const defs = linear(id('sky'), [['0', WHITE], ['.6', accent], ['1', BLACK]]) + radial(id('clearing'), [['0', WHITE, .9], ['.42', WHITE, .28], ['1', WHITE, 0]]) + linear(id('ground'), [['0', accent], ['1', BLACK]]) + linear(id('bark'), [['0', BLACK], ['.4', accent], ['.48', BLACK], ['1', BLACK]], 'gradientTransform="rotate(-90 .5 .5)"') + linear(id('trunk-front'), [['0', BLACK], ['.65', BLACK], ['.78', accent], ['1', BLACK]], 'gradientTransform="rotate(-90 .5 .5)"') + linear(id('path'), [['0', WHITE], ['.45', accent], ['1', BLACK]]) + linear(id('light'), [['0', WHITE, .44], ['1', WHITE, 0]]);
     const farTrees = [
       [27, 660, 461], [117, 611, 378], [205, 601, 421], [295, 619, 342], [376, 582, 298], [449, 585, 331], [526, 598, 280], [690, 599, 301], [764, 605, 350], [847, 610, 408], [937, 625, 372], [1030, 664, 482], [1134, 683, 428], [1231, 688, 511],
@@ -85,7 +85,7 @@
 
   function dunes(id) {
     const url = name => `url(#${id(name)})`;
-    const accent = 'var(--eg-accent,#ffb454)';
+    const accent = 'var(--eg-accent,var(--amber,#ffb454))';
     const dune = 'M-100 658C123 548 238 586 415 652C572 709 714 650 834 511C920 409 1050 430 1300 504V1090H-100Z';
     const defs = linear(id('sky'), [['0', WHITE], ['1', accent]]) + radial(id('sunlight'), [['0', WHITE, .88], ['.26', WHITE, .25], ['1', WHITE, 0]]) + linear(id('far-sand'), [['0', accent], ['1', WHITE]]) + linear(id('main-dune'), [['0', WHITE], ['.22', accent], ['1', BLACK]], 'gradientTransform="rotate(-24 .5 .5)"') + linear(id('shade'), [['0', accent], ['1', BLACK]], 'gradientTransform="rotate(38 .5 .5)"') + linear(id('foreground'), [['0', accent], ['.75', BLACK], ['1', BLACK]]) + clip(id('dune-clip'), p(dune, WHITE));
     const back = r(-90, -90, 1380, 1180, url('sky')) + c(747, 227, 255, url('sunlight')) + c(747, 227, 88, accent, 'opacity=".54"') + c(747, 227, 74, WHITE, 'opacity=".42"') + stroke('M747 126V117M847 227H856M747 328V337M646 227H637', WHITE, 2, 'opacity=".44"') + p('M-100 506Q76 374 224 452T492 456T793 431T1095 437T1300 419V1000H-100Z', url('far-sand')) + p('M-100 559C105 435 271 504 391 514C546 528 648 419 802 440C963 460 1030 516 1300 431V1000H-100Z', accent, 'opacity=".32"') + p('M-100 611C87 569 154 485 342 511C466 529 535 621 683 601C862 575 1045 481 1300 546V1000H-100Z', accent, 'opacity=".38"');
@@ -108,7 +108,7 @@
 
   function architecture(id) {
     const url = name => `url(#${id(name)})`;
-    const accent = 'var(--eg-accent,#8b7bff)';
+    const accent = 'var(--eg-accent,var(--violet,#8b7bff))';
     const defs = linear(id('sky'), [['0', MINT], ['1', WHITE]]) + linear(id('floor'), [['0', WHITE], ['.55', WHITE], ['1', accent]]) + linear(id('stone'), [['0', WHITE], ['.62', WHITE], ['1', accent]], 'gradientTransform="rotate(-20 .5 .5)"') + linear(id('side'), [['0', accent], ['1', WHITE]], 'gradientTransform="rotate(-90 .5 .5)"') + linear(id('column'), [['0', WHITE], ['.73', WHITE], ['1', accent]], 'gradientTransform="rotate(-90 .5 .5)"') + linear(id('tread'), [['0', WHITE], ['1', accent]]) + linear(id('shaft'), [['0', AMBER, .14], ['.35', WHITE, .3], ['1', WHITE, 0]]) + radial(id('ambient'), [['0', MINT, .23], ['1', MINT, 0]]);
     const back = r(-90, -90, 1380, 1180, url('sky')) + r(-90, 501, 1380, 589, url('floor')) + r(466, 374, 269, 180, WHITE) + r(487, 400, 220, 154, accent, 'opacity=".25"') + archRing(512, 325, 175, 232, 22, WHITE) + p('M553 555V414A47 47 0 0 1 647 414V555Z', MINT, 'opacity=".3"') + p('M563 555V414A37 37 0 0 1 637 414V555Z', WHITE, 'opacity=".6"') + r(607, 354, 11, 196, WHITE, 'opacity=".6"') + c(650, 464, 156, url('ambient')) + stroke('M-80 1000L600 501L1290 1000M118 1100L600 501M381 1100L600 501M846 1100L600 501M1147 1100L600 501M-80 903H1290M-80 774H1290M-80 675H1290M-80 603H1290M-80 550H1290', accent, 1, 'opacity=".2"');
     const portalSide = p('M920 403C920 226 777 83 600 83L631 66C808 66 951 210 951 386V754L920 777Z', url('side')) + p('M374 766V405A226 226 0 0 1 826 405V766L802 750V405A202 202 0 0 0 398 405V750Z', accent, 'opacity=".18"');
@@ -125,7 +125,7 @@
 
   function coast(id) {
     const url = name => `url(#${id(name)})`;
-    const accent = 'var(--eg-accent,#35d6c8)';
+    const accent = 'var(--eg-accent,var(--mint,#35d6c8))';
     const cliff = 'M865 337L952 304L1006 325L1088 298L1193 342L1290 326V1060L1122 946L1004 822L942 764L854 720L829 620L862 562L832 456Z';
     const defs = linear(id('sky'), [['0', WHITE], ['1', accent]]) + linear(id('sea'), [['0', accent], ['.44', accent], ['1', BLACK]]) + linear(id('cliff'), [['0', WHITE], ['.32', WHITE], ['1', accent]], 'gradientTransform="rotate(28 .5 .5)"') + linear(id('headland'), [['0', accent], ['1', BLACK]]) + linear(id('beach'), [['0', WHITE], ['.75', AMBER], ['1', BLACK]], 'gradientTransform="rotate(29 .5 .5)"') + linear(id('near-cliff'), [['0', accent], ['1', BLACK]], 'gradientTransform="rotate(25 .5 .5)"') + clip(id('cliff-clip'), p(cliff, WHITE));
     const sea = p('M-90 355H1290V1100H-90Z', url('sea'));
@@ -503,7 +503,7 @@
     const destination = a.safeURL(item.href);
     const html = '<!doctype html><html lang="' + escape(document.documentElement.lang) + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escape(item.title) + ' · Lienzo</title><style>' + styles + '</style></head><body><main class="eg-export" data-still="' + String(item.intensity === 0) + '"><div class="eg-export-visual">' + art + '</div><section class="eg-export-copy"><p class="eg-export-category">' + escape(item.category) + '</p><h1>' + escape(item.title) + '</h1><p>' + escape(item.description) + '</p><div class="eg-export-actions"><button type="button" aria-pressed="false">' + escape(ui.pause) + '</button>' + (destination ? '<a href="' + escape(destination) + '" target="_blank" rel="noopener noreferrer">' + escape(ui.openLink) + ' ↗</a>' : '') + '</div></section><footer>' + escape(ui.galleryStandaloneCredit) + '</footer></main><script type="application/json" data-licenses>' + json(data.notices) + '</script><script>' + script + '</script></body></html>';
     const slug = String(item.title).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 72).toLowerCase() || 'lienzo';
-    a.download(html, 'lienzo-panel-' + String(index + 1).padStart(2, '0') + '-' + slug + '.html'); a.status(ui.galleryDownloaded);
+    a.download(a.brand?.decorateHTML(html,{selector:'.eg-export'}) || html, 'lienzo-panel-' + String(index + 1).padStart(2, '0') + '-' + slug + '.html'); a.status(ui.galleryDownloaded);
   }
   $('[data-gallery-download]').addEventListener('click', downloadPanel);
   a.setup({render, reset(index) {

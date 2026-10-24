@@ -22,7 +22,7 @@ Depth and motion sets intensity; zero produces a still composition. Cycle durati
 
 Settings live temporarily in memory. Reloading resets the example.
 
-- **Get HTML** keeps the complete gallery with its photos and settings. Place it beside studio.css, studio.js, component.css, component.js, and assets/ from the ZIP. This export is not standalone.
+- **Get HTML** keeps the complete gallery with its photos and settings. Place it beside editor-workspace.css, editor-workspace.js, studio.css, studio.js, component.css, component.js, and assets/ from the ZIP. This export is not standalone.
 - **Download this panel**, inside Background and motion, creates a standalone HTML file with the artwork or photo, styles, fonts, and notices. It works without neighboring files or a network connection. Pause, content, link, and framing are included. Added photos can increase the file size.
 
 Keep license notices and accessibility features when integrating. The hosted demo uses noindex; downloads omit it. Set your own metadata before publishing. Sample links lead to Lienzo and should be replaced with the real destination for each story.
@@ -30,3 +30,13 @@ Keep license notices and accessibility features when integrating. The hosted dem
 ## Credits
 
 Original Lienzo code and artwork, prepared within the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . See LICENSE-LIENZO.txt and SOURCE-NOTES.md. Fraunces and Instrument Sans retain OFL notices. Reference photographs are not included. Images you add require your own usage rights; the code license does not extend their rights.
+
+
+## Stable editing workspace
+
+Open Settings to keep the preview beside the form. Apply commits content changes; Cancel discards unapplied fields. Hiding Settings preserves those fields. Image and motion controls update immediately and are labeled separately. Keep editor-workspace.css and editor-workspace.js beside the HTML, including when using a downloaded edited HTML.
+
+
+## Your brand
+
+Choose your own three accent colors in Your brand. Optional surface/text colors and display/body fonts apply only to the reusable piece, while the authoring interface keeps Lienzo identity. Brand changes apply immediately and are independent of content Apply/Cancel. Local font uploads stay in the browser and are embedded in exported HTML. Use only fonts you have permission to distribute. Keep template-brand.css and template-brand.js beside full-studio HTML; individual scene/panel exports embed their current brand styles.

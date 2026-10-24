@@ -350,7 +350,7 @@
     const destination = a.safeURL(item.href);
     const html = '<!doctype html><html lang="' + escape(document.documentElement.lang) + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escape(item.title) + ' · Lienzo</title><style>' + styles + '</style></head><body><main class="eg-export" data-still="' + String(item.intensity === 0) + '"><div class="eg-export-visual">' + art + '</div><section class="eg-export-copy"><p class="eg-export-category">' + escape(item.category) + '</p><h1>' + escape(item.title) + '</h1><p>' + escape(item.description) + '</p><div class="eg-export-actions"><button type="button" aria-pressed="false">' + escape(ui.pause) + '</button>' + (destination ? '<a href="' + escape(destination) + '" target="_blank" rel="noopener noreferrer">' + escape(ui.openLink) + ' ↗</a>' : '') + '</div></section><footer>' + escape(ui.galleryStandaloneCredit) + '</footer></main><script type="application/json" data-licenses>' + json(data.notices) + '</script><script>' + script + '</script></body></html>';
     const slug = String(item.title).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 72).toLowerCase() || 'lienzo';
-    a.download(html, 'lienzo-panel-' + String(index + 1).padStart(2, '0') + '-' + slug + '.html'); a.status(ui.galleryDownloaded);
+    a.download(a.brand?.decorateHTML(html,{selector:'.eg-export'}) || html, 'lienzo-panel-' + String(index + 1).padStart(2, '0') + '-' + slug + '.html'); a.status(ui.galleryDownloaded);
   }
   $('[data-gallery-download]').addEventListener('click', downloadPanel);
   a.setup({render, reset(index) {

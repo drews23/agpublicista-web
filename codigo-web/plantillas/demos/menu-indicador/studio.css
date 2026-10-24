@@ -14,3 +14,144 @@ html[data-view=component] .v2-shell,html[data-view=thumbnail] .v2-shell{padding:
 html[data-view=component] .v2-hero{display:none}
 
 .v2-upload.v2-button{position:relative;min-height:44px;font-size:12px;cursor:pointer}.v2-upload.v2-button input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.v2-upload:focus-within{outline:3px solid var(--accent);outline-offset:4px}
+
+/* Shared editing contract: preserve the artwork, dock transactional content fields. */
+.v2-workspace[data-editor-workspace]{--editor-gap:0px;--editor-panel-width:320px;overflow:visible}
+.v2-editor-layout{min-width:0;border-radius:0 0 var(--radius) var(--radius)}
+.v2-preview-region{background:var(--page);border-radius:0 0 var(--radius) var(--radius)}
+.v2-preview-region>.v2-stage{border-radius:0 0 0 var(--radius)}
+.v2-preview-region>.v2-bottom{border-radius:0 0 0 var(--radius)}
+[data-editor-collapsed=true] .v2-preview-region>.v2-bottom{border-radius:0 0 var(--radius) var(--radius)}
+.v2-editor-panel{background:var(--surface);border-left:1px solid var(--line);border-radius:0 0 var(--radius) 0;padding:0 18px 20px;color:var(--text)}
+.v2-editor-panel-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:65px;padding:10px 0;background:var(--surface);border-bottom:1px solid var(--line)}
+.v2-editor-panel-title{font:550 22px/1.2 Fraunces,serif;letter-spacing:normal;margin:0}
+.v2-editor-panel-head .v2-icon-button{width:38px;min-height:38px;padding:6px;font-size:22px;border-radius:10px}
+.v2-editor-panel-help{font-size:12px;line-height:1.65;color:var(--muted);margin:15px 0 18px}
+.v2-editor-panel [data-editor-form]>label{display:flex;flex-direction:column;gap:7px;font-size:13px}
+.v2-editor-panel [data-editor-form]>label select{width:100%;min-height:44px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--page);color:var(--text)}
+.v2-editor-panel .v2-fields{grid-template-columns:1fr;gap:16px;margin:18px 0}
+.v2-editor-panel .v2-fields .v2-wide{grid-column:auto}
+.v2-editor-panel .v2-dialog-actions{gap:8px;justify-content:flex-start;border-top:1px solid var(--line);padding-top:16px}
+.v2-editor-panel .v2-dialog-actions .v2-button{font-size:12px;padding:10px 12px}
+.v2-editor-panel .v2-dialog-actions button[type=submit]{width:100%;order:-1}
+.v2-editor-panel .v2-dialog-actions .v2-text-button{font-size:12px;margin-left:auto}
+.v2-panel-live{border-top:1px solid var(--line);margin-top:22px;padding-top:8px}
+.v2-panel-live>summary{min-height:44px;display:list-item;cursor:pointer;font-size:14px;font-weight:550;padding:10px 0}
+.v2-panel-live .pi-controls{padding:0;gap:18px}
+.v2-panel-live .pi-controls>header{display:none}
+.v2-panel-live .eg-settings{border:0;margin:0}
+.v2-panel-live .eg-settings-body{grid-template-columns:1fr;gap:24px;padding:0}
+.v2-editor-panel>.v2-row{display:flex;flex-direction:column;align-items:stretch;border-top:1px solid var(--line);padding-top:20px;margin-top:22px}
+[data-kind=particles] .pi-studio{grid-template-columns:minmax(0,1fr)}
+[data-kind=particles] .pi-artboard{border-right:0}
+[data-kind=particles] .pi-frame{flex:initial}
+[data-editor-workspace][data-editor-collapsed=false] .v2-stage{padding:22px}
+[data-kind=scenes] [data-editor-collapsed=false] .v2-stage,[data-kind=context] [data-editor-collapsed=false] .v2-stage,[data-kind=particles] [data-editor-collapsed=false] .v2-stage{padding:0}
+.v2-editor-panel :is(input,textarea,select){max-width:100%;min-width:0}
+.v2-editor-panel .v2-fields input[type=range]{min-height:44px}
+.v2-panel-guide{border-top:1px solid var(--line);margin-top:20px;padding-top:7px;font-size:12px;line-height:1.7;color:var(--muted)}
+.v2-panel-guide>summary{min-height:44px;cursor:pointer;display:list-item;padding:10px 0;color:var(--text);font-size:13px}
+.v2-panel-guide>p{margin:10px 0 0}
+.v2-preview-region>.v2-bottom{justify-content:flex-end;min-height:50px;padding:3px 16px}
+html[data-view=thumbnail] .v2-editor-panel{display:none!important}
+html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1fr)}
+@media(min-width:960px){
+  [data-editor-collapsed=false] .cs-board[data-view=collection]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-editor-collapsed=false] .cm-desk{grid-template-columns:minmax(0,1fr)}
+  [data-editor-collapsed=false] .cm-inspector{border-left:0;border-top:1px solid var(--line);display:grid;grid-template-columns:100px minmax(0,1fr);gap:0 20px}
+  [data-editor-collapsed=false] .cm-inspector-head{grid-column:1/-1}
+  [data-editor-collapsed=false] .cm-selected-art{margin:0;aspect-ratio:1.1}
+  [data-editor-collapsed=false] .cm-inspector-body h3{font-size:26px}
+}
+/* An editing artboard stays bounded; oversized custom content remains scrollable, never scaled or discarded. */
+@media(min-width:960px) and (min-height:420px){
+  [data-editor-workspace][data-editor-collapsed=false] [data-editor-preview]{max-height:var(--editor-available-height);overflow:auto;scrollbar-width:thin;overscroll-behavior:contain;scrollbar-gutter:stable}
+  [data-editor-collapsed=false] .eg-gallery{padding:18px}
+  [data-editor-collapsed=false] .eg-intro{margin-bottom:14px}
+  [data-editor-collapsed=false] .eg-intro p:last-child{display:none}
+  [data-editor-collapsed=false] .eg-panels{height:clamp(235px,calc(var(--editor-available-height) - 175px),420px)}
+  [data-editor-collapsed=false] .eg-panel-caption{left:20px;right:20px;bottom:16px}
+  [data-editor-collapsed=false] .eg-panel-category{margin-bottom:8px}
+  [data-editor-collapsed=false] .eg-panel-caption h2{font-size:clamp(26px,3vw,38px);margin-bottom:8px}
+  [data-editor-collapsed=false] .eg-description{font-size:12px;margin-bottom:8px;line-height:1.5}
+  [data-editor-collapsed=false] .eg-navigation{gap:12px;margin-top:12px}
+  [data-editor-collapsed=false] .eg-credit{margin:10px 0 0;font-size:10px}
+  [data-editor-collapsed=false] .pi-artboard{padding:18px}
+  [data-editor-collapsed=false] .pi-frame{aspect-ratio:auto;min-height:210px;height:clamp(210px,calc(var(--editor-available-height) - 175px),480px)}
+  [data-editor-collapsed=false] .pi-artboard-head{margin-bottom:12px}
+  [data-editor-collapsed=false] .pi-artboard-foot{padding-top:12px;gap:12px}
+  [data-editor-collapsed=false] .pi-artboard-foot h2{font-size:28px;margin-bottom:5px}
+  [data-editor-collapsed=false] .pi-artboard-foot p{font-size:12px;line-height:1.5}
+  [data-editor-collapsed=false] .cs-atelier{padding:18px}
+  [data-editor-collapsed=false] .cs-intro{display:none}
+  [data-editor-collapsed=false] .cs-board[data-view]{grid-template-columns:minmax(0,1fr)}
+  [data-editor-collapsed=false] .cs-board .cs-card:not([data-active=true]){display:none}
+  [data-editor-collapsed=false] .cs-board[data-view] .cs-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,.9fr);align-items:center;gap:0 18px;padding:16px}
+  [data-editor-collapsed=false] .cs-card-top{grid-column:1/-1;padding:0 0 10px}
+  [data-editor-collapsed=false] .cs-art-button{padding:0}
+  [data-editor-collapsed=false] .cs-board[data-view] .cs-scene{max-width:330px}
+  [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy{padding:0}
+  [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy h2{font-size:28px}
+  [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy>p{font-size:12px;line-height:1.65;margin-bottom:14px;min-height:0}
+  [data-editor-collapsed=false] .cs-note{padding-top:12px}
+}
+@media(max-width:959px),(max-height:579px){
+  .v2-editor-panel{border-left:0;border-top:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);padding:0 20px 22px}
+  .v2-editor-panel-head{position:relative}
+  .v2-editor-panel .v2-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .v2-editor-panel .v2-fields .v2-wide{grid-column:1/-1}
+  .v2-editor-panel .v2-dialog-actions button[type=submit]{width:auto;order:0}
+  .v2-preview-region>.v2-bottom{border-radius:0}
+}
+@media(max-width:540px){
+  .v2-editor-panel .v2-fields{grid-template-columns:1fr}
+  .v2-editor-panel .v2-fields .v2-wide{grid-column:auto}
+  .v2-editor-panel{padding:0 16px calc(20px + env(safe-area-inset-bottom,0px))}
+  .v2-editor-panel .v2-dialog-actions button[type=submit]{width:100%;order:-1}
+  [data-editor-workspace][data-editor-collapsed=false] .v2-stage{padding:18px 12px}
+  [data-kind=scenes] [data-editor-collapsed=false] .v2-stage,[data-kind=context] [data-editor-collapsed=false] .v2-stage,[data-kind=particles] [data-editor-collapsed=false] .v2-stage{padding:0}
+}
+/* On a tall phone the visible artboard and inspector share one screen; keyboard/zoom return to document flow. */
+@media(max-width:959px) and (min-height:650px){
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-layout]{height:var(--editor-available-height);grid-template-rows:minmax(190px,38%) minmax(0,1fr);align-items:stretch}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-preview]{height:100%;max-height:100%;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-panel]{height:100%;max-height:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;border-top:1px solid var(--line)}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-editor-panel-head{position:sticky;top:0}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-stage{min-height:0;padding:12px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-bottom{min-height:44px;padding:0 12px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-gallery{padding:12px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-intro{display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panels[data-layout]{height:190px;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel:not([data-active=true]){display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel-caption{left:18px;right:18px;bottom:10px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel-category{font-size:9px;margin-bottom:5px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel-caption h2{font-size:24px;margin-bottom:6px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-description{font-size:12px;line-height:1.4;margin-bottom:4px;-webkit-line-clamp:2}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-select{padding:10px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-number{width:24px;height:24px;font-size:10px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-expand{top:10px;right:10px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-navigation{grid-template-columns:minmax(0,1fr) auto;gap:0 6px;margin-top:4px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-current{display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-pagination{gap:0;grid-row:1;justify-self:start}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-pagination button{min-width:38px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-arrows{gap:0;grid-row:1}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-credit{display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-artboard{padding:12px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-artboard-head{margin-bottom:9px;font-size:9px;gap:8px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-frame{height:190px;min-height:190px;aspect-ratio:auto}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-artboard-foot{display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-atelier{padding:12px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-intro,.v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-note{display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-scene-nav{gap:3px;flex-wrap:nowrap;margin-bottom:10px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-scene-nav button{min-width:38px;min-height:44px;flex:1;padding:6px 3px;position:relative;justify-content:center}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-scene-nav button>span:last-child{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view]{grid-template-columns:minmax(0,1fr)}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board .cs-card:not([data-active=true]){display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:12px;padding:12px;align-items:center}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-card-top{display:none}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card-copy{padding:0}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card-copy h2{font-size:20px;margin-bottom:7px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card-copy>p{font-size:12px;line-height:1.45;min-height:0;margin-bottom:7px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-card-actions{flex-wrap:wrap;gap:2px}
+  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-detail-button{font-size:11px;gap:5px}
+}

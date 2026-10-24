@@ -24,3 +24,9 @@ La adaptación de Lienzo añade colores, contenido, SVG locales, etiquetas acces
 Fraunces: The Fraunces Project Authors. Instrument Sans: The Instrument Sans Project Authors. Ambas fuentes se incluyen bajo OFL 1.1 con sus avisos íntegros. El logo de Lienzo se incluye únicamente como ejemplo: sustitúyelo por el de tu proyecto; MIT no concede derechos sobre marcas de terceros.
 
 Los favoritos del carrusel son una demostración temporal, no una cuenta ni un servicio de almacenamiento. Se reinician al recargar. Comprueba el componente dentro de tu proyecto antes de publicarlo.
+
+## Mesa de edición
+El botón Ajustes pliega el inspector sin restablecer el trabajo. La vista previa permanece estable durante la edición. Conserva editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css y template-brand.js junto al CSS, JavaScript, HTML y assets originales. Estos archivos locales no necesitan red ni instalación.
+
+## Tu marca
+Lienzo es la identidad de ejemplo predeterminada. Tu marca admite colores principal, secundario y acento libres, fondo/texto opcionales, fuentes del sistema y archivos WOFF2/WOFF/TTF/OTF locales de hasta 5 MB por función. Los cambios se aplican en directo a la pieza y son independientes de Aplicar/Cancelar contenido. Las exportaciones HTML completas incluyen el perfil y las fuentes adjuntas; conserva las dependencias del ZIP junto al HTML. Los SVG de iconos incluyen sus colores y no necesitan JavaScript; esos dibujos no tienen texto visible y no usan la fuente del editor. Adjunta únicamente fuentes que puedas utilizar y redistribuir. Ningún archivo sale del navegador.

@@ -26,3 +26,13 @@ Extract the ZIP and open `index.html`; no packages are required. Hosted demos us
 ## Credits and licenses
 
 Original Lienzo code and compositions, in collaboration with MD Estudio Creativo. Read `LICENSE-LIENZO.txt`, `SOURCE-NOTES.md`, and the Fraunces and Instrument Sans OFL notices in `assets/`. Visual references are documented separately; their code, images, brands, and dependencies are not included. Font files retain their own licenses.
+
+
+## Stable editing workspace
+
+Open Settings to keep the preview beside the form. Apply commits content changes; Cancel discards unapplied fields. Hiding Settings preserves those fields. Image and motion controls update immediately and are labeled separately. Keep editor-workspace.css and editor-workspace.js beside the HTML, including when using a downloaded edited HTML.
+
+
+## Your brand
+
+Choose your own three accent colors in Your brand. Optional surface/text colors and display/body fonts apply only to the reusable piece, while the authoring interface keeps Lienzo identity. Brand changes apply immediately and are independent of content Apply/Cancel. Local font uploads stay in the browser and are embedded in exported HTML. Use only fonts you have permission to distribute. Keep template-brand.css and template-brand.js beside full-studio HTML; individual scene/panel exports embed their current brand styles.

@@ -11,6 +11,7 @@
     const rail = $('[data-rail]');
     const search = $('[data-search]');
     const editor = $('[data-editor]');
+    const workspace = $('[data-editor-workspace]');
     const form = $('[data-editor-form]');
     const exportDialog = $('[data-export-dialog]');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -19,10 +20,11 @@
     if (['component', 'thumbnail'].includes(mode)) demo.dataset.compact = '';
     if (mode === 'thumbnail') demo.dataset.thumbnail = '';
     if (instance) {
-      $$('[id]').forEach(n => { const old = n.id; n.id += '-'+instance; $$(`[aria-labelledby="${old}"],[for="${old}"]`).forEach(l => { if(l.hasAttribute('for')) l.htmlFor=n.id; else l.setAttribute('aria-labelledby',n.id); }); });
+      $$('[id]').forEach(n => { const old = n.id; n.id += '-'+instance; $$(`[aria-labelledby="${old}"],[aria-controls="${old}"],[for="${old}"]`).forEach(l => { if(l.hasAttribute('for')) l.htmlFor=n.id; else if(l.hasAttribute('aria-controls'))l.setAttribute('aria-controls',n.id);else l.setAttribute('aria-labelledby',n.id); }); });
     }
     let category = 'all', savedOnly = false, visible = [...cards], active = 0;
     let paused = false, depth = true, opener = null, scrollFrame = 0;
+    let draft = null;
     let hovering = null, hoverRect = null, point = null, hoverFrame = 0, drag = null, suppressClick = false;
     const status = message => { $('[data-status]').textContent = message; };
     const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase();
@@ -32,6 +34,7 @@
     function paintCard(card) {
       const element = node(card);
       element.dataset.accent = card.accent;
+      if(window.LienzoLegacyBrand)element.style.setProperty('--accent',window.LienzoLegacyBrand.color(card.accent));
       element.querySelector('[data-title]').textContent = card.title;
       element.querySelector('[data-description]').textContent = card.description;
       element.querySelector('[data-category]').textContent = card.category;
@@ -62,7 +65,7 @@
       hovering=hoverRect=point=null;
     }
     function updateMotion() {
-      demo.dataset.paused = String(paused || reduced.matches || editor.open || exportDialog.open);
+      demo.dataset.paused = String(paused || reduced.matches || exportDialog.open);
       demo.dataset.depth = String(depth && !paused && !reduced.matches);
       $('[data-pause]').textContent = paused ? ui.resume : ui.pause;
       $('[data-pause]').setAttribute('aria-pressed', String(paused));
@@ -121,7 +124,7 @@
         if(savedOnly){$('[data-saved-filter]').focus();applyFilters();} else $('[data-saved-count]').textContent=cards.filter(c=>c.saved).length;
       });
       element.addEventListener('pointerenter',event=>{
-        if(event.pointerType==='touch'||!precise.matches||reduced.matches||paused||!depth||drag||editor.open||exportDialog.open)return;
+        if(event.pointerType==='touch'||!precise.matches||reduced.matches||paused||!depth||drag||exportDialog.open)return;
         resetHover();hovering=element;hoverRect=element.getBoundingClientRect();element.dataset.hover='';
       });
       element.addEventListener('pointermove',event=>{
@@ -178,7 +181,7 @@
     rail.addEventListener('click',event=>{if(suppressClick){event.preventDefault();event.stopImmediatePropagation();}},{capture:true});
 
     function open(dialog, trigger){opener=trigger||document.activeElement;dialog.showModal();updateMotion();}
-    [editor,exportDialog].forEach(dialog=>{
+    [exportDialog].forEach(dialog=>{
       dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());
       dialog.addEventListener('close',()=>{updateMotion();(opener?.closest('[hidden]') ? $('[data-open-editor]') : opener)?.focus();});
       dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
@@ -187,9 +190,43 @@
       const card=cards.find(c=>c.id===id);form.elements.resource.value=id;
       ['title','description','category','href','accent'].forEach(key=>form.elements[key].value=card[key]);$('[data-editor-error]').textContent='';
     }
-    $$('[data-edit]').forEach(b=>b.addEventListener('click',()=>{loadForm(b.dataset.edit);open(editor,b);}));
-    $('[data-open-editor]').addEventListener('click',event=>{loadForm(visible[active]?.id||cards[0].id);open(editor,event.currentTarget);});
-    form.elements.resource.addEventListener('change',()=>loadForm(form.elements.resource.value));
+    function rollback() {
+      if(draft) paintCard(cards.find(card=>card.id===draft.id));
+      draft=null;
+    }
+    function panel(opened, reason='edit') {
+      window.LienzoEditorWorkspace.setOpen(editor,opened,{focus:false,reason});
+      updateMotion();
+    }
+    function beginEdit(id, trigger) {
+      if(draft?.id!==id){rollback();loadForm(id);draft={...cards.find(card=>card.id===id)};}
+      opener=trigger||document.activeElement;
+      panel(true);
+      const index=visible.findIndex(card=>card.id===id);
+      if(index>=0)go(index);
+    }
+    $$('[data-edit]').forEach(b=>b.addEventListener('click',()=>beginEdit(b.dataset.edit,b)));
+    $('[data-open-editor]').addEventListener('click',event=>{
+      event.preventDefault();
+      if(!editor.hidden) panel(false,'toggle');
+      else beginEdit(draft?.id||visible[active]?.id||cards[0].id,event.currentTarget);
+    });
+    form.elements.resource.addEventListener('change',()=>beginEdit(form.elements.resource.value,opener));
+    form.addEventListener('input',()=>{
+      const card=cards.find(c=>c.id===form.elements.resource.value);
+      if(!card)return;
+      draft={...card};
+      ['title','description','category'].forEach(key=>draft[key]=form.elements[key].value);
+      draft.href=safeURL(form.elements.href.value)||card.href;
+      draft.accent=['violet','mint','amber'].includes(form.elements.accent.value)?form.elements.accent.value:card.accent;
+      paintCard(draft);
+    });
+    $$('[data-editor-cancel]').forEach(button=>button.addEventListener('click',()=>{
+      rollback();panel(false,'cancel');opener?.focus({preventScroll:true});
+    }));
+    editor.addEventListener('keydown',event=>{
+      if(event.key==='Escape'){event.preventDefault();rollback();panel(false,'cancel');opener?.focus({preventScroll:true});}
+    });
     form.addEventListener('submit',event=>{
       event.preventDefault();
       ['title','description','category','href'].forEach(key=>form.elements[key].value=form.elements[key].value.trim());
@@ -199,15 +236,25 @@
       const card=cards.find(c=>c.id===form.elements.resource.value);
       ['title','description','category'].forEach(key=>card[key]=form.elements[key].value.trim());
       if(!card.title||!card.description||!card.category)return;
-      card.href=href;card.accent=form.elements.accent.value;paintCard(card);applyFilters();editor.close();status(ui.updated);
+      card.href=href;card.accent=form.elements.accent.value;draft=null;paintCard(card);applyFilters();panel(false,'apply');status(ui.updated);
+      const selectedIndex=visible.findIndex(item=>item.id===card.id);if(selectedIndex>=0)go(selectedIndex);
     });
     $('[data-reset]').addEventListener('click',()=>{
       const card=cards.find(c=>c.id===form.elements.resource.value),original=defaults.find(c=>c.id===card.id);
-      Object.assign(card,original);paintCard(card);loadForm(card.id);applyFilters();status(ui.restored);
+      draft={...original,saved:card.saved};paintCard(draft);
+      ['title','description','category','href','accent'].forEach(key=>form.elements[key].value=draft[key]);status(ui.restored);
     });
 
     function exportHTML(){
       const copy=document.documentElement.cloneNode(true);
+      // Discard a visible, uncommitted draft in the exported initial DOM.
+      if(draft){
+        const committed=cards.find(card=>card.id===draft.id),element=copy.querySelector('[data-card="'+draft.id+'"]');
+        if(element){element.dataset.accent=committed.accent;element.querySelector('[data-title]').textContent=committed.title;element.querySelector('[data-description]').textContent=committed.description;element.querySelector('[data-category]').textContent=committed.category;element.querySelector('[data-link]').setAttribute('href',committed.href);}
+      }
+      const exportedEditor=copy.querySelector('[data-editor]');exportedEditor.hidden=true;exportedEditor.setAttribute('inert','');
+      const exportedWorkspace=copy.querySelector('[data-editor-workspace]');exportedWorkspace.dataset.editorCollapsed='true';
+      copy.querySelector('[data-open-editor]').setAttribute('aria-expanded','false');
       copy.querySelectorAll('dialog[open]').forEach(d=>d.removeAttribute('open'));
       copy.querySelectorAll('[data-resource-carousel]').forEach((d,i)=>{
         if(i!==instance){d.remove();return;}
@@ -219,10 +266,10 @@
         d.querySelector('[data-status]').textContent='';d.querySelector('[data-copy-status]').textContent='';
         d.querySelector('[data-editor-error]').textContent='';
       });
-      copy.querySelectorAll('script[src]').forEach(s=>s.src='script.js');
-      copy.querySelectorAll('link[rel=stylesheet]').forEach(s=>s.setAttribute('href','styles.css'));
-      // Use literal relative paths: assigning .src would otherwise serialize the live origin.
-      copy.querySelectorAll('script[src]').forEach(s=>s.setAttribute('src','script.js'));
+      // Keep every offline dependency, including the editing frame, relative.
+      copy.querySelectorAll('script[src]').forEach(s=>s.setAttribute('src',s.getAttribute('src').split('?')[0].split('/').pop()));
+      copy.querySelectorAll('link[rel=stylesheet]').forEach(s=>s.setAttribute('href',s.getAttribute('href').split('?')[0].split('/').pop()));
+      window.LienzoLegacyBrand?.decorateClone(copy);
       return '<!doctype html>\n'+copy.outerHTML;
     }
     $('[data-export]').addEventListener('click',event=>{
@@ -236,6 +283,7 @@
       try{await navigator.clipboard.writeText($('[data-source]').value);$('[data-copy-status]').textContent=ui.copied;}
       catch{const area=$('[data-source]');area.focus();area.select();$('[data-copy-status]').textContent=ui.fallback;}
     });
+    document.addEventListener('lienzo:legacy-brand',()=>{cards.forEach(paintCard);if(draft)paintCard(draft);window.LienzoLegacyBrand?.apply();});
     cards.forEach(paintCard);applyFilters();updateMotion();
   });
 })();

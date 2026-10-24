@@ -4,8 +4,12 @@
   const root = document.body;
   const en = document.documentElement.lang.startsWith('en');
   const say = (es, us) => en ? us : es;
-  const palette = {mint:'#35d6c8',amber:'#ffb454',violet:'#8b7bff'};
-  const colorNames = {mint:say('Menta','Mint'),amber:say('Ámbar','Amber'),violet:say('Violeta','Violet')};
+  const palette = new Proxy({mint:'#35d6c8',amber:'#ffb454',violet:'#8b7bff'}, {
+    get(values,key) { return typeof key==='string' ? window.LienzoLegacyBrand?.color(key,values[key]) || values[key] : values[key]; }
+  });
+  const colorNames = new Proxy({mint:say('Menta','Mint'),amber:say('Ámbar','Amber'),violet:say('Violeta','Violet')}, {
+    get(values,key){return window.LienzoLegacyAssets?.name(key,values[key])||values[key];}
+  });
   const supported = ['audio','watch','laptop'];
   const clamp = (value,min,max,fallback) => Number.isFinite(Number(value)) ? Math.max(min,Math.min(max,Number(value))) : fallback;
   const text = (value,limit,fallback='') => typeof value === 'string' ? value.slice(0,limit) : fallback;
@@ -44,7 +48,7 @@
     document.querySelector('[data-detail-status]').textContent=detail.open?message:'';
     document.querySelector('[data-cart-status]').textContent=cartDialog.open?message:'';
   }
-  function asset(item,accent=item.accent) {return 'assets/'+item.key+'-'+accent+'.svg';}
+  function asset(item,accent=item.accent) {const path='assets/'+item.key+'-'+accent+'.svg';return window.LienzoLegacyAssets?.asset(path)||path;}
   function setPrice(price,previous,saving,item) {
     price.textContent=money(item.price);
     const discount=item.previous>item.price;
@@ -132,10 +136,11 @@
   function openProduct(key,opener,customize=false) {
     if(!byKey.has(key))return;
     selected=key;quantity=1;detailOpener=opener;
-    fillForm();renderDetail();editor.open=customize;
+    fillForm();renderDetail();editor.open=true;
+    window.LienzoEditorWorkspace?.setOpen(editor,true,{focus:false,reason:'edit'});
     detail.showModal();detail.scrollTop=0;dialogState();
     detail.querySelector('[data-detail-status]').textContent='';
-    if(customize){requestAnimationFrame(()=>{editor.scrollIntoView({block:'start'});form.querySelector('[data-name]').focus({preventScroll:true});});}
+    if(customize){requestAnimationFrame(()=>{editor.scrollTop=form.offsetTop;form.querySelector('[data-name]').focus({preventScroll:true});});}
   }
   function flashAdd(button) {
     const label=button.querySelector('span');
@@ -224,6 +229,7 @@
       clone.querySelector('title').textContent=items[0].name+' | Lienzo';
       clone.querySelector('.pc-grid').setAttribute('aria-label',items[0].name);
     }
+    window.LienzoLegacyBrand?.decorateClone(clone);
     return '<!doctype html>\n'+clone.outerHTML;
   }
   function download(key=null) {
@@ -362,5 +368,6 @@
     notify(say('Prueba del producto: ','Product preview: ')+item.name+'.');
   });
   addEventListener('pagehide',()=>{cleanPointer();for(const timer of timers.values())clearTimeout(timer);},{once:true});
+  document.addEventListener('lienzo:legacy-brand',()=>{render();window.LienzoLegacyBrand?.apply();});
   theme(root.dataset.theme);render();motionState();
 })();

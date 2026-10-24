@@ -18,3 +18,10 @@ New Lienzo implementation for the collaboration with MD Estudio Creativo identif
 
 ## Limits
 This is a reusable interface example, not a complete store, payment integration, installable WordPress theme, or ready-made React component. React requires lifecycle and markup adaptation. No analytics, persistence, account, backend, or external requests. Changes reset on reload. Inspect your final product images and test your own content before integration.
+
+
+## Editing workspace
+The Settings button folds the inspector without resetting your work. The preview stays in place while you edit. Keep editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css, and template-brand.js beside the original CSS, JavaScript, HTML and assets. These local files need no network or installation.
+
+## Your brand
+Lienzo is the default sample identity. Your brand accepts custom primary, secondary, and accent colors, optional surface/text colors, system fonts, and local WOFF2/WOFF/TTF/OTF font files up to 5 MB per role. Changes apply live to the component; they are separate from content Apply/Cancel. Full HTML exports embed the brand profile and uploaded fonts; keep the ZIP dependencies alongside the HTML. SVG icon exports embed their chosen colors and need no JavaScript; these drawings contain no visible text and do not use the editor’s font. Only upload fonts you are allowed to use and redistribute. No upload leaves the browser.

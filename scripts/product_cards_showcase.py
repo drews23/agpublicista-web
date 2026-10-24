@@ -1,5 +1,6 @@
 """Original bilingual glass-product showcase, built from the reviewed visual brief."""
 from pathlib import Path
+from editor_legacy_layout import document as editor_document, guide as editor_guide, copy_assets as copy_editor_assets, copy_file as copy_editor_file
 from html import escape
 import base64
 import hashlib
@@ -67,6 +68,7 @@ def card(item, lang):
 <div class="pc-card__body"><p class="pc-category">{escape(item['category'])}</p><h2 data-product-name>{name}</h2><p class="pc-description" data-product-description>{escape(item['description'])}</p><div class="pc-rating" aria-label="{tr('Valoración ilustrativa, no son opiniones reales', 'Illustrative rating, not real reviews')}: {item['rating']}"><span class="pc-stars" aria-hidden="true">★★★★★</span><span>{item['rating']} <span class="pc-muted">({item['reviews']})</span></span></div><div class="pc-price"><strong data-price>{money(item['price'])}</strong>{old}</div><div class="pc-variants"><div class="pc-swatches" role="group" aria-label="{tr('Color de ', 'Color for ')}{name}">{swatches(item,lang)}</div><span data-color-name>{names[item['accent']]}</span></div><button type="button" class="pc-button pc-button--accent pc-add" data-add>{icon('bag')}<span>{tr('Añadir a selección', 'Add to selection')}</span>{icon('plus')}</button><div class="pc-card__foot"><button type="button" class="pc-text-button" data-edit>{icon('sliders')}{tr('Personalizar', 'Customize')}</button><button type="button" class="pc-text-button" data-card-export aria-label="{tr('Copiar HTML de ', 'Copy HTML for ')}{name}">{icon('code')}HTML</button></div></div></article>'''
 
 
+@editor_document('tarjetas-producto')
 def document(lang):
     en = lang == 'en'
     tr = lambda es, us: us if en else es
@@ -110,8 +112,9 @@ def artwork(key, tone):
 
 
 def copy_assets(dest):
+    copy_editor_assets(dest)
     for name in ['styles.css', 'script.js']:
-        shutil.copy2(SOURCE / name, dest / name)
+        copy_editor_file(SOURCE / name, dest / name)
     for key in ['audio', 'watch', 'laptop']:
         for accent, tone in PALETTE.items():
             (dest / 'assets' / f'{key}-{accent}.svg').write_text(artwork(key, tone), encoding='utf8')
@@ -124,6 +127,7 @@ def thumbnail(lang='es'):
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#0a0a0f"/><rect x="40" y="60" width="220" height="460" rx="25" fill="#0a0a0f" stroke="#35d6c8"/><rect x="290" y="60" width="220" height="460" rx="25" fill="#0a0a0f" stroke="#ffb454"/><rect x="540" y="60" width="220" height="460" rx="25" fill="#0a0a0f" stroke="#8b7bff"/></svg>'
 
 
+@editor_guide
 def readme(lang):
     if lang == 'en':
         return '''# Glass Product Cards — Lienzo Objects

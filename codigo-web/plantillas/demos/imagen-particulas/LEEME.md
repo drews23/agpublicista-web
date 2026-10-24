@@ -35,3 +35,13 @@ Los selectores no representan exportación de video ni una secuencia de imágene
 El HTML personalizado necesita `studio.css`, `studio.js`, `component.css`, `component.js` y la carpeta `assets/` a su lado. No es un archivo autónomo. Se conserva la imagen local como datos dentro de la configuración del HTML; eso aumenta su tamaño. El ZIP y el HTML personalizado omiten el `noindex` de la demo. Configura tus propios metadatos antes de publicar.
 
 Respeta nombres accesibles, foco, preferencias de movimiento y la validación del origen del puente de tema del catálogo. Ajusta los selectores del componente si integras varias instancias en una página. El código original y el arte generativo se entregan bajo `LICENSE-LIENZO.txt`; la referencia original no se redistribuye ni queda cubierta por esa licencia. Consulta también `SOURCE-NOTES.md` y los avisos OFL. Colaboración identificada por el propietario del proyecto: https://creativomarketingdigital.com/ .
+
+
+## Espacio de edición estable
+
+Abre Ajustes para conservar la vista junto al formulario. Aplicar confirma los cambios de contenido; Cancelar descarta los campos sin aplicar. Ocultar ajustes conserva esos campos. Los controles de imagen y movimiento se actualizan al instante y están identificados por separado. Conserva editor-workspace.css y editor-workspace.js junto al HTML, también al descargar un HTML editado.
+
+
+## Tu marca
+
+Elige tus tres colores de acento en Tu marca. Los colores opcionales de superficie/texto y las fuentes de títulos/cuerpo afectan solo a la pieza reutilizable; la interfaz de edición conserva la identidad de Lienzo. La marca se actualiza al instante y es independiente de Aplicar/Cancelar contenido. Las fuentes locales permanecen en el navegador y se integran en el HTML exportado. Usa solo fuentes que tengas permiso de distribuir. Conserva template-brand.css y template-brand.js junto al HTML del estudio completo; las exportaciones de escena/panel incorporan sus estilos de marca actuales.

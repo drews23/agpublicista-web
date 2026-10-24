@@ -1,5 +1,6 @@
 """Generate the bilingual Lienzo material lab without flattening the visual reference."""
 from pathlib import Path
+from editor_legacy_layout import document as editor_document, guide as editor_guide, copy_assets as copy_editor_assets, copy_file as copy_editor_file
 from html import escape
 import base64
 import hashlib
@@ -47,6 +48,7 @@ def card(item, index, lang, preview=False):
     return f'''<article class="lab-card lab-card--{item['key']}{' lab-card--preview' if preview else ''}" data-card-key="{item['key']}" style="--tone:{PALETTE[item['accent']]};--depth:{item['depth']}px;--tilt:{item['tilt']}" aria-label="{name}"><div class="lab-card__back" aria-hidden="true"></div><div class="lab-card__middle" aria-hidden="true"></div><div class="lab-card__face" aria-hidden="true"><span class="lab-card__wash"></span><span class="lab-card__shine"></span></div><div class="lab-card__relief" aria-hidden="true"><i></i><i></i><i></i><i></i><span>{icon('layers')}</span></div><div class="lab-card__content"><p class="lab-card__index"><span data-card-number>{index+1:02d}</span> / FORM STUDY</p><h3 data-card-name>{name}</h3><p class="lab-card__description" data-card-description>{escape(item['description'])}</p>{actions}</div></article>'''
 
 
+@editor_document('laboratorio-3d')
 def document(lang):
     en = lang == 'en'
     tr = lambda es, us: us if en else es
@@ -77,8 +79,9 @@ def document(lang):
 
 
 def copy_assets(destination):
+    copy_editor_assets(destination)
     for name in ['styles.css', 'script.js']:
-        shutil.copy2(SOURCE / name, destination / name)
+        copy_editor_file(SOURCE / name, destination / name)
 
 
 def thumbnail(lang='es'):
@@ -89,6 +92,7 @@ def thumbnail(lang='es'):
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#0a0a0f"/><rect x="25" y="25" width="235" height="260" rx="40" fill="#35d6c8"/><rect x="282" y="25" width="235" height="260" rx="24" fill="#8b7bff"/><rect x="540" y="25" width="235" height="260" rx="32" fill="#ffb454"/><rect x="25" y="307" width="492" height="265" rx="32" fill="#6e5df2"/><rect x="540" y="307" width="235" height="265" rx="32" fill="#35d6c8"/><text x="50" y="245" fill="#0a0a0f" font-size="23" font-family="sans-serif">LIENZO / FORM LAB</text></svg>'
 
 
+@editor_guide
 def readme(lang):
     if lang == 'en':
         return '''# 3D Glass Card Lab — Lienzo

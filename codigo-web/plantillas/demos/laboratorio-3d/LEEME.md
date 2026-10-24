@@ -18,3 +18,10 @@ Los únicos tokens cromáticos son los de assets/logo-lienzo.svg: #8b7bff, #6e5d
 Implementación nueva de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . El archivo neon-glass-3d-cards-ui-lab.zip y la grabación aportados se revisaron como referencias; no se redistribuye ni se cambia la licencia de su código. Consulta SOURCE-NOTES.md. Código Lienzo: MIT; fuentes: OFL; logos con sus derechos de marca. Conserva los avisos al compartir.
 
 Ejemplo de interfaz reutilizable, no tienda completa, tema instalable de WordPress ni servicio de analítica. Sin cuentas, persistencia, subidas, pedidos ni pagos. Solo se descargan los archivos creados localmente al interactuar y el ZIP de Lienzo. Prueba tu texto e integración finales en los navegadores que vayas a admitir.
+
+
+## Mesa de edición
+El botón Ajustes pliega el inspector sin restablecer el trabajo. La vista previa permanece estable durante la edición. Conserva editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css y template-brand.js junto al CSS, JavaScript, HTML y assets originales. Estos archivos locales no necesitan red ni instalación.
+
+## Tu marca
+Lienzo es la identidad de ejemplo predeterminada. Tu marca admite colores principal, secundario y acento libres, fondo/texto opcionales, fuentes del sistema y archivos WOFF2/WOFF/TTF/OTF locales de hasta 5 MB por función. Los cambios se aplican en directo a la pieza y son independientes de Aplicar/Cancelar contenido. Las exportaciones HTML completas incluyen el perfil y las fuentes adjuntas; conserva las dependencias del ZIP junto al HTML. Los SVG de iconos incluyen sus colores y no necesitan JavaScript; esos dibujos no tienen texto visible y no usan la fuente del editor. Adjunta únicamente fuentes que puedas utilizar y redistribuir. Ningún archivo sale del navegador.

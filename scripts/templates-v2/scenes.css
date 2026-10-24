@@ -21,7 +21,7 @@
 .cs-art-button{display:block;width:100%;border:0;background:none;color:inherit;text-align:inherit;position:relative;padding:4px 9px 9px;touch-action:manipulation;isolation:isolate}
 .cs-art-button:focus-visible{outline-offset:-5px;border-radius:12px}
 .cs-art-button::before{content:'';position:absolute;inset:12px 14px 22px;border-radius:50%;background:radial-gradient(ellipse,color-mix(in srgb,var(--scene-color),transparent 93%),transparent 70%);pointer-events:none;z-index:-1}
-.cs-scene{position:relative;width:100%;max-width:420px;aspect-ratio:360/260;margin:auto;--font-sans:Instrument}
+.cs-scene{position:relative;width:100%;max-width:420px;aspect-ratio:360/260;margin:auto;--font-sans:var(--brand-font-body,Instrument)}
 .cs-scene svg{width:100%;height:100%;display:block}
 .cs-card .cs-scene,.cs-card .cs-scene *,.cs-card .cs-scene *::before,.cs-card .cs-scene *::after{animation-play-state:var(--cs-play,paused)!important}
 .v2-shell.v2-paused .cs-scene,.v2-shell.v2-paused .cs-scene *,.v2-shell.v2-paused .cs-scene *::before,.v2-shell.v2-paused .cs-scene *::after{animation-play-state:paused!important}

@@ -3,7 +3,9 @@
   'use strict';
   const root=document.body,en=document.documentElement.lang.startsWith('en');
   const say=(es,us)=>en?us:es;
-  const palette={mint:'#35d6c8',violet:'#8b7bff',amber:'#ffb454'};
+  const palette=new Proxy({mint:'#35d6c8',violet:'#8b7bff',amber:'#ffb454'}, {
+    get(values,key){return typeof key==='string'?window.LienzoLegacyBrand?.color(key,values[key])||values[key]:values[key];}
+  });
   const curves={smooth:'cubic-bezier(.22,.75,.22,1)',snappy:'cubic-bezier(.16,1,.3,1)',spring:'cubic-bezier(.22,1.35,.35,1)'};
   const keys=['glow','lift','sweep','rotate','gradient','float'];
   const clamp=(value,min,max,fallback)=>Number.isFinite(Number(value))?Math.max(min,Math.min(max,Number(value))):fallback;
@@ -32,7 +34,7 @@
   function cleanPointer(){cancelAnimationFrame(pointerFrame);pointerFrame=0;if(pointer)cleanCard(pointer.card);pointer=null;}
   function updateCard(card,item){
     card.style.setProperty('--tone',palette[item.accent]);card.style.setProperty('--duration',item.duration+'ms');card.style.setProperty('--amount',String(item.intensity/100));card.style.setProperty('--radius',item.radius+'px');card.style.setProperty('--ease',curves[item.easing]);
-    const image=card.querySelector('[data-object]');if(image)image.setAttribute('src','assets/'+item.key+'-'+item.accent+'.svg');
+    const image=card.querySelector('[data-object]');if(image){const path='assets/'+item.key+'-'+item.accent+'.svg';image.setAttribute('src',window.LienzoLegacyAssets?.asset(path)||path);}
     card.setAttribute('aria-label',item.name);card.querySelector('[data-card-name]').textContent=item.name;card.querySelector('[data-card-description]').textContent=item.description;
     const link=card.querySelector('[data-card-link]');link.querySelector('span').textContent=item.label;link.href=item.href;
     const labels={'data-test':say('Probar efecto: ','Test effect: '),'data-edit':say('Personalizar ','Customize '),'data-card-copy':say('Copiar HTML de ','Copy HTML for ')};
@@ -82,6 +84,7 @@
     clone.querySelector('[data-effects]').textContent=JSON.stringify(exported).replace(/</g,'\\u003c');
     body.dataset.theme=root.dataset.theme;body.dataset.motion=enabled()?'on':'off';delete body.dataset.view;
     if(key){clone.querySelectorAll('.hc-grid>[data-effect]').forEach(card=>{if(card.dataset.effect!==key)card.remove();});body.classList.add('hc-single');clone.querySelector('h1').textContent=exported[0].name;clone.querySelector('.hc-hero__aside>p').textContent=exported[0].description;clone.querySelector('title').textContent=exported[0].name+' | Lienzo';}
+    window.LienzoLegacyBrand?.decorateClone(clone);
     return '<!doctype html>\n'+clone.outerHTML;
   }
   async function copy(value,button){
@@ -139,5 +142,6 @@
   addEventListener('message',event=>{if(event.source===parent&&event.data?.type==='lienzo:theme'&&['dark','light'].includes(event.data.theme))theme(event.data.theme);});
   function motionState(){stopAll();root.dataset.motion=enabled()?'on':'off';const button=document.querySelector('[data-motion-toggle]');button.disabled=reduced.matches;button.setAttribute('aria-pressed',String(enabled()));button.setAttribute('aria-label',reduced.matches?say('Movimiento reducido del sistema','System reduced motion'):enabled()?say('Pausar efectos','Pause effects'):say('Activar efectos','Enable effects'));render();}
   document.querySelector('[data-motion-toggle]').addEventListener('click',()=>{motion=!motion;motionState();});reduced.addEventListener('change',motionState);addEventListener('pagehide',stopAll,{once:true});
+  document.addEventListener('lienzo:legacy-brand',()=>{render();window.LienzoLegacyBrand?.apply();});
   theme(root.dataset.theme);fillForm();motionState();
 })();

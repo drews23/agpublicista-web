@@ -212,8 +212,11 @@
   $('[data-selected-actions]').addEventListener('click', event => { const r = event.currentTarget.getBoundingClientRect(); open(state.active, r.left, r.bottom + 6, event.currentTarget); });
   $('[data-selected-preview]').addEventListener('click', event => { if (current()) openPreview(current(), event.currentTarget); });
   $('[data-edit]').addEventListener('click', event => {
+    event.preventDefault();
     event.stopImmediatePropagation();
     if (!current()) return;
+    const editor = $('[data-editor]');
+    if (!editor.hidden) { window.LienzoEditorWorkspace?.setOpen(editor, false, {reason:'toggle',focus:false}); return; }
     a.edit(state.active, () => $('[data-edit]').disabled ? search : $('[data-edit]'));
   }, {capture:true});
   $('[data-undo]').addEventListener('click', () => {

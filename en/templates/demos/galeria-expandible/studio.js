@@ -13,8 +13,12 @@
   const exportDialog = $('[data-export-dialog]');
   const form = $('[data-editor-form]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let definition = null, opener = null, visible = true, manualPause = false;
-  const colors = {violet: '#8b7bff', mint: '#35d6c8', amber: '#ffb454'};
+  const workspace = $('[data-editor-workspace]');
+  const editorToggle = $('[data-edit]');
+  let definition = null, opener = null, visible = true, manualPause = false, editorItem = null, brand = null;
+  const originalColors = {violet: '#8b7bff', mint: '#35d6c8', amber: '#ffb454'};
+  const colors = Object.fromEntries(Object.keys(originalColors).map(key => [key, originalColors[key]]));
+  Object.keys(originalColors).forEach(key => Object.defineProperty(colors, key, {enumerable:true, get:() => brand?.color(key, originalColors[key]) || originalColors[key]}));
   const paths = {
     arrow: '<path d="M5 12h14m-6-6 6 6-6 6"/>',
     close: '<path d="m6 6 12 12M6 18 18 6"/>',
@@ -53,12 +57,29 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
   const current = () => state.items[state.active || 0];
+  function accentLabels() {
+    const select = form.elements.namedItem('accent');
+    if (!select) return;
+    const custom = Object.keys(originalColors).some(key => colors[key].toLowerCase() !== originalColors[key]);
+    const roles = config.lang === 'en' ? {violet:'Primary',mint:'Secondary',amber:'Accent'} : {violet:'Principal',mint:'Secundario',amber:'Acento'};
+    for (const option of select.options || select.children) {
+      if (Object.hasOwn(originalColors, option.value)) option.textContent = custom ? roles[option.value] : ui[option.value];
+    }
+  }
   function paint() {
-    root.style.setProperty('--accent', colors[current()?.accent || state.accent] || colors.violet);
+    const key = current()?.accent || state.accent;
+    // Authoring controls keep Lienzo's palette; only the reusable piece adopts its owner's brand.
+    root.style.setProperty('--accent', originalColors[key] || originalColors.violet);
+    $('[data-stage]').style.setProperty('--accent', colors[key] || colors.violet);
     definition?.render(state);
+    $$('.cm-title,.cm-menu-sigil,.pf-cover-type,.pf-cover-caption>span:last-child,.pf-avatar>span,.pf-about-text,.ni-brand-mark,.ni-plane-mark,.ni-profile-emblem>span').forEach(node => node.setAttribute('data-brand-display',''));
+    brand?.apply();
+    // Selection can change from the artwork without replacing an unfinished form.
+    if (!editor.hidden && editorItem !== current()) fields();
+    accentLabels();
   }
   function motion() {
-    const paused = manualPause || reduced.matches || document.hidden || !visible || editor.open || exportDialog.open || document.documentElement.dataset.view === 'thumbnail';
+    const paused = manualPause || reduced.matches || document.hidden || !visible || exportDialog.open || document.documentElement.dataset.view === 'thumbnail';
     root.classList.toggle('v2-paused', paused);
     document.documentElement.dataset.reduced = String(reduced.matches);
     const button = $('[data-pause]');
@@ -85,6 +106,10 @@
   new IntersectionObserver(entries => { visible = entries[0].isIntersecting; motion(); }, {threshold: 0}).observe($('[data-stage]'));
 
   function fields() {
+    if (!definition) return;
+    editorItem = current();
+    form.hidden = !editorItem;
+    if (!editorItem) { $('[data-fields]').replaceChildren(); return; }
     const container = $('[data-fields]'); container.replaceChildren();
     const select = form.elements.namedItem('item');
     select.replaceChildren(...state.items.map((item, index) => new Option(item.title || item.name || String(index + 1), String(index))));
@@ -111,14 +136,47 @@
       label.append(input); container.append(label);
     }
     $('[data-error]').textContent = '';
+    accentLabels();
+  }
+  function panel(open, reason = 'edit', focus = false) {
+    if (window.LienzoEditorWorkspace) {
+      window.LienzoEditorWorkspace.setOpen(workspace, open, {reason, focus});
+    } else {
+      // Downloads keep usable controls if their optional layout helper is absent.
+      if (!open && editor.contains(document.activeElement)) editorToggle.focus({preventScroll: true});
+      editor.hidden = !open;
+      editor.inert = !open;
+      workspace.dataset.editorCollapsed = String(!open);
+      $$('[data-editor-toggle]').forEach(button => button.setAttribute('aria-expanded', String(open)));
+      editorToggle.textContent = open ? ui.hideSettings : ui.edit;
+    }
   }
   function edit(index = state.active || 0, returnTo = document.activeElement) {
+    if (!state.items[index]) return;
     state.active = index;
     opener = returnTo;
-    fields(); paint(); editor.showModal();
+    if (editorItem !== current()) fields();
+    panel(true); // The canvas stays mounted and interactive beside the inspector.
+    if (definition) paint();
+    const viewport = window.visualViewport;
+    if (window.innerWidth < 960 && (viewport?.height || window.innerHeight) >= 650 && (viewport?.scale || 1) <= 1.15) {
+      workspace.scrollIntoView({block:'start',behavior:'auto'});
+    }
   }
   form.elements.namedItem('item').addEventListener('change', () => { state.active = Number(form.elements.namedItem('item').value); fields(); paint(); });
-  $('[data-edit]').addEventListener('click', () => edit());
+  editorToggle.addEventListener('click', event => {
+    event.preventDefault(); // Shared delegation must not toggle this button twice.
+    if (editor.hidden) edit();
+    else panel(false, 'toggle');
+  });
+  workspace.addEventListener('lienzo:editor-panel', event => {
+    if (event.detail?.panel !== editor) return;
+    editorToggle.textContent = event.detail.open ? ui.hideSettings : ui.edit;
+    if (event.detail.open && editorItem !== current()) fields();
+  });
+  $('[data-editor-cancel]').addEventListener('click', () => {
+    panel(false, 'cancel'); fields(); status(ui.cancelled);
+  });
   $('[data-reset]').addEventListener('click', () => {
     const index = state.active || 0;
     if (definition.reset) definition.reset(index);
@@ -127,6 +185,7 @@
   });
   form.addEventListener('submit', event => {
     event.preventDefault();
+    const focusedName = form.contains(document.activeElement) ? document.activeElement.name : null;
     const next = {...current()};
     for (const field of definition.fields) {
       const input = form.elements.namedItem(field.key);
@@ -139,9 +198,11 @@
       next[field.key] = value;
     }
     state.items[state.active || 0] = next;
-    paint(); editor.close(); status(ui.applied);
+    paint();
+    if (focusedName) form.elements.namedItem(focusedName)?.focus({preventScroll:true});
+    status(ui.applied);
   });
-  [editor, exportDialog].forEach(dialog => {
+  [exportDialog].forEach(dialog => {
     dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', event => {
       if (event.target !== dialog) return;
@@ -156,8 +217,23 @@
     clone.removeAttribute('data-view');
     clone.querySelector('meta[name="robots"]')?.remove();
     clone.querySelectorAll('dialog[open]').forEach(d => d.removeAttribute('open'));
+    // Export applied state only. Layout, inspector drafts and focus mode are transient.
+    clone.querySelectorAll('[data-editor-workspace]').forEach(node => {
+      [...node.attributes].filter(attr => attr.name.startsWith('data-editor-') && attr.name !== 'data-editor-workspace').forEach(attr => node.removeAttribute(attr.name));
+      [...node.style].filter(name => name.startsWith('--editor-')).forEach(name => node.style.removeProperty(name));
+      node.dataset.editorCollapsed = 'true';
+    });
+    clone.querySelectorAll('[data-editor-panel]').forEach(node => { node.hidden = true; node.inert = true; node.removeAttribute('open'); node.scrollTop = 0; });
+    clone.querySelectorAll('[data-editor-toggle]').forEach(button => button.setAttribute('aria-expanded', 'false'));
+    clone.querySelector('[data-edit]').textContent = ui.edit;
+    clone.querySelectorAll('[data-editor-preview]').forEach(node => node.removeAttribute('data-editor-too-tall'));
+    clone.querySelectorAll('[data-fields]').forEach(node => node.replaceChildren());
+    clone.querySelectorAll('[data-error],[data-status],[data-copy-status]').forEach(node => { node.textContent = ''; });
+    clone.querySelectorAll('[data-source-code]').forEach(node => { node.textContent = ''; });
+    clone.querySelector('[data-v2]').classList.remove('v2-paused');
     clone.querySelector('[data-config]').textContent = JSON.stringify({...config, state}).replace(/</g, '\\u003c');
     clone.querySelectorAll('canvas').forEach(c => c.removeAttribute('style'));
+    brand?.decorateClone(clone);
     return '<!doctype html>\n' + clone.outerHTML;
   }
   $('[data-source]').addEventListener('click', () => {
@@ -186,11 +262,27 @@
   }
   const api = {
     root, state, defaults, ui, $, $$, icon, colors, safeURL, status, edit, download, imageFile,
+    color(key, fallback) { return brand?.color(key, fallback) || colors[key] || fallback; },
+    get brand() { return brand; },
     text(selector, value) { const node = $(selector); if (node) node.textContent = value; },
     paint, motion,
     setup(value) { definition = value; paint(); motion(); },
-    get paused() { return root.classList.contains('v2-paused') || editor.open || exportDialog.open; },
+    get paused() { return root.classList.contains('v2-paused') || exportDialog.open; },
     get reduced() { return reduced.matches; }
   };
   window.LienzoStudio = api;
+  if (window.LienzoTemplateBrand && $('[data-template-brand-panel]')) {
+    brand = window.LienzoTemplateBrand.mount({
+      root,
+      panel: $('[data-template-brand-panel]'),
+      originalFonts: {display:'Fraunces', body:'Instrument'},
+      targets: () => [
+        $('[data-stage]'), $('[data-gallery-focus]'), $('[data-context-preview]'), $('[data-pf-project-dialog]')
+      ].filter(Boolean),
+      onChange(instance, detail) {
+        paint();
+        root.dispatchEvent(new CustomEvent('v2:brand', {detail:{reason:detail?.reason || 'color'}}));
+      }
+    });
+  }
 })();

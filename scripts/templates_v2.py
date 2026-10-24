@@ -6,6 +6,8 @@ import hashlib
 import json
 import re
 import shutil
+import tempfile
+import time
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -81,7 +83,11 @@ def translations(lang):
     en = lang == 'en'
     pairs = {
         'studio': ('ESTUDIO DE INTERFACES', 'INTERFACE STUDIO'), 'theme': ('Cambiar tema', 'Change theme'),
-        'edit': ('Personalizar', 'Customize'), 'source': ('Obtener HTML', 'Get HTML'), 'pause': ('Pausar movimiento', 'Pause motion'), 'resume': ('Reanudar movimiento', 'Resume motion'),
+        'edit': ('Ajustes', 'Settings'), 'source': ('Obtener HTML', 'Get HTML'), 'pause': ('Pausar movimiento', 'Pause motion'), 'resume': ('Reanudar movimiento', 'Resume motion'),
+        'hideSettings': ('Ocultar ajustes', 'Hide settings'), 'cancel': ('Cancelar', 'Cancel'),
+        'cancelled': ('Cambios sin aplicar descartados.', 'Unapplied changes discarded.'),
+        'settingsHelp': ('Aplica para ver el resultado. Ocultar conserva los campos; Cancelar descarta los cambios sin aplicar.', 'Apply to see the result. Hiding keeps your fields; Cancel discards unapplied changes.'),
+        'liveSettings': ('Imagen y movimiento', 'Image and motion'), 'liveHelp': ('Estos controles se actualizan al instante.', 'These controls update instantly.'),
         'light': ('Tema claro', 'Light theme'), 'dark': ('Tema oscuro', 'Dark theme'), 'interactive': ('Vista interactiva', 'Interactive preview'),
         'local': ('Sin registro. Tus imágenes se quedan aquí.', 'No signup. Your images stay here.'), 'close': ('Cerrar', 'Close'),
         'editTitle': ('Hazlo tuyo.', 'Make it yours.'), 'editLead': ('Ajusta cada elemento por separado. Descarga el HTML para conservar los cambios.', 'Customize each item independently. Download the HTML to keep your changes.'),
@@ -89,7 +95,7 @@ def translations(lang):
         'resetDone': ('Elemento restaurado.', 'Item reset.'), 'applied': ('Cambios aplicados. Puedes conservarlos descargando el HTML.', 'Changes applied. Download the HTML to keep them.'),
         'required': ('Completa los campos obligatorios.', 'Complete the required fields.'), 'invalidURL': ('Usa un enlace completo que empiece por https:// o http://.', 'Use a full link beginning with https:// or http://.'),
         'invalidEmail': ('Revisa la dirección de correo.', 'Check the email address.'), 'exportTitle': ('Tu próxima pieza empieza aquí.', 'Your next piece starts here.'),
-        'exportHelp': ('Este HTML conserva tus ajustes. Ponlo junto a studio.css, studio.js, component.css, component.js y assets/ del ZIP. El HTML por sí solo no incluye esas dependencias.', 'This HTML keeps your settings. Place it beside studio.css, studio.js, component.css, component.js, and assets/ from the ZIP. The HTML alone does not include those dependencies.'),
+        'exportHelp': ('Este HTML conserva los cambios aplicados y tu marca. Ponlo junto a editor-workspace.css, editor-workspace.js, template-brand.css, template-brand.js, studio.css, studio.js, component.css, component.js y assets/ del ZIP. El HTML por sí solo no incluye esas dependencias.', 'This HTML keeps applied changes and your brand. Place it beside editor-workspace.css, editor-workspace.js, template-brand.css, template-brand.js, studio.css, studio.js, component.css, component.js, and assets/ from the ZIP. The HTML alone does not include those dependencies.'),
         'copy': ('Copiar HTML', 'Copy HTML'), 'download': ('Descargar HTML', 'Download HTML'), 'copied': ('HTML copiado.', 'HTML copied.'),
         'manualCopy': ('Código seleccionado. Usa Ctrl+C o la opción Copiar del dispositivo.', 'Code selected. Use Ctrl+C or your device’s Copy command.'), 'downloaded': ('Descarga iniciada. Conserva los archivos del ZIP junto al HTML.', 'Download started. Keep the ZIP files beside the HTML.'),
         'title': ('Título', 'Title'), 'description': ('Descripción', 'Description'), 'href': ('Enlace', 'Link'), 'accent': ('Acento', 'Accent'),
@@ -277,6 +283,99 @@ def gallery_markup(ui):
 <dialog class="eg-focus-dialog" data-gallery-focus aria-labelledby="eg-focus-title"><div class="eg-focus-top"><span>LIENZO / {ui['galleryFocus']}</span><button type="button" data-focus-close aria-label="{ui['close']}">×</button></div><div class="eg-focus-canvas" data-focus-canvas><div data-focus-art></div><span class="eg-focus-category" data-focus-category></span></div><div class="eg-focus-caption"><div><h2 id="eg-focus-title" data-focus-title></h2><p data-focus-description></p></div><div class="eg-focus-actions"><button type="button" data-focus-previous aria-label="{ui['previousPanel']}">←</button><button type="button" data-focus-next aria-label="{ui['nextPanel']}">→</button><button type="button" data-focus-pause aria-pressed="false">{ui['pause']}</button><a data-focus-link target="_blank" rel="noopener noreferrer">{ui['openLink']} ↗</a></div></div></dialog>'''
 
 
+def editor_document(raw, slug, lang, ui):
+    """Dock the six existing editors without replacing their canvas or committed state."""
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(raw, 'html.parser')
+    workspace = soup.select_one('.v2-workspace')
+    workspace['data-editor-workspace'] = ''
+    workspace['data-editor-collapsed'] = 'true'
+    workspace.select_one('.v2-toolbar')['data-editor-toolbar'] = ''
+    layout = soup.new_tag('div', attrs={'class': 'v2-editor-layout', 'data-editor-layout': ''})
+    preview = soup.new_tag('div', attrs={'class': 'v2-preview-region', 'data-editor-preview': '', 'role': 'region', 'aria-label': ui['interactive'], 'tabindex': '0'})
+    for selector in ['.v2-stage', '.v2-bottom']:
+        preview.append(workspace.select_one(selector).extract())
+    layout.append(preview)
+    editor = soup.select_one('[data-editor]')
+    editor.name = 'aside'
+    editor['class'] = ['v2-editor-panel']
+    editor['data-editor-panel'] = ''
+    editor['id'] = 'v2-settings-' + slug
+    editor['hidden'] = ''
+    editor['inert'] = ''
+    editor['aria-label'] = ui['edit']
+    editor['aria-labelledby'] = 'v2-editor-title'
+    header = editor.select_one('.v2-dialog-head')
+    header['class'] = ['v2-editor-panel-head']
+    header.select_one('.v2-eyebrow').string = ui['edit']
+    close = header.select_one('[data-close]')
+    del close['data-close']
+    close['data-editor-toggle'] = ''
+    close['aria-controls'] = editor['id']
+    close['aria-expanded'] = 'false'
+    close['aria-label'] = ui['hideSettings']
+    # Every field remains in the same form, with a clear apply/cancel transaction.
+    editor.select_one('h2').decompose()
+    intro = editor.find('p', recursive=False)
+    intro['class'] = ['v2-editor-panel-help']
+    intro.string = ui['settingsHelp']
+    head_title = header.select_one('.v2-eyebrow')
+    head_title.name = 'h2'
+    head_title['id'] = 'v2-editor-title'
+    head_title['class'] = ['v2-editor-panel-title']
+    form = editor.select_one('[data-editor-form]')
+    brand_panel = soup.new_tag('div', attrs={'data-template-brand-panel': ''})
+    form.insert_before(brand_panel)
+    cancel = soup.new_tag('button', attrs={'type': 'button', 'class': 'v2-text-button', 'data-editor-cancel': ''})
+    cancel.string = ui['cancel']
+    form.select_one('.v2-dialog-actions').insert(1, cancel)
+    tip = preview.select_one('.v2-bottom>p')
+    if tip:
+        help_section = soup.new_tag('details', attrs={'class': 'v2-panel-guide'})
+        summary = soup.new_tag('summary')
+        summary.string = 'Uso de la plantilla' if lang == 'es' else 'Using this template'
+        help_section.append(summary)
+        help_section.append(tip.extract())
+        editor.append(help_section)
+    for selector in ['.pi-controls', '.eg-settings']:
+        local = preview.select_one(selector)
+        if not local:
+            continue
+        section = soup.new_tag('details', attrs={'class': 'v2-panel-live', 'open': ''})
+        title = soup.new_tag('summary')
+        title.string = ui['liveSettings']
+        section.append(title)
+        notice = soup.new_tag('p', attrs={'class': 'v2-editor-panel-help'})
+        notice.string = ui['liveHelp']
+        section.append(notice)
+        if selector == '.eg-settings':
+            local.name = 'section'
+            local.select_one('summary').decompose()
+        section.append(local.extract())
+        editor.append(section)
+    profile_upload = preview.select_one('.v2-bottom .v2-row')
+    if profile_upload and profile_upload.select_one('[data-upload]'):
+        editor.append(profile_upload.extract())
+    layout.append(editor.extract())
+    workspace.append(layout)
+    edit = workspace.select_one('[data-edit]')
+    edit['data-editor-toggle'] = ''
+    edit['aria-controls'] = editor['id']
+    edit['aria-expanded'] = 'false'
+    edit['data-editor-label-open'] = ui['edit']
+    edit['data-editor-label-close'] = ui['hideSettings']
+    # Local helpers travel with every demo and ZIP; no root-only dependency.
+    css = soup.new_tag('link', attrs={'rel': 'stylesheet', 'href': 'editor-workspace.css?v=' + hashlib.sha256((ROOT/'css/editor-workspace.css').read_bytes()).hexdigest()[:12]})
+    script = soup.new_tag('script', attrs={'src': 'editor-workspace.js?v=' + hashlib.sha256((ROOT/'js/editor-workspace.js').read_bytes()).hexdigest()[:12], 'defer': ''})
+    soup.head.insert(0, css)
+    soup.select_one('script[src]').insert_before(script)
+    brand_css = soup.new_tag('link', attrs={'rel':'stylesheet','href':'template-brand.css?v=' + hashlib.sha256((ROOT/'css/template-brand.css').read_bytes()).hexdigest()[:12]})
+    brand_script = soup.new_tag('script', attrs={'src':'template-brand.js?v=' + hashlib.sha256((ROOT/'js/template-brand.js').read_bytes()).hexdigest()[:12], 'defer':''})
+    soup.head.append(brand_css)
+    soup.select_one('script[src]').insert_before(brand_script)
+    return str(soup)
+
+
 def document(slug, lang):
     item = RESOURCES[slug]
     title, tag, lead, fact, tip = item[lang]
@@ -302,8 +401,9 @@ def document(slug, lang):
     upload = ''
     if item['kind'] == 'profile' or (item['kind'] == 'particles' and not (SOURCE/'particles-view.html').exists()):
         upload = '<div class="v2-row"><label class="v2-upload v2-button"><span>'+ui['upload']+'</span><input type="file" data-upload accept="image/png,image/jpeg,image/webp" aria-label="'+ui['profileImage' if item['kind']=='profile' else 'image']+'"></label><button class="v2-text-button" type="button" data-remove-image>'+ui['removeImage']+'</button><span class="v2-chip">'+ui['imageHelp']+'</span></div>'
-    return f'''<!doctype html>
+    raw = f'''<!doctype html>
 <html lang="{'en-US' if lang=='en' else 'es'}" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>{esc(title)} · Lienzo</title>{css}{tags}</head><body><main class="v2-shell" data-v2 data-kind="{item['kind']}"><header class="v2-top"><a class="v2-brand" href="https://lienzo.tools{catalog}"><img src="assets/logo-lienzo.svg" class="v2-logo-dark" width="112" height="31" alt="Lienzo"><img src="assets/logo-light.svg" class="v2-logo-light" width="112" height="31" alt="Lienzo"><span>{ui['studio']}</span></a><div class="v2-actions"><button type="button" class="v2-icon-button" data-theme aria-label="{ui['theme']}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/></svg></button><a class="v2-button" href="https://lienzo.tools{catalog}">{'Más plantillas' if lang=='es' else 'More templates'} ↗</a></div></header><section class="v2-hero"><div><p class="v2-eyebrow">LIENZO / {esc(tag)}</p><h1>{esc(title)}</h1><p class="v2-lead">{esc(lead)}</p></div><div class="v2-facts"><strong>{esc(fact)}</strong>HTML · CSS · JS</div></section><section class="v2-workspace" aria-label="{esc(title)}"><div class="v2-toolbar"><span class="v2-toolbar-label"><i class="v2-dot" aria-hidden="true"></i>{ui['interactive']}</span><div class="v2-row">{controls(item['kind'],ui)}{button(ui['edit'],'data-edit')}{button(ui['source'],'data-source',True)}</div></div><div class="v2-stage" data-stage>{component(item['kind'],ui)}</div><div class="v2-bottom"><p>{esc(tip)}</p><button class="v2-text-button" type="button" data-pause aria-pressed="false">{ui['pause']}</button>{upload}</div></section><p class="v2-status" data-status role="status"></p><details class="v2-guide"><summary>{ui['guide']}</summary><p>{ui['guideText']}</p></details><footer class="v2-footer"><span>{ui['footer']}</span><span>{ui['local']}</span></footer><dialog class="v2-dialog" data-editor aria-labelledby="v2-editor-title"><div class="v2-dialog-head"><span class="v2-eyebrow">LIENZO / EDIT</span><button type="button" class="v2-icon-button" data-close aria-label="{ui['close']}">×</button></div><h2 id="v2-editor-title">{ui['editTitle']}</h2><p>{ui['editLead']}</p><form data-editor-form><label>{ui['choose']}<select name="item" aria-label="{ui['choose']}"></select></label><div class="v2-fields" data-fields></div><p class="v2-error" data-error role="alert"></p><div class="v2-dialog-actions">{button(ui['reset'],'data-reset')}<button type="submit" class="v2-button v2-primary">{ui['apply']}</button></div></form></dialog><dialog class="v2-dialog" data-export-dialog aria-labelledby="v2-export-title"><div class="v2-dialog-head"><span class="v2-eyebrow">LIENZO / HTML</span><button type="button" class="v2-icon-button" data-close aria-label="{ui['close']}">×</button></div><h2 id="v2-export-title">{ui['exportTitle']}</h2><p>{ui['exportHelp']}</p><label class="v2-sr" for="v2-source">HTML</label><textarea class="v2-code" id="v2-source" data-source-code readonly spellcheck="false"></textarea><p data-copy-status role="status"></p><div class="v2-dialog-actions">{button(ui['copy'],'data-copy')}{button(ui['download'],'data-download',True)}</div></dialog><script type="application/json" data-config>{payload}</script></main></body></html>'''
+    return editor_document(raw, slug, lang, ui)
 
 
 def source_notes(slug):
@@ -429,17 +529,32 @@ Implementación e ilustraciones originales de Lienzo, preparadas dentro de la co
 def package(slug, lang):
     demo = ROOT / ROUTES[lang].strip('/') / 'demos' / slug
     archive = ROOT / 'recursos/descargas/plantillas-web' / f'{slug}-lienzo{"-en" if lang=="en" else ""}.zip'
-    with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
-        for path in sorted(demo.rglob('*')):
-            if not path.is_file() or path.name in ['preview.svg','preview.webp']:
-                continue
-            info = zipfile.ZipInfo((Path(slug) / path.relative_to(demo)).as_posix(), (2026,10,17,0,0,0))
-            info.compress_type = zipfile.ZIP_DEFLATED
-            info.external_attr = 0o644 << 16
-            data = path.read_bytes()
-            if path.name == 'index.html':
-                data = data.replace(b'<meta name="robots" content="noindex,follow">', b'')
-            z.writestr(info, data)
+    # Preserve a good ZIP while Windows temporarily scans or reads the previous build.
+    with tempfile.NamedTemporaryFile(dir=archive.parent, prefix='.' + slug + '-', suffix='.tmp', delete=False) as handle:
+        temporary = Path(handle.name)
+    try:
+        with zipfile.ZipFile(temporary, 'w', zipfile.ZIP_DEFLATED) as z:
+            for path in sorted(demo.rglob('*')):
+                if not path.is_file() or path.name in ['preview.svg','preview.webp']:
+                    continue
+                info = zipfile.ZipInfo((Path(slug) / path.relative_to(demo)).as_posix(), (2026,10,17,0,0,0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.external_attr = 0o644 << 16
+                data = path.read_bytes()
+                if path.name == 'index.html':
+                    # HTML serialization may reorder attributes; downloaded demos remain indexable.
+                    data = re.sub(br'<meta\b(?=[^>]*\bname=["\']robots["\'])[^>]*>', b'', data, flags=re.I)
+                z.writestr(info, data)
+        for attempt in range(3):
+            try:
+                temporary.replace(archive)
+                break
+            except OSError:
+                if attempt == 2:
+                    raise
+                time.sleep(.2)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def add_cards(soup, route):
@@ -552,10 +667,19 @@ def build(only=None, language=None):
                 (assets / f'study-{i}.svg').write_text(artwork(i), encoding='utf-8')
             for name in ['studio.css','studio.js']:
                 shutil.copy2(SOURCE/name, demo/name)
+            for name, folder in [('editor-workspace.css', 'css'), ('editor-workspace.js', 'js')]:
+                shutil.copy2(ROOT / folder / name, demo / name)
+            for name, folder in [('template-brand.css', 'css'), ('template-brand.js', 'js')]:
+                shutil.copy2(ROOT / folder / name, demo / name)
             for extension in ['css','js']:
                 (demo/f'component.{extension}').write_text(component_source(kind,extension),encoding='utf-8')
             (demo / 'index.html').write_text(document(slug,lang), encoding='utf-8')
-            (demo / ('README.md' if lang=='en' else 'LEEME.md')).write_text(guide(slug,lang), encoding='utf-8')
+            guide_text = guide(slug,lang)
+            dependencies = 'studio.css, studio.js, component.css, component.js'
+            guide_text = guide_text.replace(dependencies, 'editor-workspace.css, editor-workspace.js, ' + dependencies)
+            guide_text += ('\n\n## Stable editing workspace\n\nOpen Settings to keep the preview beside the form. Apply commits content changes; Cancel discards unapplied fields. Hiding Settings preserves those fields. Image and motion controls update immediately and are labeled separately. Keep editor-workspace.css and editor-workspace.js beside the HTML, including when using a downloaded edited HTML.\n' if lang == 'en' else '\n\n## Espacio de edición estable\n\nAbre Ajustes para conservar la vista junto al formulario. Aplicar confirma los cambios de contenido; Cancelar descarta los campos sin aplicar. Ocultar ajustes conserva esos campos. Los controles de imagen y movimiento se actualizan al instante y están identificados por separado. Conserva editor-workspace.css y editor-workspace.js junto al HTML, también al descargar un HTML editado.\n')
+            guide_text += ('\n\n## Your brand\n\nChoose your own three accent colors in Your brand. Optional surface/text colors and display/body fonts apply only to the reusable piece, while the authoring interface keeps Lienzo identity. Brand changes apply immediately and are independent of content Apply/Cancel. Local font uploads stay in the browser and are embedded in exported HTML. Use only fonts you have permission to distribute. Keep template-brand.css and template-brand.js beside full-studio HTML; individual scene/panel exports embed their current brand styles.\n' if lang == 'en' else '\n\n## Tu marca\n\nElige tus tres colores de acento en Tu marca. Los colores opcionales de superficie/texto y las fuentes de títulos/cuerpo afectan solo a la pieza reutilizable; la interfaz de edición conserva la identidad de Lienzo. La marca se actualiza al instante y es independiente de Aplicar/Cancelar contenido. Las fuentes locales permanecen en el navegador y se integran en el HTML exportado. Usa solo fuentes que tengas permiso de distribuir. Conserva template-brand.css y template-brand.js junto al HTML del estudio completo; las exportaciones de escena/panel incorporan sus estilos de marca actuales.\n')
+            (demo / ('README.md' if lang=='en' else 'LEEME.md')).write_text(guide_text, encoding='utf-8')
             (demo / 'SOURCE-NOTES.md').write_text(source_notes(slug), encoding='utf-8')
             shutil.copy2(common.parent / 'LICENSE-LIENZO.txt', demo / 'LICENSE-LIENZO.txt')
             package(slug,lang)

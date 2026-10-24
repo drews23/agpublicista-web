@@ -21,3 +21,10 @@ Pausa de demo, fuera de pantalla, pestaña oculta o modal afectan a la previsual
 Dibujos, movimiento, interfaz y escritor ZIP local nuevos para Lienzo. scripts/animated_icons_showcase.py contiene geometría, keyframes, metadatos, guías y SVG generados; scripts/template-expansion/animated-icons contiene CSS/JS de interfaz y miniaturas reales localizadas. Regenerar solo iconos-animados. svg-animated-icons (2).zip se conserva como referencia visual intacta; no se redistribuye su código. No se inventa autoría ni autorización de terceros. Estos SVG de línea/duotono no necesitan assets de la biblioteca 3D.
 
 Preparado para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . Código y dibujos nuevos MIT en LICENSE-LIENZO.txt; fuentes conservan OFL. SOURCE-NOTES.md documenta procedencia. Solo paleta del logo y tracking normal de Fraunces. Los logos conservan derechos de sus titulares.
+
+
+## Mesa de edición
+El botón Ajustes pliega el inspector sin restablecer el trabajo. La vista previa permanece estable durante la edición. Conserva editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css y template-brand.js junto al CSS, JavaScript, HTML y assets originales. Estos archivos locales no necesitan red ni instalación.
+
+## Tu marca
+Lienzo es la identidad de ejemplo predeterminada. Tu marca admite colores principal, secundario y acento libres, fondo/texto opcionales, fuentes del sistema y archivos WOFF2/WOFF/TTF/OTF locales de hasta 5 MB por función. Los cambios se aplican en directo a la pieza y son independientes de Aplicar/Cancelar contenido. Las exportaciones HTML completas incluyen el perfil y las fuentes adjuntas; conserva las dependencias del ZIP junto al HTML. Los SVG de iconos incluyen sus colores y no necesitan JavaScript; esos dibujos no tienen texto visible y no usan la fuente del editor. Adjunta únicamente fuentes que puedas utilizar y redistribuir. Ningún archivo sale del navegador.

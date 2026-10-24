@@ -32,7 +32,7 @@
 .eg-select{position:absolute;inset:0;display:flex;align-items:flex-start;flex-direction:column;justify-content:space-between;padding:20px;border:0;border-radius:inherit;color:#fff;background:none;z-index:2;text-align:left;min-width:44px;min-height:44px}
 .eg-select:focus-visible{outline:3px solid #fff;outline-offset:-6px}
 .eg-number{display:grid;place-items:center;width:32px;height:32px;flex:none;border:1px solid #ffffff70;border-radius:50%;background:#0a0a0fa6;font-size:11px;font-variant-numeric:tabular-nums;line-height:1;color:#fff}
-.eg-rail-title{font:500 15px/1.2 Instrument,sans-serif;letter-spacing:.03em;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;max-height:calc(100% - 65px);overflow:hidden;text-overflow:ellipsis;margin-left:8px;transition:opacity .18s}
+.eg-rail-title{font:500 15px/1.2 var(--brand-font-body,Instrument),sans-serif;letter-spacing:.03em;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;max-height:calc(100% - 65px);overflow:hidden;text-overflow:ellipsis;margin-left:8px;transition:opacity .18s}
 .eg-panel[data-active=true] .eg-rail-title{opacity:0;pointer-events:none}
 .eg-panel:not([data-active=true]) .eg-select{padding:20px 0;align-items:center}
 .eg-expand{position:absolute;top:19px;right:19px;z-index:4;width:44px;height:44px;display:grid;place-items:center;padding:11px;border:1px solid #ffffff66;border-radius:50%;background:#0a0a0f55;color:#fff;opacity:0;visibility:hidden;transition:opacity .2s,background .2s}

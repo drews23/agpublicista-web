@@ -16,6 +16,7 @@
   const uniformCache = new Map();
   const item = () => state.items[0];
   const number = (value, low, high, fallback) => Number.isFinite(Number(value)) ? Math.min(high, Math.max(low, Number(value))) : fallback;
+  const rgb = value => { const hex = value.replace('#', ''); const full = hex.length === 3 ? [...hex].map(digit => digit + digit).join('') : hex; return [0, 2, 4].map(index => parseInt(full.slice(index, index + 2), 16) / 255); };
   const locale = document.documentElement.lang;
   const form = $('[data-particle-settings]');
   const presets = ['orbit', 'ribbon', 'monogram'];
@@ -29,13 +30,14 @@
   void main(){vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2));v_uv=p;gl_Position=vec4(p*2.-1.,0.,1.);}`;
   const cover = `vec2 cover(vec2 uv){float screen=u_resolution.x/u_resolution.y;float image=u_imageSize.x/u_imageSize.y;if(screen>image)uv.y=(uv.y-.5)*image/screen+.5;else uv.x=(uv.x-.5)*screen/image+.5;return uv;}`;
   const fragmentBackground = `#version 300 es
-  precision highp float; in vec2 v_uv; uniform sampler2D u_image; uniform vec2 u_resolution; uniform vec2 u_imageSize; uniform float u_scatter; out vec4 color;
+  precision highp float; in vec2 v_uv; uniform sampler2D u_image; uniform vec2 u_resolution; uniform vec2 u_imageSize; uniform float u_scatter; uniform vec3 u_surface; out vec4 color;
   ${cover}
-  void main(){vec3 image=texture(u_image,cover(v_uv)).rgb;vec3 base=vec3(.035,.03,.055);color=vec4(mix(base,image,.18*(1.-u_scatter)),1.);}`;
+  void main(){vec3 image=texture(u_image,cover(v_uv)).rgb;color=vec4(mix(u_surface,image,.18*(1.-u_scatter)),1.);}`;
   const vertexParticles = `#version 300 es
   precision highp float;
   uniform sampler2D u_image; uniform vec2 u_resolution; uniform vec2 u_imageSize; uniform vec2 u_mouse;
   uniform float u_count; uniform float u_time; uniform float u_force; uniform float u_energy;
+  uniform vec3 u_primary; uniform vec3 u_secondary; uniform vec3 u_accent;
   uniform float u_radius; uniform float u_scatter; uniform float u_size; uniform float u_mode; uniform float u_palette;
   out vec3 v_color; out float v_alpha;
   float hash(float n){return fract(sin(n*127.1+31.7)*43758.5453);}
@@ -53,8 +55,8 @@
     p+=flow*.008*light+direction*influence*u_force*(.18+u_energy*.18)*u_mode;
     vec2 drift=vec2(hash(id+9.)-.5,hash(id+17.)-.5);
     p+=drift*u_scatter*2.6+vec2(sin(seed*40.+u_time),cos(seed*27.+u_time))*.045*u_scatter;
-    vec3 brand=mix(vec3(.545,.482,1.),vec3(.208,.839,.784),smoothstep(.15,.7,light));
-    brand=mix(brand,vec3(1.,.706,.329),smoothstep(.76,1.,light)*.65);
+    vec3 brand=mix(u_primary,u_secondary,smoothstep(.15,.7,light));
+    brand=mix(brand,u_accent,smoothstep(.76,1.,light)*.65);
     v_color=mix(original,brand,u_palette);v_alpha=smoothstep(.04,.17,light)*(.92-u_scatter*.22);
     gl_Position=vec4(p,0.,1.);gl_PointSize=u_size*(.75+light*.45)*(1.+u_scatter*.4);
   }`;
@@ -83,7 +85,8 @@
     if (!uniformCache.has(key)) uniformCache.set(key, gl.getUniformLocation(programValue, name));
     const location = uniformCache.get(key);
     if (location === null) return;
-    if (type === '2f') gl.uniform2f(location, ...value);
+    if (type === '3f') gl.uniform3f(location, ...value);
+    else if (type === '2f') gl.uniform2f(location, ...value);
     else if (type === '1i') gl.uniform1i(location, value);
     else gl.uniform1f(location, value);
   }
@@ -116,10 +119,10 @@
   function originalArtwork() {
     const target = document.createElement('canvas'); target.width = 1400; target.height = 1050;
     const ctx = target.getContext('2d');
-    ctx.fillStyle = '#09080e'; ctx.fillRect(0, 0, 1400, 1050);
+    ctx.fillStyle = a.color('surface', '#09080e'); ctx.fillRect(0, 0, 1400, 1050);
     const accent = colors[item().accent] || colors.violet;
     const gradient = ctx.createLinearGradient(-480, -300, 480, 300);
-    gradient.addColorStop(0, '#35d6c8'); gradient.addColorStop(.3, accent); gradient.addColorStop(.64, '#6e5df2'); gradient.addColorStop(.87, '#8b7bff'); gradient.addColorStop(1, '#ffb454');
+    gradient.addColorStop(0, colors.mint); gradient.addColorStop(.3, accent); gradient.addColorStop(.64, a.color('deep', '#6e5df2')); gradient.addColorStop(.87, colors.violet); gradient.addColorStop(1, colors.amber);
     const composition = presets.includes(item().composition) ? item().composition : 'orbit';
     ctx.save(); ctx.translate(700, 480);
     if (composition === 'orbit') {
@@ -161,29 +164,34 @@
     // Fine registration marks make the generated artwork useful as an editable brand study.
     ctx.strokeStyle = '#ffffff66'; ctx.lineWidth = 1;
     [[90, 90, 1, 1], [1310, 90, -1, 1], [90, 960, 1, -1], [1310, 960, -1, -1]].forEach(([x, y, dx, dy]) => { ctx.beginPath(); ctx.moveTo(x + dx * 25, y); ctx.lineTo(x, y); ctx.lineTo(x, y + dy * 25); ctx.stroke(); });
-    ctx.fillStyle = '#ffffff'; ctx.font = '500 86px Fraunces'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const typography = getComputedStyle(frame);
+    const displayFont = typography.getPropertyValue('--brand-font-display').trim() || 'Fraunces';
+    const bodyFont = typography.getPropertyValue('--brand-font-body').trim() || 'Instrument';
+    ctx.fillStyle = a.color('text', '#ffffff'); ctx.font = '500 86px ' + displayFont; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     const title = String(item().title || 'LIENZO').slice(0, 24);
     const textWidth = ctx.measureText(title).width;
-    if (textWidth > 1100) ctx.font = '500 ' + (86 * 1100 / textWidth) + 'px Fraunces';
+    if (textWidth > 1100) ctx.font = '500 ' + (86 * 1100 / textWidth) + 'px ' + displayFont;
     ctx.fillText(title, 700, 865);
-    ctx.fillStyle = '#b6b0c7'; ctx.font = '22px Instrument';
+    ctx.fillStyle = a.color('text', '#b6b0c7'); ctx.font = '22px ' + bodyFont;
     ctx.fillText(String(item().description || '').slice(0, 90), 700, 925, 1110);
     return target;
   }
   async function prepare() {
     const current = item();
-    const key = JSON.stringify([current.title, current.description, current.accent, current.composition, current.imageData]);
+    const typography = getComputedStyle(frame);
+    const key = JSON.stringify([current.title, current.description, current.accent, current.composition, current.imageData, colors, a.color('surface', '#09080e'), a.color('text', '#ffffff'), typography.getPropertyValue('--brand-font-display'), typography.getPropertyValue('--brand-font-body')]);
     if (key === sourceKey && sourceCanvas) return;
     const version = ++imageVersion;
     frame.dataset.loading = 'true';
     $('[data-snapshot]').disabled = true;
     try {
       await document.fonts.ready;
+      if (version !== imageVersion) return;
       let source;
       if (current.imageData) {
         const image = new Image(); image.src = current.imageData; await image.decode();
         source = document.createElement('canvas'); source.width = image.naturalWidth; source.height = image.naturalHeight;
-        const ctx = source.getContext('2d'); ctx.fillStyle = '#09080e'; ctx.fillRect(0, 0, source.width, source.height); ctx.drawImage(image, 0, 0);
+        const ctx = source.getContext('2d'); ctx.fillStyle = a.color('surface', '#09080e'); ctx.fillRect(0, 0, source.width, source.height); ctx.drawImage(image, 0, 0);
       } else source = originalArtwork();
       if (version !== imageVersion) return;
       sourceCanvas = source; sourceKey = key;
@@ -217,7 +225,7 @@
   function drawStatic() {
     if (!sourceCanvas) return;
     const ctx = still.getContext('2d');
-    ctx.fillStyle = '#09080e'; ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = a.color('surface', '#09080e'); ctx.fillRect(0, 0, width, height);
     const scale = Math.max(width / sourceCanvas.width, height / sourceCanvas.height);
     const w = sourceCanvas.width * scale, h = sourceCanvas.height * scale;
     ctx.drawImage(sourceCanvas, (width - w) / 2, (height - h) / 2, w, h);
@@ -228,15 +236,18 @@
     if (staticMode || contextLost) { drawStatic(); return; }
     if (!gl) return;
     gl.bindVertexArray(vao); gl.viewport(0, 0, width, height);
-    gl.clearColor(.035, .03, .055, 1); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.clearColor(...rgb(a.color('surface', '#09080e')), 1); gl.clear(gl.COLOR_BUFFER_BIT);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texture);
     for (const p of [backgroundProgram, pointProgram]) {
       gl.useProgram(p); uniform(p, 'u_image', '1i', 0);
       uniform(p, 'u_resolution', '2f', [width, height]); uniform(p, 'u_imageSize', '2f', [sourceCanvas.width, sourceCanvas.height]);
       uniform(p, 'u_scatter', '1f', scatter);
     }
-    gl.disable(gl.BLEND); gl.useProgram(backgroundProgram); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.disable(gl.BLEND); gl.useProgram(backgroundProgram); uniform(backgroundProgram, 'u_surface', '3f', rgb(a.color('surface', '#09080e'))); gl.drawArrays(gl.TRIANGLES, 0, 3);
     gl.useProgram(pointProgram);
+    uniform(pointProgram, 'u_primary', '3f', rgb(colors.violet));
+    uniform(pointProgram, 'u_secondary', '3f', rgb(colors.mint));
+    uniform(pointProgram, 'u_accent', '3f', rgb(colors.amber));
     uniform(pointProgram, 'u_count', '1f', count); uniform(pointProgram, 'u_time', '1f', clock);
     uniform(pointProgram, 'u_mouse', '2f', interaction.mouse); uniform(pointProgram, 'u_energy', '1f', interaction.energy);
     uniform(pointProgram, 'u_force', '1f', number(item().strength, .05, 1.2, .6));
@@ -320,6 +331,12 @@
     if (a.paused) { stop(); if (a.reduced) scatter = state.dispersed ? 1 : 0; }
     else start();
     updateMotionLabel();
+  });
+  a.root.addEventListener('v2:brand', event => {
+    if (!['font','hydrate','reset'].includes(event.detail?.reason)) return;
+    // Replacing a file reuses its FontFace family; invalidate pixels, not only the family-name cache.
+    sourceKey = '';
+    prepare();
   });
   form.addEventListener('submit', event => event.preventDefault());
   form.addEventListener('input', event => {

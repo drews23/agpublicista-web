@@ -1,0 +1,23 @@
+/* Lienzo editing workspace. Opt-in; component artwork and export engines stay independent. */
+[data-editor-workspace]{--editor-header-height:0px;--editor-toolbar-height:0px;--editor-preview-top:calc(var(--editor-header-height) + var(--editor-toolbar-height) + 12px);--editor-available-height:calc(100dvh - 28px);--editor-panel-width:340px;--editor-gap:20px;min-width:0;scroll-margin-top:calc(var(--editor-header-height) + 16px)}
+[data-editor-workspace] [data-editor-layout]{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,var(--editor-panel-width));gap:var(--editor-gap);align-items:start;min-width:0}
+[data-editor-workspace][data-editor-collapsed=true] [data-editor-layout]{grid-template-columns:minmax(0,1fr)}
+[data-editor-workspace] [data-editor-preview]{min-width:0;align-self:start}
+[data-editor-workspace] [data-editor-panel]{min-width:0;scrollbar-width:thin;scrollbar-gutter:stable;overscroll-behavior:contain}
+[data-editor-workspace] [data-editor-panel][hidden]{display:none!important}
+[data-editor-toggle]{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;cursor:pointer;touch-action:manipulation}
+[data-editor-toggle] svg{width:18px;height:18px;flex:none}
+[data-editor-toggle]:focus-visible{outline:3px solid var(--accent,var(--violet,#8b7bff));outline-offset:4px}
+[data-editor-workspace] [data-editor-panel] :is(input,select,textarea,button,a,summary){scroll-margin-block:64px 24px}
+@media(min-width:960px) and (min-height:420px){
+  [data-editor-workspace] [data-editor-toolbar]{position:sticky;top:var(--editor-header-height);z-index:12}
+  [data-editor-workspace]:not([data-editor-compact=true]) [data-editor-preview]{position:sticky;top:var(--editor-preview-top)}
+  [data-editor-workspace]:not([data-editor-compact=true]) [data-editor-panel]{position:sticky;top:var(--editor-preview-top);max-height:var(--editor-available-height);overflow-y:auto;overflow-x:hidden}
+  [data-editor-workspace] [data-editor-preview][data-editor-too-tall=true]{position:relative;top:auto}
+}
+@media(max-width:959px),(max-height:419px){
+  [data-editor-workspace] [data-editor-layout]{grid-template-columns:minmax(0,1fr)}
+  [data-editor-workspace] [data-editor-preview], [data-editor-workspace] [data-editor-panel]{position:relative;top:auto;max-height:none}
+  [data-editor-workspace] [data-editor-panel]{overscroll-behavior:auto}
+}
+@media(prefers-reduced-motion:reduce){[data-editor-workspace]{scroll-behavior:auto}}

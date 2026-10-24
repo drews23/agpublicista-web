@@ -4,8 +4,12 @@
   const root = document.body;
   const en = document.documentElement.lang.startsWith('en');
   const say = (es, us) => en ? us : es;
-  const palette = {violet:'#8b7bff', mint:'#35d6c8', amber:'#ffb454'};
-  const accentNames = {violet:say('Violeta','Violet'), mint:say('Menta','Mint'), amber:say('Ámbar','Amber')};
+  const palette = new Proxy({violet:'#8b7bff', mint:'#35d6c8', amber:'#ffb454'}, {
+    get(values, key) { return typeof key==='string' ? window.LienzoLegacyBrand?.color(key, values[key]) || values[key] : values[key]; }
+  });
+  const accentNames = new Proxy({violet:say('Violeta','Violet'), mint:say('Menta','Mint'), amber:say('Ámbar','Amber')}, {
+    get(values,key){return window.LienzoLegacyAssets?.name(key,values[key])||values[key];}
+  });
   const data = document.querySelector('[data-designs]');
   const designs = JSON.parse(data.textContent);
   const defaults = structuredClone(designs);
@@ -266,6 +270,7 @@
     clone.querySelectorAll('[data-status],[data-dialog-status]').forEach(element=>element.textContent='');
     clone.querySelector('[data-designs]').textContent=JSON.stringify([item]).replace(/</g,'\\u003c');
     clone.querySelector('[data-code-dialog] textarea').textContent='';
+    window.LienzoLegacyBrand?.decorateClone(clone);
     return '<!doctype html>\n<!-- '+say('Conserva styles.css, script.js y assets/ del ZIP.','Keep styles.css, script.js and assets/ from the ZIP.')+' -->\n'+clone.outerHTML;
   }
   async function copy(text,button) {
@@ -284,7 +289,7 @@
     }
   }
   document.querySelector('[data-copy-html]').addEventListener('click',event=>copy(exportDocument(selected),event.currentTarget));
-  document.querySelector('[data-copy-css]').addEventListener('click',event=>copy(document.querySelector('[data-source-css]').textContent,event.currentTarget));
+  document.querySelector('[data-copy-css]').addEventListener('click',event=>copy(document.querySelector('[data-source-css]').textContent+'\n'+(window.LienzoLegacyBrand?.css('.lab-card')||''),event.currentTarget));
   document.querySelector('[data-code-close]').addEventListener('click',()=>codeDialog.close());
   codeDialog.addEventListener('close',()=>codeOpener?.focus({preventScroll:true}));
   document.querySelector('[data-download]').addEventListener('click',()=>{
@@ -297,5 +302,6 @@
     const target=document.querySelector(link.getAttribute('href'));if(!target)return;
     event.preventDefault();target.scrollIntoView({behavior:enabled()?'smooth':'instant',block:'start'});target.focus({preventScroll:true});
   }));
+  document.addEventListener('lienzo:legacy-brand',()=>{render();window.LienzoLegacyBrand?.apply();});
   theme(root.dataset.theme);motionState();fillForm();
 })();

@@ -2,7 +2,9 @@
 (() => {
   'use strict';
   const root=document.body,en=document.documentElement.lang.startsWith('en'),say=(es,us)=>en?us:es;
-  const palette={violet:'#8b7bff',mint:'#35d6c8',amber:'#ffb454'};
+  const palette=new Proxy({violet:'#8b7bff',mint:'#35d6c8',amber:'#ffb454'}, {
+    get(values,key){return typeof key==='string'?window.LienzoLegacyBrand?.color(key,values[key])||values[key]:values[key];}
+  });
   const metadata=JSON.parse(document.querySelector('[data-icon-metadata]').textContent);
   const known=new Set(metadata.map(x=>x.key)),clamp=(v,a,b,d)=>Number.isFinite(Number(v))?Math.max(a,Math.min(b,Number(v))):d;
   const raw=JSON.parse(document.querySelector('[data-icon-settings]').textContent),seen=new Set();
@@ -106,5 +108,6 @@
   document.querySelector('[data-motion-toggle]').addEventListener('click',()=>{motion=!motion;motionState();});reduced.addEventListener('change',motionState);
   if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{const holder=entry.target;holder.dataset.visible=String(entry.isIntersecting);holder.querySelectorAll('svg').forEach(svg=>svg.dataset.paused=String(!entry.isIntersecting));}),{threshold:.04});[...tiles,stage].forEach(holder=>observer.observe(holder));addEventListener('pagehide',()=>observer.disconnect(),{once:true});}
   document.addEventListener('visibilitychange',()=>{root.dataset.hidden=String(document.hidden);if(document.hidden)clearTimers();});addEventListener('pagehide',clearTimers,{once:true});
+  document.addEventListener('lienzo:legacy-brand',()=>{tiles.forEach(tile=>delete tile.dataset.signature);render(false);window.LienzoLegacyBrand?.apply();});
   theme(root.dataset.theme);motionState();form.querySelector('[data-label]').value=current().label;
 })();

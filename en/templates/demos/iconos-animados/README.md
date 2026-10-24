@@ -21,3 +21,10 @@ Demo pause and hidden/offscreen/modal pausing affect the preview, not the chosen
 New drawings, CSS motion, interface, and local ZIP writer authored for Lienzo. scripts/animated_icons_showcase.py owns geometry, keyframes, metadata, guides, and generated SVG assets; scripts/template-expansion/animated-icons owns UI CSS/JS and localized real thumbnails. Rebuild only iconos-animados. The supplied svg-animated-icons (2).zip remains an unchanged visual reference; its source code is not distributed. No third-party authorship or permission is invented. Existing 3D library assets are not needed for these original line/duotone SVGs.
 
 Prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . New code and drawings are MIT under LICENSE-LIENZO.txt; fonts retain OFL notices. SOURCE-NOTES.md records provenance. Logo colors only; normal Fraunces tracking. Brand marks retain their owners' rights.
+
+
+## Editing workspace
+The Settings button folds the inspector without resetting your work. The preview stays in place while you edit. Keep editor-workspace.css, editor-workspace.js, editor-legacy.css, editor-legacy.js, template-brand.css, and template-brand.js beside the original CSS, JavaScript, HTML and assets. These local files need no network or installation.
+
+## Your brand
+Lienzo is the default sample identity. Your brand accepts custom primary, secondary, and accent colors, optional surface/text colors, system fonts, and local WOFF2/WOFF/TTF/OTF font files up to 5 MB per role. Changes apply live to the component; they are separate from content Apply/Cancel. Full HTML exports embed the brand profile and uploaded fonts; keep the ZIP dependencies alongside the HTML. SVG icon exports embed their chosen colors and need no JavaScript; these drawings contain no visible text and do not use the editor’s font. Only upload fonts you are allowed to use and redistribute. No upload leaves the browser.
