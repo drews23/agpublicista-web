@@ -158,7 +158,7 @@
   <link rel="alternate" hreflang="es" href="https://lienzo.tools/herramientas/qr/">
 <link rel="alternate" hreflang="en" href="https://lienzo.tools/en/tools/qr/">
 <link rel="alternate" hreflang="x-default" href="https://lienzo.tools/herramientas/qr/">
-<link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d"></head>
+<link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d"><link rel="stylesheet" href="/css/editor-workspace.css?v=562d7595266d"><link rel="stylesheet" href="/css/editor-workspace-adapters.css?v=be42b66f516d"></head>
   <body>
     <div class="glow" aria-hidden="true"></div>
 
@@ -178,177 +178,161 @@
     </header>
 
     <main>
-      <section class="section shell">
-        <nav class="breadcrumbs" aria-label="Miga de pan">
-          <a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> › <span>Generador de código QR</span>
-        </nav>
-
-        <div class="page-head">
-          <p class="eyebrow">Herramienta gratis</p>
-          <h1>Generador de código QR</h1>
-          <p class="lede">Escribe cualquier texto o pega un enlace y descarga el código QR al instante, en PNG o en SVG. Se genera en tu navegador: nada de lo que escribes viaja por la red.</p>
-        </div>
-
-      </section>
-
-      <section class="section estudio-shell">
-        <div class="estudio" data-estudio data-workspace>
-          <div class="qr-preview estudio__lienzo" data-preview>
-              <div class="qr-lienzo" data-lienzo hidden><canvas data-canvas width="1" height="1"></canvas></div>
-              <div class="qr-preview__vacio" data-vacio>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14v7M14 19h7"/></svg>
-                <span>Completa los campos para ver tu código QR</span>
-              </div>
-            </div>
-
-          <p class="error" data-error role="alert" hidden></p>
-
-          <button class="estudio__alternar" type="button" aria-expanded="true" aria-controls="panel-estudio">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
-            <span data-alternar-texto>Ocultar</span>
-          </button>
-
-          <aside class="estudio__panel" id="panel-estudio" aria-label="Ajustes">
-            <div class="estudio__panel-cabecera">
-              <h2 class="estudio__panel-titulo">Ajustes</h2>
-            </div>
-            <div class="estudio__panel-cuerpo">
-              <details class="estudio__seccion" open>
-                <summary>Contenido</summary>
-                <div class="settings">
-                <label class="field">
-                  <span class="field__label">Texto o enlace <span class="contador" data-contador>0</span></span>
-                  <textarea placeholder="https://lienzo.tools/" data-campo="contenido" rows="4">https://lienzo.tools/</textarea>
-                  <span class="field__hint">Cualquier cosa: una URL, una frase, un número de referencia.</span>
-                </label>
-              </div>
-              </details>
-
-              <details class="estudio__seccion" open>
-                <summary>Añade tu logo</summary>
-                <div class="settings qr-logo">
-                  <label class="qr-logo__zona" data-logo-zona>
-                    <span class="qr-logo__icono" aria-hidden="true">＋</span>
-                    <strong>Selecciona o arrastra tu imagen</strong>
-                    <span>PNG, JPG o WebP · hasta 5 MB</span>
-                    <input type="file" accept="image/png,image/jpeg,image/webp" data-logo-archivo aria-label="Seleccionar logo o imagen" />
-                  </label>
-                  <p class="qr-logo__estado" data-logo-error data-estado="error" role="alert" hidden></p>
-                  <div class="qr-logo__ajustes" data-logo-ajustes hidden>
-                    <div class="qr-logo__archivo">
-                      <img data-logo-miniatura alt="Logo seleccionado" width="48" height="48" />
-                      <span data-logo-nombre></span>
-                      <button type="button" class="btn" data-logo-quitar>Quitar</button>
-                    </div>
-                    <label class="field">
-                      <span class="field__label">Tamaño del logo <output data-logo-tamano-output>16 %</output></span>
-                      <input type="range" min="12" max="20" step="1" value="16" data-logo-tamano />
-                    </label>
-                    <label class="field">
-                      <span class="field__label">Fondo del logo</span>
-                      <select data-logo-fondo>
-                        <option value="redondeado">Blanco redondeado</option>
-                        <option value="blanco">Blanco cuadrado</option>
-                        <option value="circulo">Blanco circular</option>
-                        <option value="ninguno">Sin fondo adicional</option>
-                      </select>
-                    </label>
-                    <span class="field__hint">Con logo se activa la corrección H. El tamaño incluye el espacio alrededor de la imagen.</span>
-                  </div>
-                  <p class="qr-logo__estado" data-logo-estado role="status" aria-live="polite">Opcional. Tu imagen se procesa solo en este navegador.</p>
-                </div>
-              </details>
-              <details class="estudio__seccion" open>
-                <summary>Apariencia</summary>
-                <div class="settings">
-                <div class="field-row">
-                  <label class="field">
-                    <span class="field__label">Color</span>
-                    <div class="campo-color">
-                      <input type="color" value="#0a0a0f" data-color-primario />
-                      <input type="text" value="#0a0a0f" data-color-primario-texto />
-                    </div>
-                  </label>
-                  <label class="field">
-                    <span class="field__label">Fondo</span>
-                    <div class="campo-color">
-                      <input type="color" value="#ffffff" data-color-fondo />
-                      <input type="text" value="#ffffff" data-color-fondo-texto />
-                    </div>
-                  </label>
-                </div>
-                <label class="field">
-                  <span class="field__label">Tamaño de descarga <output data-tamano-output>1024 px</output></span>
-                  <input type="range" min="256" max="2048" step="256" value="1024" data-tamano />
-                </label>
-                <div class="field">
-                  <span class="field__label">Corrección de errores</span>
-                  <div class="radiogroup" role="radiogroup" aria-label="Nivel de corrección de errores">
-                    <label><input type="radio" name="ec" value="L" data-ec /> <span>L · 7 %</span></label>
-                    <label><input type="radio" name="ec" value="M" data-ec checked /> <span>M · 15 %</span></label>
-                    <label><input type="radio" name="ec" value="Q" data-ec /> <span>Q · 25 %</span></label>
-                    <label><input type="radio" name="ec" value="H" data-ec /> <span>H · 30 %</span></label>
-                  </div>
-                  <span class="field__hint">Los porcentajes se refieren a datos recuperables, no al área que puedes tapar. Con logo se activa H; comprueba siempre el resultado impreso.</span>
-                </div>
-              </div>
-              </details>
-            </div>
-          </aside>
-
-          <details class="estudio__codigo">
-            <summary>
-              <span class="estudio__codigo-etiqueta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6" /></svg><span class="estudio__codigo-texto">Detalles</span></span>
-              <span class="acciones estudio__codigo-acciones">
-                <button class="btn btn--primary" type="button" data-descargar-png>Descargar PNG</button>
-              <button class="btn btn--ghost" type="button" data-descargar-svg>Descargar SVG</button>
-              </span>
-            </summary>
-            <div class="estudio__codigo-cuerpo">
-              <p class="qr-archivo"><span class="stat__value--small" data-nombre-archivo>, </span></p>
-              <div class="stats" aria-live="polite">
-              <div class="stat"><span class="stat__label">Versión</span><span class="stat__value" data-stat-version>, </span></div>
-              <div class="stat"><span class="stat__label">Módulos</span><span class="stat__value stat__value--small" data-stat-modulos>, </span></div>
-              <div class="stat"><span class="stat__label">Corrección</span><span class="stat__value stat__value--small" data-stat-ec>, </span></div>
-              <div class="stat"><span class="stat__label">Contenido</span><span class="stat__value stat__value--small" data-stat-bytes>, </span></div>
-            </div>
-            </div>
-          </details>
-        </div>
-
-        <p class="tool-note">
+<section class="section shell">
+<nav aria-label="Miga de pan" class="breadcrumbs">
+<a href="/">Inicio</a> › <a href="/herramientas/">Herramientas</a> › <span>Generador de código QR</span>
+</nav>
+<div class="page-head">
+<p class="eyebrow">Herramienta gratis</p>
+<h1>Generador de código QR</h1>
+<p class="lede">Escribe cualquier texto o pega un enlace y descarga el código QR al instante, en PNG o en SVG. Se genera en tu navegador: nada de lo que escribes viaja por la red.</p>
+</div>
+</section>
+<section class="section estudio-shell">
+<div class="estudio editor-qr-workspace" data-editor-focus-anchor="workspace" data-editor-lang="es" data-editor-layout="" data-editor-workspace="qr" data-estudio="" data-workspace=""><div class="editor-qr-toolbar" data-editor-toolbar=""><strong>Tu código QR</strong><button aria-controls="qr-editor-settings" aria-expanded="true" class="editor-toggle" data-editor-toggle="" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>
+<span data-alternar-texto="" data-editor-toggle-label="">Ocultar ajustes</span>
+</button></div>
+<div class="qr-preview estudio__lienzo" data-editor-preview="" data-preview="">
+<div class="qr-lienzo" data-lienzo="" hidden=""><canvas data-canvas="" height="1" width="1"></canvas></div>
+<div class="qr-preview__vacio" data-vacio="">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24"><rect height="7" rx="1" width="7" x="3" y="3"></rect><rect height="7" rx="1" width="7" x="14" y="3"></rect><rect height="7" rx="1" width="7" x="3" y="14"></rect><path d="M14 14h3v3h-3zM19 14v7M14 19h7"></path></svg>
+<span>Completa los campos para ver tu código QR</span>
+</div>
+</div>
+<p class="error" data-error="" hidden="" role="alert"></p>
+<aside aria-label="Ajustes" class="estudio__panel" data-editor-panel="" id="qr-editor-settings">
+<div class="estudio__panel-cabecera">
+<h2 class="estudio__panel-titulo">Ajustes</h2>
+</div>
+<div class="estudio__panel-cuerpo" data-editor-panel-body="">
+<details class="estudio__seccion" open="">
+<summary>Contenido</summary>
+<div class="settings">
+<label class="field">
+<span class="field__label">Texto o enlace <span class="contador" data-contador="">0</span></span>
+<textarea data-campo="contenido" placeholder="https://lienzo.tools/" rows="4">https://lienzo.tools/</textarea>
+<span class="field__hint">Cualquier cosa: una URL, una frase, un número de referencia.</span>
+</label>
+</div>
+</details>
+<details class="estudio__seccion">
+<summary>Añade tu logo</summary>
+<div class="settings qr-logo">
+<label class="qr-logo__zona" data-logo-zona="">
+<span aria-hidden="true" class="qr-logo__icono">＋</span>
+<strong>Selecciona o arrastra tu imagen</strong>
+<span>PNG, JPG o WebP · hasta 5 MB</span>
+<input accept="image/png,image/jpeg,image/webp" aria-label="Seleccionar logo o imagen" data-logo-archivo="" type="file"/>
+</label>
+<p class="qr-logo__estado" data-estado="error" data-logo-error="" hidden="" role="alert"></p>
+<div class="qr-logo__ajustes" data-logo-ajustes="" hidden="">
+<div class="qr-logo__archivo">
+<img alt="Logo seleccionado" data-logo-miniatura="" height="48" width="48"/>
+<span data-logo-nombre=""></span>
+<button class="btn" data-logo-quitar="" type="button">Quitar</button>
+</div>
+<label class="field">
+<span class="field__label">Tamaño del logo <output data-logo-tamano-output="">16 %</output></span>
+<input data-logo-tamano="" max="20" min="12" step="1" type="range" value="16"/>
+</label>
+<label class="field">
+<span class="field__label">Fondo del logo</span>
+<select data-logo-fondo="">
+<option value="redondeado">Blanco redondeado</option>
+<option value="blanco">Blanco cuadrado</option>
+<option value="circulo">Blanco circular</option>
+<option value="ninguno">Sin fondo adicional</option>
+</select>
+</label>
+<span class="field__hint">Con logo se activa la corrección H. El tamaño incluye el espacio alrededor de la imagen.</span>
+</div>
+<p aria-live="polite" class="qr-logo__estado" data-logo-estado="" role="status">Opcional. Tu imagen se procesa solo en este navegador.</p>
+</div>
+</details>
+<details class="estudio__seccion">
+<summary>Apariencia</summary>
+<div class="settings">
+<div class="field-row">
+<label class="field">
+<span class="field__label">Color</span>
+<div class="campo-color">
+<input data-color-primario="" type="color" value="#0a0a0f"/>
+<input data-color-primario-texto="" type="text" value="#0a0a0f"/>
+</div>
+</label>
+<label class="field">
+<span class="field__label">Fondo</span>
+<div class="campo-color">
+<input data-color-fondo="" type="color" value="#ffffff"/>
+<input data-color-fondo-texto="" type="text" value="#ffffff"/>
+</div>
+</label>
+</div>
+<label class="field">
+<span class="field__label">Tamaño de descarga <output data-tamano-output="">1024 px</output></span>
+<input data-tamano="" max="2048" min="256" step="256" type="range" value="1024"/>
+</label>
+<div class="field">
+<span class="field__label">Corrección de errores</span>
+<div aria-label="Nivel de corrección de errores" class="radiogroup" role="radiogroup">
+<label><input data-ec="" name="ec" type="radio" value="L"/> <span>L · 7 %</span></label>
+<label><input checked="" data-ec="" name="ec" type="radio" value="M"/> <span>M · 15 %</span></label>
+<label><input data-ec="" name="ec" type="radio" value="Q"/> <span>Q · 25 %</span></label>
+<label><input data-ec="" name="ec" type="radio" value="H"/> <span>H · 30 %</span></label>
+</div>
+<span class="field__hint">Los porcentajes se refieren a datos recuperables, no al área que puedes tapar. Con logo se activa H; comprueba siempre el resultado impreso.</span>
+</div>
+</div>
+</details>
+</div>
+</aside>
+<div class="editor-qr-export"><span class="acciones estudio__codigo-acciones">
+<button class="btn btn--primary" data-descargar-png="" type="button">Descargar PNG</button>
+<button class="btn btn--ghost" data-descargar-svg="" type="button">Descargar SVG</button>
+</span><details class="estudio__codigo">
+<summary>
+<span class="estudio__codigo-etiqueta"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 15l6-6 6 6"></path></svg><span class="estudio__codigo-texto">Detalles</span></span>
+</summary>
+<div class="estudio__codigo-cuerpo">
+<p class="qr-archivo"><span class="stat__value--small" data-nombre-archivo="">, </span></p>
+<div aria-live="polite" class="stats">
+<div class="stat"><span class="stat__label">Versión</span><span class="stat__value" data-stat-version="">, </span></div>
+<div class="stat"><span class="stat__label">Módulos</span><span class="stat__value stat__value--small" data-stat-modulos="">, </span></div>
+<div class="stat"><span class="stat__label">Corrección</span><span class="stat__value stat__value--small" data-stat-ec="">, </span></div>
+<div class="stat"><span class="stat__label">Contenido</span><span class="stat__value stat__value--small" data-stat-bytes="">, </span></div>
+</div>
+</div>
+</details></div></div>
+<p class="tool-note">
           El código se genera y se dibuja en tu navegador. Nada de lo que escribes aquí se envía a ningún servidor.
         </p>
-      </section>
-
-      <section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3300px">
-        <div class="prose">
-          <h2>Un generador de QR sin fricción</h2>
-          <p>
+</section>
+<section class="section shell diferir-render" style="--alto-escritorio: 2000px; --alto-movil: 3300px">
+<div class="prose">
+<h2>Un generador de QR sin fricción</h2>
+<p>
             La mayoría de generadores de código QR te piden crear una cuenta, te limitan
             las descargas o esconden el botón real de PNG detrás de un plan de pago. Este
             no: escribes, ves el código actualizarse al instante y lo descargas. Todo el
             cálculo (la codificación, la corrección de errores, el dibujo del código) ocurre dentro de tu navegador.
           </p>
-
-          <h2>Cómo crear un código QR</h2>
-          <ol>
-            <li>Escribe o pega el contenido: un enlace, una frase, lo que necesites.</li>
-            <li>Ajusta el color, el fondo y el nivel de corrección si quieres personalizarlo.</li>
-            <li>Descarga en PNG (para imprimir o compartir) o en SVG (para editar en otro programa).</li>
-          </ol>
-
-          <h2>PNG o SVG: cuál elegir</h2>
-          <p>
-            <strong>PNG</strong> es una imagen de píxeles: perfecta para pegarla en un
+<h2>Cómo crear un código QR</h2>
+<ol>
+<li>Escribe o pega el contenido: un enlace, una frase, lo que necesites.</li>
+<li>Ajusta el color, el fondo y el nivel de corrección si quieres personalizarlo.</li>
+<li>Descarga en PNG (para imprimir o compartir) o en SVG (para editar en otro programa).</li>
+</ol>
+<h2>PNG o SVG: cuál elegir</h2>
+<p>
+<strong>PNG</strong> es una imagen de píxeles: perfecta para pegarla en un
             documento, subirla a redes sociales o imprimirla directamente. <strong>SVG</strong>
             es vectorial (sin píxeles, escala a cualquier tamaño sin perder nitidez) y es
             la opción correcta si vas a llevar el código a Illustrator, Figma o Canva para
             montarlo en un diseño más grande, como un cartel o un empaque.
           </p>
-
-          <h2>Qué significa el nivel de corrección de errores</h2>
-          <p>
+<h2>Qué significa el nivel de corrección de errores</h2>
+<p>
             Todo código QR guarda una copia de seguridad de sus propios datos, calculada
             matemáticamente. El nivel de corrección decide cuánta: con L, hasta un 7 % del
             contenido codificado puede recuperarse; con H, aproximadamente un
@@ -356,74 +340,69 @@
             en la mayoría de tamaños de impresión no se nota. Al añadir un logo aquí, se activa H y se comprueba la lectura.
             Prueba también el archivo final con tu móvil antes de imprimirlo.
           </p>
-
-          <h2>Casos de uso habituales</h2>
-          <ul>
-            <li><strong>Carteles y volantes:</strong> enlazar directo a una página sin que nadie tenga que teclear la URL.</li>
-            <li><strong>Presentaciones:</strong> un código en la última diapositiva para que el público acceda al material.</li>
-            <li><strong>Empaques y etiquetas:</strong> enlazar a instrucciones, garantía o el catálogo completo.</li>
-            <li><strong>Documentos internos:</strong> codificar un número de referencia o de serie.</li>
-          </ul>
-
-          <h2>Y si necesitas un formato específico</h2>
-          <p>
+<h2>Casos de uso habituales</h2>
+<ul>
+<li><strong>Carteles y volantes:</strong> enlazar directo a una página sin que nadie tenga que teclear la URL.</li>
+<li><strong>Presentaciones:</strong> un código en la última diapositiva para que el público acceda al material.</li>
+<li><strong>Empaques y etiquetas:</strong> enlazar a instrucciones, garantía o el catálogo completo.</li>
+<li><strong>Documentos internos:</strong> codificar un número de referencia o de serie.</li>
+</ul>
+<h2>Y si necesitas un formato específico</h2>
+<p>
             Si lo que vas a codificar es una red WiFi, una tarjeta de contacto, un correo
             prellenado o un SMS, usa la variante enfocada: el formato interno de esos
             códigos tiene reglas propias (comillas, separadores, campos obligatorios) que
             las páginas específicas resuelven por ti sin que tengas que conocerlas.
           </p>
-
-          <h2>Las demás herramientas de código QR</h2>
-          <p>
+<h2>Las demás herramientas de código QR</h2>
+<p>
             Todas comparten el mismo motor y la misma promesa (nada se sube a ningún
             servidor) : <a href="/herramientas/qr/url/">código qr para una url</a>, <a href="/herramientas/qr/texto/">código qr de texto</a>, <a href="/herramientas/qr/wifi/">código qr para wifi</a>, <a href="/herramientas/qr/contacto/">código qr de contacto</a>, <a href="/herramientas/qr/email/">código qr para correo</a> y <a href="/herramientas/qr/sms/">código qr para sms</a>. Y si tu caso no encaja
             en ninguna de las variantes específicas, el
             <a href="/herramientas/qr/">generador de código QR</a> acepta cualquier texto.
           </p>
-
-          <h2 id="faq">Preguntas frecuentes</h2>
-          <details class="faq-item" name="faq" open>
-            <summary><h3>¿Se sube mi contenido a algún servidor?</h3></summary>
-            <p>No. El código QR se genera y se dibuja completamente en tu navegador. Ni el texto que escribes ni la imagen resultante viajan por la red en ningún momento.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Los códigos QR caducan?</h3></summary>
-            <p>No, nunca. Un código QR de contenido directo (como estos, sin acortador ni redirección) es solo una forma de guardar el texto: mientras el texto siga siendo válido (por ejemplo, mientras la URL exista) el código funciona para siempre, sin fecha de vencimiento.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Puedo usar el código en un proyecto comercial?</h3></summary>
-            <p>Sí. El código que generas es tuyo, para el uso que necesites, comercial incluido. No hay marca de agua ni ninguna condición añadida sobre el resultado.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Cuánto texto puedo meter en un código QR?</h3></summary>
-            <p>Varios miles de caracteres si el contenido es solo texto o números, algo menos si mezcla mayúsculas, minúsculas y símbolos. Para un uso normal (una URL, una frase, un dato de contacto) nunca vas a acercarte al límite.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Por qué mi lector no reconoce el código?</h3></summary>
-            <p>Casi siempre es por falta de margen en blanco alrededor (la «zona de silencio») o por un color de bajo contraste entre el código y el fondo. Esta herramienta ya deja el margen correcto; si personalizas los colores, mantén el fondo claro y el código oscuro.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Necesito una app especial para leer el código?</h3></summary>
-            <p>No. La cámara nativa de cualquier teléfono moderno (iPhone desde iOS 11, Android desde la versión 9 con Google Lens integrado) lee códigos QR sin instalar nada.</p>
-          </details>
-        </div>
-
-        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
-        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
-      </section>
-      <section class="section shell compartir-bloque" aria-label="Compartir">
-          <p class="compartir-bloque__lema">Si te resolvió algo, a alguien de tu equipo también le sirve.</p>
-          <div class="compartir" aria-label="Compartir esta página">
-            <span class="compartir__titulo">Compartir</span>
-            <a href="https://wa.me/?text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada%3A%20https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"/></svg></a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F" target="_blank" rel="noopener" aria-label="Compartir en Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"/></svg></a>
-            <a href="https://t.me/share/url?url=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada" target="_blank" rel="noopener" aria-label="Compartir en Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"/></svg></a>
-            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada" target="_blank" rel="noopener" aria-label="Compartir en X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
-            <a href="mailto:?subject=Una%20herramienta%20gratis%20que%20resuelve%20esto%20en%20segundos&amp;body=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada%3A%20https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F%0D%0A%0D%0AEncontrado%20en%20lienzo.tools" aria-label="Compartir por correo" title="Correo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 7 9-7"/></svg></a>
-            <button type="button" data-compartir-copiar aria-label="Copiar el enlace" title="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
-          </div>
-        </section>
-    </main>
+<h2 id="faq">Preguntas frecuentes</h2>
+<details class="faq-item" name="faq" open="">
+<summary><h3>¿Se sube mi contenido a algún servidor?</h3></summary>
+<p>No. El código QR se genera y se dibuja completamente en tu navegador. Ni el texto que escribes ni la imagen resultante viajan por la red en ningún momento.</p>
+</details>
+<details class="faq-item" name="faq">
+<summary><h3>¿Los códigos QR caducan?</h3></summary>
+<p>No, nunca. Un código QR de contenido directo (como estos, sin acortador ni redirección) es solo una forma de guardar el texto: mientras el texto siga siendo válido (por ejemplo, mientras la URL exista) el código funciona para siempre, sin fecha de vencimiento.</p>
+</details>
+<details class="faq-item" name="faq">
+<summary><h3>¿Puedo usar el código en un proyecto comercial?</h3></summary>
+<p>Sí. El código que generas es tuyo, para el uso que necesites, comercial incluido. No hay marca de agua ni ninguna condición añadida sobre el resultado.</p>
+</details>
+<details class="faq-item" name="faq">
+<summary><h3>¿Cuánto texto puedo meter en un código QR?</h3></summary>
+<p>Varios miles de caracteres si el contenido es solo texto o números, algo menos si mezcla mayúsculas, minúsculas y símbolos. Para un uso normal (una URL, una frase, un dato de contacto) nunca vas a acercarte al límite.</p>
+</details>
+<details class="faq-item" name="faq">
+<summary><h3>¿Por qué mi lector no reconoce el código?</h3></summary>
+<p>Casi siempre es por falta de margen en blanco alrededor (la «zona de silencio») o por un color de bajo contraste entre el código y el fondo. Esta herramienta ya deja el margen correcto; si personalizas los colores, mantén el fondo claro y el código oscuro.</p>
+</details>
+<details class="faq-item" name="faq">
+<summary><h3>¿Necesito una app especial para leer el código?</h3></summary>
+<p>No. La cámara nativa de cualquier teléfono moderno (iPhone desde iOS 11, Android desde la versión 9 con Google Lens integrado) lee códigos QR sin instalar nada.</p>
+</details>
+</div>
+<div aria-label="Anuncios" class="ad-slot" role="complementary">Anuncios</div>
+<!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
+</section>
+<section aria-label="Compartir" class="section shell compartir-bloque">
+<p class="compartir-bloque__lema">Si te resolvió algo, a alguien de tu equipo también le sirve.</p>
+<div aria-label="Compartir esta página" class="compartir">
+<span class="compartir__titulo">Compartir</span>
+<a aria-label="Compartir en WhatsApp" href="https://wa.me/?text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada%3A%20https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F" rel="noopener" target="_blank" title="WhatsApp"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"></path></svg></a>
+<a aria-label="Compartir en Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F" rel="noopener" target="_blank" title="Facebook"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"></path></svg></a>
+<a aria-label="Compartir en Telegram" href="https://t.me/share/url?url=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada" rel="noopener" target="_blank" title="Telegram"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"></path></svg></a>
+<a aria-label="Compartir en X" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada" rel="noopener" target="_blank" title="X"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"></path></svg></a>
+<a aria-label="Compartir por correo" href="mailto:?subject=Una%20herramienta%20gratis%20que%20resuelve%20esto%20en%20segundos&amp;body=%C2%BFConoces%20a%20alguien%20que%20necesita%20esto%3F%20Generador%20de%20c%C3%B3digo%20QR%20gratis%20online%2C%20sin%20registro%2C%20sin%20instalar%20nada%3A%20https%3A%2F%2Flienzo.tools%2Fherramientas%2Fqr%2F%0D%0A%0D%0AEncontrado%20en%20lienzo.tools" title="Correo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="15" rx="2.5" width="19" x="2.5" y="4.5"></rect><path d="m3 6 9 7 9-7"></path></svg></a>
+<button aria-label="Copiar el enlace" data-compartir-copiar="" title="Copiar enlace" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg></button>
+</div>
+</section>
+</main>
 
     <footer class="site-footer">
       <div class="shell">
@@ -473,9 +452,9 @@
     <script src="/js/site.js?v=b20ebe58b7cf" defer></script>
     <script src="/js/mi-lienzo.js?v=4364bb214cd7" defer></script>
     <script src="js/vendor/qrcode-generator.js" defer></script>
-    <script src="/js/estudio.js?v=2026090504" defer></script>
+
     <script src="js/qr-core.js?v=20261009logo2" defer></script>
     <script src="js/qr-logo.js?v=20261009logo2" defer></script>
     <script src="js/qr-generador.js?v=20261009logo2" defer></script>
-  </body>
+  <script src="/js/editor-workspace.js?v=67b2fed160fa" defer></script></body>
 </html>

@@ -41,14 +41,18 @@
   }
   function reveal(workspace) {
     if (workspace.dataset.editorFocusAnchor !== 'workspace') return;
-    if (window.innerWidth >= 960 || workspace.dataset.editorNatural === 'true') return;
+    if (workspace.dataset.editorNatural === 'true') return;
     const preview = workspace.querySelector('[data-editor-preview]');
     if (!preview) return;
     const rect = preview.getBoundingClientRect();
     const inset = Number.parseFloat(getComputedStyle(workspace).getPropertyValue('--editor-header-height')) || 0;
     const height = window.visualViewport?.height || window.innerHeight;
-    const visible = Math.max(0, Math.min(rect.bottom, height) - Math.max(rect.top, inset));
-    if (visible >= Math.min(rect.height, height - inset) * .85) return;
+    const visibleHeight = bounds => Math.max(0, Math.min(bounds.bottom, height) - Math.max(bounds.top, inset));
+    const panelVisible = panels(workspace).filter(panel => !panel.hidden).every(panel => {
+      const bounds = panel.getBoundingClientRect();
+      return visibleHeight(bounds) >= Math.min(160, bounds.height, height - inset);
+    });
+    if (visibleHeight(rect) >= Math.min(rect.height, height - inset) * .85 && panelVisible) return;
     window.scrollTo({top:Math.max(0, workspace.getBoundingClientRect().top + window.scrollY - inset - 12), behavior:'instant'});
   }
   let scheduled = false;

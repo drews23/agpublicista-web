@@ -43,6 +43,7 @@ function walk(node,parent,edits){
 const reports=[];
 // These files already contain their own ES/en-US labels. Never translate a
 // shared runtime or copy it into an English-only parallel implementation.
+const sharedEditorWorkspaceAssets=new Set(['/css/editor-workspace.css','/css/editor-workspace-adapters.css','/js/editor-workspace.js']);
 const sharedMotionStudioAssets=new Set([
  '/codigo-web/animaciones/js/motion-engine.js',
  '/codigo-web/animaciones/js/studio-controller.js',
@@ -61,7 +62,7 @@ const sharedControlStudioAssets=new Set([
  '/codigo-web/componentes/botones/css/control-studio.css',
 ]);
 for(const [src,dest]of Object.entries(jobs)){
- if(sharedMotionStudioAssets.has(src)||sharedLoadingStudioAssets.has(src)||sharedControlStudioAssets.has(src))continue;
+ if(sharedEditorWorkspaceAssets.has(src)||sharedMotionStudioAssets.has(src)||sharedLoadingStudioAssets.has(src)||sharedControlStudioAssets.has(src))continue;
  let code=fs.readFileSync(path.join(root,src),'utf8'),edits=[];
  walk(parse(code),null,edits);
  for(const e of edits.sort((a,b)=>b.start-a.start))code=code.slice(0,e.start)+e.value+code.slice(e.end);

@@ -18,6 +18,11 @@ from bs4 import BeautifulSoup
 
 
 ROOT = Path(__file__).resolve().parents[1]
+import importlib.util as _editor_importlib
+_editor_spec = _editor_importlib.spec_from_file_location("lienzo_editor_adapters", ROOT / "scripts/editor_workspace_adapters.py")
+_editor_adapter = _editor_importlib.module_from_spec(_editor_spec)
+_editor_spec.loader.exec_module(_editor_adapter)
+
 PAGES = {
     "es": ROOT / "codigo-web/animaciones/index.html",
     "en": ROOT / "en/code/animations/index.html",
@@ -230,7 +235,8 @@ def build_page(raw: str, lang: str) -> str:
     raw = re.sub(r'<script\b[^>]*\bsrc\s*=\s*([\'"]).*?\1[^>]*>\s*</script>', strip_script, raw, flags=re.S | re.I)
     scripts = "".join(f'<script src="{asset_url(route)}" defer></script>' for route in ASSETS[1:])
     raw = raw.replace("</body>", scripts + "</body>", 1)
-    return re.sub(r"(?m)^[ \t]+$", "", update_metadata(raw, lang))
+    raw = _editor_adapter.enhance_document(update_metadata(raw, lang), "motion", lang)
+    return re.sub(r"(?m)^[ \t]+$", "", raw)
 
 
 # Public integration hook used by the guarded English builders.

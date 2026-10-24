@@ -5,6 +5,11 @@ from bs4 import BeautifulSoup
 import argparse, hashlib, html, importlib.util, json, re
 
 ROOT = Path(__file__).resolve().parents[1]
+import importlib.util as _editor_importlib
+_editor_spec = _editor_importlib.spec_from_file_location("lienzo_editor_adapters", ROOT / "scripts/editor_workspace_adapters.py")
+_editor_adapter = _editor_importlib.module_from_spec(_editor_spec)
+_editor_spec.loader.exec_module(_editor_adapter)
+
 PAGES = {'es': ROOT/'codigo-web/componentes/botones/index.html', 'en': ROOT/'en/code/components/buttons/index.html'}
 BASE_CSS = '/codigo-web/componentes/carga/css/loading-studio.css'
 ASSETS = ('/codigo-web/componentes/botones/css/control-studio.css', '/codigo-web/componentes/botones/js/control-runtime.js', '/codigo-web/componentes/botones/js/control-engine.js', '/codigo-web/componentes/botones/js/control-controller.js')
@@ -146,7 +151,8 @@ def build_page(raw,lang):
         return '' if node and urlsplit(node.get('src','')).path in old else match.group()
     raw=re.sub(r'<script\b[^>]*\bsrc\s*=\s*([\'"]).*?\1[^>]*>\s*</script>',strip_script,raw,flags=re.S|re.I)
     raw=raw.replace('</body>',''.join(f'<script src="{asset(x)}" defer></script>' for x in ASSETS[1:])+'</body>',1)
-    return re.sub(r'(?m)^[ \t]+$','',update_metadata(raw,lang))
+    raw = _editor_adapter.enhance_document(update_metadata(raw, lang), "control", lang)
+    return re.sub(r"(?m)^[ \t]+$", "", raw)
 
 render_page=build_page
 

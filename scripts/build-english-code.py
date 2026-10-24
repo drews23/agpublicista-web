@@ -12,6 +12,7 @@ import importlib.util, json, re, html, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 CONTENT=ROOT/'scripts/english-content'
 REPORT=ROOT/'_historial_chat/2026-10-10-english-seo'
+EDITOR_WORKSPACE_SHARED_ASSETS = frozenset({'/css/editor-workspace.css', '/css/editor-workspace-adapters.css', '/js/editor-workspace.js'})
 # CSS Motion Studio owns both languages in one shared runtime and dedicated view.
 MOTION_STUDIO_SHARED_ASSETS=frozenset({
  '/codigo-web/animaciones/js/motion-engine.js',
@@ -207,7 +208,7 @@ def build():
    src=urljoin(es,x['src']);path=urlsplit(src).path
    if 'googlesyndication' in src or path in ['/js/site.js','/js/mi-lienzo.js']:continue
    mapped=ASSETS.get(path,remap(src,es));scripts.append(f'<script src="{mapped}" defer></script>')
-   if path not in ['/js/estudio.js','/js/color-engine.js'] and path not in MOTION_STUDIO_SHARED_ASSETS and path not in LOADING_STUDIO_SHARED_ASSETS and path not in CONTROL_STUDIO_SHARED_ASSETS:jsmap[path]=urlsplit(mapped).path
+   if path not in ['/js/estudio.js','/js/color-engine.js'] and path not in MOTION_STUDIO_SHARED_ASSETS and path not in LOADING_STUDIO_SHARED_ASSETS and path not in CONTROL_STUDIO_SHARED_ASSETS and path not in EDITOR_WORKSPACE_SHARED_ASSETS:jsmap[path]=urlsplit(mapped).path
   top=BeautifulSoup(base.theme_logo(base.header()),'html.parser');switch=top.select_one('.language-switch');switch['href']=es;switch['aria-label']='Cambiar a español'
   canonical=base.ORIGIN+en
   schema={'@context':'https://schema.org','@type':'WebApplication' if es=='/mi-lienzo/' or '/componentes/' not in es and es!='/codigo-web/' else 'CollectionPage','name':title,'url':canonical,'description':desc,'inLanguage':'en-US'}
