@@ -11,6 +11,30 @@ import importlib.util, json, re, shutil, hashlib, html
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT/'scripts/english-content'
 REPORT = ROOT/'_historial_chat/2026-10-10-english-seo'
+# These bilingual Studio assets are intentionally shared by both hub routes.
+# Do not create translated copies or derive the English hub from Spanish chrome.
+AUDIO_STUDIO_SHARED_ASSETS = frozenset({
+ 'herramientas/audio/css/studio.css',
+ 'herramientas/audio/js/studio-engine.js',
+ 'herramientas/audio/js/studio-editor.js',
+ 'herramientas/audio/js/studio-worker.js',
+})
+
+def refresh_audio_studio_english():
+ """Refresh only the specialized English hub, retaining its current page chrome.
+
+ For Audio Studio-only work use ``python scripts/audio-studio-view.py --write``
+ instead of this broad tools pipeline or its historical finalizer.
+ """
+ target=ROOT/'en/tools/audio/index.html'
+ if not target.is_file():
+  raise FileNotFoundError('Audio Studio requires the existing English hub as its chrome source.')
+ current=target.read_text(encoding='utf-8')
+ studio_spec=importlib.util.spec_from_file_location('lienzo_audio_studio_view',ROOT/'scripts/audio-studio-view.py')
+ studio=importlib.util.module_from_spec(studio_spec);studio_spec.loader.exec_module(studio)
+ rendered=studio.render_page(current,'en')
+ if rendered!=current:target.write_text(rendered,encoding='utf-8',newline='\n')
+
 spec = importlib.util.spec_from_file_location('templates', ROOT/'scripts/build-english-templates.py')
 base = importlib.util.module_from_spec(spec); spec.loader.exec_module(base)
 NAMES = {
@@ -91,12 +115,17 @@ def guide(key):
  return f'<section class="section"><div class="shell"><h2>{heading}</h2><p>{body}</p><details><summary>{q}</summary><p>{a}</p></details><p><a href="/en/tools/">Explore all tools</a> · <a href="/en/privacy/">Privacy</a> · <a href="/en/third-party-licenses/">Third-party licenses</a></p></div></section>'
 def build():
  REPORT.mkdir(parents=True,exist_ok=True)
+ preserve_audio_studio=False
  originals={str(p.relative_to(ROOT)).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'herramientas').rglob('*') if p.is_file()}
  snapshot=REPORT/'phase-four-spanish-files.json'
  if not snapshot.exists():snapshot.write_text(json.dumps(originals,indent=2),encoding='utf-8')
  for key,title in NAMES.items():
   es=('/herramientas/'+key+'/').replace('//','/');en=ROUTES[es]
-  source=ROOT/es.strip('/')/'index.html';soup=BeautifulSoup(source.read_text(encoding='utf-8'),'html.parser');main=soup.main
+  source=ROOT/es.strip('/')/'index.html';source_html=source.read_text(encoding='utf-8')
+  if key=='audio' and 'data-audio-studio' in source_html:
+   preserve_audio_studio=True
+   continue
+  soup=BeautifulSoup(source_html,'html.parser');main=soup.main
   # Tool dialogs can live outside main. Keep their IDs and full interaction markup.
   for extra in list(soup.body.find_all(recursive=False)):
    if extra.name in ['aside','dialog'] or (extra.name=='div' and extra.get('id')=='sheet-backdrop'):main.append(extra.extract())
@@ -164,7 +193,9 @@ def build():
  # Copy assets with the same relative dependency structure. JS localization is a separate guarded pass.
  for p in (ROOT/'herramientas').rglob('*'):
   if not p.is_file() or p.name=='index.html' or 'iconos3d' in p.parts:continue
-  relative=p.relative_to(ROOT).as_posix();mapped='/'.join(SEGMENTS.get(x,x) for x in relative.split('/'))
+  relative=p.relative_to(ROOT).as_posix()
+  if relative in AUDIO_STUDIO_SHARED_ASSETS:continue
+  mapped='/'.join(SEGMENTS.get(x,x) for x in relative.split('/'))
   dest=ROOT/mapped;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(p,dest)
  shutil.copyfile(ROOT/'js/estudio.js',ROOT/'en/assets/estudio.js')
  # Keep the original compact data shape, sequence ordering, and skin-tone variants.
@@ -188,6 +219,7 @@ def build():
  (REPORT/'tool-html-missing.txt').write_text('\n'.join(sorted(missing)),encoding='utf-8')
  (CONTENT/'tool-routes.json').write_text(json.dumps(ROUTES,indent=2),encoding='utf-8')
  (CONTENT/'tool-phrases.json').write_text(json.dumps(TEXT,ensure_ascii=False,indent=2),encoding='utf-8')
+ if preserve_audio_studio:refresh_audio_studio_english()
  allowed={x for x in (CONTENT/'tool-html-allowlist.txt').read_text(encoding='utf-8').splitlines() if x and not x.startswith('#')}
  unreviewed=sorted(missing-allowed)
  print(json.dumps({'pages':len(NAMES),'reviewed_unchanged_strings':len(missing),'unreviewed_strings':unreviewed},ensure_ascii=False))

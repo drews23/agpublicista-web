@@ -150,39 +150,129 @@ window.LienzoAudio = (() => {
     return candidatos.find((m) => MediaRecorder.isTypeSupported(m)) || null;
   }
 
-  function codificarComprimido(ctx, buffer, mimeType, onProgreso) {
+  function codificarComprimido(ctx, buffer, mimeType, onProgreso, opciones = {}) {
     return new Promise((resolve, reject) => {
-      const destino = ctx.createMediaStreamDestination();
-      const src = ctx.createBufferSource();
-      src.buffer = buffer;
-      src.connect(destino);
-
-      const grabador = new MediaRecorder(destino.stream, { mimeType });
+      const { signal, audioBitsPerSecond } = opciones || {};
       const trozos = [];
-      grabador.ondataavailable = (e) => {
-        if (e.data.size > 0) trozos.push(e.data);
-      };
-      grabador.onerror = (e) => reject(e.error || new Error("Recorder failed"));
-      grabador.onstop = () => resolve(new Blob(trozos, { type: mimeType }));
+      let destino, src, grabador, progresoTimer, cierreTimer, limiteTimer;
+      let terminado = false;
+      let detencionSolicitada = false;
+      let inicio = 0;
 
-      const inicio = ctx.currentTime;
-      // setTimeout y no rAF: rAF se congela con la pestaña en segundo plano
-      // y la exportacion seguiria sin barra de progreso.
-      const avisar = () => {
-        if (grabador.state !== "recording") return;
-        const avance = Math.min(1, (ctx.currentTime - inicio) / buffer.duration);
-        if (onProgreso) onProgreso(avance);
-        if (avance < 1) setTimeout(avisar, 200);
+      const limpiar = () => {
+        clearTimeout(progresoTimer);
+        clearTimeout(cierreTimer);
+        clearTimeout(limiteTimer);
+        if (signal) signal.removeEventListener("abort", cancelar);
+        if (grabador) {
+          grabador.ondataavailable = grabador.onerror = grabador.onstop = null;
+          try { if (grabador.state !== "inactive") grabador.stop(); } catch (_) { /* Ya detenido. */ }
+        }
+        if (src) {
+          src.onended = null;
+          try { src.stop(); } catch (_) { /* Puede no haber empezado. */ }
+          try { src.disconnect(); } catch (_) { /* Ya desconectado. */ }
+        }
+        if (destino) {
+          try { destino.disconnect(); } catch (_) { /* Ya desconectado. */ }
+          destino.stream.getTracks().forEach((pista) => {
+            try { pista.stop(); } catch (_) { /* La pista ya no está disponible. */ }
+          });
+        }
+      };
+      const terminar = (error, blob) => {
+        if (terminado) return;
+        terminado = true;
+        limpiar();
+        if (error) reject(error);
+        else resolve(blob);
+      };
+      const cancelar = () => {
+        const error = new Error("Export canceled");
+        error.name = "AbortError";
+        terminar(error);
+      };
+      const notificar = (avance) => {
+        try {
+          if (onProgreso) onProgreso(avance);
+        } catch (error) { terminar(error); }
+        return !terminado;
       };
 
-      grabador.start();
-      src.start(0);
-      setTimeout(avisar, 200);
-      src.onended = () => {
-        // Pequeño margen: algunos navegadores recortan el último buffer si
-        // se detiene el grabador en el mismo tick que "ended".
-        setTimeout(() => grabador.stop(), 60);
-      };
+      try {
+        if (signal && signal.aborted) { cancelar(); return; }
+        if (!buffer || !Number.isFinite(buffer.duration) || buffer.duration <= 0) {
+          throw new Error("The audio has no valid duration");
+        }
+        if (!Number.isInteger(buffer.numberOfChannels) || buffer.numberOfChannels < 1) {
+          throw new Error("The audio has no valid channel count");
+        }
+        if (buffer.numberOfChannels > 2) {
+          throw new Error("Compressed export supports mono or stereo. Choose WAV for multichannel audio.");
+        }
+        if (ctx.state === "closed") throw new Error("The audio engine is closed");
+        if (signal) signal.addEventListener("abort", cancelar, { once: true });
+        // El margen permite vaciar el codificador y absorber la latencia del contexto.
+        const latencia = Math.max(0, Number(ctx.baseLatency) || 0) + Math.max(0, Number(ctx.outputLatency) || 0);
+        const margenMs = Math.max(100, Math.min(2000, Math.ceil(latencia * 1000) + 60));
+        limiteTimer = setTimeout(() => terminar(new Error("Export did not finish. Keep this tab active and try again.")),
+          Math.min(2147483647, Math.ceil(buffer.duration * 1000) + margenMs + 15000));
+
+        const iniciar = () => {
+          if (terminado) return;
+          try {
+            if (ctx.state !== "running") throw new Error("The audio engine could not be started");
+            destino = ctx.createMediaStreamDestination();
+            destino.channelCount = buffer.numberOfChannels;
+            destino.channelCountMode = "explicit";
+            src = ctx.createBufferSource();
+            src.buffer = buffer;
+            src.connect(destino);
+            const ajustes = { mimeType };
+            if (Number.isFinite(audioBitsPerSecond) && audioBitsPerSecond > 0) ajustes.audioBitsPerSecond = audioBitsPerSecond;
+            grabador = new MediaRecorder(destino.stream, ajustes);
+            grabador.ondataavailable = (evento) => {
+              if (!terminado && evento.data && evento.data.size > 0) trozos.push(evento.data);
+            };
+            grabador.onerror = (evento) => terminar(evento.error || new Error("Recorder failed"));
+            grabador.onstop = () => {
+              if (terminado) return;
+              if (!detencionSolicitada || !trozos.length) {
+                terminar(new Error("Export was interrupted or produced no audio"));
+                return;
+              }
+              // El navegador puede elegir un MIME más específico que el solicitado.
+              const tipoReal = grabador.mimeType || trozos.find((trozo) => trozo.type)?.type || mimeType;
+              const blob = new Blob(trozos, { type: tipoReal });
+              if (notificar(1)) terminar(null, blob);
+            };
+            src.onended = () => {
+              if (terminado || detencionSolicitada || cierreTimer !== undefined) return;
+              cierreTimer = setTimeout(() => {
+                if (terminado) return;
+                try {
+                  detencionSolicitada = true;
+                  grabador.stop();
+                } catch (error) { terminar(error); }
+              }, margenMs);
+            };
+            const avisar = () => {
+              if (terminado || grabador.state !== "recording") return;
+              // El reloj del audio evita un progreso ficticio si el contexto se suspende.
+              const avance = Math.max(0, Math.min(0.999, (ctx.currentTime - inicio) / buffer.duration));
+              if (notificar(avance)) progresoTimer = setTimeout(avisar, 200);
+            };
+            grabador.start();
+            if (terminado) return;
+            inicio = ctx.currentTime;
+            src.start(inicio);
+            if (!terminado && notificar(0)) progresoTimer = setTimeout(avisar, 200);
+          } catch (error) { terminar(error); }
+        };
+        // Solicitar resume en esta misma llamada conserva la activación del usuario.
+        if (ctx.state !== "running") Promise.resolve(ctx.resume()).then(iniciar, terminar);
+        else iniciar();
+      } catch (error) { terminar(error); }
     });
   }
 

@@ -268,3 +268,12 @@ ver mapa	view map
 · pasa 4,5:1 · el enlace puede usar el acento tal cual	· passes 4.5:1 · the link can use the original accent
 · por debajo de 4,5:1 · el enlace se ajusta para contrastar	· below 4.5:1 · the link is adjusted for contrast
 » copiado. Pégalo en el <head> de tu página: esta pestaña ya lo estrena.	” copied. Paste it into your page's <head>: this tab now previews it.
+# Audio Studio compressed export lifecycle and input validation.
+Exportación cancelada	Export canceled
+El audio no tiene una duración válida	The audio has no valid duration
+El audio no tiene un número de canales válido	The audio has no valid channel count
+La exportación comprimida admite mono o estéreo. Elige WAV para audio multicanal.	Compressed export supports mono or stereo. Choose WAV for multichannel audio.
+El motor de audio está cerrado	The audio engine is closed
+La exportación no terminó. Mantén activa la pestaña e inténtalo de nuevo.	Export did not finish. Keep this tab active and try again.
+No se pudo activar el motor de audio	The audio engine could not be started
+La exportación se interrumpió o no generó audio	Export was interrupted or produced no audio

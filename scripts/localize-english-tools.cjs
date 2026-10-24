@@ -43,11 +43,19 @@ function walk(node,parent,edits){
  }
 }
 const reports=[];
+// Audio Studio already owns separate ES/en-US dictionaries in one shared runtime.
+// Translating that runtime would also translate its Spanish branch.
+const sharedAudioStudioScripts=new Set([
+ 'herramientas/audio/js/studio-engine.js',
+ 'herramientas/audio/js/studio-editor.js',
+ 'herramientas/audio/js/studio-worker.js',
+]);
 function scan(dir){
  for(const item of fs.readdirSync(dir,{withFileTypes:true})){
   const p=path.join(dir,item.name);
   if(item.isDirectory()){if(item.name!=='vendor')scan(p);continue;}
   if(!item.name.endsWith('.js'))continue;
+  if(sharedAudioStudioScripts.has(path.relative(root,p).replaceAll('\\','/')))continue;
   localize(p);
  }
 }
@@ -78,5 +86,24 @@ function localize(sourcePath){
  reports.push({source:relative,target:path.relative(root,target).replaceAll('\\','/'),translated:edits.length,sha256:crypto.createHash('sha256').update(source).digest('hex')});
 }
 scan(path.join(root,'herramientas'));localize(path.join(root,'js/estudio.js'));localize(path.join(root,'js/color-engine.js'));
+// The localized base audio helpers have just changed. Refresh only the existing
+// English Studio hub so its cache hashes match, without rebuilding its chrome.
+// Standalone hub updates: python scripts/audio-studio-view.py --write
+const audioStudioHub=path.join(root,'en/tools/audio/index.html');
+if(fs.existsSync(audioStudioHub)&&fs.readFileSync(audioStudioHub,'utf8').includes('data-audio-studio')){
+ const {spawnSync}=require('child_process');
+ const refresh=spawnSync(process.env.PYTHON||'python',['-X','utf8','-c',[
+  'import importlib.util',
+  'from pathlib import Path',
+  "p=Path('scripts/audio-studio-view.py')",
+  "s=importlib.util.spec_from_file_location('lienzo_audio_studio_view',p)",
+  'm=importlib.util.module_from_spec(s);s.loader.exec_module(m)',
+  "p=Path('en/tools/audio/index.html')",
+  "before=p.read_text(encoding='utf-8')",
+  "after=m.render_page(before,'en')",
+  "p.write_text(after,encoding='utf-8',newline='\\n') if after!=before else None",
+ ].join('\n')],{cwd:root,encoding:'utf8',windowsHide:true});
+ if(refresh.error||refresh.status!==0)throw Error('Audio Studio English refresh failed: '+(refresh.error?.message||refresh.stderr||refresh.stdout));
+}
 fs.writeFileSync(path.join(root,'_historial_chat/2026-10-10-english-seo/tool-js-localization.json'),JSON.stringify(reports,null,2));
 console.log(JSON.stringify({files:reports.length,translated:reports.reduce((n,r)=>n+r.translated,0)}));
