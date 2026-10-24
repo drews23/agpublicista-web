@@ -124,7 +124,8 @@ def build():
         source = source.replace('</head>', css+'</head>', 1)
         from catalog_copy import enhance_catalog_copy
         from home_stage import restore_stage
-        path.write_text(restore_stage(enhance_catalog_copy(source, '/en/' if en else '/'), en), encoding='utf-8')
+        from newsletter_blocks import install_home
+        path.write_text(install_home(restore_stage(enhance_catalog_copy(source, '/en/' if en else '/'), en), en), encoding='utf-8')
     print('Simplified ES and EN home sections; catalogs and individual resources untouched.')
 
 

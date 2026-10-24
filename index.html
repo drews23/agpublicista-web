@@ -993,7 +993,7 @@ main > section[aria-label="Qué es Lienzo"] p{margin:0 auto;max-width:64ch;line-
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7833516119998133"
          crossorigin="anonymous"></script>
-  <link rel="alternate" hreflang="es" href="https://lienzo.tools/"><link rel="alternate" hreflang="en" href="https://lienzo.tools/en/"><link rel="alternate" hreflang="x-default" href="https://lienzo.tools/"></head>
+  <link rel="alternate" hreflang="es" href="https://lienzo.tools/"><link rel="alternate" hreflang="en" href="https://lienzo.tools/en/"><link rel="alternate" hreflang="x-default" href="https://lienzo.tools/"><link rel="stylesheet" href="/css/newsletter.css?v=76e215c55c7f"></head>
   <body>
     <div class="glow" aria-hidden="true"></div>
 
@@ -1210,7 +1210,32 @@ main > section[aria-label="Qué es Lienzo"] p{margin:0 auto;max-width:64ch;line-
             <button type="button" data-compartir-copiar aria-label="Copiar el enlace" title="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
           </div>
         </section>
-    </main>
+    <!-- Lienzo newsletter: start -->
+<section class="newsletter shell" id="newsletter" aria-labelledby="newsletter-title">
+  <div class="newsletter__layout">
+    <div>
+      <p class="eyebrow">LIENZO / LA PRÓXIMA NOVEDAD</p>
+      <h2 class="newsletter__title" id="newsletter-title">Lo nuevo de Lienzo,<br><em>en tu correo.</em></h2>
+      <p class="newsletter__intro">Nuevas herramientas, recursos gratuitos y mejoras para tu próximo proyecto. Recibe las novedades en español.</p>
+      <ul class="newsletter__topics"><li>Nuevas herramientas</li><li>Recursos gratuitos</li><li>Mejoras útiles</li></ul><a class="newsletter__more" href="/boletin/">¿Qué voy a recibir? <span aria-hidden="true">↗</span></a>
+    </div>
+    <form class="newsletter__form" action="https://e6e844e8.sibforms.com/serve/MUIFANLGAAHwWNRexjbYaflkvFEJoIpz5rRZZl0dHMmAlf2Bo-JkkYrGuRedTaNcvj8YFZHFjD7vOOjz4uQzF4D3Xg0uaFXKQTWTYQeh1vCDNsOxxs6nXllKg5OiJWnkLfB9eyqoPJNggQkQR4ucAaynyYLqAn7cesB0hHZO-eS7YqYHE7DlGSsFWxndxSFACGDvwNZt8xt0tC7Oxg==" method="post" accept-charset="UTF-8" aria-label="Suscripción al boletín de Lienzo">
+      <fieldset class="newsletter__fields">
+      <label for="newsletter-email">Tu correo electrónico</label>
+      <input class="newsletter__email" id="newsletter-email" type="email" name="EMAIL" autocomplete="email" inputmode="email" maxlength="254" placeholder="tu@ejemplo.com" aria-describedby="newsletter-note" required>
+      <label class="newsletter__consent" for="newsletter-consent"><input id="newsletter-consent" type="checkbox" name="OPT_IN" value="1" required><span>Quiero recibir por correo las novedades de Lienzo sobre herramientas, recursos y mejoras. He leído la <a href="/privacidad/#boletin">política de privacidad</a>.</span></label>
+      <div class="newsletter__trap" aria-hidden="true"><label for="newsletter-check">Leave this field empty</label><input id="newsletter-check" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off"></div>
+      <input type="hidden" name="locale" value="es"><input type="hidden" name="html_type" value="simple">
+      <button class="newsletter__submit" type="submit"><span>Avísame de lo nuevo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button>
+      </fieldset>
+      <div class="newsletter__status" data-newsletter-status role="status" aria-live="polite" tabindex="-1" hidden></div>
+      <p class="newsletter__note" id="newsletter-note"><strong>Primero, confirma tu correo.</strong> Brevo gestiona la suscripción y envía el correo de confirmación. Sin frecuencia fija. Puedes darte de baja cuando quieras.</p>
+      <noscript><p class="newsletter__note">Sin JavaScript, al enviar verás la respuesta de confirmación de Brevo en esta pestaña.</p></noscript>
+    </form>
+  </div>
+</section>
+<!-- Lienzo newsletter: end -->
+</main>
 
     <footer class="site-footer">
       <div class="shell">
@@ -1230,7 +1255,7 @@ main > section[aria-label="Qué es Lienzo"] p{margin:0 auto;max-width:64ch;line-
           </div>
           <div>
             <h4>Explora</h4>
-            <ul>
+            <ul><li><a data-newsletter-footer href="/boletin/">Boletín de novedades</a></li>
               <li><a href="/herramientas/">Herramientas</a></li>
               <li><a href="/codigo-web/">Código web</a></li>
               <li><a href="/blog/">Blog</a></li>
@@ -1265,5 +1290,5 @@ main > section[aria-label="Qué es Lienzo"] p{margin:0 auto;max-width:64ch;line-
     <script src="/js/hero-eclipse.js?v=b2f278aa6532" defer></script>
     <script src="/js/site.js?v=419967f684ea" defer></script>
     <script src="/js/mi-lienzo.js?v=4364bb214cd7" defer></script>
-  <script src="/js/home-discovery.js?v=4f2b0a8e7d9a" defer></script></body>
+  <script src="/js/home-discovery.js?v=4f2b0a8e7d9a" defer></script><script src="/js/newsletter.js?v=d10f5d7c468b" defer></script></body>
 </html>
