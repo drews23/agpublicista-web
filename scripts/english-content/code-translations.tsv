@@ -573,7 +573,7 @@ Nueve patrones editables con estados, progreso accesible y exportación HTML, CS
 Rail lateral que se expande, menú de app con grupos, cajón con popover, barra inferior móvil y pestañas con indicador.	Expanding sidebar, grouped app menu, popover drawer, mobile bottom bar, and tabs with an indicator.
 Glassmorphism con backdrop-filter, neón por capas y fondos aurora.	Glassmorphism with backdrop-filter, layered neon, and aurora backgrounds.
 Cuatro bento grids con grid-template-areas y colapso móvil resuelto.	Four bento grids using grid-template-areas with responsive mobile layouts.
-Botones con estados de verdad, switch, chips, segmentado y pestañas con teclado.	Buttons with interactive states, switches, chips, segmented controls, and keyboard-accessible tabs.
+Personaliza ocho controles nativos, prueba sus estados y exporta HTML, CSS y JavaScript completos.	Customize eight native controls, test their states, and export complete HTML, CSS, and JavaScript.
 Perfil, precio, testimonio, imagen con velo y fila de descarga.	Profile, pricing, testimonial, image overlay, and download cards.
 Etiqueta flotante, buscador, contador, checkbox, radios-tarjeta y range.	Floating labels, search, counters, checkboxes, card radio buttons, and range inputs.
 Métricas, sparkline sin librería, progreso, lista con estados, skeleton y tabla.	Metrics, a library-free sparkline, progress, status rows, skeletons, and a table.

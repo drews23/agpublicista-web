@@ -24,6 +24,22 @@ LOADING_STUDIO_SHARED_ASSETS=frozenset({
  '/codigo-web/componentes/carga/js/loading-controller.js',
  '/codigo-web/componentes/carga/css/loading-studio.css',
 })
+CONTROL_STUDIO_SHARED_ASSETS=frozenset({
+ '/codigo-web/componentes/botones/js/control-engine.js',
+ '/codigo-web/componentes/botones/js/control-runtime.js',
+ '/codigo-web/componentes/botones/js/control-controller.js',
+ '/codigo-web/componentes/botones/css/control-studio.css',
+})
+
+def refresh_control_studio_english():
+ """Refresh only the independent English Control Studio with its own chrome."""
+ target=ROOT/'en/code/components/buttons/index.html'
+ if not target.is_file():raise FileNotFoundError('Control Studio requires its existing English hub.')
+ current=target.read_text(encoding='utf8')
+ control_spec=importlib.util.spec_from_file_location('lienzo_control_studio_view',ROOT/'scripts/control-studio-view.py')
+ control=importlib.util.module_from_spec(control_spec);control_spec.loader.exec_module(control)
+ rendered=control.build_page(current,'en')
+ if rendered!=current:target.write_text(rendered,encoding='utf8',newline='\n')
 
 def refresh_motion_studio_english():
  """Refresh only the current English hub, retaining its own page chrome.
@@ -85,7 +101,7 @@ def tr(value):
 def remap(value,es):
  if value.startswith(('#','mailto:','data:','http')):return value
  path=urljoin(es,value);parts=urlsplit(path)
- if parts.path in MOTION_STUDIO_SHARED_ASSETS or parts.path in LOADING_STUDIO_SHARED_ASSETS:return path
+ if parts.path in MOTION_STUDIO_SHARED_ASSETS or parts.path in LOADING_STUDIO_SHARED_ASSETS or parts.path in CONTROL_STUDIO_SHARED_ASSETS:return path
  if parts.path in ROUTES:return ROUTES[parts.path]+('?' + parts.query if parts.query else '')+('#'+parts.fragment if parts.fragment else '')
  if parts.path.startswith('/codigo-web/') and '/js/' in parts.path:
   return PAGES.get(es,es)+'js/'+parts.path.split('/js/')[-1]
@@ -106,6 +122,7 @@ def build():
  REPORT.mkdir(parents=True,exist_ok=True)
  preserve_motion_studio=False
  preserve_loading_studio=False
+ preserve_control_studio=False
  reports=[];jsmap={}
  snapshot={}
  for p in [*(ROOT/'codigo-web').rglob('*'),*(ROOT/'mi-lienzo').rglob('*'),ROOT/'js/mi-lienzo.js',ROOT/'js/codigo-web.js']:
@@ -123,6 +140,11 @@ def build():
    loading_target=ROOT/'en/code/components/loading/index.html'
    if 'data-loading-studio' in raw or (loading_target.is_file() and 'data-loading-studio' in loading_target.read_text(encoding='utf8')):
     preserve_loading_studio=True
+    continue
+  if es=='/codigo-web/componentes/botones/':
+   control_target=ROOT/'en/code/components/buttons/index.html'
+   if 'data-control-studio' in raw or (control_target.is_file() and 'data-control-studio' in control_target.read_text(encoding='utf8')):
+    preserve_control_studio=True
     continue
   s=BeautifulSoup(raw,'html.parser');main=s.main
   before=hashlib.sha256(re.search(r'<main\b.*?</main>',raw,re.S).group().encode()).hexdigest()
@@ -185,7 +207,7 @@ def build():
    src=urljoin(es,x['src']);path=urlsplit(src).path
    if 'googlesyndication' in src or path in ['/js/site.js','/js/mi-lienzo.js']:continue
    mapped=ASSETS.get(path,remap(src,es));scripts.append(f'<script src="{mapped}" defer></script>')
-   if path not in ['/js/estudio.js','/js/color-engine.js'] and path not in MOTION_STUDIO_SHARED_ASSETS and path not in LOADING_STUDIO_SHARED_ASSETS:jsmap[path]=urlsplit(mapped).path
+   if path not in ['/js/estudio.js','/js/color-engine.js'] and path not in MOTION_STUDIO_SHARED_ASSETS and path not in LOADING_STUDIO_SHARED_ASSETS and path not in CONTROL_STUDIO_SHARED_ASSETS:jsmap[path]=urlsplit(mapped).path
   top=BeautifulSoup(base.theme_logo(base.header()),'html.parser');switch=top.select_one('.language-switch');switch['href']=es;switch['aria-label']='Cambiar a español'
   canonical=base.ORIGIN+en
   schema={'@context':'https://schema.org','@type':'WebApplication' if es=='/mi-lienzo/' or '/componentes/' not in es and es!='/codigo-web/' else 'CollectionPage','name':title,'url':canonical,'description':desc,'inLanguage':'en-US'}
@@ -210,5 +232,6 @@ def build():
  p.write_text(xml,encoding='utf8')
  if preserve_motion_studio:refresh_motion_studio_english()
  if preserve_loading_studio:refresh_loading_studio_english()
+ if preserve_control_studio:refresh_control_studio_english()
  print(json.dumps({'pages':len(PAGES),'missing':len(missing)}))
 if __name__=='__main__':build()

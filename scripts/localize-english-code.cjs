@@ -54,8 +54,14 @@ const sharedLoadingStudioAssets=new Set([
  '/codigo-web/componentes/carga/js/loading-controller.js',
  '/codigo-web/componentes/carga/css/loading-studio.css',
 ]);
+const sharedControlStudioAssets=new Set([
+ '/codigo-web/componentes/botones/js/control-engine.js',
+ '/codigo-web/componentes/botones/js/control-runtime.js',
+ '/codigo-web/componentes/botones/js/control-controller.js',
+ '/codigo-web/componentes/botones/css/control-studio.css',
+]);
 for(const [src,dest]of Object.entries(jobs)){
- if(sharedMotionStudioAssets.has(src)||sharedLoadingStudioAssets.has(src))continue;
+ if(sharedMotionStudioAssets.has(src)||sharedLoadingStudioAssets.has(src)||sharedControlStudioAssets.has(src))continue;
  let code=fs.readFileSync(path.join(root,src),'utf8'),edits=[];
  walk(parse(code),null,edits);
  for(const e of edits.sort((a,b)=>b.start-a.start))code=code.slice(0,e.start)+e.value+code.slice(e.end);
@@ -109,6 +115,23 @@ if(fs.existsSync(loadingStudioHub)&&fs.readFileSync(loadingStudioHub,'utf8').inc
   "p.write_text(after,encoding='utf-8',newline='\\n') if after!=before else None",
  ].join('\n')],{cwd:root,encoding:'utf8',windowsHide:true});
  if(refresh.error||refresh.status!==0)throw Error('Loading Studio English refresh failed: '+(refresh.error?.message||refresh.stderr||refresh.stdout));
+}
+// Each studio owns its bilingual view. Never run AST translation on its runtime.
+const controlStudioHub=path.join(root,'en/code/components/buttons/index.html');
+if(fs.existsSync(controlStudioHub)&&fs.readFileSync(controlStudioHub,'utf8').includes('data-control-studio')){
+ const {spawnSync}=require('child_process');
+ const refresh=spawnSync(process.env.PYTHON||'python',['-X','utf8','-c',[
+  'import importlib.util',
+  'from pathlib import Path',
+  "p=Path('scripts/control-studio-view.py')",
+  "s=importlib.util.spec_from_file_location('lienzo_control_studio_view',p)",
+  'm=importlib.util.module_from_spec(s);s.loader.exec_module(m)',
+  "p=Path('en/code/components/buttons/index.html')",
+  "before=p.read_text(encoding='utf-8')",
+  "after=m.build_page(before,'en')",
+  "p.write_text(after,encoding='utf-8',newline='\\n') if after!=before else None",
+ ].join('\n')],{cwd:root,encoding:'utf8',windowsHide:true});
+ if(refresh.error||refresh.status!==0)throw Error('Control Studio English refresh failed: '+(refresh.error?.message||refresh.stderr||refresh.stdout));
 }
 fs.writeFileSync(path.join(root,'_historial_chat/2026-10-10-english-seo/code-js-localization.json'),JSON.stringify(reports,null,2));
 console.log(JSON.stringify({files:reports.length,translations:reports.reduce((n,x)=>n+x.translations,0)}));

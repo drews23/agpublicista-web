@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Botones y controles CSS: switch, tabs, chips | Lienzo</title>
-    <meta name="description" content="Botones con degradado, brillo y estado de carga; switch, chips, control segmentado y pestañas accesibles con teclado. CSS y JS listos para copiar." />
+    <title>Generador de botones y controles CSS | Lienzo</title>
+    <meta name="description" content="Personaliza ocho botones y controles nativos. Prueba estados, switches, filtros y pestañas con teclado; exporta HTML, CSS, JavaScript y proyecto JSON." />
     <link rel="canonical" href="https://lienzo.tools/codigo-web/componentes/botones/" />
     <meta name="theme-color" content="#0a0a0f" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Botones y controles: código listo para copiar" />
-    <meta property="og:description" content="Botones con degradado, brillo y estado de carga; switch, chips, control segmentado y pestañas accesibles con teclado. CSS y JS listos para copiar." />
+    <meta property="og:title" content="Generador de botones y controles CSS" />
+    <meta property="og:description" content="Personaliza ocho botones y controles nativos. Prueba estados, switches, filtros y pestañas con teclado; exporta HTML, CSS, JavaScript y proyecto JSON." />
     <meta property="og:url" content="https://lienzo.tools/codigo-web/componentes/botones/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-codigo-web-componentes-botones.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -36,117 +36,13 @@
       }, 3000);
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/site.css?v=2026090405" />
-    <link rel="stylesheet" href="../css/componentes.css?v=2026090404" />
 
-    <script type="application/ld+json">
-    {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      "@id": "https://lienzo.tools/codigo-web/componentes/botones/#page",
-      "name": "Botones y controles CSS: switch, tabs, chips",
-      "url": "https://lienzo.tools/codigo-web/componentes/botones/",
-      "description": "Botones con degradado, brillo y estado de carga; switch, chips, control segmentado y pestañas accesibles con teclado. CSS y JS listos para copiar.",
-      "inLanguage": "es",
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "Lienzo",
-        "url": "https://lienzo.tools/"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Inicio",
-          "item": "https://lienzo.tools/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Código web",
-          "item": "https://lienzo.tools/codigo-web/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Componentes CSS",
-          "item": "https://lienzo.tools/codigo-web/componentes/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Botones y controles",
-          "item": "https://lienzo.tools/codigo-web/componentes/botones/"
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Por qué esconder el input en vez de usar un div con onclick?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Porque el input trae gratis lo que el div nunca tendrá: foco con teclado, activación con espacio y enter, anuncio correcto en lectores de pantalla y participación en formularios. El CSS lo oculta a la vista (opacity: 0, 1px), no del árbol de accesibilidad."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué es :has() y qué pasa si el navegador no lo soporta?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Es el selector que permite estilar al padre según el estado de un hijo — aquí, pintar la caja cuando su input está marcado. Todos los navegadores lo soportan desde finales de 2023. En uno muy antiguo, el control seguiría funcionando; solo perdería el resaltado visual."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Las pestañas necesitan una librería?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No: el JS incluido gestiona clic, flechas del teclado, foco y atributos ARIA en unas 20 líneas. Es el patrón oficial de WAI-ARIA reducido a lo esencial."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo deshabilito uno de estos botones?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Con el atributo disabled de toda la vida, que además bloquea el foco y lo anuncia al lector de pantalla. Añade un estilo :disabled con opacidad reducida y cursor normal, y evita ocultar botones deshabilitados: es mejor que se vea que existen."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Por qué el botón de carga bloquea sus propios clics?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Para evitar el doble envío, que es el bug clásico de los formularios. La clase esta-cargando pone pointer-events: none mientras dura la operación; al terminar, el botón vuelve solo."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Puedo usar el brillo que recorre en muchos botones a la vez?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Poder puedes, pero el brillo señala novedad o importancia: si todos brillan, ninguno destaca. Úsalo en un solo elemento por vista, y ten en cuenta que la receta ya lo desactiva para quien pidió movimiento reducido."
-          }
-        }
-      ]
-    }
-  ]
-}
-    </script>
+
+
+    <link rel="stylesheet" href="/css/site.css?v=2026090405" />
+
+
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://lienzo.tools/codigo-web/componentes/botones/#page", "name": "Generador de botones y controles CSS", "url": "https://lienzo.tools/codigo-web/componentes/botones/", "description": "Personaliza ocho botones y controles nativos. Prueba estados, switches, filtros y pestañas con teclado; exporta HTML, CSS, JavaScript y proyecto JSON.", "inLanguage": "es", "isPartOf": {"@type": "WebSite", "name": "Lienzo", "url": "https://lienzo.tools/"}, "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "browserRequirements": "JavaScript enabled", "featureList": ["Eight native controls", "Keyboard tabs", "Explicit async states", "Standalone HTML export", "Versioned JSON projects"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://lienzo.tools/"}, {"@type": "ListItem", "position": 2, "name": "Código web", "item": "https://lienzo.tools/codigo-web/"}, {"@type": "ListItem", "position": 3, "name": "Componentes CSS", "item": "https://lienzo.tools/codigo-web/componentes/"}, {"@type": "ListItem", "position": 4, "name": "Botones y controles", "item": "https://lienzo.tools/codigo-web/componentes/botones/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Son controles funcionales o solo una imagen?", "acceptedAnswer": {"@type": "Answer", "text": "Son elementos nativos: button, checkbox y radio, o pestañas con botones y paneles asociados. La selección, el teclado y los estados funcionan. El evento lzc:action permite conectar el botón con tu proceso; lzc:change informa los cambios de selección."}}, {"@type": "Question", "name": "¿El botón de carga descarga o envía un archivo?", "acceptedAnswer": {"@type": "Answer", "text": "No por sí solo. La demostración es local y está identificada. Conecta tu operación al evento y usa setState para comunicar loading, success o error. No se promete una operación que no ocurrió."}}, {"@type": "Question", "name": "¿Cómo funcionan las pestañas con teclado?", "acceptedAnswer": {"@type": "Answer", "text": "Tab entra en la pestaña activa. Flecha izquierda/derecha recorre y activa los paneles; Home y End van al primero y al último. Cada panel conserva su relación ARIA. Para opciones únicas y múltiples se mantienen radios y checkboxes nativos."}}, {"@type": "Question", "name": "¿Los estados de prueba se quedan en el código?", "acceptedAnswer": {"@type": "Answer", "text": "Hover, foco y pulsado son ayudas de inspección del editor. No se exportan como estados forzados. La configuración deshabilitada y los estados explícitos del botón de carga sí se conservan. Revisa el ajuste antes de exportar."}}, {"@type": "Question", "name": "¿Puedo usar varios controles en la misma página?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. El runtime asigna identificadores y nombres de grupo independientes al montar cada componente. Carga el JavaScript una sola vez y usa LienzoControls.mount o mountAll. destroy elimina los eventos y temporizadores del componente."}}, {"@type": "Question", "name": "¿Qué incluyen la descarga y el proyecto?", "acceptedAnswer": {"@type": "Answer", "text": "El ejemplo HTML incorpora marcado, estilos y JavaScript sin CDN. También puedes descargar cada parte. El JSON conserva tus ajustes y se abre en este estudio; no es una cuenta ni sincronización en la nube. Código MIT con su aviso incluido."}}]}]}</script>
       <!-- AdSense: anuncios no personalizados en todo el tráfico -->
     <script>
       (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
@@ -156,8 +52,8 @@
   <link rel="alternate" hreflang="es" href="https://lienzo.tools/codigo-web/componentes/botones/">
 <link rel="alternate" hreflang="en" href="https://lienzo.tools/en/code/components/buttons/">
 <link rel="alternate" hreflang="x-default" href="https://lienzo.tools/codigo-web/componentes/botones/">
-<link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d"></head>
-  <body>
+<link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d"><link rel="stylesheet" href="/css/fonts.css?v=2c18780336c7"><link rel="stylesheet" href="/codigo-web/componentes/carga/css/loading-studio.css?v=0b60c4b89997"><link rel="stylesheet" href="/codigo-web/componentes/botones/css/control-studio.css?v=f5cd0dc10c32"></head>
+  <body class="control-studio-page">
     <div class="glow" aria-hidden="true"></div>
 
     <header class="site-header" data-unified-header>
@@ -174,535 +70,45 @@
       </div>
     </header>
 
-    <main>
-      <section class="section shell">
-        <nav class="breadcrumbs reveal" aria-label="Miga de pan">
-          <a href="/">Inicio</a> › <a href="/codigo-web/">Código web</a> › <a href="/codigo-web/componentes/">Componentes CSS</a> › <span>Botones y controles</span>
-        </nav>
-
-        <div class="page-head">
-          <p class="eyebrow reveal">Código listo para copiar</p>
-          <h1 class="reveal" style="--reveal-delay: 80ms">Botones y controles</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">Los controles son la parte de la interfaz que la gente toca. Estos vienen con lo que casi nunca trae un snippet: área táctil de 44 píxeles, foco visible, controles nativos debajo del maquillaje y teclado funcionando.</p>
-        </div>
-
-        <section class="lab-seccion" id="botones-base" aria-labelledby="botones-base-h">
-          <header class="lab-seccion__head">
-            <h2 id="botones-base-h">Botones</h2>
-            <p>Cuatro botones que cubren el 90 % de una interfaz: el principal, el secundario, el de brillo y el de carga. Área táctil mínima de 44px en todos.</p>
-          </header>
-          <div class="lab-galeria">
-          <article class="pieza" id="boton-degradado">
-            <div class="pieza__escenario">
-              <button class="lz-btn lz-btn--primario" type="button">Descargar pack</button>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Principal degradado</h3>
-              
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-            </div>
-            <template class="receta-css">.lz-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 44px;
-  padding: 0 1.4rem;
-  border: 0;
-  border-radius: 12px;
-  font: 600 0.95rem/1 system-ui, sans-serif;
-  cursor: pointer;
-  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
-}
-.lz-btn--primario {
-  color: #fff;
-  background: linear-gradient(135deg, #8b7bff, #5f8bff);
-  box-shadow: 0 10px 24px rgba(139, 123, 255, 0.35);
-}
-.lz-btn--primario:hover { transform: translateY(-2px); filter: brightness(1.08); }
-.lz-btn--primario:active { transform: translateY(0); }
-.lz-btn--primario:focus-visible { outline: 2px solid #c9c1ff; outline-offset: 2px; }</template>
-            <template class="receta-html">&lt;button class="lz-btn lz-btn--primario" type="button"&gt;Descargar pack&lt;/button&gt;</template>
-          </article>
-          <article class="pieza" id="boton-fantasma">
-            <div class="pieza__escenario">
-              <button class="lz-btn-fantasma" type="button">Ver detalles</button>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Secundario fantasma</h3>
-              
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-            </div>
-            <template class="receta-css">.lz-btn-fantasma {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 1.4rem;
-  border: 1px solid #3a374a;
-  border-radius: 12px;
-  background: transparent;
-  color: #e8e6f2;
-  font: 600 0.95rem/1 system-ui, sans-serif;
-  cursor: pointer;
-  transition: border-color 160ms ease, background-color 160ms ease;
-}
-.lz-btn-fantasma:hover { border-color: #8b7bff; background: rgba(139, 123, 255, 0.08); }
-.lz-btn-fantasma:focus-visible { outline: 2px solid #8b7bff; outline-offset: 2px; }</template>
-            <template class="receta-html">&lt;button class="lz-btn-fantasma" type="button"&gt;Ver detalles&lt;/button&gt;</template>
-          </article>
-          <article class="pieza" id="boton-brillo">
-            <div class="pieza__escenario">
-              <button class="lz-btn-brillo" type="button">Novedad</button>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Brillo que recorre</h3>
-              
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-            </div>
-            <template class="receta-css">.lz-btn-brillo {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 1.6rem;
-  border: 1px solid #3a374a;
-  border-radius: 999px;
-  background: #16141f;
-  color: #f4f3f8;
-  font: 600 0.95rem/1 system-ui, sans-serif;
-  cursor: pointer;
-  overflow: hidden;
-}
-.lz-btn-brillo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
-  transform: translateX(-100%);
-  transition: transform 600ms ease;
-}
-.lz-btn-brillo:hover::after { transform: translateX(100%); }
-@media (prefers-reduced-motion: reduce) {
-  .lz-btn-brillo::after { display: none; }
-}</template>
-            <template class="receta-html">&lt;button class="lz-btn-brillo" type="button"&gt;Novedad&lt;/button&gt;</template>
-          </article>
-          <article class="pieza" id="boton-carga">
-            <div class="pieza__escenario">
-              <button class="lz-btn-carga" type="button" data-lz-carga>
-                <span class="lz-btn-carga__aro" aria-hidden="true"></span>
-                <span class="lz-btn-carga__texto">Procesar</span>
-              </button>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Botón de carga</h3>
-              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
-            </div>
-            <template class="receta-css">.lz-btn-carga {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  min-height: 44px;
-  padding: 0 1.4rem;
-  border: 0;
-  border-radius: 12px;
-  background: #2c2938;
-  color: #f4f3f8;
-  font: 600 0.95rem/1 system-ui, sans-serif;
-  cursor: pointer;
-}
-.lz-btn-carga__aro {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-top-color: #fff;
-  display: none;
-}
-.lz-btn-carga.esta-cargando { opacity: 0.85; pointer-events: none; }
-.lz-btn-carga.esta-cargando .lz-btn-carga__aro {
-  display: block;
-  animation: lz-girar 700ms linear infinite;
-}
-@keyframes lz-girar { to { transform: rotate(1turn); } }</template>
-            <template class="receta-html">&lt;button class="lz-btn-carga" type="button" data-lz-carga&gt;
-  &lt;span class="lz-btn-carga__aro" aria-hidden="true"&gt;&lt;/span&gt;
-  &lt;span class="lz-btn-carga__texto"&gt;Procesar&lt;/span&gt;
-&lt;/button&gt;</template>
-            <template class="receta-js">// Simula un estado de carga de 1,6 s al hacer clic.
-document.querySelectorAll("[data-lz-carga]").forEach((btn) =&gt; {
-  btn.addEventListener("click", () =&gt; {
-    btn.classList.add("esta-cargando");
-    setTimeout(() =&gt; btn.classList.remove("esta-cargando"), 1600);
-  });
-});</template>
-          </article>
-          </div>
-        </section>
-
-        <section class="lab-seccion" id="conmutadores" aria-labelledby="conmutadores-h">
-          <header class="lab-seccion__head">
-            <h2 id="conmutadores-h">Conmutadores</h2>
-            <p>Switch y chips construidos sobre controles nativos: el input sigue ahí, accesible y con teclado; el CSS solo lo viste.</p>
-          </header>
-          <div class="lab-galeria">
-          <article class="pieza" id="switch">
-            <div class="pieza__escenario">
-              <label class="lz-switch">
-                <input type="checkbox" checked />
-                <span class="lz-switch__pista" aria-hidden="true"></span>
-                Notificaciones
-              </label>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Interruptor (switch)</h3>
-              
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-            </div>
-            <template class="receta-css">.lz-switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  color: #e8e6f2;
-  font: 500 0.95rem/1 system-ui, sans-serif;
-  cursor: pointer;
-}
-.lz-switch input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-}
-.lz-switch__pista {
-  width: 46px;
-  height: 26px;
-  border-radius: 999px;
-  background: #3a374a;
-  position: relative;
-  transition: background-color 180ms ease;
-  flex: 0 0 auto;
-}
-.lz-switch__pista::after {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #fff;
-  transition: transform 180ms ease;
-}
-.lz-switch input:checked + .lz-switch__pista { background: #35d6c8; }
-.lz-switch input:checked + .lz-switch__pista::after { transform: translateX(20px); }
-.lz-switch input:focus-visible + .lz-switch__pista {
-  outline: 2px solid #8b7bff;
-  outline-offset: 2px;
-}</template>
-            <template class="receta-html">&lt;label class="lz-switch"&gt;
-  &lt;input type="checkbox" checked /&gt;
-  &lt;span class="lz-switch__pista" aria-hidden="true"&gt;&lt;/span&gt;
-  Notificaciones
-&lt;/label&gt;</template>
-          </article>
-          <article class="pieza" id="chips">
-            <div class="pieza__escenario">
-              <div class="lz-chips" role="group" aria-label="Filtros">
-                <label class="lz-chip"><input type="checkbox" checked />SVG</label>
-                <label class="lz-chip"><input type="checkbox" />PNG</label>
-                <label class="lz-chip"><input type="checkbox" />WAV</label>
-              </div>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Chips de filtro</h3>
-              
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-            </div>
-            <template class="receta-css">.lz-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.lz-chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 0 0.95rem;
-  border: 1px solid #3a374a;
-  border-radius: 999px;
-  background: #16141f;
-  color: #cfcbdd;
-  font: 500 0.88rem/1 system-ui, sans-serif;
-  cursor: pointer;
-  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
-}
-.lz-chip input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-}
-.lz-chip:has(input:checked) {
-  border-color: #8b7bff;
-  background: rgba(139, 123, 255, 0.14);
-  color: #fff;
-}
-.lz-chip:has(input:focus-visible) {
-  outline: 2px solid #8b7bff;
-  outline-offset: 2px;
-}</template>
-            <template class="receta-html">&lt;div class="lz-chips" role="group" aria-label="Filtros"&gt;
-  &lt;label class="lz-chip"&gt;&lt;input type="checkbox" checked /&gt;SVG&lt;/label&gt;
-  &lt;label class="lz-chip"&gt;&lt;input type="checkbox" /&gt;PNG&lt;/label&gt;
-  &lt;label class="lz-chip"&gt;&lt;input type="checkbox" /&gt;WAV&lt;/label&gt;
-&lt;/div&gt;</template>
-          </article>
-          <article class="pieza" id="segmentado">
-            <div class="pieza__escenario">
-              <div class="lz-segmento" role="group" aria-label="Vista">
-                <label class="lz-segmento__opcion"><input type="radio" name="lz-seg" checked />Día</label>
-                <label class="lz-segmento__opcion"><input type="radio" name="lz-seg" />Semana</label>
-                <label class="lz-segmento__opcion"><input type="radio" name="lz-seg" />Mes</label>
-              </div>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Control segmentado</h3>
-              
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-            </div>
-            <template class="receta-css">.lz-segmento {
-  display: inline-flex;
-  padding: 4px;
-  gap: 2px;
-  border-radius: 12px;
-  background: #16141f;
-  border: 1px solid #2c2938;
-}
-.lz-segmento__opcion {
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 0 1rem;
-  border-radius: 9px;
-  color: #cfcbdd;
-  font: 600 0.88rem/1 system-ui, sans-serif;
-  cursor: pointer;
-  transition: background-color 160ms ease, color 160ms ease;
-}
-.lz-segmento__opcion input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-}
-.lz-segmento__opcion:has(input:checked) {
-  background: #8b7bff;
-  color: #fff;
-}
-.lz-segmento__opcion:has(input:focus-visible) {
-  outline: 2px solid #c9c1ff;
-  outline-offset: 1px;
-}</template>
-            <template class="receta-html">&lt;div class="lz-segmento" role="group" aria-label="Vista"&gt;
-  &lt;label class="lz-segmento__opcion"&gt;&lt;input type="radio" name="lz-seg" checked /&gt;Día&lt;/label&gt;
-  &lt;label class="lz-segmento__opcion"&gt;&lt;input type="radio" name="lz-seg" /&gt;Semana&lt;/label&gt;
-  &lt;label class="lz-segmento__opcion"&gt;&lt;input type="radio" name="lz-seg" /&gt;Mes&lt;/label&gt;
-&lt;/div&gt;</template>
-          </article>
-          </div>
-        </section>
-
-        <section class="lab-seccion" id="pestanas" aria-labelledby="pestanas-h">
-          <header class="lab-seccion__head">
-            <h2 id="pestanas-h">Pestañas</h2>
-            <p>Pestañas accesibles de verdad: roles ARIA, flechas del teclado y paneles asociados. El JS mide 20 líneas y está incluido.</p>
-          </header>
-          <div class="lab-galeria">
-          <article class="pieza pieza--ancha" id="tabs">
-            <div class="pieza__escenario">
-              <div class="lz-tabs" data-lz-tabs>
-                <div class="lz-tabs__lista" role="tablist" aria-label="Secciones">
-                  <button role="tab" id="lz-tab-1" aria-controls="lz-panel-1" aria-selected="true" type="button">Resumen</button>
-                  <button role="tab" id="lz-tab-2" aria-controls="lz-panel-2" aria-selected="false" type="button" tabindex="-1">Detalles</button>
-                  <button role="tab" id="lz-tab-3" aria-controls="lz-panel-3" aria-selected="false" type="button" tabindex="-1">Historial</button>
-                </div>
-                <div class="lz-tabs__panel" role="tabpanel" id="lz-panel-1" aria-labelledby="lz-tab-1">Contenido del resumen.</div>
-                <div class="lz-tabs__panel" role="tabpanel" id="lz-panel-2" aria-labelledby="lz-tab-2" hidden>Contenido de los detalles.</div>
-                <div class="lz-tabs__panel" role="tabpanel" id="lz-panel-3" aria-labelledby="lz-tab-3" hidden>Contenido del historial.</div>
-              </div>
-            </div>
-            <div class="pieza__pie">
-              <h3 class="pieza__nombre">Pestañas con teclado</h3>
-              <span class="lab-aviso-js" title="Incluye su JavaScript">JS</span>
-              <button class="pieza__btn" type="button" data-copiar="receta-css">Copiar CSS</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-html">Copiar HTML</button>
-              <button class="pieza__btn" type="button" data-copiar="receta-js">Copiar JS</button>
-            </div>
-            <template class="receta-css">.lz-tabs__lista {
-  display: flex;
-  gap: 0.3rem;
-  border-bottom: 1px solid #2c2938;
-}
-.lz-tabs__lista [role="tab"] {
-  border: 0;
-  background: transparent;
-  color: #cfcbdd;
-  font: 600 0.92rem/1 system-ui, sans-serif;
-  padding: 0.7rem 1rem;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-}
-.lz-tabs__lista [role="tab"][aria-selected="true"] {
-  color: #fff;
-  border-bottom-color: #8b7bff;
-}
-.lz-tabs__lista [role="tab"]:focus-visible {
-  outline: 2px solid #8b7bff;
-  outline-offset: -2px;
-  border-radius: 6px;
-}
-.lz-tabs__panel {
-  padding: 0.9rem 0.2rem;
-  color: #e8e6f2;
-  font: 400 0.92rem/1.5 system-ui, sans-serif;
-}</template>
-            <template class="receta-html">&lt;div class="lz-tabs" data-lz-tabs&gt;
-  &lt;div class="lz-tabs__lista" role="tablist" aria-label="Secciones"&gt;
-    &lt;button role="tab" id="lz-tab-1" aria-controls="lz-panel-1" aria-selected="true" type="button"&gt;Resumen&lt;/button&gt;
-    &lt;button role="tab" id="lz-tab-2" aria-controls="lz-panel-2" aria-selected="false" type="button" tabindex="-1"&gt;Detalles&lt;/button&gt;
-    &lt;button role="tab" id="lz-tab-3" aria-controls="lz-panel-3" aria-selected="false" type="button" tabindex="-1"&gt;Historial&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="lz-tabs__panel" role="tabpanel" id="lz-panel-1" aria-labelledby="lz-tab-1"&gt;Contenido del resumen.&lt;/div&gt;
-  &lt;div class="lz-tabs__panel" role="tabpanel" id="lz-panel-2" aria-labelledby="lz-tab-2" hidden&gt;Contenido de los detalles.&lt;/div&gt;
-  &lt;div class="lz-tabs__panel" role="tabpanel" id="lz-panel-3" aria-labelledby="lz-tab-3" hidden&gt;Contenido del historial.&lt;/div&gt;
-&lt;/div&gt;</template>
-            <template class="receta-js">// Pestañas: clic + flechas izquierda/derecha, foco gestionado.
-document.querySelectorAll("[data-lz-tabs]").forEach((raiz) =&gt; {
-  const pestanas = [...raiz.querySelectorAll('[role="tab"]')];
-  function activar(tab) {
-    pestanas.forEach((t) =&gt; {
-      const activa = t === tab;
-      t.setAttribute("aria-selected", String(activa));
-      t.tabIndex = activa ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !activa;
-    });
-    tab.focus();
-  }
-  pestanas.forEach((tab, i) =&gt; {
-    tab.addEventListener("click", () =&gt; activar(tab));
-    tab.addEventListener("keydown", (e) =&gt; {
-      if (e.key !== "ArrowRight" &amp;&amp; e.key !== "ArrowLeft") return;
-      e.preventDefault();
-      const paso = e.key === "ArrowRight" ? 1 : -1;
-      activar(pestanas[(i + paso + pestanas.length) % pestanas.length]);
-    });
-  });
-});</template>
-          </article>
-          </div>
-        </section>
-      </section>
-
-      <section class="section shell diferir-render" style="--alto-escritorio: 2100px; --alto-movil: 3500px">
-        <div class="prose">
-          <h2>La regla de esta página: el control nativo se queda</h2>
-          <p>
-            Todos los conmutadores que ves (el switch, los chips, el segmentado) son
-            <code>&lt;input&gt;</code> de verdad vestidos con CSS. El input se oculta
-            visualmente pero sigue en el documento, así que el teclado, el lector de
-            pantalla y el envío de formularios funcionan sin una línea de JavaScript.
-            El selector <code>:has()</code> hace el resto: cuando el input interno cambia,
-            la caja que lo envuelve se entera y se pinta.
-          </p>
-
-          <h2>Cómo usarlos</h2>
-          <ol>
-            <li>Copia el CSS y el HTML juntos: en los controles, la estructura es parte del funcionamiento.</li>
-            <li>Para el botón de carga y las pestañas, copia también el JS: son menos de 25 líneas cada uno y no tienen dependencias.</li>
-            <li>Cambia los colores a los de tu marca. Los estados (hover, activo, foco, deshabilitado) ya están definidos: solo retíñelos.</li>
-          </ol>
-
-          <h2>Los 44 píxeles que separan un botón de una frustración</h2>
-          <p>
-            Las guías de accesibilidad táctil convergen en lo mismo: un objetivo táctil
-            necesita unos 44 píxeles de lado para pulsarse sin errar. Todos los botones de
-            esta página parten de <code>min-height: 44px</code>. Cuando reduzcas un botón
-            para un contexto denso (una barra de herramientas, una tabla) reduce el
-            dibujo, no el área: <code>padding</code> negativo visual sí, objetivo táctil
-            pequeño no.
-          </p>
-
-          <h2>Dónde encajan</h2>
-          <ul>
-            <li><strong>El principal degradado</strong>, para la acción única que quieres que ocurra en cada pantalla.</li>
-            <li><strong>El fantasma</strong>, para todo lo demás: convive con el principal sin competirle.</li>
-            <li><strong>El segmentado</strong>, para alternar vistas (día/semana/mes) donde un select sería demasiado.</li>
-            <li><strong>Las pestañas con teclado</strong>, para organizar contenido paralelo sin recargar la página.</li>
-          </ul>
-
-          <h2>Las demás categorías</h2>
-          <p>
-            La familia completa, cada una con sus piezas y su código:
-            <a href="/codigo-web/componentes/formas/">formas y recortes</a>, <a href="/codigo-web/componentes/superficies/">vidrio y neón</a>, <a href="/codigo-web/componentes/bento/">bento grid</a>, <a href="/codigo-web/componentes/tarjetas/">tarjetas</a>, <a href="/codigo-web/componentes/formularios/">formularios</a>, <a href="/codigo-web/componentes/datos/">datos y métricas</a>, <a href="/codigo-web/componentes/interacciones/">microinteracciones</a>, <a href="/codigo-web/componentes/carga/">estados de carga</a> y <a href="/codigo-web/componentes/navegacion/">navegación</a>.
-            Y si buscas generadores en vez de piezas hechas, están en <a href="/codigo-web/">Código web</a>.
-          </p>
-
-          <h2 id="faq">Preguntas frecuentes</h2>
-          <details class="faq-item" name="faq" open>
-            <summary><h3>¿Por qué esconder el input en vez de usar un div con onclick?</h3></summary>
-            <p>Porque el input trae gratis lo que el div nunca tendrá: foco con teclado, activación con espacio y enter, anuncio correcto en lectores de pantalla y participación en formularios. El CSS lo oculta a la vista (opacity: 0, 1px), no del árbol de accesibilidad.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Qué es :has() y qué pasa si el navegador no lo soporta?</h3></summary>
-            <p>Es el selector que permite estilar al padre según el estado de un hijo: aquí, pintar la caja cuando su input está marcado. Todos los navegadores lo soportan desde finales de 2023. En uno muy antiguo, el control seguiría funcionando; solo perdería el resaltado visual.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Las pestañas necesitan una librería?</h3></summary>
-            <p>No: el JS incluido gestiona clic, flechas del teclado, foco y atributos ARIA en unas 20 líneas. Es el patrón oficial de WAI-ARIA reducido a lo esencial.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Cómo deshabilito uno de estos botones?</h3></summary>
-            <p>Con el atributo disabled de toda la vida, que además bloquea el foco y lo anuncia al lector de pantalla. Añade un estilo :disabled con opacidad reducida y cursor normal, y evita ocultar botones deshabilitados: es mejor que se vea que existen.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Por qué el botón de carga bloquea sus propios clics?</h3></summary>
-            <p>Para evitar el doble envío, que es el bug clásico de los formularios. La clase esta-cargando pone pointer-events: none mientras dura la operación; al terminar, el botón vuelve solo.</p>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary><h3>¿Puedo usar el brillo que recorre en muchos botones a la vez?</h3></summary>
-            <p>Poder puedes, pero el brillo señala novedad o importancia: si todos brillan, ninguno destaca. Úsalo en un solo elemento por vista, y ten en cuenta que la receta ya lo desactiva para quien pidió movimiento reducido.</p>
-          </details>
-        </div>
-
-        <div class="ad-slot" role="complementary" aria-label="Anuncios">Anuncios</div>
-        <!-- AdSense: pegar aquí el bloque responsive cuando la cuenta esté aprobada -->
-      </section>
-      <section class="section shell compartir-bloque" aria-label="Compartir">
-          <p class="compartir-bloque__lema">Si conoces a alguien que maqueta webs, esto le ahorra el día.</p>
-          <div class="compartir" aria-label="Compartir esta página">
-            <span class="compartir__titulo">Compartir</span>
-            <a href="https://wa.me/?text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar%3A%20https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"/></svg></a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F" target="_blank" rel="noopener" aria-label="Compartir en Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"/></svg></a>
-            <a href="https://t.me/share/url?url=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar" target="_blank" rel="noopener" aria-label="Compartir en Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"/></svg></a>
-            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar" target="_blank" rel="noopener" aria-label="Compartir en X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"/></svg></a>
-            <a href="mailto:?subject=CSS%20listo%20para%20copiar&amp;body=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar%3A%20https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F%0D%0A%0D%0AEncontrado%20en%20lienzo.tools" aria-label="Compartir por correo" title="Correo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 7 9-7"/></svg></a>
-            <button type="button" data-compartir-copiar aria-label="Copiar el enlace" title="Copiar enlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
-          </div>
-        </section>
-    </main>
+    <main id="main" class="container" data-control-studio data-lang="es">
+<section class="ls-hero"><nav class="ls-breadcrumb" aria-label="Ruta de navegación"><a href="/">Inicio</a><span>/</span><a href="/codigo-web/">Código web</a><span>/</span><a href="/codigo-web/componentes/">Componentes</a><span>/</span><span>Botones y controles</span></nav>
+<div class="ls-hero__body"><div><p class="ls-eyebrow">LIENZO / CONTROL STUDIO</p><h1>Pequeños gestos.<br><em>Grandes decisiones.</em></h1><p class="ls-lede">Un botón invita. Un control responde. Diseña ambos con intención: ocho piezas nativas que puedes personalizar, probar y llevar a tu próxima interfaz.</p></div><aside class="ls-hero__aside"><div class="cs-hero-mark" aria-hidden="true"><span></span><span></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></div><p><strong>08</strong> piezas <span>/</span> gestos reales</p><span class="ls-local"><i></i>Código nativo. Sin dependencias.</span></aside></div></section>
+<section class="ls-workspace" id="control-workspace" aria-labelledby="control-title"><header class="ls-workspace__top"><div class="ls-section-title"><span class="ls-index">01 /</span><h2 id="control-title">Del gesto al detalle</h2></div><div class="ls-history"><button type="button" class="ls-button " data-undo><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4-4 4 4 4m-4-4h11a6 6 0 0 1 0 12h-3"/></svg><span>Deshacer</span></button><button type="button" class="ls-button " data-redo><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m17 4 4 4-4 4m4-4H10a6 6 0 0 0 0 12h3"/></svg><span>Rehacer</span></button><button type="button" class="ls-button " data-reset><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4v6h6M3.6 10a9 9 0 1 1 .3 5"/></svg><span>Restablecer</span></button></div></header>
+<p class="ls-notice" data-motion-notice hidden>Movimiento reducido activo. Los controles conservan sus estados sin animación decorativa.</p>
+<div class="ls-layout"><div class="ls-preview-column"><div class="ls-preview-card"><header class="ls-selection"><div><span class="ls-eyebrow" data-family-label></span><h3 data-selection-label></h3></div><span class="ls-live-label"><i></i>VISTA INTERACTIVA</span></header>
+<div class="ls-stage cs-stage" data-stage><div class="cs-demo-sheet" data-demo-sheet><div class="cs-sheet-top"><span class="cs-sheet-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18"/></svg></span><span>LIENZO / TU INTERFAZ</span><span class="cs-sheet-dots" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="cs-sheet-copy"><p class="cs-context-eyebrow">UN DETALLE QUE IMPORTA</p><h4 data-context-title>Haz espacio para<br>tu próxima idea.</h4><p>Toca, elige y prueba. El resultado empieza con un gesto claro.</p></div><div class="cs-preview" data-preview><p>Activa JavaScript para personalizar. Los ocho patrones se describen en la biblioteca.</p></div><div class="cs-context-result" data-context-result aria-hidden="true"><span></span><span></span><span></span></div><div class="cs-sheet-bottom"><span>DISEÑADO PARA INTERACTUAR</span><span aria-hidden="true">↗</span></div></div><span class="ls-stage__signature">LIENZO / CONTROL</span></div>
+<div class="cs-test-strip"><span>Inspeccionar estado</span><div class="cs-tests" role="group" aria-label="Estados de prueba"><button type="button" data-test-state="idle" aria-pressed="true">Reposo</button><button type="button" data-test-state="hover" aria-pressed="false">Hover</button><button type="button" data-test-state="focus" aria-pressed="false">Foco</button><button type="button" data-test-state="pressed" aria-pressed="false">Pulsado</button><button type="button" data-test-state="disabled" aria-pressed="false">Deshabilitado</button><span class="cs-async-states" data-async-states hidden><button type="button" data-test-state="loading" aria-pressed="false">Cargando</button><button type="button" data-test-state="success" aria-pressed="false">Éxito</button><button type="button" data-test-state="error" aria-pressed="false">Error</button></span></div></div><p class="ls-description" data-description></p></div>
+<div class="cs-integration"><div><span class="ls-index">UN CONTROL, UNA FUNCIÓN</span><p data-purpose></p></div><div class="cs-demo-actions" data-demo-actions hidden><button type="button" class="ls-button ls-button--primary" data-simulate><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 5 11 7-11 7V5Z"/></svg><span>Simular tarea</span></button><button type="button" class="ls-button ls-button--outline" data-cancel><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="2"/></svg><span>Cancelar demo</span></button></div></div><p class="ls-note">La vista es local. Los botones emiten eventos para tu aplicación; no envían datos ni confirman descargas. Hover, foco y pulsado de prueba no se incluyen en la exportación.</p></div>
+<aside class="ls-inspector" aria-labelledby="control-settings"><header class="ls-inspector__heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h5m4 0h7M4 17h9m4 0h3M9 4v6m4 4v6"/></svg><h2 id="control-settings">Afinar cada gesto</h2></header><div class="ls-inspector__body">
+<label class="ls-field"><span>Pieza</span><select data-pattern><option value="boton-degradado">Principal degradado</option><option value="boton-fantasma">Secundario fantasma</option><option value="boton-brillo">Brillo que recorre</option><option value="boton-carga">Botón de carga</option><option value="switch">Interruptor</option><option value="chips">Chips de filtro</option><option value="segmentado">Control segmentado</option><option value="tabs">Pestañas con teclado</option></select></label>
+<div class="ls-field-grid"><label class="ls-field"><span>Acento</span><select data-accent><option value="violet">Violeta</option><option value="mint">Menta</option><option value="amber">Ámbar</option></select></label><label class="ls-field"><span>Superficie</span><select data-theme><option value="dark">Oscura</option><option value="light">Clara</option></select></label></div>
+<div class="ls-field-grid"><label class="ls-field"><span>Tamaño</span><select data-size><option value="compact">Compacto</option><option value="comfortable">Cómodo</option><option value="large">Grande</option></select></label><label class="ls-field"><span>Ancho</span><select data-width><option value="auto">Natural</option><option value="full">Completo</option></select></label></div>
+<label class="ls-field"><span>Texto o etiqueta del grupo</span><input type="text" data-text maxlength="80" autocomplete="off"></label>
+<label class="ls-field ls-range" for="control-radius"><span>Radio de esquina<output data-radius-output></output></span><input type="range" id="control-radius" aria-label="Radio de esquina" data-radius min="0" max="28" step="1"></label><label class="ls-field ls-range" for="control-duration"><span>Respuesta del gesto<output data-duration-output></output></span><input type="range" id="control-duration" aria-label="Respuesta del gesto" data-duration min="120" max="400" step="10"></label>
+<div data-action-fields><div class="ls-field-grid"><label class="ls-field"><span>Icono</span><select data-icon><option value="arrow">Flecha</option><option value="download">Descarga</option><option value="plus">Más</option><option value="check">Confirmación</option><option value="none">Sin icono</option></select></label><label class="ls-field"><span>Posición</span><select data-icon-position><option value="end">Después</option><option value="start">Antes</option></select></label></div></div>
+<div data-choice-fields hidden><label class="ls-field"><span>Opciones · una por línea (2–4)</span><textarea data-options rows="3" maxlength="140" spellcheck="false"></textarea></label></div>
+<div data-tab-fields hidden><details class="ls-details"><summary>Contenido de los paneles</summary><div class="ls-details__content" data-panel-fields></div></details></div>
+<div data-async-fields hidden><details class="ls-details"><summary>Mensajes de la tarea</summary><div class="ls-details__content"><label class="ls-field"><span>Cargando</span><input type="text" data-loading-text maxlength="60" autocomplete="off"></label><label class="ls-field"><span>Éxito</span><input type="text" data-success-text maxlength="60" autocomplete="off"></label><label class="ls-field"><span>Error o reintento</span><input type="text" data-error-text maxlength="80" autocomplete="off"></label></div></details></div>
+<details class="ls-details"><summary>Integración y clase CSS</summary><div class="ls-details__content"><label class="ls-field"><span>Nombre del componente</span><input type="text" data-name maxlength="48" autocomplete="off"></label><p class="cs-helper">Usa un nombre distinto si necesitas estilos diferentes en la misma página. El runtime separa IDs y grupos de cada instancia.</p></div></details>
+</div></aside></div><p class="ls-status" data-status role="status" aria-live="polite">Elige una pieza y prueba su interacción.</p><p class="ls-error" data-error role="alert" hidden></p></section>
+<section class="ls-library-section" aria-labelledby="control-library-title"><header class="ls-library-heading"><div><p class="ls-eyebrow">02 / BIBLIOTECA DE GESTOS</p><h2 id="control-library-title">La acción correcta.<br><em>En su lugar.</em></h2></div><p>Ocho piezas, tres funciones. Cada una conserva su semántica y responde al ratón, al tacto y al teclado.</p></header>
+<div class="ls-library-tools"><div class="ls-filters" role="group" aria-label="Familias de controles"><button class="ls-filter" type="button" data-family="all" aria-pressed="true">Todos</button><button class="ls-filter" id="botones-base" type="button" data-family="action" aria-pressed="false">Botones</button><button class="ls-filter" id="conmutadores" type="button" data-family="choice" aria-pressed="false">Selección</button><button class="ls-filter" id="pestanas" type="button" data-family="tabs" aria-pressed="false">Pestañas</button></div><label class="ls-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg><input type="search" data-search aria-label="Buscar controles" placeholder="Buscar una pieza…"></label></div><p class="ls-result-count" data-result-count role="status"></p><div class="ls-library" data-library><button type="button" class="ls-preset" id="boton-degradado" data-choose="boton-degradado" data-category="action" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-button cs-mini-button--boton-degradado">Explorar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span><span class="ls-preset__meta"><span class="ls-preset__number">01 / Botones</span><strong>Principal degradado</strong><span class="ls-preset__description">Tu acción principal. Clara y reconocible.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button><button type="button" class="ls-preset" id="boton-fantasma" data-choose="boton-fantasma" data-category="action" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-button cs-mini-button--boton-fantasma">Explorar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span><span class="ls-preset__meta"><span class="ls-preset__number">02 / Botones</span><strong>Secundario fantasma</strong><span class="ls-preset__description">Presencia sin competir por atención.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button><button type="button" class="ls-preset" id="boton-brillo" data-choose="boton-brillo" data-category="action" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-button cs-mini-button--boton-brillo">Explorar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span><span class="ls-preset__meta"><span class="ls-preset__number">03 / Botones</span><strong>Brillo que recorre</strong><span class="ls-preset__description">Un reflejo breve que responde al gesto.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button><button type="button" class="ls-preset" id="boton-carga" data-choose="boton-carga" data-category="action" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-button cs-mini-button--boton-carga">Explorar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span><span class="ls-preset__meta"><span class="ls-preset__number">04 / Botones</span><strong>Botón de carga</strong><span class="ls-preset__description">Una tarea, cuatro estados explícitos.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button><button type="button" class="ls-preset" id="switch" data-choose="switch" data-category="choice" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-switch"><i></i></span><span class="cs-mini-lines"><i></i><i></i></span></span><span class="ls-preset__meta"><span class="ls-preset__number">05 / Selección</span><strong>Interruptor</strong><span class="ls-preset__description">Una preferencia. Dos decisiones claras.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button><button type="button" class="ls-preset" id="chips" data-choose="chips" data-category="choice" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-chips"><b>HTML</b><b>CSS</b><b>JS</b></span></span><span class="ls-preset__meta"><span class="ls-preset__number">06 / Selección</span><strong>Chips de filtro</strong><span class="ls-preset__description">Elige más de una posibilidad.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button><button type="button" class="ls-preset" id="segmentado" data-choose="segmentado" data-category="choice" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-segment"><i></i><i></i><i></i></span></span><span class="ls-preset__meta"><span class="ls-preset__number">07 / Selección</span><strong>Control segmentado</strong><span class="ls-preset__description">Opciones relacionadas. Una selección.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button><button type="button" class="ls-preset" id="tabs" data-choose="tabs" data-category="tabs" aria-pressed="false"><span class="ls-miniature cs-miniature" aria-hidden="true"><span class="cs-mini-tabs"><i></i><i></i><i></i><b></b><b></b></span></span><span class="ls-preset__meta"><span class="ls-preset__number">08 / Pestañas</span><strong>Pestañas con teclado</strong><span class="ls-preset__description">Cambia de contexto sin perder el foco.</span><span class="ls-preset__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span></span></button></div><p class="ls-empty" data-empty hidden>No hay coincidencias. Prueba otro nombre o familia.</p></section>
+<section class="ls-export" aria-labelledby="control-code-title"><header class="ls-export__heading"><div><p class="ls-eyebrow">03 / DEL ESTUDIO A TU INTERFAZ</p><h2 id="control-code-title">Tu gesto.<br><em>Todo el código.</em></h2><p>HTML, CSS y comportamiento de la misma pieza. Exporta un ejemplo autónomo o guarda un proyecto para seguir afinándolo. Sin librerías externas.</p></div><span class="ls-code-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18"/></svg></span></header>
+<div class="ls-code-panel"><div class="ls-code-bar"><div class="ls-source-tabs" role="group" aria-label="Lenguaje del código"><button type="button" data-source="html" aria-pressed="true">HTML</button><button type="button" data-source="css" aria-pressed="false">CSS</button><button type="button" data-source="js" aria-pressed="false">JavaScript</button></div><span>CÓDIGO NATIVO / MIT</span></div><pre class="ls-code" data-code tabindex="0" aria-label="Código del componente">Activa JavaScript para generar el código.</pre><div class="ls-code-actions"><button type="button" class="ls-button " data-copy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span>Copiar código</span></button><button type="button" class="ls-button " data-download-html><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg><span>Ejemplo HTML</span></button><button type="button" class="ls-button " data-download-css><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg><span>Descargar CSS</span></button><button type="button" class="ls-button " data-download-js><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg><span>Descargar JavaScript</span></button></div><div class="ls-downloads" data-downloads></div></div>
+<div class="ls-project"><div><h3>Continúa donde lo dejaste.</h3><p>El JSON conserva la pieza, sus textos y ajustes. No guarda datos en la nube.</p></div><div><button type="button" class="ls-button ls-button--outline" data-download-project><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg><span>Guardar proyecto</span></button><button type="button" class="ls-button ls-button--outline" data-import-project><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 16V3m-5 5 5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Abrir proyecto</span></button><input type="file" accept="application/json,.json" data-project-file hidden></div></div></section>
+<section class="ls-guide" aria-labelledby="control-guide-title"><header class="ls-guide__intro"><p class="ls-eyebrow">04 / CRITERIO DE INTERFAZ</p><h2 id="control-guide-title">Que se vea bien.<br>Que responda mejor.</h2><p>Una apariencia coherente empieza por elegir el control adecuado y termina con una respuesta comprensible.</p><a href="/codigo-web/componentes/" class="ls-button ls-button--outline">Explorar componentes CSS<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></header><div class="ls-guide__body"><article><h3>Acción, selección o navegación.</h3><p>Un button ejecuta una acción. Un checkbox admite elecciones independientes; los radios ofrecen una sola. Las pestañas cambian paneles. La estética no debe alterar esa función.</p></article><article><h3>El estado también es contenido.</h3><p>Distingue foco, disponibilidad y resultado con forma, texto y contraste. Reserva una señal de carga para una tarea real. Si el usuario prefiere menos movimiento, conserva la información.</p></article><details class="ls-faq"><summary>¿Son controles funcionales o solo una imagen?</summary><p>Son elementos nativos: button, checkbox y radio, o pestañas con botones y paneles asociados. La selección, el teclado y los estados funcionan. El evento lzc:action permite conectar el botón con tu proceso; lzc:change informa los cambios de selección.</p></details><details class="ls-faq"><summary>¿El botón de carga descarga o envía un archivo?</summary><p>No por sí solo. La demostración es local y está identificada. Conecta tu operación al evento y usa setState para comunicar loading, success o error. No se promete una operación que no ocurrió.</p></details><details class="ls-faq"><summary>¿Cómo funcionan las pestañas con teclado?</summary><p>Tab entra en la pestaña activa. Flecha izquierda/derecha recorre y activa los paneles; Home y End van al primero y al último. Cada panel conserva su relación ARIA. Para opciones únicas y múltiples se mantienen radios y checkboxes nativos.</p></details><details class="ls-faq"><summary>¿Los estados de prueba se quedan en el código?</summary><p>Hover, foco y pulsado son ayudas de inspección del editor. No se exportan como estados forzados. La configuración deshabilitada y los estados explícitos del botón de carga sí se conservan. Revisa el ajuste antes de exportar.</p></details><details class="ls-faq"><summary>¿Puedo usar varios controles en la misma página?</summary><p>Sí. El runtime asigna identificadores y nombres de grupo independientes al montar cada componente. Carga el JavaScript una sola vez y usa LienzoControls.mount o mountAll. destroy elimina los eventos y temporizadores del componente.</p></details><details class="ls-faq"><summary>¿Qué incluyen la descarga y el proyecto?</summary><p>El ejemplo HTML incorpora marcado, estilos y JavaScript sin CDN. También puedes descargar cada parte. El JSON conserva tus ajustes y se abre en este estudio; no es una cuenta ni sincronización en la nube. Código MIT con su aviso incluido.</p></details><p class="cs-helper">HTML autónomo sin CDN. Fuentes del sistema cuando Fraunces e Instrument Sans no están instaladas. Código MIT; conserva el aviso.</p></div></section><div aria-label="Anuncios" class="ad-slot" role="complementary">Anuncios</div>
+<section aria-label="Compartir" class="section shell compartir-bloque">
+<p class="compartir-bloque__lema">Si conoces a alguien que maqueta webs, esto le ahorra el día.</p>
+<div aria-label="Compartir esta página" class="compartir">
+<span class="compartir__titulo">Compartir</span>
+<a aria-label="Compartir en WhatsApp" href="https://wa.me/?text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar%3A%20https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F" rel="noopener" target="_blank" title="WhatsApp"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8M8.9 7.2c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3l-.4-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.1-.2 0-.4.1-.5l.6-.7c.2-.2.2-.4.1-.6l-.7-1.8c-.2-.4-.4-.4-.5-.4z"></path></svg></a>
+<a aria-label="Compartir en Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F" rel="noopener" target="_blank" title="Facebook"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.6H7.6V14h2.8v8z"></path></svg></a>
+<a aria-label="Compartir en Telegram" href="https://t.me/share/url?url=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar" rel="noopener" target="_blank" title="Telegram"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M21.9 4.4 2.9 11.7c-.8.3-.8 1.4 0 1.7l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.8 3.5c.6.4 1.4.1 1.6-.6l3.1-15.4c.2-.9-.6-1.6-1.4-1.3zm-3 3.5-8 7.2-.3 3-1.3-4.2 9.3-6.2c.4-.3.8.3.4.6z" transform="translate(-.7 0)"></path></svg></a>
+<a aria-label="Compartir en X" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F&amp;text=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar" rel="noopener" target="_blank" title="X"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M17.7 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7zm-1 16.2h1.7L7.4 4.7H5.6z"></path></svg></a>
+<a aria-label="Compartir por correo" href="mailto:?subject=CSS%20listo%20para%20copiar&amp;body=%C2%BFConoces%20a%20alguien%20que%20escribe%20CSS%3F%20Botones%20y%20controles%20CSS%3A%20switch%2C%20tabs%2C%20chips%2C%20listo%20para%20copiar%3A%20https%3A%2F%2Flienzo.tools%2Fcodigo-web%2Fcomponentes%2Fbotones%2F%0D%0A%0D%0AEncontrado%20en%20lienzo.tools" title="Correo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="15" rx="2.5" width="19" x="2.5" y="4.5"></rect><path d="m3 6 9 7 9-7"></path></svg></a>
+<button aria-label="Copiar el enlace" data-compartir-copiar="" title="Copiar enlace" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg></button>
+</div>
+</section></main>
 
     <footer class="site-footer">
       <div class="shell">
@@ -753,6 +159,6 @@ document.querySelectorAll("[data-lz-tabs]").forEach((raiz) =&gt; {
 
     <script src="/js/site.js?v=b20ebe58b7cf" defer></script>
     <script src="/js/mi-lienzo.js?v=4364bb214cd7" defer></script>
-    <script src="../js/componentes.js?v=2026090404" defer></script>
-  </body>
+
+  <script src="/codigo-web/componentes/botones/js/control-runtime.js?v=2fcfd483f4b7" defer></script><script src="/codigo-web/componentes/botones/js/control-engine.js?v=342cc029a73e" defer></script><script src="/codigo-web/componentes/botones/js/control-controller.js?v=ffc6a3591db4" defer></script></body>
 </html>
