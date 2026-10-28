@@ -143,6 +143,13 @@ window.LienzoQR = (() => {
     document.body.appendChild(a);
     a.click();
     a.remove();
+    try {
+      const format = blob.type === 'image/png' ? 'png' : blob.type === 'image/svg+xml' ? 'svg' : null;
+      if (format) {
+        window.LienzoAnalytics?.track('tool_export_ready', { tool_id: 'qr', format });
+        window.LienzoAnalytics?.track('tool_download_click', { tool_id: 'qr', format });
+      }
+    } catch (_) { /* Optional measurement never changes the QR or its content. */ }
     setTimeout(() => URL.revokeObjectURL(url), 4000);
   }
 

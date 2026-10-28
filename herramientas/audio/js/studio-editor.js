@@ -448,6 +448,8 @@
       $("download").textContent = `${text.download} · ${extension.toUpperCase()} · ${bytes(blob.size)}`;
       $("download-panel").hidden = false;
       status(text.saved);
+      try { window.LienzoAnalytics?.track('tool_export_ready', { tool_id: 'audio-studio', format }); }
+      catch (_) { /* Optional analytics must not affect the exported audio. */ }
     });
   }
   function view() {

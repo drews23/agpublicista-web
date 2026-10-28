@@ -48,6 +48,11 @@
           accepted = true;
           fields.hidden = true;
           message = copy.accepted;
+          try {
+            window.LienzoAnalytics?.track('newsletter_request_accepted', {
+              placement: location.pathname === '/' || location.pathname === '/en/' ? 'home' : 'newsletter'
+            });
+          } catch (_) { /* A measurement failure cannot undo an accepted request. */ }
         } else {
           message = copy.rejected;
         }

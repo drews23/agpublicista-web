@@ -4,6 +4,15 @@
 
   const root = document.documentElement;
 
+  // The local consent interface loads here; the Google tag remains blocked until permission.
+  if (!document.querySelector('script[data-lienzo-analytics]')) {
+    const analytics = document.createElement('script');
+    analytics.src = '/js/analytics.js?v=07ddea7e9827';
+    analytics.dataset.lienzoAnalytics = '';
+    analytics.defer = true;
+    document.head.append(analytics);
+  }
+
   /* Tema claro/oscuro (persistente) */
   const THEME_KEY = "agp-theme";
 
