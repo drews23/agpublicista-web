@@ -156,7 +156,7 @@
     "source": null,
     "zip": "imagen-particulas-lienzo.zip",
     "desc": "Convierte una imagen local en una composición que responde al movimiento. Tres artes originales, atracción y repulsión, color, dispersión y captura PNG, con densidad adaptable o hasta 600.000 puntos.",
-    "size": 132,
+    "size": 150,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },

@@ -4,12 +4,12 @@
     "piLive": "Imagen en movimiento",
     "piPaused": "Movimiento pausado",
     "piStatic": "Vista estática",
-    "piCanvasLabel": "Composición interactiva en partículas. Usa el puntero o el botón Pulso central.",
+    "piCanvasLabel": "Imagen completa en reposo. Acerca el puntero, toca la imagen o usa Pulso central para activar las partículas.",
     "piStaticCanvas": "Composición estática alternativa",
     "piEdition": "ARTE GENERATIVO / 01",
-    "piPointerHint": "Acerca el puntero. Cambia la materia.",
+    "piPointerHint": "Imagen intacta. Partículas al acercar el puntero.",
     "piHeadline": "Cada punto, una posibilidad.",
-    "piArtLead": "Una imagen que se deshace, responde y vuelve a encontrar su forma. Crea con el arte de Lienzo o empieza con el tuyo.",
+    "piArtLead": "Tu imagen, nítida. El puntero activa las partículas a su alrededor; al salir, la imagen recupera su forma. Empieza con el arte de Lienzo o carga el tuyo.",
     "piSettings": "Dale otra forma.",
     "piLaboratory": "ESTUDIO DE PARTÍCULAS",
     "piSource": "La imagen",
@@ -43,19 +43,20 @@
     "piSnapshotError": "No se pudo generar el PNG. Prueba de nuevo cuando la imagen termine de cargar.",
     "piSnapshotDone": "PNG descargado: captura del lienzo, sin los controles.",
     "piOriginalRestored": "Arte original restaurado.",
-    "piStaticNote": "Vista estática: no se dibujan partículas."
+    "piStaticNote": "Vista estática: no se dibujan partículas.",
+    "piIdle": "Imagen nítida"
   },
   "en": {
     "piStudio": "Matter: image and particle studio",
     "piLive": "Image in motion",
     "piPaused": "Motion paused",
     "piStatic": "Static preview",
-    "piCanvasLabel": "Interactive particle artwork. Move your pointer or use the Center pulse button.",
+    "piCanvasLabel": "Full image at rest. Move your pointer, touch the image, or use Center pulse to activate particles.",
     "piStaticCanvas": "Static artwork alternative",
     "piEdition": "GENERATIVE ART / 01",
-    "piPointerHint": "Move your pointer. Reshape the matter.",
+    "piPointerHint": "Intact image. Particles respond to your pointer.",
     "piHeadline": "Every point, a possibility.",
-    "piArtLead": "An image that scatters, responds, and finds its shape again. Start with original Lienzo artwork or bring your own.",
+    "piArtLead": "Your image, clear and intact. Particles respond around your pointer, then settle back when you leave. Start with Lienzo artwork or bring your own.",
     "piSettings": "Find a new form.",
     "piLaboratory": "PARTICLE STUDIO",
     "piSource": "The image",
@@ -89,6 +90,7 @@
     "piSnapshotError": "Could not create the PNG. Try again after the image finishes loading.",
     "piSnapshotDone": "PNG downloaded: the canvas, without the controls.",
     "piOriginalRestored": "Original artwork restored.",
-    "piStaticNote": "Static preview: no particles are being drawn."
+    "piStaticNote": "Static preview: no particles are being drawn.",
+    "piIdle": "Clear image"
   }
 }

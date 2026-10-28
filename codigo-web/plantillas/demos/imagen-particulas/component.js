@@ -7,11 +7,11 @@
   const frame = $('[data-particle-frame]');
   const canvas = $('[data-particle-canvas]');
   const still = $('[data-particle-static]');
-  const interaction = {mouse: [4, 4], energy: 0, previous: null, rect: null};
+  const interaction = {mouse: [4, 4], energy: 0, previous: null, rect: null, active: false, activity: 0, pulse: false};
   const qualityCounts = {balanced: 180000, high: 600000};
   let gl = null, pointProgram = null, backgroundProgram = null, texture = null, vao = null;
   let sourceCanvas = null, sourceKey = '', imageVersion = 0, uploadVersion = 0;
-  let raf = 0, last = 0, clock = 0, scatter = 0, width = 1, height = 1, count = 72000;
+  let raf = 0, last = 0, clock = 0, scatter = 0, width = 1, height = 1, count = 72000, pulseTimer = 0;
   let staticMode = false, contextLost = false, averageFrame = 16.7, sampleFrames = 0, drawCount = 0, resizeFrame = 0;
   const uniformCache = new Map();
   const item = () => state.items[0];
@@ -29,19 +29,23 @@
   precision highp float; out vec2 v_uv;
   void main(){vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2));v_uv=p;gl_Position=vec4(p*2.-1.,0.,1.);}`;
   const cover = `vec2 cover(vec2 uv){float screen=u_resolution.x/u_resolution.y;float image=u_imageSize.x/u_imageSize.y;if(screen>image)uv.y=(uv.y-.5)*image/screen+.5;else uv.x=(uv.x-.5)*screen/image+.5;return uv;}`;
+  // Both passes use the same source-space mask. Untouched pixels stay in the original image.
+  const localMask = `float localMask(vec2 uv){vec2 d=uv*2.-1.-u_mouse;d.x*=u_resolution.x/u_resolution.y;return (1.-smoothstep(u_radius*.25,u_radius,length(d)))*u_activity;}`;
   const fragmentBackground = `#version 300 es
-  precision highp float; in vec2 v_uv; uniform sampler2D u_image; uniform vec2 u_resolution; uniform vec2 u_imageSize; uniform float u_scatter; uniform vec3 u_surface; out vec4 color;
+  precision highp float; in vec2 v_uv; uniform sampler2D u_image; uniform vec2 u_resolution; uniform vec2 u_imageSize; uniform vec2 u_mouse; uniform float u_radius; uniform float u_activity; uniform float u_scatter; uniform vec3 u_surface; out vec4 color;
   ${cover}
-  void main(){vec3 image=texture(u_image,cover(v_uv)).rgb;color=vec4(mix(u_surface,image,.18*(1.-u_scatter)),1.);}`;
+  ${localMask}
+  void main(){vec3 image=texture(u_image,cover(v_uv)).rgb;float mask=max(localMask(v_uv),u_scatter);color=vec4(mix(image,u_surface,mask),1.);}`;
   const vertexParticles = `#version 300 es
   precision highp float;
   uniform sampler2D u_image; uniform vec2 u_resolution; uniform vec2 u_imageSize; uniform vec2 u_mouse;
   uniform float u_count; uniform float u_time; uniform float u_force; uniform float u_energy;
   uniform vec3 u_primary; uniform vec3 u_secondary; uniform vec3 u_accent;
-  uniform float u_radius; uniform float u_scatter; uniform float u_size; uniform float u_mode; uniform float u_palette;
+  uniform float u_radius; uniform float u_activity; uniform float u_scatter; uniform float u_size; uniform float u_mode; uniform float u_palette;
   out vec3 v_color; out float v_alpha;
   float hash(float n){return fract(sin(n*127.1+31.7)*43758.5453);}
   ${cover}
+  ${localMask}
   void main(){
     float id=float(gl_VertexID),ratio=u_resolution.x/u_resolution.y;
     float cols=floor(sqrt(u_count*ratio)),rows=ceil(u_count/cols);
@@ -49,15 +53,15 @@
     vec3 original=texture(u_image,cover(uv)).rgb;
     float light=max(max(original.r,original.g),original.b),seed=hash(id);
     vec2 p=uv*2.-1.,distance=p-u_mouse;distance.x*=ratio;
-    float influence=exp(-dot(distance,distance)/(u_radius*u_radius));
+    float influence=localMask(uv);
     vec2 direction=normalize(distance+vec2(.0001)); direction.x/=ratio;
     vec2 flow=vec2(sin(u_time*.6+uv.y*9.+seed*2.),cos(u_time*.45+uv.x*8.+seed*2.));
-    p+=flow*.008*light+direction*influence*u_force*(.18+u_energy*.18)*u_mode;
+    p+=flow*.008*light*influence+direction*influence*u_force*(.18+u_energy*.18)*u_mode;
     vec2 drift=vec2(hash(id+9.)-.5,hash(id+17.)-.5);
     p+=drift*u_scatter*2.6+vec2(sin(seed*40.+u_time),cos(seed*27.+u_time))*.045*u_scatter;
     vec3 brand=mix(u_primary,u_secondary,smoothstep(.15,.7,light));
     brand=mix(brand,u_accent,smoothstep(.76,1.,light)*.65);
-    v_color=mix(original,brand,u_palette);v_alpha=smoothstep(.04,.17,light)*(.92-u_scatter*.22);
+    v_color=mix(original,brand,u_palette);v_alpha=smoothstep(.04,.17,light)*(.92-u_scatter*.22)*max(influence,u_scatter);
     gl_Position=vec4(p,0.,1.);gl_PointSize=u_size*(.75+light*.45)*(1.+u_scatter*.4);
   }`;
   const fragmentParticles = `#version 300 es
@@ -180,7 +184,7 @@
     const current = item();
     const typography = getComputedStyle(frame);
     const key = JSON.stringify([current.title, current.description, current.accent, current.composition, current.imageData, colors, a.color('surface', '#09080e'), a.color('text', '#ffffff'), typography.getPropertyValue('--brand-font-display'), typography.getPropertyValue('--brand-font-body')]);
-    if (key === sourceKey && sourceCanvas) return;
+    if (key === sourceKey && sourceCanvas) { draw(); start(); return; }
     const version = ++imageVersion;
     frame.dataset.loading = 'true';
     $('[data-snapshot]').disabled = true;
@@ -194,6 +198,7 @@
         const ctx = source.getContext('2d'); ctx.fillStyle = a.color('surface', '#09080e'); ctx.fillRect(0, 0, source.width, source.height); ctx.drawImage(image, 0, 0);
       } else source = originalArtwork();
       if (version !== imageVersion) return;
+      resetInteraction();
       sourceCanvas = source; sourceKey = key;
       uploadTexture(); draw(); start();
       frame.dataset.ready = 'true';
@@ -242,16 +247,19 @@
       gl.useProgram(p); uniform(p, 'u_image', '1i', 0);
       uniform(p, 'u_resolution', '2f', [width, height]); uniform(p, 'u_imageSize', '2f', [sourceCanvas.width, sourceCanvas.height]);
       uniform(p, 'u_scatter', '1f', scatter);
+      uniform(p, 'u_mouse', '2f', interaction.mouse); uniform(p, 'u_activity', '1f', interaction.activity);
+      uniform(p, 'u_radius', '1f', number(item().radius, .08, .8, .32));
     }
     gl.disable(gl.BLEND); gl.useProgram(backgroundProgram); uniform(backgroundProgram, 'u_surface', '3f', rgb(a.color('surface', '#09080e'))); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    // Resting images use one full-resolution pass, with no point grid or ambient drift.
+    if (!interaction.activity && !scatter) return;
     gl.useProgram(pointProgram);
     uniform(pointProgram, 'u_primary', '3f', rgb(colors.violet));
     uniform(pointProgram, 'u_secondary', '3f', rgb(colors.mint));
     uniform(pointProgram, 'u_accent', '3f', rgb(colors.amber));
     uniform(pointProgram, 'u_count', '1f', count); uniform(pointProgram, 'u_time', '1f', clock);
-    uniform(pointProgram, 'u_mouse', '2f', interaction.mouse); uniform(pointProgram, 'u_energy', '1f', interaction.energy);
+    uniform(pointProgram, 'u_energy', '1f', interaction.energy);
     uniform(pointProgram, 'u_force', '1f', number(item().strength, .05, 1.2, .6));
-    uniform(pointProgram, 'u_radius', '1f', number(item().radius, .08, .8, .32));
     uniform(pointProgram, 'u_mode', '1f', item().interaction === 'attract' ? -1 : 1);
     uniform(pointProgram, 'u_palette', '1f', item().palette === 'brand' ? 1 : 0);
     uniform(pointProgram, 'u_size', '1f', Math.max(1, width / Math.sqrt(count * width / height) * .98) * number(item().pointSize, .6, 2.3, 1));
@@ -264,7 +272,13 @@
     const dt = Math.min(delta / 1000, .05); last = time;
     clock += dt * number(item().speed, 0, 1.5, .65);
     interaction.energy *= Math.exp(-dt * 3);
-    scatter += ((state.dispersed ? 1 : 0) - scatter) * (1 - Math.exp(-dt * 5));
+    const activityTarget = interaction.active || interaction.pulse ? 1 : 0;
+    interaction.activity += (activityTarget - interaction.activity) * (1 - Math.exp(-dt * 10));
+    if (Math.abs(activityTarget - interaction.activity) < .001) interaction.activity = activityTarget;
+    const scatterTarget = state.dispersed ? 1 : 0;
+    scatter += (scatterTarget - scatter) * (1 - Math.exp(-dt * 5));
+    if (Math.abs(scatterTarget - scatter) < .001) scatter = scatterTarget;
+    if (!interaction.activity && !activityTarget) interaction.mouse = [4, 4];
     if (item().quality === 'adaptive') {
       averageFrame += (Math.min(delta, 100) - averageFrame) * .06;
       if (++sampleFrames >= 90) {
@@ -272,16 +286,25 @@
         sampleFrames = 0;
       }
     }
-    draw(); raf = requestAnimationFrame(animate);
+    draw();
+    if (needsAnimation()) raf = requestAnimationFrame(animate);
+    else { last = 0; updateMotionLabel(); }
   }
-  function start() { updateMotionLabel(); if (!raf && !a.paused && !staticMode && !contextLost && sourceCanvas) { last = 0; raf = requestAnimationFrame(animate); } }
+  function needsAnimation() { return interaction.active || interaction.pulse || interaction.activity > 0 || state.dispersed || scatter > 0; }
+  function start() { updateMotionLabel(); if (!raf && !a.paused && !staticMode && !contextLost && sourceCanvas && needsAnimation()) { last = 0; raf = requestAnimationFrame(animate); } }
   function stop() { cancelAnimationFrame(raf); raf = 0; last = 0; }
+  function resetInteraction() {
+    window.clearTimeout(pulseTimer); pulseTimer = 0;
+    interaction.active = false; interaction.pulse = false; interaction.activity = 0;
+    interaction.mouse = [4, 4]; interaction.previous = null; interaction.energy = 0;
+    stop();
+  }
   function updateMotionLabel() {
-    a.text('[data-motion-label]', staticMode || contextLost ? ui.piStatic : a.paused ? ui.piPaused : ui.piLive);
-    frame.dataset.renderState = staticMode ? 'static' : contextLost ? 'context-lost' : a.paused ? 'paused' : 'running';
+    a.text('[data-motion-label]', staticMode || contextLost ? ui.piStatic : a.paused ? ui.piPaused : needsAnimation() ? ui.piLive : ui.piIdle);
+    frame.dataset.renderState = staticMode ? 'static' : contextLost ? 'context-lost' : a.paused ? 'paused' : needsAnimation() ? 'running' : 'idle';
   }
   function fallback(lost = false) {
-    stop(); contextLost = lost; staticMode = !lost;
+    resetInteraction(); contextLost = lost; staticMode = !lost;
     canvas.hidden = true; still.hidden = false;
     $('[data-fallback]').hidden = false;
     a.text('[data-fallback]', lost ? ui.piContextLost : ui.fallback);
@@ -311,11 +334,13 @@
     const box = interaction.rect || (interaction.rect = canvas.getBoundingClientRect());
     const next = [(event.clientX - box.left) / box.width * 2 - 1, 1 - (event.clientY - box.top) / box.height * 2];
     if (interaction.previous) interaction.energy = Math.min(2, interaction.energy + Math.hypot(next[0] - interaction.previous[0], next[1] - interaction.previous[1]) * 6);
-    interaction.mouse = next; interaction.previous = next;
+    window.clearTimeout(pulseTimer); pulseTimer = 0; interaction.pulse = false;
+    interaction.mouse = next; interaction.previous = next; interaction.active = true;
     if (event.type === 'pointerdown') interaction.energy = 1.5;
+    start();
   }
-  function clearPointer() { interaction.mouse = [4, 4]; interaction.previous = null; }
-  canvas.addEventListener('pointerenter', () => { interaction.rect = canvas.getBoundingClientRect(); });
+  function clearPointer() { interaction.active = false; interaction.previous = null; start(); }
+  canvas.addEventListener('pointerenter', event => { interaction.rect = canvas.getBoundingClientRect(); pointer(event); }, {passive: true});
   canvas.addEventListener('pointermove', pointer, {passive: true});
   canvas.addEventListener('pointerdown', event => { interaction.rect = canvas.getBoundingClientRect(); pointer(event); }, {passive: true});
   canvas.addEventListener('pointerleave', clearPointer); canvas.addEventListener('pointerup', event => { if (event.pointerType === 'touch') clearPointer(); });
@@ -327,8 +352,7 @@
     catch { fallback(); }
   });
   a.root.addEventListener('v2:motion', () => {
-    clearPointer();
-    if (a.paused) { stop(); if (a.reduced) scatter = state.dispersed ? 1 : 0; }
+    if (a.paused) { resetInteraction(); if (a.reduced || !state.dispersed) scatter = state.dispersed ? 1 : 0; draw(); }
     else start();
     updateMotionLabel();
   });
@@ -359,8 +383,10 @@
   });
   $('[data-center-pulse]').addEventListener('click', () => {
     if (staticMode || contextLost || a.paused) { a.status(ui.piResumeHint); return; }
-    interaction.mouse = [0, 0]; interaction.energy = 2;
-    window.setTimeout(() => { if (!interaction.previous) interaction.mouse = [4, 4]; }, 700);
+    window.clearTimeout(pulseTimer);
+    interaction.mouse = [0, 0]; interaction.previous = null; interaction.active = false; interaction.pulse = true; interaction.energy = 2;
+    pulseTimer = window.setTimeout(() => { pulseTimer = 0; interaction.pulse = false; start(); }, 700);
+    start();
     a.status(ui.piPulseDone);
   });
   $('[data-snapshot]').addEventListener('click', () => {
@@ -406,6 +432,7 @@
       sync(); prepare();
     },
     reset() {
+      resetInteraction();
       uploadVersion++; imageVersion++;
       state.items[0] = structuredClone(defaults.items[0]); state.dispersed = false; scatter = 0; clock = 0;
       averageFrame = 16.7; sampleFrames = 0; density(true);

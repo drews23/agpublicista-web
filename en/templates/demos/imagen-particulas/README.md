@@ -6,8 +6,8 @@ Original HTML, CSS, and JavaScript, with WebGL 2 shaders and three original gene
 
 1. Choose Orbit, Flow, or Monogram. Each composition is drawn in Canvas 2D, without remote photos or assets. Customize changes its title, description, and brand accent.
 2. Optionally load a local PNG, JPEG, or WebP image up to 8 MB. It is decoded, resized to a maximum of 1600 pixels per side, and processed in your browser. Nothing is uploaded.
-3. Switch between attraction and repulsion. Adjust strength, radius, speed, and point size. Color mode preserves the image or applies the Lienzo palette.
-4. Move your pointer, touch the artwork, or use Center pulse. Touch keeps the page’s vertical scrolling available. Scatter and Reassemble also work with a keyboard.
+3. Switch between attraction and repulsion. Adjust strength, radius, speed, and point size. Color mode preserves particle colors or applies the brand palette. The resting image always retains its original colors.
+4. At rest, the complete image is drawn without a point grid or distortion. Move your pointer or touch the image to activate particles only around the contact. Moving away or lifting your finger smoothly restores the image. Center pulse triggers a brief response without a pointer. Touch keeps the page’s vertical scrolling available. Scatter and Reassemble also work with a keyboard.
 5. Save a PNG of the visible canvas. Its resolution matches the current drawing buffer and appears in the filename. Controls are not included in the image.
 
 Choosing an original composition removes the uploaded image. Use original artwork restores the selected composition. Reset item restores this template’s initial settings. State lives in memory: use Get HTML and download the edited file to keep your work after closing the page.
@@ -16,9 +16,11 @@ Choosing an original composition removes the uploaded image. Use original artwor
 
 Adaptive starts with 42,000 points when the canvas is narrower than 650 CSS pixels, or 82,000 on larger canvases. It observes frame intervals while animation runs. After 90 samples, if the average exceeds 26 ms, it reduces the count by 26%, down to a minimum of 18,000. Density does not automatically increase, avoiding repeated changes. Changing density or resizing the canvas recalculates the starting point.
 
-Balanced draws 180,000 points; High draws 600,000. These are explicit fixed settings, not performance promises. Speed depends on the GPU, browser, display, power settings, and other page activity. The panel displays the configured point count, not an FPS measurement.
+Balanced draws 180,000 points; High draws 600,000. These are explicit fixed settings, not performance promises. Speed depends on the GPU, browser, display, power settings, and other page activity. The panel displays the configured effect point count, not an FPS measurement. At rest, the point grid is not drawn: the complete image texture is used instead.
 
 The drawing buffer is capped at 1600 pixels wide. Pixel ratio is limited to 1.5, or 1.25 on small canvases. There are no per-particle attribute buffers, CPU physics integrators, or continuous GPU-to-CPU reads: positions are generated from `gl_VertexID`.
+
+Once reassembly finishes, the animation loop stops: the resting image does not consume continuous animation frames. Scatter explicitly activates the effect across the whole image; Reassemble restores the complete image.
 
 Pause motion, reduced-motion preferences, a hidden tab, an offscreen stage, and studio dialogs stop the animation loop. Explicit control changes can draw one paused frame. With reduced motion, Scatter/Reassemble applies immediately. Pausing stops animation; it does not release the texture or context while the page remains open.
 
