@@ -61,10 +61,10 @@ def enhance_document(raw, route):
     return raw
 
 if __name__ == '__main__':
-    for route in dict.fromkeys([*RELATED_PAGES, *PAGES, *ACCESS_PAGES, '/en/tools/qr/']):
+    for route in dict.fromkeys([*RELATED_PAGES, *PAGES, *ACCESS_PAGES, '/herramientas/qr/', '/en/tools/qr/']):
         path = ROOT / route.strip('/') / 'index.html'
         raw = path.read_text(encoding='utf-8')
         updated = enhance_document(raw, route)
         if updated != raw:
             path.write_text(updated, encoding='utf-8')
-    print('Resource summaries, related sections, template shortcuts, and English QR formats applied.')
+    print('Resource summaries, related sections, template shortcuts, and localized QR formats applied.')

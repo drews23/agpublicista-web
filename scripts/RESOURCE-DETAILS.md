@@ -18,7 +18,7 @@ Local verification for this tranche is in `output/resource-details-2026-10-12/`:
 
 The narrow pass also maintains summaries on both AI icon guides. The existing Spanish video and English style comparison remain the preview targets. Native fragment links focus the preview, download, and terms headings/sections. The inventory distinguishes 25 concepts from 75 SVG and 75 PNG files; the original ZIP and separate credits remain unchanged. The English source removes obsolete Spanish labels only for guides that already have English editions.
 
-`qr_formats.py` adds six English format links before the main QR editor, with scoped `qr-formats.css`. The editor itself continues to handle text/links. The six dedicated pages, engines, export controls, and Spanish QR page remain unchanged. This enhancer runs from the narrow pass, the English tool builder, and the finalizer through `enhance_document`. No broad regeneration is needed.
+`qr_formats.py` adds six localized format links before the main QR editor, with scoped `qr-formats.css`. Since October 28, 2026, the Spanish hub also links to its existing URL, text, Wi-Fi, contact, email, and SMS generators. The editor itself continues to handle text/links. The six dedicated pages, engines, export controls, and existing English page remain unchanged. This enhancer runs from the narrow pass, the English tool builder, and the finalizer through `enhance_document`. Apply the helper only to the intended hub when reviewing a small change; no broad regeneration is needed.
 
 ## Remaining icon and Spline guides (October 13, 2026)
 
