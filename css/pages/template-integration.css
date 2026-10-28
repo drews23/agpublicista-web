@@ -1,0 +1,13 @@
+/* Practical setup guide; the catalog and downloadable templates stay independent. */
+.template-integration{margin-block:2rem;padding:clamp(18px,3vw,32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);min-width:0;scroll-margin-top:110px}
+.template-integration h2{margin:0 0 1rem;font-family:var(--font-display);font-size:clamp(1.65rem,3vw,2.3rem);font-weight:400;line-height:1.2;letter-spacing:normal}
+.template-integration p,.template-integration li,.template-integration dd{max-width:82ch;color:var(--muted);font-size:.92rem;line-height:1.8}
+.template-integration a{text-underline-offset:.22em}
+.template-integration details{border-top:1px solid var(--line);margin-top:1rem;min-width:0}
+.template-integration summary{padding:1rem 0;min-height:48px;cursor:pointer;font-size:.96rem;line-height:1.5}
+.template-integration details>div{padding:0 0 .5rem;min-width:0}
+.template-integration pre{max-width:100%;overflow-x:auto;padding:1rem;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:400 .8rem/1.7 ui-monospace,monospace;tab-size:2;white-space:pre}
+.template-integration p code,.template-integration li code{overflow-wrap:anywhere}
+.template-integration dt{margin-top:1rem;font-weight:600}
+.template-integration dd{margin:.25rem 0 0}
+.template-integration a:focus-visible,.template-integration summary:focus-visible{outline:2px solid var(--violeta);outline-offset:4px}

@@ -236,6 +236,8 @@ def build():
     expansion_spec=importlib.util.spec_from_file_location('template_expansion',ROOT/'scripts/build-template-expansion.py')
     expansion=importlib.util.module_from_spec(expansion_spec);expansion_spec.loader.exec_module(expansion)
     catalog=expansion.enhance_collection(catalog, '/en/templates/')
+    from template_integration import enhance_integration
+    catalog = enhance_integration(catalog, '/en/templates/')
     TARGET.joinpath('index.html').write_text(catalog, encoding='utf-8')
     TARGET.joinpath('plantillas.js').write_text(translate(SOURCE.joinpath('plantillas.js').read_text(encoding='utf-8'), {'Tema claro':'Light theme','Tema oscuro':'Dark theme','Demo interactiva: ':'Interactive demo: '}), encoding='utf-8')
     assets = ROOT / 'en/assets'

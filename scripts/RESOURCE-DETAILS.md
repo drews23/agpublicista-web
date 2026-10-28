@@ -1,5 +1,11 @@
 # Resource details: Spanish and English
 
+## Practical HTML integration (October 28, 2026)
+
+`template_integration.py` maintains an original guide inside both template catalogs, before the existing FAQs. It uses the current Creative Resource Carousel ZIP and its real dependency names. The guide distinguishes a complete template, an exported HTML that still needs its dependencies, an iframe embed, and a native integration that requires adaptation. The iframe example displays the complete template with a fixed height; it is not an automatic component converter or a verified React/WordPress integration.
+
+Run `python scripts/template_integration.py` to update only these two guide blocks. The English catalog builder and the narrow resource enhancer also preserve their localized version. No ZIP, demo, export engine, navigation, canonical, existing resource link or count changes. `css/pages/template-integration.css` is scoped to the new guide. The exact HTML example is extracted alongside the actual ES/EN ZIP files for local browser verification; those QA folders remain in output, outside publication.
+
 The four reviewed articles have a short resource summary before their first preview. It identifies the contents, archive and editable format, requirements, and shortcuts to preview, download, and usage terms.
 
 Run `python scripts/resource_details.py` after regenerating those articles. This narrow pass preserves the rest of each document. It is also called by the English resource builder and finalizer. Do not run broad English generators merely to refresh these summaries: those generators own other pages and may require the existing navigation and discovery final passes afterward.

@@ -4,6 +4,7 @@ import re
 from resource_related import enhance_related, PAGES as RELATED_PAGES
 from template_shortcuts import enhance_shortcuts
 from qr_formats import enhance_qr_formats
+from template_integration import enhance_integration
 from resource_access import enhance_access, PAGES as ACCESS_PAGES
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,7 @@ PAGES = {
 def enhance_document(raw, route):
     raw = enhance_access(raw, route)
     raw = enhance_qr_formats(raw, route)
+    raw = enhance_integration(raw, route)
     raw = enhance_shortcuts(raw, route)
     raw = enhance_related(raw, route)
     if route not in PAGES:
