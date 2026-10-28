@@ -69,7 +69,9 @@
 .estudio[data-editor-workspace="qr"] .estudio__seccion > summary { font: 550 .78rem var(--font-body); text-transform: none; letter-spacing: normal; min-height: 48px; }
 .estudio[data-editor-workspace="qr"] .qr-lienzo { max-width: min(100%,370px); max-height: min(100%,370px); }
 .estudio[data-editor-workspace="qr"] .qr-lienzo canvas { display: block; width: 100%; max-width: 370px; height: auto; max-height: 100%; object-fit: contain; }
-.estudio[data-editor-workspace="qr"] .editor-qr-export { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: start; gap: .6rem; padding: .8rem 1rem; border-top: 1px solid var(--line); background: var(--bg); }
+/* Sticky preview and inspector can reach the export row while scrolling.
+   Keep the real controls above both without changing the QR or its layout. */
+.estudio[data-editor-workspace="qr"] .editor-qr-export { position: relative; z-index: 4; grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: start; gap: .6rem; padding: .8rem 1rem; border-top: 1px solid var(--line); background: var(--bg); }
 .estudio[data-editor-workspace="qr"] .estudio__codigo-acciones { margin: 0; justify-content: flex-start; }
 .estudio[data-editor-workspace="qr"] .estudio__codigo { position: static; width: auto; max-width: 100%; margin-inline-start: auto; background: var(--bg-soft); box-shadow: none; backdrop-filter: none; border: 0; opacity: 1; visibility: visible; }
 .estudio[data-editor-workspace="qr"] .estudio__codigo > summary { min-height: 44px; }
