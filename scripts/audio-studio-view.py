@@ -11,6 +11,7 @@ import hashlib
 import html
 import json
 from pathlib import Path
+from urllib.parse import quote
 
 from bs4 import BeautifulSoup
 
@@ -174,10 +175,20 @@ def editorial(lang: str) -> str:
         base = "/en/tools/audio/"
         faqs = [("Is my audio uploaded to a server?", "No. This editor decodes and processes audio in your browser. Exports are created on your device. Site services, including advertising and consent, follow their own privacy policies."), ("Which formats can I open?", "MP3, WAV, M4A/AAC, OGG/Opus, and FLAC when your browser supports the source codec. If decoding fails, the editor shows a message. A file extension alone does not guarantee compatibility."), ("Does changing speed preserve pitch?", "No. Speed and pitch change together through playback rate. This editor does not provide pitch-preserving time-stretching."), ("Does normalization prevent all distortion?", "Normalization adjusts the selection peak to −1 dBFS. It cannot repair existing distortion and does not measure LUFS loudness. If you increase gain afterward, check the peak again and listen to the output."), ("Should I choose 16-bit or 24-bit WAV?", "WAV stores uncompressed PCM audio. 16-bit is often suitable for sharing; 24-bit can be useful for further editing. Exporting at a higher bit depth cannot recover detail missing from the original."), ("What are the editor limits?", "Uploads are limited to 100 MiB per file. Decoded PCM audio is limited to 384 MiB, and estimated working memory to 768 MiB. These are preventive limits, not a guarantee that every device can finish an operation. Your browser may need additional memory for decoding; keep the original and use shorter recordings on devices with limited memory."), ("Can I merge files or remove background noise?", "This studio works with one track. Use Merge audio to join multiple files. It does not include AI noise removal or claim to restore damaged recordings.")]
         faq_title = "Clear answers before you export."
+    if lang == "es":
+        practice_title = "Un sonido para ponerlo en práctica."
+        practice_intro = "Compara los packs de Lienzo y elige un WAV. Prepáralo aquí y llévalo a tu editor de video para sincronizarlo con la imagen."
+        practice_links = [("/blog/efectos-de-sonido-para-videos-gratis/", "Comparar y descargar sonidos"), ("/blog/sonidos-de-introduccion-y-desvanecimiento-gratis/", "Practicar una entrada y un cierre")]
+    else:
+        practice_title = "Put a sound to work."
+        practice_intro = "Compare Lienzo sound packs and choose a WAV file. Prepare it here, then bring it into your video editor to sync it with the picture."
+        practice_links = [("/en/blog/free-sound-effects/", "Compare and download sound effects"), ("/en/blog/intro-fade-sound-effects/", "Practice an intro and a fade")]
+    practice_anchors = "".join(f'<a href="{path}">{label}{icon("arrow")}</a>' for path, label in practice_links)
+    practice = f'<div class="as-focused" id="audio-practice"><div><h2>{practice_title}</h2><p>{practice_intro}</p></div><nav aria-label="{"Guías y sonidos para practicar" if lang == "es" else "Sound packs and practice guides"}">{practice_anchors}</nav></div>'
     cards = "".join(f'<article><span class="as-kicker">0{i + 1}</span><h3>{heading}</h3><p>{body}</p></article>' for i, (heading, body) in enumerate(steps))
     anchors = "".join(f'<a href="{base}{path}/">{name}{icon("arrow")}</a>' for path, name in links)
     faq_html = "".join(f'<details class="faq-item" name="audio-studio-faq"><summary><h3>{question}</h3></summary><p>{answer}</p></details>' for question, answer in faqs)
-    return f'''<section class="shell as-guide"><div class="as-section-heading"><p class="eyebrow">{'EL FLUJO' if lang == 'es' else 'THE WORKFLOW'}</p><h2>{title}</h2><p>{intro}</p></div><div class="as-guide__steps">{cards}</div><div class="as-focused"><div><h2>{focused_title}</h2><p>{focused_intro}</p></div><nav aria-label="{'Herramientas de audio' if lang == 'es' else 'Audio tools'}">{anchors}</nav></div><div class="as-faq"><h2>{faq_title}</h2>{faq_html}</div></section>'''
+    return f'''<section class="shell as-guide"><div class="as-section-heading"><p class="eyebrow">{'EL FLUJO' if lang == 'es' else 'THE WORKFLOW'}</p><h2>{title}</h2><p>{intro}</p></div><div class="as-guide__steps">{cards}</div><div class="as-focused"><div><h2>{focused_title}</h2><p>{focused_intro}</p></div><nav aria-label="{'Herramientas de audio' if lang == 'es' else 'Audio tools'}">{anchors}</nav></div>{practice}<div class="as-faq"><h2>{faq_title}</h2>{faq_html}</div></section>'''
 
 
 def update_schema(soup: BeautifulSoup, lang: str) -> None:
@@ -205,6 +216,10 @@ def render_page(source: str, lang: str) -> str:
     if main is None:
         raise ValueError(f"No main element found for {lang}")
     sharing = main.select_one(".compartir-bloque")
+    if sharing and lang == "es":
+        # Legacy share URLs repeated the title's existing installation promise.
+        for anchor in sharing.select("a[href]"):
+            anchor["href"] = anchor["href"].replace(quote("sin instalar nada, sin instalar nada"), quote("sin instalar nada"))
     preserved_sharing = str(sharing) if sharing else ""
     main.clear()
     main["id"] = "main"

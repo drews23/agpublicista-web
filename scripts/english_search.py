@@ -59,16 +59,8 @@ def apply_search_copy(soup, route):
             fragment = BeautifulSoup('<p data-search-related>Working on a scene change? Compare the <a href="/en/blog/free-transition-sound-effects/">16 free WAV transition sound effects</a> and follow the synchronization guide.</p>', 'html.parser')
             section.append(fragment.p)
     elif route == '/en/templates/':
-        soup.select_one('.templates-head .lede').string = 'Preview three free HTML, CSS, and JavaScript UI templates, then download the source code. Add a carousel or social buttons to an existing website; these downloads are reusable UI pieces, not complete website themes.'
-        labels = {
-            'carrusel-recursos': ('Interactive HTML, CSS and JavaScript Carousel', 'Show resources in a responsive carousel with native scrolling, keyboard navigation, category filters, and a temporary favorites filter. Customize the cards and links in index.html; keep script.js for the interactive controls.'),
-            'botones-cristal': ('Glassmorphism Social Media Buttons', 'Add five social links with a CSS glass effect, reflections, and lift on hover or keyboard focus. Change destinations and accessible labels in index.html, then adjust colors and spacing in styles.css.'),
-            'botones-capas': ('Layered Social Buttons with CSS Hover Effects', 'Give three social links color and depth with layered CSS hover effects. Edit each destination and label in index.html; adjust the --tile color and .layers rules in styles.css to fit your brand.'),
-        }
-        for id_, (heading, description) in labels.items():
-            card = soup.select_one('#' + id_)
-            card.h2.string = heading
-            card.select_one('.template__description').string = description
+        # Resource builders own card headings and descriptions for all 14 pieces.
+        soup.select_one('.templates-head .lede').string = 'Explore fourteen free HTML, CSS, and JavaScript templates. Preview and customize carousels, galleries, cards, menus, icons, and visual effects before downloading the code. These are reusable interface pieces, not complete website themes.'
 
     # A stable insertion point makes repeated finalization idempotent.
     extra = CONTENT / ('search-' + ('home' if route == '/en/' else route.rstrip('/').split('/')[-1]) + '.html')

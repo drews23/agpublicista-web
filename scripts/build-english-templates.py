@@ -17,7 +17,7 @@ VERSION = '2026101201'
 ORIGIN = 'https://lienzo.tools'
 
 TEXT = {
- 'Plantillas web gratis: vista previa y descarga | Lienzo': 'Free HTML CSS JavaScript Templates | Lienzo',
+ 'Plantillas web gratis: vista previa y descarga | Lienzo': '14 Free HTML, CSS & JavaScript Templates | Lienzo',
  'Plantillas web que puedes ver, probar y descargar': 'Free Web Templates: Preview, Try and Download',
  'Plantillas HTML y CSS listas para personalizar: botones sociales de cristal y carrusel de recursos. Prueba cada demo y descarga su ZIP con código y guía.': 'Explore free HTML, CSS and JavaScript templates: an interactive carousel and glass social buttons. Try live demos and download the code with an English guide.',
  'Plantillas web de Lienzo: carrusel y botones sociales': 'Lienzo web templates: interactive carousel and social buttons',

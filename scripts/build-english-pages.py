@@ -34,6 +34,12 @@ PAGES = [
 ROUTES = {'/' + es + '/': '/en/' + en + '/' for es, en, *_ in PAGES}
 ROUTES['/codigo-web/plantillas/'] = '/en/templates/'
 
+# These guides now have reviewed English editions; do not mark them Spanish.
+ROUTES.update({
+    '/blog/efectos-de-sonido-glitch-gratis/': '/en/blog/glitch-sound-effects/',
+    '/blog/transiciones-de-sonido-gratis/': '/en/blog/free-transition-sound-effects/',
+})
+
 def localize_links(fragment):
     for a in fragment.select('a[href]'):
         href = a['href']
