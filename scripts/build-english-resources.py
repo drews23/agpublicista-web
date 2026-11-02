@@ -169,6 +169,8 @@ This English sheet is separate from the unchanged original archive.
     target.parent.mkdir(parents=True,exist_ok=True)
     from resource_details import enhance_document
     document = enhance_document(document, '/en/blog/' + en + '/')
+    from article_share import enhance_document as enhance_article_share
+    document = enhance_article_share(document, '/en/blog/' + en + '/')
     target.write_text(document,encoding='utf-8')
     source=re.sub(r'<!-- Lienzo language alternatives -->\s*(?:<link[^>]+hreflang=[^>]+>\s*)+','',source)
     source=source.replace('</head>','<!-- Lienzo language alternatives -->\n'+templates.head_links('/blog/'+es+'/', '/en/blog/'+en+'/')+'\n</head>',1)

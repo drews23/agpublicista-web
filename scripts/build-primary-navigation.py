@@ -45,7 +45,8 @@ def update(source, name):
     utility_label = 'My Lienzo' if language == 'en' else 'Mi Lienzo'
     selected = ' aria-current="page"' if route == utility else ''
     button = f'<a class="theme-btn espacio-btn" href="{utility}" data-espacio-btn aria-label="{utility_label}" title="{utility_label}"{selected}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a>'
-    utilities = [n for n in discovery.Ranges(header).nodes if n['tag'] == 'a' and 'data-espacio-btn' in n['attrs']]
+    utilities = [n for n in discovery.Ranges(header).nodes if n['tag'] == 'a' and
+                 ('data-espacio-btn' in n['attrs'] or 'espacio-btn' in n['attrs'].get('class', '').split())]
     for n in reversed(utilities):
         header = header[:n['start']] + header[n['end']:]
     toggle = next(n for n in discovery.Ranges(header).nodes if n['tag'] == 'button' and 'data-nav-toggle' in n['attrs'])

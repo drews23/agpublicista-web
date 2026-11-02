@@ -117,7 +117,9 @@ def build_articles():
         soup.main.clear();article=soup.new_tag('article',attrs={'class':'english-prose' if en else 'section shell'})
         body=(SOURCE/('article-en.html' if en else 'article-es.html')).read_text(encoding='utf8');assert '{{' not in body and URL in body
         article.append(BeautifulSoup(body,'html.parser'));soup.main.append(article)
-        path=ROOT/route.lstrip('/')/'index.html';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(str(soup),encoding='utf8')
+        from article_share import enhance_document as enhance_article_share
+        document=enhance_article_share(str(soup),route)
+        path=ROOT/route.lstrip('/')/'index.html';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(document,encoding='utf8')
 
 
 def sync_related_pages():

@@ -139,6 +139,8 @@ for es, en, title, description in PAGES:
     document = templates.theme_logo(document)
     destination = ROOT / 'en' / en / 'index.html'
     destination.parent.mkdir(parents=True, exist_ok=True)
+    from article_share import enhance_document as enhance_article_share
+    document = enhance_article_share(document, '/en/' + en.strip('/') + '/')
     destination.write_text(document, encoding='utf-8')
     # Alter only head alternates and the navigation language switch in Spanish.
     source = re.sub(r'<!-- Lienzo language alternatives -->\s*(?:<link[^>]+hreflang=[^>]+>\s*)+', '', source)
