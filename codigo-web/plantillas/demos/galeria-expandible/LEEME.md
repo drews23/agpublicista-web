@@ -14,7 +14,11 @@ Con foco en un selector, usa Izquierda/Derecha en horizontal o Arriba/Abajo en v
 
 Personalizar modifica título, categoría, descripción, enlace HTTP(S) y acento. Restaurar elemento afecta solo a ese panel. El acento también participa en la ilustración original.
 
-Fondo y movimiento contiene los ajustes del panel seleccionado. Carga PNG, JPEG o WebP de hasta 8 MB; la imagen se procesa en tu navegador y no se envía a un servidor. Ajusta encuadre horizontal/vertical y acercamiento. Añade una descripción accesible cuando la fotografía comunique información. Usar arte original restaura el paisaje. Una carga anterior pendiente no sobrescribe una selección o restauración más reciente.
+Imagen y movimiento contiene los ajustes del panel seleccionado. Carga PNG, JPEG o WebP de hasta 8 MB; la imagen se procesa en tu navegador y no se envía a un servidor. Añade una descripción accesible cuando la fotografía comunique información. Usar arte original restaura el paisaje. Una carga anterior pendiente no sobrescribe una selección o restauración más reciente.
+
+Las imágenes nuevas usan **Imagen completa · sin recorte**. Conserva todos los bordes y la proporción de la fotografía, centrada en el espacio disponible. Los controles de posición, acercamiento y movimiento quedan desactivados para proteger el encuadre; sus valores se conservan. **Rellenar 6:5 · recorte ajustable** permite elegir posición horizontal/vertical, acercamiento, profundidad y duración. Usa el mismo marco 6:5 en el panel, la vista ampliada y el HTML individual, aunque cambie el tamaño de la pantalla. El movimiento es opcional y cero lo desactiva.
+
+En los paneles con fotografía, el texto ocupa su propio espacio para no tapar la imagen; si es largo, puede desplazarse dentro de ese espacio. Las ilustraciones originales mantienen su composición y animaciones.
 
 Profundidad y movimiento regula la intensidad; cero muestra una composición estática. Duración del ciclo cambia el ritmo. Solo se anima el panel activo; pausa manual, movimiento reducido, diálogos y fuera de vista suspenden los efectos. El puntero se procesa únicamente cuando se mueve, sin un bucle JavaScript permanente. El rendimiento depende del dispositivo y no se garantiza una tasa de fotogramas.
 
@@ -23,7 +27,7 @@ Profundidad y movimiento regula la intensidad; cero muestra una composición est
 Los ajustes son temporales en memoria; recargar reinicia el ejemplo.
 
 - **Obtener HTML** conserva la galería completa y sus fotos/ajustes. Mantén ese HTML junto a editor-workspace.css, editor-workspace.js, studio.css, studio.js, component.css, component.js y assets/ del ZIP. No es un archivo autónomo.
-- **Descargar este panel**, dentro de Fondo y movimiento, genera un HTML independiente con la ilustración o foto, estilos, fuentes y avisos. Puede abrirse sin archivos vecinos ni red. Incluye pausa y conserva texto, enlace y encuadre. Las fotos añadidas pueden aumentar su peso.
+- **Descargar este panel**, dentro de Imagen y movimiento, genera un HTML independiente con la ilustración o foto, estilos, fuentes y avisos. Puede abrirse sin archivos vecinos ni red. Incluye pausa cuando hay movimiento y conserva texto, enlace y modo de encuadre. Imagen completa mantiene toda la fotografía; Rellenar conserva el marco 6:5, la posición y el acercamiento elegidos. Las fotos añadidas pueden aumentar su peso.
 
 Conserva los avisos de licencia y la accesibilidad al integrar. La demo alojada tiene noindex; las descargas lo omiten. Configura tus propios metadatos antes de publicar. Los enlaces de muestra conducen a Lienzo y deben adaptarse al destino real de cada historia.
 

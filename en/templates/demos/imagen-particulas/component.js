@@ -22,7 +22,7 @@
   const presets = ['orbit', 'ribbon', 'monogram'];
   const settings = {
     strength: [.05, 1.2, .6], radius: [.08, .8, .32], speed: [0, 1.5, .65], pointSize: [.6, 2.3, 1],
-    quality: ['adaptive', 'balanced', 'high'], interaction: ['repel', 'attract'], palette: ['original', 'brand']
+    quality: ['adaptive', 'balanced', 'high'], interaction: ['repel', 'attract'], palette: ['original', 'brand'], framing: ['contain', 'cover']
   };
 
   const vertexBackground = `#version 300 es
@@ -184,7 +184,7 @@
     const current = item();
     const typography = getComputedStyle(frame);
     const key = JSON.stringify([current.title, current.description, current.accent, current.composition, current.imageData, colors, a.color('surface', '#09080e'), a.color('text', '#ffffff'), typography.getPropertyValue('--brand-font-display'), typography.getPropertyValue('--brand-font-body')]);
-    if (key === sourceKey && sourceCanvas) { draw(); start(); return; }
+    if (key === sourceKey && sourceCanvas) { resize(); draw(); start(); return; }
     const version = ++imageVersion;
     frame.dataset.loading = 'true';
     $('[data-snapshot]').disabled = true;
@@ -200,14 +200,14 @@
       if (version !== imageVersion) return;
       resetInteraction();
       sourceCanvas = source; sourceKey = key;
-      uploadTexture(); draw(); start();
+      uploadTexture(); resize(); draw(); start();
       frame.dataset.ready = 'true';
       a.text('[data-source-label]', current.imageData ? ui.piLocalImage : ui['piPreset' + (presets.indexOf(current.composition) + 1)] || ui.piPreset1);
       $('[data-remove-image]').disabled = !current.imageData;
     } catch (error) { if (version === imageVersion) a.status(ui.imageError); }
     finally { if (version === imageVersion) { frame.dataset.loading = 'false'; $('[data-snapshot]').disabled = !sourceCanvas; } }
   }
-  function adaptiveCount() { return frame.clientWidth < 650 ? 42000 : 82000; }
+  function adaptiveCount() { return (interaction.rect?.width || frame.clientWidth) < 650 ? 42000 : 82000; }
   function density(reset = false) {
     const value = settings.quality.includes(item().quality) ? item().quality : 'adaptive';
     if (value !== 'adaptive') count = qualityCounts[value];
@@ -215,17 +215,38 @@
     a.text('[data-particle-count]', new Intl.NumberFormat(locale).format(staticMode || contextLost ? 0 : count));
     a.text('[data-density-note]', staticMode || contextLost ? ui.piStaticNote : value === 'adaptive' ? ui.piAdaptiveNote : ui.piManualNote);
   }
+  function imageSize() {
+    const w = sourceCanvas?.width || 1400, h = sourceCanvas?.height || 1050;
+    if (item().framing === 'cover') {
+      // The optional 4:3 crop has its own frame, never the inspector's dimensions.
+      const unit = Math.max(1, Math.floor(Math.min(w / 4, h / 3, 400)));
+      return [unit * 4, unit * 3];
+    }
+    const scale = Math.min(1, 1600 / Math.max(w, h));
+    return [Math.max(1, Math.round(w * scale)), Math.max(1, Math.round(h * scale))];
+  }
+  function displayRect() {
+    const box = canvas.getBoundingClientRect();
+    const scale = Math.min(box.width / width, box.height / height);
+    const w = width * scale, h = height * scale;
+    return {left: box.left + (box.width - w) / 2, top: box.top + (box.height - h) / 2, width: w, height: h};
+  }
   function resize() {
-    const box = frame.getBoundingClientRect();
-    const dpr = Math.min(devicePixelRatio || 1, box.width < 650 ? 1.25 : 1.5);
-    const nextWidth = Math.max(1, Math.round(Math.min(1600, box.width * dpr)));
-    const nextHeight = Math.max(1, Math.round(nextWidth * box.height / Math.max(1, box.width)));
-    interaction.rect = canvas.getBoundingClientRect();
-    if (nextWidth === width && nextHeight === height) return;
+    const [nextWidth, nextHeight] = imageSize();
+    const changed = nextWidth !== width || nextHeight !== height;
     width = nextWidth; height = nextHeight;
-    canvas.width = still.width = width; canvas.height = still.height = height;
-    if (gl && !contextLost) gl.viewport(0, 0, width, height);
-    density(true); draw();
+    if (changed) {
+      canvas.width = still.width = width; canvas.height = still.height = height;
+      if (gl && !contextLost) gl.viewport(0, 0, width, height);
+    }
+    interaction.rect = displayRect();
+    interaction.previous = null;
+    frame.dataset.framing = item().framing === 'cover' ? 'cover' : 'contain';
+    frame.dataset.outputWidth = String(width); frame.dataset.outputHeight = String(height);
+    const sizeLabel = width + ' × ' + height + ' px';
+    if ($('[data-export-size]').textContent !== sizeLabel) a.text('[data-export-size]', sizeLabel);
+    density(true);
+    if (changed) draw();
   }
   function drawStatic() {
     if (!sourceCanvas) return;
@@ -331,8 +352,10 @@
   }
   function pointer(event) {
     if (a.paused || staticMode || contextLost || event.pointerType === 'touch' && event.type === 'pointermove' && !event.buttons) return;
-    const box = interaction.rect || (interaction.rect = canvas.getBoundingClientRect());
+    const box = interaction.rect || (interaction.rect = displayRect());
+    if (!box.width || !box.height) return;
     const next = [(event.clientX - box.left) / box.width * 2 - 1, 1 - (event.clientY - box.top) / box.height * 2];
+    if (next.some(value => Math.abs(value) > 1)) { clearPointer(); return; }
     if (interaction.previous) interaction.energy = Math.min(2, interaction.energy + Math.hypot(next[0] - interaction.previous[0], next[1] - interaction.previous[1]) * 6);
     window.clearTimeout(pulseTimer); pulseTimer = 0; interaction.pulse = false;
     interaction.mouse = next; interaction.previous = next; interaction.active = true;
@@ -340,9 +363,9 @@
     start();
   }
   function clearPointer() { interaction.active = false; interaction.previous = null; start(); }
-  canvas.addEventListener('pointerenter', event => { interaction.rect = canvas.getBoundingClientRect(); pointer(event); }, {passive: true});
+  canvas.addEventListener('pointerenter', event => { interaction.rect = displayRect(); pointer(event); }, {passive: true});
   canvas.addEventListener('pointermove', pointer, {passive: true});
-  canvas.addEventListener('pointerdown', event => { interaction.rect = canvas.getBoundingClientRect(); pointer(event); }, {passive: true});
+  canvas.addEventListener('pointerdown', event => { interaction.rect = displayRect(); pointer(event); }, {passive: true});
   canvas.addEventListener('pointerleave', clearPointer); canvas.addEventListener('pointerup', event => { if (event.pointerType === 'touch') clearPointer(); });
   canvas.addEventListener('pointercancel', clearPointer);
   window.addEventListener('scroll', () => { interaction.rect = null; }, {passive: true});
@@ -369,6 +392,7 @@
     const spec = settings[key];
     item()[key] = typeof spec[0] === 'number' ? number(control.value, ...spec) : spec.includes(control.value) ? control.value : spec[0];
     if (key === 'quality') { averageFrame = 16.7; sampleFrames = 0; density(true); }
+    if (key === 'framing') { resetInteraction(); resize(); }
     sync(); draw(); start();
   });
   $$('[data-preset]').forEach(button => button.addEventListener('click', () => {
@@ -390,15 +414,16 @@
     a.status(ui.piPulseDone);
   });
   $('[data-snapshot]').addEventListener('click', () => {
-    if (!sourceCanvas) return;
+    if (!sourceCanvas || frame.dataset.loading === 'true') return;
     // Read in the same task as draw(): no preserveDrawingBuffer cost in the animation loop.
     draw();
     const capture = staticMode || contextLost ? still : canvas;
+    const captureWidth = capture.width, captureHeight = capture.height;
     try {
       capture.toBlob(blob => {
         if (!blob) { a.status(ui.piSnapshotError); return; }
         const url = URL.createObjectURL(blob), link = document.createElement('a');
-        link.href = url; link.download = 'lienzo-matter-' + width + 'x' + height + '.png'; link.click();
+        link.href = url; link.download = 'lienzo-matter-' + captureWidth + 'x' + captureHeight + '.png'; link.click();
         window.setTimeout(() => URL.revokeObjectURL(url), 1500);
         a.status(ui.piSnapshotDone);
       }, 'image/png');
@@ -429,6 +454,7 @@
   a.setup({
     render() {
       item().composition = presets.includes(item().composition) ? item().composition : 'orbit';
+      item().framing = item().framing === 'cover' ? 'cover' : 'contain';
       sync(); prepare();
     },
     reset() {

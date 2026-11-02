@@ -14,7 +14,11 @@ With a panel selector focused, use Left/Right in horizontal mode or Up/Down in v
 
 Customize changes the title, category, description, HTTP(S) link, and accent. Reset item affects only that panel. The accent also appears in the original artwork.
 
-Background and motion contains settings for the selected panel. Add a PNG, JPEG, or WebP up to 8 MB; processing stays in your browser without uploading it to a server. Adjust horizontal/vertical position and zoom. Add an accessible description when your photo conveys information. Use original artwork restores the landscape. An older pending image load cannot overwrite a more recent upload or restoration.
+Image and motion contains settings for the selected panel. Add a PNG, JPEG, or WebP up to 8 MB; processing stays in your browser without uploading it to a server. Add an accessible description when your photo conveys information. Use original artwork restores the landscape. An older pending image load cannot overwrite a more recent upload or restoration.
+
+New images use **Full image · no crop**. Every edge and the photo's aspect ratio stay visible, centered in the available space. Position, zoom, and motion controls are disabled to protect the framing; their values are kept. **Fill 6:5 · adjustable crop** lets you set horizontal/vertical position, zoom, depth, and cycle duration. The panel, expanded view, and individual HTML use the same 6:5 frame at different screen sizes. Motion is optional; zero turns it off.
+
+Photo panels give text its own space so it does not cover the image; long captions can scroll within that space. Original illustrations keep their composition and animations.
 
 Depth and motion sets intensity; zero produces a still composition. Cycle duration changes the pace. Only the active panel animates. Manual pause, reduced motion, dialogs, and leaving the viewport suspend effects. Pointer updates run only when the pointer moves, without a permanent JavaScript frame loop. Performance depends on the device; no frame-rate guarantee is made.
 
@@ -23,7 +27,7 @@ Depth and motion sets intensity; zero produces a still composition. Cycle durati
 Settings live temporarily in memory. Reloading resets the example.
 
 - **Get HTML** keeps the complete gallery with its photos and settings. Place it beside studio.css, studio.js, component.css, component.js, and assets/ from the ZIP. This export is not standalone.
-- **Download this panel**, inside Background and motion, creates a standalone HTML file with the artwork or photo, styles, fonts, and notices. It works without neighboring files or a network connection. Pause, content, link, and framing are included. Added photos can increase the file size.
+- **Download this panel**, inside Image and motion, creates a standalone HTML file with the artwork or photo, styles, fonts, and notices. It works without neighboring files or a network connection. Pause is available when there is motion. Content, link, and framing mode are included: Full image keeps the complete photo, while Fill keeps the 6:5 frame, position, and zoom you chose. Added photos can increase the file size.
 
 Keep license notices and accessibility features when integrating. The hosted demo uses noindex; downloads omit it. Set your own metadata before publishing. Sample links lead to Lienzo and should be replaced with the real destination for each story.
 

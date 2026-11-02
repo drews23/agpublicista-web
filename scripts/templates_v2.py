@@ -139,7 +139,7 @@ def initial(kind, lang):
         titles = tr(['Valle de luz', 'Bosque sereno', 'Dunas de ámbar', 'Arquitectura de luz', 'Marea'], ['Valley of light', 'Quiet forest', 'Amber dunes', 'Light and space', 'Tide'])
         descriptions = tr(['La luz recorre las cumbres. El río dibuja una nueva dirección.', 'Entre la niebla y las ramas, una pausa para mirar de otra manera.', 'Capas de arena, sombras largas y formas que cambian con la luz.', 'Arcos, vacíos y perspectiva. El espacio también cuenta una historia.', 'La costa se abre al horizonte. Cada corriente deja su propio trazo.'], ['Light crosses the peaks. The river finds a new direction.', 'Between mist and branches, a pause to see things differently.', 'Layers of sand, long shadows, and shapes shaped by light.', 'Arches, open space, and perspective. A place can tell a story.', 'The coast opens to the horizon. Every current leaves its own trace.'])
         categories = tr(['Perspectiva', 'Naturaleza', 'Textura', 'Espacio', 'Horizonte'], ['Perspective', 'Nature', 'Texture', 'Space', 'Horizon'])
-        items = [dict(title=t, category=categories[i], description=descriptions[i], accent=color[i], href='https://lienzo.tools/' + ('en/' if lang == 'en' else ''), imageData='', imageAlt='', focalX=50, focalY=50, zoom=100, intensity=.65, duration=12000) for i,t in enumerate(titles)]
+        items = [dict(title=t, category=categories[i], description=descriptions[i], accent=color[i], href='https://lienzo.tools/' + ('en/' if lang == 'en' else ''), imageData='', imageAlt='', imageFit='contain', focalX=50, focalY=50, zoom=100, intensity=.65, duration=12000) for i,t in enumerate(titles)]
         return dict(items=items, active=0, layout='auto', hoverPreview=False)
     elif kind == 'navigation':
         titles = tr(['Inicio', 'Colección', 'Crear', 'Guardados', 'Perfil'], ['Home', 'Collection', 'Create', 'Saved', 'Profile'])
@@ -211,6 +211,8 @@ def controls(kind, ui):
 
 def component_source(kind, extension):
     files = ([f'{kind}-art.{extension}'] if kind in ['scenes','gallery'] else []) + [f'{kind}.{extension}']
+    if kind == 'gallery' and extension == 'css':
+        files.append('gallery-photo.css')
     return '\n'.join((SOURCE/name).read_text(encoding='utf-8-sig') for name in files)
 
 
@@ -256,7 +258,11 @@ def gallery_translations(lang):
         'galleryIntensity': ('Profundidad y movimiento', 'Depth and motion'),
         'galleryDuration': ('Duración del ciclo', 'Cycle duration'),
         'motionHint': ('Ajustes independientes por panel. Cero muestra un paisaje estático.', 'Each panel keeps its own settings. Zero displays a still landscape.'),
-        'cropHint': ('El encuadre se aplica a tu fotografía. El paisaje original conserva su composición por capas.', 'Position and zoom apply to your photo. The original landscape keeps its layered composition.'),
+        'cropHint': ('Imagen completa conserva todos los bordes. Rellenar usa un marco 6:5 estable para el panel, la vista ampliada y el HTML individual.', 'Full image keeps every edge. Fill uses a stable 6:5 frame in the panel, expanded view, and individual HTML.'),
+        'photoFit': ('Encuadre de la fotografía', 'Photo framing'),
+        'photoFitContain': ('Imagen completa · sin recorte', 'Full image · no crop'),
+        'photoFitCover': ('Rellenar 6:5 · recorte ajustable', 'Fill 6:5 · adjustable crop'),
+        'fullPhotoHint': ('La imagen completa mantiene sus bordes, sin zoom ni movimiento. Cambia a Rellenar para usar posición, acercamiento y profundidad; tus valores se conservan.', 'Full image keeps its edges without zoom or motion. Switch to Fill to use position, zoom, and depth; your values are kept.'),
         'galleryCredit': ('Ilustraciones originales · SVG, CSS y JavaScript nativos', 'Original artwork · Native SVG, CSS, and JavaScript'),
         'galleryFocus': ('Vista ampliada', 'Expanded view'), 'downloadPanel': ('Descargar este panel', 'Download this panel'),
         'galleryDownloaded': ('Panel descargado: HTML independiente con ilustración o foto, fuentes y licencias.', 'Panel downloaded: standalone HTML with artwork or photo, fonts, and licenses.'),
@@ -277,8 +283,8 @@ def gallery_markup(ui):
 <p class="v2-sr" data-gallery-live role="status" aria-live="polite"></p>
 <details class="eg-settings"><summary><span>{ui['panelSettings']}</span><span data-gallery-settings-title></span><span aria-hidden="true">+</span></summary><div class="eg-settings-body">
 <section class="eg-photo-settings"><p class="eg-setting-heading">{ui['selectedPanel']} <strong data-gallery-photo-title></strong></p><p class="eg-source-label" data-gallery-image-state></p>
-<div class="eg-image-actions"><label class="v2-upload v2-button"><span>{ui['upload']}</span><input type="file" data-upload accept="image/png,image/jpeg,image/webp" aria-label="{ui['photoForPanel']}"></label><button class="v2-text-button" type="button" data-remove-image>{ui['removeImage']}</button></div><p class="eg-setting-help">{ui['imageHelp']}</p><div class="eg-crop" data-gallery-crop hidden>{controls}<button type="button" class="v2-text-button" data-reset-crop>{ui['resetCrop']}</button></div><p class="eg-setting-help">{ui['cropHint']}</p></section>
-<section class="eg-motion-settings"><p class="eg-setting-heading">{ui['galleryIntensity']}</p>{motion}<p class="eg-setting-help">{ui['motionHint']}</p><button type="button" class="v2-button" data-gallery-download>{ui['downloadPanel']} ↓</button></section></div></details>
+<div class="eg-image-actions"><label class="v2-upload v2-button"><span>{ui['upload']}</span><input type="file" data-upload accept="image/png,image/jpeg,image/webp" aria-label="{ui['photoForPanel']}"></label><button class="v2-text-button" type="button" data-remove-image>{ui['removeImage']}</button></div><p class="eg-setting-help">{ui['imageHelp']}</p><div class="eg-crop" data-gallery-crop hidden><label class="eg-photo-fit">{ui['photoFit']}<select data-gallery-fit aria-describedby="eg-crop-hint"><option value="contain">{ui['photoFitContain']}</option><option value="cover">{ui['photoFitCover']}</option></select></label>{controls}<button type="button" class="v2-text-button" data-reset-crop>{ui['resetCrop']}</button></div><p class="eg-setting-help" id="eg-crop-hint">{ui['cropHint']}</p></section>
+<section class="eg-motion-settings"><p class="eg-setting-heading">{ui['galleryIntensity']}</p>{motion}<p class="eg-setting-help" data-gallery-motion-hint>{ui['motionHint']}</p><button type="button" class="v2-button" data-gallery-download>{ui['downloadPanel']} ↓</button></section></div></details>
 <p class="eg-credit">{ui['galleryCredit']}</p></div>
 <dialog class="eg-focus-dialog" data-gallery-focus aria-labelledby="eg-focus-title"><div class="eg-focus-top"><span>LIENZO / {ui['galleryFocus']}</span><button type="button" data-focus-close aria-label="{ui['close']}">×</button></div><div class="eg-focus-canvas" data-focus-canvas><div data-focus-art></div><span class="eg-focus-category" data-focus-category></span></div><div class="eg-focus-caption"><div><h2 id="eg-focus-title" data-focus-title></h2><p data-focus-description></p></div><div class="eg-focus-actions"><button type="button" data-focus-previous aria-label="{ui['previousPanel']}">←</button><button type="button" data-focus-next aria-label="{ui['nextPanel']}">→</button><button type="button" data-focus-pause aria-pressed="false">{ui['pause']}</button><a data-focus-link target="_blank" rel="noopener noreferrer">{ui['openLink']} ↗</a></div></div></dialog>'''
 
@@ -392,7 +398,7 @@ def document(slug, lang):
         config['sceneExport']['notices']['Lienzo'] = (common.parent/'LICENSE-LIENZO.txt').read_text(encoding='utf-8')
     if item['kind'] == 'gallery':
         common = ROOT / 'codigo-web/plantillas/demos/carrusel-recursos/assets'
-        config['galleryExport'] = dict(css=(SOURCE/'gallery-art.css').read_text(encoding='utf-8'), fonts={name:base64.b64encode((common/file).read_bytes()).decode('ascii') for name,file in [('Fraunces','fraunces.woff2'),('Instrument','instrument.woff2')]}, notices={name:(common/file).read_text(encoding='utf-8') for name,file in [('Fraunces','OFL-Fraunces.txt'),('Instrument Sans','OFL-Instrument-Sans.txt')]})
+        config['galleryExport'] = dict(css='\n'.join((SOURCE/name).read_text(encoding='utf-8') for name in ['gallery-art.css','gallery-photo.css']), fonts={name:base64.b64encode((common/file).read_bytes()).decode('ascii') for name,file in [('Fraunces','fraunces.woff2'),('Instrument','instrument.woff2')]}, notices={name:(common/file).read_text(encoding='utf-8') for name,file in [('Fraunces','OFL-Fraunces.txt'),('Instrument Sans','OFL-Instrument-Sans.txt')]})
         config['galleryExport']['notices']['Lienzo'] = (common.parent/'LICENSE-LIENZO.txt').read_text(encoding='utf-8')
     payload = json.dumps(config, ensure_ascii=False).replace('<', '\\u003c')
     catalog = ROUTES[lang]

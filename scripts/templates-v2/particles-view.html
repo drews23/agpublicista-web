@@ -2,10 +2,12 @@
   <div class="pi-artboard">
     <div class="pi-artboard-head"><p><span class="pi-live-dot" aria-hidden="true"></span><span data-motion-label>{{piLive}}</span></p><span data-source-label>{{piPreset1}}</span></div>
     <div class="pi-frame" data-particle-frame data-loading="true" data-render-state="loading">
-      <canvas data-particle-canvas role="img" aria-label="{{piCanvasLabel}}"></canvas><canvas data-particle-static role="img" aria-label="{{piStaticCanvas}}" hidden></canvas>
-      <div class="pi-frame-top"><span><i aria-hidden="true"></i>LIENZO / MATTER</span><span class="pi-engine" data-engine>WebGL 2</span></div>
-      <div class="pi-frame-bottom"><span>{{piEdition}}</span><span>{{piPointerHint}}</span></div>
-      <p class="pi-fallback" data-fallback role="status" hidden>{{fallback}}</p>
+      <div class="pi-frame-top"><span><i aria-hidden="true"></i>LIENZO / MATTER</span><div class="pi-frame-actions"><span class="pi-engine" data-engine>WebGL 2</span><button type="button" class="pi-save" data-snapshot aria-label="{{snapshot}}" title="{{snapshot}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg><span>PNG</span></button></div></div>
+      <div class="pi-viewport">
+        <canvas data-particle-canvas role="img" aria-label="{{piCanvasLabel}}"></canvas><canvas data-particle-static role="img" aria-label="{{piStaticCanvas}}" hidden></canvas>
+        <p class="pi-fallback" data-fallback role="status" hidden>{{fallback}}</p>
+      </div>
+      <div class="pi-frame-bottom"><span class="pi-export-size"><span>PNG</span><output data-export-size aria-label="{{piExportSize}}" aria-live="polite">—</output></span><span>{{piPointerHint}}</span></div>
     </div>
     <div class="pi-artboard-foot"><div><h2>{{piHeadline}}</h2><p>{{piArtLead}}</p></div><span data-preset-index>01 / 03</span></div>
   </div>
@@ -19,6 +21,8 @@
       </div>
       <div class="pi-upload-row"><label class="v2-upload v2-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M4 16v5h16v-5"/></svg><span>{{upload}}</span><input type="file" data-upload accept="image/png,image/jpeg,image/webp" aria-label="{{image}}"></label><button type="button" class="pi-remove" data-remove-image aria-label="{{removeImage}}" title="{{removeImage}}" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button></div>
       <p class="pi-note">{{piUploadNote}}</p>
+      <label class="pi-framing">{{piFraming}}<select name="framing" aria-describedby="pi-framing-note"><option value="contain">{{piFitComplete}}</option><option value="cover">{{piFitCover}}</option></select></label>
+      <p class="pi-note" id="pi-framing-note">{{piFramingNote}}</p>
     </section>
     <section class="pi-section"><p class="pi-field-title"><strong>{{quality}}</strong><span>02</span></p><label><span class="v2-sr">{{quality}}</span><select name="quality" data-quality data-gpu-control><option value="adaptive">{{adaptive}}</option><option value="balanced">{{piBalanced}}</option><option value="high">{{high}}</option></select></label><div class="pi-count"><strong data-particle-count>82.000</strong><span>{{points}}</span></div><p class="pi-note" data-density-note>{{piAdaptiveNote}}</p><div class="pi-primary-actions"><button type="button" class="v2-button v2-primary" data-scatter aria-pressed="false">{{scatter}}</button><button type="button" class="pi-pulse" data-center-pulse aria-label="{{piPulse}}" title="{{piPulse}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></svg></button></div></section>
     <section class="pi-section pi-dynamics"><p class="pi-field-title"><strong>{{piDynamics}}</strong><span>03</span></p>
@@ -28,7 +32,6 @@
       <label class="pi-slider"><span>{{piSpeed}}<output data-value-speed>.65</output></span><input name="speed" type="range" min="0" max="1.5" step=".05" value=".65" data-gpu-control></label>
       <label class="pi-slider"><span>{{piSize}}<output data-value-pointsize>1</output></span><input name="pointSize" type="range" min=".6" max="2.3" step=".1" value="1" data-gpu-control></label>
     </section>
-    <button class="v2-button pi-snapshot" type="button" data-snapshot><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>{{snapshot}}</button>
     <div class="pi-local-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></svg><p>{{piPrivacy}}</p></div>
   </form>
 </section>
