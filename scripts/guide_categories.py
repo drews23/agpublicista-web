@@ -21,8 +21,8 @@ GROUPS = [
     ('after-effects', 'after-effects', 'After Effects', 'After Effects',
      'Personaliza texto animado, títulos y transiciones con las guías de cada proyecto.',
      'Customize animated text, titles, and transitions with each project guide.',
-     ['animacion-de-texto-after-effects', 'plantillas-after-effects-gratis'],
-     ['after-effects-text-animation', 'after-effects-templates']),
+     ['animacion-de-texto-after-effects', 'plantillas-after-effects-gratis', 'animacion-texto-after-effects-7-escenas'],
+     ['after-effects-text-animation', 'after-effects-templates', 'after-effects-text-animation-7-scenes']),
     ('iconos', 'icons', 'Iconos', 'Icons',
      'Compara los packs SVG y PNG y consulta cómo usarlos en tus proyectos.',
      'Compare SVG and PNG packs and learn how to use them in your projects.',
@@ -44,6 +44,8 @@ GROUPS = [
 def enhance_guides(source, route):
     if route not in ('/blog/', '/en/blog/'):
         return source
+    from after_effects_text_scenes import ensure_directory_card
+    source = ensure_directory_card(source, route)
     en = route.startswith('/en/')
     pool = discovery.cards(source, english_catalog=en)
     groups = []
@@ -82,7 +84,9 @@ def enhance_guides(source, route):
                 if listing.get('@type') == 'ItemList':
                     items = {item['url']: item for item in listing['itemListElement']}
                     listing['itemListElement'] = [{**items['https://lienzo.tools'+path], 'position': i} for i, path in enumerate(ordered, 1)]
-            return match[1]+json.dumps(data, ensure_ascii=False)+match[3]
+            original = match[2]
+            formatted = json.dumps(data, ensure_ascii=False, indent=2 if '\n' in original else None)
+            return match[1]+('\n' if original.startswith('\n') else '')+formatted+('\n' if original.endswith('\n') else '')+match[3]
         source = re.sub(r'(<script\b[^>]*type="application/ld\+json"[^>]*>)(.*?)(</script>)', order_list, source, flags=re.S)
     return source
 
@@ -91,4 +95,4 @@ if __name__ == '__main__':
     for route in ['/blog/', '/en/blog/']:
         path = ROOT / route.lstrip('/') / 'index.html'
         path.write_text(enhance_guides(path.read_text(encoding='utf8'), route), encoding='utf8')
-    print('Grouped 20 existing guide cards in each language.')
+    print('Grouped existing guide cards in each language.')

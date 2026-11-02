@@ -187,4 +187,6 @@ for _,en,*_ in PAGES:
     if url not in existing: xml=xml.replace('</urlset>',f'  <url><loc>{url}</loc><lastmod>{EDITION}</lastmod></url>\n</urlset>')
 xml_path.write_text(xml,encoding='utf-8')
 (ROOT/'_historial_chat/2026-10-10-english-seo/phase-three-build.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+from after_effects_text_scenes import build as build_seven_scene_resource
+build_seven_scene_resource()
 print(json.dumps({'pages_built':len(report),'spanish_content_preserved':all(x['spanish_main_unchanged'] for x in report)},indent=2))

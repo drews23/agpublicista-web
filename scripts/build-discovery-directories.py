@@ -169,7 +169,7 @@ RESOURCE_GROUPS = [
      ['efectos-de-sonido-para-videos-gratis','efectos-de-sonido-terror-fantasmas-gratis','sonidos-de-introduccion-y-desvanecimiento-gratis','efectos-de-sonido-suspenso-gratis','transiciones-de-sonido-gratis','efectos-de-sonido-glitch-gratis'],
      ['free-sound-effects','horror-sound-effects','intro-fade-sound-effects','suspense-sound-effects','free-transition-sound-effects','glitch-sound-effects']),
     ('after-effects','after-effects','After Effects','After Effects','AEP · proyectos editables y tutoriales','AEP · editable projects and tutorials',
-     ['animacion-de-texto-after-effects','plantillas-after-effects-gratis'], ['after-effects-text-animation','after-effects-templates']),
+     ['animacion-de-texto-after-effects','plantillas-after-effects-gratis','animacion-texto-after-effects-7-escenas'], ['after-effects-text-animation','after-effects-templates','after-effects-text-animation-7-scenes']),
     ('iconos','icons','Iconos','Icons','SVG y PNG · seis packs para diseño','SVG and PNG · six design packs',
      ['iconos-de-ropa-de-hombre-gratis-svg','iconos-de-inteligencia-artificial-gratis-svg','iconos-de-realidad-virtual-gratis-svg','iconos-de-eventos-virtuales-gratis-svg','iconos-de-hoteleria-gratis-svg','iconos-de-cocina-gratis-svg'],
      ['mens-clothing-icons','ai-icons','vr-ar-icons','virtual-event-icons','hotel-icons','kitchen-icons']),
@@ -205,6 +205,8 @@ def update_schema(source):
 def organize_resources(en=False):
     path = ROOT / ('en/resources/index.html' if en else 'recursos/index.html')
     source = path.read_text(encoding='utf-8')
+    from after_effects_text_scenes import ensure_directory_card
+    source = ensure_directory_card(source, '/en/resources/' if en else '/recursos/')
     pool = cards(element(source, tag='main'), english_catalog=en)
     template_key, tools_key = ('web-templates','browser-tools') if en else ('plantillas-web','herramientas-online')
     items = [(template_key, 'Web templates' if en else 'Plantillas web', 'HTML · CSS · JavaScript')]
