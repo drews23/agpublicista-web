@@ -25,25 +25,60 @@
   const initials = name => String(name).trim().split(/\s+/).filter(Boolean).slice(0, 2).map(word => Array.from(word)[0]).join('').toLocaleUpperCase();
   const projectURL = index => a.safeURL(item()['project' + index + 'URL']) || a.safeURL(item().href) || 'https://lienzo.tools/';
 
+  // Project framing is independent of the portrait and shared by cards and previews.
+  function projectPhoto(current, index) {
+    const prefix = 'project' + index, source = imageData(current[prefix + 'Image']);
+    const mode = current[prefix + 'ImageFit'];
+    return {source, fit: mode === 'contain' || mode === 'cover' ? mode : source ? 'cover' : 'contain',
+      x: bounded(current[prefix + 'ImageX'], 0, 100, 50), y: bounded(current[prefix + 'ImageY'], 0, 100, 50),
+      zoom: bounded(current[prefix + 'ImageZoom'], 100, 180, 100), alt: String(current[prefix + 'ImageAlt'] || '').slice(0, 180)};
+  }
+  function sizeProjectPhoto(container) {
+    const viewport = container.querySelector('.pf-photo-viewport'), frame = container.querySelector('.pf-photo-frame'), image = frame?.querySelector('img');
+    if (!image || !viewport.clientWidth || !viewport.clientHeight) return;
+    const ratio = container.dataset.photoFit === 'cover' ? 4 / 5 : (image.naturalWidth / image.naturalHeight || 4 / 5);
+    const width = Math.min(viewport.clientWidth, viewport.clientHeight * ratio);
+    frame.style.width = width + 'px'; frame.style.height = width / ratio + 'px';
+  }
+  function resetProjectFraming(index) {
+    const prefix = 'project' + index;
+    Object.assign(item(), {[prefix + 'ImageFit']: 'contain', [prefix + 'ImageX']: 50, [prefix + 'ImageY']: 50, [prefix + 'ImageZoom']: 100, [prefix + 'ImageAlt']: ''});
+  }
+  const photoObserver = new ResizeObserver(entries => entries.forEach(entry => sizeProjectPhoto(entry.target)));
+  for (const container of [...$$('[data-pf-art]'), $('[data-pf-dialog-art]')]) {
+    photoObserver.observe(container);
+    container.addEventListener('load', event => { if (event.target.matches('.pf-photo-frame img')) sizeProjectPhoto(container); }, true);
+  }
+
   function artwork(index, place) {
     const id = instance + '-' + place + '-' + index;
     if (index === 0) return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 440" fill="none" aria-hidden="true"><defs><radialGradient id="${id}-orb" cx=".3" cy=".2"><stop stop-color="#fff"/><stop offset=".25" stop-color="var(--violet,#8b7bff)"/><stop offset=".72" stop-color="var(--brand-deep,#6e5df2)"/><stop offset="1" stop-color="#14131d"/></radialGradient><linearGradient id="${id}-metal" x1="70" y1="95" x2="290" y2="290" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset=".23" stop-color="var(--violet,#8b7bff)"/><stop offset=".5" stop-color="#14131d"/><stop offset=".74" stop-color="var(--mint,#35d6c8)"/><stop offset="1" stop-color="#fff"/></linearGradient><linearGradient id="${id}-paper" x1="15" y1="258" x2="330" y2="440" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#e7e6eb"/></linearGradient></defs><rect width="360" height="440" fill="#14131d"/><path d="M0 80H360M0 160H360M0 240H360M0 320H360M60 0V440M140 0V440M220 0V440M300 0V440" stroke="#fff" stroke-opacity=".035"/><circle cx="275" cy="60" r="140" fill="var(--violet,#8b7bff)" opacity=".08"/><g class="pf-art-orbit"><ellipse cx="180" cy="180" rx="117" ry="52" transform="rotate(-33 180 180)" stroke="url(#${id}-metal)" stroke-width="17"/><ellipse cx="180" cy="180" rx="117" ry="52" transform="rotate(27 180 180)" stroke="url(#${id}-metal)" stroke-width="17"/><ellipse cx="180" cy="180" rx="117" ry="52" transform="rotate(87 180 180)" stroke="url(#${id}-metal)" stroke-width="17"/></g><circle cx="180" cy="180" r="48" fill="url(#${id}-orb)"/><circle cx="282" cy="115" r="8" fill="var(--amber,#ffb454)"/><g class="pf-art-float"><path d="m28 286 199-30 99 57-199 34Z" fill="url(#${id}-paper)"/><path d="m28 286 99 61v67l-99-61Z" fill="var(--violet,#8b7bff)"/><path d="m127 347 199-34v67l-199 34Z" fill="var(--brand-deep,#6e5df2)"/><path d="m49 294 57 35 35-5-58-35Z" fill="#14131d"/><path d="m96 287 57 35 35-5-58-35Z" fill="var(--mint,#35d6c8)"/><path d="m143 280 57 35 35-5-58-35Z" fill="var(--amber,#ffb454)"/><path d="m190 273 57 35 35-5-58-35Z" fill="var(--violet,#8b7bff)"/><path d="m150 367 150-25m-150 35 108-18" stroke="#fff" stroke-opacity=".55" stroke-width="2"/></g><path d="M26 61h22m-22 0v22M334 246h-22m22 0v-22" stroke="#fff" stroke-opacity=".22"/><circle cx="34" cy="238" r="3" fill="var(--mint,#35d6c8)"/></svg>`;
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 440" fill="none" aria-hidden="true"><defs><linearGradient id="${id}-glass" x1="160" y1="97" x2="300" y2="290" gradientUnits="userSpaceOnUse"><stop stop-color="var(--mint,#35d6c8)"/><stop offset=".5" stop-color="var(--violet,#8b7bff)"/><stop offset="1" stop-color="var(--brand-deep,#6e5df2)"/></linearGradient><linearGradient id="${id}-ribbon" x1="70" y1="290" x2="268" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="var(--amber,#ffb454)"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="var(--violet,#8b7bff)"/></linearGradient></defs><rect width="360" height="440" fill="#eeedf1"/><path d="M0 82H360M0 164H360M0 246H360M0 328H360M60 0V440M140 0V440M220 0V440M300 0V440" stroke="#14131d" stroke-opacity=".045"/><g class="pf-art-float"><rect x="31" y="68" width="298" height="278" rx="14" fill="#14131d"/><rect x="31.5" y="68.5" width="297" height="277" rx="13.5" stroke="#fff" stroke-opacity=".2"/><path d="M31 101H329" stroke="#fff" stroke-opacity=".1"/><circle cx="47" cy="85" r="3" fill="var(--violet,#8b7bff)"/><circle cx="58" cy="85" r="3" fill="var(--mint,#35d6c8)"/><circle cx="69" cy="85" r="3" fill="var(--amber,#ffb454)"/><rect x="237" y="79" width="77" height="12" rx="6" fill="#fff" fill-opacity=".07"/><path d="M49 124h34m-34 9h57" stroke="#fff" stroke-opacity=".5" stroke-width="3"/><rect x="49" y="159" width="104" height="6" rx="3" fill="#fff"/><rect x="49" y="172" width="86" height="6" rx="3" fill="#fff"/><rect x="49" y="193" width="78" height="3" rx="1.5" fill="#fff" fill-opacity=".3"/><rect x="49" y="203" width="94" height="3" rx="1.5" fill="#fff" fill-opacity=".3"/><rect x="49" y="226" width="61" height="18" rx="9" fill="var(--mint,#35d6c8)"/><path d="M60 235h28m-4-3 4 3-4 3" stroke="#14131d" stroke-width="1.5"/><g class="pf-art-travel"><path d="M248 122c39 0 64 29 64 64s-33 43-56 58-64 12-72-14 18-34 14-61 11-47 50-47Z" fill="url(#${id}-glass)"/><path d="M249 138c30-1 46 20 45 45s-24 32-43 43-47 9-51-10 13-25 12-44 7-33 37-34Z" stroke="#fff" stroke-opacity=".3"/><circle cx="253" cy="181" r="19" fill="#fff" fill-opacity=".1"/></g><path d="M49 270H311" stroke="#fff" stroke-opacity=".12"/><rect x="49" y="288" width="77" height="40" rx="6" fill="#fff" fill-opacity=".06"/><rect x="140" y="288" width="77" height="40" rx="6" fill="#fff" fill-opacity=".06"/><rect x="231" y="288" width="77" height="40" rx="6" fill="#fff" fill-opacity=".06"/><circle cx="64" cy="302" r="5" fill="var(--violet,#8b7bff)"/><circle cx="155" cy="302" r="5" fill="var(--mint,#35d6c8)"/><circle cx="246" cy="302" r="5" fill="var(--amber,#ffb454)"/><path d="M58 318h43m48 0h42m49 0h42" stroke="#fff" stroke-opacity=".3" stroke-width="2"/></g><g class="pf-art-float pf-art-float-late"><rect x="170" y="308" width="135" height="86" rx="11" fill="#fff"/><rect x="170.5" y="308.5" width="134" height="85" rx="10.5" stroke="#14131d" stroke-opacity=".1"/><path d="M186 368c20-36 29 12 48-22s38 27 55-11" stroke="url(#${id}-ribbon)" stroke-width="7" stroke-linecap="round"/><rect x="185" y="321" width="30" height="3" rx="1.5" fill="#14131d" fill-opacity=".5"/><circle cx="287" cy="322" r="3" fill="var(--mint,#35d6c8)"/></g><path d="M33 378h67m-67 10h45" stroke="#14131d" stroke-opacity=".25" stroke-width="2"/><circle cx="308" cy="39" r="3" fill="var(--brand-deep,#6e5df2)"/></svg>`;
   }
 
-  function paintArtwork(container, index, place, source) {
+  function paintArtwork(container, index, place) {
     const key = place === 'modal' ? 'modal' : 'project' + index;
-    const next = imageData(source);
-    if (imageSources[key] === next && container.childElementCount) return;
-    imageSources[key] = next;
-    container.replaceChildren();
-    if (next) {
-      const image = document.createElement('img');
-      image.alt = '';
-      image.src = next;
-      image.decoding = 'async';
-      container.append(image);
-    } else container.innerHTML = artwork(index, place);
+    const settings = projectPhoto(item(), index), next = settings.source;
+    if (imageSources[key] !== next || !container.childElementCount) {
+      imageSources[key] = next;
+      container.replaceChildren();
+      if (next) {
+        const viewport = document.createElement('span'), frame = document.createElement('span'), image = document.createElement('img');
+        viewport.className = 'pf-photo-viewport'; frame.className = 'pf-photo-frame';
+        image.src = next; image.decoding = 'async'; frame.append(image); viewport.append(frame); container.append(viewport);
+      } else container.innerHTML = artwork(index, place);
+    }
+    container.dataset.photo = String(!!next); container.dataset.photoFit = settings.fit;
+    const button = container.closest('.pf-project-open');
+    if (button) button.dataset.photo = String(!!next);
+    container.setAttribute('aria-hidden', String(!next || !settings.alt));
+    if (!next) return;
+    const image = container.querySelector('img'), complete = settings.fit === 'contain';
+    image.alt = settings.alt;
+    image.style.objectFit = complete ? 'contain' : 'cover';
+    image.style.objectPosition = complete ? '50% 50%' : settings.x + '% ' + settings.y + '%';
+    image.style.transform = complete ? 'none' : 'scale(' + settings.zoom / 100 + ')';
+    sizeProjectPhoto(container);
   }
 
   function setTab(value, announce = false) {
@@ -64,8 +99,23 @@
     a.text('[data-pf-dialog-category]', current[prefix + 'Category']);
     a.text('[data-pf-dialog-description]', current[prefix + 'Description']);
     $('[data-pf-dialog-link]').href = projectURL(projectIndex);
-    paintArtwork($('[data-pf-dialog-art]'), projectIndex, 'modal', current[prefix + 'Image']);
+    const settings = projectPhoto(current, projectIndex), complete = settings.fit === 'contain';
+    projectDialog.dataset.photo = String(!!settings.source);
+    paintArtwork($('[data-pf-dialog-art]'), projectIndex, 'modal');
     $('[data-pf-remove-project-image]').disabled = !imageData(current[prefix + 'Image']);
+    const framing = $('[data-pf-project-framing]');
+    if (!framing) return;
+    framing.hidden = !settings.source;
+    $('[data-pf-project-fit]').value = settings.fit;
+    for (const field of ['x', 'y', 'zoom']) {
+      const control = $('[data-pf-project-' + field + ']');
+      control.value = String(settings[field]); control.disabled = complete;
+      a.text('[data-pf-project-' + field + '-output]', settings[field] + '%');
+    }
+    const alt = $('[data-pf-project-alt]');
+    if (alt.value !== settings.alt) alt.value = settings.alt;
+    $('[data-pf-project-center]').disabled = complete;
+    a.text('[data-pf-project-fit-help]', complete ? ui.pfFullImageHelp : ui.pfCropImageHelp);
   }
 
   function render() {
@@ -109,7 +159,7 @@
       a.text('[data-pf-project-title="' + index + '"]', current[prefix]);
       a.text('[data-pf-project-category="' + index + '"]', current[prefix + 'Category']);
       $('[data-project-link="' + index + '"]').href = projectURL(index);
-      paintArtwork($('[data-pf-art="' + index + '"]'), index, 'card', current[prefix + 'Image']);
+      paintArtwork($('[data-pf-art="' + index + '"]'), index, 'card');
     }
     state.pfLayout = state.pfLayout === 'compact' ? 'compact' : 'editorial';
     layout.dataset.pfLayout = state.pfLayout;
@@ -165,7 +215,10 @@
         item().imageData = source;
         item().photoY = 50;
         item().photoZoom = 100;
-      } else item()['project' + targetIndex + 'Image'] = source;
+      } else {
+        item()['project' + targetIndex + 'Image'] = source;
+        resetProjectFraming(targetIndex);
+      }
       a.paint();
       a.status(ui.imageDone);
       if (target !== 'avatar' && projectDialog.open && projectIndex === targetIndex) a.text('[data-pf-project-status]', ui.imageDone);
@@ -194,6 +247,7 @@
   $('[data-pf-remove-project-image]').addEventListener('click', () => {
     ++uploadTokens['project' + projectIndex];
     item()['project' + projectIndex + 'Image'] = '';
+    resetProjectFraming(projectIndex);
     a.paint();
     a.status(ui.pfProjectImageRemoved);
     a.text('[data-pf-project-status]', ui.pfProjectImageRemoved);
@@ -201,6 +255,24 @@
   [['[data-pf-photo-y]', 'photoY'], ['[data-pf-photo-zoom]', 'photoZoom']].forEach(([selector, key]) => {
     $(selector).addEventListener('input', event => { item()[key] = Number(event.target.value); a.paint(); });
     $(selector).addEventListener('change', () => a.status(ui.pfPhotoChanged));
+  });
+  $('[data-pf-project-fit]')?.addEventListener('change', event => {
+    item()['project' + projectIndex + 'ImageFit'] = event.target.value === 'cover' ? 'cover' : 'contain';
+    a.paint(); a.text('[data-pf-project-status]', ui.pfPhotoChanged);
+  });
+  for (const field of ['x', 'y', 'zoom']) {
+    $('[data-pf-project-' + field + ']')?.addEventListener('input', event => {
+      item()['project' + projectIndex + 'Image' + (field === 'zoom' ? 'Zoom' : field.toUpperCase())] = Number(event.target.value);
+      a.paint();
+    });
+  }
+  $('[data-pf-project-alt]')?.addEventListener('input', event => {
+    item()['project' + projectIndex + 'ImageAlt'] = event.target.value.slice(0, 180); a.paint();
+  });
+  $('[data-pf-project-center]')?.addEventListener('click', () => {
+    const prefix = 'project' + projectIndex;
+    Object.assign(item(), {[prefix + 'ImageX']: 50, [prefix + 'ImageY']: 50, [prefix + 'ImageZoom']: 100});
+    a.paint(); a.text('[data-pf-project-status]', ui.pfPhotoChanged);
   });
   $('[data-pf-copy-email]').addEventListener('click', async () => {
     try {

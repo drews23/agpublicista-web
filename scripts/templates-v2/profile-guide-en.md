@@ -5,11 +5,21 @@ An original editorial portfolio built with HTML, CSS, and JavaScript. It include
 ## Get started
 
 1. Extract the ZIP and open `index.html`.
-2. Select **Customize** to replace the name, role, bio, headline, approach, location, skills, email, website, and both projects. Links must be complete HTTP(S) URLs.
+2. Open **Settings** to replace the name, role, bio, headline, approach, location, skills, email, website, and both projects. Links must be complete HTTP(S) URLs.
 3. Choose the **Editorial** or **Compact** layout. Both keep the projects and tab navigation available.
-4. Use **Change portrait** to upload a PNG, JPG, or WebP image up to 8 MB. Adjust the vertical position and zoom with the framing controls. Choose a circle or soft square in Customize.
+4. Use **Change portrait** to upload a PNG, JPG, or WebP image up to 8 MB. Adjust the vertical position and zoom with the framing controls. Choose a circle or soft square in Settings.
 5. Select **Explore** on a project to open its details, follow its configured link, or upload a project image. **Restore illustration** brings back that project’s original artwork.
 6. Close the preview, then select **Get HTML** to keep your changes. Keep the edited HTML beside `studio.css`, `studio.js`, `component.css`, `component.js`, and `assets/` from the ZIP. The HTML alone does not include those dependencies.
+
+## Project image framing
+
+Newly uploaded images use **Full image · no crop**. Every edge and the original aspect ratio stay visible, including in the Compact layout. Card labels have their own space so they do not cover the photo; full images do not zoom on hover.
+
+Open a project and expand **Image framing**. **Fill 4:5 · adjustable crop** lets you set horizontal position, vertical position, and zoom from 100% to 180%. The card, expanded view, and exported HTML use the same 4:5 frame and settings at different display sizes. The preview stays visible while you scroll through the controls. **Center crop** restores 50%/50% position and 100% zoom.
+
+Switching back to Full image disables crop controls without erasing their values. You can add an accessible image description. Both projects keep independent images and settings; uploading a replacement or restoring the illustration resets only that project's framing. Portrait position, zoom, and shape controls remain separate.
+
+Exported HTML keeps photos, framing modes, crop settings, and descriptions. It still needs the files from the ZIP. Photos in older HTML without a framing mode use Fill with the shared frame instead of two different crops. Original project artwork keeps its design and motion.
 
 ## Sample content
 

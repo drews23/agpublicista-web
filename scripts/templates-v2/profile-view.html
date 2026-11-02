@@ -36,4 +36,28 @@
   </section>
 </div>
 <div class="pf-photo-tools" data-pf-photo-tools hidden><span>{{pfFraming}}</span><label>{{pfVertical}}<input type="range" min="0" max="100" step="1" value="50" data-pf-photo-y><output data-pf-photo-y-output>50%</output></label><label>{{pfZoom}}<input type="range" min="100" max="180" step="1" value="100" data-pf-photo-zoom><output data-pf-photo-zoom-output>1×</output></label></div>
-<dialog class="v2-dialog pf-project-dialog" data-pf-project-dialog aria-labelledby="pf-project-dialog-title"><div class="v2-dialog-head"><span class="v2-eyebrow">{{pfSampleWork}}</span><button type="button" class="v2-icon-button" data-pf-close-project aria-label="{{close}}">×</button></div><div class="pf-dialog-art" data-pf-dialog-art aria-hidden="true"></div><p class="pf-dialog-category" data-pf-dialog-category></p><h2 id="pf-project-dialog-title" data-pf-dialog-title></h2><p data-pf-dialog-description></p><div class="pf-dialog-actions"><a class="v2-button v2-primary" data-pf-dialog-link target="_blank" rel="noopener noreferrer">{{pfVisitProject}} ↗</a><label class="v2-button v2-upload pf-project-upload"><span>{{pfProjectImage}}</span><input type="file" accept="image/png,image/jpeg,image/webp" data-pf-project-upload aria-label="{{pfProjectImage}}"></label><button type="button" class="v2-text-button" data-pf-remove-project-image>{{pfOriginalImage}}</button></div><p class="pf-local-note">{{pfImageHelp}}</p><p class="pf-project-status" data-pf-project-status role="status"></p></dialog>
+<dialog class="v2-dialog pf-project-dialog" data-pf-project-dialog aria-labelledby="pf-project-dialog-title">
+  <div class="v2-dialog-head"><span class="v2-eyebrow">{{pfSampleWork}}</span><button type="button" class="v2-icon-button" data-pf-close-project aria-label="{{close}}">×</button></div>
+  <div class="pf-project-detail">
+    <div class="pf-dialog-art" data-pf-dialog-art aria-hidden="true"></div>
+    <div class="pf-dialog-copy">
+      <p class="pf-dialog-category" data-pf-dialog-category></p><h2 id="pf-project-dialog-title" data-pf-dialog-title></h2><p data-pf-dialog-description></p>
+      <div class="pf-dialog-actions"><a class="v2-button v2-primary" data-pf-dialog-link target="_blank" rel="noopener noreferrer">{{pfVisitProject}} ↗</a><label class="v2-button v2-upload pf-project-upload"><span>{{pfProjectImage}}</span><input type="file" accept="image/png,image/jpeg,image/webp" data-pf-project-upload aria-label="{{pfProjectImage}}"></label><button type="button" class="v2-text-button" data-pf-remove-project-image>{{pfOriginalImage}}</button></div>
+      <details class="pf-project-framing" data-pf-project-framing hidden open>
+        <summary>{{pfProjectFraming}}<span aria-hidden="true">+</span></summary>
+        <div class="pf-framing-fields">
+          <label class="pf-fit-field">{{pfProjectFit}}<select data-pf-project-fit aria-describedby="pf-project-fit-help"><option value="contain">{{pfProjectFull}}</option><option value="cover">{{pfProjectCrop}}</option></select></label>
+          <p class="pf-fit-help" id="pf-project-fit-help" data-pf-project-fit-help></p>
+          <div class="pf-crop-controls" role="group" aria-label="{{pfCropControls}}">
+            <label for="pf-project-x">{{pfHorizontal}}<output data-pf-project-x-output aria-hidden="true" for="pf-project-x">50%</output></label><input type="range" id="pf-project-x" data-pf-project-x min="0" max="100" step="1" value="50">
+            <label for="pf-project-y">{{pfProjectVertical}}<output data-pf-project-y-output aria-hidden="true" for="pf-project-y">50%</output></label><input type="range" id="pf-project-y" data-pf-project-y min="0" max="100" step="1" value="50">
+            <label for="pf-project-zoom">{{pfProjectZoom}}<output data-pf-project-zoom-output aria-hidden="true" for="pf-project-zoom">100%</output></label><input type="range" id="pf-project-zoom" data-pf-project-zoom min="100" max="180" step="1" value="100">
+            <button type="button" class="v2-text-button" data-pf-project-center>{{pfProjectCenter}}</button>
+          </div>
+          <label class="pf-alt-field">{{pfProjectAlt}}<input type="text" data-pf-project-alt maxlength="180"></label>
+        </div>
+      </details>
+      <p class="pf-local-note">{{pfImageHelp}}</p><p class="pf-project-status" data-pf-project-status role="status"></p>
+    </div>
+  </div>
+</dialog>

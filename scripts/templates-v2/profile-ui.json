@@ -46,7 +46,19 @@
     "removeImage": "Usar monograma",
     "pfCoverLineOne": "FORMA",
     "pfCoverLineTwo": "CON",
-    "pfCoverLineThree": "INTENCIÓN."
+    "pfCoverLineThree": "INTENCIÓN.",
+    "pfProjectFraming": "Encuadre de la imagen",
+    "pfProjectFit": "Mostrar la imagen",
+    "pfProjectFull": "Imagen completa · sin recorte",
+    "pfProjectCrop": "Rellenar 4:5 · recorte ajustable",
+    "pfHorizontal": "Posición horizontal",
+    "pfProjectVertical": "Posición vertical",
+    "pfProjectZoom": "Acercamiento",
+    "pfCropControls": "Ajustes del recorte",
+    "pfProjectCenter": "Centrar recorte",
+    "pfProjectAlt": "Descripción de la imagen (accesibilidad)",
+    "pfFullImageHelp": "Se muestran todos los bordes, sin acercamiento. Cambia a Rellenar para ajustar el recorte; tus valores se conservan.",
+    "pfCropImageHelp": "El marco 4:5, la posición y el acercamiento se mantienen en la tarjeta, la ampliación y el HTML. Ajusta cada proyecto por separado."
   },
   "en": {
     "demo": "Sample profile",
@@ -95,6 +107,18 @@
     "removeImage": "Use monogram",
     "pfCoverLineOne": "FORM",
     "pfCoverLineTwo": "MEETS",
-    "pfCoverLineThree": "FEELING."
+    "pfCoverLineThree": "FEELING.",
+    "pfProjectFraming": "Image framing",
+    "pfProjectFit": "Image display",
+    "pfProjectFull": "Full image · no crop",
+    "pfProjectCrop": "Fill 4:5 · adjustable crop",
+    "pfHorizontal": "Horizontal position",
+    "pfProjectVertical": "Vertical position",
+    "pfProjectZoom": "Zoom",
+    "pfCropControls": "Crop settings",
+    "pfProjectCenter": "Center crop",
+    "pfProjectAlt": "Image description (accessibility)",
+    "pfFullImageHelp": "Every edge stays visible without zoom. Switch to Fill to adjust the crop; your values are kept.",
+    "pfCropImageHelp": "The 4:5 frame, position, and zoom stay consistent in the card, expanded view, and HTML. Each project keeps its own settings."
   }
 }
