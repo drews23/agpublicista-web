@@ -1,4 +1,7 @@
 /* Original Eclipse artwork shared by the Spanish and English home pages. */
+/* Keep the accent control above the English copy without blocking its links. */
+.english-eclipse .cabecera{z-index:5;pointer-events:none;}
+.english-eclipse .disco{pointer-events:auto;}
 .eclipse{--_factor: min(600px, 80vh); --_size: min(var(--_factor), 80vw); font-size: max(calc(var(--_size) * 0.03), 10px);  --ecl-bg: #07060d; --ecl-glow: #8b7bff;  --ecl-glow-2: #35d6c8;  --ecl-line: #c7bfff;  --ecl-line-soft: rgba(199, 191, 255, 0.18); --ecl-text-hi: #efeaff; --ecl-text-lo: #b3a8ff; --ecl-spot: 139, 123, 255;  --ecl-panel: #14121f; position: relative; overflow: hidden; background: var(--ecl-bg) linear-gradient(0deg, rgba(139, 123, 255, 0.05), rgba(53, 214, 200, 0.05)); min-height: 47em;}
 .eclipse.eclipse--oro{--ecl-glow: #ffb454; --ecl-glow-2: #ffd39b; --ecl-line: #ffd9a8; --ecl-line-soft: rgba(255, 217, 168, 0.18); --ecl-text-hi: #fff3e2; --ecl-text-lo: #ffcf94; --ecl-spot: 255, 180, 84;}
 .eclipse::after{content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 9em; background: linear-gradient(180deg,
