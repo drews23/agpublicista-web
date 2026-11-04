@@ -1,0 +1,130 @@
+{
+  "date": "2026-11-04",
+  "purpose": "Internal preparation pilot. Public sources, manually authored proposals, no campaign publication or measured performance.",
+  "directionDecision": {
+    "recordedOn": "2026-11-04",
+    "origin": "user-stated",
+    "caseIds": ["mago-balayage-es", "mago-balayage-en"],
+    "selection": "Equilibrar valoración y transformación visual",
+    "scope": "Creative direction selected; final copy, offer availability and any timed task remain pending."
+  },
+  "cases": [
+    {
+      "id": "md-web-es",
+      "source": {
+        "url": "https://creativomarketingdigital.com/paquetes-de-sitios-web/",
+        "reviewedOn": "2026-11-04",
+        "kind": "selected-excerpts",
+        "coverage": "Nonconsecutive excerpts from the offer and landing-package sections; not the complete page.",
+        "excluded": "Conceptual prototype metrics, prices behind sign-in, broad conversion promises, delivery deadlines and commercial guarantees.",
+        "authority": "The business's own public offer. Confirms what it advertises, not independently measured outcomes.",
+        "approval": "Business owner review pending. Campaign and ad group names have not been verified."
+      },
+      "expectedExportBlockers": ["CAMPAIGN_REQUIRED", "AD_GROUP_REQUIRED"],
+      "draft": {
+        "schemaVersion": 1,
+        "language": "es",
+        "business": "MD Estudio Creativo",
+        "campaign": "",
+        "adGroup": "",
+        "url": "https://creativomarketingdigital.com/paquetes-de-sitios-web/",
+        "path1": "diseno-web",
+        "path2": "bogota",
+        "terms": "diseño web en Bogotá\nsitios web",
+        "facts": "Propuesta manual para revisión interna. Web con UX/UI, SEO técnico y revisión móvil según alcance. Sin promesas de conversión ni plazos.",
+        "landing": "Diseño UX/UI orientado a tus objetivos.\nSEO técnico básico + sitemap + Schema.org\nDiseño móvil y revisión de rendimiento\nCotización exacta según alcance final.",
+        "headlines": [
+          {"text": "Diseño web en Bogotá", "pin": ""},
+          {"text": "Sitios web para tu negocio", "pin": ""},
+          {"text": "SEO técnico y diseño móvil", "pin": ""},
+          {"text": "Web con diseño UX/UI", "pin": ""},
+          {"text": "Landing pages a tu medida", "pin": ""},
+          {"text": "Entregables y alcance claros", "pin": ""},
+          {"text": "Solicita tu cotización web", "pin": ""}
+        ],
+        "descriptions": [
+          {"text": "Diseño UX/UI, revisión móvil y SEO técnico. Solicita una cotización según el alcance.", "pin": ""},
+          {"text": "Conoce los entregables y las condiciones de tu proyecto web antes de iniciar.", "pin": ""}
+        ]
+      }
+    },
+    {
+      "id": "mago-balayage-es",
+      "source": {
+        "url": "https://elmagodelcolor.com/balayage-bogota/",
+        "additionalUrls": ["https://elmagodelcolor.com/"],
+        "reviewedOn": "2026-11-04",
+        "kind": "selected-excerpts",
+        "coverage": "Selected diagnosis text from the service page and the qualification about Plex from the homepage; not either complete page.",
+        "excluded": "Starting prices, ratings, years of experience, damage-free promises, unconditional Plex inclusion and appointment/deposit rules.",
+        "authority": "The business's public descriptions. Suitability of a procedure requires individual assessment; text matches cannot certify it.",
+        "approval": "Business owner review pending. Keep diagnosis qualifications; do not transfer terms from the English traveler offer."
+      },
+      "expectedExportBlockers": ["CAMPAIGN_REQUIRED", "AD_GROUP_REQUIRED"],
+      "draft": {
+        "schemaVersion": 1,
+        "language": "es",
+        "business": "El Mago del Color",
+        "campaign": "",
+        "adGroup": "",
+        "url": "https://elmagodelcolor.com/balayage-bogota/",
+        "path1": "balayage",
+        "path2": "bogota",
+        "terms": "balayage en Bogotá\ncolorimetría de autor",
+        "facts": "Propuesta manual. Dirección elegida por el responsable: equilibrar valoración y transformación visual. Diseño según diagnóstico e historial; no prometer ausencia de daño ni resultado universal.",
+        "landing": "Balayage personalizado · Diagnóstico honesto · Plex según valoración\nEvaluamos tu fibra, tu historial químico y tu tono de piel.\nun color con dimensión, brillo",
+        "headlines": [
+          {"text": "Balayage en Bogotá", "pin": ""},
+          {"text": "Luz y dimensión para tu color", "pin": ""},
+          {"text": "Diseñado para tu cabello", "pin": ""},
+          {"text": "Colorimetría de autor", "pin": ""},
+          {"text": "Primero, tu valoración", "pin": ""},
+          {"text": "Consulta tu cita de balayage", "pin": ""},
+          {"text": "El Mago del Color", "pin": ""}
+        ],
+        "descriptions": [
+          {"text": "Balayage con luz y dimensión, diseñado para tu cabello. Agenda tu valoración en Bogotá.", "pin": ""},
+          {"text": "Cuéntanos el cambio que buscas. Revisamos tu historial y definimos un plan para tu color.", "pin": ""}
+        ]
+      }
+    },
+    {
+      "id": "mago-balayage-en",
+      "source": {
+        "url": "https://elmagodelcolor.com/en/",
+        "reviewedOn": "2026-11-04",
+        "kind": "selected-excerpts",
+        "coverage": "Short nonconsecutive excerpts from the service design, assessment and English-assistance sections. Not the full page.",
+        "excluded": "USD conversions, competitor price comparisons, ratings, damage-free promises and traveler payment conditions.",
+        "authority": "The business's English-language offer, reviewed independently of Spanish commercial conditions.",
+        "approval": "Business owner review pending. No verified campaign, ad group or US-market demand data."
+      },
+      "expectedExportBlockers": ["CAMPAIGN_REQUIRED", "AD_GROUP_REQUIRED"],
+      "draft": {
+        "schemaVersion": 1,
+        "language": "en",
+        "business": "El Mago del Color",
+        "campaign": "",
+        "adGroup": "",
+        "url": "https://elmagodelcolor.com/en/",
+        "path1": "balayage",
+        "path2": "english",
+        "terms": "balayage in Bogotá\nhair color",
+        "facts": "Manual proposal. Owner-selected direction: balance visual transformation and assessment. English assistance is stated on the page. No damage-free or price guarantee.",
+        "landing": "Hand-painted, tailored to your face and base color.\nHair assessment first\nWe reply in English.\nBook on WhatsApp",
+        "headlines": [
+          {"text": "Balayage in Bogotá", "pin": ""},
+          {"text": "Light and Dimension for You", "pin": ""},
+          {"text": "English-Speaking Hair Color", "pin": ""},
+          {"text": "Start With a Hair Assessment", "pin": ""},
+          {"text": "Plan Your Color Before You Fly", "pin": ""},
+          {"text": "El Mago del Color", "pin": ""}
+        ],
+        "descriptions": [
+          {"text": "Explore balayage with light and dimension. Ask about your hair assessment in Bogotá.", "pin": ""},
+          {"text": "Planning a visit to Bogotá? Message us on WhatsApp. We reply in English.", "pin": ""}
+        ]
+      }
+    }
+  ]
+}
