@@ -117,7 +117,9 @@ final class PilotStore {
             Contract::reject($status['periodRemaining']===0,'PILOT_PERIOD_LIMIT',429);
             Contract::reject($status['dailyRemaining']===0,'PILOT_DAILY_LIMIT',429);
             $now=$this->now(); $period=$this->calendar($now,'Y-m');
-            $used=(int)$this->query("SELECT COALESCE(SUM(CASE WHEN state='complete' THEN spent ELSE MAX(reserved,spent) END),0) FROM pilot_usage WHERE budget_period=?",[$period])->fetchColumn();
+            // The pilot budget is a lifetime cap, not a monthly allowance. The
+            // calendar period is retained only for accounting and never resets it.
+            $used=(int)$this->query("SELECT COALESCE(SUM(CASE WHEN state='complete' THEN spent ELSE MAX(reserved,spent) END),0) FROM pilot_usage")->fetchColumn();
             Contract::reject($maximumCost > $this->policy['budgetMicroUsd']-$used,'PILOT_BUDGET_LIMIT',429);
             $this->query("INSERT INTO pilot_usage (grant_id,request_id,fingerprint,created,day_key,budget_period,state,reserved) VALUES (?,?,?,?,?,?,'pending',?)",[$id,$request,$fingerprint,$now,$this->calendar($now,'Y-m-d'),$period,$maximumCost]);
             return true;

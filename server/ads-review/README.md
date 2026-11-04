@@ -56,6 +56,12 @@ reservation are different. The pilot route uses only `MockProvider`, with zero r
 cost and **paid budget zero**. No price calculation, paid adapter, verified maximum
 provider cost or real billing reconciliation is implemented by this ledger.
 
+The monetary cap applies to the entire pilot database lifetime across all calendar
+months and participants. `budget_period` records a month for accounting only; it
+does not renew the budget. On 2026-11-04 the owner approved a total pilot consumption
+cap of USD 5, not a recurring monthly allowance. The local route still reserves zero
+and remains simulated; that approval does not configure Google billing or a provider.
+
 Expired invitations and access grants stop working, but metadata/usage tombstones are
 not automatically purged. Production retention and scheduled cleanup remain pending.
 An admin-defined participant ID is not proof of a unique person. Verified email,
