@@ -92,7 +92,7 @@
               "name": "¿Se suben mis archivos a algún servidor?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Toda la optimización ocurre dentro de tu navegador, en tu propio equipo. El archivo nunca viaja por la red, así que puedes optimizar material confidencial de clientes sin ningún riesgo. De hecho, la herramienta sigue funcionando si te quedas sin conexión después de cargar la página."
+                "text": "La herramienta procesa el SVG en tu navegador y no lo envía a un servidor para optimizarlo. Conserva el original y revisa el contenido antes de publicarlo. Optimizar un SVG no equivale a sanearlo ni garantiza su seguridad."
               }
             },
             {
@@ -100,7 +100,7 @@
               "name": "¿Por qué mi SVG exportado de Illustrator o Figma pesa tanto?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Los editores guardan mucha información que el navegador no necesita: metadatos del programa, comentarios, identificadores, capas vacías, estilos sin usar y coordenadas con hasta diez decimales. Todo eso ocupa espacio sin cambiar ni un píxel de lo que se ve. Limpiarlo suele recortar entre un 30 % y un 70 % del peso."
+                "text": "Un editor puede incluir metadatos, comentarios, grupos vacíos y coordenadas con muchos decimales. Parte de esa información puede simplificarse. El ahorro depende del archivo y de las opciones elegidas; no existe un porcentaje garantizado."
               }
             },
             {
@@ -108,7 +108,7 @@
               "name": "¿Qué es la precisión decimal y cuánto conviene bajarla?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Es la cantidad de decimales que se conservan en las coordenadas. Un valor de 2 o 3 es suficiente para casi cualquier icono o ilustración y ahorra muchos bytes. Si bajas demasiado verás las curvas deformarse en la vista previa: ahí es donde conviene subir un punto. Las ilustraciones muy detalladas o de gran tamaño pueden necesitar 4."
+                "text": "Controla el redondeo de coordenadas. Empieza con el valor predeterminado, 3, y compara curvas, trazos y encuadre antes de reducirlo. Revisa también a tamaño real y en el contexto final: algunas diferencias no se aprecian en una vista previa pequeña."
               }
             },
             {
@@ -178,6 +178,7 @@
           </p>
         </div>
 
+        <p><a class="btn btn--ghost" href="/herramientas/optimizar-svg/laboratorio/">Explorar seis ejemplos antes y después</a></p>
         <!-- Carga -->
       </section>
 
@@ -248,7 +249,7 @@
                 <label class="field">
                   <span class="field__label">Precisión decimal <output data-precision-output>3</output></span>
                   <input type="range" min="0" max="8" step="1" value="3" data-precision />
-                  <span class="field__hint">Cuántos decimales conservan las coordenadas. Baja hasta que veas deformarse la vista previa.</span>
+                  <span class="field__hint">Reducir decimales puede alterar curvas y trazos. Compara ambas vistas y revisa el resultado a su tamaño final.</span>
                 </label>
 
                 <label class="switch">
@@ -341,26 +342,27 @@
             Un archivo SVG es texto, y como todo texto puede decir lo mismo con menos palabras.
             Los editores gráficos son generosos: guardan el nombre del programa, la versión, capas
             que quedaron vacías, identificadores que nadie referencia y coordenadas como
-            <code>10.000000</code> donde bastaba <code>10</code>. Nada de eso cambia un solo píxel
-            de lo que ve tu visitante, pero todo eso viaja por la red en cada visita.
+            <code>10.000000</code> donde puede bastar <code>10</code>. Parte de esa información
+            puede simplificarse. Comprueba el resultado, especialmente si hay estilos, animaciones
+            o scripts que dependen de los identificadores.
           </p>
           <p>
-            En iconos y logos exportados desde Illustrator o Figma es habitual recortar entre un
-            30 % y un 70 % del peso sin ninguna pérdida visual. En ilustraciones con trazados
-            complejos el ahorro suele ser aún mayor, porque ahí es donde los decimales se
-            multiplican.
+            El ahorro depende del archivo y de las opciones elegidas. Un SVG que ya está
+            optimizado puede ahorrar muy poco o incluso aumentar de peso. El
+            <a href="/herramientas/optimizar-svg/laboratorio/">laboratorio de seis ejemplos</a>
+            permite medirlo con una configuración documentada, sin prometer un porcentaje fijo.
           </p>
 
           <h2>Cómo usar esta herramienta</h2>
           <ol>
             <li>Arrastra tu archivo, pégalo como código o pulsa «Probar con un ejemplo».</li>
             <li>
-              Compara las dos vistas previas. Si el resultado se ve idéntico, el ahorro es gratis
-              en el sentido literal: no perdiste nada.
+              Compara las dos vistas previas y revisa el SVG a tamaño real en su contexto de uso.
+              Comprueba también los textos alternativos y las referencias externas que utilices.
             </li>
             <li>
-              Baja la <strong>precisión decimal</strong> hasta el punto justo antes de que las
-              curvas empiecen a deformarse. Ahí está el mayor ahorro de todos.
+              Ajusta la <strong>precisión decimal</strong> con cuidado. Menos decimales puede
+              reducir bytes, pero también cambiar curvas, uniones y posiciones.
             </li>
             <li>
               Descarga el archivo, copia el código, o cópialo como <strong>data URI</strong> para
@@ -370,8 +372,8 @@
 
           <h2>Las optimizaciones opcionales, con cuidado</h2>
           <p>
-            Las que vienen activadas por defecto son seguras: limpian sin cambiar el dibujo. Las
-            opcionales pueden ser justo lo que necesitas o romperte el archivo, según el caso.
+            Las opciones predeterminadas son un punto de partida, no una garantía para cualquier
+            SVG. Las opcionales pueden ser útiles o alterar el archivo, según el caso.
             Dos ejemplos de manual:
           </p>
           <ul>
@@ -386,8 +388,8 @@
             </li>
           </ul>
           <p>
-            Por eso la vista previa está siempre a la vista: activa, mira y decide. Si algo se
-            rompe, lo verás al instante.
+            Por eso la vista previa está siempre a la vista: activa, mira y decide. Si detectas
+            un cambio no deseado, revierte el ajuste. Revisa también el archivo en su contexto final.
           </p>
 
           <h2>Y después, ¿dónde lo uso?</h2>
@@ -410,26 +412,23 @@
 
           <h3>¿Se suben mis archivos a algún servidor?</h3>
           <p>
-            No. Toda la optimización ocurre dentro de tu navegador, en tu propio equipo. El archivo
-            nunca viaja por la red, así que puedes optimizar material confidencial de clientes sin
-            ningún riesgo. De hecho, la herramienta sigue funcionando si te quedas sin conexión
-            después de cargar la página.
+            La herramienta procesa el SVG en tu navegador y no lo envía a un servidor para
+            optimizarlo. Conserva el original y revisa el contenido antes de publicarlo.
+            Optimizar un SVG no equivale a sanearlo ni garantiza su seguridad.
           </p>
 
           <h3>¿Por qué mi SVG exportado de Illustrator o Figma pesa tanto?</h3>
           <p>
-            Los editores guardan mucha información que el navegador no necesita: metadatos del
-            programa, comentarios, identificadores, capas vacías, estilos sin usar y coordenadas
-            con hasta diez decimales. Todo eso ocupa espacio sin cambiar ni un píxel de lo que se
-            ve. Limpiarlo suele recortar entre un 30 % y un 70 % del peso.
+            Un editor puede incluir metadatos, comentarios, grupos vacíos y coordenadas con
+            muchos decimales. Parte de esa información puede simplificarse. El ahorro depende
+            del archivo y de las opciones elegidas; no existe un porcentaje garantizado.
           </p>
 
           <h3>¿Qué es la precisión decimal y cuánto conviene bajarla?</h3>
           <p>
-            Es la cantidad de decimales que se conservan en las coordenadas. Un valor de 2 o 3 es
-            suficiente para casi cualquier icono o ilustración y ahorra muchos bytes. Si bajas
-            demasiado verás las curvas deformarse en la vista previa: ahí es donde conviene subir
-            un punto. Las ilustraciones muy detalladas o de gran tamaño pueden necesitar 4.
+            Controla el redondeo de coordenadas. Empieza con el valor predeterminado, 3, y
+            compara curvas, trazos y encuadre antes de reducirlo. Revisa también a tamaño real
+            y en el contexto final: algunas diferencias no se aprecian en una vista previa pequeña.
           </p>
 
           <h3>¿Puedo usar el SVG optimizado como favicon?</h3>
@@ -520,6 +519,6 @@
     <script src="/js/site.js?v=1bbddead3136" defer></script>
     <script src="/js/mi-lienzo.js?v=4364bb214cd7" defer></script>
     <script src="/js/estudio.js?v=2026090504" defer></script>
-    <script src="js/optimizar.js?v=2026090504" defer></script>
+    <script src="js/optimizar.js?v=2026110401" defer></script>
   </body>
 </html>

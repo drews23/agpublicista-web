@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "assetSet": "lienzo-library-3d-v2",
+  "authorship": "Artwork selected from the Lienzo library, created in collaboration with MD Estudio Creativo. Presentation adapted to the Lienzo palette; library originals unchanged.",
+  "license": {
+    "url": "https://lienzo.tools/licencia/",
+    "credits": "https://lienzo.tools/recursos/creditos/favicons-catalogo-3d.txt",
+    "noteEs": "Iconos de la biblioteca Lienzo, creada en colaboración con MD Estudio Creativo. Consulta las condiciones del recurso y conserva sus avisos de atribución.",
+    "noteEn": "Icons from the Lienzo library, created in collaboration with MD Estudio Creativo. Refer to the resource terms and retain its attribution notices."
+  },
+  "cases": [
+    {
+      "id": "editor-cleanup",
+      "libraryId": "edbff264",
+      "tone": "violet",
+      "es": "Capas isométricas",
+      "en": "Isometric layers",
+      "focusEs": "Estructura y profundidad",
+      "focusEn": "Structure and depth",
+      "noteEs": "Compara los bordes, las transparencias y la profundidad entre las capas.",
+      "noteEn": "Compare edges, transparency, and depth between the layers.",
+      "provenance": {
+        "source": "herramientas/favicons/iconos3d/edbff264.svg",
+        "sourceSha256": "46d3d097dc646cc66420e4c4d2f50234e8d27d2c2879acfb7179c91d0255bfd4",
+        "sampleSha256": "9354a8ec14084f3e48293adf36d20362f24b4689c68af14be5e865aedab1c07d",
+        "adaptation": "Lienzo presentation colors; source geometry retained.",
+        "credits": "/recursos/creditos/favicons-catalogo-3d.txt",
+        "terms": "/licencia/"
+      }
+    },
+    {
+      "id": "curves-precision",
+      "libraryId": "9abf5882",
+      "tone": "mint",
+      "es": "Pluma Bézier",
+      "en": "Bézier pen",
+      "focusEs": "Curvas y precisión",
+      "focusEn": "Curves and precision",
+      "noteEs": "Revisa la curva blanca, los nodos y la punta de la pluma al cambiar la precisión.",
+      "noteEn": "Inspect the white curve, control points, and pen tip when changing precision.",
+      "provenance": {
+        "source": "herramientas/favicons/iconos3d/9abf5882.svg",
+        "sourceSha256": "3c1af1ba2c152d60824787993f69de4ef1d9c58e279700ae19ba356d64e0629d",
+        "sampleSha256": "2c34f557c5e0004c56b4a11cbc0e03a95e92ade03bbf295822a1a9b6abae9391",
+        "adaptation": "Lienzo presentation colors; source geometry retained.",
+        "credits": "/recursos/creditos/favicons-catalogo-3d.txt",
+        "terms": "/licencia/"
+      }
+    },
+    {
+      "id": "gradient-references",
+      "libraryId": "50ad3a46",
+      "tone": "violet",
+      "es": "Cubo dimensional",
+      "en": "Dimensional cube",
+      "focusEs": "Degradados y referencias",
+      "focusEn": "Gradients and references",
+      "noteEs": "Comprueba el volumen y los degradados. Sus referencias deben seguir conectadas.",
+      "noteEn": "Check the volume and gradients. Their references must remain connected.",
+      "provenance": {
+        "source": "herramientas/favicons/iconos3d/50ad3a46.svg",
+        "sourceSha256": "6f0fcf55d1bf4ba0c38b0d6ce31d005ab0477f9f04208dcae5ae3dc41a16d2a1",
+        "sampleSha256": "796a83a7e824f39405405b0a7ad172b58085c5790f540ac7b237590511474139",
+        "adaptation": "Lienzo presentation colors; source geometry retained.",
+        "credits": "/recursos/creditos/favicons-catalogo-3d.txt",
+        "terms": "/licencia/"
+      }
+    },
+    {
+      "id": "fine-strokes",
+      "libraryId": "83a82de2",
+      "tone": "mint",
+      "es": "Varita creativa",
+      "en": "Creative wand",
+      "focusEs": "Destellos y detalles",
+      "focusEn": "Highlights and details",
+      "noteEs": "Observa las facetas de la estrella, los destellos y las uniones del mango.",
+      "noteEn": "Inspect the star facets, highlights, and handle joins.",
+      "provenance": {
+        "source": "herramientas/favicons/iconos3d/83a82de2.svg",
+        "sourceSha256": "6141652d2a5d184e359a5b32129cd834ecff820165daad094367252b724baf8f",
+        "sampleSha256": "24c19a096325853811199237acc9c386871adb2279d2868a901b7a824d62556b",
+        "adaptation": "Lienzo presentation colors; source geometry retained.",
+        "credits": "/recursos/creditos/favicons-catalogo-3d.txt",
+        "terms": "/licencia/"
+      }
+    },
+    {
+      "id": "responsive-viewbox",
+      "libraryId": "74bb0ce3",
+      "tone": "amber",
+      "es": "Cohete creativo",
+      "en": "Creative rocket",
+      "focusEs": "Escala y encuadre",
+      "focusEn": "Scale and framing",
+      "noteEs": "Revisa el encuadre, las aletas y la ventana, también a tamaño pequeño.",
+      "noteEn": "Check the framing, fins, and window, including at small sizes.",
+      "provenance": {
+        "source": "herramientas/favicons/iconos3d/74bb0ce3.svg",
+        "sourceSha256": "c26f8c288d2a7cc0be3a3d8c9675712924a1d6c83a87770b1227d27697957e3f",
+        "sampleSha256": "d161afece53b14f90298cffc61c59bdfb015cc64ec5a96d2539bd21f838f4ca0",
+        "adaptation": "Lienzo presentation colors; source geometry retained.",
+        "credits": "/recursos/creditos/favicons-catalogo-3d.txt",
+        "terms": "/licencia/"
+      }
+    },
+    {
+      "id": "compact-icon",
+      "libraryId": "679c6ce6",
+      "tone": "amber",
+      "es": "Una buena idea",
+      "en": "A bright idea",
+      "focusEs": "SVG ya optimizado",
+      "focusEn": "Already optimized SVG",
+      "noteEs": "Esta bombilla ya está optimizada con precisión 3. El ahorro puede ser cero.",
+      "noteEn": "This light bulb is already optimized at precision 3. Savings may be zero.",
+      "provenance": {
+        "source": "herramientas/favicons/iconos3d/679c6ce6.svg",
+        "sourceSha256": "c8d241711a1a5991f20e181c3aa41dd86dce0d6bea9b6119a5fbca56c2bfb6ac",
+        "sampleSha256": "61843f34549d16df6ae839990092ad68dc678a72c4e0b4948c20aaebfa2f6c62",
+        "adaptation": "Lienzo presentation colors; pre-optimized with local SVGO 4.0.2 defaults at precision 3.",
+        "credits": "/recursos/creditos/favicons-catalogo-3d.txt",
+        "terms": "/licencia/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+LIENZO SVG LAB — ARTWORK CREDITS AND TERMS / CRÉDITOS Y CONDICIONES
+Selection updated: 4 November 2026 / Selección actualizada: 4 de noviembre de 2026.
+
+Creation in collaboration / Creación en colaboración:
+Jorge Andrés Arias García / Lienzo, en colaboración con
+MD Estudio Creativo · Creativo Marketing Digital
+https://creativomarketingdigital.com/estudio-creativo-marketing-digital/
+
+These six SVG examples are selected from the existing Lienzo 3D icon library.
+Presentation colors are adapted to Lienzo; library source files remain unchanged.
+They retain the library's resource terms and attribution. They are not relicensed
+under the MIT license that accompanied the previous geometric test fixtures.
+
+Estos seis ejemplos SVG proceden de la biblioteca de iconos 3D de Lienzo.
+Se adaptan sus colores de presentación; los originales de la biblioteca se conservan.
+Se mantienen las condiciones y la atribución del recurso. No se relicencian como MIT.
+
+Resource / Recurso: https://lienzo.tools/herramientas/favicons/
+Recorded origin / Origen registrado: Envato Elements, según la ficha existente.
+Credits / Ficha de atribución:
+https://lienzo.tools/recursos/creditos/favicons-catalogo-3d.txt
+Terms / Condiciones: https://lienzo.tools/licencia/
+Origin details / Créditos y origen: https://lienzo.tools/licencias-de-terceros/#recursos
+
+Conserva los avisos individuales de autoría y licencia de los archivos.
+Esta atribución común no elimina derechos de otros titulares ni atribuye
+autoría exclusiva a Lienzo. Para compartir el recurso, enlaza su entrada.
+No lo vuelvas a publicar como un pack o catálogo equivalente.
+
+The exact library source paths, SHA-256 checksums, and presentation adaptations
+are recorded per example in cases.json and in the exported JSON report.
+El origen, las sumas SHA-256 y las adaptaciones se registran en cases.json
+y en el informe JSON descargable.
+
+Contact / Contacto: contacto@lienzo.tools

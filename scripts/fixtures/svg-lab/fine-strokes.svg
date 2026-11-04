@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="120" viewBox="0 0 160 120">
+  <title>Fine strokes and line joins</title>
+  <g fill="none" stroke="#35d6c8" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.125 88.875 50.375 22.625 80.625 88.875 110.875 22.625 141.125 88.875"/>
+    <circle cx="80.625" cy="59.375" r="34.875"/>
+    <rect x="40.125" y="18.625" width="80.75" height="82.25" rx="12.375"/>
+  </g>
+  <circle cx="80.625" cy="59.375" r="3.375" fill="#ffb454"/>
+</svg>

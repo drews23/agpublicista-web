@@ -58,6 +58,7 @@
   let optimized = "";
   let requestId = 0;
   let pending = 0;
+  let engineReady = false;
 
   const DEMO = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Ejemplo generado a mano, con la basura típica de un editor -->
@@ -201,6 +202,7 @@
 
   async function run() {
     if (!source) return;
+    if (!engineReady) { workspace.dataset.busy = "true"; return; }
 
     const options = {
       plugins: selectedPlugins(),
@@ -316,6 +318,7 @@
   });
 
   dropzone.addEventListener("keydown", (event) => {
+    if (event.target !== dropzone) return;
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       fileInput.click();
@@ -432,7 +435,10 @@
       versionLabel.textContent = info.version;
       info.defaults.forEach((plugin) => pluginsDefault.append(pluginToggle(plugin, true)));
       info.optional.forEach((plugin) => pluginsOptional.append(pluginToggle(plugin, false)));
+      engineReady = true;
+      if (source) run();
     } catch {
+      workspace.dataset.busy = "false";
       showError("No se pudo cargar el optimizador. Recarga la página para intentarlo de nuevo.");
     }
   })();

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="120" viewBox="0 0 160 120">
+  <title>Curves and precision</title>
+  <path d="M12.375 84.625C34.125 6.375 61.625 14.875 79.375 59.625S125.875 112.125 147.625 31.375" fill="none" stroke="#35d6c8" stroke-width="5.375" stroke-linecap="round"/>
+  <path d="M12.375 97.125C39.625 42.875 74.125 18.375 147.625 97.125" fill="none" stroke="#8b7bff" stroke-width="2.125"/>
+  <circle cx="79.375" cy="59.625" r="8.625" fill="#ffb454"/>
+</svg>
