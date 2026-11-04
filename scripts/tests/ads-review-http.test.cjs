@@ -1,0 +1,27 @@
+/* Requires the explicit local PHP server at 127.0.0.1:8810. No external API. */
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const fs=require('node:fs'),path=require('node:path'),{execFile}=require('node:child_process');
+const {promisify}=require('node:util'),{randomUUID,createHash}=require('node:crypto');
+const E=require('../../js/ads-studio-engine.js'),M=require('../../js/ads-studio-review-model.js');
+const ROOT=path.resolve(__dirname,'../..'),BASE='http://127.0.0.1:8810';
+const php=process.env.LIENZO_PHP_PATH||path.join(ROOT,'output/ads-review-runtime/php/php.exe');
+const flags=['-n','-d','extension_dir='+path.join(path.dirname(php),'ext'),'-d','extension=pdo_sqlite','-d','extension=mbstring','-d','extension=intl'];
+async function session(){const r=await fetch(BASE+'/api/ads/session');assert.equal(r.status,200);return {cookie:r.headers.get('set-cookie').split(';')[0],token:(await r.json()).csrfToken};}
+function request(){const d=E.createDraft('es');Object.assign(d,{business:'Ejemplo ficticio',url:'https://example.com/service'});d.headlines[0].text='Servicio a tu medida';const projected=M.project(d);return {schemaVersion:1,requestId:randomUUID(),draftRevision:createHash('sha256').update(M.canonical(projected)).digest('hex'),locale:'es-CO',goal:'Oferta clara',draft:projected,evidence:[{id:'offer-1',text:'Primero, tu valoración',sourceUrl:d.url,observedOn:'2026-11-04',scope:'offer',ownerConfirmed:true}],constraints:[],consent:{version:'local-simulation-v1',confirmed:true}};}
+function post(s,r,headers={}){return fetch(BASE+'/api/ads/review',{method:'POST',headers:{'Content-Type':'application/json','Origin':BASE,'Cookie':s.cookie,'X-CSRF-Token':s.token,...headers},body:JSON.stringify(r)});}
+test('HTTP: session, valid review, exact retry and conflicting reuse',async()=>{const s=await session(),r=request();const one=await post(s,r);assert.equal(one.status,200);const value=await one.json();M.validate(r,value);assert.deepEqual(await (await post(s,r)).json(),value);r.goal='Other goal';assert.equal((await post(s,r)).status,409);});
+test('HTTP: strict access, origin, media type and request size',async()=>{const s=await session(),r=request();assert.equal((await post(s,r,{'X-CSRF-Token':'wrong'})).status,403);assert.equal((await post(s,r,{'Origin':'https://example.com'})).status,403);assert.equal((await post(s,r,{'Content-Type':'text/plain'})).status,415);const large={...r,goal:'x'.repeat(66000)};assert.equal((await post(s,large)).status,413);assert.equal((await fetch(BASE+'/api/ads/review')).status,405);});
+test('HTTP: invalid input, no consent and missing evidence return explicit results',async()=>{const s=await session(),r=request();r.extra=true;assert.equal((await post(s,r)).status,400);delete r.extra;r.consent.confirmed=false;assert.equal((await post(s,r)).status,403);r.consent.confirmed=true;r.evidence=[];const response=await post(s,r);assert.equal(response.status,200);assert.equal((await response.json()).status,'insufficient_evidence');});
+test('HTTP: 31-character fact becomes a description without silent clipping',async()=>{const s=await session(),r=request();r.evidence[0].text='Coffee roasted in small batches';const response=await post(s,r);assert.equal(response.status,200);const value=await response.json();M.validate(r,value);assert.equal(value.suggestions[0].field,'descriptions');assert.equal(value.suggestions[0].proposedText,r.evidence[0].text);});
+test('HTTP: router never serves backend sources, private data or traversal',async()=>{for(const p of ['/server/ads-review/Review.php','/server/ads-review/dev-router.php','/output/ads-review-runtime/source.json','/.git/config','/api/ads/unknown','/js/%2e%2e/server/ads-review/Review.php'])assert.equal((await fetch(BASE+p)).status,404,p);});
+test('HTTP: both prototype pages inject local hooks; normal source pages stay unchanged',async()=>{for(const route of ['herramientas/anuncios/','en/tools/ads/']){const r=await fetch(BASE+'/'+route);assert.equal(r.status,200);const html=await r.text();assert.match(html,/data-review-demo="local"/);assert.match(html,/ads-studio-review-model.js/);assert.doesNotMatch(fs.readFileSync(path.join(ROOT,route,'index.html'),'utf8'),/data-review-demo/);}});
+test('PHP and browser engine count the same boundary and Unicode vectors',async()=>{
+  const values=['','A'.repeat(30),'A'.repeat(31),'Cafe\u0301','咖啡','🌿','👩‍💻','é','\u1100','\ua4cf','\ua303','\uff61','\u{20000}','Coffee roasted in small batches'];
+  const result=await new Promise((resolve,reject)=>{const child=execFile(php,[...flags,'scripts/tests/ads-review-php.php','counts'],{cwd:ROOT},(error,stdout)=>error?reject(error):resolve(stdout));child.stdin.end(JSON.stringify(values));});
+  assert.deepEqual(JSON.parse(result),values.map(E.countCharacters));
+});
+test('two independent PHP processes reserve the same request only once',async()=>{
+  const privateBase=path.resolve(ROOT,'../lienzo-private-dev');fs.mkdirSync(privateBase,{recursive:true});const dir=fs.mkdtempSync(path.join(privateBase,'race-'));
+  const run=()=>promisify(execFile)(php,[...flags,'scripts/tests/ads-review-php.php','worker',dir],{cwd:ROOT});
+  const out=await Promise.all([run(),run()]);const statuses=out.map(r=>JSON.parse(r.stdout).status);assert.ok(statuses.includes(200));assert.ok(statuses.every(s=>s===200||s===409));assert.equal(fs.readFileSync(path.join(dir,'provider-calls.txt'),'utf8'),'call\n');
+});

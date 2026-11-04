@@ -32,6 +32,8 @@ RewriteRule ^herramientas/qr/hub/?$ https://lienzo.tools/herramientas/qr/ [R=301
 # añade y sobrescribe), así que cualquier copia que vuelva a subirse por
 # descuido queda cortada aquí en vez de quedar pública.
 RewriteRule ^svg(/|$) - [R=404,L]
+# Backend source is not a public endpoint. Deployment requires a separate private setup.
+RewriteRule ^server/ads-review(/|$) - [R=404,L]
 # Ojo: el espacio va como clase [\s] — un espacio literal en el patron
 # rompe el parseo de argumentos de Apache y anula la regla.
 RewriteRule ^escenas[\s]3d(/|$) - [R=404,L]

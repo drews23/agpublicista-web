@@ -1,4 +1,4 @@
-/* Lienzo Ads Studio — browser controller. Ad content is never sent to a service.
+/* Lienzo Ads Studio — browser controller. Default editor stays entirely local.
  * Explicit JSON downloads are the backup. There is no automatic persistence.
  */
 (() => {
@@ -339,6 +339,7 @@
     $('ads-export-status').textContent=csvErrors?(en?`${csvErrors} items to complete for CSV. You can still save your draft.`:`${csvErrors} requisitos por completar para CSV. Puedes guardar el borrador.`):words.ready;
     $('ads-draft-status').textContent=example?words.example:words.unsaved;
     renderPreview();window.LienzoEditorWorkspace?.refresh();
+    if(app.dataset.reviewDemo==='local')app.dispatchEvent(new Event('lienzo-ads-change'));
     return analysis;
   }
   app.addEventListener('input',event=>{
@@ -414,4 +415,13 @@
     if(dirty&&hasContent()) {event.preventDefault();event.returnValue='';}
   });
   hydrate();
+  // Only the loopback development router enables this explicit simulated flow.
+  if(app.dataset.reviewDemo==='local'&&window.LienzoAdsReview) window.LienzoAdsReview.mount({
+    app, getDraft:()=>E.parseDraft(E.exportJson(draft)),
+    changeAsset:(field,index,expected,text)=>{
+      if(!['headlines','descriptions'].includes(field)||!draft[field][index]||draft[field][index].text!==expected)throw new Error('REVISION_CONFLICT');
+      if(E.countCharacters(text)>(field==='headlines'?30:90))throw new Error('INVALID_PROVIDER_RESPONSE');
+      draft[field][index].text=text;dirty=true;variant=0;renderAssets();update();
+    }
+  });
 })();

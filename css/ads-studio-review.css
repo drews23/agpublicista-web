@@ -1,0 +1,21 @@
+/* Loaded only by the local PHP prototype router. */
+.ads-review-demo{border:1px solid var(--line-strong);border-radius:24px;background:var(--bg-soft);padding:clamp(20px,3vw,32px);margin-bottom:24px;max-width:100%;box-sizing:border-box}
+.ads-review-demo h2{font:500 clamp(1.6rem,3vw,2.2rem)/1.2 var(--font-display);letter-spacing:normal;margin:12px 0}
+.ads-review-demo-field{display:grid;gap:8px;margin:18px 0;font-size:.9rem;font-weight:550}
+.ads-review-demo-field input,.ads-review-demo-field textarea{width:100%;min-width:0;box-sizing:border-box;padding:12px 14px;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:12px;font:400 1rem/1.5 var(--font-body)}
+.ads-review-demo-check{display:flex;align-items:start;gap:10px;margin:12px 0;font-size:.88rem;line-height:1.5}
+.ads-review-demo-check input{width:20px;height:20px;flex:none;accent-color:var(--violeta)}
+.ads-review-demo-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.ads-review-demo .ads-btn{min-height:44px;white-space:normal}
+.ads-review-demo-status{color:var(--muted);line-height:1.6;min-height:1.6em;margin-top:16px;overflow-wrap:anywhere}
+.ads-review-demo-proposal{padding:20px;margin-top:20px;background:var(--bg);border:1px solid var(--line-strong);border-radius:16px;overflow-wrap:anywhere}
+.ads-review-demo-proposal h3{font:600 .75rem var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:12px 0 6px}
+.ads-review-demo-proposal p{line-height:1.6;margin:6px 0}
+.ads-review-demo :focus-visible{outline:3px solid var(--violeta);outline-offset:3px}
+.ads-review-demo [hidden]{display:none!important}
+.ads-review-access{margin:20px 0;padding:18px;border:1px solid var(--line-strong);border-radius:16px;background:var(--bg)}
+.ads-review-access h3{font:600 1rem/1.4 var(--font-body);margin:0 0 8px}
+.ads-review-access-form{display:flex;align-items:end;flex-wrap:wrap;gap:12px}
+.ads-review-access-form .ads-review-demo-field{flex:1 1 260px;margin:8px 0;min-width:0}
+.ads-review-access-form>.ads-btn{margin-bottom:8px}
+@media(max-width:560px){.ads-review-demo-actions .ads-btn{width:100%}}
