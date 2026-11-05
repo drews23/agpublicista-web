@@ -1,7 +1,10 @@
 # Ads Studio: secure preparation, not hosting activation
 
-Date: November 4, 2026. Both public language versions and the local MockProvider
-previews retain their current behavior. No route loads these new components.
+Date: November 4, 2026. Both public language versions and the previous local
+MockProvider previews retain their behavior. No production route loads these
+components. A new explicitly gated loopback access preview and prepared controller
+are documented in [ACCESS.md](ACCESS.md); they use only fictional mail and a local
+simulator, without a genuine Google credential or generation.
 
 ## Private configuration
 
@@ -116,7 +119,8 @@ do not enable HTTPS. Any reverse-proxy exception needs an explicit trusted-proxy
 configuration after checking Hostinger's actual web environment. The isolated check
 passed the direct HTTPS guard without a proxy exception. It also applied the cookie
 settings to a temporary diagnostic and confirmed a real Chrome session roundtrip.
-That diagnostic has been removed; a product login controller remains to be deployed.
+That diagnostic has been removed. The controller and ES/EN access screens now have
+a separate loopback proof; a product HTTPS entry point remains to be deployed.
 
 `VerifiedGeminiReview` is closed by default. The prepared integration validates the
 verified session and Google consent before allocating a pilot grant, then delegates

@@ -3,7 +3,8 @@ window.LienzoAdsReview={mount(options){
   'use strict';
   const {app,getDraft,changeAsset}=options;
   const pilot=app.dataset.reviewPilot==='local';
-  if(location.hostname!=='127.0.0.1'||location.port!==(pilot?'8811':'8810')||app.dataset.reviewDemo!=='local')return;
+  const verified=app.dataset.reviewAccess==='local';
+  if(location.hostname!=='127.0.0.1'||location.port!==(verified?'8812':pilot?'8811':'8810')||app.dataset.reviewDemo!=='local')return;
   const M=window.LienzoAdsReviewModel,en=document.documentElement.lang.startsWith('en');
   const t=en?{
     title:'Try a review, keep control',local:'Local prototype · no AI connected',intro:'Use fictional data. This test repeats a fact you confirm and stores the response locally to prevent duplicates. It does not generate professional ad copy or send anything to Google.',
@@ -28,6 +29,17 @@ window.LienzoAdsReview={mount(options){
     error:'No se pudo completar la revisión. Conservas el borrador; guardar y exportar siguen disponibles.',cancelled:'Revisión cancelada aquí. El servidor local podría terminar de procesarla; el borrador se conserva.',
     limit:'Se alcanzó el límite de pruebas locales. Espera un minuto. El borrador se conserva.',timeout:'La revisión local agotó el tiempo de espera. El borrador se conserva.'
   };
+  if(verified)Object.assign(t,en?{
+    title:'A second look. Your final say.',local:'Access preview · local simulator',
+    intro:'Try the invitation-only review flow with fictional data. The simulator selects a fact you confirm. It does not write new claims or contact Google.',
+    run:'Review my draft',consent:'',required:'Complete the goal and confirmed fact, then authorize the review.',
+    busy:'Reviewing the confirmed fact…',cancelled:'Review cancelled here. A server attempt may still use an allowance. Your draft stays unchanged.'
+  }:{
+    title:'Otra mirada. La decisión es tuya.',local:'Vista de acceso · simulador local',
+    intro:'Prueba el acceso por invitación con datos ficticios. El simulador selecciona un hecho que confirmes. No escribe nuevas promesas ni contacta con Google.',
+    run:'Revisar mi borrador',consent:'',required:'Completa el objetivo y el hecho confirmado; después autoriza la revisión.',
+    busy:'Revisando el hecho confirmado…',cancelled:'Revisión cancelada aquí. Un intento en el servidor puede consumir cuota. El borrador se conserva.'
+  });
   const p=en?{
     title:'Invitation-only local test',intro:'This tests access and review limits. An invitation does not verify your email. No emails, Gemini calls or payments.',
     token:'Single-use test invitation',activate:'Activate local access',need:'A test invitation is required for reviews. The editor, save and export stay available.',
@@ -69,7 +81,23 @@ window.LienzoAdsReview={mount(options){
   const status=node('p',t.idle,panel,'ads-review-demo-status');status.setAttribute('role','status');status.id='ads-review-status';
   const results=node('div',null,panel,'ads-review-demo-results');results.id='ads-review-results';
   app.before(panel);
-  let controller,serial=0,lastRequest,replyContext,history;
+  let controller,serial=0,lastRequest,replyContext,history,accessUI;
+  if(verified){
+    if(!window.LienzoAdsAccess){panel.remove();return;}
+    panel.classList.add('ads-review-demo--verified');
+    accessUI=window.LienzoAdsAccess.mount({panel,consent,goal,getDraft});
+    panel.addEventListener('lienzo-ads-access',()=>{
+      if(!accessUI.authorized()){
+        if(controller){serial++;controller.abort();controller=null;cancel.hidden=true;}
+        replyContext=null;history=null;results.replaceChildren();
+      }
+      run.disabled=Boolean(controller)||!accessUI.ready();stale();
+    });
+    run.disabled=true;
+    const preparation=node('details',null,panel,'ads-review-preparation');
+    node('summary',en?'Prepare a review':'Preparar una revisión',preparation);
+    for(const item of [goal.closest('label'),fact.closest('label'),hint,owner.closest('label'),actions,status,results])preparation.append(item);
+  }
   function renderAccess(){
     if(!pilot)return;
     const active=accessInfo?.access==='active';invitationForm.hidden=active;
@@ -100,29 +128,34 @@ window.LienzoAdsReview={mount(options){
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshAccess();});
     refreshAccess();
   }
-  const context=()=>M.stamp(getDraft())+M.canonical({goal:goal.value,fact:fact.value,owner:owner.checked,consent:consent.checked});
+  const context=()=>M.stamp(getDraft())+M.canonical({goal:goal.value,fact:fact.value,owner:owner.checked,consent:consent.checked,access:accessUI?.stamp()||''});
   function stale(){
     if(replyContext&&context()!==replyContext){results.querySelectorAll('[data-review-apply]').forEach(b=>b.disabled=true);status.textContent=t.stale;}
     if(history&&M.stamp(getDraft())!==history.after){results.querySelectorAll('[data-review-undo]').forEach(b=>b.disabled=true);status.textContent=t.stale;}
   }
   app.addEventListener('input',stale);app.addEventListener('change',stale);app.addEventListener('lienzo-ads-change',stale);
   panel.addEventListener('input',stale);panel.addEventListener('change',stale);
-  cancel.addEventListener('click',()=>{if(!controller)return;serial++;controller.abort();controller=null;run.disabled=false;if(pilot)renderAccess();cancel.hidden=true;status.textContent=t.cancelled;});
+  cancel.addEventListener('click',()=>{if(!controller)return;serial++;controller.abort();controller=null;run.disabled=verified&&!accessUI.ready();if(pilot)renderAccess();cancel.hidden=true;status.textContent=t.cancelled;if(verified)accessUI.refresh();});
   run.addEventListener('click',async()=>{
     if(controller)return;
+    if(verified&&!accessUI.ready()){accessUI.show();return;}
     if(!goal.value.trim()||!fact.value.trim()||!owner.checked||!consent.checked){status.textContent=t.required;return;}
     const thisSerial=++serial,current=context(),snapshot=getDraft();replyContext=null;history=null;results.replaceChildren();
     controller=new AbortController();const active=controller;run.disabled=true;cancel.hidden=false;status.textContent=t.busy;
     let timedOut=false;const timeout=setTimeout(()=>{timedOut=true;active.abort();},30000);
     try{
       const request={schemaVersion:1,requestId:crypto.randomUUID(),draftRevision:await M.revision(snapshot),locale:en?'en-US':'es-CO',goal:goal.value.trim(),draft:M.project(snapshot),
-        evidence:[{id:'owner-fact-1',text:fact.value.trim(),sourceUrl:snapshot.url,observedOn:new Date().toISOString().slice(0,10),scope:'offer',ownerConfirmed:true}],constraints:[],consent:{version:'local-simulation-v1',confirmed:true}};
+        evidence:[{id:'owner-fact-1',text:fact.value.trim(),sourceUrl:snapshot.url,observedOn:new Date().toISOString().slice(0,10),scope:'offer',ownerConfirmed:true}],constraints:[],consent:{version:verified?'gemini-review-v1':'local-simulation-v1',confirmed:true}};
       const key=M.canonical({...request,requestId:''});
       if(lastRequest?.key===key)request.requestId=lastRequest.id;else lastRequest={key,id:request.requestId};
-      const session=await fetch('/api/ads/session',{credentials:'same-origin',signal:active.signal});if(!session.ok)throw new Error('ACCESS_REQUIRED');
-      const sessionData=await session.json();
+      let sessionData;
+      if(verified){sessionData=await accessUI.session(active.signal);if(!accessUI.ready())throw new Error('ACCESS_REQUIRED');}
+      else {const session=await fetch('/api/ads/session',{credentials:'same-origin',signal:active.signal});if(!session.ok)throw new Error('ACCESS_REQUIRED');sessionData=await session.json();}
       const response=await fetch('/api/ads/review',{method:'POST',credentials:'same-origin',signal:active.signal,headers:{'Content-Type':'application/json','X-CSRF-Token':sessionData.csrfToken},body:JSON.stringify(request)});
-      if(!response.ok)throw new Error(pilot&&response.status===403?'PILOT_ACCESS':pilot&&response.status===429?'PILOT_LIMIT':response.status===429?'LIMIT':'SERVICE_ERROR');
+      if(!response.ok){
+        if(verified){const failure=await response.json().catch(()=>({}));throw new Error(failure.error||'SERVICE_ERROR');}
+        throw new Error(pilot&&response.status===403?'PILOT_ACCESS':pilot&&response.status===429?'PILOT_LIMIT':response.status===429?'LIMIT':'SERVICE_ERROR');
+      }
       const value=M.validate(request,await response.json());
       if(thisSerial!==serial||active.signal.aborted)return;
       if(context()!==current){status.textContent=t.stale;return;}
@@ -148,7 +181,7 @@ window.LienzoAdsReview={mount(options){
           }catch(_){status.textContent=t.stale;}
         });
       }
-    }catch(error){if(thisSerial===serial)status.textContent=timedOut?t.timeout:active.signal.aborted?t.cancelled:error.message==='PILOT_ACCESS'?p.need:error.message==='PILOT_LIMIT'?p.exhausted:error.message==='LIMIT'?t.limit:error.message==='INVALID_PROVIDER_RESPONSE'?t.invalid:t.error;}
-    finally{clearTimeout(timeout);if(thisSerial===serial){controller=null;run.disabled=false;cancel.hidden=true;if(pilot)await loadAccess().catch(()=>{run.disabled=true;accessStatus.textContent=p.unavailable;});}}
+    }catch(error){if(thisSerial===serial)status.textContent=timedOut?t.timeout:active.signal.aborted?t.cancelled:verified?accessUI.error(error.message):error.message==='PILOT_ACCESS'?p.need:error.message==='PILOT_LIMIT'?p.exhausted:error.message==='LIMIT'?t.limit:error.message==='INVALID_PROVIDER_RESPONSE'?t.invalid:t.error;}
+    finally{clearTimeout(timeout);if(thisSerial===serial){controller=null;run.disabled=verified&&!accessUI.ready();cancel.hidden=true;if(verified)await accessUI.refresh();if(pilot)await loadAccess().catch(()=>{run.disabled=true;accessStatus.textContent=p.unavailable;});}}
   });
 }};

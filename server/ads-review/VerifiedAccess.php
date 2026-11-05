@@ -127,6 +127,15 @@ final class VerifiedEmailAccess {
         return $row;
     }
     public function authorize(#[\SensitiveParameter] string $token,#[\SensitiveParameter] string $csrf):void {$this->session($token,$csrf);}
+    /** Read-only access summary. Never issues an invitation or allocates a pilot grant. */
+    public function status(#[\SensitiveParameter] string $token,#[\SensitiveParameter] string $csrf,PilotStore $pilot):array {
+        $row=$this->session($token,$csrf);$quota=null;
+        if($row['pilot_grant']!==null) {
+            try {$quota=$pilot->status($row['pilot_grant']);}
+            catch(ReviewError $e) {$quota=['access'=>'unavailable','reason'=>$e->reason];}
+        }
+        return ['expiresAt'=>gmdate('c',min((int)$row['expires'],(int)$row['allowed_until'])),'pilot'=>$quota];
+    }
     public function logout(#[\SensitiveParameter] string $token,#[\SensitiveParameter] string $csrf):void {
         $this->session($token,$csrf);
         $this->query('UPDATE verified_session SET revoked=1 WHERE token_hash=?',[hash('sha256',$token)]);

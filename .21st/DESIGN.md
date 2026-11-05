@@ -1,5 +1,18 @@
 # Lienzo: contexto de diseño
 
+## Acceso de Ads Studio - 4 noviembre 2026
+
+Mantener Instrument Sans y Fraunces locales con espaciado normal, fondos y bordes
+del tema Lienzo y acentos de su paleta. El acceso complementa al editor; guardar y
+exportar permanecen independientes. Diálogo nativo progresivo con correo, código
+completo de ocho dígitos y autorización explícita desmarcada. Etiquetas visibles,
+autocompletado, errores anunciados, retorno del foco y panel de preparación plegable.
+Conservar las versiones ES/en-US y no introducir testimonios, métricas ni cuentas
+ficticias como prueba comercial. La vista local identifica su simulador y correo
+de prueba. HTML/CSS/JS nativos, sin migración de framework ni componentes de pago.
+Contrato y límites: server/ads-review/ACCESS.md. Este lote se prepara localmente;
+la activación pública y los envíos reales son pasos independientes.
+
 ## Cuatro mejoras finales de la tanda 2.0 - 17 octubre 2026
 
 Navegación, menú contextual, partículas y perfil mantienen URL y versiones ES/en-US con composiciones propias, originales y funcionales. Dock editorial con indicadores separados; mesa de recursos con búsqueda/inspector/deshacer; estudio Canvas/WebGL con tres artes y controles reales; perfil editorial/compacto con proyectos ampliables y retrato local. Conservar paleta del logo, Fraunces con espaciado normal, fuentes locales y temas claro/oscuro. No introducir clientes, métricas, cuentas ni sincronización ficticia. Los proveedores por tipo se generan de forma limitada; las otras diez plantillas, incluidas Escenas CSS y Galería mejoradas, se preservan. Obtener HTML necesita archivos vecinos; JSON, PNG y vCard tienen propósitos separados. Miniaturas reales localizadas de 600x320 sin distorsión. Contrato y pruebas: scripts/REMAINING-TEMPLATES-UPGRADE.md. Metadatos 21st 37505/720/14092 consultados sin recuperar código. Todo local, sin commit, push ni publicación.

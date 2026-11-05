@@ -92,6 +92,11 @@ final class PilotStore {
     }
     public function revoke(string $id): void { $this->query('UPDATE pilot_grants SET revoked=1 WHERE id=?',[$id]); }
     public function pause(bool $paused): void { $this->query('UPDATE pilot_settings SET paused=? WHERE id=1',[$paused?1:0]); }
+    /** Public limits only; inspecting access must not start the participant's trial. */
+    public function limits(): array {
+        return ['periodReviews'=>$this->policy['periodReviews'],'dailyReviews'=>$this->policy['dailyReviews'],
+            'periodDays'=>$this->policy['periodDays'],'timezone'=>'America/Bogota'];
+    }
     public function requireBudgetCeiling(int $maximum): void {
         Contract::reject($maximum < 0 || $this->policy['budgetMicroUsd'] > $maximum,'PILOT_BUDGET_CONFIGURATION',503);
     }

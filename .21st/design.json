@@ -40,7 +40,12 @@
       "scripts/template-expansion/resource-carousel/script.js",
       "scripts/templates_v2.py",
       "scripts/templates-v2/studio.css",
-      "scripts/templates-v2/studio.js"
+      "scripts/templates-v2/studio.js",
+      "css/ads-studio.css",
+      "css/ads-studio-review.css",
+      "css/ads-studio-access.css",
+      "js/ads-studio-review.js",
+      "js/ads-studio-access.js"
     ],
     "assets": [
       "assets"

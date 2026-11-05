@@ -8,7 +8,9 @@ ads, or predict campaign results. Use fictional test data.
 `Gemini.php` adds a separate integration seam and usage-based accounting.
 `GeminiHttps.php` now prepares a closed-by-default HTTPS transport, `PrivateFiles.php`
 validates private credential files and `VerifiedAccess.php` prepares invite-only
-email-code access. Neither development router nor public page loads these components.
+email-code access. Neither the previous development routers nor a public page loads
+the Google transport. The new `-Access` preview uses only fictional email and a local
+simulator with the prepared controller and ES/EN screens; see [ACCESS.md](ACCESS.md).
 Tests use synthetic keys, simulated mail and substituted network calls only. See
 [the Gemini contract](GEMINI.md) and [the secure preparation contract](SECURE.md).
 
