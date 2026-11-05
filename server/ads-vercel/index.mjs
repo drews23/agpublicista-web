@@ -15,7 +15,9 @@ async function readBody(request) {
   try { return new TextDecoder('utf-8', { fatal: true }).decode(Buffer.concat(chunks)); }
   catch { throw new AccessError('INVALID_JSON', 400); }
 }
-export default async function handler(request, response) {
+// This server-owned seam supports real local HTTP regression tests. Browser
+// requests cannot choose a connector or override the production environment.
+export const createHandler = ({ openDatabase = connectDatabase } = {}) => async function handler(request, response) {
   for (const [key, value] of Object.entries({ 'Cache-Control': 'no-store, private',
     'Content-Type': 'application/json; charset=utf-8', 'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': 'no-referrer', 'X-Robots-Tag': 'noindex, nofollow', Vary: 'Cookie' })) response.setHeader(key, value);
@@ -28,7 +30,7 @@ export default async function handler(request, response) {
       [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].filter(host => /^[a-z0-9-]+\.vercel\.app$/.test(host || ''));
     requireThat(allowedHosts.includes(request.headers.host), 'INVALID_ORIGIN_CONFIGURATION', 503);
     const origin = `https://${request.headers.host}`;
-    pool = connectDatabase(databaseURL());
+    pool = openDatabase(databaseURL());
     const store = new AdsStore({ pool, pepper: process.env.LIENZO_ADS_IDENTITY_PEPPER, scope });
     if (new URL(request.url, origin).pathname === '/api/ads/internal/mail') {
       const sender = makeBrevoSender({ enabled: process.env.LIENZO_ADS_MAIL_ENABLED === '1', apiKey: process.env.LIENZO_ADS_BREVO_API_KEY });
@@ -49,4 +51,5 @@ export default async function handler(request, response) {
     response.end(JSON.stringify({ error: error instanceof AccessError ? error.code : 'SERVICE_UNAVAILABLE' }));
     if (!(error instanceof AccessError)) console.error('Lienzo access: unexpected backend failure');
   } finally { if (pool) try { await pool.end(); } catch {} }
-}
+};
+export default createHandler();

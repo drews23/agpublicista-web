@@ -144,7 +144,7 @@ records, zero mail jobs and no Production schema. Read-only mode was restored.
 This proves actual cloud SQL persistence, not deployed controller functionality
 or distributed SDK concurrency. Those runtime checks remain separate gates.
 
-The latest local suites pass 20 backend tests and 16,237 static assertions, including
+The latest local suites pass 22 backend tests and 16,237 static assertions, including
 all 154 sitemap URLs. The managed-variable mapping is included in these tests.
 
 Do not pull all environment values to local disk. Keep Preview separate from
@@ -181,6 +181,15 @@ PostgreSQL statements; their local pool bridge serializes transactions. Verify
 concurrency again using independent Neon connections before calling the distributed
 locking production-proven. Cloud HTTP cookies, worker auth, provider delivery,
 retention schedule and deployed function compatibility remain activation gates.
+
+The native HTTP regression suite uses real Node.js IncomingMessage and
+ServerResponse objects over loopback, with a server-owned database connector
+substitution. It covers raw/chunked body limits, invalid UTF-8, strict origin and
+CSRF checks, generic access replies, the encrypted outbox with a fictional sender,
+cookie/CSRF rotation, ES/EN session continuity, disabled review and logout. Browser
+requests cannot choose that connector. Test cookies are inspected and sent
+explicitly; this is not a browser Secure-cookie/TLS proof, a Neon SDK concurrency
+proof or evidence of real email delivery.
 
 Primary references: [Neon driver](https://neon.com/docs/serverless/serverless-driver),
 [current Neon pricing](https://neon.com/pricing),
