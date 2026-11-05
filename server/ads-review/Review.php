@@ -53,7 +53,9 @@ final class Contract {
         return $parts !== false && in_array($parts['scheme'] ?? '', ['http','https'], true) && !empty($parts['host']) &&
             !isset($parts['user']) && !isset($parts['pass']) && !preg_match('/[\s\x00-\x1f\x7f]/u', $url);
     }
-    public static function request(string $body): array {
+    public static function request(string $body, string $consentVersion = 'local-simulation-v1'): array {
+        // The server chooses the purpose. A browser cannot promote simulation consent.
+        self::reject(!in_array($consentVersion,['local-simulation-v1','gemini-review-v1'],true),'INVALID_CONSENT_CONFIGURATION',503);
         self::reject(strlen($body) > 65536, 'REQUEST_TOO_LARGE', 413);
         try { $r = json_decode($body, true, 32, JSON_THROW_ON_ERROR); } catch (Throwable) { throw new ReviewError(400,'INVALID_JSON'); }
         self::keys($r, ['schemaVersion','requestId','draftRevision','locale','goal','draft','evidence','constraints','consent']);
@@ -74,8 +76,7 @@ final class Contract {
         }
         self::reject(!hash_equals(hash('sha256',self::canonical($d)), $r['draftRevision']), 'REVISION_CONFLICT',409);
         self::keys($r['consent'],['version','confirmed']);
-        // This notice authorizes the local simulation only, never transmission to Google.
-        self::reject($r['consent']['version'] !== 'local-simulation-v1' || $r['consent']['confirmed'] !== true,'CONSENT_REQUIRED',403);
+        self::reject($r['consent']['version'] !== $consentVersion || $r['consent']['confirmed'] !== true,'CONSENT_REQUIRED',403);
         self::reject(!is_array($r['constraints']) || !array_is_list($r['constraints']) || count($r['constraints'])>20);
         foreach ($r['constraints'] as $value) self::text($value,500,false);
         self::reject(!is_array($r['evidence']) || !array_is_list($r['evidence']) || count($r['evidence'])>20);

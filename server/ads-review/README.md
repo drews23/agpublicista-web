@@ -1,9 +1,16 @@
 # Ads Studio: local review backend prototype
 
-This is a complete **local simulation**, not the Gemini integration or a deployable
-public API. The only implemented provider repeats a confirmed offer fact verbatim.
-It does not create professional copy, interpret the goal semantically, browse a
-destination, approve ads, or predict campaign results. Use fictional test data.
+The HTTP preview remains a complete **local simulation**, not a deployable public
+API. Its `MockProvider` repeats a confirmed offer fact verbatim. It does not create
+professional copy, interpret the goal semantically, browse a destination, approve
+ads, or predict campaign results. Use fictional test data.
+
+`Gemini.php` adds a separate integration seam and usage-based accounting.
+`GeminiHttps.php` now prepares a closed-by-default HTTPS transport, `PrivateFiles.php`
+validates private credential files and `VerifiedAccess.php` prepares invite-only
+email-code access. Neither development router nor public page loads these components.
+Tests use synthetic keys, simulated mail and substituted network calls only. See
+[the Gemini contract](GEMINI.md) and [the secure preparation contract](SECURE.md).
 
 ## Run locally on Windows
 
@@ -53,8 +60,9 @@ do not consume another slot. After response expiry, the ledger prevents the same
 from silently invoking the provider again. Uncertain work retains its slot and maximum
 reservation; mismatched cost accounting pauses further execution. A slot and a monetary
 reservation are different. The pilot route uses only `MockProvider`, with zero reserved
-cost and **paid budget zero**. No price calculation, paid adapter, verified maximum
-provider cost or real billing reconciliation is implemented by this ledger.
+cost and **paid budget zero**. The separate offline Gemini seam has a conservative
+model-bound reservation and simulated receipt settlement. No real provider execution
+or reconciliation against a Google invoice has been verified.
 
 The monetary cap applies to the entire pilot database lifetime across all calendar
 months and participants. `budget_period` records a month for accounting only; it
@@ -86,7 +94,8 @@ loopback remote address, and exact host. The normal site HTML never loads the re
 scripts or enables the local marker. The router injects the scripts and corrects
 privacy copy only into its local responses. Backend source paths are denied by the
 repository root and directory `.htaccess`; the local router uses a static allowlist.
-No Gemini URL, key, SDK, paid provider, or network adapter is implemented.
+The router has no Gemini connection or credential handling. The standalone transport
+implementation remains closed by default and is not connected to either HTTP preview.
 
 `GET /api/ads/session` establishes a local HttpOnly, SameSite=Strict session and CSRF
 token. `POST /api/ads/review` requires the matching token, exact Origin, JSON media
@@ -137,6 +146,22 @@ Set `LIENZO_JSDOM_PATH` to the already installed jsdom runtime when needed.
 
 ## Before any public or Gemini activation
 
+An isolated **web-SAPI** check on November 4, 2026 at 21:50:17 Bogotá passed 33/33
+checks using PHP 8.3.36 LiteSpeed. It exercised the current modules with synthetic
+fixtures outside the web root: effective UID/private permissions, the strict JSON
+credential reader, SQLite, an email-code/session/logout flow, real same-origin
+POST/CSRF validation and a Chrome cookie roundtrip. Cookie options were Secure,
+HttpOnly, SameSite=Strict with a host-only prefix. Two parallel web requests reached
+different worker processes and produced exactly one SQLite reservation.
+
+Unauthenticated HTTPS HEAD to Google's root verified TLS only (404, cURL error 0).
+No real key was read, mail sent or generation called. The temporary public bridge
+was moved to trash and its URL verified at 404; no cron was created. ES/EN Ads pages
+remained byte-for-byte identical to the pre-test baseline at HTTP 200. Evidence:
+`output/ads-web-hosting-2026-11-04/hostinger-web-report.json` and
+`cleanup-and-public-verification.json`. This is isolated hosting evidence, not a
+published login controller, authenticated Gemini request or real mail delivery.
+
 An isolated hosting check on 2026-11-04 verified PHP 8.3.36 **CLI** execution,
 private directory/file permissions, SQLite transactions, duplicate reservations and
 two-connection writer locking outside `public_html`. An unauthenticated HTTPS HEAD
@@ -146,11 +171,17 @@ Evidence: `output/ads-hosting-check-2026-11-04/hostinger-report.json` (local art
 `hosting-probe.php` is CLI-only, expires after fifteen minutes from upload, runs once
 per dedicated private directory, and must never become a public HTTP diagnostic.
 
-Still required: web SAPI execution and storage access, HTTPS sessions, multi-process
-behavior on the actual hosting, public authentication/abuse protection, monetary
-reservations, current model/pricing,
-Google project, secure credentials, provider timeout/billing behavior, consent to send
-data to Google, or production retention/monitoring. These are explicit next gates.
+On 2026-11-04 an exclusive Google project and Gemini-only service-account-bound
+credential were created in Cloud; the secret remains in Google. This is not a
+working backend connection. Still required: the actual public controller/interface
+and its hosting configuration, public authentication/abuse protection, live
+validation of reservation bounds and current model/pricing,
+verified hosting permissions and credential provisioning, actual provider timeout/
+billing behavior, visible access/consent screens, transactional mail delivery, and
+production retention/monitoring. The underlying secure-file, HTTPS, email-code and
+Google consent helpers exist but have not been activated on hosting. These are explicit
+next gates. The offline server contract accepts a separate `gemini-review-v1` purpose
+only when explicitly selected by the server; the normal local contract rejects it.
 The provider must stay unavailable if any required configuration or budget is absent.
 Do not deploy this development router as the public API. No credentials belong in this
 directory, the repository, browser code, logs, or chat.

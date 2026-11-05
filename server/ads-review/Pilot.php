@@ -92,6 +92,9 @@ final class PilotStore {
     }
     public function revoke(string $id): void { $this->query('UPDATE pilot_grants SET revoked=1 WHERE id=?',[$id]); }
     public function pause(bool $paused): void { $this->query('UPDATE pilot_settings SET paused=? WHERE id=1',[$paused?1:0]); }
+    public function requireBudgetCeiling(int $maximum): void {
+        Contract::reject($maximum < 0 || $this->policy['budgetMicroUsd'] > $maximum,'PILOT_BUDGET_CONFIGURATION',503);
+    }
     public function status(string $id): array {
         $grant=$this->authorize($id); $day=$this->calendar($this->now(),'Y-m-d');
         $total=(int)$this->query('SELECT COUNT(*) FROM pilot_usage WHERE grant_id=?',[$id])->fetchColumn();
