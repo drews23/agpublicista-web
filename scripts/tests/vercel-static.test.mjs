@@ -83,6 +83,11 @@ check(resolveRoute('/contacto/').status === 200, 'Contact page must remain indep
 check(resolveRoute('/en/tools/qr/').status === 200, 'English QR');
 check(resolveRoute('/assets/fonts/fraunces/fraunces-latin.woff2').headers['Access-Control-Allow-Origin'] === '*', 'Public font CORS');
 check(readFileSync(path.join(output, 'robots.txt'), 'utf8') === 'User-agent: *\nDisallow: /\n', 'Preview robots');
+const functionDirectory = path.join(root, '.vercel/output/functions/api/ads.func');
+const functionConfig = JSON.parse(readFileSync(path.join(functionDirectory, '.vc-config.json'), 'utf8'));
+check(functionConfig.runtime === 'nodejs24.x' && functionConfig.shouldAddHelpers === false, 'Private raw HTTP Node.js function');
+check(existsSync(path.join(functionDirectory, 'index.mjs')), 'Function bundle exists');
+check(!existsSync(path.join(output, 'node_modules')) && !existsSync(path.join(output, 'server')), 'Private dependencies/source outside public output');
 const production = spawnSync(process.execPath, ['scripts/build-vercel.mjs'], { cwd: root,
   encoding: 'utf8', env: { ...process.env, VERCEL_ENV: 'production', LIENZO_ENABLE_VERCEL_PRODUCTION: '' } });
 check(production.status !== 0 && production.stderr.includes('Production migration is not enabled'), 'Accidental production deployment must fail');

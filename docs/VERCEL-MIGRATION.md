@@ -60,3 +60,7 @@ a send-only permission. Create it only when its Vercel server-secret destination
 and consumer are ready. Do not store it under the historical Hostinger directory
 or expose it to static output, browser code, chat, screenshots or documentation.
 No new live mail test or Gemini generation is part of this preview stage.
+
+Continuation: the local Node.js/PostgreSQL adaptation is documented in
+[ADS-VERCEL-BACKEND.md](ADS-VERCEL-BACKEND.md). Its cloud provisioning and provider
+activation are separate from the static Preview already deployed.

@@ -1,0 +1,12 @@
+{
+  "name": "lienzo-tools",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "24.x" },
+  "scripts": {
+    "build": "node scripts/build-vercel.mjs",
+    "test:backend": "node --test scripts/tests/ads-vercel.test.mjs"
+  },
+  "dependencies": { "@neondatabase/serverless": "1.2.0" },
+  "devDependencies": { "@electric-sql/pglite": "0.5.15", "esbuild": "0.28.2" }
+}

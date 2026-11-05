@@ -3,6 +3,7 @@ import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, realpathS
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isPublicPath } from './vercel-public-policy.mjs';
+import { build } from 'esbuild';
 
 const root = realpathSync(fileURLToPath(new URL('../', import.meta.url)));
 const output = path.join(root, '.vercel', 'output');
@@ -61,12 +62,27 @@ routes.push({ src: '/(.*)\\.(?:css|js|mjs|json)', headers: { 'Cache-Control': 'p
 routes.push({ src: '/(.*)\\.(?:svg|png|jpe?g|webp|gif|ico|woff2?|ttf|otf)', headers: { 'Cache-Control': 'public, max-age=15552000' }, continue: true });
 const escaped = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const directories = files.filter(file => file.endsWith('/index.html')).map(file => file.slice(0, -10));
+// Build a private Node.js function. None of its source or dependencies enters static/.
+const functionDirectory = path.join(output, 'functions', 'api', 'ads.func');
+mkdirSync(functionDirectory, { recursive: true });
+await build({ entryPoints: [path.join(root, 'server/ads-vercel/index.mjs')],
+  outfile: path.join(functionDirectory, 'index.mjs'), bundle: true, platform: 'node',
+  format: 'esm', target: 'node24', sourcemap: false, banner: { js: "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);" } });
+writeFileSync(path.join(functionDirectory, '.vc-config.json'), JSON.stringify({
+  runtime: 'nodejs24.x', handler: 'index.mjs', launcherType: 'Nodejs', shouldAddHelpers: false,
+}, null, 2) + '\n');
+routes.push({ src: '/api/ads(?:/.*)?', dest: '/api/ads' });
 for (const directory of directories) {
   routes.push({ src: escaped('/' + directory.slice(0, -1)), status: 308, headers: { Location: '/' + directory } });
   routes.push({ src: escaped('/' + directory), dest: '/' + directory + 'index.html' });
 }
 routes.push({ src: '/', dest: '/index.html' }, { handle: 'filesystem' }, { src: '/.*', status: 404, dest: '/404.html' });
-writeFileSync(path.join(output, 'config.json'), JSON.stringify({ version: 3, routes }, null, 2) + '\n');
+const crons = process.env.VERCEL_ENV === 'production' && process.env.LIENZO_ADS_MAIL_CRON_ENABLED === '1' ?
+  [{ path: '/api/ads/internal/mail', schedule: '* * * * *' }] : [];
+if (crons.length && (process.env.LIENZO_ADS_ACCESS_ENABLED !== '1' || process.env.LIENZO_ADS_MAIL_ENABLED !== '1' || !process.env.CRON_SECRET)) {
+  throw new Error('Mail cron requires explicit access, mail and worker-secret configuration.');
+}
+writeFileSync(path.join(output, 'config.json'), JSON.stringify({ version: 3, routes, ...(crons.length ? { crons } : {}) }, null, 2) + '\n');
 writeFileSync(path.join(output, 'build-report.json'), JSON.stringify({ preview, files: files.length,
   bytes, directories: directories.length, routes: routes.length,
   gitCommit: process.env.VERCEL_GIT_COMMIT_SHA || null }, null, 2) + '\n');
