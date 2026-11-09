@@ -266,31 +266,38 @@ def scene_translations(lang):
 
 def gallery_translations(lang):
     pairs = {
-        'auto': ('Adaptable', 'Responsive'), 'hoverPreview': ('Explorar al pasar', 'Preview on hover'),
+        'auto': ('Adaptable', 'Responsive'), 'hoverPreview': ('Abrir al pasar el puntero', 'Open on hover'),
         'galleryLabel': ('Cinco paisajes para explorar', 'Five landscapes to explore'),
         'galleryEdition': ('ESTUDIOS DE PAISAJE / 01—05', 'LANDSCAPE STUDIES / 01—05'),
         'galleryHint': ('Abre un paisaje. Encuentra otra perspectiva.', 'Open a landscape. Find a new perspective.'),
         'selectPanel': ('Abrir panel', 'Open panel'), 'expandPanel': ('Ampliar paisaje', 'Expand landscape'),
         'previousPanel': ('Panel anterior', 'Previous panel'), 'nextPanel': ('Panel siguiente', 'Next panel'),
         'openLink': ('Abrir enlace', 'Open link'), 'category': ('Categoría', 'Category'),
-        'panelSettings': ('Fondo y movimiento', 'Background and motion'),
-        'selectedPanel': ('Panel seleccionado', 'Selected panel'), 'originalArt': ('Paisaje original Lienzo', 'Original Lienzo landscape'),
-        'customPhoto': ('Tu fotografía · carga local', 'Your photo · local upload'),
+        'galleryPanelPicker': ('Panel en edición', 'Panel to edit'),
+        'galleryImage': ('Imagen', 'Image'), 'galleryText': ('Texto y enlace', 'Text and link'),
+        'galleryMotion': ('Movimiento', 'Motion'), 'galleryLayout': ('Disposición de la galería', 'Gallery layout'),
+        'galleryTextHelp': ('Pulsa Aplicar cambios para actualizar el panel.', 'Select Apply changes to update the panel.'),
+        'galleryLayoutHint': ('Oculta Ajustes para ver la disposición completa y probar la apertura con el puntero.', 'Hide Settings to see the full layout and try opening panels on hover.'),
+        'originalArt': ('Paisaje original de Lienzo', 'Original Lienzo landscape'),
+        'customPhoto': ('Tu foto', 'Your photo'),
         'loadingPhoto': ('Preparando imagen…', 'Preparing image…'),
+        'galleryUpload': ('Cargar foto', 'Upload photo'),
+        'galleryUploadHelp': ('PNG, JPG o WebP · hasta 8 MB', 'PNG, JPG, or WebP · up to 8 MB'),
         'photoForPanel': ('Cambiar imagen del panel seleccionado', 'Change the selected panel’s image'),
         'focalX': ('Encuadre horizontal', 'Horizontal position'), 'focalY': ('Encuadre vertical', 'Vertical position'),
         'imageZoom': ('Acercamiento', 'Zoom'), 'resetCrop': ('Centrar imagen', 'Center image'),
-        'imageAlt': ('Descripción de tu imagen (accesibilidad)', 'Describe your image (accessibility)'),
-        'galleryIntensity': ('Profundidad y movimiento', 'Depth and motion'),
+        'imageAlt': ('Texto alternativo de la foto', 'Photo alt text'),
+        'galleryIntensity': ('Intensidad', 'Intensity'),
         'galleryDuration': ('Duración del ciclo', 'Cycle duration'),
-        'motionHint': ('Ajustes independientes por panel. Cero muestra un paisaje estático.', 'Each panel keeps its own settings. Zero displays a still landscape.'),
-        'cropHint': ('Imagen completa conserva todos los bordes. Rellenar usa un marco 6:5 estable para el panel, la vista ampliada y el HTML individual.', 'Full image keeps every edge. Fill uses a stable 6:5 frame in the panel, expanded view, and individual HTML.'),
+        'motionHint': ('Cero deja el panel estático.', 'Set to zero for a still panel.'),
+        'cropHint': ('El encuadre también se conserva en la vista ampliada y al descargar el panel.', 'The same framing carries over to expanded view and the panel download.'),
         'photoFit': ('Encuadre de la fotografía', 'Photo framing'),
         'photoFitContain': ('Imagen completa · sin recorte', 'Full image · no crop'),
         'photoFitCover': ('Rellenar 6:5 · recorte ajustable', 'Fill 6:5 · adjustable crop'),
-        'fullPhotoHint': ('La imagen completa mantiene sus bordes, sin zoom ni movimiento. Cambia a Rellenar para usar posición, acercamiento y profundidad; tus valores se conservan.', 'Full image keeps its edges without zoom or motion. Switch to Fill to use position, zoom, and depth; your values are kept.'),
+        'fullPhotoHint': ('Selecciona Rellenar 6:5 en Imagen para activar el movimiento.', 'Choose Fill 6:5 under Image to enable motion.'),
         'galleryCredit': ('Ilustraciones originales · SVG, CSS y JavaScript nativos', 'Original artwork · Native SVG, CSS, and JavaScript'),
-        'galleryFocus': ('Vista ampliada', 'Expanded view'), 'downloadPanel': ('Descargar este panel', 'Download this panel'),
+        'galleryFocus': ('Vista ampliada', 'Expanded view'), 'downloadPanel': ('Descargar panel actual', 'Download current panel'),
+        'downloadGallery': ('Descargar galería', 'Download gallery'),
         'galleryDownloaded': ('Panel descargado: HTML independiente con ilustración o foto, fuentes y licencias.', 'Panel downloaded: standalone HTML with artwork or photo, fonts, and licenses.'),
         'galleryStandaloneCredit': ('Diseño y código: Lienzo. Conserva los avisos incluidos. Las imágenes que añadas requieren tus propios permisos de uso.', 'Design and code: Lienzo. Keep the included notices. Images you add require your own usage rights.'),
         'photoRemoved': ('Paisaje original restaurado en este panel.', 'Original landscape restored for this panel.'),
@@ -307,11 +314,19 @@ def gallery_markup(ui):
 <div class="eg-panels" data-panels role="group" aria-label="{ui['galleryLabel']}"></div>
 <div class="eg-navigation"><div class="eg-current"><span data-gallery-count></span><span data-gallery-name></span></div><div class="eg-pagination" role="group" aria-label="{ui['choose']}"></div><div class="eg-arrows"><button type="button" data-gallery-previous aria-label="{ui['previousPanel']}">←</button><button type="button" data-gallery-next aria-label="{ui['nextPanel']}">→</button></div></div>
 <p class="v2-sr" data-gallery-live role="status" aria-live="polite"></p>
-<details class="eg-settings"><summary><span>{ui['panelSettings']}</span><span data-gallery-settings-title></span><span aria-hidden="true">+</span></summary><div class="eg-settings-body">
-<section class="eg-photo-settings"><p class="eg-setting-heading">{ui['selectedPanel']} <strong data-gallery-photo-title></strong></p><p class="eg-source-label" data-gallery-image-state></p>
-<div class="eg-image-actions"><label class="v2-upload v2-button"><span>{ui['upload']}</span><input type="file" data-upload accept="image/png,image/jpeg,image/webp" aria-label="{ui['photoForPanel']}"></label><button class="v2-text-button" type="button" data-remove-image>{ui['removeImage']}</button></div><p class="eg-setting-help">{ui['imageHelp']}</p><div class="eg-crop" data-gallery-crop hidden><label class="eg-photo-fit">{ui['photoFit']}<select data-gallery-fit aria-describedby="eg-crop-hint"><option value="contain">{ui['photoFitContain']}</option><option value="cover">{ui['photoFitCover']}</option></select></label>{controls}<button type="button" class="v2-text-button" data-reset-crop>{ui['resetCrop']}</button></div><p class="eg-setting-help" id="eg-crop-hint">{ui['cropHint']}</p></section>
-<section class="eg-motion-settings"><p class="eg-setting-heading">{ui['galleryIntensity']}</p>{motion}<p class="eg-setting-help" data-gallery-motion-hint>{ui['motionHint']}</p><button type="button" class="v2-button" data-gallery-download>{ui['downloadPanel']} ↓</button></section></div></details>
 <p class="eg-credit">{ui['galleryCredit']}</p></div>
+<details class="v2-panel-live eg-photo-settings" open>
+  <summary>{ui['galleryImage']}</summary>
+  <p class="eg-source-label" data-gallery-image-state role="status"></p>
+  <div class="eg-image-actions"><label class="v2-upload v2-button"><span>{ui['galleryUpload']}</span><input type="file" data-upload accept="image/png,image/jpeg,image/webp" aria-label="{ui['photoForPanel']}" aria-describedby="eg-upload-hint"></label><button class="v2-text-button" type="button" data-remove-image hidden>{ui['removeImage']}</button></div>
+  <p class="eg-setting-help" id="eg-upload-hint">{ui['galleryUploadHelp']}</p>
+  <div class="eg-crop" data-gallery-crop hidden>
+    <label class="eg-photo-fit">{ui['photoFit']}<select data-gallery-fit><option value="contain">{ui['photoFitContain']}</option><option value="cover">{ui['photoFitCover']}</option></select></label>
+    <div data-gallery-framing hidden>{controls}<button type="button" class="v2-text-button" data-reset-crop>{ui['resetCrop']}</button><p class="eg-setting-help">{ui['cropHint']}</p></div>
+  </div>
+</details>
+<details class="v2-panel-live eg-motion-settings"><summary>{ui['galleryMotion']}</summary>{motion}<p class="eg-setting-help" data-gallery-motion-hint>{ui['motionHint']}</p></details>
+<button type="button" class="v2-button" data-gallery-download>{ui['downloadPanel']}</button>
 <dialog class="eg-focus-dialog" data-gallery-focus aria-labelledby="eg-focus-title"><div class="eg-focus-top"><span>LIENZO / {ui['galleryFocus']}</span><button type="button" data-focus-close aria-label="{ui['close']}">×</button></div><div class="eg-focus-canvas" data-focus-canvas><div data-focus-art></div><span class="eg-focus-category" data-focus-category></span></div><div class="eg-focus-caption"><div><h2 id="eg-focus-title" data-focus-title></h2><p data-focus-description></p></div><div class="eg-focus-actions"><button type="button" data-focus-previous aria-label="{ui['previousPanel']}">←</button><button type="button" data-focus-next aria-label="{ui['nextPanel']}">→</button><button type="button" data-focus-pause aria-pressed="false">{ui['pause']}</button><a data-focus-link target="_blank" rel="noopener noreferrer">{ui['openLink']} ↗</a></div></div></dialog>'''
 
 
@@ -396,7 +411,52 @@ def editor_document(raw, slug, lang, ui):
         toolbar.select_one('.v2-toolbar-label').decompose()
         toolbar.insert(0, toolbar.select_one('.dv-switch').extract())
         preview.select_one('.v2-bottom').insert(0, preview.select_one('[data-device-compare]').extract())
-    for selector in ['.pi-controls', '.eg-settings', '.pp-settings', '.lp-settings']:
+    if kind == 'gallery':
+        form['id'] = 'eg-editor-form'
+        picker = form.select_one('label').extract()
+        picker['class'] = ['eg-panel-picker']
+        picker.contents[0].replace_with(ui['galleryPanelPicker'])
+        picker.select_one('select').attrs.update({'form': form['id'], 'aria-label': ui['galleryPanelPicker']})
+        header.insert_after(picker)
+        status = soup.select_one('[data-status]').extract()
+        status['class'].append('eg-editor-status')
+        picker.insert_after(status)
+        image_section = preview.select_one('.eg-photo-settings').extract()
+        status.insert_after(image_section)
+        text_section = soup.new_tag('details', attrs={'class': 'v2-panel-live eg-text-settings'})
+        summary = soup.new_tag('summary')
+        summary.string = ui['galleryText']
+        text_section.append(summary)
+        intro.string = ui['galleryTextHelp']
+        text_section.append(intro.extract())
+        text_section.append(form.extract())
+        image_section.insert_after(text_section)
+        motion_section = preview.select_one('.eg-motion-settings').extract()
+        text_section.insert_after(motion_section)
+        layout_section = soup.new_tag('details', attrs={'class': 'v2-panel-live eg-layout-settings'})
+        summary = soup.new_tag('summary')
+        summary.string = ui['galleryLayout']
+        layout_section.append(summary)
+        for selector in ['.v2-segmented', '.eg-hover-toggle']:
+            layout_section.append(workspace.select_one(selector).extract())
+        hint = soup.new_tag('p', attrs={'class': 'eg-setting-help'})
+        hint.string = ui['galleryLayoutHint']
+        layout_section.append(hint)
+        motion_section.insert_after(layout_section)
+        nav = preview.select_one('.eg-navigation')
+        pause = preview.select_one('[data-pause]').extract()
+        pause['class'].append('eg-pause')
+        nav.append(pause)
+        preview.select_one('.v2-bottom').decompose()
+        export = soup.select_one('[data-export-dialog]')
+        actions = export.select_one('.v2-dialog-actions')
+        actions.insert(0, preview.select_one('[data-gallery-download]').extract())
+        download = actions.select_one('[data-download]').extract()
+        download.string = ui['downloadGallery']
+        actions.insert(0, download)
+        export.select_one('label[for="v2-source"]').insert_before(actions.extract())
+        actions.insert_after(export.select_one('[data-copy-status]').extract())
+    for selector in ['.pi-controls', '.pp-settings', '.lp-settings']:
         local = preview.select_one(selector)
         if not local:
             continue
@@ -408,9 +468,6 @@ def editor_document(raw, slug, lang, ui):
             notice = soup.new_tag('p', attrs={'class': 'v2-editor-panel-help'})
             notice.string = ui['liveHelp']
             section.append(notice)
-        if selector == '.eg-settings':
-            local.name = 'section'
-            local.select_one('summary').decompose()
         section.append(local.extract())
         if media_first:
             text_section.insert_before(section)
@@ -503,6 +560,12 @@ def document(slug, lang):
         ui.update(scene_translations(lang))
     if item['kind'] == 'gallery':
         ui.update(gallery_translations(lang))
+        ui['source'] = 'Exportar' if lang == 'es' else 'Export'
+        ui['exportTitle'] = 'Exporta tu galería' if lang == 'es' else 'Export your gallery'
+        ui['exportHelp'] = (
+            'Descarga la galería completa para usarla con los archivos del ZIP, o guarda el panel actual como un HTML independiente.'
+            if lang == 'es' else 'Download the full gallery to use alongside the ZIP files, or save the current panel as a standalone HTML file.'
+        )
     config = dict(slug=slug, kind=item['kind'], lang=lang, ui=ui, state=initial(item['kind'],lang))
     if item['kind'] == 'particles':
         # The sandboxed preview and local ZIP need an origin-clean image for WebGL and PNG export.

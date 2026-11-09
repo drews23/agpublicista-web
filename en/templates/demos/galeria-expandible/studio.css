@@ -39,8 +39,6 @@ html[data-view=component] .v2-hero{display:none}
 .v2-panel-live>summary{min-height:44px;display:list-item;cursor:pointer;font-size:14px;font-weight:550;padding:10px 0}
 .v2-panel-live .pi-controls{padding:0;gap:18px}
 .v2-panel-live .pi-controls>header{display:none}
-.v2-panel-live .eg-settings{border:0;margin:0}
-.v2-panel-live .eg-settings-body{grid-template-columns:1fr;gap:24px;padding:0}
 .v2-editor-panel>.v2-row{display:flex;flex-direction:column;align-items:stretch;border-top:1px solid var(--line);padding-top:20px;margin-top:22px}
 [data-kind=particles] .pi-studio{grid-template-columns:minmax(0,1fr)}
 [data-kind=particles] .pi-artboard{border-right:0}
@@ -66,16 +64,6 @@ html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1f
 /* An editing artboard stays bounded; oversized custom content remains scrollable, never scaled or discarded. */
 @media(min-width:960px) and (min-height:420px){
   [data-editor-workspace][data-editor-collapsed=false] [data-editor-preview]{max-height:var(--editor-available-height);overflow:auto;scrollbar-width:thin;overscroll-behavior:contain;scrollbar-gutter:stable}
-  [data-editor-collapsed=false] .eg-gallery{padding:18px}
-  [data-editor-collapsed=false] .eg-intro{margin-bottom:14px}
-  [data-editor-collapsed=false] .eg-intro p:last-child{display:none}
-  [data-editor-collapsed=false] .eg-panels{height:clamp(235px,calc(var(--editor-available-height) - 175px),420px)}
-  [data-editor-collapsed=false] .eg-panel-caption{left:20px;right:20px;bottom:16px}
-  [data-editor-collapsed=false] .eg-panel-category{margin-bottom:8px}
-  [data-editor-collapsed=false] .eg-panel-caption h2{font-size:clamp(26px,3vw,38px);margin-bottom:8px}
-  [data-editor-collapsed=false] .eg-description{font-size:12px;margin-bottom:8px;line-height:1.5}
-  [data-editor-collapsed=false] .eg-navigation{gap:12px;margin-top:12px}
-  [data-editor-collapsed=false] .eg-credit{margin:10px 0 0;font-size:10px}
   [data-editor-collapsed=false] .pi-artboard{padding:18px}
   [data-editor-collapsed=false] .pi-frame{aspect-ratio:auto;min-height:210px;height:clamp(210px,calc(var(--editor-available-height) - 175px),480px)}
   [data-editor-collapsed=false] .pi-artboard-head{margin-bottom:12px}
@@ -119,23 +107,6 @@ html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1f
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-editor-panel-head{position:sticky;top:0}
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-stage{min-height:0;padding:12px}
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-bottom{min-height:44px;padding:0 12px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-gallery{padding:12px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-intro{display:none}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panels[data-layout]{height:190px;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel:not([data-active=true]){display:none}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel-caption{left:18px;right:18px;bottom:10px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel-category{font-size:9px;margin-bottom:5px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-panel-caption h2{font-size:24px;margin-bottom:6px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-description{font-size:12px;line-height:1.4;margin-bottom:4px;-webkit-line-clamp:2}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-select{padding:10px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-number{width:24px;height:24px;font-size:10px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-expand{top:10px;right:10px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-navigation{grid-template-columns:minmax(0,1fr) auto;gap:0 6px;margin-top:4px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-current{display:none}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-pagination{gap:0;grid-row:1;justify-self:start}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-pagination button{min-width:38px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-arrows{gap:0;grid-row:1}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .eg-credit{display:none}
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-artboard{padding:12px}
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-artboard-head{margin-bottom:9px;font-size:9px;gap:8px}
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-frame{height:190px;min-height:190px;aspect-ratio:auto}

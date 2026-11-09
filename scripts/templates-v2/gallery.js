@@ -47,6 +47,18 @@
   state.active = Math.round(clamp(state.active, 0, total - 1, 0));
   state.layout = ['auto', 'horizontal', 'vertical'].includes(state.layout) ? state.layout : 'auto';
   state.hoverPreview = state.hoverPreview === true;
+  const workspace = gallery.closest('[data-editor-workspace]');
+  const editing = () => editor.matches('[data-editor-panel]') && !editor.hidden;
+  if (workspace) {
+    workspace.dataset.editorFocusAnchor = 'workspace';
+    workspace.addEventListener('lienzo:editor-panel', event => {
+      cancelHover();
+      if (!event.detail.open || workspace.dataset.editorConstrained === 'true') return;
+      if (matchMedia('(min-width: 960px) and (min-height: 420px), (min-height: 450px)').matches) {
+        workspace.scrollIntoView({block: 'start', behavior: 'instant'});
+      }
+    });
+  }
   focusDialog.id = focusDialog.id || 'eg-gallery-focus';
   focusDialog.setAttribute('aria-describedby', 'eg-focus-description');
   $('[data-focus-description]').id = 'eg-focus-description';
@@ -60,7 +72,8 @@
     '<div class="eg-panel-caption" id="eg-caption-' + index + '" inert><p class="eg-panel-category" data-panel-category></p><h2 id="eg-title-' + index + '"></h2><p class="eg-description" data-panel-description></p><a class="eg-project" data-panel-link target="_blank" rel="noopener noreferrer">' + escape(ui.openLink) + a.icon('arrow') + '</a></div></article>').join('');
   $('.eg-pagination').innerHTML = state.items.map((_, index) => '<button type="button" data-gallery-goto="' + index + '" aria-pressed="false"><span>' + String(index + 1).padStart(2, '0') + '</span></button>').join('');
   const panels = $$('[data-panel]'), buttons = $$('[data-select]'), expands = $$('[data-expand]'), pages = $$('[data-gallery-goto]');
-  const hoverInput = $('[data-hover-preview]'), crop = $('[data-gallery-crop]');
+  const hoverInput = $('[data-hover-preview]'), crop = $('[data-gallery-crop]'), framing = $('[data-gallery-framing]');
+  const imageState = $('[data-gallery-image-state]'), removeImage = $('[data-remove-image]');
   if (!$('[data-gallery-alt]')) {
     const label = document.createElement('label');
     label.className = 'eg-alt-label'; label.textContent = ui.imageAlt;
@@ -209,9 +222,12 @@
     });
     a.text('[data-gallery-count]', String(state.active + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0'));
     for (const selector of ['[data-gallery-name]', '[data-gallery-settings-title]', '[data-gallery-photo-title]']) a.text(selector, item.title);
-    a.text('[data-gallery-image-state]', loading[state.active] ? ui.loadingPhoto : item.imageData ? ui.customPhoto : ui.originalArt);
-    $('[data-remove-image]').disabled = !item.imageData && !loading[state.active];
+    const imageLabel = loading[state.active] ? ui.loadingPhoto : item.imageData ? ui.customPhoto : ui.originalArt;
+    if (imageState.textContent !== imageLabel) imageState.textContent = imageLabel;
+    removeImage.hidden = !item.imageData && !loading[state.active];
+    removeImage.disabled = removeImage.hidden;
     $('[data-gallery-download]').disabled = loading[state.active]; crop.hidden = !item.imageData;
+    if (framing) framing.hidden = item.imageFit !== 'cover';
     $('[data-gallery-alt]').value = item.imageAlt;
     $('[data-gallery-fit]').value = item.imageFit;
     a.text('[data-gallery-motion-hint]', completePhoto(item) ? ui.fullPhotoHint : ui.motionHint);
@@ -239,11 +255,11 @@
     expands[index].addEventListener('click', () => openFocus(index));
     panel.addEventListener('pointerenter', event => {
       pointerEnter(panel, event);
-      if (!state.hoverPreview || !fine.matches || event.pointerType === 'touch' || a.paused || focusDialog.open || index === state.active) return;
+      if (!state.hoverPreview || editing() || !fine.matches || event.pointerType === 'touch' || a.paused || focusDialog.open || index === state.active) return;
       cancelHover();
       hoverTimer = setTimeout(() => {
         hoverTimer = 0;
-        if (!a.paused && !focusDialog.open && state.hoverPreview && fine.matches) select(index, {user: true, scroll: false});
+        if (!a.paused && !focusDialog.open && !editing() && state.hoverPreview && fine.matches) select(index, {user: true, scroll: false});
       }, 160);
     });
     panel.addEventListener('pointermove', event => pointerMove(panel, event));
@@ -295,10 +311,10 @@
       if (uploads[index] === token) { loading[index] = false; a.paint(); }
     }
   });
-  $('[data-remove-image]').addEventListener('click', () => {
+  removeImage.addEventListener('click', () => {
     const index = state.active; uploads[index]++; loading[index] = false;
     Object.assign(state.items[index], {imageData: '', imageAlt: '', imageFit: 'contain', focalX: 50, focalY: 50, zoom: 100});
-    a.paint(); a.status(ui.photoRemoved);
+    a.paint(); $('[data-upload]').focus({preventScroll: true}); a.status(ui.photoRemoved);
   });
   function openFocus(index) {
     if (editor.open || sourceDialog.open || focusDialog.open) return;
@@ -386,7 +402,9 @@
     const destination = a.safeURL(item.href);
     const html = '<!doctype html><html lang="' + escape(document.documentElement.lang) + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escape(item.title) + ' · Lienzo</title><style>' + styles + '</style></head><body><main class="eg-export" data-photo="' + String(!!item.imageData) + '" data-still="' + String(item.intensity === 0 || completePhoto(item)) + '"><div class="eg-export-visual">' + art + '</div><section class="eg-export-copy"><p class="eg-export-category">' + escape(item.category) + '</p><h1>' + escape(item.title) + '</h1><p>' + escape(item.description) + '</p><div class="eg-export-actions"><button type="button" aria-pressed="false">' + escape(ui.pause) + '</button>' + (destination ? '<a href="' + escape(destination) + '" target="_blank" rel="noopener noreferrer">' + escape(ui.openLink) + ' ↗</a>' : '') + '</div></section><footer>' + escape(ui.galleryStandaloneCredit) + '</footer></main><script type="application/json" data-licenses>' + json(data.notices) + '</script><script>' + script + '</script></body></html>';
     const slug = String(item.title).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 72).toLowerCase() || 'lienzo';
-    a.download(a.brand?.decorateHTML(html,{selector:'.eg-export'}) || html, 'lienzo-panel-' + String(index + 1).padStart(2, '0') + '-' + slug + '.html'); a.status(ui.galleryDownloaded);
+    a.download(a.brand?.decorateHTML(html,{selector:'.eg-export'}) || html, 'lienzo-panel-' + String(index + 1).padStart(2, '0') + '-' + slug + '.html');
+    if (sourceDialog.open) a.text('[data-copy-status]', ui.galleryDownloaded);
+    else a.status(ui.galleryDownloaded);
   }
   $('[data-gallery-download]').addEventListener('click', downloadPanel);
   a.setup({render, reset(index) {
