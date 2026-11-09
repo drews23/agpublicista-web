@@ -185,14 +185,53 @@ def adapt_markup(raw, slug, lang):
         layout.append(preview); layout.append(panel.extract())
         toggle = frame(workspace, layout, preview, panel, toolbar=workspace.select_one('.rc-toolbar'), button=workspace.select_one('[data-open-editor]'))
         toggle['aria-expanded'] = 'false'; workspace['data-editor-collapsed'] = 'true'
-        panel.select_one('[data-close]')['data-editor-cancel'] = ''
+        workspace['data-editor-focus-anchor'] = 'workspace'
+        toggle.span['data-editor-toggle-label'] = ''
+        preview_label = tag('p', **{'class': 'rc-preview-label'})
+        preview_label.string = label('Vista previa en vivo', 'Live preview')
+        workspace.select_one('.rc-toolbar').insert(0, preview_label)
+
+        form = panel.select_one('form')
+        form['novalidate'] = ''
+        heading = panel.select_one('h2')
+        heading.string = label('Editar tarjeta', 'Edit card')
+        panel.select_one('.rc-dialog-head').decompose()
+        panel.select_one(':scope > p').decompose()
+        form.insert(0, heading.extract())
+        body = tag('div', **{'class': 'rc-editor-scroll'})
+        heading.insert_after(body)
+        body.append(form.select_one('label').extract())
+
+        fields = form.select_one('.rc-fields')
+        description = fields.select_one('[name=description]')
+        textarea = tag('textarea', rows='3', maxlength='180', required='')
+        textarea['name'] = 'description'
+        description.replace_with(textarea)
+        for keys, title, open_by_default in (
+            (('title', 'description', 'category'), label('Contenido', 'Content'), True),
+            (('href', 'accent'), label('Enlace y color', 'Link and color'), False),
+        ):
+            section = tag('details', **{'class': 'rc-editor-section'})
+            if open_by_default:
+                section['open'] = ''
+            summary = tag('summary')
+            summary.string = title
+            section.append(summary)
+            group = tag('div', **{'class': 'rc-editor-fields'})
+            for key in keys:
+                group.append(fields.select_one(f'[name={key}]').parent.extract())
+            if not open_by_default:
+                error = form.select_one('[data-editor-error]').extract()
+                error['id'] = 'rc-link-error'
+                group.select_one('[name=href]')['aria-describedby'] = error['id']
+                group.append(error)
+            section.append(group)
+            body.append(section)
+        fields.decompose()
+        body.append(form.select_one('[data-reset]').extract())
         cancel = tag('button', type='button', **{'class': 'rc-button', 'data-editor-cancel': ''})
         cancel.string = label('Cancelar', 'Cancel')
-        panel.select_one('.rc-dialog-actions').insert(1, cancel)
-        panel.select_one('h2').string = label('Personaliza la tarjeta', 'Customize the card')
-        panel.select_one('h2').find_next_sibling('p').string = label(
-            'Previsualiza los cambios. Aplica para conservarlos o cancela.',
-            'Preview your changes. Apply to keep them, or cancel.')
+        panel.select_one('.rc-dialog-actions').insert(0, cancel)
     else:
         # These two examples had no editor. Keep their actual social component
         # intact, and offer an explicitly scoped visual setting panel.
@@ -235,7 +274,10 @@ def brand_markup(soup, slug, lang):
     panel = soup.select_one('[data-editor-panel]')
     if not panel.select_one('[data-legacy-brand]'):
         host = soup.new_tag('div', attrs={'data-legacy-brand': ''})
-        panel.insert(0, host)
+        if slug == 'carrusel-recursos' and (body := panel.select_one('.rc-editor-scroll')):
+            body.select_one('[data-reset]').insert_before(host)
+        else:
+            panel.insert(0, host)
     if slug in SLUGS[:2] and not panel.select_one('[data-social-export]'):
         export = soup.new_tag('button', attrs={'type': 'button', 'class': 'editor-legacy-toggle', 'data-social-export': ''})
         export.string = 'Download my HTML' if lang == 'en' else 'Descargar mi HTML'

@@ -11,8 +11,9 @@
     const rail = $('[data-rail]');
     const search = $('[data-search]');
     const editor = $('[data-editor]');
-    const workspace = $('[data-editor-workspace]');
     const form = $('[data-editor-form]');
+    const apply = form.querySelector('[type=submit]');
+    const textFields = ['title', 'description', 'category'];
     const exportDialog = $('[data-export-dialog]');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     const precise = matchMedia('(hover: hover) and (pointer: fine)');
@@ -20,7 +21,13 @@
     if (['component', 'thumbnail'].includes(mode)) demo.dataset.compact = '';
     if (mode === 'thumbnail') demo.dataset.thumbnail = '';
     if (instance) {
-      $$('[id]').forEach(n => { const old = n.id; n.id += '-'+instance; $$(`[aria-labelledby="${old}"],[aria-controls="${old}"],[for="${old}"]`).forEach(l => { if(l.hasAttribute('for')) l.htmlFor=n.id; else if(l.hasAttribute('aria-controls'))l.setAttribute('aria-controls',n.id);else l.setAttribute('aria-labelledby',n.id); }); });
+      $$('[id]').forEach(node => {
+        const old = node.id;
+        node.id += '-'+instance;
+        for (const attr of ['aria-labelledby', 'aria-describedby', 'aria-controls', 'for']) {
+          $$(`[${attr}="${old}"]`).forEach(label => label.setAttribute(attr, node.id));
+        }
+      });
     }
     let category = 'all', savedOnly = false, visible = [...cards], active = 0;
     let paused = false, depth = true, opener = null, scrollFrame = 0;
@@ -31,22 +38,33 @@
     const node = card => nodes.get(card.id);
     const safeURL = value => { try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) ? url.href : null; } catch { return null; } };
 
-    function paintCard(card) {
-      const element = node(card);
+    function paintLink(element, value) {
+      const link = element.querySelector('[data-link]');
+      const href = safeURL(value);
+      link.hidden = !href;
+      if (href) link.href = href;
+      else link.removeAttribute('href');
+    }
+
+    function paintContent(element, card) {
       element.dataset.accent = card.accent;
-      if(window.LienzoLegacyBrand)element.style.setProperty('--accent',window.LienzoLegacyBrand.color(card.accent));
       element.querySelector('[data-title]').textContent = card.title;
       element.querySelector('[data-description]').textContent = card.description;
       element.querySelector('[data-category]').textContent = card.category;
-      const link = element.querySelector('[data-link]');
-      const href = safeURL(card.href);
-      if(href) link.href = href; else link.removeAttribute('href');
+      paintLink(element, card.href);
       const favorite = element.querySelector('[data-favorite]');
       favorite.setAttribute('aria-pressed', String(card.saved));
       favorite.setAttribute('aria-label', (card.saved ? ui.remove : ui.save)+': '+card.title);
       element.querySelector('[data-edit]').setAttribute('aria-label', ui.edit+': '+card.title);
-      const option = [...form.elements.resource.options].find(o => o.value === card.id);
-      option.textContent = card.title;
+    }
+    function paintCard(card, committed = true) {
+      const element = node(card);
+      paintContent(element, card);
+      if(window.LienzoLegacyBrand)element.style.setProperty('--accent',window.LienzoLegacyBrand.color(card.accent));
+      if (committed) {
+        const option = [...form.elements.resource.options].find(o => o.value === card.id);
+        option.textContent = card.title;
+      }
     }
     function setTheme(theme, notify = false) {
       document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
@@ -140,7 +158,7 @@
     $('[data-prev]').addEventListener('click',()=>go(active-1));
     $('[data-next]').addEventListener('click',()=>go(active+1));
     rail.addEventListener('keydown',event=>{
-      if(event.target!==rail)return;
+      if(event.target!==rail||!editor.hidden)return;
       const keys={ArrowLeft:active-1,ArrowRight:active+1,Home:0,End:visible.length-1};
       if(event.key in keys){event.preventDefault();go(keys[event.key]);}
     });
@@ -160,7 +178,7 @@
 
     // Native touch scroll; mouse dragging adds no custom touch gesture interception.
     rail.addEventListener('pointerdown',event=>{
-      if(event.pointerType!=='mouse'||event.button!==0||demo.dataset.layout!=='rail'||event.target.closest('button,input'))return;
+      if(!editor.hidden||event.pointerType!=='mouse'||event.button!==0||demo.dataset.layout!=='rail'||event.target.closest('button,input,a'))return;
       drag={id:event.pointerId,x:event.clientX,y:event.clientY,left:rail.scrollLeft,moved:false};
     });
     rail.addEventListener('pointermove',event=>{
@@ -188,22 +206,27 @@
     });
     function loadForm(id){
       const card=cards.find(c=>c.id===id);form.elements.resource.value=id;
-      ['title','description','category','href','accent'].forEach(key=>form.elements[key].value=card[key]);$('[data-editor-error]').textContent='';
+      ['title','description','category','href','accent'].forEach(key=>form.elements[key].value=card[key] ?? '');$('[data-editor-error]').textContent='';
     }
     function rollback() {
       if(draft) paintCard(cards.find(card=>card.id===draft.id));
       draft=null;
     }
-    function panel(opened, reason='edit') {
+    function panel(opened, reason) {
       window.LienzoEditorWorkspace.setOpen(editor,opened,{focus:false,reason});
+      rail.setAttribute('aria-label', opened ? $('.rc-preview-label').textContent : ui.keyboard);
+      rail.setAttribute('aria-roledescription', !opened && demo.dataset.layout === 'rail' ? 'carousel' : '');
       updateMotion();
     }
     function beginEdit(id, trigger) {
+      const opening = editor.hidden;
       if(draft?.id!==id){rollback();loadForm(id);draft={...cards.find(card=>card.id===id)};}
+      $('[data-previewing]')?.removeAttribute('data-previewing');
+      node(draft).dataset.previewing = '';
+      if (!opening) return;
       opener=trigger||document.activeElement;
-      panel(true);
-      const index=visible.findIndex(card=>card.id===id);
-      if(index>=0)go(index);
+      panel(true,'toggle');
+      form.elements.resource.focus({preventScroll:true});
     }
     $$('[data-edit]').forEach(b=>b.addEventListener('click',()=>beginEdit(b.dataset.edit,b)));
     $('[data-open-editor]').addEventListener('click',event=>{
@@ -212,14 +235,16 @@
       else beginEdit(draft?.id||visible[active]?.id||cards[0].id,event.currentTarget);
     });
     form.elements.resource.addEventListener('change',()=>beginEdit(form.elements.resource.value,opener));
-    form.addEventListener('input',()=>{
+    form.addEventListener('input',event=>{
+      if (!['title','description','category','href','accent'].includes(event.target.name)) return;
       const card=cards.find(c=>c.id===form.elements.resource.value);
       if(!card)return;
       draft={...card};
-      ['title','description','category'].forEach(key=>draft[key]=form.elements[key].value);
-      draft.href=safeURL(form.elements.href.value)||card.href;
+      textFields.forEach(key=>draft[key]=form.elements[key].value);
+      draft.href=safeURL(form.elements.href.value) || '';
       draft.accent=['violet','mint','amber'].includes(form.elements.accent.value)?form.elements.accent.value:card.accent;
-      paintCard(draft);
+      $('[data-editor-error]').textContent='';
+      paintCard(draft, false);
     });
     $$('[data-editor-cancel]').forEach(button=>button.addEventListener('click',()=>{
       rollback();panel(false,'cancel');opener?.focus({preventScroll:true});
@@ -227,22 +252,36 @@
     editor.addEventListener('keydown',event=>{
       if(event.key==='Escape'){event.preventDefault();rollback();panel(false,'cancel');opener?.focus({preventScroll:true});}
     });
-    form.addEventListener('submit',event=>{
+    function applyChanges(event) {
       event.preventDefault();
-      ['title','description','category','href'].forEach(key=>form.elements[key].value=form.elements[key].value.trim());
-      if(!form.reportValidity())return;
-      const href=safeURL(form.elements.href.value);
-      if(!href){$('[data-editor-error]').textContent=ui.invalid;form.elements.href.focus();return;}
+      const fields = [...textFields, 'href'].map(key => form.elements[key]);
+      fields.forEach(field => { field.value = field.value.trim(); });
+      const invalid = fields.find(field => !field.validity.valid);
+      if (invalid) {
+        invalid.closest('details').open = true;
+        invalid.reportValidity();
+        return;
+      }
+      const linkField = form.elements.href;
+      const href=safeURL(linkField.value);
+      if(linkField.value && !href){
+        linkField.closest('details').open = true;
+        $('[data-editor-error]').textContent=ui.invalid;
+        linkField.focus();
+        return;
+      }
       const card=cards.find(c=>c.id===form.elements.resource.value);
-      ['title','description','category'].forEach(key=>card[key]=form.elements[key].value.trim());
-      if(!card.title||!card.description||!card.category)return;
-      card.href=href;card.accent=form.elements.accent.value;draft=null;paintCard(card);applyFilters();panel(false,'apply');status(ui.updated);
+      textFields.forEach(key=>card[key]=form.elements[key].value);
+      card.href=href || '';card.accent=form.elements.accent.value;draft=null;paintCard(card);applyFilters();panel(false,'apply');status(ui.updated);
       const selectedIndex=visible.findIndex(item=>item.id===card.id);if(selectedIndex>=0)go(selectedIndex);
-    });
+    }
+    // The catalog iframe permits scripts and downloads, without form navigation.
+    apply.addEventListener('click', applyChanges);
+    form.addEventListener('submit', applyChanges);
     $('[data-reset]').addEventListener('click',()=>{
       const card=cards.find(c=>c.id===form.elements.resource.value),original=defaults.find(c=>c.id===card.id);
-      draft={...original,saved:card.saved};paintCard(draft);
-      ['title','description','category','href','accent'].forEach(key=>form.elements[key].value=draft[key]);status(ui.restored);
+      draft={...original,saved:card.saved};paintCard(draft, false);
+      ['title','description','category','href','accent'].forEach(key=>form.elements[key].value=draft[key] ?? '');status(ui.restored);
     });
 
     function exportHTML(){
@@ -250,16 +289,19 @@
       // Discard a visible, uncommitted draft in the exported initial DOM.
       if(draft){
         const committed=cards.find(card=>card.id===draft.id),element=copy.querySelector('[data-card="'+draft.id+'"]');
-        if(element){element.dataset.accent=committed.accent;element.querySelector('[data-title]').textContent=committed.title;element.querySelector('[data-description]').textContent=committed.description;element.querySelector('[data-category]').textContent=committed.category;element.querySelector('[data-link]').setAttribute('href',committed.href);}
+        if(element) paintContent(element, committed);
       }
       const exportedEditor=copy.querySelector('[data-editor]');exportedEditor.hidden=true;exportedEditor.setAttribute('inert','');
       const exportedWorkspace=copy.querySelector('[data-editor-workspace]');exportedWorkspace.dataset.editorCollapsed='true';
       copy.querySelector('[data-open-editor]').setAttribute('aria-expanded','false');
+      copy.querySelector('[data-open-editor] [data-editor-toggle-label]').textContent=ui.customize;
+      copy.querySelector('[data-rail]').setAttribute('aria-label',ui.keyboard);
+      copy.querySelector('[data-rail]').setAttribute('aria-roledescription',demo.dataset.layout==='rail'?'carousel':'');
       copy.querySelectorAll('dialog[open]').forEach(d=>d.removeAttribute('open'));
       copy.querySelectorAll('[data-resource-carousel]').forEach((d,i)=>{
         if(i!==instance){d.remove();return;}
         delete d.dataset.compact;delete d.dataset.thumbnail;delete d.dataset.inactive;d.dataset.paused='false';d.dataset.depth='true';
-        d.querySelectorAll('[data-card]').forEach(n=>{n.hidden=false;delete n.dataset.hover;n.removeAttribute('style');});
+        d.querySelectorAll('[data-card]').forEach(n=>{n.hidden=false;delete n.dataset.hover;delete n.dataset.previewing;n.removeAttribute('style');});
         d.querySelector('[data-resource-state]').textContent=JSON.stringify({cards:cards.map(({saved,...card})=>card)}).replace(/</g,'\\u003c');
         d.querySelector('[data-source]').value='';d.querySelector('[data-source]').textContent='';
         d.querySelector('[data-search]').setAttribute('value','');
@@ -283,7 +325,7 @@
       try{await navigator.clipboard.writeText($('[data-source]').value);$('[data-copy-status]').textContent=ui.copied;}
       catch{const area=$('[data-source]');area.focus();area.select();$('[data-copy-status]').textContent=ui.fallback;}
     });
-    document.addEventListener('lienzo:legacy-brand',()=>{cards.forEach(paintCard);if(draft)paintCard(draft);window.LienzoLegacyBrand?.apply();});
-    cards.forEach(paintCard);applyFilters();updateMotion();
+    document.addEventListener('lienzo:legacy-brand',()=>{cards.forEach(card=>paintCard(card));if(draft)paintCard(draft, false);window.LienzoLegacyBrand?.apply();});
+    cards.forEach(card=>paintCard(card));applyFilters();updateMotion();
   });
 })();

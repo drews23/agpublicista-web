@@ -118,11 +118,13 @@ body{margin:0;background:#0a0a0f}
 .rc-card-top [data-category]{color:var(--accent-ink);font-weight:600;max-width:55%}
 .rc-card h2{font:400 25px/1.15 Fraunces,Georgia,serif;letter-spacing:normal;margin:14px 0 10px;overflow-wrap:anywhere}
 .rc-card p{color:var(--muted);font-size:13px;line-height:1.65;margin:0 0 21px;overflow-wrap:anywhere}
+.rc-card [data-description]{white-space:pre-line}
 .rc-card-actions{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:10px;position:relative;z-index:2}
 .rc-card-actions a{min-height:44px;display:flex;align-items:center;gap:8px;text-decoration:none;font-size:12px;font-weight:500}
 .rc-card-actions a svg{width:16px;transform:rotate(-35deg);transition:transform .2s}
 .rc-card-actions a:hover svg{transform:translate(2px,-2px) rotate(-35deg)}
-.rc-card-actions .rc-icon-button{border:0;background:transparent;color:var(--muted)}
+.rc-card-actions .rc-icon-button{margin-left:auto;border:0;background:transparent;color:var(--muted)}
+.rc-sample-note{margin:4px 0;color:var(--muted);font-size:12px}
 .rc-navigation{display:flex;align-items:center;gap:20px;padding-top:2px}
 .rc-arrows{display:flex;gap:8px}.rc-arrows button{border-radius:50%}.rc-prev svg{transform:rotate(180deg)}
 .rc-range-label{flex:1;min-width:0;display:flex;align-items:center}.rc-range-label input{width:100%;min-height:44px;accent-color:var(--accent-ink);cursor:pointer}
@@ -160,7 +162,7 @@ body{margin:0;background:#0a0a0f}
 .rc-demo[data-compact] .rc-art{height:210px}
 .rc-demo[data-thumbnail]{padding:18px;min-height:100svh;display:flex;align-items:center}
 .rc-demo[data-thumbnail] .rc-collection{width:100%}
-.rc-demo[data-thumbnail] :is(.rc-toolbar,.rc-filter-row,.rc-navigation,.rc-bottom,.rc-tip,.rc-status,.rc-save,.rc-card-actions,.rc-card p){display:none}
+.rc-demo[data-thumbnail] :is(.rc-toolbar,.rc-sample-note,.rc-filter-row,.rc-navigation,.rc-bottom,.rc-tip,.rc-status,.rc-save,.rc-card-actions,.rc-card p){display:none}
 .rc-demo[data-thumbnail] .rc-rail{overflow:hidden;gap:13px;padding:0;pointer-events:none}
 .rc-demo[data-thumbnail] .rc-card{flex-basis:calc((100% - 26px)/3)}
 .rc-demo[data-thumbnail] .rc-art{height:190px}.rc-demo[data-thumbnail] .rc-body{padding:14px}.rc-demo[data-thumbnail] .rc-card h2{font-size:21px;margin-bottom:1px}
@@ -169,3 +171,68 @@ body{margin:0;background:#0a0a0f}
 @media(max-width:600px){.rc-demo{padding:20px}.rc-header{padding-bottom:16px;gap:8px}.rc-header img{width:116px;height:40px}.rc-edition{display:none}.rc-header .rc-button{margin-left:auto;padding:8px 11px}.rc-header .rc-button svg{display:none}.rc-hero{display:block;padding:27px 0 23px}.rc-hero h1{font-size:39px}.rc-hero-side{margin-top:16px;max-width:100%}.rc-hero-mark{display:none}.rc-hero-side p{font-size:14px}.rc-toolbar{flex-wrap:wrap;padding:13px 0}.rc-search{max-width:none;flex-basis:100%}.rc-tools{width:100%;justify-content:space-between}.rc-filter-row{gap:3px}.rc-filters{gap:0}.rc-filters button{padding:8px 10px}.rc-saved-filter{min-height:44px;margin:4px 0 2px auto}.rc-rail{gap:15px;padding-bottom:20px}.rc-card{flex-basis:calc(100% - 20px)}.rc-art{height:230px}.rc-body{padding:20px}.rc-card h2{font-size:26px}.rc-card p{font-size:14px}.rc-demo[data-layout=grid] .rc-rail{grid-template-columns:minmax(0,1fr)}.rc-bottom{align-items:start;gap:9px}.rc-bottom>p{padding-top:15px;white-space:nowrap}.rc-bottom>div{gap:0 14px}.rc-navigation{gap:11px}.rc-footer{flex-direction:column;gap:3px}.rc-dialog{padding:18px}.rc-dialog h2{font-size:27px}.rc-demo[data-thumbnail] .rc-art{height:150px}.rc-demo[data-thumbnail] .rc-card h2{font-size:14px}.rc-demo[data-thumbnail] .rc-card-top{font-size:6px}.rc-demo[data-thumbnail] .rc-body{padding:10px}.rc-demo[data-thumbnail] .rc-art>div{scale:.65}.rc-demo[data-thumbnail] .rc-art-chip{display:none}}
 @media(prefers-reduced-motion:reduce){.rc-demo *,.rc-demo *::before,.rc-demo *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rc-surface{transform:none!important}.rc-layer,.rc-layer-back{--ax:0px!important;--ay:0px!important}}
 @media(max-width:600px){.rc-filter-row{flex-wrap:nowrap;gap:8px;align-items:center}.rc-filters{flex:1;min-width:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.rc-filters::-webkit-scrollbar{display:none}.rc-filters button{flex:none}.rc-saved-filter{margin:0;gap:5px;font-size:0!important;padding:8px}.rc-saved-filter span{font-size:10px}.rc-saved-filter svg{width:18px}}
+
+/* Editing keeps one live card in view and gives the settings their own scroll. */
+.rc-preview-label{display:none;margin:0;color:var(--muted);font-size:12px;font-weight:600}
+.rc-collection[data-editor-collapsed=false] > .rc-toolbar{flex-wrap:nowrap;background:var(--bg);padding-block:10px}
+.rc-collection[data-editor-collapsed=false] .rc-tools{width:auto;flex:none}
+.rc-collection[data-editor-collapsed=false] .rc-preview-label{display:block}
+.rc-collection[data-editor-collapsed=false] :is(.rc-search,.rc-layout,.rc-sample-note,.rc-navigation,.rc-bottom,.rc-tip,.rc-empty){display:none}
+[data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-editor-preview .rc-filter-row{display:none}
+[data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-editor-preview{
+  display:grid;place-items:stretch;height:min(560px,var(--editor-available-height));padding:0;
+  border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;
+}
+[data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-rail{
+  display:grid!important;grid-template-columns:minmax(0,1fr);place-items:safe center;
+  overflow:auto;scroll-snap-type:none;cursor:auto;padding:16px;
+}
+.rc-collection[data-editor-collapsed=false] .rc-rail .rc-card:not([data-previewing]){display:none}
+.rc-collection[data-editor-collapsed=false] .rc-rail .rc-card[data-previewing]{display:block!important;width:min(100%,420px)}
+.rc-collection[data-editor-collapsed=false] .rc-card-actions,.rc-collection[data-editor-collapsed=false] .rc-save{display:none}
+[data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-card [data-description]{display:block;margin-bottom:0;white-space:pre-line}
+[data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-card h2{margin-block:8px}
+[data-editor-legacy="carrusel-recursos"] .rc-editor-panel[data-editor-panel]{
+  padding:0;overflow:hidden;scrollbar-gutter:auto;height:min(560px,var(--editor-available-height));
+  color:var(--ink);background:var(--panel);border-color:var(--line);
+}
+.rc-editor-panel form{display:grid;grid-template-rows:auto minmax(0,1fr) auto;height:100%;min-width:0}
+[data-editor-legacy="carrusel-recursos"] .rc-editor-panel form > h2{padding:15px 16px;margin:0;border-bottom:1px solid var(--line);font-size:16px}
+.rc-editor-scroll{display:grid;align-content:start;gap:10px;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:12px 16px}
+[data-editor-legacy="carrusel-recursos"] .rc-editor-scroll label{font-size:13px;min-width:0}
+.rc-editor-scroll :is(select,input,textarea){font-size:16px}
+.rc-editor-scroll textarea{width:100%;min-height:78px;resize:vertical;padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink);line-height:1.5}
+.rc-editor-section{min-width:0;border:1px solid var(--line);border-radius:10px}
+.rc-editor-section summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;list-style:none}
+.rc-editor-section summary::-webkit-details-marker{display:none}
+.rc-editor-section summary::after{content:'';width:8px;height:8px;border:solid var(--muted);border-width:0 1.5px 1.5px 0;transform:rotate(45deg);margin-right:2px}
+.rc-editor-section[open] summary::after{transform:rotate(225deg)}
+.rc-editor-section summary:focus-visible{outline:2px solid var(--accent-ink);outline-offset:-3px;border-radius:9px}
+.rc-editor-fields{display:grid;gap:10px;padding:0 12px 12px}
+.rc-editor-fields .rc-error{margin:0;min-height:0}
+.rc-editor-fields .rc-error:empty{display:none}
+.rc-editor-scroll [data-reset]{justify-self:start;max-width:100%}
+.rc-editor-panel .rc-dialog-actions{gap:8px;justify-content:flex-end;margin:0;padding:10px 14px;border-top:1px solid var(--line)}
+.rc-editor-panel .rc-dialog-actions button{max-width:100%;padding-inline:12px}
+
+@media(max-width:959px) and (min-height:420px){
+  [data-editor-legacy="carrusel-recursos"] .rc-demo .rc-collection[data-editor-collapsed=false]:not([data-editor-natural=true]) [data-editor-layout]{
+    grid-template-rows:clamp(118px,31%,190px) minmax(0,1fr);gap:10px;
+  }
+  [data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false]:not([data-editor-natural=true]) :is(.rc-editor-preview,.rc-editor-panel){height:100%}
+}
+@media(max-width:959px){
+  [data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-rail{padding:7px}
+  .rc-collection[data-editor-collapsed=false] .rc-surface{display:grid;grid-template-columns:minmax(0,32%) minmax(0,1fr);align-items:stretch}
+  [data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-art{height:auto;min-height:104px;border-bottom:0;border-right:1px solid var(--line)}
+  .rc-collection[data-editor-collapsed=false] .rc-art > .rc-layer{position:absolute;left:50%;top:50%;translate:-50% -50%;scale:.42;margin:0}
+  .rc-collection[data-editor-collapsed=false] .rc-art :is(.rc-audio,.rc-motion-frame,.rc-code-window,.rc-palette){width:220px}
+  .rc-collection[data-editor-collapsed=false] .rc-art .rc-layer-back{display:none}
+  .rc-collection[data-editor-collapsed=false] :is(.rc-art-chip,.rc-art-no){display:none}
+  [data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-body{padding:10px}
+  [data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-card h2{font-size:19px;margin-block:4px}
+  [data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-collapsed=false] .rc-card [data-description]{line-height:1.35}
+  [data-editor-legacy="carrusel-recursos"] .rc-editor-panel form > h2{padding-block:9px;font-size:14px}
+}
+[data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-natural=true][data-editor-collapsed=false] .rc-editor-preview{height:auto;max-height:none}
+[data-editor-legacy="carrusel-recursos"] .rc-collection[data-editor-natural=true] .rc-editor-panel{height:auto;max-height:none}
