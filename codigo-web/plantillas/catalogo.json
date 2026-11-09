@@ -180,7 +180,7 @@
     "source": null,
     "zip": "mockup-multidispositivo-lienzo.zip",
     "desc": "Presenta un proyecto en portátil y móvil con capturas o MP4. Marca la misma acción en dos grabaciones y compara cómo se ve en cada pantalla.",
-    "size": 773,
+    "size": 775,
     "authorRole": "Implementación original y guía",
     "license": "Código MIT. Fuentes OFL. Procedencia de la imagen del portátil en SOURCE-NOTES.md."
   },

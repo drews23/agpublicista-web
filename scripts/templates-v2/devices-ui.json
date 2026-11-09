@@ -1,6 +1,6 @@
 {
   "es": {
-    "dvStage": "Estudio de dispositivos",
+    "dvStage": "Vista previa",
     "dvLayout": "Composición del mockup",
     "dvDual": "Ambos",
     "dvLaptop": "Portátil",
@@ -12,9 +12,11 @@
     "dvUploadLaptop": "Cargar captura del portátil",
     "dvUploadPhone": "Cargar captura del móvil",
     "dvCaptures": "Contenido de pantalla",
+    "dvMediaSample": "Muestra",
+    "dvMediaImage": "Imagen",
     "dvChooseImage": "Elegir imagen",
     "dvChooseVideo": "Elegir MP4",
-    "dvUploadHelp": "Cada pantalla admite una imagen de hasta 8 MB o un MP4 de hasta 40 MiB. Los archivos se procesan en tu navegador.",
+    "dvUploadHelp": "Por pantalla: PNG, JPG o WebP de hasta 8 MB, o MP4 de hasta 40 MiB.",
     "dvLaptopVideo": "Video del portátil",
     "dvPhoneVideo": "Video del móvil",
     "dvUploadLaptopVideo": "Cargar video MP4 del portátil",
@@ -48,7 +50,7 @@
     "dvHeadline": "Titular de la muestra"
   },
   "en": {
-    "dvStage": "Device studio",
+    "dvStage": "Preview",
     "dvLayout": "Mockup layout",
     "dvDual": "Both",
     "dvLaptop": "Laptop",
@@ -60,9 +62,11 @@
     "dvUploadLaptop": "Upload laptop screenshot",
     "dvUploadPhone": "Upload phone screenshot",
     "dvCaptures": "Screen media",
+    "dvMediaSample": "Sample",
+    "dvMediaImage": "Image",
     "dvChooseImage": "Choose image",
     "dvChooseVideo": "Choose MP4",
-    "dvUploadHelp": "Each screen accepts an image up to 8 MB or an MP4 up to 40 MiB. Your browser processes the files locally.",
+    "dvUploadHelp": "Per screen: PNG, JPG, or WebP up to 8 MB, or MP4 up to 40 MiB.",
     "dvLaptopVideo": "Laptop video",
     "dvPhoneVideo": "Phone video",
     "dvUploadLaptopVideo": "Upload laptop MP4 video",

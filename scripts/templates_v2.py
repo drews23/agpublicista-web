@@ -320,7 +320,7 @@ def editor_document(raw, slug, lang, ui):
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(raw, 'html.parser')
     kind = RESOURCES[slug]['kind']
-    media_first = kind in ['phone-prototype', 'laptop-perspective']
+    media_first = kind in ['devices', 'phone-prototype', 'laptop-perspective']
     workspace = soup.select_one('.v2-workspace')
     workspace['data-editor-workspace'] = ''
     workspace['data-editor-collapsed'] = 'true'
@@ -369,7 +369,7 @@ def editor_document(raw, slug, lang, ui):
     form.insert_before(brand_panel)
     if media_first:
         form.select_one('label')['hidden'] = ''
-        text_class = 'pp-copy-settings' if kind == 'phone-prototype' else 'lp-copy-settings'
+        text_class = {'devices': 'dv-copy-settings', 'phone-prototype': 'pp-copy-settings', 'laptop-perspective': 'lp-copy-settings'}[kind]
         text_section = soup.new_tag('details', attrs={'class': 'v2-panel-live ' + text_class})
         summary = soup.new_tag('summary')
         summary.string = 'Textos de muestra' if lang == 'es' else 'Sample text'
@@ -386,7 +386,17 @@ def editor_document(raw, slug, lang, ui):
         help_section.append(summary)
         help_section.append(tip.extract())
         editor.append(help_section)
-    for selector in ['.pi-controls', '.eg-settings', '.dv-settings', '.pp-settings', '.lp-settings']:
+    if kind == 'devices':
+        intro.decompose()
+        text_section.insert_after(brand_panel.extract())
+        text_section.insert_before(preview.select_one('.dv-settings').extract())
+        text_section.insert_before(preview.select_one('.dv-compare').extract())
+        text_section.append(soup.select_one('[data-status]').extract())
+        toolbar = workspace.select_one('.v2-toolbar')
+        toolbar.select_one('.v2-toolbar-label').decompose()
+        toolbar.insert(0, toolbar.select_one('.dv-switch').extract())
+        preview.select_one('.v2-bottom').insert(0, preview.select_one('[data-device-compare]').extract())
+    for selector in ['.pi-controls', '.eg-settings', '.pp-settings', '.lp-settings']:
         local = preview.select_one(selector)
         if not local:
             continue
@@ -481,6 +491,13 @@ def document(slug, lang):
             'Guarda el HTML junto a los archivos del ZIP de la plantilla para abrir el estudio con tu imagen y el efecto. Para obtener una imagen de portada, usa Descargar PNG.'
             if lang == 'es' else
             'Save the HTML alongside the files from the template ZIP to reopen the studio with your image and particle effect. For a hero image, use Download PNG.'
+        )
+    if item['kind'] == 'devices':
+        ui['source'] = 'Exportar' if lang == 'es' else 'Export'
+        ui['exportTitle'] = 'Guarda tu mockup' if lang == 'es' else 'Save your mockup'
+        ui['exportHelp'] = (
+            'Descarga el proyecto ZIP para guardar el mockup con tus MP4. Puedes copiar o descargar el HTML para usarlo junto a los archivos de la plantilla.'
+            if lang == 'es' else 'Download the project ZIP to save the mockup with your MP4s. You can copy or download the HTML to use alongside the template files.'
         )
     if item['kind'] == 'scenes':
         ui.update(scene_translations(lang))

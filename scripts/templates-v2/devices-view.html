@@ -51,21 +51,28 @@
       <figcaption class="dv-caption"><i aria-hidden="true"></i>{{dvPhone}}</figcaption>
     </figure>
   </div>
-  <!-- devices-journey -->
 </section>
-<section class="dv-settings" aria-label="{{dvCaptures}}">
-  <p class="dv-settings-help">{{dvUploadHelp}}</p>
-  <details class="dv-setting" open>
-    <summary>{{dvLaptopScreen}}</summary>
+<button class="v2-text-button dv-compare-shortcut" type="button" data-device-compare aria-controls="dv-compare">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3Z"/></svg>
+  <span>{{dvJourneyTitle}}</span>
+</button>
+<section class="dv-settings" aria-labelledby="dv-captures-title">
+  <h3 id="dv-captures-title">{{dvCaptures}}</h3>
+  <p class="dv-settings-help" id="dv-file-limits">{{dvUploadHelp}}</p>
+  <details class="dv-setting" name="dv-screens" data-device-settings="laptop" open>
+    <summary>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M2 20h20"/></svg>
+      <span>{{dvLaptopScreen}}</span><span class="dv-media-badge" data-device-media-kind="laptop">{{dvMediaSample}}</span>
+    </summary>
     <div class="dv-setting-body">
       <div class="dv-media-uploads">
         <label class="v2-upload v2-button">
           <span>{{dvChooseImage}}</span>
-          <input type="file" data-device-upload="laptop" accept="image/png,image/jpeg,image/webp" aria-label="{{dvUploadLaptop}}">
+          <input type="file" data-device-upload="laptop" accept="image/png,image/jpeg,image/webp" aria-label="{{dvUploadLaptop}}" aria-describedby="dv-file-limits">
         </label>
         <label class="v2-upload v2-button">
           <span>{{dvChooseVideo}}</span>
-          <input type="file" data-device-video-upload="laptop" accept=".mp4,video/mp4" aria-label="{{dvUploadLaptopVideo}}">
+          <input type="file" data-device-video-upload="laptop" accept=".mp4,video/mp4" aria-label="{{dvUploadLaptopVideo}}" aria-describedby="dv-file-limits">
         </label>
       </div>
       <label data-device-option="laptop" hidden>{{dvFit}}
@@ -93,17 +100,20 @@
       <p class="dv-media-status" data-device-media-status="laptop" role="status"></p>
     </div>
   </details>
-  <details class="dv-setting">
-    <summary>{{dvPhoneScreen}}</summary>
+  <details class="dv-setting" name="dv-screens" data-device-settings="phone">
+    <summary>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>
+      <span>{{dvPhoneScreen}}</span><span class="dv-media-badge" data-device-media-kind="phone">{{dvMediaSample}}</span>
+    </summary>
     <div class="dv-setting-body">
       <div class="dv-media-uploads">
         <label class="v2-upload v2-button">
           <span>{{dvChooseImage}}</span>
-          <input type="file" data-device-upload="phone" accept="image/png,image/jpeg,image/webp" aria-label="{{dvUploadPhone}}">
+          <input type="file" data-device-upload="phone" accept="image/png,image/jpeg,image/webp" aria-label="{{dvUploadPhone}}" aria-describedby="dv-file-limits">
         </label>
         <label class="v2-upload v2-button">
           <span>{{dvChooseVideo}}</span>
-          <input type="file" data-device-video-upload="phone" accept=".mp4,video/mp4" aria-label="{{dvUploadPhoneVideo}}">
+          <input type="file" data-device-video-upload="phone" accept=".mp4,video/mp4" aria-label="{{dvUploadPhoneVideo}}" aria-describedby="dv-file-limits">
         </label>
       </div>
       <label data-device-option="phone" hidden>{{dvFit}}
@@ -131,5 +141,5 @@
       <p class="dv-media-status" data-device-media-status="phone" role="status"></p>
     </div>
   </details>
-  <!-- devices-journey-settings -->
 </section>
+<!-- devices-journey -->

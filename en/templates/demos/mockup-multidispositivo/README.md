@@ -4,14 +4,14 @@ Show a site, interface, or portfolio on a laptop and phone. Each device can show
 
 1. Extract the ZIP and open `index.html`.
 2. Choose **Both**, **Laptop**, or **Phone** in the preview toolbar.
-3. Open **Settings** and find **Image and motion**. Each device accepts a PNG, JPG, or WebP image up to 8 MB, or an MP4 up to 40 MiB. Your browser processes the files locally. If it cannot read your MP4, re-export with H.264 video and AAC audio when applicable.
+3. Open **Settings** and choose which device to edit under **Screen media**. Each device accepts a PNG, JPG, or WebP image up to 8 MB, or an MP4 up to 40 MiB. Your browser processes the files locally. If it cannot read your MP4, re-export with H.264 video and AAC audio when applicable.
 4. **Show full image** preserves every edge of the screenshot. **Fill screen** covers the frame and lets you adjust the vertical crop. **Long page** fits the image to the device width. Scroll inside the device using a mouse, touch, or keyboard, or use the position slider.
-5. **Restore sample** brings Atlas back on that screen. Change the sample name, headline, or accent in **Settings**. **Reset item** restores the initial configuration of the HTML file you opened.
-6. Open **Get HTML** and choose **Download project ZIP** to bundle the HTML, clips, and template files. Extract it and open `index.html` offline. Keep the scripts, styles, and any `assets/` or `media/` folders beside the HTML.
+5. **Restore sample** brings Atlas back on that screen. Change its name, headline, or accent in **Sample text**. **Reset item** restores the initial configuration of the HTML file you opened.
+6. Open **Export** and choose **Download project ZIP** to bundle the HTML, clips, and template files. Extract it and open `index.html` offline. Keep the scripts, styles, and any `assets/` or `media/` folders beside the HTML.
 
-## Action walkthrough
+## Compare videos
 
-Select **Load demo** to compare three moments in the Atlas portfolio. With two of your own clips, seek each screen to the same action, give it a name, and select **Save marker**. Each marker saves both times and jumps back to them with a click. Reorder or remove markers as needed. **Play both** starts each clip from its current position. Audio starts muted.
+Open **Compare videos** from the preview and select **Load demo** to explore three moments in the Atlas portfolio. With two of your own clips, seek each screen to the same action, give it a name, and select **Save marker**. Each marker saves both times and jumps back to them with a click. Reorder or remove markers as needed. **Play both** starts each clip from its current position. Audio starts muted.
 
 When you reopen a project from disk and only change its markers or framing, download the HTML and save it as `index.html` in the same folder to keep the clips already stored in `media/`.
 

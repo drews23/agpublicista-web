@@ -5,6 +5,33 @@
   if (!studio) return;
   const {state, defaults, $, $$, ui} = studio;
   const stage = $('[data-device-studio]');
+  const workspace = stage.closest('[data-editor-workspace]');
+  const editor = $('[data-editor]');
+  const comparison = $('#dv-compare');
+  const compareButton = $('[data-device-compare]');
+  if (workspace) {
+    workspace.dataset.editorFocusAnchor = 'workspace';
+    workspace.addEventListener('lienzo:editor-panel', event => {
+      if (!event.detail.open || workspace.dataset.editorConstrained === 'true') return;
+      if (matchMedia('(min-width: 960px) and (min-height: 420px), (min-height: 450px)').matches) {
+        workspace.scrollIntoView({block: 'start', behavior: 'instant'});
+      }
+    });
+  }
+  if (comparison && compareButton) {
+    compareButton.addEventListener('click', () => {
+      if (editor.hidden) studio.edit(0, compareButton);
+      comparison.open = true;
+      const summary = comparison.querySelector('summary');
+      summary.focus({preventScroll: true});
+      if (getComputedStyle(editor).overflowY === 'auto') {
+        const header = editor.querySelector('.v2-editor-panel-head');
+        editor.scrollTop += summary.getBoundingClientRect().top - editor.getBoundingClientRect().top - header.offsetHeight - 8;
+      } else {
+        summary.scrollIntoView({block: 'nearest', behavior: 'instant'});
+      }
+    });
+  }
   const layouts = {dual: ui.dvDual, laptop: ui.dvLaptop, phone: ui.dvPhone};
   const activeItem = () => state.items[0];
   const imageTypes = ['image/png', 'image/jpeg', 'image/webp'];
@@ -27,6 +54,8 @@
       seek: element('seek'),
       time: element('time'),
       mediaStatus: element('media-status'),
+      mediaBadge: element('media-kind'),
+      settings: element('settings'),
       fit: element('fit'),
       option: element('option'),
       position: element('position'),
@@ -134,6 +163,9 @@
     device.video.hidden = !device.videoReady;
     device.videoControls.hidden = !device.videoReady;
     const hasMedia = Boolean(source) || device.videoReady;
+    if (device.mediaBadge) {
+      device.mediaBadge.textContent = device.videoReady ? 'MP4' : source ? ui.dvMediaImage : ui.dvMediaSample;
+    }
     device.sample.hidden = hasMedia;
     device.screen.dataset.fit = hasMedia ? fit : 'contain';
     if (!device.image.hidden && fit === 'scroll') device.screen.tabIndex = 0;
@@ -195,8 +227,7 @@
     setPosition(device, 50, false);
     renderCapture(device);
     device.upload.focus();
-    device.mediaStatus.textContent = '';
-    studio.status(ui.dvImageRestored);
+    device.mediaStatus.textContent = ui.dvImageRestored;
     signalMedia(device, 'restore');
   }
 
@@ -367,11 +398,10 @@
         activeItem()[device.name + 'Fit'] = 'contain';
         setPosition(device, 50, false);
         renderCapture(device);
-        device.mediaStatus.textContent = '';
-        studio.status(ui.imageDone);
+        device.mediaStatus.textContent = ui.imageDone;
         signalMedia(device, 'upload');
       } catch {
-        if (request === device.request) studio.status(ui.dvImageError);
+        if (request === device.request) device.mediaStatus.textContent = ui.dvImageError;
       }
     });
     device.videoUpload.addEventListener('change', () => {
@@ -416,6 +446,8 @@
 
   $$('[data-device-mode]').forEach(button => button.addEventListener('click', () => {
     state.deviceMode = button.dataset.deviceMode;
+    const device = devices.find(candidate => candidate.name === state.deviceMode);
+    if (device?.settings) device.settings.open = true;
     render();
   }));
 

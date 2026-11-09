@@ -1,8 +1,7 @@
 {
   "es": {
-    "dvJourneyKicker": "02 / Comparación de video",
-    "dvJourneyTitle": "Recorrido por acciones",
-    "dvJourneyIntro": "Carga un MP4 por pantalla o prueba la demo. Marca la misma acción aunque ocurra en momentos distintos.",
+    "dvJourneyTitle": "Comparar videos",
+    "dvJourneyIntro": "Carga dos MP4 o prueba la demo. Guarda el tiempo de la misma acción en ambos videos.",
     "dvJourneyDemo": "Cargar demo",
     "dvJourneyDemoReplace": "Reemplazar con demo",
     "dvJourneyDemoLoading": "Cargando la demo…",
@@ -32,9 +31,8 @@
     "dvJourneyConfirm": "Guardar proyecto"
   },
   "en": {
-    "dvJourneyKicker": "02 / Video comparison",
-    "dvJourneyTitle": "Action walkthrough",
-    "dvJourneyIntro": "Add one MP4 per screen or try the demo. Mark the same action even when it happens at different times.",
+    "dvJourneyTitle": "Compare videos",
+    "dvJourneyIntro": "Add two MP4s or try the demo. Save the time of the same action in both clips.",
     "dvJourneyDemo": "Load demo",
     "dvJourneyDemoReplace": "Replace with demo",
     "dvJourneyDemoLoading": "Loading the demo…",
