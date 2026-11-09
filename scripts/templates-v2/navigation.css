@@ -14,3 +14,85 @@ html[data-view=thumbnail] .ni-layout{max-width:920px}html[data-view=thumbnail] .
 /* Keep every actionable control comfortable for touch without changing artwork scale. */
 .ni-save{width:44px;height:44px}.ni-screen-foot button,.ni-filter select,.ni-builder-list button{min-height:44px}
 @media(max-width:660px){.ni-save{width:44px;height:44px}}
+
+/* The preview frame and the settings scroll independently. */
+[data-kind=navigation] .v2-workspace{--editor-panel-width:340px;overflow-anchor:none}
+[data-kind=navigation] .v2-toolbar [data-pause]{padding:8px 10px;font-size:12px}
+[data-kind=navigation] .v2-editor-panel .v2-panel-live{margin-top:0}
+[data-kind=navigation] .v2-editor-panel .v2-fields{grid-template-columns:minmax(0,1fr);gap:12px;margin:4px 0 16px}
+[data-kind=navigation] .v2-editor-panel .v2-error:empty{min-height:0;margin:0}
+.ni-display-settings .v2-segmented button{flex:1;min-height:44px}
+.ni-display-settings .ni-compact-toggle{min-height:44px;margin:3px 0 8px}
+.ni-display-settings{margin-bottom:12px}
+.ni-panel-actions{display:flex;align-items:center;gap:7px}
+.ni-panel-actions .v2-button{font-size:13px;padding:7px 12px}
+.ni-panel-actions .v2-icon-button{min-height:44px;width:44px}
+.ni-content:focus-visible{outline-offset:-4px}
+
+[data-kind=navigation] [data-editor-collapsed=false] :is(.ni-screen-foot,.ni-keyboard-hint){display:none}
+[data-kind=navigation] .v2-workspace[data-editor-collapsed=false] .v2-stage{min-height:0;padding:14px}
+
+@media(min-width:960px) and (min-height:420px),(max-width:959px) and (min-height:450px){
+  [data-kind=navigation] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-layout]{
+    height:var(--editor-available-height);align-items:stretch;
+  }
+  [data-kind=navigation] [data-editor-collapsed=false]:not([data-editor-constrained=true]) :is([data-editor-preview],[data-editor-panel]){
+    height:100%;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  }
+  [data-kind=navigation] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-panel]{overflow-x:hidden}
+  [data-kind=navigation] [data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-editor-panel-head{position:sticky;top:0}
+  [data-kind=navigation] [data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-stage{height:100%}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout]{
+    height:100%;grid-template-rows:minmax(0,1fr) auto;gap:10px;padding:0;
+  }
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout=vertical]{
+    grid-template-rows:minmax(0,1fr);align-items:stretch;
+  }
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-screen{display:flex;flex-direction:column;min-height:0}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-screen-bar{flex:none;padding:10px 16px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-content{
+    flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;
+  }
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-panel{padding:clamp(14px,2vw,28px);min-height:0}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout=vertical] .ni-dock{max-height:100%;overflow:hidden auto;overscroll-behavior:contain}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-link-label{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+}
+
+@media(max-width:959px) and (min-height:450px){
+  [data-kind=navigation] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-layout]{
+    grid-template-rows:clamp(172px,calc(var(--editor-available-height) * .42),304px) minmax(0,1fr);
+  }
+  [data-kind=navigation] .v2-workspace[data-editor-collapsed=false] .v2-stage{padding:8px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout]{gap:6px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-screen-bar{display:none}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-screen{border-radius:14px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-dock{padding:4px;border-radius:14px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-link{
+    min-width:44px;min-height:44px;padding:4px;gap:3px;border-radius:9px;font-size:9px;
+  }
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout=horizontal] .ni-link{flex-basis:clamp(44px,13vw,86px)}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-link-icon{height:21px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-link-icon svg{width:20px;height:20px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-home-content{
+    grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);min-height:0;gap:8px;align-items:start;
+  }
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-panel h2{font-size:clamp(21px,4vw,33px);margin:6px 0 10px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-orbit-scene{height:auto;min-height:88px;aspect-ratio:1;max-width:232px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-plane-mark{font-size:clamp(30px,7vw,60px)}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-plane-mark>span{transform:translate(-3px,-8px)}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-floating-chip{width:28px;height:28px;border-radius:8px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-floating-chip svg{width:14px;height:14px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-home-content :is(.ni-plane-top,.ni-plane-lines,.ni-scene-label,.ni-home-caption){display:none}
+}
+
+@media(max-width:660px){
+  [data-kind=navigation] .v2-toolbar-label{display:none}
+  [data-kind=navigation] .v2-toolbar>.v2-row{width:100%;justify-content:flex-end}
+}
+@media(max-width:959px) and (450px <= height < 600px){
+  [data-kind=navigation] [data-editor-collapsed=false] .v2-editor-panel-head{min-height:54px;padding-block:4px}
+  [data-kind=navigation] [data-editor-collapsed=false] .v2-editor-panel-help{margin:8px 0 9px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-panel{padding:10px 12px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-layout[data-layout] .ni-panel h2{font-size:clamp(19px,3.5vw,27px);margin-top:0}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .ni-section-index{display:none}
+}

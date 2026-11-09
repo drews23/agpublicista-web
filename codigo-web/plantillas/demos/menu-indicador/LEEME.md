@@ -14,11 +14,11 @@ Un componente nativo HTML, CSS y JavaScript con dos orientaciones, cinco destino
 ## Usar y personalizar
 
 1. Abre `index.html` conservando las carpetas vecinas. Puedes servir la carpeta con un servidor local.
-2. Elige horizontal o vertical y, si lo necesitas, activa «Solo iconos». Las etiquetas accesibles permanecen disponibles.
-3. Usa «Editar destino», o entra en Crear y elige una fila. Cambia etiqueta, titular, texto, enlace, icono y acento.
+2. Abre Ajustes. En «Diseño del menú», elige horizontal o vertical y activa «Solo iconos» si lo necesitas. La vista previa y el menú siguen a la vista mientras recorres los ajustes.
+3. Elige el destino en el panel, o entra en Crear y selecciona una fila. Abre «Texto» o «Enlace, icono y color» y pulsa «Aplicar» para ver el resultado. Puedes ocultar el panel y retomar el borrador del mismo destino.
 4. Un enlace que empieza por `#` abre su destino interno dentro de la demo. Un enlace HTTP/HTTPS navega a la dirección indicada. Las URL de otros protocolos se rechazan.
 5. «Descargar configuración» genera un JSON con los destinos y la presentación. El JSON no contiene el código ni es un sistema de importación.
-6. «Obtener HTML» exporta la demostración completa con el estado actual. Guarda ese HTML junto a los CSS, JavaScript y `assets` del ZIP; no es un archivo autónomo.
+6. Usa «Exportar» para descargar la demostración completa con el estado actual. Guarda el HTML junto a los CSS, JavaScript y `assets` del ZIP.
 
 Los enlaces reales de las tarjetas abren una nueva pestaña. Puedes sustituir sus destinos en el array `resources` de `component.js`. Estas tarjetas son un ejemplo de integración, no una tienda ni un catálogo sincronizado.
 

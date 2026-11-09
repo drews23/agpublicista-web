@@ -5,6 +5,7 @@
   if (!a) return;
   const {state, $, $$, ui, colors} = a;
   const layout = $('[data-nav-layout]');
+  const workspace = layout.closest('[data-editor-workspace]');
   const dock = $('[data-dock]');
   const track = $('[data-nav-links]');
   const panels = $('[data-nav-panels]');
@@ -71,19 +72,20 @@
     });
   }
   function reveal(index) {
-    const node = buttons[index];
-    if (state.layout === 'horizontal') {
-      const left = node.offsetLeft, right = left + node.offsetWidth;
-      if (left < dock.scrollLeft) dock.scrollLeft = left;
-      else if (right > dock.scrollLeft + dock.clientWidth) dock.scrollLeft = right - dock.clientWidth + 12;
-    }
+    const item = buttons[index].getBoundingClientRect();
+    const bounds = dock.getBoundingClientRect();
+    const vertical = state.layout === 'vertical';
+    const start = vertical ? item.top - bounds.top - dock.clientTop : item.left - bounds.left - dock.clientLeft;
+    const end = start + (vertical ? item.height : item.width);
+    const size = vertical ? dock.clientHeight : dock.clientWidth;
+    const delta = start < 0 ? start : Math.max(0, end - size);
+    if (delta) dock.scrollBy(vertical ? {top:delta} : {left:delta});
   }
   function activate(index, returnFocus = false) {
     if (!Number.isInteger(index) || index < 0 || index >= buttons.length) return;
     state.active = index; hoverIndex = -1;
     a.paint();
     if (returnFocus) buttons[index].focus({preventScroll:true});
-    reveal(index);
   }
   function render() {
     layout.dataset.layout = state.layout;
@@ -125,11 +127,13 @@
     a.text('[data-nav-saved-count]', String(state.savedResources.length).padStart(2, '0'));
     $('[data-nav-empty]').hidden = state.savedResources.length > 0;
     if (lastActive !== state.active) {
+      panels.scrollTop = 0;
       activePanels[state.active].classList.remove('ni-panel-enter');
       // A class drives one short transition; hidden panels have no animation work.
       void activePanels[state.active].offsetWidth;
       activePanels[state.active].classList.add('ni-panel-enter');
       lastActive = state.active;
+      reveal(state.active);
     }
     move();
   }
@@ -159,7 +163,12 @@
     else return;
     event.preventDefault(); buttons[next].focus({preventScroll:true}); reveal(next);
   });
-  $$('button[data-nav-layout-button]').forEach(button => button.addEventListener('click', () => { state.layout = button.dataset.navLayoutButton; hoverIndex = -1; dock.scrollLeft = 0; a.paint(); }));
+  $$('button[data-nav-layout-button]').forEach(button => button.addEventListener('click', () => {
+    state.layout = button.dataset.navLayoutButton;
+    hoverIndex = -1;
+    a.paint();
+    reveal(state.active);
+  }));
   $('[data-nav-compact]').addEventListener('change', event => { state.compact = event.target.checked; a.paint(); });
   $('[data-nav-filter]').addEventListener('change', event => { state.collectionFilter = event.target.value; a.paint(); });
   $$('[data-go]').forEach(button => button.addEventListener('click', () => activate(Number(button.dataset.go), true)));
@@ -174,26 +183,41 @@
       replacement?.focus({preventScroll:true});
     }
   }));
-  $('[data-nav-edit]').addEventListener('click', () => a.edit(state.active, $('[data-nav-edit]')));
+  function editDestination(index, trigger) {
+    a.edit(index, trigger);
+    $('[data-editor-panel]').scrollTop = 0;
+    $('[data-editor-form] select[name=item]').focus({preventScroll:true});
+  }
+  $('[data-nav-edit]').addEventListener('click', event => editDestination(state.active, event.currentTarget));
   $$('[data-nav-edit-index]').forEach(button => button.addEventListener('click', () => {
-    const index = Number(button.dataset.navEditIndex);
-    // Editing another destination changes the visible destination; restore focus there on close.
-    a.edit(index, () => buttons[index].focus({preventScroll:true}));
+    editDestination(Number(button.dataset.navEditIndex), button);
   }));
   $('[data-nav-json]').addEventListener('click', () => {
     const data = {component:'lienzo-glass-navigation', version:2, layout:state.layout, compact:state.compact, destinations:state.items.map((item, index) => ({label:item.title, headline:item.headline || item.title, description:item.description, href:a.safeURL(item.href, true) || '#destination-' + index, symbol:symbols.includes(item.symbol) ? item.symbol : symbols[index], accent:colors[item.accent] || colors.violet}))};
     a.download(JSON.stringify(data, null, 2), 'lienzo-navigation.json', 'application/json;charset=utf-8'); a.status(ui.navConfigSaved);
   });
-  const observer = new ResizeObserver(move);
+  if (workspace) {
+    const docked = matchMedia('(min-width: 960px) and (min-height: 420px), (min-height: 450px)');
+    workspace.dataset.editorFocusAnchor = 'workspace';
+    workspace.addEventListener('lienzo:editor-panel', event => {
+      if (event.detail.open && docked.matches && workspace.dataset.editorConstrained !== 'true') {
+        workspace.scrollIntoView({block:'start', behavior:'instant'});
+      }
+    });
+  }
+  const observer = new ResizeObserver(() => {
+    reveal(focusIndex >= 0 ? focusIndex : state.active);
+    move();
+  });
   observer.observe(dock); observer.observe(track);
   document.fonts?.ready.then(move);
   a.root.addEventListener('v2:motion', () => { if (!a.paused) move(); });
   a.setup({render, fields:[
     {key:'title', label:ui.navLabel, required:true, maxLength:22},
-    {key:'symbol', label:ui.navSymbol, options:symbols.map((symbol, index) => [symbol, ui['navSymbol' + index]])},
     {key:'headline', label:ui.navHeadline, required:true, maxLength:90, wide:true},
     {key:'description', label:ui.description, type:'textarea', maxLength:240, wide:true},
-    {key:'href', label:ui.href, url:true, fragments:true, required:true, maxLength:400, wide:true},
-    {key:'accent', label:ui.accent, options:Object.keys(colors).map(key => [key, ui[key]])}
+    {key:'href', group:'link', label:ui.href, url:true, fragments:true, required:true, maxLength:400},
+    {key:'symbol', group:'link', label:ui.navSymbol, options:symbols.map((symbol, index) => [symbol, ui['navSymbol' + index]])},
+    {key:'accent', group:'link', label:ui.accent, options:Object.keys(colors).map(key => [key, ui[key]])}
   ]});
 })();

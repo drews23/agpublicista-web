@@ -14,11 +14,11 @@ A native HTML, CSS, and JavaScript component with two orientations, five editabl
 ## Use and customize
 
 1. Open `index.html` with its neighboring folders intact. You may also serve the folder locally.
-2. Choose horizontal or vertical navigation. Turn on Icons only if needed; accessible labels remain available.
-3. Use Edit destination, or open Create and choose a row. Customize the label, headline, description, link, icon, and accent.
+2. Open Settings. Under Menu layout, choose horizontal or vertical navigation and turn on Icons only if needed. The preview and navigation stay in view as you scroll through the settings.
+3. Select a destination in the panel, or open Create and choose a row. Use Text or Link, icon, and color, then select Apply to preview your edits. Hide the panel to return to the same destination's draft later.
 4. A link starting with `#` opens its internal destination in the demo. An HTTP/HTTPS link navigates to the specified address. Other URL protocols are rejected.
 5. Download settings creates JSON containing the destinations and layout settings. It does not contain the code and does not implement an import system.
-6. Get HTML exports the full demo with its current state. Keep that HTML next to the CSS, JavaScript, and `assets` from the ZIP; it is not a standalone file.
+6. Use Export to download the full demo with its current state. Keep the HTML next to the CSS, JavaScript, and `assets` from the ZIP.
 
 Resource cards open real links in a new tab. Replace their destinations in the `resources` array in `component.js`. The cards demonstrate an integration; they are not a store or a synced catalog.
 

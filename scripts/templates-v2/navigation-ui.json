@@ -2,6 +2,10 @@
   "es": {
     "navWorkspace": "Estudio de navegación interactivo", "navStudio": "ESTUDIO", "navDemo": "Demo editable",
     "navLandmark": "Destinos del estudio", "navEditDestination": "Editar destino", "navCompact": "Solo iconos",
+    "navDestinationPicker": "Destino en edición", "navDisplaySettings": "Diseño del menú",
+    "navTextSettings": "Texto", "navLinkSettings": "Enlace, icono y color",
+    "navApply": "Aplicar", "navSettingsHelp": "Aplica los cambios antes de cambiar de destino.",
+    "navPreviewContent": "Contenido de la vista previa", "source": "Exportar", "pause": "Pausar", "resume": "Reanudar",
     "navKeyboardHorizontal": "Izquierda / derecha: explorar · Enter: abrir · Inicio / Fin: extremos",
     "navKeyboardVertical": "Arriba / abajo: explorar · Enter: abrir · Inicio / Fin: extremos",
     "navOverview": "El punto de partida", "navLibrary": "La colección", "navBuild": "A tu manera", "navShortlist": "Tu selección", "navIdentity": "La identidad",
@@ -19,6 +23,10 @@
   "en": {
     "navWorkspace": "Interactive navigation studio", "navStudio": "STUDIO", "navDemo": "Editable demo",
     "navLandmark": "Studio destinations", "navEditDestination": "Edit destination", "navCompact": "Icons only",
+    "navDestinationPicker": "Destination to edit", "navDisplaySettings": "Menu layout",
+    "navTextSettings": "Text", "navLinkSettings": "Link, icon, and color",
+    "navApply": "Apply", "navSettingsHelp": "Apply your edits before switching destinations.",
+    "navPreviewContent": "Preview content", "source": "Export", "pause": "Pause", "resume": "Resume",
     "navKeyboardHorizontal": "Left / right: explore · Enter: open · Home / End: first / last",
     "navKeyboardVertical": "Up / down: explore · Enter: open · Home / End: first / last",
     "navOverview": "The starting point", "navLibrary": "The collection", "navBuild": "Make it yours", "navShortlist": "Your shortlist", "navIdentity": "The identity",

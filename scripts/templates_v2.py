@@ -418,6 +418,45 @@ def editor_document(raw, slug, lang, ui):
         toolbar.select_one('.v2-toolbar-label').decompose()
         toolbar.insert(0, toolbar.select_one('.dv-switch').extract())
         preview.select_one('.v2-bottom').insert(0, preview.select_one('[data-device-compare]').extract())
+    if kind == 'navigation':
+        toolbar = workspace.select_one('.v2-toolbar')
+        toolbar.select_one('.v2-row').insert(0, preview.select_one('[data-pause]').extract())
+        preview.select_one('.v2-bottom').decompose()
+        intro.string = ui['navSettingsHelp']
+
+        display = soup.new_tag('details', attrs={'class': 'v2-panel-live ni-display-settings'})
+        summary = soup.new_tag('summary')
+        summary.string = ui['navDisplaySettings']
+        display.append(summary)
+        display.append(toolbar.select_one('.v2-segmented').extract())
+        display.append(toolbar.select_one('.ni-compact-toggle').extract())
+        form.insert_before(display)
+        form.insert_after(brand_panel.extract())
+
+        form['id'] = 'ni-editor-form'
+        picker = form.select_one('label')
+        picker.contents[0].replace_with(ui['navDestinationPicker'])
+        picker.select_one('select')['aria-label'] = ui['navDestinationPicker']
+        fields = form.select_one('[data-fields]')
+        for title, group in [(ui['navTextSettings'], ''), (ui['navLinkSettings'], 'link')]:
+            section = soup.new_tag('details', attrs={'class': 'v2-panel-live'})
+            summary = soup.new_tag('summary')
+            summary.string = title
+            section.append(summary)
+            if group:
+                section.append(soup.new_tag('div', attrs={'class': 'v2-fields', 'data-fields': group}))
+                fields.parent.insert_after(section)
+            else:
+                section['open'] = ''
+                fields.wrap(section)
+
+        apply = form.select_one('[type=submit]').extract()
+        apply.attrs.update({'form': form['id'], 'aria-label': ui['apply']})
+        apply.string = ui['navApply']
+        actions = soup.new_tag('div', attrs={'class': 'ni-panel-actions'})
+        actions.append(apply)
+        actions.append(close.extract())
+        header.append(actions)
     if kind == 'scenes':
         form['id'] = 'cs-editor-form'
         picker = form.select_one('label').extract()
