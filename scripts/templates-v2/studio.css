@@ -44,7 +44,7 @@ html[data-view=component] .v2-hero{display:none}
 [data-kind=particles] .pi-artboard{border-right:0}
 [data-kind=particles] .pi-frame{flex:initial}
 [data-editor-workspace][data-editor-collapsed=false] .v2-stage{padding:22px}
-[data-kind=scenes] [data-editor-collapsed=false] .v2-stage,[data-kind=context] [data-editor-collapsed=false] .v2-stage,[data-kind=particles] [data-editor-collapsed=false] .v2-stage{padding:0}
+[data-kind=context] [data-editor-collapsed=false] .v2-stage,[data-kind=particles] [data-editor-collapsed=false] .v2-stage{padding:0}
 .v2-editor-panel :is(input,textarea,select){max-width:100%;min-width:0}
 .v2-editor-panel .v2-fields input[type=range]{min-height:44px}
 .v2-panel-guide{border-top:1px solid var(--line);margin-top:20px;padding-top:7px;font-size:12px;line-height:1.7;color:var(--muted)}
@@ -54,7 +54,6 @@ html[data-view=component] .v2-hero{display:none}
 html[data-view=thumbnail] .v2-editor-panel{display:none!important}
 html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1fr)}
 @media(min-width:960px){
-  [data-editor-collapsed=false] .cs-board[data-view=collection]{grid-template-columns:repeat(2,minmax(0,1fr))}
   [data-editor-collapsed=false] .cm-desk{grid-template-columns:minmax(0,1fr)}
   [data-editor-collapsed=false] .cm-inspector{border-left:0;border-top:1px solid var(--line);display:grid;grid-template-columns:100px minmax(0,1fr);gap:0 20px}
   [data-editor-collapsed=false] .cm-inspector-head{grid-column:1/-1}
@@ -70,18 +69,6 @@ html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1f
   [data-editor-collapsed=false] .pi-artboard-foot{padding-top:12px;gap:12px}
   [data-editor-collapsed=false] .pi-artboard-foot h2{font-size:28px;margin-bottom:5px}
   [data-editor-collapsed=false] .pi-artboard-foot p{font-size:12px;line-height:1.5}
-  [data-editor-collapsed=false] .cs-atelier{padding:18px}
-  [data-editor-collapsed=false] .cs-intro{display:none}
-  [data-editor-collapsed=false] .cs-board[data-view]{grid-template-columns:minmax(0,1fr)}
-  [data-editor-collapsed=false] .cs-board .cs-card:not([data-active=true]){display:none}
-  [data-editor-collapsed=false] .cs-board[data-view] .cs-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,.9fr);align-items:center;gap:0 18px;padding:16px}
-  [data-editor-collapsed=false] .cs-card-top{grid-column:1/-1;padding:0 0 10px}
-  [data-editor-collapsed=false] .cs-art-button{padding:0}
-  [data-editor-collapsed=false] .cs-board[data-view] .cs-scene{max-width:330px}
-  [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy{padding:0}
-  [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy h2{font-size:28px}
-  [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy>p{font-size:12px;line-height:1.65;margin-bottom:14px;min-height:0}
-  [data-editor-collapsed=false] .cs-note{padding-top:12px}
 }
 @media(max-width:959px),(max-height:579px){
   .v2-editor-panel{border-left:0;border-top:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);padding:0 20px 22px}
@@ -97,7 +84,7 @@ html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1f
   .v2-editor-panel{padding:0 16px calc(20px + env(safe-area-inset-bottom,0px))}
   .v2-editor-panel .v2-dialog-actions button[type=submit]{width:100%;order:-1}
   [data-editor-workspace][data-editor-collapsed=false] .v2-stage{padding:18px 12px}
-  [data-kind=scenes] [data-editor-collapsed=false] .v2-stage,[data-kind=context] [data-editor-collapsed=false] .v2-stage,[data-kind=particles] [data-editor-collapsed=false] .v2-stage{padding:0}
+  [data-kind=context] [data-editor-collapsed=false] .v2-stage,[data-kind=particles] [data-editor-collapsed=false] .v2-stage{padding:0}
 }
 /* On a tall phone the visible artboard and inspector share one screen; keyboard/zoom return to document flow. */
 @media(max-width:959px) and (min-height:650px){
@@ -111,18 +98,4 @@ html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1f
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-artboard-head{margin-bottom:9px;font-size:9px;gap:8px}
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-frame{height:190px;min-height:190px;aspect-ratio:auto}
   .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .pi-artboard-foot{display:none}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-atelier{padding:12px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-intro,.v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-note{display:none}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-scene-nav{gap:3px;flex-wrap:nowrap;margin-bottom:10px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-scene-nav button{min-width:38px;min-height:44px;flex:1;padding:6px 3px;position:relative;justify-content:center}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-scene-nav button>span:last-child{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view]{grid-template-columns:minmax(0,1fr)}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board .cs-card:not([data-active=true]){display:none}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:12px;padding:12px;align-items:center}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-card-top{display:none}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card-copy{padding:0}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card-copy h2{font-size:20px;margin-bottom:7px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-board[data-view] .cs-card-copy>p{font-size:12px;line-height:1.45;min-height:0;margin-bottom:7px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-card-actions{flex-wrap:wrap;gap:2px}
-  .v2-workspace[data-editor-collapsed=false]:not([data-editor-constrained=true]) .cs-detail-button{font-size:11px;gap:5px}
 }

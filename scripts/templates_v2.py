@@ -250,13 +250,20 @@ def scene_translations(lang):
         'sceneNote': ('Animación por piezas · HTML, SVG y CSS originales', 'Motion by moving part · Original HTML, SVG, and CSS'),
         'sceneLocal': ('Sin librerías. Sin solicitudes externas.', 'No libraries. No external requests.'),
         'sceneTypes': (['Código','Velocidad','Contenido','Adaptación','Conexiones','Ideas'], ['Code','Speed','Content','Responsive','Connections','Ideas']),
+        'scenePicker': ('Escena', 'Scene'), 'sceneContent': ('Texto y color', 'Text and color'),
+        'sceneMotion': ('Movimiento', 'Motion'), 'sceneApply': ('Aplicar', 'Apply'),
+        'sceneSettingsHelp': ('Aplica antes de cambiar de escena o exportar.', 'Apply changes before switching scenes or exporting.'),
+        'reset': ('Restaurar escena', 'Reset scene'), 'resetDone': ('Escena restaurada.', 'Scene reset.'),
         'sequence': ('Ver secuencia', 'Play sequence'), 'stopSequence': ('Detener secuencia', 'Stop sequence'),
         'sequenceEnd': ('Secuencia terminada. Explora cualquier escena a tu ritmo.', 'Sequence finished. Explore any scene at your own pace.'),
         'sequencePosition': ('Escena', 'Scene'), 'sequencePaused': ('Secuencia en pausa.', 'Sequence paused.'),
         'playScene': ('Reiniciar animación', 'Replay animation'), 'editScene': ('Personalizar escena', 'Customize scene'),
         'downloadScene': ('Descargar escena', 'Download scene'), 'sceneDownloaded': ('Escena descargada: HTML independiente con estilos, ilustración, fuentes y licencias incluidos.', 'Scene downloaded: standalone HTML with styles, artwork, fonts, and licenses included.'),
-        'openDetail': ('Ver detalle', 'View detail'), 'backCollection': ('Volver a la colección', 'Back to collection'), 'sceneDuration': ('Ritmo del ciclo (ms)', 'Cycle pace (ms)'),
+        'openDetail': ('Ver detalle', 'View detail'), 'backCollection': ('Volver a la colección', 'Back to collection'), 'sceneDuration': ('Duración del ciclo base', 'Base cycle duration'),
         'sceneIntensity': ('Intensidad del movimiento', 'Motion intensity'),
+        'source': ('Exportar', 'Export'), 'exportTitle': ('Exporta tus escenas', 'Export your scenes'),
+        'exportHelp': ('Descarga la escena actual como HTML independiente. Para usar el estudio completo, guarda su HTML junto a los archivos del ZIP.', 'Download the current scene as a standalone HTML file. To use the full studio, keep its HTML alongside the files from the ZIP.'),
+        'downloadCollection': ('Descargar estudio completo', 'Download full studio'),
         'pausedHelp': ('El movimiento está pausado. Reanúdalo con el control inferior; también se respeta la preferencia del sistema.', 'Motion is paused. Use the control below to resume; system motion preferences are also respected.'),
         'motionReduced': ('Movimiento reducido del sistema', 'System reduced motion'),
         'standaloneCredit': ('Ilustración y código: Lienzo. Conserva los avisos de licencia incluidos en el HTML.', 'Artwork and code: Lienzo. Keep the license notices included in the HTML.'),
@@ -411,6 +418,50 @@ def editor_document(raw, slug, lang, ui):
         toolbar.select_one('.v2-toolbar-label').decompose()
         toolbar.insert(0, toolbar.select_one('.dv-switch').extract())
         preview.select_one('.v2-bottom').insert(0, preview.select_one('[data-device-compare]').extract())
+    if kind == 'scenes':
+        form['id'] = 'cs-editor-form'
+        picker = form.select_one('label').extract()
+        picker['class'] = ['cs-scene-picker']
+        picker.contents[0].replace_with(ui['scenePicker'])
+        picker.select_one('select').attrs.update({'form': form['id'], 'aria-label': ui['scenePicker']})
+        preview.select_one('.v2-bottom').insert(0, picker)
+
+        intro.string = ui['sceneSettingsHelp']
+        form.insert_after(brand_panel.extract())
+        fields = form.select_one('[data-fields]')
+        error = form.select_one('[data-error]')
+        for label, group in [(ui['sceneContent'], ''), (ui['sceneMotion'], 'motion')]:
+            section = soup.new_tag('details', attrs={'class': 'v2-panel-live'})
+            summary = soup.new_tag('summary')
+            summary.string = label
+            section.append(summary)
+            if group:
+                form.select_one('.v2-dialog-actions').insert_before(section)
+                section.append(soup.new_tag('div', attrs={'class': 'v2-fields', 'data-fields': group}))
+            else:
+                section['open'] = ''
+                fields.wrap(section)
+                fields.insert_before(error.extract())
+
+        apply = form.select_one('[type=submit]').extract()
+        apply.attrs.update({'form': form['id'], 'aria-label': ui['apply']})
+        apply.string = ui['sceneApply']
+        header_actions = soup.new_tag('div', attrs={'class': 'cs-panel-actions'})
+        header_actions.append(apply)
+        header_actions.append(close.extract())
+        header.append(header_actions)
+
+        export = soup.select_one('[data-export-dialog]')
+        actions = export.select_one('.v2-dialog-actions')
+        download = actions.select_one('[data-download]').extract()
+        download['class'] = ['v2-button']
+        download.string = ui['downloadCollection']
+        scene_download = soup.new_tag('button', attrs={'type': 'button', 'class': 'v2-button v2-primary', 'data-scene-download': ''})
+        scene_download.string = ui['downloadScene']
+        actions.insert(0, download)
+        actions.insert(0, scene_download)
+        export.select_one('label[for="v2-source"]').insert_before(actions.extract())
+        actions.insert_after(export.select_one('[data-copy-status]').extract())
     if kind == 'gallery':
         form['id'] = 'eg-editor-form'
         picker = form.select_one('label').extract()
@@ -670,11 +721,11 @@ Six original interface illustrations with CSS motion. HTML and inline SVG define
 ## Explore and customize
 Extract the complete ZIP and open index.html. Collection shows all six compositions. Detail enlarges the selected scene; arrow keys, Home, and End navigate the six choices. Replay restarts the selected scene. Play sequence presents all six and can be stopped. The sequence clock also pauses when the preview is paused.
 
-Each scene has independent title, description, accent, pace, and motion intensity. Reset item restores that item only. Intensity zero provides a still composition. State lives in memory and resets on reload: download your work to keep it.
+Open Settings to keep the selected scene in view as you scroll through the editor. Switch scenes with the picker below the artwork. Use Text and color for the title, description, and accent, and Motion for cycle duration and intensity. Apply before switching scenes or exporting. Reset scene restores the defaults for that scene. Zero intensity keeps the artwork still. Download your work to keep it after reloading.
 
 ## Two HTML exports
-- The download icon on each scene creates a **standalone HTML file** for that scene. Artwork, CSS, fonts, font notices, code license, and a pause control are embedded. It needs no neighboring files or network requests. Its fonts make the file larger than bare SVG markup. Set your own page metadata and replace sample content before publishing.
-- Get HTML in the toolbar exports the **complete customized studio**. Keep that HTML beside studio.css, studio.js, component.css, component.js, and assets/ from this ZIP. This larger studio export is not standalone.
+- Download scene in Export, or the download icon on a scene card, creates a **standalone HTML file**. It includes artwork, CSS, fonts, font notices, the code license, and a pause control. Set your own page metadata and replace sample content before publishing.
+- Download full studio in Export saves the **complete customized studio**. Keep that HTML alongside the other files and the assets/ folder from this ZIP.
 
 ## Motion and integration
 Each moving part has its own cycle. --scene-color changes the primary accent; --cs-speed multiplies timing; --cs-energy changes motion amplitudes. --cs-play controls running/paused. The studio suspends offscreen scenes, background tabs, open dialogs, manual pause, and system reduced motion. Reduced motion and zero intensity show the static drawing. Animation uses CSS rather than a permanent JavaScript frame loop. Actual device performance varies; no FPS is guaranteed.
@@ -699,11 +750,11 @@ Seis ilustraciones originales de interfaz con movimiento CSS. HTML y SVG en lín
 ## Explorar y personalizar
 Descomprime el ZIP completo y abre index.html. Colección presenta las seis composiciones. Detalle amplía la seleccionada; flechas, Inicio y Fin recorren sus seis opciones. Reiniciar animación reproduce la escena desde el principio. Ver secuencia presenta las seis y permite detenerse. El reloj de la secuencia se pausa junto con la previsualización.
 
-Cada escena conserva título, descripción, acento, ritmo e intensidad independientes. Restaurar elemento solo restaura ese elemento. Intensidad cero muestra la composición estática. El estado está en memoria y se reinicia al recargar: descarga tu trabajo para conservarlo.
+Abre Ajustes para mantener la escena seleccionada a la vista mientras desplazas el panel. Cambia de escena con el selector debajo de la ilustración. En Texto y color puedes editar el título, la descripción y el acento. En Movimiento puedes ajustar la duración del ciclo y la intensidad. Aplica antes de cambiar de escena o exportar. Restaurar escena devuelve esa escena a sus valores originales. Con intensidad cero, la ilustración queda estática. Descarga tu trabajo para conservarlo al recargar.
 
 ## Dos exportaciones HTML
-- El icono de descarga de cada escena crea un **HTML independiente** con esa escena. Incluye ilustración, CSS, fuentes, sus avisos, licencia del código y control de pausa. No necesita archivos vecinos ni solicitudes de red. Las fuentes hacen que pese más que el SVG aislado. Configura tus metadatos y sustituye el contenido de muestra antes de publicarlo.
-- Obtener HTML en la barra exporta el **estudio completo personalizado**. Conserva ese HTML junto a studio.css, studio.js, component.css, component.js y assets/ del ZIP. Esta exportación del estudio completo no es autónoma.
+- Descargar escena en Exportar, o el icono de descarga en cada tarjeta, crea un **HTML independiente**. Incluye ilustración, CSS, fuentes, sus avisos, licencia del código y control de pausa. Configura tus metadatos y sustituye el contenido de muestra antes de publicarlo.
+- Descargar estudio completo en Exportar guarda el **estudio completo personalizado**. Conserva ese HTML junto a los demás archivos y la carpeta assets/ del ZIP.
 
 ## Movimiento e integración
 Cada mecanismo tiene su propio ciclo. --scene-color cambia el acento principal; --cs-speed multiplica los tiempos; --cs-energy ajusta amplitudes. --cs-play controla ejecución/pausa. El estudio detiene escenas fuera de vista, pestañas en segundo plano, diálogos abiertos, pausa manual y movimiento reducido del sistema. El modo reducido y la intensidad cero muestran el dibujo estático. CSS anima las piezas; no hay un bucle permanente de fotogramas JavaScript. El rendimiento depende del dispositivo y no se garantiza una tasa de FPS.

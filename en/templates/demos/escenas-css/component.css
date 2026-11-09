@@ -119,3 +119,81 @@ html[data-reduced=true] .cs-scene *,html[data-reduced=true] .cs-scene *::before,
 @media(max-width:580px){.cs-board{grid-template-columns:1fr}.cs-atelier{padding:16px}.cs-card-top{padding:16px 17px 0}.cs-art-button{padding:0 8px 10px}.cs-card-copy{padding:0 19px 19px}.cs-card-copy h2{font-size:29px}.cs-card-copy>p{font-size:14px;min-height:0}.cs-small-button{width:44px;min-width:44px;height:44px}.cs-detail-button{font-size:13px}.cs-edition{font-size:9px;gap:12px}.cs-edition>span:first-child{padding-right:12px}.cs-board[data-view=detail] .cs-card{padding:14px}.cs-board[data-view=detail] .cs-card-copy h2{font-size:31px}[data-kind=scenes] .v2-toolbar>.v2-row{gap:8px}[data-kind=scenes] [data-play-all]{margin-right:0}[data-kind=scenes] .v2-segmented{flex:1}[data-kind=scenes] .v2-segmented button{flex:1}}
 @media(max-width:760px){.cs-play-hint{font-size:11px;padding:5px 9px;bottom:3px}.cs-play-hint svg{width:13px;height:13px}}
 @media(prefers-reduced-motion:reduce){.cs-scene *,.cs-scene *::before,.cs-scene *::after{animation:none!important}.cs-card::before,.cs-play-hint,.cs-detail-button svg{transition:none}}
+
+/* Settings use one scene, one picker, and a separate inspector scroll area. */
+[data-kind=scenes] .v2-workspace{--editor-panel-width:340px;overflow-anchor:none}
+[data-kind=scenes] .v2-workspace[data-editor-collapsed=false] .v2-stage{min-height:0;padding:0}
+[data-kind=scenes] [data-editor-collapsed=false] .v2-toolbar>.v2-row{justify-content:flex-end}
+[data-kind=scenes] [data-editor-collapsed=false] :is(.v2-segmented,[data-play-all],.cs-intro,.cs-note,.cs-scene-nav,.cs-card-top,.cs-card-actions){display:none}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-atelier{padding:16px}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view]{grid-template-columns:minmax(0,1fr)}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center;gap:clamp(10px,2vw,24px);padding:14px;
+}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-board .cs-card:not([data-active=true]){display:none}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-art-button{padding:0}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-scene{
+  width:min(100%,calc(var(--cs-art-height,360px) * 360 / 260));max-width:none;
+}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy{min-width:0;padding:0}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy h2{font-size:clamp(19px,3vw,38px);margin:0 0 6px}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy>p{font-size:13px;line-height:1.5;min-height:0;margin:0}
+[data-kind=scenes] [data-editor-collapsed=false] .cs-card-copy :is(h2,p){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+[data-kind=scenes] [data-editor-collapsed=false] .v2-bottom{flex-wrap:nowrap;justify-content:space-between;gap:8px;padding:4px 12px}
+[data-kind=scenes] [data-editor-collapsed=false] [data-pause]{flex:none}
+.cs-scene-picker{display:none}
+[data-editor-collapsed=false] .cs-scene-picker{display:flex;align-items:center;gap:9px;min-width:0}
+.cs-scene-picker select{min-width:0;width:min(250px,100%);min-height:44px;padding:5px 8px;color:var(--text);background:var(--page);border:1px solid var(--line);border-radius:10px}
+.cs-panel-actions{display:flex;align-items:center;gap:7px}
+.cs-panel-actions .v2-button{font-size:13px;padding:7px 12px}
+.cs-panel-actions .v2-icon-button{min-height:44px;width:44px}
+[data-kind=scenes] .v2-editor-panel .v2-fields{grid-template-columns:minmax(0,1fr);gap:12px;margin:4px 0 14px}
+[data-kind=scenes] .v2-editor-panel .v2-panel-live{margin-top:0}
+[data-kind=scenes] .v2-editor-panel .v2-error{min-height:0;margin:0}
+[data-kind=scenes] .v2-editor-panel .v2-error:not(:empty){margin:0 0 10px}
+.v2-field-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.v2-field-heading>span{flex:none;color:var(--muted);font-variant-numeric:tabular-nums}
+
+@media(min-width:960px) and (min-height:420px){
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]){--cs-art-height:min(360px,calc(var(--editor-available-height) - 118px))}
+}
+
+@media(min-width:960px) and (min-height:420px),(max-width:959px) and (min-height:450px){
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-layout]{
+    height:var(--editor-available-height);align-items:stretch;
+  }
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]) :is([data-editor-preview],[data-editor-panel]){
+    height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  }
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-preview]{display:flex;flex-direction:column}
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-stage{flex:1;display:grid;align-items:center}
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-bottom{flex:none}
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-editor-panel-head{position:sticky;top:0}
+}
+
+@media(max-width:959px){
+  [data-kind=scenes] [data-editor-collapsed=false] .cs-atelier{padding:10px}
+  [data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card{padding:8px}
+  [data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy h2{font-size:clamp(17px,4.5vw,30px);-webkit-line-clamp:2}
+  [data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy>p{font-size:12px;-webkit-line-clamp:2}
+  [data-kind=scenes] [data-editor-collapsed=false] .cs-play-hint{font-size:0;right:2px;padding:5px 7px}
+  [data-kind=scenes] [data-editor-collapsed=false] [data-pause]{display:grid;place-items:center;width:44px;padding:0;border:1px solid var(--line);border-radius:10px;font-size:0}
+  [data-kind=scenes] [data-editor-collapsed=false] [data-pause]::before{content:'';width:10px;height:13px;border-inline:2px solid currentColor}
+  [data-kind=scenes] [data-editor-collapsed=false] [data-pause][aria-pressed=true]::before{width:0;height:0;border:0;border-block:7px solid transparent;border-left:10px solid currentColor}
+}
+
+@media(max-width:959px) and (min-height:450px){
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]){
+    --cs-preview-height:clamp(166px,min(calc(90px + 39vw),calc(var(--editor-available-height) * .45)),310px);
+    --cs-art-height:calc(var(--cs-preview-height) - 92px);
+  }
+  [data-kind=scenes] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-layout]{
+    grid-template-rows:var(--cs-preview-height) minmax(0,1fr);
+  }
+}
+
+@media(max-width:959px) and (450px <= height < 600px){
+  [data-kind=scenes] [data-editor-collapsed=false] .v2-editor-panel-head{min-height:54px;padding-block:4px}
+  [data-kind=scenes] [data-editor-collapsed=false] .v2-editor-panel-help{margin:9px 0 10px}
+  [data-kind=scenes] [data-editor-collapsed=false] .cs-board[data-view] .cs-card-copy>p{display:none}
+}

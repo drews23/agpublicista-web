@@ -7,7 +7,13 @@
   const board = $('[data-scene-board]');
   const atelier = $('.cs-atelier');
   const nav = $('[data-scene-nav]');
+  const workspace = atelier.closest('[data-editor-workspace]');
+  const picker = $('.cs-scene-picker select');
+  const editing = () => workspace?.dataset.editorCollapsed === 'false';
+  const dockable = matchMedia('(min-width: 960px) and (min-height: 420px), (min-height: 450px)');
   const visible = new WeakMap();
+  const seconds = new Intl.NumberFormat(document.documentElement.lang, {maximumFractionDigits: 1});
+  const percent = new Intl.NumberFormat(document.documentElement.lang, {style: 'percent'});
   let sequence = null;
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   state.scenesView = state.scenesView === 'detail' ? 'detail' : 'collection';
@@ -40,9 +46,10 @@
       : '';
   }
   function motion() {
+    const showingCollection = !editing() && state.scenesView === 'collection';
     cards.forEach((card,i) => {
       const inView = visible.get(card) !== false;
-      const showing = state.scenesView !== 'detail' || state.active === i;
+      const showing = showingCollection || state.active === i;
       card.style.setProperty('--cs-play', !a.paused && inView && showing && Number(state.items[i].intensity ?? 1)>0 ? 'running' : 'paused');
     });
     if (a.paused) clockPaused(); else clockRunning();
@@ -122,7 +129,8 @@
       atelier.scrollIntoView({block:'nearest',behavior:a.reduced?'instant':'smooth'});
     });
     card.querySelector('[data-card-edit]').addEventListener('click',() => {
-      stopSequence();a.edit(i,()=>cards[i].querySelector('[data-card-edit]'));
+      a.edit(i,()=>cards[i].querySelector('[data-card-edit]'));
+      picker?.focus({preventScroll:true});
     });
     card.querySelector('[data-card-download]').addEventListener('click',() => downloadScene(i));
   });
@@ -141,12 +149,25 @@
     stopSequence();state.scenesView=button.dataset.scenesView;a.paint();
   }));
   $('[data-play-all]').addEventListener('click',()=>{
+    if (editing()) return;
     if(sequence){stopSequence(true);a.paint();return;}
     const prior=state.scenesView;
     state.scenesView='detail';state.active=0;
     sequence={prior,cursor:0,remaining:Math.max(2800,Number(state.items[0].duration)*1.5),started:0,timer:0};
     a.paint();restart(0);clockRunning();
   });
+  if (workspace) {
+    workspace.dataset.editorFocusAnchor = 'workspace';
+    workspace.addEventListener('lienzo:editor-panel', event => {
+      if (event.detail.open) {
+        stopSequence(true);
+        if (dockable.matches && workspace.dataset.editorConstrained !== 'true') {
+          workspace.scrollIntoView({block:'start',behavior:'instant'});
+        }
+      }
+      render();
+    });
+  }
   const observer=new IntersectionObserver(entries=>{
     entries.forEach(entry=>visible.set(entry.target,entry.isIntersecting));motion();
   },{threshold:0});
@@ -154,8 +175,9 @@
   a.root.addEventListener('v2:motion',motion);
   window.addEventListener('pagehide',clockPaused);
   window.addEventListener('pageshow',motion);
+  $('[data-scene-download]')?.addEventListener('click', () => downloadScene(state.active, $('[data-copy-status]')));
 
-  function downloadScene(index) {
+  function downloadScene(index, notice) {
     const item=state.items[index];
     const data=JSON.parse($('[data-config]').textContent).sceneExport;
     const fontCSS=Object.entries(data.fonts).map(([name,value])=>'@font-face{font-family:'+name+';src:url(data:font/woff2;base64,'+value+') format("woff2");font-weight:100 900;font-display:swap}').join('\n');
@@ -184,13 +206,14 @@
     const html='<!doctype html><html lang="'+(ui.lang||document.documentElement.lang)+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+escape(item.title)+' · Lienzo</title><style>'+styles+'</style></head><body><main class="cs-export" data-still="'+String(Number(item.intensity??1)===0)+'">'+illustration+'<h1>'+escape(item.title)+'</h1><p>'+escape(item.description)+'</p><button type="button" aria-pressed="false">'+escape(ui.pause)+'</button><footer>'+escape(ui.standaloneCredit)+'</footer></main><script type="application/json" data-licenses>'+notices+'</script><script>'+script+'</script></body></html>';
     const name=item.title.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase();
     a.download(a.brand?.decorateHTML(html,{selector:'.cs-export'}) || html,'lienzo-escena-'+String(index+1).padStart(2,'0')+'-'+name+'.html');
-    a.status(ui.sceneDownloaded);
+    if (notice) notice.textContent = ui.sceneDownloaded;
+    else a.status(ui.sceneDownloaded);
   }
   a.setup({render,fields:[
     {key:'title',label:ui.title,required:true,maxLength:64,wide:true},
     {key:'description',label:ui.description,type:'textarea',maxLength:180,wide:true},
     {key:'accent',label:ui.accent,options:Object.keys(colors).map(key=>[key,ui[key]])},
-    {key:'duration',label:ui.sceneDuration,type:'range',min:900,max:6000,step:100},
-    {key:'intensity',label:ui.sceneIntensity,type:'range',min:0,max:1,step:.1,default:1}
+    {key:'duration',group:'motion',label:ui.sceneDuration,type:'range',min:900,max:6000,step:100,format:value => seconds.format(value / 1000) + ' s'},
+    {key:'intensity',group:'motion',label:ui.sceneIntensity,type:'range',min:0,max:1,step:.1,default:1,format:value => percent.format(value)}
   ]});
 })();

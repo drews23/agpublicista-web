@@ -108,7 +108,7 @@
     "source": null,
     "zip": "escenas-css-lienzo.zip",
     "desc": "Seis escenas de interfaz con mecanismos propios: código, velocidad, contenido vivo, dispositivos, conexiones e ideas. Personaliza cada composición y descarga una escena independiente.",
-    "size": 255,
+    "size": 256,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },

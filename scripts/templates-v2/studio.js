@@ -109,8 +109,9 @@
     if (!definition) return;
     editorItem = current();
     form.hidden = !editorItem;
-    if (!editorItem) { $('[data-fields]').replaceChildren(); return; }
-    const container = $('[data-fields]'); container.replaceChildren();
+    const groups = new Map([...form.querySelectorAll('[data-fields]')].map(node => [node.dataset.fields, node]));
+    groups.forEach(node => node.replaceChildren());
+    if (!editorItem) return;
     const select = form.elements.namedItem('item');
     select.replaceChildren(...state.items.map((item, index) => new Option(item.title || item.name || String(index + 1), String(index))));
     select.value = String(state.active || 0);
@@ -133,7 +134,24 @@
       }
       input.name = field.key;
       input.value = String(current()[field.key] ?? field.default ?? '');
-      label.append(input); container.append(label);
+      if (field.format) {
+        const heading = document.createElement('span');
+        heading.className = 'v2-field-heading';
+        heading.textContent = field.label;
+        const value = document.createElement('span');
+        value.setAttribute('aria-hidden', 'true');
+        heading.append(value);
+        const showValue = () => {
+          const text = field.format(Number(input.value));
+          value.textContent = text;
+          input.setAttribute('aria-valuetext', text);
+        };
+        label.replaceChildren(heading);
+        input.addEventListener('input', showValue);
+        showValue();
+      }
+      label.append(input);
+      (groups.get(field.group) || groups.get('')).append(label);
     }
     $('[data-error]').textContent = '';
     accentLabels();
@@ -183,6 +201,12 @@
     else state.items[index] = structuredClone(defaults.items[index]);
     fields(); paint(); status(ui.resetDone);
   });
+  function fieldError(input, message) {
+    const group = input.closest('details');
+    if (group) group.open = true;
+    $('[data-error]').textContent = message;
+    input.focus();
+  }
   form.addEventListener('submit', event => {
     event.preventDefault();
     const focusedName = form.contains(document.activeElement) ? document.activeElement.name : null;
@@ -190,9 +214,9 @@
     for (const field of definition.fields) {
       const input = form.elements.namedItem(field.key);
       let value = input.value.trim();
-      if (field.required && !value) { $('[data-error]').textContent = ui.required; input.focus(); return; }
-      if (field.url && !safeURL(value, field.fragments)) { $('[data-error]').textContent = ui.invalidURL; input.focus(); return; }
-      if (field.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { $('[data-error]').textContent = ui.invalidEmail; input.focus(); return; }
+      if (field.required && !value) return fieldError(input, ui.required);
+      if (field.url && !safeURL(value, field.fragments)) return fieldError(input, ui.invalidURL);
+      if (field.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return fieldError(input, ui.invalidEmail);
       if (field.options && !field.options.some(x => String(x[0]) === value)) return;
       if (field.type === 'range' || field.type === 'number') value = Math.min(field.max, Math.max(field.min, Number(value)));
       next[field.key] = value;

@@ -13,11 +13,11 @@ Seis ilustraciones originales de interfaz con movimiento CSS. HTML y SVG en lín
 ## Explorar y personalizar
 Descomprime el ZIP completo y abre index.html. Colección presenta las seis composiciones. Detalle amplía la seleccionada; flechas, Inicio y Fin recorren sus seis opciones. Reiniciar animación reproduce la escena desde el principio. Ver secuencia presenta las seis y permite detenerse. El reloj de la secuencia se pausa junto con la previsualización.
 
-Cada escena conserva título, descripción, acento, ritmo e intensidad independientes. Restaurar elemento solo restaura ese elemento. Intensidad cero muestra la composición estática. El estado está en memoria y se reinicia al recargar: descarga tu trabajo para conservarlo.
+Abre Ajustes para mantener la escena seleccionada a la vista mientras desplazas el panel. Cambia de escena con el selector debajo de la ilustración. En Texto y color puedes editar el título, la descripción y el acento. En Movimiento puedes ajustar la duración del ciclo y la intensidad. Aplica antes de cambiar de escena o exportar. Restaurar escena devuelve esa escena a sus valores originales. Con intensidad cero, la ilustración queda estática. Descarga tu trabajo para conservarlo al recargar.
 
 ## Dos exportaciones HTML
-- El icono de descarga de cada escena crea un **HTML independiente** con esa escena. Incluye ilustración, CSS, fuentes, sus avisos, licencia del código y control de pausa. No necesita archivos vecinos ni solicitudes de red. Las fuentes hacen que pese más que el SVG aislado. Configura tus metadatos y sustituye el contenido de muestra antes de publicarlo.
-- Obtener HTML en la barra exporta el **estudio completo personalizado**. Conserva ese HTML junto a editor-workspace.css, editor-workspace.js, studio.css, studio.js, component.css, component.js y assets/ del ZIP. Esta exportación del estudio completo no es autónoma.
+- Descargar escena en Exportar, o el icono de descarga en cada tarjeta, crea un **HTML independiente**. Incluye ilustración, CSS, fuentes, sus avisos, licencia del código y control de pausa. Configura tus metadatos y sustituye el contenido de muestra antes de publicarlo.
+- Descargar estudio completo en Exportar guarda el **estudio completo personalizado**. Conserva ese HTML junto a los demás archivos y la carpeta assets/ del ZIP.
 
 ## Movimiento e integración
 Cada mecanismo tiene su propio ciclo. --scene-color cambia el acento principal; --cs-speed multiplica los tiempos; --cs-energy ajusta amplitudes. --cs-play controla ejecución/pausa. El estudio detiene escenas fuera de vista, pestañas en segundo plano, diálogos abiertos, pausa manual y movimiento reducido del sistema. El modo reducido y la intensidad cero muestran el dibujo estático. CSS anima las piezas; no hay un bucle permanente de fotogramas JavaScript. El rendimiento depende del dispositivo y no se garantiza una tasa de FPS.

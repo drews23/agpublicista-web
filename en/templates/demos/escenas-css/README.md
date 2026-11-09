@@ -13,11 +13,11 @@ Six original interface illustrations with CSS motion. HTML and inline SVG define
 ## Explore and customize
 Extract the complete ZIP and open index.html. Collection shows all six compositions. Detail enlarges the selected scene; arrow keys, Home, and End navigate the six choices. Replay restarts the selected scene. Play sequence presents all six and can be stopped. The sequence clock also pauses when the preview is paused.
 
-Each scene has independent title, description, accent, pace, and motion intensity. Reset item restores that item only. Intensity zero provides a still composition. State lives in memory and resets on reload: download your work to keep it.
+Open Settings to keep the selected scene in view as you scroll through the editor. Switch scenes with the picker below the artwork. Use Text and color for the title, description, and accent, and Motion for cycle duration and intensity. Apply before switching scenes or exporting. Reset scene restores the defaults for that scene. Zero intensity keeps the artwork still. Download your work to keep it after reloading.
 
 ## Two HTML exports
-- The download icon on each scene creates a **standalone HTML file** for that scene. Artwork, CSS, fonts, font notices, code license, and a pause control are embedded. It needs no neighboring files or network requests. Its fonts make the file larger than bare SVG markup. Set your own page metadata and replace sample content before publishing.
-- Get HTML in the toolbar exports the **complete customized studio**. Keep that HTML beside editor-workspace.css, editor-workspace.js, studio.css, studio.js, component.css, component.js, and assets/ from this ZIP. This larger studio export is not standalone.
+- Download scene in Export, or the download icon on a scene card, creates a **standalone HTML file**. It includes artwork, CSS, fonts, font notices, the code license, and a pause control. Set your own page metadata and replace sample content before publishing.
+- Download full studio in Export saves the **complete customized studio**. Keep that HTML alongside the other files and the assets/ folder from this ZIP.
 
 ## Motion and integration
 Each moving part has its own cycle. --scene-color changes the primary accent; --cs-speed multiplies timing; --cs-energy changes motion amplitudes. --cs-play controls running/paused. The studio suspends offscreen scenes, background tabs, open dialogs, manual pause, and system reduced motion. Reduced motion and zero intensity show the static drawing. Animation uses CSS rather than a permanent JavaScript frame loop. Actual device performance varies; no FPS is guaranteed.
