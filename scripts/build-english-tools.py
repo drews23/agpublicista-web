@@ -107,12 +107,40 @@ GUIDES={
  'texto-ondulado':('Build a text effect with a readable fallback','Change the text, wave shape, spacing, and movement, then preview the result. Copy the generated HTML and include the referenced script in your project. Keep the reduced-motion behavior and provide a readable alternative when the effect conveys essential information.','Does the generated HTML work on its own?','The effect needs the referenced text-path JavaScript. Keep that script available at the path used by your page, or update the reference when integrating it.'),
  '':('Pick the tool for the job','Create QR codes, edit audio, optimize SVG, explore color palettes, generate favicons, or customize a wavy text effect. The individual pages explain inputs, export options, and browser limitations. There is no account requirement. Domain favicon lookup uses external services; other file-editing operations run in the browser.','Do I need to install software?','No installation is required for these browser tools. Use a current browser, keep your source files, and verify the exported result before publishing.'),
 }
+SEARCH_COPY = {
+ 'qr': (
+  'Free QR Code Generator with Logo',
+  'Create a free QR code with your logo and brand colors. Download PNG or SVG for print or digital use. Your details stay in your browser.',
+  'UtilitiesApplication',
+ ),
+ 'optimizar-svg': (
+  'Free SVG Optimizer and Compressor',
+  'Compress SVG files with SVGO in your browser. Compare before and after, adjust precision, and copy the code or download the optimized SVG.',
+  'DesignApplication',
+ ),
+ 'audio': (
+  'Free Online Audio Editor',
+  'Trim audio, adjust the volume, and add fades in your browser. Export a 16-bit or 24-bit WAV file without uploading your recording.',
+  'MultimediaApplication',
+ ),
+}
+GUIDE_DETAILS = {
+ 'qr': (
+  ('Choose PNG or SVG', 'Use PNG for slides, social posts, or email. Choose SVG for print layouts or when the code needs to scale. Keep the clear margin around the code when placing either file.'),
+  ('Test the QR code in its final layout', 'Scan the exported code at the size people will see it. For print, test a proof before ordering copies. If a logo makes the code harder to scan, reduce its size or increase contrast between the code and the background.'),
+ ),
+ 'optimizar-svg': (
+  ('Compare the file size and the drawing', 'Use the original and optimized previews to check thin lines, corners, and curves. If lowering precision changes a detail, raise it again. Compare the file sizes after each adjustment so you can choose the smallest version that still looks right.'),
+  ('Check IDs before embedding the SVG', 'Keep IDs used by your CSS, JavaScript, or animation. After copying the optimized markup or downloading the file, test it in the page or app where it will be used.'),
+ ),
+}
 def guide(key):
  reviewed={'qr/contacto':'qr-contact','qr/wifi':'qr-wifi','audio/convertir':'audio-convert'}
  if key in reviewed:
   return (CONTENT/'guides'/f'{reviewed[key]}.html').read_text(encoding='utf-8')
  family=key.split('/')[0];heading,body,q,a=GUIDES[family]
- return f'<section class="section"><div class="shell"><h2>{heading}</h2><p>{body}</p><details><summary>{q}</summary><p>{a}</p></details><p><a href="/en/tools/">Explore all tools</a> · <a href="/en/privacy/">Privacy</a> · <a href="/en/third-party-licenses/">Third-party licenses</a></p></div></section>'
+ details=''.join(f'<h3>{subheading}</h3><p>{paragraph}</p>' for subheading,paragraph in GUIDE_DETAILS.get(key,()))
+ return f'<section class="section"><div class="shell"><h2>{heading}</h2><p>{body}</p>{details}<details><summary>{q}</summary><p>{a}</p></details><p><a href="/en/tools/">Explore all tools</a> · <a href="/en/privacy/">Privacy</a> · <a href="/en/third-party-licenses/">Third-party licenses</a></p></div></section>'
 def build():
  REPORT.mkdir(parents=True,exist_ok=True)
  preserve_audio_studio=False
@@ -174,14 +202,16 @@ def build():
    if src.startswith('/js/color-engine.js'):mapped='/en/assets/color-engine.js'
    scripts.append(f'<script src="{html.escape(mapped)}"'+(' type="module"' if script.get('type')=='module' else ' defer')+'></script>')
   desc=f'{title} by Lienzo. Try the browser tool, customize your result, and review export options and practical usage guidance. Free, no signup.'
+  page_title,desc,category=SEARCH_COPY.get(key,(title,desc,'MultimediaApplication'))
   reviewed_key={'qr/contacto':'qr-contact','qr/wifi':'qr-wifi','audio/convertir':'audio-convert'}.get(key)
   if reviewed_key:
    desc=json.loads((CONTENT/'guides/descriptions.json').read_text(encoding='utf8'))[reviewed_key]
-  schema={'@context':'https://schema.org','@type':'WebApplication','name':title,'url':base.ORIGIN+en,'inLanguage':'en-US','applicationCategory':'MultimediaApplication','operatingSystem':'Web browser','offers':{'@type':'Offer','price':'0','priceCurrency':'USD'}}
+  schema={'@context':'https://schema.org','@type':'WebApplication','name':title,'url':base.ORIGIN+en,'inLanguage':'en-US','applicationCategory':category,'operatingSystem':'Web browser','offers':{'@type':'Offer','price':'0','priceCurrency':'USD'}}
+  if key in SEARCH_COPY:schema['description']=desc
   top=base.header().replace('href="/codigo-web/plantillas/" lang="es"',f'href="{es}" lang="es"').replace('Ver esta colección en español','Ver esta herramienta en español')
   top=top.replace('<a href="/en/templates/">Web Templates</a>','<a href="/en/tools/">Tools</a><a href="/en/templates/">Templates</a>')
   main['id']=main.get('id','main')
-  output=f'''<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title} | Lienzo</title><meta name="description" content="{html.escape(desc)}"><link rel="canonical" href="{base.ORIGIN+en}">{base.head_links(es,en)}<meta property="og:title" content="{title} | Lienzo"><meta property="og:description" content="{html.escape(desc)}"><meta property="og:url" content="{base.ORIGIN+en}"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><link id="page-favicon" rel="icon" href="/favicon.svg">{''.join(styles)}<link rel="stylesheet" href="/en/assets/english.css?v=2026101004"><script>document.documentElement.classList.add('js');try{{document.documentElement.dataset.theme=localStorage.getItem('agp-theme')||'light'}}catch(e){{}}</script><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head><body><a class="sr-only" href="#{main['id']}">Skip to content</a>{top}{main}{base.footer()}{''.join(scripts)}</body></html>'''
+  output=f'''<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(page_title)} | Lienzo</title><meta name="description" content="{html.escape(desc)}"><link rel="canonical" href="{base.ORIGIN+en}">{base.head_links(es,en)}<meta property="og:title" content="{html.escape(page_title)} | Lienzo"><meta property="og:description" content="{html.escape(desc)}"><meta property="og:url" content="{base.ORIGIN+en}"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><link id="page-favicon" rel="icon" href="/favicon.svg">{''.join(styles)}<link rel="stylesheet" href="/en/assets/english.css?v=2026101004"><script>document.documentElement.classList.add('js');try{{document.documentElement.dataset.theme=localStorage.getItem('agp-theme')||'light'}}catch(e){{}}</script><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head><body><a class="sr-only" href="#{main['id']}">Skip to content</a>{top}{main}{base.footer()}{''.join(scripts)}</body></html>'''
   from qr_formats import enhance_qr_formats
   output = enhance_qr_formats(output, en)
   if key == 'qr':

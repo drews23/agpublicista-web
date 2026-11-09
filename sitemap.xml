@@ -62,13 +62,13 @@
   </url>
   <url>
     <loc>https://lienzo.tools/herramientas/optimizar-svg/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lienzo.tools/herramientas/audio/</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/herramientas/qr/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -535,6 +535,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/en/tools/audio/</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://lienzo.tools/en/tools/audio/convert/</loc>
@@ -569,6 +570,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/en/tools/svg-optimizer/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://lienzo.tools/en/tools/palettes/</loc>
@@ -581,6 +583,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/en/tools/qr/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://lienzo.tools/en/tools/qr/contact/</loc>
