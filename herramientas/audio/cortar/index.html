@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cortar audio online gratis: recorta MP3 y WAV | Lienzo</title>
-    <meta name="description" content="Corta un audio arrastrando dos manijas sobre la onda. Escucha el recorte antes de exportar y descárgalo en WAV u Opus, sin subir el archivo." />
+    <meta name="description" content="Corta un MP3 o WAV online gratis. Ajusta el inicio y el fin, escucha el fragmento y descárgalo como WAV de 16 bits. El audio se procesa en tu navegador." />
     <link rel="canonical" href="https://lienzo.tools/herramientas/audio/cortar/" />
     <meta name="theme-color" content="#0a0a0f" />
 
@@ -13,7 +13,7 @@
     <meta property="og:site_name" content="Lienzo" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:title" content="Cortar audio online gratis" />
-    <meta property="og:description" content="Recorta un MP3 o un WAV arrastrando sobre la forma de onda. Nada se sube a ningún servidor." />
+    <meta property="og:description" content="Corta un MP3 o WAV online gratis. Ajusta el inicio y el fin, escucha el fragmento y descárgalo como WAV de 16 bits. El audio se procesa en tu navegador." />
     <meta property="og:url" content="https://lienzo.tools/herramientas/audio/cortar/" />
     <meta property="og:image" content="https://lienzo.tools/assets/og/og-herramientas-audio-cortar.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -55,7 +55,7 @@
       "@id": "https://lienzo.tools/herramientas/audio/cortar/#app",
       "name": "Cortador de audio de Lienzo",
       "url": "https://lienzo.tools/herramientas/audio/cortar/",
-      "description": "Herramienta para cortar un archivo de audio en el navegador arrastrando dos manijas sobre la forma de onda, sin subir el archivo a ningún servidor.",
+      "description": "Corta un MP3 o WAV online gratis. Ajusta el inicio y el fin, escucha el fragmento y descárgalo como WAV de 16 bits. El audio se procesa en tu navegador.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Web",
       "inLanguage": "es",
@@ -131,7 +131,7 @@
           "name": "¿Pierdo calidad al cortar?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Si exportas en WAV, no: el WAV es sin pérdida y guarda exactamente las muestras del tramo. Ten en cuenta que si el original era un MP3, la pérdida de calidad ya venía de fábrica; cortar no la empeora, pero tampoco la recupera."
+            "text": "El recorte se guarda como WAV PCM de 16 bits. El navegador puede cambiar la frecuencia de muestreo al abrir el archivo y el fundido modifica los extremos. La calidad del resultado depende también del audio original."
           }
         },
         {
@@ -139,7 +139,7 @@
           "name": "¿Por qué el WAV pesa más que el MP3 original?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Porque el WAV no comprime nada: guarda cada muestra tal cual. Un minuto en estéreo a 48 kHz ocupa unos 11 MB. Si necesitas un archivo ligero para compartir, usa la descarga comprimida en Opus."
+            "text": "Un minuto de WAV PCM de 16 bits, en estéreo a 48 kHz, ocupa unos 11,5 MB. Para obtener un archivo más ligero, usa la descarga comprimida si tu navegador la habilita."
           }
         },
         {
@@ -194,8 +194,8 @@
 
         <div class="page-head">
           <p class="eyebrow reveal">Herramienta gratis</p>
-          <h1 class="reveal" style="--reveal-delay: 80ms">Cortar audio</h1>
-          <p class="lede reveal" style="--reveal-delay: 140ms">Arrastra las dos manijas sobre la onda para quedarte solo con el tramo que necesitas. Escúchalo antes de exportar y descárgalo en WAV o comprimido. Todo dentro de tu navegador.</p>
+          <h1 class="reveal" style="--reveal-delay: 80ms">Cortar audio online</h1>
+          <p class="lede reveal" style="--reveal-delay: 140ms">Abre un MP3 o WAV, elige el fragmento en la forma de onda y escúchalo antes de descargarlo. El audio se procesa en tu navegador.</p>
         </div>
 
         <div class="loader reveal" style="--reveal-delay: 200ms">
@@ -322,15 +322,16 @@
           <ol>
             <li>Arrastra tu MP3, WAV, OGG o M4A a la zona de carga.</li>
             <li>Mueve las dos manijas sobre la onda hasta encuadrar el tramo. Con las flechas del teclado ajustas de décima en décima, y con Mayús + flecha de segundo en segundo.</li>
-            <li>Pulsa reproducir para escuchar solo lo seleccionado y descarga en WAV o en Opus comprimido.</li>
+            <li>Pulsa reproducir para escuchar solo lo seleccionado y descarga en WAV. Si aparece el botón de descarga comprimida, puedes usarlo para obtener un archivo más ligero.</li>
           </ol>
+          <p>Por ejemplo, para extraer una frase de una nota de voz, escribe 12,3 s en Inicio y 18,7 s en Fin. Escucha el fragmento antes de descargar los 6,4 segundos en WAV.</p>
 
-          <h2>El fundido evita el chasquido</h2>
+          <h2>Cuándo activar el fundido</h2>
           <p>
             Cuando un corte cae justo en mitad de una onda, el salto brusco de una
             amplitud alta al silencio produce un «clic» audible. Activando el fundido de
-            entrada y salida se aplican 20 milisegundos de rampa en cada extremo: no se
-            nota como efecto, pero elimina el chasquido. Para música y voz suele valer la
+            entrada y salida se aplican hasta 20 milisegundos de rampa en cada extremo para
+            suavizar el chasquido. Para música y voz suele valer la
             pena dejarlo activado; para efectos de sonido muy cortos y percusivos, a veces
             es preferible quitarlo.
           </p>
@@ -373,11 +374,11 @@
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Pierdo calidad al cortar?</h3></summary>
-            <p>Si exportas en WAV, no: el WAV es sin pérdida y guarda exactamente las muestras del tramo. Ten en cuenta que si el original era un MP3, la pérdida de calidad ya venía de fábrica; cortar no la empeora, pero tampoco la recupera.</p>
+            <p>El recorte se guarda como WAV PCM de 16 bits. El navegador puede cambiar la frecuencia de muestreo al abrir el archivo y el fundido modifica los extremos. La calidad del resultado depende también del audio original.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Por qué el WAV pesa más que el MP3 original?</h3></summary>
-            <p>Porque el WAV no comprime nada: guarda cada muestra tal cual. Un minuto en estéreo a 48 kHz ocupa unos 11 MB. Si necesitas un archivo ligero para compartir, usa la descarga comprimida en Opus.</p>
+            <p>Un minuto de WAV PCM de 16 bits, en estéreo a 48 kHz, ocupa unos 11,5 MB. Para obtener un archivo más ligero, usa la descarga comprimida si tu navegador la habilita.</p>
           </details>
           <details class="faq-item" name="faq">
             <summary><h3>¿Hay marca de agua o límite de cortes?</h3></summary>

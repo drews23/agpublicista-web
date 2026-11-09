@@ -15,7 +15,7 @@ ORIGIN = 'https://lienzo.tools'
 DATE = '2026-10-10'
 PAGES = [
  ('blog/efectos-de-sonido-glitch-gratis', 'blog/glitch-sound-effects', '13 Free Glitch Sound Effects in WAV', 'Download 13 free WAV glitch sound effects for tech intros, gaming, streams, and video edits. Preview chapters, editing tips, credits, and usage terms.'),
- ('blog/transiciones-de-sonido-gratis', 'blog/free-transition-sound-effects', '16 Free Transition Sound Effects in WAV', 'Preview and download 16 free WAV transitions: fire, wind, magic, and cybernetic sounds. Learn synchronization, mixing, and the pack usage terms.'),
+ ('blog/transiciones-de-sonido-gratis', 'blog/free-transition-sound-effects', '16 Free Transition Sound Effects in WAV', 'Preview and download 16 free WAV transitions across five sound families. Learn synchronization, mixing, and the pack usage terms.'),
  ('sobre-mi', 'about', 'About Andrés García and Lienzo', 'Meet Andrés García, the advertising professional, art director, and web designer behind Lienzo and its free creative resources.'),
  ('recursos', 'resources', 'Free Creative Resources for Design and Video Editing', 'Explore free sound effects, SVG icons, After Effects templates, web templates, and browser tools. Compare formats and find each download guide.'),
  ('blog', 'blog', 'Creative Design Guides and Free Resource Tutorials', 'Practical English guides to sound effects, SVG icons, After Effects, color, Spline scenes, and web design. Explore tutorials, downloads, and creative tools.'),
