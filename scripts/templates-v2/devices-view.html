@@ -1,0 +1,135 @@
+<section class="dv-studio" data-device-studio data-mode="dual" aria-label="{{dvStage}}">
+  <div class="dv-stage-head">
+    <p class="dv-index"><span aria-hidden="true"></span>{{dvStage}}</p>
+    <p class="dv-mode-label" data-device-mode-label>{{dvDual}}</p>
+  </div>
+  <div class="dv-composition">
+    <div class="dv-ground" aria-hidden="true"></div>
+    <figure class="dv-laptop" data-device-frame="laptop">
+      <div class="dv-laptop-body">
+        <img class="dv-laptop-shell" src="assets/laptop-shell.webp" width="1536" height="1024" alt="" decoding="async">
+        <div class="dv-screen" data-device-screen="laptop" role="region" aria-label="{{dvLaptopScreen}}" data-fit="contain">
+          <div class="dv-sample">
+            <div class="dv-sample-top"><b data-device-name>Atlas</b><span>01 / {{dvSampleSection}}</span></div>
+            <div class="dv-sample-grid">
+              <div class="dv-sample-copy">
+                <p>{{dvSampleTag}}</p>
+                <h2 data-device-heading data-brand-display>{{dvSampleHeading}}</h2>
+                <span>{{dvSampleExplore}} <span aria-hidden="true">↗</span></span>
+              </div>
+              <div class="dv-sample-art" aria-hidden="true"><i></i><i></i><i></i></div>
+            </div>
+            <div class="dv-sample-foot"><span>{{dvSampleSection}}</span><span>01 / 03</span></div>
+          </div>
+          <img class="dv-image" alt="{{dvLaptopCapture}}" data-device-image="laptop" decoding="async" hidden>
+          <video class="dv-video" data-device-video="laptop" aria-label="{{dvLaptopVideo}}" preload="metadata" playsinline muted hidden></video>
+        </div>
+      </div>
+      <figcaption class="dv-caption"><i aria-hidden="true"></i>{{dvLaptop}}</figcaption>
+    </figure>
+    <figure class="dv-phone" data-device-frame="phone">
+      <div class="dv-phone-shell">
+        <span class="dv-phone-camera" aria-hidden="true"></span>
+        <div class="dv-screen" data-device-screen="phone" role="region" aria-label="{{dvPhoneScreen}}" data-fit="contain">
+          <div class="dv-sample">
+            <div class="dv-sample-top"><b data-device-name>Atlas</b><span>01</span></div>
+            <div class="dv-sample-grid">
+              <div class="dv-sample-copy">
+                <p>{{dvSampleTag}}</p>
+                <h2 data-device-heading data-brand-display>{{dvSampleHeading}}</h2>
+                <span>{{dvSampleExplore}} <span aria-hidden="true">↗</span></span>
+              </div>
+              <div class="dv-sample-art" aria-hidden="true"><i></i><i></i><i></i></div>
+            </div>
+            <div class="dv-sample-foot"><span>{{dvSampleSection}}</span><span>01</span></div>
+          </div>
+          <img class="dv-image" alt="{{dvPhoneCapture}}" data-device-image="phone" decoding="async" hidden>
+          <video class="dv-video" data-device-video="phone" aria-label="{{dvPhoneVideo}}" preload="metadata" playsinline muted hidden></video>
+        </div>
+        <span class="dv-phone-gesture" aria-hidden="true"></span>
+      </div>
+      <figcaption class="dv-caption"><i aria-hidden="true"></i>{{dvPhone}}</figcaption>
+    </figure>
+  </div>
+  <!-- devices-journey -->
+</section>
+<section class="dv-settings" aria-label="{{dvCaptures}}">
+  <p class="dv-settings-help">{{dvUploadHelp}}</p>
+  <details class="dv-setting" open>
+    <summary>{{dvLaptopScreen}}</summary>
+    <div class="dv-setting-body">
+      <div class="dv-media-uploads">
+        <label class="v2-upload v2-button">
+          <span>{{dvChooseImage}}</span>
+          <input type="file" data-device-upload="laptop" accept="image/png,image/jpeg,image/webp" aria-label="{{dvUploadLaptop}}">
+        </label>
+        <label class="v2-upload v2-button">
+          <span>{{dvChooseVideo}}</span>
+          <input type="file" data-device-video-upload="laptop" accept=".mp4,video/mp4" aria-label="{{dvUploadLaptopVideo}}">
+        </label>
+      </div>
+      <label data-device-option="laptop" hidden>{{dvFit}}
+        <select data-device-fit="laptop">
+          <option value="contain">{{dvContain}}</option>
+          <option value="cover">{{dvCover}}</option>
+          <option value="scroll">{{dvScroll}}</option>
+        </select>
+      </label>
+      <label data-device-position-field="laptop" hidden>
+        <span><span data-device-position-label="laptop">{{dvPosition}}</span> <output data-device-output="laptop">50%</output></span>
+        <input type="range" min="0" max="100" value="50" data-device-position="laptop">
+      </label>
+      <div class="dv-video-controls" data-device-video-controls="laptop" hidden>
+        <div class="dv-video-buttons">
+          <button type="button" class="v2-button" data-device-play="laptop">{{dvPlayVideo}}</button>
+          <button type="button" class="v2-text-button" data-device-audio="laptop" aria-pressed="false">{{dvVideoAudio}}</button>
+        </div>
+        <label class="dv-video-seek">
+          <span>{{dvVideoPosition}} <output data-device-time="laptop">0:00</output></span>
+          <input type="range" data-device-seek="laptop" min="0" max="0" step=".1" value="0">
+        </label>
+      </div>
+      <button type="button" class="v2-text-button" data-device-remove="laptop" hidden>{{dvRestoreSample}}</button>
+      <p class="dv-media-status" data-device-media-status="laptop" role="status"></p>
+    </div>
+  </details>
+  <details class="dv-setting">
+    <summary>{{dvPhoneScreen}}</summary>
+    <div class="dv-setting-body">
+      <div class="dv-media-uploads">
+        <label class="v2-upload v2-button">
+          <span>{{dvChooseImage}}</span>
+          <input type="file" data-device-upload="phone" accept="image/png,image/jpeg,image/webp" aria-label="{{dvUploadPhone}}">
+        </label>
+        <label class="v2-upload v2-button">
+          <span>{{dvChooseVideo}}</span>
+          <input type="file" data-device-video-upload="phone" accept=".mp4,video/mp4" aria-label="{{dvUploadPhoneVideo}}">
+        </label>
+      </div>
+      <label data-device-option="phone" hidden>{{dvFit}}
+        <select data-device-fit="phone">
+          <option value="contain">{{dvContain}}</option>
+          <option value="cover">{{dvCover}}</option>
+          <option value="scroll">{{dvScroll}}</option>
+        </select>
+      </label>
+      <label data-device-position-field="phone" hidden>
+        <span><span data-device-position-label="phone">{{dvPosition}}</span> <output data-device-output="phone">50%</output></span>
+        <input type="range" min="0" max="100" value="50" data-device-position="phone">
+      </label>
+      <div class="dv-video-controls" data-device-video-controls="phone" hidden>
+        <div class="dv-video-buttons">
+          <button type="button" class="v2-button" data-device-play="phone">{{dvPlayVideo}}</button>
+          <button type="button" class="v2-text-button" data-device-audio="phone" aria-pressed="false">{{dvVideoAudio}}</button>
+        </div>
+        <label class="dv-video-seek">
+          <span>{{dvVideoPosition}} <output data-device-time="phone">0:00</output></span>
+          <input type="range" data-device-seek="phone" min="0" max="0" step=".1" value="0">
+        </label>
+      </div>
+      <button type="button" class="v2-text-button" data-device-remove="phone" hidden>{{dvRestoreSample}}</button>
+      <p class="dv-media-status" data-device-media-status="phone" role="status"></p>
+    </div>
+  </details>
+  <!-- devices-journey-settings -->
+</section>

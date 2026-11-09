@@ -76,11 +76,12 @@
 @media(max-width:390px){.catalog-hero__statement{font-size:2.8rem}.catalog-hero__art{height:280px}.catalog-art__window--front{top:105px}.catalog-art__badge{font-size:.95rem;padding:9px 12px}.catalog-group .template__body{padding:22px}}
 @media(prefers-reduced-motion:reduce){.templates-section *, .templates-section *::before{scroll-behavior:auto!important;transition:none!important;animation:none!important}.catalog-hero__art:hover .catalog-art__window--back{transform:rotate(-7deg)}.catalog-hero__art:hover .catalog-art__window--front{transform:rotate(5deg)}}
 
-/* Six-category template library */
+/* Category index with wrapped rows */
 .catalog-index ul:has(>li:nth-child(6)){grid-template-columns:repeat(3,minmax(0,1fr))}
-.catalog-index ul:has(>li:nth-child(6))>li:nth-child(4){border-left:0}
+.catalog-index ul:has(>li:nth-child(6))>li:nth-child(3n+1){border-left:0}
 .catalog-index ul:has(>li:nth-child(6))>li:nth-child(n+4){border-top:1px solid var(--line-strong)}
+.catalog-index ul>li:nth-child(7):last-child{grid-column:1/-1}
 .catalog-group--2:has(#tarjeta-perfil) .templates-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:900px){.catalog-index ul:has(>li:nth-child(6)){grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-index ul:has(>li:nth-child(6))>li:nth-child(4){border-left:1px solid var(--line-strong)}.catalog-index ul:has(>li:nth-child(6))>li:nth-child(2n+1){border-left:0}.catalog-index ul:has(>li:nth-child(6))>li:nth-child(n+3){border-top:1px solid var(--line-strong)}}
+@media(max-width:900px){.catalog-index ul:has(>li:nth-child(6)){grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-index ul:has(>li:nth-child(6))>li:nth-child(even){border-left:1px solid var(--line-strong)}.catalog-index ul:has(>li:nth-child(6))>li:nth-child(2n+1){border-left:0}.catalog-index ul:has(>li:nth-child(6))>li:nth-child(n+3){border-top:1px solid var(--line-strong)}}
 @media(max-width:640px){.catalog-group--2:has(#tarjeta-perfil) .templates-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.catalog-index ul:has(>li:nth-child(6)){grid-template-columns:1fr}.catalog-index ul:has(>li:nth-child(6))>li{border-left:0!important}.catalog-index ul:has(>li:nth-child(6))>li+li{border-top:1px solid var(--line-strong)}}

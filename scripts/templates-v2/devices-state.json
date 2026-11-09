@@ -1,0 +1,36 @@
+{
+  "es": {
+    "active": 0,
+    "deviceMode": "dual",
+    "items": [
+      {
+        "title": "Atlas",
+        "heading": "Otra forma de mirar.",
+        "accent": "mint",
+        "laptopImage": "",
+        "laptopFit": "contain",
+        "laptopPosition": 50,
+        "phoneImage": "",
+        "phoneFit": "contain",
+        "phonePosition": 50
+      }
+    ]
+  },
+  "en": {
+    "active": 0,
+    "deviceMode": "dual",
+    "items": [
+      {
+        "title": "Atlas",
+        "heading": "A different way to see.",
+        "accent": "mint",
+        "laptopImage": "",
+        "laptopFit": "contain",
+        "laptopPosition": 50,
+        "phoneImage": "",
+        "phoneFit": "contain",
+        "phonePosition": 50
+      }
+    ]
+  }
+}

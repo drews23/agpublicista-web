@@ -1,0 +1,30 @@
+{
+  "es": {
+    "active": 0,
+    "items": [
+      {
+        "title": "Prisma",
+        "heading": "La luz también diseña.",
+        "copy": "Estudio de color, superficie y perspectiva.",
+        "accent": "mint",
+        "image": "",
+        "imageFit": "contain",
+        "videoFit": "contain"
+      }
+    ]
+  },
+  "en": {
+    "active": 0,
+    "items": [
+      {
+        "title": "Prism",
+        "heading": "Light shapes design.",
+        "copy": "A study in color, surface, and perspective.",
+        "accent": "mint",
+        "image": "",
+        "imageFit": "contain",
+        "videoFit": "contain"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+<section class="dv-journey" data-device-journey aria-labelledby="dv-journey-title">
+  <header class="dj-head">
+    <div>
+      <p class="dj-kicker">{{dvJourneyKicker}}</p>
+      <h2 id="dv-journey-title">{{dvJourneyTitle}}</h2>
+      <p>{{dvJourneyIntro}}</p>
+    </div>
+    <button class="v2-button dj-demo" type="button" data-dj-demo>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3Z"/></svg>
+      <span data-dj-demo-label>{{dvJourneyDemo}}</span>
+    </button>
+  </header>
+  <p class="dj-status" role="status" data-dj-status></p>
+  <div class="dj-tools" data-dj-tools hidden>
+    <div class="dj-transport">
+      <button class="v2-button dj-play" type="button" data-dj-play>
+        <svg data-dj-play-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg>
+        <svg data-dj-pause-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" hidden><path d="M9 5v14m6-14v14"/></svg>
+        <span data-dj-play-label>{{dvJourneyPlay}}</span>
+      </button>
+      <div class="dj-clocks">
+        <label class="dj-clock">
+          <span>{{dvJourneyLaptopTime}}</span>
+          <output data-dj-time="laptop" aria-hidden="true">00:00.0</output>
+          <input type="range" min="0" max="0" step="0.1" value="0" data-dj-seek="laptop" aria-label="{{dvJourneyLaptopTime}}">
+        </label>
+        <label class="dj-clock">
+          <span>{{dvJourneyPhoneTime}}</span>
+          <output data-dj-time="phone" aria-hidden="true">00:00.0</output>
+          <input type="range" min="0" max="0" step="0.1" value="0" data-dj-seek="phone" aria-label="{{dvJourneyPhoneTime}}">
+        </label>
+      </div>
+    </div>
+    <form class="dj-form" data-dj-form>
+      <label class="dj-name">
+        <span>{{dvJourneyName}}</span>
+        <input type="text" maxlength="36" placeholder="{{dvJourneyPlaceholder}}" autocomplete="off" data-dj-name>
+      </label>
+      <button class="v2-button" type="submit" data-dj-add>{{dvJourneyAdd}}</button>
+    </form>
+    <p class="dj-hint" data-dj-empty>{{dvJourneyEmpty}}</p>
+    <ol class="dj-list" aria-label="{{dvJourneyMarkers}}" data-dj-list></ol>
+  </div>
+</section>

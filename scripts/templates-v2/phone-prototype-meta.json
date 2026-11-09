@@ -1,0 +1,16 @@
+{
+  "es": [
+    "Prototipo de pantalla móvil",
+    "Diseño de interacción",
+    "Prueba un recorrido móvil desde la pantalla de bloqueo hasta una app. Cambia las capturas y configura zonas táctiles para que tu propio diseño se pueda recorrer.",
+    "04 pantallas",
+    "Desbloquea el teléfono y prueba el recorrido. Abre Ajustes para cargar tus pantallas, cambiar el aviso y definir dónde continúa cada acción."
+  ],
+  "en": [
+    "Interactive Phone Prototype",
+    "Interaction design",
+    "Try a mobile flow from the lock screen into an app. Replace the screenshots and configure hotspots to make your own design interactive.",
+    "04 screens",
+    "Unlock the phone and try the flow. Open Settings to upload your screens, edit the notification, and choose where each action leads."
+  ]
+}

@@ -1,0 +1,14 @@
+# Notas de procedencia / Source notes
+
+Lienzo creó el código y la composición del mockup. El marco fotorrealista se generó con la herramienta integrada ImageGen y se distribuye como WebP. La plantilla incluye sus fuentes y avisos OFL. La referencia visual aportada con MD Estudio Creativo mostró cómo una proyección de cuatro esquinas encaja en una foto en perspectiva. Los archivos, dependencias y fotografía remota de esa referencia quedan fuera de este paquete.
+
+Lienzo created the mockup code and composition. The photorealistic laptop was generated with the built-in ImageGen tool and is distributed as WebP. The package includes its fonts and OFL notices. The visual reference supplied with MD Estudio Creativo demonstrated four-corner screen projection in a perspective photo. The reference files, dependencies, and remote photo are outside this package.
+
+## Huellas de referencia / Reference fingerprints
+
+- `match-terminal-into-3d-image-of-the-laptop/dist/index.html` · `ea6a280dddca566f4c1d1574b0fbcf4076017ce6426d88012b02d49d37101510`
+- `match-terminal-into-3d-image-of-the-laptop/dist/script.js` · `e6a17ee8c177a79c9bc90d7d5cdc2d75280fb7726493a42c1d28831fd29de876`
+
+## ImageGen prompt
+
+> Photorealistic commercial product photograph of exactly one unbranded premium thin graphite aluminum laptop, lid open about 108 degrees, entire device isolated on genuinely transparent alpha background. Landscape composition. Three-quarter angle from slightly above and off to the right of screen center by about 20–25 degrees, camera at mid-screen height plus a little, perspective visible yet viewing the entire broad 16:10 display clearly. Natural and coherent straight edges, screen is an unmistakable flat projective quadrilateral with each of all four corners visible, display area at least half the width of the composition, slight near-to-far slope with moderate perspective and full keyboard deck, thin metal front edge and trackpad clearly visible. Minimal slim black bezel, realistic glass at edge, brushed graphite finish, precision CNC machined corners, realistic individual keyboard keys. Soft directional studio light, neutral color temperature, dark graphite tones, nuanced metallic highlights. The entire active display inset is one flat solid saturated chroma green #00E600 registration surface, green touches the four straight screen boundaries, no gradient or reflections on the green area, no content, no logos, no words, no symbols, no markings other than realistic subtle key legends. Do not make green decorative stripes elsewhere. No cable, no person, no furniture, no floating panels. Very tight safe framing with a small margin on all sides; do not crop any of the laptop or let it touch the image boundaries. Real camera packshot, not vector or cartoon. Preserve the outside alpha and keep the laptop chassis opaque.

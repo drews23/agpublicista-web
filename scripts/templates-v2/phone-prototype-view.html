@@ -1,0 +1,149 @@
+<section class="pp-studio" data-phone-prototype data-active-screen="lock" aria-label="{{ppStage}}">
+  <div class="pp-stage-head">
+    <p class="pp-eyebrow"><i aria-hidden="true"></i>{{ppStage}}</p>
+    <p class="pp-scene-label"><span data-pp-index aria-hidden="true">01 / 04</span> <span data-pp-current>{{ppLock}}</span></p>
+  </div>
+  <div class="pp-composition">
+    <div class="pp-device">
+      <img class="pp-phone-shell" src="assets/phone-shell.webp" width="840" height="1718" alt="" decoding="async" fetchpriority="high">
+      <div class="pp-screen">
+        <section class="pp-scene pp-lock" data-pp-screen="lock" aria-label="{{ppLock}}" tabindex="-1">
+          <img class="pp-screenshot" data-pp-image="lock" alt="{{ppLockImage}}" decoding="async" hidden>
+          <div class="pp-sample pp-lock-display">
+            <p class="pp-lock-time" aria-label="{{ppTimeLabel}} 09:41">09:41</p>
+            <p class="pp-lock-date">{{ppLockDate}}</p>
+          </div>
+          <aside class="pp-notification" data-pp-notification>
+            <span class="pp-notification-mark" aria-hidden="true"></span>
+            <div>
+              <b data-pp-notification-title>{{ppNotificationTitleSample}}</b>
+              <p data-pp-notification-message>{{ppNotificationMessageSample}}</p>
+            </div>
+          </aside>
+          <button type="button" class="pp-lock-action" data-pp-nav="unlock">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 10V7a3 3 0 0 1 6 0M12 14v2" stroke-linecap="round"/></svg>
+            <span>{{ppUnlock}}</span>
+          </button>
+        </section>
+        <section class="pp-scene pp-home" data-pp-screen="home" aria-label="{{ppHome}}" tabindex="-1" hidden>
+          <img class="pp-screenshot" data-pp-image="home" alt="{{ppHomeImage}}" decoding="async" hidden>
+          <div class="pp-sample pp-home-content">
+            <p class="pp-app-eyebrow">{{ppHomeKicker}}</p>
+            <h2 class="pp-app-title" data-brand-display data-pp-title="home">{{ppHomeTitleSample}}</h2>
+            <p class="pp-app-copy" data-pp-copy="home">{{ppHomeCopySample}}</p>
+            <div class="pp-art pp-art-home" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+          <div class="pp-home-actions" role="group" aria-label="{{ppApps}}">
+            <button type="button" data-pp-nav="project">
+              <span aria-hidden="true">01</span>{{ppOpenProject}}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </button>
+            <button type="button" data-pp-nav="confirmation">
+              <span aria-hidden="true">02</span>{{ppOpenConfirmation}}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </button>
+          </div>
+        </section>
+        <section class="pp-scene pp-project" data-pp-screen="project" aria-label="{{ppProject}}" tabindex="-1" hidden>
+          <img class="pp-screenshot" data-pp-image="project" alt="{{ppProjectImage}}" decoding="async" hidden>
+          <div class="pp-sample pp-project-content">
+            <p class="pp-app-eyebrow">{{ppProjectKicker}}</p>
+            <h2 class="pp-app-title" data-brand-display data-pp-title="project">{{ppProjectTitleSample}}</h2>
+            <div class="pp-art pp-art-project" aria-hidden="true"><i></i><i></i><i></i></div>
+            <p class="pp-app-copy" data-pp-copy="project">{{ppProjectCopySample}}</p>
+          </div>
+          <button type="button" class="pp-hotspot" data-pp-hotspot="project" data-custom="false">
+            <span class="pp-hotspot-label">{{ppConfirmVisit}}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </button>
+        </section>
+        <section class="pp-scene pp-confirmation" data-pp-screen="confirmation" aria-label="{{ppConfirmation}}" tabindex="-1" hidden>
+          <img class="pp-screenshot" data-pp-image="confirmation" alt="{{ppConfirmationImage}}" decoding="async" hidden>
+          <div class="pp-sample pp-confirmation-content">
+            <div class="pp-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m5 12 5 5L19 8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="pp-app-eyebrow">{{ppConfirmationKicker}}</p>
+            <h2 class="pp-app-title" data-brand-display data-pp-title="confirmation">{{ppConfirmationTitleSample}}</h2>
+            <p class="pp-app-copy" data-pp-copy="confirmation">{{ppConfirmationCopySample}}</p>
+          </div>
+          <button type="button" class="pp-hotspot" data-pp-hotspot="confirmation" data-custom="false">
+            <span class="pp-hotspot-label">{{ppReturnHome}}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </button>
+        </section>
+      </div>
+    </div>
+    <aside class="pp-stage-note">
+      <p class="pp-stage-step" data-pp-stage-step>{{ppStep}} 01</p>
+      <strong data-pp-stage-title>{{ppStageLockTitle}}</strong>
+      <p data-pp-stage-hint>{{ppStageLockHint}}</p>
+    </aside>
+  </div>
+  <div class="pp-controls" role="group" aria-label="{{ppNavigation}}">
+    <button type="button" data-pp-nav="back" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m13 5-7 7 7 7M6 12h13"/></svg>
+      <span>{{ppBack}}</span>
+    </button>
+    <button type="button" data-pp-nav="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Zm6 10v-7h6v7"/></svg>
+      <span>{{ppHome}}</span>
+    </button>
+    <button type="button" data-pp-nav="lock" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+      <span>{{ppLockAction}}</span>
+    </button>
+  </div>
+</section>
+<section class="pp-settings pp-inspector" aria-label="{{ppInspector}}">
+  <p class="pp-inspector-heading">{{ppInspector}}</p>
+  <label>{{ppEditScreen}}
+    <select data-pp-edit-screen>
+      <option value="lock">{{ppLock}}</option>
+      <option value="home">{{ppHome}}</option>
+      <option value="project">{{ppProject}}</option>
+      <option value="confirmation">{{ppConfirmation}}</option>
+    </select>
+  </label>
+  <div class="pp-upload-row">
+    <label class="v2-upload v2-button">
+      <span>{{ppChooseImage}}</span>
+      <input type="file" data-pp-upload accept="image/png,image/jpeg,image/webp" aria-label="{{ppChooseImage}}">
+    </label>
+    <button type="button" class="v2-text-button" data-pp-remove-image hidden>{{ppRestoreSample}}</button>
+  </div>
+  <p class="pp-setting-note">{{ppImageHelp}}</p>
+  <p class="pp-setting-note" data-pp-image-status role="status"></p>
+  <label class="pp-hotspot-toggle" data-pp-lock-settings>
+    <input type="checkbox" data-pp-notification-toggle checked>
+    <span>{{ppShowNotification}}</span>
+  </label>
+  <div class="pp-hotspot-settings" data-pp-app-settings hidden>
+    <label class="pp-hotspot-toggle">
+      <input type="checkbox" data-pp-hotspot-toggle>
+      <span>{{ppUseHotspot}}</span>
+    </label>
+    <div class="pp-hotspot-fields" data-pp-hotspot-fields hidden>
+      <label>{{ppActionLabel}}
+        <input type="text" maxlength="42" data-pp-action-label>
+      </label>
+      <label>{{ppDestination}}
+        <select data-pp-destination>
+          <option value="lock">{{ppLock}}</option>
+          <option value="home">{{ppHome}}</option>
+          <option value="project">{{ppProject}}</option>
+          <option value="confirmation">{{ppConfirmation}}</option>
+        </select>
+      </label>
+      <div class="pp-position-fields">
+        <label><span>{{ppHorizontal}} <output data-pp-position-value="x">50%</output></span>
+          <input type="range" min="0" max="100" value="50" data-pp-position="x">
+        </label>
+        <label><span>{{ppVertical}} <output data-pp-position-value="y">85%</output></span>
+          <input type="range" min="0" max="100" value="85" data-pp-position="y">
+        </label>
+      </div>
+      <p class="pp-setting-note">{{ppHotspotHelp}}</p>
+    </div>
+  </div>
+</section>

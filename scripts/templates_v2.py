@@ -1,4 +1,4 @@
-"""Six original Lienzo UI resources. Sources and reference folders stay separate."""
+"""Build original Lienzo UI resources from the shared studio and resource sources."""
 from pathlib import Path
 from html import escape as esc
 import base64
@@ -44,6 +44,25 @@ RESOURCES = {
         'kind': 'profile', 'reference': 'portfolio-card-with-dark-mode-togglekiara-sinha',
         'es': ['Tarjeta de perfil creativo', 'Tu trabajo merece una buena presentación.', 'Un perfil con identidad, proyectos, habilidades, enlaces editables y foto local opcional. Personalízalo y descarga también una tarjeta de contacto vCard.', '01 perfil', 'Contenido de ejemplo para sustituir por tu nombre, trabajo y enlaces reales.'],
         'en': ['Creative Profile Card', 'Give your work the introduction it deserves.', 'An expressive profile with projects, skills, editable links, and an optional local photo. Make it yours and download a vCard contact file.', '01 profile', 'Sample content to replace with your real name, work, and links.'],
+    },
+    'mockup-multidispositivo': {
+        'kind': 'devices',
+        'sample_artwork': False,
+        'assets': ('laptop-shell.webp',),
+        'localized_videos': ('demo-laptop', 'demo-phone'),
+        'license': 'Código MIT. Fuentes OFL. Procedencia de la imagen del portátil en SOURCE-NOTES.md.',
+    },
+    'prototipo-pantalla-movil': {
+        'kind': 'phone-prototype',
+        'sample_artwork': False,
+        'assets': ('phone-shell.webp',),
+        'license': 'Código MIT. Fuentes OFL. Procedencia del marco del teléfono en SOURCE-NOTES.md.',
+    },
+    'portatil-en-perspectiva': {
+        'kind': 'laptop-perspective',
+        'sample_artwork': False,
+        'assets': ('laptop-perspective.webp',),
+        'license': 'Código MIT. Fuentes OFL. Procedencia de la imagen del portátil en SOURCE-NOTES.md.',
     },
 }
 
@@ -182,6 +201,8 @@ def artwork(index, width=1200, height=900):
 def component(kind, ui):
     supplied = provider_markup(kind, 'view.html', ui)
     if supplied is not None:
+        if kind == 'devices':
+            supplied = supplied.replace('<!-- devices-journey -->', provider_markup(kind, 'journey.html', ui))
         return supplied
     if kind == 'scenes':
         return '<section class="cs-atelier" aria-label="'+ui['sceneCollection']+'"><div class="cs-intro"><p class="cs-edition"><span>LIENZO</span><span>01 — 06 / CSS MOTION</span></p><p>'+ui['sceneIntro']+'</p></div><div class="cs-scene-nav" data-scene-nav role="group" aria-label="'+ui['choose']+'"></div><div class="cs-board" data-scene-board data-view="collection"></div><p class="cs-sequence-status" data-sequence-status role="status"></p><div class="cs-note"><span>'+ui['sceneNote']+'</span><span>'+ui['sceneLocal']+'</span></div></section>'
@@ -213,6 +234,10 @@ def component_source(kind, extension):
     files = ([f'{kind}-art.{extension}'] if kind in ['scenes','gallery'] else []) + [f'{kind}.{extension}']
     if kind == 'gallery' and extension == 'css':
         files.append('gallery-photo.css')
+    if kind == 'devices':
+        files.append(f'devices-journey.{extension}')
+    if kind in ['devices', 'laptop-perspective'] and extension == 'js':
+        files.append('devices-project.js')
     return '\n'.join((SOURCE/name).read_text(encoding='utf-8-sig') for name in files)
 
 
@@ -290,9 +315,11 @@ def gallery_markup(ui):
 
 
 def editor_document(raw, slug, lang, ui):
-    """Dock the six existing editors without replacing their canvas or committed state."""
+    """Dock the editor while preserving its preview and committed state."""
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(raw, 'html.parser')
+    kind = RESOURCES[slug]['kind']
+    media_first = kind in ['phone-prototype', 'laptop-perspective']
     workspace = soup.select_one('.v2-workspace')
     workspace['data-editor-workspace'] = ''
     workspace['data-editor-collapsed'] = 'true'
@@ -324,7 +351,14 @@ def editor_document(raw, slug, lang, ui):
     editor.select_one('h2').decompose()
     intro = editor.find('p', recursive=False)
     intro['class'] = ['v2-editor-panel-help']
-    intro.string = ui['settingsHelp']
+    if kind == 'phone-prototype':
+        intro.string = ('Las capturas y acciones se actualizan al instante. Aplica los cambios de texto antes de exportar.'
+                        if lang == 'es' else 'Screenshots and actions update as you edit. Apply text changes before exporting.')
+    elif kind == 'laptop-perspective':
+        intro.string = ('Carga tu MP4 o imagen y ajusta el encuadre en la vista previa.'
+                        if lang == 'es' else 'Add your MP4 or image and adjust the framing in the preview.')
+    else:
+        intro.string = ui['settingsHelp']
     head_title = header.select_one('.v2-eyebrow')
     head_title.name = 'h2'
     head_title['id'] = 'v2-editor-title'
@@ -332,6 +366,14 @@ def editor_document(raw, slug, lang, ui):
     form = editor.select_one('[data-editor-form]')
     brand_panel = soup.new_tag('div', attrs={'data-template-brand-panel': ''})
     form.insert_before(brand_panel)
+    if media_first:
+        form.select_one('label')['hidden'] = ''
+        text_class = 'pp-copy-settings' if kind == 'phone-prototype' else 'lp-copy-settings'
+        text_section = soup.new_tag('details', attrs={'class': 'v2-panel-live ' + text_class})
+        summary = soup.new_tag('summary')
+        summary.string = 'Textos de muestra' if lang == 'es' else 'Sample text'
+        text_section.append(summary)
+        form.wrap(text_section)
     cancel = soup.new_tag('button', attrs={'type': 'button', 'class': 'v2-text-button', 'data-editor-cancel': ''})
     cancel.string = ui['cancel']
     form.select_one('.v2-dialog-actions').insert(1, cancel)
@@ -343,22 +385,26 @@ def editor_document(raw, slug, lang, ui):
         help_section.append(summary)
         help_section.append(tip.extract())
         editor.append(help_section)
-    for selector in ['.pi-controls', '.eg-settings']:
+    for selector in ['.pi-controls', '.eg-settings', '.dv-settings', '.pp-settings', '.lp-settings']:
         local = preview.select_one(selector)
         if not local:
             continue
         section = soup.new_tag('details', attrs={'class': 'v2-panel-live', 'open': ''})
         title = soup.new_tag('summary')
-        title.string = ui['liveSettings']
+        title.string = ui[{'phone-prototype': 'ppInspector', 'laptop-perspective': 'lpMediaSettings'}.get(kind, 'liveSettings')]
         section.append(title)
-        notice = soup.new_tag('p', attrs={'class': 'v2-editor-panel-help'})
-        notice.string = ui['liveHelp']
-        section.append(notice)
+        if not media_first:
+            notice = soup.new_tag('p', attrs={'class': 'v2-editor-panel-help'})
+            notice.string = ui['liveHelp']
+            section.append(notice)
         if selector == '.eg-settings':
             local.name = 'section'
             local.select_one('summary').decompose()
         section.append(local.extract())
-        editor.append(section)
+        if media_first:
+            text_section.insert_before(section)
+        else:
+            editor.append(section)
     profile_upload = preview.select_one('.v2-bottom .v2-row')
     if profile_upload and profile_upload.select_one('[data-upload]'):
         editor.append(profile_upload.extract())
@@ -379,6 +425,15 @@ def editor_document(raw, slug, lang, ui):
     brand_script = soup.new_tag('script', attrs={'src':'template-brand.js?v=' + hashlib.sha256((ROOT/'js/template-brand.js').read_bytes()).hexdigest()[:12], 'defer':''})
     soup.head.append(brand_css)
     soup.select_one('script[src]').insert_before(brand_script)
+    if kind in ['devices', 'laptop-perspective']:
+        export = soup.select_one('[data-export-dialog]')
+        project_status = soup.new_tag('p', attrs={'data-device-project-status': '', 'role': 'status'})
+        actions = export.select_one('.v2-dialog-actions')
+        actions.insert_before(project_status)
+        actions.select_one('[data-download]')['class'] = ['v2-button']
+        project_button = soup.new_tag('button', attrs={'type': 'button', 'class': 'v2-button v2-primary', 'data-device-project': ''})
+        project_button.string = 'Download project ZIP' if lang == 'en' else 'Descargar proyecto ZIP'
+        actions.append(project_button)
     return str(soup)
 
 
@@ -387,6 +442,22 @@ def document(slug, lang):
     title, tag, lead, fact, tip = item[lang]
     ui = translations(lang)
     ui.update(provider(item['kind'], 'ui.json', lang) or {})
+    if item['kind'] == 'devices':
+        ui.update(provider('devices', 'journey-ui.json', lang) or {})
+        ui['exportHelp'] = (
+            'The project ZIP includes your settings, action markers, and clips. Extract it and open index.html. The HTML option keeps the same layout when opened alongside the template files.'
+            if lang == 'en' else
+            'El ZIP del proyecto incluye tus ajustes, los pasos del recorrido y los videos. Descomprímelo y abre index.html. La opción HTML conserva la composición al abrirla junto a los archivos de la plantilla.'
+        )
+    if item['kind'] == 'laptop-perspective':
+        ui['source'] = 'Export' if lang == 'en' else 'Exportar'
+        ui['exportTitle'] = 'Save your mockup' if lang == 'en' else 'Guarda tu mockup'
+        ui['local'] = 'Your files stay on this device.' if lang == 'en' else 'Tus archivos se quedan en este equipo.'
+        ui['exportHelp'] = (
+            'Download the project ZIP to keep your MP4 with the mockup. Extract it and open index.html. Use the HTML option for a still image and keep it alongside the template files.'
+            if lang == 'en' else
+            'Descarga el ZIP del proyecto para guardar tu MP4 con el mockup. Descomprímelo y abre index.html. Para una imagen fija, también puedes guardar el HTML junto a los archivos de la plantilla.'
+        )
     if item['kind'] == 'scenes':
         ui.update(scene_translations(lang))
     if item['kind'] == 'gallery':
@@ -413,7 +484,11 @@ def document(slug, lang):
 
 
 def source_notes(slug):
-    reference = REFERENCE / RESOURCES[slug]['reference']
+    resource = RESOURCES[slug]
+    supplied = provider(resource['kind'], 'source-notes.md')
+    if supplied is not None:
+        return supplied
+    reference = REFERENCE / resource['reference']
     sources = []
     if reference.exists():
         for p in sorted(reference.rglob('*')):
@@ -532,6 +607,19 @@ Implementación e ilustraciones originales de Lienzo, preparadas dentro de la co
 """
 
 
+def package_files(demo):
+    return (path for path in sorted(demo.rglob('*')) if path.is_file() and path.name not in ['preview.svg', 'preview.webp'])
+
+
+def project_manifest(demo):
+    # A relative script also loads when an extracted project opens without a web server.
+    files = {
+        path.relative_to(demo).as_posix(): base64.b64encode(path.read_bytes()).decode('ascii')
+        for path in package_files(demo) if path.name not in ['index.html', 'project-files.js']
+    }
+    (demo / 'project-files.js').write_text('window.LienzoDeviceProjectFiles = ' + json.dumps(files, separators=(',', ':')) + ';\n', encoding='utf-8')
+
+
 def package(slug, lang):
     demo = ROOT / ROUTES[lang].strip('/') / 'demos' / slug
     archive = ROOT / 'recursos/descargas/plantillas-web' / f'{slug}-lienzo{"-en" if lang=="en" else ""}.zip'
@@ -540,9 +628,7 @@ def package(slug, lang):
         temporary = Path(handle.name)
     try:
         with zipfile.ZipFile(temporary, 'w', zipfile.ZIP_DEFLATED) as z:
-            for path in sorted(demo.rglob('*')):
-                if not path.is_file() or path.name in ['preview.svg','preview.webp']:
-                    continue
+            for path in package_files(demo):
                 info = zipfile.ZipInfo((Path(slug) / path.relative_to(demo)).as_posix(), (2026,10,17,0,0,0))
                 info.compress_type = zipfile.ZIP_DEFLATED
                 info.external_attr = 0o644 << 16
@@ -564,7 +650,7 @@ def package(slug, lang):
 
 
 def add_cards(soup, route):
-    """Add only the six new cards to the parsed catalog before grouping."""
+    """Refresh cards for resources built by this studio before catalog grouping."""
     lang = 'en' if route.startswith('/en/') else 'es'
     section = soup.select_one('.templates-section')
     if not section:
@@ -579,7 +665,11 @@ def add_cards(soup, route):
         archive = ROOT / 'recursos/descargas/plantillas-web' / f'{slug}-lienzo{"-en" if lang=="en" else ""}.zip'
         version = hashlib.sha256(archive.read_bytes()).hexdigest()[:12]
         preview = ROOT / route.strip('/') / 'demos' / slug / 'preview.webp'
-        image = f'demos/{slug}/preview.webp?v={hashlib.sha256(preview.read_bytes()).hexdigest()[:12]}' if preview.exists() else f'demos/{slug}/assets/study-0.svg'
+        if preview.exists():
+            image = f'demos/{slug}/preview.webp?v={hashlib.sha256(preview.read_bytes()).hexdigest()[:12]}'
+        else:
+            fallback = 'study-0.svg' if resource.get('sample_artwork', True) else 'logo-lienzo.svg'
+            image = f'demos/{slug}/assets/{fallback}'
         size = (archive.stat().st_size + 1023)//1024
         html = f'''<article class="template" id="{slug}" tabindex="-1" data-template-v2><div class="template__visual" aria-hidden="true"><img src="{image}" width="600" height="320" loading="lazy" decoding="async" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="template__body"><p class="template__tag">{esc(tag)}</p><h3 class="template__title">{esc(title)}</h3><p class="template__description">{esc(lead)}</p><ul class="template__meta" aria-label="{tr('Características','Features')}"><li>HTML + CSS + JS</li><li>ZIP · {size} KB</li></ul><div class="template__actions"><a class="btn btn--primary" data-preview="{slug}" aria-haspopup="dialog" href="demos/{slug}/">{tr('Probar plantilla','Try template')}</a><a class="btn btn--ghost" href="/recursos/descargas/plantillas-web/{archive.name}?v={version}" download="{archive.name}">{tr('Descargar ZIP','Download ZIP')} ↓</a></div><details class="template__credit"><summary>{tr('Guía y créditos','Guide and credits')}</summary><p>{tr('Implementación original Lienzo con fuentes locales y guía de integración. Las referencias visuales y los avisos están documentados en el ZIP.','Original Lienzo implementation with local fonts and an integration guide. Visual references and notices are documented in the ZIP.')} <a href="demos/{slug}/{'README.md' if lang=='en' else 'LEEME.md'}">{tr('Leer la guía de uso','Read the guide')}</a>.</p></details></div></article>'''
         container.append(BeautifulSoup(html,'html.parser').article)
@@ -605,12 +695,16 @@ def enhance_resources(raw, route):
         title, _, desc, _, _ = resource[lang]
         html = f'<a class="card" href="{ROUTES[lang]}#{slug}" data-template-v2-resource><span class="directory-template-format">HTML · CSS · JavaScript</span><h3>{esc(title)}</h3><p>{esc(desc)}</p><span class="catalog-action">{tr("Probar y descargar","Try and download")} ↗</span></a>'
         grid.append(BeautifulSoup(html,'html.parser').a)
+    template_count = len(grid.select('a.card'))
     count = section.select_one('.directory-group__count')
     if count:
-        count.string = str(len(grid.select('a.card')))
+        count.string = str(template_count)
     heading = section.select_one('.directory-group__head p' if lang=='en' else '.section-head p:not(.eyebrow)')
     if heading:
-        heading.string = tr('Catorce piezas de interfaz: carruseles, galerías, tarjetas, menús, escenas CSS, partículas y botones sociales. Prueba las demos y descarga el código con su guía.', 'Fourteen UI templates: carousels, galleries, cards, menus, CSS scenes, particles, and social buttons. Try the demos and download the source code and guide.')
+        heading.string = tr(
+            f'Explora {template_count} plantillas para carruseles, tarjetas, dispositivos y otros elementos web. Prueba las demos y descarga el código con su guía.',
+            f'Explore {template_count} templates for carousels, cards, device mockups, and other web interfaces. Try the demos and download the source code and guide.',
+        )
     spec = importlib.util.spec_from_file_location('v2_ranges', ROOT/'scripts/build-discovery-directories.py')
     ranges = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(ranges)
@@ -652,7 +746,8 @@ def update_catalogs():
     entries = [x for x in json.loads(inventory.read_text(encoding='utf-8')) if x['id'] not in RESOURCES]
     for slug,resource in RESOURCES.items():
         archive = ROOT / 'recursos/descargas/plantillas-web' / f'{slug}-lienzo.zip'
-        entries.append({'id':slug,'title':resource['es'][0],'tag':resource['es'][1],'author':'Lienzo','source':None,'zip':archive.name,'desc':resource['es'][2],'size':(archive.stat().st_size+1023)//1024,'authorRole':'Implementación original y guía','license':'MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado.'})
+        license_notice = resource.get('license', 'MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado.')
+        entries.append({'id':slug,'title':resource['es'][0],'tag':resource['es'][1],'author':'Lienzo','source':None,'zip':archive.name,'desc':resource['es'][2],'size':(archive.stat().st_size+1023)//1024,'authorRole':'Implementación original y guía','license':license_notice})
     inventory.write_text(json.dumps(entries,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
 
@@ -660,17 +755,23 @@ def build(only=None, language=None):
     common = ROOT / 'codigo-web/plantillas/demos/carrusel-recursos/assets'
     chosen = list(only or RESOURCES)
     for slug in chosen:
-        kind = RESOURCES[slug]['kind']
+        resource = RESOURCES[slug]
+        kind = resource['kind']
         for lang in ([language] if language else ROUTES):
             demo = ROOT / ROUTES[lang].strip('/') / 'demos' / slug
             assets = demo / 'assets'
             assets.mkdir(parents=True, exist_ok=True)
             for name in ['fraunces.woff2','instrument.woff2','OFL-Fraunces.txt','OFL-Instrument-Sans.txt','logo-lienzo.svg']:
                 shutil.copy2(common / name, assets / name)
+            for name in resource.get('assets', ()):
+                shutil.copy2(SOURCE / f'{kind}-assets' / name, assets / name)
+            for name in resource.get('localized_videos', ()):
+                shutil.copy2(SOURCE / f'{kind}-assets' / f'{name}-{lang}.mp4', assets / f'{name}.mp4')
             logo = (assets / 'logo-lienzo.svg').read_text(encoding='utf-8')
             (assets / 'logo-light.svg').write_text(re.sub(r'#fff(?:fff)?\b', '#201c2b', logo, flags=re.I), encoding='utf-8')
-            for i in range(5):
-                (assets / f'study-{i}.svg').write_text(artwork(i), encoding='utf-8')
+            if resource.get('sample_artwork', True):
+                for i in range(5):
+                    (assets / f'study-{i}.svg').write_text(artwork(i), encoding='utf-8')
             for name in ['studio.css','studio.js']:
                 shutil.copy2(SOURCE/name, demo/name)
             for name, folder in [('editor-workspace.css', 'css'), ('editor-workspace.js', 'js')]:
@@ -688,6 +789,8 @@ def build(only=None, language=None):
             (demo / ('README.md' if lang=='en' else 'LEEME.md')).write_text(guide_text, encoding='utf-8')
             (demo / 'SOURCE-NOTES.md').write_text(source_notes(slug), encoding='utf-8')
             shutil.copy2(common.parent / 'LICENSE-LIENZO.txt', demo / 'LICENSE-LIENZO.txt')
+            if kind in ['devices', 'laptop-perspective']:
+                project_manifest(demo)
             package(slug,lang)
     print(f'Built {len(chosen)} template resource(s), language: {language or "ES/en-US"}. Other demos unchanged.')
 

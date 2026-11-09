@@ -1,0 +1,48 @@
+{
+  "es": {
+    "active": 0,
+    "phoneScreen": "lock",
+    "items": [
+      {
+        "title": "Órbita",
+        "accent": "mint",
+        "homeCopy": "Un recorrido por la luz, el color y el movimiento.",
+        "projectTitle": "Luz en tránsito",
+        "projectCopy": "Capas de luz cambian de forma a medida que recorres la sala.",
+        "confirmationTitle": "Todo listo",
+        "confirmationCopy": "Confirmación de muestra para cerrar el recorrido.",
+        "notificationTitle": "Órbita",
+        "notificationMessage": "Ya puedes explorar la exposición.",
+        "notificationEnabled": true,
+        "images": {"lock": "", "home": "", "project": "", "confirmation": ""},
+        "hotspots": {
+          "project": {"enabled": false, "label": "Confirmar visita", "destination": "confirmation", "x": 50, "y": 85},
+          "confirmation": {"enabled": false, "label": "Volver a inicio", "destination": "home", "x": 50, "y": 85}
+        }
+      }
+    ]
+  },
+  "en": {
+    "active": 0,
+    "phoneScreen": "lock",
+    "items": [
+      {
+        "title": "Orbit",
+        "accent": "mint",
+        "homeCopy": "A journey through light, color, and movement.",
+        "projectTitle": "Light in motion",
+        "projectCopy": "Layers of light change shape as you move through the room.",
+        "confirmationTitle": "All set",
+        "confirmationCopy": "A sample confirmation to finish the walkthrough.",
+        "notificationTitle": "Orbit",
+        "notificationMessage": "The exhibition is ready to explore.",
+        "notificationEnabled": true,
+        "images": {"lock": "", "home": "", "project": "", "confirmation": ""},
+        "hotspots": {
+          "project": {"enabled": false, "label": "Confirm visit", "destination": "confirmation", "x": 50, "y": 85},
+          "confirmation": {"enabled": false, "label": "Back to home", "destination": "home", "x": 50, "y": 85}
+        }
+      }
+    ]
+  }
+}

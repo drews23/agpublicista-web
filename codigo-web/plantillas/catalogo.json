@@ -108,7 +108,7 @@
     "source": null,
     "zip": "escenas-css-lienzo.zip",
     "desc": "Seis escenas de interfaz con mecanismos propios: código, velocidad, contenido vivo, dispositivos, conexiones e ideas. Personaliza cada composición y descarga una escena independiente.",
-    "size": 238,
+    "size": 255,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },
@@ -132,7 +132,7 @@
     "source": null,
     "zip": "menu-indicador-lienzo.zip",
     "desc": "Un estudio interactivo con indicador activo y exploración independientes, cinco destinos útiles, favoritos locales, filtros, iconos editables y navegación horizontal o vertical.",
-    "size": 132,
+    "size": 149,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },
@@ -144,7 +144,7 @@
     "source": null,
     "zip": "menu-contextual-lienzo.zip",
     "desc": "Una mesa creativa con tres composiciones originales, búsqueda, favoritos y dos vistas. Abre un menú de cristal que edita, duplica, cambia el acento y retira recursos con deshacer.",
-    "size": 132,
+    "size": 149,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },
@@ -171,5 +171,41 @@
     "size": 153,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
+  },
+  {
+    "id": "mockup-multidispositivo",
+    "title": "Mockup multidispositivo",
+    "tag": "Composición adaptable",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "mockup-multidispositivo-lienzo.zip",
+    "desc": "Presenta un proyecto en portátil y móvil con capturas o MP4. Marca la misma acción en dos grabaciones y compara cómo se ve en cada pantalla.",
+    "size": 773,
+    "authorRole": "Implementación original y guía",
+    "license": "Código MIT. Fuentes OFL. Procedencia de la imagen del portátil en SOURCE-NOTES.md."
+  },
+  {
+    "id": "prototipo-pantalla-movil",
+    "title": "Prototipo de pantalla móvil",
+    "tag": "Diseño de interacción",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "prototipo-pantalla-movil-lienzo.zip",
+    "desc": "Prueba un recorrido móvil desde la pantalla de bloqueo hasta una app. Cambia las capturas y configura zonas táctiles para que tu propio diseño se pueda recorrer.",
+    "size": 448,
+    "authorRole": "Implementación original y guía",
+    "license": "Código MIT. Fuentes OFL. Procedencia del marco del teléfono en SOURCE-NOTES.md."
+  },
+  {
+    "id": "portatil-en-perspectiva",
+    "title": "Portátil en perspectiva",
+    "tag": "Mockup fotorrealista",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "portatil-en-perspectiva-lienzo.zip",
+    "desc": "Presenta tu grabación MP4 o captura en la pantalla de un portátil visto en perspectiva. Ajusta el encuadre y guarda el proyecto para abrirlo sin conexión.",
+    "size": 518,
+    "authorRole": "Implementación original y guía",
+    "license": "Código MIT. Fuentes OFL. Procedencia de la imagen del portátil en SOURCE-NOTES.md."
   }
 ]

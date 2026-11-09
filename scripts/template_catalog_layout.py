@@ -1,4 +1,4 @@
-"""Organize fourteen template cards without rebuilding the eight earlier demos."""
+"""Organize template cards by category without rebuilding the demos."""
 from pathlib import Path
 from html import escape
 import hashlib
@@ -35,6 +35,10 @@ GROUPS = [
      'Imágenes que se transforman y responden al movimiento.',
      'Images that transform and respond to movement.',
      ['imagen-particulas']),
+    ('dispositivos', 'devices', 'Dispositivos', 'Devices',
+     'Muestra cómo se ve una interfaz en pantallas de distintos tamaños.',
+     'Show how an interface looks on screens of different sizes.',
+     ['mockup-multidispositivo', 'prototipo-pantalla-movil', 'portatil-en-perspectiva']),
 ]
 CHOICES = {
     'carrusel-recursos': ('Explorar una colección creativa', 'Browsing a creative collection', 'Texto, enlaces, acento y disposición', 'Text, links, accent, and layout', 'HTML + CSS + JS'),
@@ -51,6 +55,9 @@ CHOICES = {
     'menu-contextual': ('Organizar y editar una colección local', 'Organizing and editing a local collection', 'Búsqueda, dos vistas, acciones, acento y deshacer', 'Search, two views, actions, accents, and undo', 'HTML + SVG + CSS + JS'),
     'imagen-particulas': ('Crear una imagen interactiva y capturarla', 'Creating and capturing interactive image art', 'Tres artes, imagen local, fuerza, color y densidad', 'Three artworks, local image, force, color, and density', 'HTML + CSS + JS · WebGL 2'),
     'tarjeta-perfil': ('Presentar identidad y proyectos ampliables', 'Presenting an identity and expandable projects', 'Retrato, encuadre, dos disposiciones, proyectos y vCard', 'Portrait, framing, two layouts, projects, and vCard', 'HTML + SVG + CSS + JS'),
+    'mockup-multidispositivo': ('Comparar un recorrido en portátil y móvil', 'Comparing a walkthrough on laptop and phone', 'Capturas, MP4, encuadre y pasos', 'Screenshots, MP4, framing, and action markers', 'HTML + CSS + JS'),
+    'prototipo-pantalla-movil': ('Probar el recorrido de una app', 'Trying an app flow', 'Pantallas, aviso y puntos interactivos', 'Screens, notification, and hotspots', 'HTML + CSS + JS'),
+    'portatil-en-perspectiva': ('Presentar una grabación en un portátil', 'Presenting a recording on a laptop', 'MP4 o imagen, encuadre y reproducción', 'MP4 or still image, framing, and playback', 'HTML + CSS + JS'),
 }
 
 
@@ -72,6 +79,7 @@ def enhance_template_catalog(raw, route):
     section = soup.select_one('.templates-section')
     cards = {card['id']: card for card in section.select('article.template')}
     expected = [slug for group in GROUPS for slug in group[-1]]
+    template_count = len(expected)
     if set(cards) != set(expected):
         raise ValueError('Template category inventory changed: ' + route)
     # The category heading is h2; the existing resource title becomes h3.
@@ -89,8 +97,8 @@ def enhance_template_catalog(raw, route):
     preview_version=('?v='+hashlib.sha256(preview_path.read_bytes()).hexdigest()[:12]) if preview_path.exists() else ''
     product_preview_path=ROOT/route.strip('/')/'demos/tarjetas-producto/preview.svg'
     product_preview_version=('?v='+hashlib.sha256(product_preview_path.read_bytes()).hexdigest()[:12]) if product_preview_path.exists() else ''
-    hero = f'''<div class="templates-head page-head catalog-hero"><div class="catalog-hero__copy"><p class="eyebrow">HTML · CSS · JAVASCRIPT</p><h1>{escape(title)}</h1><p class="catalog-hero__statement">{tr('Elige una pieza.<br>Hazla tuya.', 'Find your piece.<br>Make it yours.')}</p><p class="lede">{tr('Catorce piezas de interfaz para dar forma a tu próxima web. Explora, prueba los controles y descarga el código para adaptarlo a tu proyecto.', english_copy['lede'])}</p><div class="catalog-hero__actions"><a class="btn btn--primary" href="#{index}">{tr('Explorar plantillas', 'Explore templates')} <span aria-hidden="true">↓</span></a><a class="catalog-text-link" href="#{how}">{tr('Cómo empezar', 'How to get started')} <span aria-hidden="true">↗</span></a></div></div><div class="catalog-hero__art" aria-hidden="true"><span class="catalog-art__label">LIENZO / {tr('BIBLIOTECA WEB', 'WEB LIBRARY')}</span><div class="catalog-art__window catalog-art__window--back"><span class="catalog-art__bar"><i></i><i></i><i></i><span>cards.css</span></span><img src="demos/laboratorio-3d/preview.svg{preview_version}" alt="" width="600" height="320" decoding="async"></div><div class="catalog-art__window catalog-art__window--front"><span class="catalog-art__bar"><i></i><i></i><i></i><span>your-next-idea.html</span></span><img src="demos/tarjetas-producto/preview.svg{product_preview_version}" alt="" width="600" height="320" decoding="async"></div><span class="catalog-art__badge">&lt;/&gt; <span>{tr('Código para crear', 'Code to create')}</span></span></div></div>'''
-    bar = f'''<div class="templates-bar catalog-meta"><p><strong>14</strong> {tr('plantillas para personalizar', 'templates to customize')}</p><p>{tr('Gratis · Sin registro · Código incluido', 'Free · No signup · Source code included')}</p></div>'''
+    hero = f'''<div class="templates-head page-head catalog-hero"><div class="catalog-hero__copy"><p class="eyebrow">HTML · CSS · JAVASCRIPT</p><h1>{escape(title)}</h1><p class="catalog-hero__statement">{tr('Elige una pieza.<br>Hazla tuya.', 'Find your piece.<br>Make it yours.')}</p><p class="lede">{tr('Elige un mockup para mostrar tu proyecto, un carrusel para tus productos o una galería para tu portafolio. Prueba los controles y descarga el código.', english_copy['lede'])}</p><div class="catalog-hero__actions"><a class="btn btn--primary" href="#{index}">{tr('Explorar plantillas', 'Explore templates')} <span aria-hidden="true">↓</span></a><a class="catalog-text-link" href="#{how}">{tr('Cómo empezar', 'How to get started')} <span aria-hidden="true">↗</span></a></div></div><div class="catalog-hero__art" aria-hidden="true"><span class="catalog-art__label">LIENZO / {tr('BIBLIOTECA WEB', 'WEB LIBRARY')}</span><div class="catalog-art__window catalog-art__window--back"><span class="catalog-art__bar"><i></i><i></i><i></i><span>cards.css</span></span><img src="demos/laboratorio-3d/preview.svg{preview_version}" alt="" width="600" height="320" decoding="async"></div><div class="catalog-art__window catalog-art__window--front"><span class="catalog-art__bar"><i></i><i></i><i></i><span>your-next-idea.html</span></span><img src="demos/tarjetas-producto/preview.svg{product_preview_version}" alt="" width="600" height="320" decoding="async"></div><span class="catalog-art__badge">&lt;/&gt; <span>{tr('Código para crear', 'Code to create')}</span></span></div></div>'''
+    bar = f'''<div class="templates-bar catalog-meta"><p><strong>{template_count}</strong> {tr('plantillas para personalizar', 'templates to customize')}</p><p>{tr('Gratis · Sin registro · Código incluido', 'Free · No signup · Source code included')}</p></div>'''
     links = []
     groups = []
     for number, group in enumerate(GROUPS, 1):
@@ -107,7 +115,7 @@ def enhance_template_catalog(raw, route):
         values = [choice[1 if en else 0], choice[3 if en else 2], choice[4]]
         labels = ['Best for', 'Customize', 'Code'] if en else ['Para qué', 'Personaliza', 'Código']
         rows.append(f'<tr><th scope="row"><a href="#{slug}">{escape(cards[slug].find("h3").get_text())}<span aria-hidden="true"> ↗</span></a></th>'+''.join(f'<td data-label="{label}">{escape(value)}</td>' for label, value in zip(labels, values))+'</tr>')
-    comparison = f'''<details class="catalog-compare" id="{compare}"><summary><span><strong>{tr('¿Cuál encaja con tu idea?', 'Which one fits your idea?')}</strong><span>{tr('Compara usos, personalización y código de las catorce plantillas.', 'Compare uses, customization, and code across all fourteen templates.')}</span></span><span class="catalog-compare__toggle" aria-hidden="true">+</span></summary><div class="catalog-compare__content"><table><caption class="sr-only">{tr('Comparación de las catorce plantillas web', 'Compare all fourteen web templates')}</caption><thead><tr><th scope="col">{tr('Plantilla', 'Template')}</th><th scope="col">{tr('Para qué', 'Best for')}</th><th scope="col">{tr('Personaliza', 'Customize')}</th><th scope="col">{tr('Código', 'Code')}</th></tr></thead><tbody>{''.join(rows)}</tbody></table><p>{tr('Los botones sociales funcionan con HTML y CSS; el cambio de tema de sus demos usa JavaScript. Son piezas de interfaz, no sitios completos ni temas instalables. Las tarjetas de producto no realizan pedidos ni pagos.', 'The social buttons work with HTML and CSS; their demo theme controls use JavaScript. These are UI pieces, not complete websites or installable themes. Product cards do not process orders or payments.')}</p></div></details>'''
+    comparison = f'''<details class="catalog-compare" id="{compare}"><summary><span><strong>{tr('¿Cuál encaja con tu idea?', 'Which one fits your idea?')}</strong><span>{tr('Compara usos, personalización y código de las plantillas.', 'Compare use cases, customization options, and source code.')}</span></span><span class="catalog-compare__toggle" aria-hidden="true">+</span></summary><div class="catalog-compare__content"><table><caption class="sr-only">{tr('Comparación de las plantillas web', 'Compare all web templates')}</caption><thead><tr><th scope="col">{tr('Plantilla', 'Template')}</th><th scope="col">{tr('Para qué', 'Best for')}</th><th scope="col">{tr('Personaliza', 'Customize')}</th><th scope="col">{tr('Código', 'Code')}</th></tr></thead><tbody>{''.join(rows)}</tbody></table><p>{tr('Los botones sociales funcionan con HTML y CSS; el cambio de tema de sus demos usa JavaScript. Son piezas de interfaz, no sitios completos ni temas instalables. Las tarjetas de producto no realizan pedidos ni pagos.', 'The social buttons work with HTML and CSS; their demo theme controls use JavaScript. These are UI pieces, not complete websites or installable themes. Product cards do not process orders or payments.')}</p></div></details>'''
     note = f'<p class="templates-note catalog-note">{tr("Cada ZIP incluye código, fuentes locales, guía y licencias. Descomprime y abre index.html: sin instalar paquetes.", "Each ZIP includes source code, local fonts, a guide, and licenses. Extract it and open index.html: no packages to install.")}</p>'
     replacement = '<section class="section shell templates-section">' + breadcrumb + hero + bar + nav + comparison + '<div class="templates-library" data-template-library>' + ''.join(groups) + '</div>' + note + '</section>'
     updated = _ranges().replace_element(raw, replacement, tag='section', class_name='templates-section')
@@ -116,7 +124,7 @@ def enhance_template_catalog(raw, route):
         data = json.loads(match.group(1))
         for node in data.get('@graph', [data]):
             if node.get('@type') in ['CollectionPage','WebPage'] and 'description' in node:
-                node['description'] = tr('14 plantillas HTML, CSS y JavaScript para probar, personalizar y descargar.', english_copy['description'])
+                node['description'] = tr(f'{template_count} plantillas HTML, CSS y JavaScript para probar, personalizar y descargar.', english_copy['description'])
                 if en:
                     node['name'] = english_copy['title'].removesuffix(' | Lienzo')
             if node.get('@type') == 'ItemList':
@@ -126,7 +134,7 @@ def enhance_template_catalog(raw, route):
     # Keep the English catalog's search and share copy in sync on every rebuild.
     if en:
         updated = re.sub(r'<title>[^<]*</title>', lambda _: '<title>' + escape(english_copy['title']) + '</title>', updated, count=1)
-    description = tr('14 plantillas web HTML, CSS y JavaScript gratis: galerías, tarjetas, menús, iconos, partículas y botones. Prueba, personaliza y descarga el código.', english_copy['description'])
+    description = tr(f'{template_count} plantillas web HTML, CSS y JavaScript gratis. Prueba mockups, galerías, tarjetas y menús. Personaliza y descarga el código.', english_copy['description'])
     for match in reversed(list(re.finditer(r'<meta\b[^>]*>', updated))):
         meta = BeautifulSoup(match.group(), 'html.parser').meta
         if meta.get('name') in ['description', 'twitter:description'] or meta.get('property') == 'og:description':
@@ -154,4 +162,4 @@ if __name__ == '__main__':
     for route in ['/codigo-web/plantillas/','/en/templates/']:
         path = ROOT / route.lstrip('/') / 'index.html'
         path.write_text(enhance_template_catalog(path.read_text(encoding='utf-8'),route),encoding='utf-8')
-    print('Organized fourteen templates in six categories per language; earlier demos unchanged.')
+    print(f'Organized {len(CHOICES)} templates in {len(GROUPS)} categories per language.')
