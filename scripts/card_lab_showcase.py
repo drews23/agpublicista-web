@@ -73,7 +73,59 @@ def document(lang):
 <details class="lab-help"><summary>{tr('Lleva el material a tu proyecto', 'Bring the material to your project')}</summary><p>{tr('Abre el ZIP completo sin instalar paquetes. Personaliza una tarjeta y usa Copiar HTML o Descargar HTML para obtener su documento de ejemplo. Conserva styles.css, script.js y assets/ junto a él. La guía incluida explica la integración y los controles.', 'Open the complete ZIP without installing packages. Customize a card, then use Copy HTML or Download HTML for its example document. Keep styles.css, script.js, and assets/ beside it. The included guide explains integration and controls.')}</p></details>
 <p class="lab-status" data-status role="status" aria-live="polite" aria-atomic="true"></p></main>
 <footer class="lab-footer lab-container"><span>{tr('Código MIT · Fuentes OFL · Sin dependencias externas', 'MIT code · OFL fonts · No external dependencies')}</span><a href="https://creativomarketingdigital.com/" target="_blank" rel="noopener">{tr('Colaboración: MD Estudio Creativo', 'Collaboration: MD Estudio Creativo')} ↗</a></footer>
-<dialog class="lab-dialog" data-detail-dialog aria-labelledby="detail-title"><header class="lab-dialog__header"><div><p class="lab-eyebrow">LIENZO / MATERIAL EDITOR</p><h2 id="detail-title" data-detail-title>{escape(items[0]['name'])}</h2></div><button type="button" class="lab-icon" data-close aria-label="{tr('Cerrar personalización', 'Close customization')}">{icon('close')}</button></header><div class="lab-editor"><div class="lab-editor__preview"><div data-detail-card>{card(items[0],0,lang,True)}</div><button type="button" class="lab-button" data-detail-test>{icon('layers')}{tr('Probar efecto', 'Test effect')}</button></div><form class="lab-editor__form" data-editor><label>{tr('Título', 'Title')}<input name="name" data-name maxlength="48" required autocomplete="off"></label><label>{tr('Descripción', 'Description')}<textarea name="description" data-description maxlength="160" rows="3" required></textarea></label><fieldset><legend>{tr('Acento de marca', 'Brand accent')}</legend><div class="lab-swatches">{swatches}</div></fieldset><label class="lab-range">{tr('Profundidad de capas', 'Layer depth')}<output data-depth-output>28 px</output><input type="range" data-depth min="0" max="48" step="2" value="28"></label><label class="lab-range">{tr('Inclinación máxima', 'Maximum tilt')}<output data-tilt-output>10°</output><input type="range" data-tilt min="0" max="14" step="1" value="10"></label><button type="button" class="lab-reset" data-reset>{icon('reset')}{tr('Restablecer esta tarjeta', 'Reset this card')}</button><p class="lab-editor__note">{tr('Los cambios se aplican a esta tarjeta. Se reinician al recargar.', 'Changes apply to this card. They reset when you reload.')}</p></form></div><div class="lab-dialog__exports"><button type="button" class="lab-button lab-button--primary" data-copy-html>{icon('copy')}{tr('Copiar HTML', 'Copy HTML')}</button><button type="button" class="lab-button" data-copy-css>{tr('Copiar CSS', 'Copy CSS')}</button><button type="button" class="lab-button" data-download>{icon('download')}{tr('Descargar HTML', 'Download HTML')}</button><span>{tr('Conserva los archivos locales del ZIP.', 'Keep the local files from the ZIP.')}</span></div><p class="lab-status" data-dialog-status role="status" aria-live="polite"></p></dialog>
+<dialog class="lab-dialog" data-detail-dialog aria-labelledby="detail-title">
+  <header class="lab-dialog__header">
+    <div><p class="lab-eyebrow">{tr('Vista previa', 'Live preview')}</p><h2 id="detail-title" data-detail-title>{escape(items[0]['name'])}</h2></div>
+    <div class="lab-dialog__actions">
+      <button type="button" class="editor-legacy-toggle" data-lab-settings><span data-editor-toggle-label>{tr('Ocultar ajustes', 'Hide settings')}</span></button>
+      <button type="button" class="lab-icon" data-close aria-label="{tr('Cerrar personalización', 'Close customization')}">{icon('close')}</button>
+    </div>
+  </header>
+  <div class="lab-editor">
+    <div class="lab-editor__preview">
+      <div data-detail-card>{card(items[0],0,lang,True)}</div>
+      <button type="button" class="lab-button" data-detail-test>{icon('layers')}{tr('Probar efecto', 'Test effect')}</button>
+    </div>
+    <form class="lab-editor__form" data-editor aria-label="{tr('Ajustes de la tarjeta', 'Card settings')}">
+      <details class="lab-editor__section" open>
+        <summary>{tr('Contenido', 'Content')}</summary>
+        <div class="lab-editor__fields">
+          <label>{tr('Título', 'Title')}<input name="name" data-name maxlength="48" required autocomplete="off"></label>
+          <label>{tr('Descripción', 'Description')}<textarea name="description" data-description maxlength="160" rows="3" required></textarea></label>
+        </div>
+      </details>
+      <details class="lab-editor__section">
+        <summary>{tr('Apariencia y movimiento', 'Appearance and motion')}</summary>
+        <div class="lab-editor__fields">
+          <fieldset><legend>{tr('Acento de marca', 'Brand accent')}</legend><div class="lab-swatches">{swatches}</div></fieldset>
+          <div class="lab-range">
+            <label for="lab-depth">{tr('Profundidad de capas', 'Layer depth')}</label><output for="lab-depth" data-depth-output>28 px</output>
+            <input id="lab-depth" type="range" data-depth min="0" max="48" step="2" value="28">
+          </div>
+          <div class="lab-range">
+            <label for="lab-tilt">{tr('Inclinación máxima', 'Maximum tilt')}</label><output for="lab-tilt" data-tilt-output>10°</output>
+            <input id="lab-tilt" type="range" data-tilt min="0" max="14" step="1" value="10">
+          </div>
+        </div>
+      </details>
+      <details class="lab-editor__section" data-lab-copy>
+        <summary>{tr('Copiar código', 'Copy code')}</summary>
+        <div class="lab-editor__fields lab-editor__copy">
+          <button type="button" class="lab-button" data-copy-html>{icon('copy')}{tr('Copiar HTML', 'Copy HTML')}</button>
+          <button type="button" class="lab-button" data-copy-css>{tr('Copiar CSS', 'Copy CSS')}</button>
+        </div>
+      </details>
+      <button type="button" class="lab-reset" data-reset>{icon('reset')}{tr('Restablecer esta tarjeta', 'Reset this card')}</button>
+    </form>
+  </div>
+  <footer class="lab-dialog__exports">
+    <div class="lab-dialog__feedback">
+      <p class="lab-status" data-dialog-status role="status" aria-live="polite"></p>
+      <span>{tr('Conserva los archivos del ZIP.', 'Keep the files from the ZIP.')}</span>
+    </div>
+    <button type="button" class="lab-button lab-button--primary" data-download>{icon('download')}{tr('Descargar HTML', 'Download HTML')}</button>
+  </footer>
+</dialog>
 <dialog class="lab-code-dialog" data-code-dialog aria-labelledby="copy-title"><button type="button" class="lab-icon" data-code-close aria-label="{tr('Cerrar código', 'Close code')}">{icon('close')}</button><h2 id="copy-title">{tr('Copia el código', 'Copy the code')}</h2><p>{tr('Selecciona el texto y usa Ctrl+C o Cmd+C.', 'Select the text and press Ctrl+C or Cmd+C.')}</p><textarea aria-label="{tr('Código para copiar', 'Code to copy')}" readonly></textarea></dialog>
 <script type="application/json" data-designs>{json.dumps(items,ensure_ascii=False)}</script><script type="text/plain" data-source-css>{css}</script></body></html>'''
 
@@ -106,6 +158,8 @@ Move a mouse over a card for pointer tilt. Use Test effect for a short depth dem
 
 The focus deck presents all six designs. Use previous/next, numbered controls, ArrowLeft/ArrowRight/Home/End while focusing its stage, or a horizontal swipe. Vertical gestures retain normal page scrolling. Manual navigation stops at either end. There is no autoplay. Escape closes the editor and restores focus. System reduced motion or Pause effects disables pointer tilt and test animation; static depth remains.
 
+In the editor, Content opens first. Expand Appearance and motion for accent, depth, and tilt. Use Your brand for the collection palette and fonts. Hide settings gives the preview more room and keeps the current values. Download HTML stays in the footer. Copy HTML and Copy CSS are grouped under Copy code.
+
 ## Integrate and export
 Copy HTML and Download HTML produce a complete single-card example document with its current text, accent, depth, and tilt. Keep styles.css, script.js, and assets/ beside it. The editor and its controls remain functional. Copy CSS includes the whole scoped stylesheet. This is not a dependency-free fragment or a preconfigured React component. Use the full ZIP as the integration reference and preserve the ln-lab container, data attributes, scripts, and dialogs you need.
 
@@ -126,6 +180,8 @@ Descomprime el ZIP completo y abre index.html. Fuentes, logo, CSS y JavaScript s
 Mueve el ratón sobre una tarjeta para inclinarla. Probar efecto ofrece una demostración breve del relieve, también con toque o teclado. Cambiar acento alterna solo entre violeta, menta y ámbar del logo. Copiar HTML exporta esa tarjeta. Personalizar abre un editor nativo con título/descripción en vivo, tres acentos de marca, profundidad de capas (0–48 px) e inclinación máxima (0–14 grados). Restablecer recupera solo la tarjeta elegida. Los ajustes son por tarjeta y se reinician al recargar.
 
 La mesa de pruebas muestra los seis diseños. Usa anterior/siguiente, indicadores numerados, flechas/Inicio/Fin al enfocar el escenario o un gesto horizontal. Los gestos verticales conservan el desplazamiento de la página. La navegación manual se detiene en los extremos. No hay avance automático. Escape cierra el editor y devuelve el foco. Movimiento reducido del sistema o Pausar efectos desactivan inclinación y prueba animada; el relieve estático permanece.
+
+En el editor, Contenido abre primero. Despliega Apariencia y movimiento para ajustar el acento, la profundidad y la inclinación. Abre Tu marca para cambiar la paleta y las fuentes de la colección. Ocultar ajustes amplía la vista previa y conserva los valores actuales. Descargar HTML queda al pie del editor. Copiar HTML y Copiar CSS se agrupan en Copiar código.
 
 ## Integrar y exportar
 Copiar HTML y Descargar HTML entregan un documento completo de una tarjeta con su texto, acento, profundidad e inclinación actuales. Conserva styles.css, script.js y assets/ junto a él. El editor y sus controles siguen funcionando. Copiar CSS incluye la hoja completa con sus estilos delimitados. No es un fragmento sin dependencias ni un componente React preparado. El ZIP completo es la referencia funcional; conserva contenedor ln-lab, atributos data-, scripts y diálogos que necesites.

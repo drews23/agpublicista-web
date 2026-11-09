@@ -138,7 +138,8 @@ def adapt_markup(raw, slug, lang):
     elif slug == 'laboratorio-3d':
         workspace = soup.select_one('[data-detail-dialog]')
         frame(workspace, soup.select_one('.lab-editor'), soup.select_one('.lab-editor__preview'),
-              soup.select_one('.lab-editor__form'), soup.select_one('.lab-dialog__header'))
+              soup.select_one('.lab-editor__form'), soup.select_one('.lab-dialog__header'),
+              workspace.select_one('[data-lab-settings]'))
     elif slug == 'tarjetas-producto':
         workspace = soup.select_one('[data-detail-dialog]')
         original = soup.select_one('.pc-detail__layout')
@@ -286,6 +287,8 @@ def brand_markup(soup, slug, lang):
             body.select_one('[data-reset]').insert_before(host)
         elif slug == 'carrusel-progreso':
             panel.append(host)
+        elif slug == 'laboratorio-3d' and (copy_section := panel.select_one('[data-lab-copy]')):
+            copy_section.insert_before(host)
         else:
             panel.insert(0, host)
     if slug in SLUGS[:2] and not panel.select_one('[data-social-export]'):

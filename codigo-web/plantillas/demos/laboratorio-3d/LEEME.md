@@ -9,6 +9,8 @@ Mueve el ratón sobre una tarjeta para inclinarla. Probar efecto ofrece una demo
 
 La mesa de pruebas muestra los seis diseños. Usa anterior/siguiente, indicadores numerados, flechas/Inicio/Fin al enfocar el escenario o un gesto horizontal. Los gestos verticales conservan el desplazamiento de la página. La navegación manual se detiene en los extremos. No hay avance automático. Escape cierra el editor y devuelve el foco. Movimiento reducido del sistema o Pausar efectos desactivan inclinación y prueba animada; el relieve estático permanece.
 
+En el editor, Contenido abre primero. Despliega Apariencia y movimiento para ajustar el acento, la profundidad y la inclinación. Abre Tu marca para cambiar la paleta y las fuentes de la colección. Ocultar ajustes amplía la vista previa y conserva los valores actuales. Descargar HTML queda al pie del editor. Copiar HTML y Copiar CSS se agrupan en Copiar código.
+
 ## Integrar y exportar
 Copiar HTML y Descargar HTML entregan un documento completo de una tarjeta con su texto, acento, profundidad e inclinación actuales. Conserva styles.css, script.js y assets/ junto a él. El editor y sus controles siguen funcionando. Copiar CSS incluye la hoja completa con sus estilos delimitados. No es un fragmento sin dependencias ni un componente React preparado. El ZIP completo es la referencia funcional; conserva contenedor ln-lab, atributos data-, scripts y diálogos que necesites.
 

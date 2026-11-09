@@ -15,11 +15,6 @@
 /* Dialog editors have a pinned preview and an independently scrollable inspector. */
 [data-editor-legacy] dialog[data-editor-workspace]{--editor-header-height:90px;width:min(1240px,calc(100vw - 32px));max-width:calc(100vw - 32px)}
 [data-editor-legacy] dialog[data-editor-workspace] [data-editor-layout]{padding:22px}
-[data-editor-legacy="laboratorio-3d"] .lab-editor{grid-template-columns:minmax(0,1fr) minmax(280px,340px);padding:22px}
-[data-editor-legacy="laboratorio-3d"] .lab-editor__preview{padding:14px 12px;min-height:320px;gap:14px}
-[data-editor-legacy="laboratorio-3d"] .lab-card--preview{min-height:270px}
-[data-editor-legacy="laboratorio-3d"] .lab-editor__form{padding:22px;gap:18px}
-[data-editor-legacy="laboratorio-3d"] .lab-dialog__header .editor-legacy-toggle{margin-left:auto;margin-right:12px}
 [data-editor-legacy="tarjetas-producto"] .pc-detail__layout{display:flex;flex-direction:column;gap:20px;padding:0}
 [data-editor-legacy="tarjetas-producto"] .pc-detail__visual{min-height:240px}
 [data-editor-legacy="tarjetas-producto"] .pc-detail__visual img{max-height:260px}
@@ -113,10 +108,6 @@
  [data-editor-legacy] [data-editor-panel]{max-height:none;overflow:visible;padding:18px}
  [data-editor-legacy] dialog[data-editor-workspace]{--editor-header-height:66px}
  [data-editor-legacy] dialog[data-editor-workspace] [data-editor-layout]{padding:14px}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview{min-height:200px;padding:18px 0}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview .lab-card{width:210px;min-height:220px;max-height:240px}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview .lab-card--cinema{width:100%;max-width:350px}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview .lab-card__description{display:none}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison{padding:16px 0}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-card{max-width:260px;min-height:260px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-scene{--scene-min:235px}
@@ -148,11 +139,6 @@
 @media(prefers-reduced-motion:reduce){[data-editor-legacy] [data-editor-preview]{scroll-behavior:auto}}
 @media(max-height:419px){[data-editor-legacy] [data-editor-preview]{position:relative!important;top:auto!important}}
 @media(max-height:620px){
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview{padding:12px;gap:12px;min-height:250px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview{min-height:200px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview .lab-card__content{padding:20px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview h3{font-size:24px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview .lab-card__description{font-size:11px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison{min-height:300px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-scene{--scene-min:240px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-face__content{padding:14px}

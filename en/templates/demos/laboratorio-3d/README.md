@@ -9,6 +9,8 @@ Move a mouse over a card for pointer tilt. Use Test effect for a short depth dem
 
 The focus deck presents all six designs. Use previous/next, numbered controls, ArrowLeft/ArrowRight/Home/End while focusing its stage, or a horizontal swipe. Vertical gestures retain normal page scrolling. Manual navigation stops at either end. There is no autoplay. Escape closes the editor and restores focus. System reduced motion or Pause effects disables pointer tilt and test animation; static depth remains.
 
+In the editor, Content opens first. Expand Appearance and motion for accent, depth, and tilt. Use Your brand for the collection palette and fonts. Hide settings gives the preview more room and keeps the current values. Download HTML stays in the footer. Copy HTML and Copy CSS are grouped under Copy code.
+
 ## Integrate and export
 Copy HTML and Download HTML produce a complete single-card example document with its current text, accent, depth, and tilt. Keep styles.css, script.js, and assets/ beside it. The editor and its controls remain functional. Copy CSS includes the whole scoped stylesheet. This is not a dependency-free fragment or a preconfigured React component. Use the full ZIP as the integration reference and preserve the ln-lab container, data attributes, scripts, and dialogs you need.
 

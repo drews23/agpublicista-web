@@ -12,28 +12,9 @@
 [data-editor-legacy] .editor-legacy-toggle:focus-visible{outline:3px solid var(--editor-accent);outline-offset:4px}
 [data-editor-legacy] [data-editor-panel] h2{font-family:inherit;font-size:16px;font-weight:600;line-height:1.3;margin:0 0 18px;letter-spacing:normal}
 
-/* Progress carousel: keep the complete original slide, shadows and navigation. */
-[data-editor-legacy="carrusel-progreso"] .showcase-settings__fields{display:flex;flex-direction:column;align-items:stretch;gap:24px;padding:0}
-[data-editor-legacy="carrusel-progreso"] .showcase-settings__fields label{display:flex;flex-direction:column;align-items:stretch;gap:12px}
-[data-editor-legacy="carrusel-progreso"] .showcase-settings__fields input[type=range]{width:100%}
-[data-editor-legacy="carrusel-progreso"] .editor-legacy-settings h2{font-size:17px}
-[data-editor-legacy="carrusel-progreso"] .showcase-stage{height:320px}
-[data-editor-legacy="carrusel-progreso"] .showcase-card{height:230px;width:clamp(225px,24vw,280px);margin-top:40px}
-[data-editor-legacy="carrusel-progreso"] .showcase-card__figure{top:-85px}
-[data-editor-legacy="carrusel-progreso"] .showcase-card__copy{bottom:18px;left:22px;right:22px}
-[data-editor-legacy="carrusel-progreso"] .showcase-card h2{font-size:1.65rem}
-[data-editor-legacy="carrusel-progreso"] .showcase-controls{gap:16px;padding-bottom:8px}
-[data-editor-legacy="carrusel-progreso"] .showcase-bottom{padding:10px 0}
-[data-editor-legacy="carrusel-progreso"] .showcase-note{display:none}
-
 /* Dialog editors have a pinned preview and an independently scrollable inspector. */
 [data-editor-legacy] dialog[data-editor-workspace]{--editor-header-height:90px;width:min(1240px,calc(100vw - 32px));max-width:calc(100vw - 32px)}
 [data-editor-legacy] dialog[data-editor-workspace] [data-editor-layout]{padding:22px}
-[data-editor-legacy="laboratorio-3d"] .lab-editor{grid-template-columns:minmax(0,1fr) minmax(280px,340px);padding:22px}
-[data-editor-legacy="laboratorio-3d"] .lab-editor__preview{padding:14px 12px;min-height:320px;gap:14px}
-[data-editor-legacy="laboratorio-3d"] .lab-card--preview{min-height:270px}
-[data-editor-legacy="laboratorio-3d"] .lab-editor__form{padding:22px;gap:18px}
-[data-editor-legacy="laboratorio-3d"] .lab-dialog__header .editor-legacy-toggle{margin-left:auto;margin-right:12px}
 [data-editor-legacy="tarjetas-producto"] .pc-detail__layout{display:flex;flex-direction:column;gap:20px;padding:0}
 [data-editor-legacy="tarjetas-producto"] .pc-detail__visual{min-height:240px}
 [data-editor-legacy="tarjetas-producto"] .pc-detail__visual img{max-height:260px}
@@ -127,10 +108,6 @@
  [data-editor-legacy] [data-editor-panel]{max-height:none;overflow:visible;padding:18px}
  [data-editor-legacy] dialog[data-editor-workspace]{--editor-header-height:66px}
  [data-editor-legacy] dialog[data-editor-workspace] [data-editor-layout]{padding:14px}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview{min-height:200px;padding:18px 0}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview .lab-card{width:210px;min-height:220px;max-height:240px}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview .lab-card--cinema{width:100%;max-width:350px}
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview .lab-card__description{display:none}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison{padding:16px 0}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-card{max-width:260px;min-height:260px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-scene{--scene-min:235px}
@@ -145,10 +122,6 @@
  [data-editor-legacy="iconos-animados"] .mi-stage{min-height:170px;height:170px}
  [data-editor-legacy="iconos-animados"] .mi-preview__caption,[data-editor-legacy="iconos-animados"] .mi-rest{display:none}
  [data-editor-legacy="iconos-animados"] .mi-playback{padding-top:10px}
- [data-editor-legacy="carrusel-progreso"] .showcase{max-height:none}
- [data-editor-legacy="carrusel-progreso"] .showcase-viewport{height:250px}
- [data-editor-legacy="carrusel-progreso"] .showcase-stage{height:250px!important}
- [data-editor-legacy="carrusel-progreso"] .showcase-slide{--card-height:210px}
  [data-editor-legacy="carrusel-recursos"] .rc-editor-preview{padding-bottom:8px}
  [data-editor-legacy="carrusel-recursos"] .rc-editor-preview .rc-filter-row{display:flex;min-width:0;gap:8px;flex-wrap:nowrap}
  [data-editor-legacy="carrusel-recursos"] .rc-editor-preview .rc-filters{min-width:0;overflow-x:auto;scrollbar-width:thin;flex-wrap:nowrap}
@@ -166,11 +139,6 @@
 @media(prefers-reduced-motion:reduce){[data-editor-legacy] [data-editor-preview]{scroll-behavior:auto}}
 @media(max-height:419px){[data-editor-legacy] [data-editor-preview]{position:relative!important;top:auto!important}}
 @media(max-height:620px){
- [data-editor-legacy="laboratorio-3d"] .lab-editor__preview{padding:12px;gap:12px;min-height:250px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview{min-height:200px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview .lab-card__content{padding:20px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview h3{font-size:24px}
- [data-editor-legacy="laboratorio-3d"] .lab-card--preview .lab-card__description{font-size:11px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison{min-height:300px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-scene{--scene-min:240px}
  [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-face__content{padding:14px}
@@ -184,15 +152,6 @@
  [data-editor-legacy="iconos-animados"] .mi-playback{padding:10px 0 0}
  [data-editor-legacy="tarjetas-producto"] .pc-detail__visual{min-height:190px}
  [data-editor-legacy="tarjetas-producto"] .pc-detail__visual img{max-height:220px}
- [data-editor-legacy="carrusel-progreso"] .showcase-stage{height:240px}
- [data-editor-legacy="carrusel-progreso"] .showcase-card{height:170px;width:220px;margin-top:30px}
- [data-editor-legacy="carrusel-progreso"] .showcase-card__figure{top:-70px}
- [data-editor-legacy="carrusel-progreso"] .showcase-card h2{font-size:1.3rem;margin-bottom:6px}
- [data-editor-legacy="carrusel-progreso"] .showcase-card__copy{bottom:14px}
- [data-editor-legacy="carrusel-progreso"] .showcase-card__category{font-size:.55rem;margin-bottom:5px}
- [data-editor-legacy="carrusel-progreso"] .showcase-card__price{font-size:.85rem}
- [data-editor-legacy="carrusel-progreso"] .showcase-controls{padding-bottom:0}
- [data-editor-legacy="carrusel-progreso"] .showcase-bottom{padding:6px 0}
 }
 @media(max-width:959px) and (min-height:420px){
  [data-editor-legacy] [data-editor-workspace]:not([data-editor-collapsed=true]):not([data-editor-natural=true]) [data-editor-layout]{height:var(--editor-available-height);grid-template-rows:minmax(150px,46%) minmax(150px,1fr)}

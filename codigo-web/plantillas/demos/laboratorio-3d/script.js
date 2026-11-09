@@ -16,6 +16,7 @@
   const byKey = new Map(designs.map(item => [item.key,item]));
   const gallery = document.querySelector('.lab-grid');
   const detail = document.querySelector('[data-detail-dialog]');
+  const editor = detail.querySelector('[data-editor]');
   const codeDialog = document.querySelector('[data-code-dialog]');
   const stage = document.querySelector('[data-stage]');
   const previous = document.querySelector('[data-prev]');
@@ -155,7 +156,8 @@
       document.querySelectorAll('[data-card-key="'+key+'"]').forEach(cleanMotion);
       tests.delete(key);
     },1250));
-    notify(say('Prueba de profundidad: ','Depth preview: ')+byKey.get(key).name+'.');
+    notify(detail.open ? say('Probando el efecto.','Testing the effect.') :
+      say('Prueba de profundidad: ','Depth preview: ')+byKey.get(key).name+'.');
   }
   root.addEventListener('pointerover',event => {
     const card = event.target.closest('.lab-card');
@@ -210,8 +212,9 @@
 
   function openEditor(key,button) {
     choose(key,false);opener=button;detail.showModal();
+    window.LienzoEditorWorkspace.setOpen(editor, true);
     document.querySelector('[data-dialog-status]').textContent='';
-    detail.scrollTop=0;
+    detail.scrollTop=0;editor.scrollTop=0;
   }
   gallery.addEventListener('click',event => {
     const button=event.target.closest('button');
@@ -231,7 +234,7 @@
   document.querySelector('[data-close]').addEventListener('click',() => detail.close());
   detail.addEventListener('close',() => {stopTests();opener?.focus({preventScroll:true});});
   document.querySelector('[data-detail-test]').addEventListener('click',() => testEffect(selected));
-  document.querySelector('[data-editor]').addEventListener('submit',event => event.preventDefault());
+  editor.addEventListener('submit',event => event.preventDefault());
   nameField.addEventListener('input',() => {
     byKey.get(selected).name=nameField.value.trim()||defaults.find(item=>item.key===selected).name;render();
   });
@@ -281,7 +284,7 @@
         const field=document.createElement('textarea');field.value=text;field.className='lab-sr';root.append(field);field.select();
         let ok;try{ok=document.execCommand('copy');}finally{field.remove();}if(!ok)throw Error('Clipboard unavailable');
       }
-      notify(say('Código copiado. Conserva los archivos locales del ZIP.','Code copied. Keep the local files from the ZIP.'));
+      notify(say('Código copiado.','Code copied.'));
     } catch {
       codeOpener=button||document.activeElement;
       codeDialog.querySelector('textarea').value=text;codeDialog.showModal();
@@ -296,7 +299,7 @@
     const blob=new Blob([exportDocument(selected)],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
     const link=document.createElement('a');link.href=url;link.download='lienzo-'+selected+'.html';root.append(link);link.click();link.remove();
     setTimeout(()=>URL.revokeObjectURL(url),1000);
-    notify(say('HTML descargado. Conserva CSS, JS y assets/ del ZIP.','HTML downloaded. Keep CSS, JS, and assets/ from the ZIP.'));
+    notify(say('HTML descargado.','HTML downloaded.'));
   });
   document.querySelectorAll('a[href="#lab-grid"],a[href="#lab-deck"]').forEach(link=>link.addEventListener('click',event=>{
     const target=document.querySelector(link.getAttribute('href'));if(!target)return;
