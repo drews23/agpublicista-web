@@ -6,6 +6,16 @@
   const {state, ui, $, $$, colors} = a;
   const grid = $('[data-context-cards]'), menu = $('[data-menu]'), submenu = $('[data-submenu]');
   const preview = $('[data-context-preview]'), search = $('[data-context-search]');
+  const workspace = $('[data-editor-workspace]'), editor = $('[data-editor-panel]');
+  const toggle = $('[data-edit]'), apply = editor.querySelector('button[type=submit]');
+  const inspector = $('.cm-inspector'), selectedActions = $('[data-selected-actions]');
+  const tryMenu = $('[data-try-context]');
+  const media = $('[data-context-media]'), artChoice = $('[data-context-art-choice]');
+  const upload = $('[data-context-upload]'), removeImage = $('[data-context-remove-image]');
+  const imageStatus = $('[data-context-image-status]');
+  const iconPresets = ['folder', 'image', 'external'];
+  const imageJobs = new Map();
+  const editing = () => !editor.hidden;
   const actions = [['preview', 'image'], ['rename', 'edit'], ['duplicate', 'copy'], ['save', 'heart'], ['accent', 'sun'], ['remove', 'trash']];
   const history = state.history || (state.history = []);
   let nextId = Math.max(-1, ...state.items.map(item => Number(item.id)), ...history.map(entry => Number(entry.item.id))) + 1;
@@ -14,6 +24,10 @@
   const current = () => state.items[state.active];
   const cardFor = id => $$('[data-context-id]').find(node => node.dataset.contextId === String(id));
   const matching = item => (state.filter !== 'saved' || item.saved) && [item.title, item.description, item.category].join(' ').toLocaleLowerCase().includes((state.query || '').trim().toLocaleLowerCase());
+  const imageSource = item => {
+    const value = item?.imageData;
+    return typeof value === 'string' && /^data:image\/(?:webp|png|jpeg);base64,[A-Za-z0-9+/]+={0,2}$/.test(value) ? value : '';
+  };
   function artwork(index) {
     const head = '<svg viewBox="0 0 720 540" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M30 40h32M30 40v32M690 500h-32M690 500v-32" stroke="currentColor" opacity=".24"/>';
     const tail = '<path d="M42 482h72m8 0h18" stroke="currentColor" opacity=".48" stroke-width="2"/><text x="640" y="66" fill="currentColor" opacity=".55" font-family="Instrument,sans-serif" font-size="13">L.</text></svg>';
@@ -23,6 +37,22 @@
       '<g class="cm-art-core"><circle cx="360" cy="270" r="111" fill="currentColor" opacity=".1"/><circle cx="360" cy="270" r="88" fill="currentColor" opacity=".66"/><path d="M288 218a90 90 0 0 1 131 122" stroke="var(--cm-art-ink)" stroke-width="18" opacity=".48"/><g class="cm-orbit"><ellipse cx="360" cy="270" rx="222" ry="85" transform="rotate(-33 360 270)" stroke="currentColor" stroke-width="2"/><circle cx="180" cy="373" r="19" fill="var(--mint)"/><circle cx="545" cy="172" r="9" fill="currentColor"/></g><ellipse cx="360" cy="270" rx="220" ry="85" transform="rotate(33 360 270)" stroke="currentColor" opacity=".35"/><path d="M348 270h24m-12-12v24" stroke="var(--cm-art-ink)" stroke-width="2"/></g>'
     ];
     return head + art[Math.abs(Number(index) || 0) % 3] + tail;
+  }
+  function cardVisual(item) {
+    const src = imageSource(item);
+    if (src) return `<img class="cm-user-image" src="${src}" alt="" decoding="async">`;
+    const icon = iconPresets[Number(item.art) - 3];
+    if (icon) return '<span class="cm-art-symbol" aria-hidden="true">' + a.icon(icon) + '</span>';
+    return artwork(item.art);
+  }
+  function syncImageControls(item) {
+    $('[data-source]').disabled = imageJobs.size > 0;
+    if (!item) return;
+    artChoice.value = String(item.art);
+    if (artChoice.selectedIndex === -1) artChoice.selectedIndex = 0;
+    const hasImage = Boolean(imageSource(item));
+    removeImage.hidden = !hasImage;
+    imageStatus.textContent = imageJobs.has(item.id) ? ui.contextImageLoading : hasImage ? ui.contextImageReady : '';
   }
   function syncSelection() {
     const item = current();
@@ -34,21 +64,37 @@
     $('[data-inspector-empty]').hidden = Boolean(item);
     $('.cm-inspector-body').hidden = !item;
     $('[data-selected-art]').hidden = !item;
-    $('[data-edit]').disabled = !item;
+    syncEditorButtons();
+    syncImageControls(item);
     if (!item) { a.text('[data-selected-index]', '—'); return; }
-    a.root.style.setProperty('--accent', colors[item.accent] || colors.violet);
-    $('.cm-inspector').style.setProperty('--card-accent', colors[item.accent]);
-    $('[data-selected-art]').innerHTML = artwork(item.art);
+    $('[data-stage]').style.setProperty('--accent', colors[item.accent] || colors.violet);
+    inspector.style.setProperty('--card-accent', colors[item.accent]);
+    $('[data-selected-art]').innerHTML = cardVisual(item);
     a.text('[data-selected-index]', String(state.active + 1).padStart(2, '0'));
     a.text('[data-selected-title]', item.title);
     a.text('[data-selected-description]', item.description);
     a.text('[data-selected-category]', item.category);
+    a.text('[data-selected-format]', imageSource(item) ? ui.contextImageFormat : 'SVG + CSS');
     a.text('[data-selected-accent]', ui[item.accent]);
     a.text('[data-selected-status]', item.saved ? ui.isSaved : ui.notSaved);
   }
+  function syncEditorButtons() {
+    const empty = !current();
+    if (empty && !editing() && document.activeElement === toggle) search.focus({preventScroll:true});
+    toggle.disabled = empty && !editing();
+    tryMenu.disabled = empty;
+    apply.disabled = empty;
+  }
+  function focusActions(id) {
+    if (editing()) {
+      (current() ? selectedActions : toggle).focus({preventScroll:true});
+      return;
+    }
+    (cardFor(id)?.querySelector('[data-actions]') || $('[data-filter=all]')).focus();
+  }
   function select(index) { state.active = index; syncSelection(); }
   function render() {
-    menu.hidden = true; submenu.hidden = true;
+    close(false);
     grid.replaceChildren();
     if (!['grid', 'list'].includes(state.layout)) state.layout = 'grid';
     if (!['all', 'saved'].includes(state.filter)) state.filter = 'all';
@@ -59,7 +105,7 @@
       const node = document.createElement('article');
       node.className = 'cm-card'; node.dataset.contextId = String(item.id);
       node.style.setProperty('--card-accent', colors[item.accent] || colors.violet);
-      node.innerHTML = '<button type="button" class="cm-card-select" data-select-card aria-pressed="false"><span class="cm-art">' + artwork(item.art) + '<span class="cm-art-number">' + String(index + 1).padStart(2, '0') + '</span><span class="cm-saved"' + (item.saved ? '' : ' hidden') + '>' + a.icon('heart') + '</span></span><span class="cm-card-copy"><span class="cm-category"></span><span class="cm-title"></span><span class="cm-description"></span></span></button><button type="button" class="cm-actions" data-actions aria-haspopup="menu" aria-expanded="false">' + a.icon('more') + '</button>';
+      node.innerHTML = '<button type="button" class="cm-card-select" data-select-card aria-pressed="false"><span class="cm-art">' + cardVisual(item) + '<span class="cm-art-number">' + String(index + 1).padStart(2, '0') + '</span><span class="cm-saved"' + (item.saved ? '' : ' hidden') + '>' + a.icon('heart') + '</span></span><span class="cm-card-copy"><span class="cm-category"></span><span class="cm-title"></span><span class="cm-description"></span></span></button><button type="button" class="cm-actions" data-actions aria-haspopup="menu" aria-expanded="false">' + a.icon('more') + '</button>';
       node.querySelector('.cm-category').textContent = item.category;
       node.querySelector('.cm-title').textContent = item.title;
       node.querySelector('.cm-description').textContent = item.description;
@@ -101,7 +147,7 @@
     const wasOpen = !menu.hidden;
     menu.hidden = true; submenu.hidden = true;
     menu.querySelector('[data-menu-action=accent]')?.setAttribute('aria-expanded', 'false');
-    $$('[data-actions]').forEach(button => button.setAttribute('aria-expanded', 'false'));
+    $$('[data-actions],[data-selected-actions],[data-try-context]').forEach(button => button.setAttribute('aria-expanded', 'false'));
     if (wasOpen && restore) (opener?.isConnected ? opener : cardFor(targetId)?.querySelector('[data-actions]'))?.focus({preventScroll:true});
   }
   function position(element, x, y) {
@@ -116,7 +162,8 @@
     menu.innerHTML = '<div class="cm-menu-head" role="presentation"><span class="cm-menu-sigil" aria-hidden="true">L.</span><div><strong></strong><span>' + escape(ui.menuLocal) + '</span></div></div>' + actions.map(([key,symbol]) => (key === 'remove' ? '<div class="cm-menu-divider" role="separator"></div>' : '') + '<button type="button" tabindex="-1" role="' + (key === 'save' ? 'menuitemcheckbox' : 'menuitem') + '" data-menu-action="' + key + '"' + (key === 'save' ? ' aria-checked="' + Boolean(item.saved) + '"' : '') + (key === 'accent' ? ' aria-haspopup="menu" aria-expanded="false" aria-controls="cm-color-menu"' : '') + (key === 'duplicate' && state.items.length >= 6 ? ' disabled aria-disabled="true" title="' + escape(ui.duplicateDisabled) + '"' : '') + '><span class="cm-menu-icon">' + a.icon(symbol) + '</span><span>' + escape(key === 'save' && item.saved ? ui.unsave : ui[key]) + '</span>' + (key === 'accent' ? '<span class="cm-menu-arrow" aria-hidden="true">›</span>' : '') + (key === 'save' && item.saved ? '<span class="cm-menu-tick" aria-hidden="true">✓</span>' : '') + '</button>').join('') + '<p class="cm-menu-hint" role="presentation">' + escape(ui.menuKeyboard) + '</p>';
     menu.querySelector('.cm-menu-head strong').textContent = item.title;
     menu.style.setProperty('--accent', colors[item.accent]);
-    cardFor(targetId)?.querySelector('[data-actions]')?.setAttribute('aria-expanded', 'true');
+    const trigger = returnTo?.matches('[aria-haspopup=menu]') ? returnTo : cardFor(targetId)?.querySelector('[data-actions]');
+    trigger?.setAttribute('aria-expanded', 'true');
     menu.hidden = false; position(menu, x, y);
     openedScrollX = scrollX; openedScrollY = scrollY;
     menu.querySelector('[data-menu-action]').focus({preventScroll:true});
@@ -134,7 +181,7 @@
   function openPreview(item, returnTo) {
     previewOpener = returnTo;
     preview.style.setProperty('--card-accent', colors[item.accent]);
-    $('[data-preview-art]').innerHTML = artwork(item.art);
+    $('[data-preview-art]').innerHTML = cardVisual(item);
     a.text('[data-preview-title]', item.title); a.text('[data-preview-description]', item.description); a.text('[data-preview-category]', item.category);
     const href = a.safeURL(item.href);
     $('[data-preview-link]').hidden = !href;
@@ -147,7 +194,13 @@
     state.active = state.items.findIndex(item => item.id === targetId);
     const item = current(); if (!item) { close(); return; }
     if (action === 'accent') { openSubmenu(); return; }
-    if (action === 'rename') { const id = item.id; close(false); a.edit(state.active, () => cardFor(id)?.querySelector('[data-actions]') || search); return; }
+    if (action === 'rename') {
+      close(false);
+      a.edit(state.active, opener);
+      media.open = true;
+      media.querySelector('summary').focus();
+      return;
+    }
     if (action === 'preview') { const returnTo = opener; close(false); openPreview(item, returnTo); return; }
     if (action === 'save') { item.saved = !item.saved; a.status(ui.saved); }
     if (action === 'duplicate') {
@@ -156,18 +209,19 @@
       state.active++; a.status(ui.duplicated);
     }
     if (action === 'remove') {
+      imageJobs.delete(item.id);
       history.push({item: structuredClone(item), index: state.active});
       state.items.splice(state.active, 1); state.active = Math.max(0, Math.min(state.active, state.items.length - 1)); a.status(ui.removed);
     }
     close(false); a.paint();
-    if (action === 'remove') $('[data-undo]').focus();
-    else (cardFor(current()?.id)?.querySelector('[data-actions]') || $('[data-filter=all]')).focus();
+    if (action === 'remove') $('[data-undo]').focus({preventScroll:editing()});
+    else focusActions(current()?.id);
   });
   submenu.addEventListener('click', event => {
     const key = event.target.closest('[data-color]')?.dataset.color;
     if (!Object.hasOwn(colors, key)) return;
     const item = state.items.find(item => item.id === targetId); if (!item) return;
-    item.accent = key; const id = item.id; close(false); a.paint(); cardFor(id)?.querySelector('[data-actions]')?.focus(); a.status(ui.accentChanged);
+    item.accent = key; const id = item.id; close(false); a.paint(); focusActions(id); a.status(ui.accentChanged);
   });
   function keyboard(event) {
     const inSub = submenu.contains(event.target);
@@ -203,40 +257,109 @@
   }, true);
   window.addEventListener('resize', () => close(menuHasFocus()));
   document.addEventListener('keydown', event => {
-    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !preview.open && !$('[data-editor]').open && !$('[data-export-dialog]').open && !/^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)) { event.preventDefault(); close(false); search.focus(); }
+    if (event.key === '/' && !event.ctrlKey && !event.metaKey && !preview.open && !editing() && !$('[data-export-dialog]').open && !/^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)) { event.preventDefault(); close(false); search.focus(); }
   });
   search.addEventListener('input', () => { state.query = search.value; a.paint(); });
   $$('button[data-filter]').forEach(button => button.addEventListener('click', () => { state.filter = button.dataset.filter; a.paint(); }));
   $$('button[data-context-view]').forEach(button => button.addEventListener('click', () => { state.layout = button.dataset.contextView; a.paint(); }));
-  $('[data-clear-filter]').addEventListener('click', () => { state.query = ''; state.filter = 'all'; a.paint(); search.focus(); });
-  $('[data-selected-actions]').addEventListener('click', event => { const r = event.currentTarget.getBoundingClientRect(); open(state.active, r.left, r.bottom + 6, event.currentTarget); });
+  $('[data-clear-filter]').addEventListener('click', () => {
+    state.query = ''; state.filter = 'all'; a.paint();
+    if (editing()) focusActions(current()?.id); else search.focus();
+  });
+  function openSelectedActions(event) {
+    const button = event.currentTarget;
+    const r = button.getBoundingClientRect();
+    open(state.active, r.left, r.bottom + 6, button);
+  }
+  tryMenu.addEventListener('click', openSelectedActions);
+  selectedActions.addEventListener('click', openSelectedActions);
+  selectedActions.addEventListener('keydown', event => {
+    if ((event.shiftKey && event.key === 'F10') || event.key === 'ContextMenu') {
+      event.preventDefault(); openSelectedActions(event);
+    }
+  });
+  $('[data-selected-art]').addEventListener('contextmenu', event => {
+    if (!editing() || !current()) return;
+    event.preventDefault(); open(state.active, event.clientX, event.clientY, selectedActions);
+  });
   $('[data-selected-preview]').addEventListener('click', event => { if (current()) openPreview(current(), event.currentTarget); });
-  $('[data-edit]').addEventListener('click', event => {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    if (!current()) return;
-    const editor = $('[data-editor]');
-    if (!editor.hidden) { window.LienzoEditorWorkspace?.setOpen(editor, false, {reason:'toggle',focus:false}); return; }
-    a.edit(state.active, () => $('[data-edit]').disabled ? search : $('[data-edit]'));
-  }, {capture:true});
+  const docked = matchMedia('(min-width: 960px) and (min-height: 420px), (min-height: 450px)');
+  workspace.dataset.editorFocusAnchor = 'workspace';
+  workspace.addEventListener('lienzo:editor-panel', event => {
+    close(false); syncEditorButtons();
+    if (event.detail.open && docked.matches && workspace.dataset.editorConstrained !== 'true') {
+      workspace.scrollIntoView({block:'start', behavior:'instant'});
+    }
+  });
   $('[data-undo]').addEventListener('click', () => {
     if (!history.length) return;
     if (state.items.length >= 6) { a.status(ui.undoLimit); return; }
     const previous = history.pop(); state.items.splice(Math.min(previous.index, state.items.length), 0, previous.item);
-    state.active = state.items.findIndex(item => item.id === previous.item.id); state.query = ''; state.filter = 'all'; a.paint(); a.status(ui.restored); cardFor(previous.item.id)?.querySelector('[data-select-card]')?.focus();
+    state.active = state.items.findIndex(item => item.id === previous.item.id); state.query = ''; state.filter = 'all'; a.paint(); a.status(ui.restored);
+    if (editing()) focusActions(previous.item.id); else cardFor(previous.item.id)?.querySelector('[data-select-card]')?.focus();
   });
-  $('[data-export-collection]').addEventListener('click', () => { a.download(JSON.stringify({format:'lienzo-resource-collection',version:1,items:state.items},null,2), 'lienzo-resource-collection.json', 'application/json;charset=utf-8'); a.status(ui.dataSaved); });
+  $('[data-export-collection]').addEventListener('click', () => {
+    a.download(JSON.stringify({format:'lienzo-resource-collection',version:1,items:state.items},null,2), 'lienzo-resource-collection.json', 'application/json;charset=utf-8');
+    if ($('[data-export-dialog]').open) a.text('[data-copy-status]', ui.dataSaved); else a.status(ui.dataSaved);
+  });
   $('[data-close-preview]').addEventListener('click', () => preview.close());
   preview.addEventListener('click', event => { if (event.target === preview) { const r = preview.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) preview.close(); } });
   preview.addEventListener('close', () => { a.root.classList.remove('cm-preview-open'); (previewOpener?.isConnected ? previewOpener : $('[data-selected-preview]'))?.focus(); $('[data-preview-art]').replaceChildren(); });
+  artChoice.replaceChildren(...ui.contextArtChoices.map((label, index) => new Option(label, String(index))));
+  artChoice.addEventListener('change', () => {
+    const item = current();
+    if (!item) return;
+    imageJobs.delete(item.id);
+    item.art = Number(artChoice.value);
+    delete item.imageData;
+    a.paint();
+  });
+  upload.addEventListener('change', async () => {
+    const file = upload.files[0], item = current();
+    upload.value = '';
+    if (!file || !item) return;
+    const id = item.id, job = Symbol();
+    imageJobs.set(id, job);
+    syncImageControls(item);
+    try {
+      const src = await a.imageFile(file);
+      if (imageJobs.get(id) !== job) return;
+      const target = state.items.find(resource => resource.id === id);
+      imageJobs.delete(id);
+      if (target) {
+        target.imageData = src;
+        a.paint();
+      }
+    } catch {
+      if (imageJobs.get(id) !== job) return;
+      imageJobs.delete(id);
+      syncImageControls(current());
+      if (current()?.id === id) imageStatus.textContent = ui.imageError;
+    }
+  });
+  removeImage.addEventListener('click', () => {
+    const item = current();
+    if (!item) return;
+    imageJobs.delete(item.id);
+    delete item.imageData;
+    a.paint();
+    artChoice.focus({preventScroll:true});
+  });
   $('[data-search-icon]').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg>';
   $('[data-context-view=grid]').innerHTML = a.icon('grid');
   $('[data-context-view=list]').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 5h13M8 12h13M8 19h13M3 5h1M3 12h1M3 19h1"/></svg>';
   $('[data-empty-icon]').innerHTML = a.icon('folder');
   // A cloned full-studio export may contain a previously open transient preview.
   a.root.classList.remove('cm-preview-open'); preview.removeAttribute('open'); $('[data-preview-art]').replaceChildren();
-  a.setup({render, reset(index) {
+  a.setup({render, isSelectable:matching, reset(index) {
     const old = state.items[index], base = a.defaults.items.find(item => item.id === (old.sourceId ?? old.id)) || a.defaults.items[0];
+    imageJobs.delete(old.id);
     state.items[index] = {...structuredClone(base), id:old.id, ...(old.sourceId === undefined ? {} : {sourceId:old.sourceId})};
-  }, fields:[{key:'title',label:ui.title,required:true,maxLength:80,wide:true},{key:'description',label:ui.description,type:'textarea',maxLength:240,wide:true},{key:'category',label:ui.category,maxLength:48},{key:'accent',label:ui.accent,options:Object.keys(colors).map(key=>[key,ui[key]])},{key:'href',label:ui.urlLabel,url:true,maxLength:500,wide:true}]});
+  }, fields:[
+    {key:'title',label:ui.title,required:true,maxLength:80},
+    {key:'description',label:ui.description,type:'textarea',maxLength:240},
+    {key:'category',label:ui.category,maxLength:48},
+    {key:'href',group:'appearance',label:ui.urlLabel,url:true,maxLength:500},
+    {key:'accent',group:'appearance',label:ui.accent,options:Object.keys(colors).map(key=>[key,ui[key]])}
+  ]});
 })();

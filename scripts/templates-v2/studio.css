@@ -53,13 +53,6 @@ html[data-view=component] .v2-hero{display:none}
 .v2-preview-region>.v2-bottom{justify-content:flex-end;min-height:50px;padding:3px 16px}
 html[data-view=thumbnail] .v2-editor-panel{display:none!important}
 html[data-view=thumbnail] [data-editor-layout]{grid-template-columns:minmax(0,1fr)}
-@media(min-width:960px){
-  [data-editor-collapsed=false] .cm-desk{grid-template-columns:minmax(0,1fr)}
-  [data-editor-collapsed=false] .cm-inspector{border-left:0;border-top:1px solid var(--line);display:grid;grid-template-columns:100px minmax(0,1fr);gap:0 20px}
-  [data-editor-collapsed=false] .cm-inspector-head{grid-column:1/-1}
-  [data-editor-collapsed=false] .cm-selected-art{margin:0;aspect-ratio:1.1}
-  [data-editor-collapsed=false] .cm-inspector-body h3{font-size:26px}
-}
 /* An editing artboard stays bounded; oversized custom content remains scrollable, never scaled or discarded. */
 @media(min-width:960px) and (min-height:420px){
   [data-editor-workspace][data-editor-collapsed=false] [data-editor-preview]{max-height:var(--editor-available-height);overflow:auto;scrollbar-width:thin;overscroll-behavior:contain;scrollbar-gutter:stable}

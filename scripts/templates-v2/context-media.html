@@ -1,0 +1,13 @@
+<details class="v2-panel-live cm-media-settings" data-context-media open>
+  <summary>{{contextImageSection}}</summary>
+  <label class="cm-art-picker">{{contextArtwork}}<select data-context-art-choice></select></label>
+  <div class="cm-media-actions">
+    <label class="v2-upload v2-button">
+      <span>{{contextUpload}}</span>
+      <input type="file" data-context-upload accept="image/png,image/jpeg,image/webp" aria-label="{{contextUpload}}" aria-describedby="cm-image-help">
+    </label>
+    <button type="button" class="v2-text-button" data-context-remove-image hidden>{{contextRemoveImage}}</button>
+  </div>
+  <p class="cm-media-help" id="cm-image-help">{{contextImageHelp}}</p>
+  <p class="cm-media-status" data-context-image-status data-export-empty role="status"></p>
+</details>

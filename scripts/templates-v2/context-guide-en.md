@@ -1,25 +1,29 @@
-# Resource Desk and Context Menu · Lienzo
+# Context Menu for Cards · Lienzo
 
-Original HTML, CSS, JavaScript, and SVG artwork. This is a sample collection with three resources, not a file manager for your operating system. Replace the names, descriptions, categories, links, and accents before integrating it into a real application.
+Use this HTML, CSS, and JavaScript component to group the actions for each card in a catalog, portfolio, or library under a ⋯ button. The demo includes three Lienzo cards with working links. Adapt the cards and their actions to the site where you use the component.
 
 ## Explore and organize
 
-Select a card to see its details in the inspector. Open its actions using the ⋯ button, a right-click on that card, or Shift + F10. Outside the cards, browser menus and shortcuts keep working normally. On touchscreens, use the ⋯ button.
+Select Try the menu or use a card’s ⋯ button. For example, save CSS Gradients and switch to Favorites to see it there. You can also open a card’s menu by right-clicking it or pressing Shift + F10.
+
+Choose Edit card to open Image or icon. Pick a preset illustration or icon, or upload a PNG, JPG, or WebP image up to 8 MB. Image changes apply right away. Remove your image to return to the preset. In Text and Link and color, select Apply to save the fields. Hide the panel to return to the same card’s draft fields later.
 
 The menu can expand a preview, edit content, duplicate, save or remove a favorite, choose one of the three logo accents, and remove a resource with undo. The collection supports six visible resources. When it is full, remove one before undoing a removal. History, filters, and view preferences are kept in an exported HTML file; reloading the hosted demo starts a new session.
 
-Search titles, descriptions, and categories. Press / to focus search when you are not typing in a form. Switch between all/favorites and grid/list. Counts reflect actual sample items, not business metrics. There is no persistent storage, API, disk access, or external service.
+Search titles, descriptions, and categories. Press / to focus search when you are not typing in a form. Switch between all/favorites and grid/list. The browser processes the images you choose and embeds them in the exports.
 
 ## Keyboard and accessibility
 
 Tab moves through controls. On a card’s main button, left/right and Home/End move focus through the collection without changing the selection. In the menu, up/down and Home/End move focus; typing letters finds an action. Right opens the accent submenu; up/down moves through its choices. Left or Escape closes the submenu. Another Escape closes the menu and restores focus. Tab closes the menu and continues. The expanded view uses a native dialog with dismissal and focus restoration.
 
-Decorative motion is limited to the card being interacted with and respects Pause motion, reduced motion, and studio pausing. No JavaScript animation loop runs while idle. Frame rates depend on the browser and device and are not guaranteed.
+Decorative motion is limited to the card being interacted with and respects the Pause button, reduced-motion preferences, and studio pausing.
 
 ## Two different downloads
 
-- **Save JSON data** downloads only the collection data for your own integration. It does not contain the interface or install a resource manager.
-- **Get HTML** saves the entire edited studio. Keep the HTML beside `studio.css`, `studio.js`, `component.css`, `component.js`, and the ZIP’s `assets/` folder. The HTML alone is not standalone.
+Open Export to choose a format.
+
+- **Save JSON data** downloads the collection data for your own integration.
+- **Download HTML** saves the entire edited studio. Keep the HTML beside the other files and the ZIP’s `assets/` folder.
 
 Extract the ZIP and open `index.html`; no packages are required. Hosted demos use noindex; the ZIP omits that directive. HTTP(S) links are validated, text is inserted as text, and serialized JSON escapes `<`. Do not replace those safeguards with unsanitized HTML.
 

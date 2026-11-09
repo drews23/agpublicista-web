@@ -418,6 +418,50 @@ def editor_document(raw, slug, lang, ui):
         toolbar.select_one('.v2-toolbar-label').decompose()
         toolbar.insert(0, toolbar.select_one('.dv-switch').extract())
         preview.select_one('.v2-bottom').insert(0, preview.select_one('[data-device-compare]').extract())
+    if kind == 'context':
+        toolbar = workspace.select_one('.v2-toolbar .v2-row')
+        toolbar.insert(0, preview.select_one('[data-pause]').extract())
+        toolbar.select_one('[data-source]')['class'] = ['v2-button']
+        preview.select_one('.v2-bottom').decompose()
+        intro.string = ui['contextSettingsHelp']
+        form.insert_after(brand_panel.extract())
+
+        form['id'] = 'cm-editor-form'
+        picker = form.select_one('label')
+        picker.contents[0].replace_with(ui['contextResourcePicker'])
+        picker.select_one('select')['aria-label'] = ui['contextResourcePicker']
+        picker.insert_after(BeautifulSoup(provider_markup(kind, 'media.html', ui), 'html.parser').details)
+        fields = form.select_one('[data-fields]')
+        for title, group in [(ui['contextContent'], ''), (ui['contextLinkColor'], 'appearance')]:
+            section = soup.new_tag('details', attrs={'class': 'v2-panel-live'})
+            summary = soup.new_tag('summary')
+            summary.string = title
+            section.append(summary)
+            if group:
+                section.append(soup.new_tag('div', attrs={'class': 'v2-fields', 'data-fields': group}))
+                fields.parent.insert_after(section)
+            else:
+                fields.wrap(section)
+                fields.insert_before(intro.extract())
+
+        apply = form.select_one('[type=submit]').extract()
+        apply.attrs.update({'form': form['id'], 'aria-label': ui['apply']})
+        apply.string = ui['contextApply']
+        header_actions = soup.new_tag('div', attrs={'class': 'cm-panel-actions'})
+        header_actions.append(apply)
+        header_actions.append(close.extract())
+        header.append(header_actions)
+
+        export = soup.select_one('[data-export-dialog]')
+        actions = export.select_one('.v2-dialog-actions')
+        json_download = preview.select_one('[data-export-collection]').extract()
+        json_download['class'] = ['v2-button']
+        json_download.string = ui['exportCollection']
+        actions.insert(0, json_download)
+        actions.insert(0, actions.select_one('[data-download]').extract())
+        export.select_one('label[for="v2-source"]').insert_before(actions.extract())
+        actions.insert_after(export.select_one('[data-copy-status]').extract())
+        preview.select_one('.cm-foot').decompose()
     if kind == 'navigation':
         toolbar = workspace.select_one('.v2-toolbar')
         toolbar.select_one('.v2-row').insert(0, preview.select_one('[data-pause]').extract())

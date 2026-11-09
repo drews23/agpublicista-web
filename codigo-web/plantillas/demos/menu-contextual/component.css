@@ -30,3 +30,91 @@
 @media(max-width:440px){.cm-intro h2{font-size:30px}.cm-intro{padding:22px 16px}.cm-grid{grid-template-columns:1fr}.cm-art{aspect-ratio:1.5}.cm-card-copy{padding:17px}.cm-description{min-height:0;font-size:12px}.cm-title{font-size:29px}.cm-art-number{font-size:11px}.cm-actions{height:40px;width:40px}.cm-inspector{grid-template-columns:1fr}.cm-selected-art{max-width:180px;aspect-ratio:1.4;margin-bottom:18px}.cm-desk-note{font-size:10px}.cm-grid[data-layout=list] .cm-art{width:84px;aspect-ratio:1}.cm-grid[data-layout=list] .cm-title{font-size:21px}.cm-grid[data-layout=list] .cm-category{font-size:8px}.cm-grid[data-layout=list] .cm-description{display:none}.cm-grid[data-layout=list] .cm-card-copy{padding-right:35px}.cm-grid[data-layout=list] .cm-card-select{gap:10px}.cm-grid[data-layout=list] .cm-actions{right:8px;top:12px;width:32px;height:32px}.cm-filters button{padding:8px;font-size:11px}.cm-views{padding-left:8px}.cm-views button{width:36px}.cm-preview h2{font-size:34px}.cm-preview-body{padding-inline:4px}}
 html[data-view=thumbnail] [data-kind=context] .cm-intro{padding:15px 20px}html[data-view=thumbnail] .cm-intro h2{font-size:31px;margin:7px 0}html[data-view=thumbnail] .cm-intro>div>p:last-child,html[data-view=thumbnail] .cm-desk-note,html[data-view=thumbnail] .cm-foot{display:none}html[data-view=thumbnail] .cm-commandbar{padding:9px 20px}html[data-view=thumbnail] .cm-desk{min-height:0}html[data-view=thumbnail] .cm-collection{padding:18px}html[data-view=thumbnail] .cm-grid{grid-template-columns:repeat(3,minmax(0,1fr))}html[data-view=thumbnail] .cm-inspector{padding:17px}html[data-view=thumbnail] .cm-art{aspect-ratio:1.1}html[data-view=thumbnail] .cm-title{font-size:23px}html[data-view=thumbnail] .cm-description{font-size:10px}
 @media(prefers-reduced-motion:reduce){.cm-card,.cm-art-core,.cm-menu,.cm-submenu{transition:none!important;animation:none!important}.cm-card:hover,.cm-card:focus-within,.cm-card:hover .cm-art-core,.cm-card:focus-within .cm-art-core{transform:none!important}.cm-orbit{animation:none!important}}
+
+/* While editing, keep the selected resource and its actions on the artboard. */
+.cm-intro{align-items:center;gap:18px;padding:22px 28px}
+.cm-intro h2{font-size:clamp(24px,2.8vw,38px);margin:0 0 6px}
+.cm-intro [data-try-context]{flex:none;font-size:13px}
+.cm-actions,.cm-grid[data-layout=list] .cm-actions{width:44px;height:44px}
+.cm-grid[data-layout=list] .cm-card-copy{padding-right:52px}
+.cm-selected-art,.cm-preview-art{position:relative;overflow:hidden}
+.cm-art-symbol{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.cm-art-symbol svg{width:42%;height:52%;max-width:160px;max-height:160px;stroke-width:1.35}
+.cm-user-image{display:block;width:100%;height:100%;object-fit:contain}
+.cm-art:has(.cm-user-image) .cm-art-number{display:none}
+
+[data-kind=context] .v2-workspace{--editor-panel-width:340px;overflow-anchor:none}
+[data-kind=context] .v2-toolbar [data-pause]{padding:8px 10px;font-size:12px}
+[data-kind=context] .v2-editor-panel .v2-panel-live{margin-top:0}
+[data-kind=context] .v2-editor-panel .v2-fields{grid-template-columns:minmax(0,1fr);gap:12px;margin:4px 0 16px}
+[data-kind=context] .v2-editor-panel .v2-error:empty{min-height:0;margin:0}
+[data-kind=context] [data-editor-form]>label{margin:12px 0}
+.cm-panel-actions{display:flex;align-items:center;gap:7px}
+.cm-panel-actions .v2-button{font-size:13px;padding:7px 12px}
+.cm-panel-actions .v2-icon-button{width:44px;min-height:44px}
+.cm-media-settings{padding-bottom:12px}
+.cm-art-picker{display:grid;gap:6px;font-size:13px}
+.cm-art-picker select{width:100%;min-height:44px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--page);color:var(--text)}
+.cm-media-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cm-media-actions .v2-text-button{font-size:12px}
+.cm-media-help,.cm-media-status{font-size:12px;line-height:1.5;color:var(--muted);margin:7px 0 0}
+.cm-media-status:not(:empty){color:var(--text)}
+.cm-media-status:empty{margin:0}
+
+[data-editor-collapsed=false] :is(.cm-intro,.cm-commandbar,.cm-inspector-head,.cm-inspector dl,[data-selected-preview]){display:none}
+[data-editor-collapsed=false] .cm-desk{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;min-height:0}
+[data-editor-collapsed=false] .cm-collection{display:contents}
+[data-editor-collapsed=false] .cm-collection>:not(.cm-empty,.cm-undo){display:none}
+[data-editor-collapsed=false] .cm-inspector{
+  display:grid;grid-area:1/1;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);min-height:0;
+  align-items:center;gap:clamp(10px,2vw,28px);padding:clamp(12px,2.4vw,30px);border:0;background:var(--page);
+}
+[data-editor-collapsed=false] .cm-desk:has(.cm-empty:not([hidden])) .cm-inspector{display:none}
+[data-editor-collapsed=false] .cm-selected-art{width:min(100%,460px);max-width:none;max-height:100%;aspect-ratio:4/3;margin:0;justify-self:center}
+[data-editor-collapsed=false] .cm-inspector-body{min-width:0}
+[data-editor-collapsed=false] .cm-inspector-body :is(h3,p,.cm-category){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+[data-editor-collapsed=false] .cm-inspector h3{font-size:clamp(20px,3.2vw,42px);margin:6px 0 10px}
+[data-editor-collapsed=false] .cm-inspector .cm-category{-webkit-line-clamp:1}
+[data-editor-collapsed=false] .cm-inspector [data-selected-actions]{width:auto;min-height:44px;gap:8px;padding-inline:10px}
+[data-editor-collapsed=false] .cm-empty{grid-area:1/1;align-self:center;min-height:0;margin:0 12px;padding:10px}
+[data-editor-collapsed=false] .cm-empty h3{font-size:21px;margin:0 0 6px}
+[data-editor-collapsed=false] .cm-empty p{margin:0 0 8px}
+[data-editor-collapsed=false] .cm-undo{grid-area:2/1;margin:0 12px 8px;padding:3px 6px 3px 10px}
+[data-editor-collapsed=false] .cm-undo .v2-button{min-height:44px}
+
+@media(min-width:960px) and (min-height:420px),(max-width:959px) and (min-height:450px){
+  [data-kind=context] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-layout]{
+    height:var(--editor-available-height);align-items:stretch;
+  }
+  [data-kind=context] [data-editor-collapsed=false]:not([data-editor-constrained=true]) :is([data-editor-preview],[data-editor-panel]){
+    height:100%;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  }
+  [data-kind=context] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-panel]{overflow-x:hidden}
+  [data-kind=context] [data-editor-collapsed=false]:not([data-editor-constrained=true]) .v2-editor-panel-head{position:sticky;top:0}
+  [data-kind=context] [data-editor-collapsed=false]:not([data-editor-constrained=true]) :is(.v2-stage,.cm-workspace,.cm-desk){height:100%}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .cm-desk{grid-template-rows:minmax(0,1fr) auto}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .cm-inspector{grid-template-rows:minmax(0,1fr)}
+}
+
+@media(max-width:959px) and (min-height:450px){
+  [data-kind=context] [data-editor-collapsed=false]:not([data-editor-constrained=true]) [data-editor-layout]{
+    grid-template-rows:clamp(174px,calc(var(--editor-available-height) * .36),280px) minmax(0,1fr);
+  }
+  [data-editor-collapsed=false] .cm-inspector{padding:12px}
+  [data-editor-collapsed=false] .cm-inspector h3{font-size:clamp(19px,4vw,29px);-webkit-line-clamp:2}
+  [data-editor-collapsed=false] .cm-inspector-body>p{-webkit-line-clamp:2;line-height:1.45;margin-bottom:8px}
+}
+
+@media(max-width:660px){
+  .cm-intro{display:grid;gap:12px;padding:16px}
+  .cm-intro [data-try-context]{justify-self:start}
+  [data-kind=context] .v2-toolbar-label{display:none}
+  [data-kind=context] .v2-toolbar>.v2-row{width:100%;justify-content:flex-end}
+}
+@media(max-width:959px) and (450px <= height < 600px){
+  [data-kind=context] [data-editor-collapsed=false] .v2-editor-panel-head{min-height:54px;padding-block:4px}
+  [data-kind=context] [data-editor-collapsed=false] .v2-editor-panel-help{margin:8px 0 9px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .cm-inspector{padding-block:8px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) .cm-inspector h3{font-size:clamp(19px,3.5vw,22px);margin:0 0 5px}
+  [data-editor-collapsed=false]:not([data-editor-constrained=true]) :is(.cm-inspector-body>p,.cm-inspector .cm-category,.cm-empty h3,.cm-empty svg){display:none}
+}

@@ -105,6 +105,16 @@
   reduced.addEventListener('change', motion);
   new IntersectionObserver(entries => { visible = entries[0].isIntersecting; motion(); }, {threshold: 0}).observe($('[data-stage]'));
 
+  function updateItemPicker() {
+    const select = form.elements.namedItem('item');
+    const choices = state.items.flatMap((item, index) => {
+      if (definition.isSelectable && !definition.isSelectable(item)) return [];
+      return [new Option(item.title || item.name || String(index + 1), String(index))];
+    });
+    select.replaceChildren(...choices);
+    select.value = String(state.active || 0);
+    select.closest('label').hidden = choices.length === 1;
+  }
   function fields() {
     if (!definition) return;
     editorItem = current();
@@ -112,10 +122,7 @@
     const groups = new Map([...form.querySelectorAll('[data-fields]')].map(node => [node.dataset.fields, node]));
     groups.forEach(node => node.replaceChildren());
     if (!editorItem) return;
-    const select = form.elements.namedItem('item');
-    select.replaceChildren(...state.items.map((item, index) => new Option(item.title || item.name || String(index + 1), String(index))));
-    select.value = String(state.active || 0);
-    select.closest('label').hidden = state.items.length === 1;
+    updateItemPicker();
     for (const field of definition.fields) {
       const label = document.createElement('label');
       label.textContent = field.label;
@@ -190,7 +197,10 @@
   workspace.addEventListener('lienzo:editor-panel', event => {
     if (event.detail?.panel !== editor) return;
     editorToggle.textContent = event.detail.open ? ui.hideSettings : ui.edit;
-    if (event.detail.open && editorItem !== current()) fields();
+    if (event.detail.open) {
+      if (editorItem !== current()) fields();
+      else if (editorItem && definition?.isSelectable) updateItemPicker();
+    }
   });
   $('[data-editor-cancel]').addEventListener('click', () => {
     panel(false, 'cancel'); fields(); status(ui.cancelled);
@@ -207,8 +217,7 @@
     $('[data-error]').textContent = message;
     input.focus();
   }
-  form.addEventListener('submit', event => {
-    event.preventDefault();
+  function applyFields() {
     const focusedName = form.contains(document.activeElement) ? document.activeElement.name : null;
     const next = {...current()};
     for (const field of definition.fields) {
@@ -225,6 +234,15 @@
     paint();
     if (focusedName) form.elements.namedItem(focusedName)?.focus({preventScroll:true});
     status(ui.applied);
+  }
+  // The sandboxed catalog iframe blocks native form submission before the submit event.
+  [...form.elements].find(control => control.type === 'submit')?.addEventListener('click', event => {
+    event.preventDefault();
+    if (form.reportValidity()) applyFields();
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    applyFields();
   });
   [exportDialog].forEach(dialog => {
     dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
@@ -251,7 +269,7 @@
     clone.querySelectorAll('[data-editor-toggle]').forEach(button => button.setAttribute('aria-expanded', 'false'));
     clone.querySelector('[data-edit]').textContent = ui.edit;
     clone.querySelectorAll('[data-editor-preview]').forEach(node => node.removeAttribute('data-editor-too-tall'));
-    clone.querySelectorAll('[data-fields]').forEach(node => node.replaceChildren());
+    clone.querySelectorAll('[data-fields],[data-export-empty]').forEach(node => node.replaceChildren());
     clone.querySelectorAll('[data-error],[data-status],[data-copy-status]').forEach(node => { node.textContent = ''; });
     clone.querySelectorAll('[data-source-code]').forEach(node => { node.textContent = ''; });
     clone.querySelectorAll('[data-device-project-status]').forEach(node => { node.textContent = ''; });

@@ -138,13 +138,13 @@
   },
   {
     "id": "menu-contextual",
-    "title": "Menú contextual de recursos",
-    "tag": "Cada acción tiene su lugar.",
+    "title": "Menú contextual para tarjetas",
+    "tag": "Acciones por tarjeta",
     "author": "Lienzo",
     "source": null,
     "zip": "menu-contextual-lienzo.zip",
-    "desc": "Una mesa creativa con tres composiciones originales, búsqueda, favoritos y dos vistas. Abre un menú de cristal que edita, duplica, cambia el acento y retira recursos con deshacer.",
-    "size": 149,
+    "desc": "Añade un botón ⋯ a las tarjetas de un catálogo, portafolio o biblioteca. Prueba cómo ver, editar, duplicar y guardar en favoritos una tarjeta.",
+    "size": 151,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },
