@@ -4,19 +4,19 @@
     "phoneScreen": "lock",
     "items": [
       {
-        "title": "Órbita",
+        "title": "Museo de arte",
         "accent": "mint",
-        "homeCopy": "Un recorrido por la luz, el color y el movimiento.",
-        "projectTitle": "Luz en tránsito",
-        "projectCopy": "Capas de luz cambian de forma a medida que recorres la sala.",
-        "confirmationTitle": "Todo listo",
-        "confirmationCopy": "Confirmación de muestra para cerrar el recorrido.",
-        "notificationTitle": "Órbita",
-        "notificationMessage": "Ya puedes explorar la exposición.",
+        "homeCopy": "Recorre el Pabellón Quadracci del Museo de Arte de Milwaukee.",
+        "projectTitle": "Pabellón Quadracci",
+        "projectCopy": "Los ventanales del atrio abren la vista al lago Michigan.",
+        "confirmationTitle": "Visita completada",
+        "confirmationCopy": "Terminaste el recorrido de muestra.",
+        "notificationTitle": "Guía del museo",
+        "notificationMessage": "El recorrido está listo.",
         "notificationEnabled": true,
         "images": {"lock": "", "home": "", "project": "", "confirmation": ""},
         "hotspots": {
-          "project": {"enabled": false, "label": "Confirmar visita", "destination": "confirmation", "x": 50, "y": 85},
+          "project": {"enabled": false, "label": "Terminar recorrido", "destination": "confirmation", "x": 50, "y": 85},
           "confirmation": {"enabled": false, "label": "Volver a inicio", "destination": "home", "x": 50, "y": 85}
         }
       }
@@ -27,19 +27,19 @@
     "phoneScreen": "lock",
     "items": [
       {
-        "title": "Orbit",
+        "title": "Art Museum",
         "accent": "mint",
-        "homeCopy": "A journey through light, color, and movement.",
-        "projectTitle": "Light in motion",
-        "projectCopy": "Layers of light change shape as you move through the room.",
-        "confirmationTitle": "All set",
-        "confirmationCopy": "A sample confirmation to finish the walkthrough.",
-        "notificationTitle": "Orbit",
-        "notificationMessage": "The exhibition is ready to explore.",
+        "homeCopy": "Explore the Milwaukee Art Museum’s Quadracci Pavilion.",
+        "projectTitle": "Quadracci Pavilion",
+        "projectCopy": "The atrium’s windows look out over Lake Michigan.",
+        "confirmationTitle": "Tour complete",
+        "confirmationCopy": "You’ve completed the sample tour.",
+        "notificationTitle": "Museum guide",
+        "notificationMessage": "Your tour is ready.",
         "notificationEnabled": true,
         "images": {"lock": "", "home": "", "project": "", "confirmation": ""},
         "hotspots": {
-          "project": {"enabled": false, "label": "Confirm visit", "destination": "confirmation", "x": 50, "y": 85},
+          "project": {"enabled": false, "label": "Finish tour", "destination": "confirmation", "x": 50, "y": 85},
           "confirmation": {"enabled": false, "label": "Back to home", "destination": "home", "x": 50, "y": 85}
         }
       }

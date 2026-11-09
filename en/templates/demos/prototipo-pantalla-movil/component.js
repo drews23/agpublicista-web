@@ -7,9 +7,10 @@
   const stage = $('[data-phone-prototype]');
   const workspace = $('[data-editor-workspace]');
   workspace.dataset.editorFocusAnchor = 'workspace';
+  const dockedViewport = matchMedia('(min-width: 960px) and (min-height: 420px), (max-width: 959px) and (min-height: 450px)');
   workspace.addEventListener('lienzo:editor-panel', event => {
-    if (!event.detail.open || !matchMedia('(min-width: 960px) and (min-height: 650px)').matches) return;
-    if (workspace.getBoundingClientRect().top > 24) workspace.scrollIntoView({block: 'start', behavior: 'instant'});
+    if (!event.detail.open || !dockedViewport.matches || workspace.dataset.editorNatural === 'true') return;
+    workspace.scrollIntoView({block: 'start', behavior: 'instant'});
   });
   const screens = {
     lock: {label: ui.ppLock, title: ui.ppStageLockTitle, hint: ui.ppStageLockHint},
@@ -29,6 +30,7 @@
   const item = () => state.items[0];
   const currentScreen = () => Object.hasOwn(screens, state.phoneScreen) ? state.phoneScreen : 'lock';
   const editScreen = $('[data-pp-edit-screen]');
+  const textGroups = $$('[data-pp-text-screen]');
   const upload = $('[data-pp-upload]');
   const removeImage = $('[data-pp-remove-image]');
   const notificationToggle = $('[data-pp-notification-toggle]');
@@ -75,6 +77,7 @@
   function paintInspector(key) {
     const hasAppAction = Object.hasOwn(appActions, key);
     editScreen.value = key;
+    for (const group of textGroups) group.hidden = group.dataset.ppTextScreen !== key;
     removeImage.hidden = !screenshot(key);
     studio.text('[data-pp-image-status]', imageStatus[key]);
     $('[data-pp-lock-settings]').hidden = key !== 'lock';
@@ -231,15 +234,19 @@
 
   studio.setup({
     render,
+    revealField(input) {
+      const group = input.closest('[data-pp-text-screen]');
+      if (group?.hidden) goTo(group.dataset.ppTextScreen, {remember: false, focus: false});
+    },
     fields: [
-      {key: 'title', label: ui.ppTitle, required: true, maxLength: 30, wide: true},
-      {key: 'homeCopy', label: ui.ppHomeCopy, type: 'textarea', maxLength: 82, wide: true},
-      {key: 'projectTitle', label: ui.ppProjectTitle, required: true, maxLength: 42, wide: true},
-      {key: 'projectCopy', label: ui.ppProjectCopy, type: 'textarea', maxLength: 92, wide: true},
-      {key: 'confirmationTitle', label: ui.ppConfirmationTitle, required: true, maxLength: 36, wide: true},
-      {key: 'confirmationCopy', label: ui.ppConfirmationCopy, type: 'textarea', maxLength: 84, wide: true},
-      {key: 'notificationTitle', label: ui.ppNotificationTitle, maxLength: 24},
-      {key: 'notificationMessage', label: ui.ppNotificationMessage, type: 'textarea', maxLength: 62, wide: true},
+      {key: 'title', group: 'home', label: ui.ppTitle, required: true, maxLength: 30},
+      {key: 'homeCopy', group: 'home', label: ui.ppHomeCopy, type: 'textarea', maxLength: 82},
+      {key: 'projectTitle', group: 'project', label: ui.ppProjectTitle, required: true, maxLength: 42},
+      {key: 'projectCopy', group: 'project', label: ui.ppProjectCopy, type: 'textarea', maxLength: 92},
+      {key: 'confirmationTitle', group: 'confirmation', label: ui.ppConfirmationTitle, required: true, maxLength: 36},
+      {key: 'confirmationCopy', group: 'confirmation', label: ui.ppConfirmationCopy, type: 'textarea', maxLength: 84},
+      {key: 'notificationTitle', group: 'lock', label: ui.ppNotificationTitle, maxLength: 24},
+      {key: 'notificationMessage', group: 'lock', label: ui.ppNotificationMessage, type: 'textarea', maxLength: 62},
       {key: 'accent', label: ui.color, options: [['mint', ui.mint], ['violet', ui.violet], ['amber', ui.amber]]}
     ],
     reset() {

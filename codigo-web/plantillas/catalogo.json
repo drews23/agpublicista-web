@@ -192,9 +192,9 @@
     "source": null,
     "zip": "prototipo-pantalla-movil-lienzo.zip",
     "desc": "Prueba un recorrido móvil desde la pantalla de bloqueo hasta una app. Cambia las capturas y configura zonas táctiles para que tu propio diseño se pueda recorrer.",
-    "size": 448,
+    "size": 620,
     "authorRole": "Implementación original y guía",
-    "license": "Código MIT. Fuentes OFL. Procedencia del marco del teléfono en SOURCE-NOTES.md."
+    "license": "Código MIT. Fuentes OFL. Créditos de las fotografías y del marco en SOURCE-NOTES.md."
   },
   {
     "id": "portatil-en-perspectiva",

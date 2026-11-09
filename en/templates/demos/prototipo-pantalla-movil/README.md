@@ -3,10 +3,10 @@
 Turn your mobile designs into a flow you can try by touch or keyboard. The sample includes a lock screen, home screen, project page, and confirmation.
 
 1. Extract the ZIP and open `index.html`.
-2. Try the sample flow. Unlock the phone, open the project, and confirm the action. Use the home and lock controls to go back.
-3. Open **Settings → Screens and actions**. Choose a screen and add a PNG, JPG, or WebP screenshot up to 8 MB. Your browser reads and resizes the image on your device.
-4. Under **Sample text**, edit the headings or lock screen notification, then select **Apply**. You can show or hide the notification from the lock screen settings.
-5. On the project and confirmation screens, enable the hotspot and set its horizontal and vertical position. Name the action and choose the destination screen. Test the link with the screenshot in the frame.
+2. Try the sample flow. Unlock the phone, open the Quadracci Pavilion page, and select **Finish tour**. Use the home and lock controls to go back.
+3. Open **Settings** and use **Screen** to choose what to edit. Expand **Screenshot** to add a PNG, JPG, or WebP image up to 8 MB. Your browser processes the image on your device.
+4. **Text and color** shows the text for the selected screen. On the lock screen, you can show or hide the notification. Select **Apply** to confirm text and color edits.
+5. On Project or Confirmation, expand **Interactive hotspot** to turn on the button, set its position, and choose its destination. Test the action on the phone. Collapse each section as needed or close settings to see the full prototype.
 6. Use **Get HTML** to save your settings and images. Place the file in the extracted ZIP folder alongside `assets/`, the styles, and the scripts. Share that folder to deliver the flow offline.
 
 The prototype uses a sample time and the notifications you set. Hotspots keep their names and destinations in the saved HTML. Use images and fonts you can share if you plan to send the files to someone else.

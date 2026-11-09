@@ -212,6 +212,7 @@
     fields(); paint(); status(ui.resetDone);
   });
   function fieldError(input, message) {
+    definition.revealField?.(input);
     const group = input.closest('details');
     if (group) group.open = true;
     $('[data-error]').textContent = message;

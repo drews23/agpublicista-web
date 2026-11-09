@@ -57,8 +57,8 @@ RESOURCES = {
     'prototipo-pantalla-movil': {
         'kind': 'phone-prototype',
         'sample_artwork': False,
-        'assets': ('phone-shell.webp',),
-        'license': 'Código MIT. Fuentes OFL. Procedencia del marco del teléfono en SOURCE-NOTES.md.',
+        'assets': ('phone-shell.webp', 'museum-exterior.webp', 'museum-atrium.webp'),
+        'license': 'Código MIT. Fuentes OFL. Créditos de las fotografías y del marco en SOURCE-NOTES.md.',
     },
     'portatil-en-perspectiva': {
         'kind': 'laptop-perspective',
@@ -343,7 +343,7 @@ def editor_document(raw, slug, lang, ui):
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(raw, 'html.parser')
     kind = RESOURCES[slug]['kind']
-    media_first = kind in ['devices', 'phone-prototype', 'laptop-perspective']
+    media_first = kind in ['devices', 'laptop-perspective']
     workspace = soup.select_one('.v2-workspace')
     workspace['data-editor-workspace'] = ''
     workspace['data-editor-collapsed'] = 'true'
@@ -375,10 +375,7 @@ def editor_document(raw, slug, lang, ui):
     editor.select_one('h2').decompose()
     intro = editor.find('p', recursive=False)
     intro['class'] = ['v2-editor-panel-help']
-    if kind == 'phone-prototype':
-        intro.string = ('Las capturas y acciones se actualizan al instante. Aplica los cambios de texto antes de exportar.'
-                        if lang == 'es' else 'Screenshots and actions update as you edit. Apply text changes before exporting.')
-    elif kind == 'laptop-perspective':
+    if kind == 'laptop-perspective':
         intro.string = ('Carga tu MP4 o imagen y ajusta el encuadre en la vista previa.'
                         if lang == 'es' else 'Add your MP4 or image and adjust the framing in the preview.')
     else:
@@ -392,7 +389,7 @@ def editor_document(raw, slug, lang, ui):
     form.insert_before(brand_panel)
     if media_first:
         form.select_one('label')['hidden'] = ''
-        text_class = {'devices': 'dv-copy-settings', 'phone-prototype': 'pp-copy-settings', 'laptop-perspective': 'lp-copy-settings'}[kind]
+        text_class = {'devices': 'dv-copy-settings', 'laptop-perspective': 'lp-copy-settings'}[kind]
         text_section = soup.new_tag('details', attrs={'class': 'v2-panel-live ' + text_class})
         summary = soup.new_tag('summary')
         summary.string = 'Textos de muestra' if lang == 'es' else 'Sample text'
@@ -419,6 +416,40 @@ def editor_document(raw, slug, lang, ui):
         toolbar.select_one('.v2-toolbar-label').decompose()
         toolbar.insert(0, toolbar.select_one('.dv-switch').extract())
         preview.select_one('.v2-bottom').insert(0, preview.select_one('[data-device-compare]').extract())
+    if kind == 'phone-prototype':
+        intro.decompose()
+        inspector = preview.select_one('.pp-settings').extract()
+        head_title['class'].append('v2-sr')
+        close.insert_before(inspector.select_one('.pp-screen-picker').extract())
+        bottom = preview.select_one('.v2-bottom')
+        workspace.select_one('.v2-toolbar .v2-row').insert(0, bottom.select_one('[data-pause]').extract())
+        bottom.decompose()
+
+        text_section = soup.new_tag('details', attrs={'class': 'pp-editor-section pp-copy-settings'})
+        summary = soup.new_tag('summary')
+        summary.string = ui['ppTextSection']
+        text_section.append(summary)
+        form.wrap(text_section)
+        form.select_one('label')['hidden'] = ''
+        fields = form.select_one('[data-fields]')
+        fields.insert_before(form.select_one('[data-error]').extract())
+        for screen in ['lock', 'home', 'project', 'confirmation']:
+            group = soup.new_tag('div', attrs={'data-pp-text-screen': screen})
+            if screen != 'lock':
+                group['hidden'] = ''
+            else:
+                group.append(inspector.select_one('[data-pp-lock-settings]').extract())
+            group.append(soup.new_tag('div', attrs={'class': 'v2-fields', 'data-fields': screen}))
+            fields.insert_before(group)
+        form.select_one('[data-editor-cancel]').string = ui['ppDiscardDraft']
+        form.select_one('[data-reset]').string = ui['ppResetPrototype']
+        form.append(soup.select_one('[data-status]').extract())
+
+        inspector['class'].append('pp-editor-scroll')
+        inspector['data-pp-editor-scroll'] = ''
+        for child in [text_section, brand_panel, editor.select_one('.v2-panel-guide')]:
+            inspector.append(child.extract())
+        editor.append(inspector)
     if kind == 'context':
         toolbar = workspace.select_one('.v2-toolbar .v2-row')
         toolbar.insert(0, preview.select_one('[data-pause]').extract())
@@ -591,13 +622,13 @@ def editor_document(raw, slug, lang, ui):
         actions.insert(0, download)
         export.select_one('label[for="v2-source"]').insert_before(actions.extract())
         actions.insert_after(export.select_one('[data-copy-status]').extract())
-    for selector in ['.pi-controls', '.pp-settings', '.lp-settings']:
+    for selector in ['.pi-controls', '.lp-settings']:
         local = preview.select_one(selector)
         if not local:
             continue
         section = soup.new_tag('details', attrs={'class': 'v2-panel-live', 'open': ''})
         title = soup.new_tag('summary')
-        title.string = ui[{'phone-prototype': 'ppInspector', 'laptop-perspective': 'lpMediaSettings'}.get(kind, 'liveSettings')]
+        title.string = ui['lpMediaSettings' if kind == 'laptop-perspective' else 'liveSettings']
         section.append(title)
         if not media_first:
             notice = soup.new_tag('p', attrs={'class': 'v2-editor-panel-help'})
