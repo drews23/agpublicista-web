@@ -1,56 +1,61 @@
-"""Prepare local-library SVG copies with Lienzo color tokens, preserving geometry.
-
-This edits vector presentation attributes, not the originals or raster pixels.
-Run only when the selected library files or the palette policy changes.
-"""
-from pathlib import Path
-import colorsys
-import hashlib
+"""Prepare optimized, transparent copies of the selected local 3D renders."""
+from hashlib import sha256
+from io import BytesIO
 import json
-import re
+from pathlib import Path
+from zipfile import ZipFile
 
-ROOT=Path(__file__).resolve().parents[1]
-SOURCE=ROOT/'scripts/template-expansion/hover-cards'
-LIBRARY=ROOT/'herramientas/favicons/iconos3d'
-SELECTED={'glow':'679c6ce6','lift':'edbff264','sweep':'83a82de2','rotate':'50ad3a46','gradient':'19b28796','float':'74bb0ce3'}
-PALETTE={'mint':'#35d6c8','violet':'#8b7bff','amber':'#ffb454'}
-metadata={item['h']:item for item in json.loads((ROOT/'herramientas/favicons/js/iconos3d.json').read_text(encoding='utf8'))}
+from PIL import Image
 
-
-def recolor(value,accent):
-    digits=value[1:]
-    if len(digits)==3:digits=''.join(c*2 for c in digits)
-    if len(digits)!=6:return value
-    rgb=[int(digits[i:i+2],16)/255 for i in [0,2,4]]
-    hue,light,saturation=colorsys.rgb_to_hls(*rgb)
-    if saturation<.15:
-        return f'color-mix(in srgb, #fff {light*100:.2f}%, #0a0a0f)'
-    # Secondary hues stay in the same brand family. Preserve the source's relief.
-    secondary='#8b7bff' if accent!='violet' else '#35d6c8'
-    tone=secondary if .72<hue<.98 else PALETTE[accent]
-    _,target_light,_=colorsys.rgb_to_hls(*[int(tone[i:i+2],16)/255 for i in [1,3,5]])
-    if light>=target_light:
-        amount=min(96,(light-target_light)/(1-target_light)*100)
-        return f'color-mix(in srgb, #fff {amount:.2f}%, {tone})'
-    amount=max(8,light/target_light*100)
-    return f'color-mix(in srgb, {tone} {amount:.2f}%, #0a0a0f)'
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / 'scripts/template-expansion/hover-cards'
+GALLERY = ROOT / 'GALERIA DE FAVICONES SVG'
+AGENCY = 'creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip'
+SELECTED = {
+    'glow': (AGENCY, 'Creative Agency 2/PNG/V1/Creative Power.png'),
+    'lift': (AGENCY, 'Creative Agency 2/PNG/V1/Designing Folder.png'),
+    'sweep': ('editing-software-2026-02-08-01-44-16-utc.zip', 'Editing Software.png'),
+    'rotate': (AGENCY, 'Creative Agency 2/PNG/V1/Designing Tools.png'),
+    'gradient': ('color-picker-3d-icon-2026-06-08-16-11-58-utc.zip', 'Color Picker.png'),
+    'float': (AGENCY, 'Creative Agency 2/PNG/V1/Cloud Media.png'),
+}
 
 
 def build():
-    dest=SOURCE/'icons';dest.mkdir(parents=True,exist_ok=True)
-    manifest=[]
-    for key,h in SELECTED.items():
-        path=LIBRARY/(h+'.svg');original=path.read_bytes();svg=original.decode('utf8')
-        assert '<image' not in svg and '<script' not in svg and not re.search(r'(?:href|src)=["\']https?:',svg)
-        outputs=[]
-        for accent in PALETTE:
-            # Only color-valued attributes/styles; leave ID references intact.
-            colored=re.sub(r'#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?\b',lambda m:recolor(m[0],accent) if m.start()==0 or svg[m.start()-1] not in ['(','/'] else m[0],svg)
-            target=dest/(key+'-'+accent+'.svg');target.write_text(colored,encoding='utf8')
-            outputs.append({'path':target.relative_to(ROOT).as_posix(),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'bytes':target.stat().st_size})
-        manifest.append({'effect':key,'libraryId':h,'name':metadata[h]['n'],'source':path.relative_to(ROOT).as_posix(),'sourceSha256':hashlib.sha256(original).hexdigest(),'changes':'Vector presentation colors mapped to logo-tone/white/neutral-black blends; original geometry preserved.','outputs':outputs})
-    (SOURCE/'icons-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
-    print('Prepared',len(manifest),'library icons in three brand finishes; originals unchanged.')
+    manifest = []
+    notice = [
+        'LIENZO — RENDERS 3D DE LA GALERÍA / 3D GALLERY RENDERS',
+        '',
+        'Copias WebP de los renders PNG de la galería local. Conservan color y transparencia.',
+        'WebP copies of the original local gallery renders, preserving color and transparency.',
+        '',
+        'La licencia MIT corresponde al código de la plantilla.',
+        'The MIT license applies to the template code.',
+        '',
+        'Procedencia / Sources',
+    ]
+    for effect, (archive, member) in SELECTED.items():
+        with ZipFile(GALLERY / archive) as source:
+            original = source.read(member)
+        with Image.open(BytesIO(original)) as image:
+            render = image.convert('RGBA')
+        render = render.crop(render.getbbox())
+        render.thumbnail((400, 400), Image.Resampling.LANCZOS)
+        output = SOURCE / 'icons' / f'{effect}.webp'
+        render.save(output, 'WEBP', quality=88, method=6)
+        source_hash = sha256(original).hexdigest()
+        manifest.append({
+            'effect': effect,
+            'archive': (GALLERY / archive).relative_to(ROOT).as_posix(),
+            'member': member,
+            'sourceSha256': source_hash,
+            'output': output.relative_to(ROOT).as_posix(),
+            'outputSha256': sha256(output.read_bytes()).hexdigest(),
+        })
+        notice.extend([f'- {output.name}: {archive} / {member}', f'  SHA-256 (PNG): {source_hash}'])
+    (SOURCE / 'icons-manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    (SOURCE / 'ICONS-NOTICE.txt').write_text('\n'.join(notice) + '\n', encoding='utf-8')
 
 
-if __name__=='__main__':build()
+if __name__ == '__main__':
+    build()

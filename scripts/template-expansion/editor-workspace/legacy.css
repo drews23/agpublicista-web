@@ -32,12 +32,6 @@
 [data-editor-legacy="tarjetas-producto"] .pc-editor__motion{min-width:0;padding-top:20px;border-top:1px solid var(--line)}
 [data-editor-legacy="tarjetas-producto"] .pc-editor__footer{display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch;gap:14px}
 [data-editor-legacy="tarjetas-producto"] .pc-editor__footer>div{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
-[data-editor-legacy="tarjetas-hover"] .hc-comparison{display:grid;grid-template-columns:1fr;gap:16px;padding:0}
-[data-editor-legacy="tarjetas-hover"] .hc-comparison>div:first-child{display:none}
-[data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-card{max-width:360px;margin:auto}
-[data-editor-legacy="tarjetas-hover"] .hc-editor{margin:0;display:flex;flex-direction:column;gap:22px;padding:20px}
-[data-editor-legacy="tarjetas-hover"] .hc-editor__content,[data-editor-legacy="tarjetas-hover"] .hc-editor__settings,[data-editor-legacy="tarjetas-hover"] .hc-editor__links{display:flex;flex-direction:column;gap:14px}
-[data-editor-legacy="tarjetas-hover"] .hc-editor__footer{display:flex;flex-direction:column;align-items:stretch;gap:12px}
 
 /* SVG studio: one stable artboard, with library and controls together. */
 [data-editor-legacy="iconos-animados"] .mi-workbench{display:block}
@@ -98,9 +92,6 @@
  [data-editor-legacy] [data-editor-workspace][data-editor-collapsed=true] [data-editor-layout]{grid-template-columns:minmax(0,1fr)}
  [data-editor-legacy] [data-editor-panel]{max-height:calc(100dvh - var(--editor-header-height) - 36px);overflow-y:auto}
  [data-editor-legacy] [data-editor-preview]:not([data-editor-too-tall=true]){top:var(--editor-preview-top,calc(var(--editor-header-height) + 12px))}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison{min-height:390px;align-content:center}
- [data-editor-legacy="tarjetas-hover"] [data-editor-collapsed=true] .hc-comparison{grid-template-columns:1fr 1fr}
- [data-editor-legacy="tarjetas-hover"] [data-editor-collapsed=true] .hc-comparison>div:first-child{display:block}
 }
 @media(max-width:959px){
  [data-editor-legacy] [data-editor-layout]{grid-template-columns:minmax(0,1fr)!important;gap:16px}
@@ -108,14 +99,6 @@
  [data-editor-legacy] [data-editor-panel]{max-height:none;overflow:visible;padding:18px}
  [data-editor-legacy] dialog[data-editor-workspace]{--editor-header-height:66px}
  [data-editor-legacy] dialog[data-editor-workspace] [data-editor-layout]{padding:14px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison{padding:16px 0}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-card{max-width:260px;min-height:260px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-scene{--scene-min:235px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-face__content{padding:14px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-art{height:78px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison h2{font-size:23px;margin:4px 0 8px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-card__description{font-size:11px;line-height:1.6}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison__label{margin:0 0 8px}
  [data-editor-legacy="tarjetas-producto"] .pc-detail__visual{min-height:170px}
  [data-editor-legacy="tarjetas-producto"] .pc-detail__visual img{max-height:190px}
  [data-editor-legacy="iconos-animados"] .mi-preview{padding:14px}
@@ -139,12 +122,6 @@
 @media(prefers-reduced-motion:reduce){[data-editor-legacy] [data-editor-preview]{scroll-behavior:auto}}
 @media(max-height:419px){[data-editor-legacy] [data-editor-preview]{position:relative!important;top:auto!important}}
 @media(max-height:620px){
- [data-editor-legacy="tarjetas-hover"] .hc-comparison{min-height:300px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-scene{--scene-min:240px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-face__content{padding:14px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-art{height:78px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison h2{font-size:23px;margin:4px 0 8px}
- [data-editor-legacy="tarjetas-hover"] .hc-comparison .hc-card__description{font-size:11px;line-height:1.6}
  [data-editor-legacy="iconos-animados"] .mi-preview{padding:16px}
  [data-editor-legacy="iconos-animados"] .mi-stage{min-height:160px}
  [data-editor-legacy="iconos-animados"] .mi-preview__caption h2{font-size:24px;margin-bottom:0}

@@ -34,7 +34,6 @@
   function cleanPointer(){cancelAnimationFrame(pointerFrame);pointerFrame=0;if(pointer)cleanCard(pointer.card);pointer=null;}
   function updateCard(card,item){
     card.style.setProperty('--tone',palette[item.accent]);card.style.setProperty('--duration',item.duration+'ms');card.style.setProperty('--amount',String(item.intensity/100));card.style.setProperty('--radius',item.radius+'px');card.style.setProperty('--ease',curves[item.easing]);
-    const image=card.querySelector('[data-object]');if(image){const path='assets/'+item.key+'-'+item.accent+'.svg';image.setAttribute('src',window.LienzoLegacyAssets?.asset(path)||path);}
     card.setAttribute('aria-label',item.name);card.querySelector('[data-card-name]').textContent=item.name;card.querySelector('[data-card-description]').textContent=item.description;
     const link=card.querySelector('[data-card-link]');link.querySelector('span').textContent=item.label;link.href=item.href;
     const labels={'data-test':say('Probar efecto: ','Test effect: '),'data-edit':say('Personalizar ','Customize '),'data-card-copy':say('Copiar HTML de ','Copy HTML for ')};
@@ -74,11 +73,35 @@
   function startTest(key,announce=true){
     if(!enabled()||!byKey.has(key))return;
     clearTimeout(tests.get(key));tests.set(key,setTimeout(()=>stopTest(key),1200+byKey.get(key).duration*2));setTesting(key,true);
-    if(announce)notify(say('Prueba de efecto: ','Effect preview: ')+byKey.get(key).name+'.');
+    if(announce)notify(dialog.open?say('Probando el efecto.','Testing the effect.'):say('Prueba de efecto: ','Effect preview: ')+byKey.get(key).name+'.');
   }
   function dialogState(){root.dataset.dialogOpen=String(dialog.open||codeDialog.open);root.dataset.codeOpen=String(codeDialog.open);cleanPointer();}
-  function choose(key){if(!byKey.has(key))return;stopTest(selected);selected=key;fillForm();render();startTest(key,false);}
-  function openEditor(key,button){selected=key;opener=button;fillForm();dialog.showModal();dialog.scrollTop=0;dialogState();render();startTest(key,false);document.querySelector('[data-editor-status]').textContent='';}
+  function choose(key){
+    if(!byKey.has(key))return;
+    stopTest(selected);selected=key;fillForm();render();
+    if(!dialog.querySelector('[data-after]').hidden)showPreview('after');
+  }
+  const modes=[...dialog.querySelectorAll('[data-preview-mode]')];
+  function showPreview(mode) {
+    modes.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.previewMode===mode)));
+    dialog.querySelector('[data-before]').hidden=mode!=='before';
+    const after=dialog.querySelector('[data-after]');
+    after.hidden=mode!=='after';
+    stopTest(selected);
+    if(after.hidden||!enabled())return;
+    const card=after.firstElementChild;
+    // Paint from the neutral state even when Replay interrupts an active test.
+    card.classList.add('hc-card--baseline');
+    card.querySelector('.hc-face').getBoundingClientRect();
+    card.classList.remove('hc-card--baseline');
+    startTest(selected,false);
+  }
+  function openEditor(key,button){
+    selected=key;opener=button;fillForm();dialog.showModal();
+    window.LienzoEditorWorkspace.setOpen(form,true);
+    dialog.scrollTop=0;form.scrollTop=0;dialogState();render();showPreview('after');
+    document.querySelector('[data-editor-status]').textContent='';
+  }
   function exportDocument(key=null){
     const clone=initialDocument.cloneNode(true),body=clone.querySelector('body'),exported=key?[byKey.get(key)]:items;
     clone.querySelector('[data-effects]').textContent=JSON.stringify(exported).replace(/</g,'\\u003c');
@@ -94,7 +117,8 @@
   function download(key=null){const url=URL.createObjectURL(new Blob([exportDocument(key)],{type:'text/html;charset=utf-8'})),link=document.createElement('a');link.href=url;link.download='lienzo-hover-'+(key||'collection')+'.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);notify(say('HTML creado. Consérvalo junto a CSS, JS y assets/.','HTML created. Keep it beside CSS, JS, and assets/.'));}
   grid.addEventListener('click',event=>{const button=event.target.closest('button'),card=button?.closest('[data-effect]');if(!card)return;const key=card.dataset.effect;if(button.hasAttribute('data-test')){if(tests.has(key))stopTest(key);else startTest(key);}if(button.hasAttribute('data-edit'))openEditor(key,button);if(button.hasAttribute('data-card-copy'))copy(exportDocument(key),button);});
   document.querySelector('[data-test-all]').addEventListener('click',()=>{items.forEach(item=>startTest(item.key,false));notify(say('Prueba de los seis efectos.','Previewing all six effects.'));});
-  document.querySelector('[data-editor-test]').addEventListener('click',()=>{startTest(selected);});
+  modes.forEach(button=>button.addEventListener('click',()=>showPreview(button.dataset.previewMode)));
+  document.querySelector('[data-editor-test]').addEventListener('click',()=>showPreview('after'));
   document.querySelector('[data-prev]').addEventListener('click',()=>{const index=items.indexOf(byKey.get(selected));if(index>0)choose(items[index-1].key);});
   document.querySelector('[data-next]').addEventListener('click',()=>{const index=items.indexOf(byKey.get(selected));if(index<items.length-1)choose(items[index+1].key);});
   document.querySelector('[data-reset]').addEventListener('click',()=>{Object.assign(byKey.get(selected),structuredClone(defaults.find(item=>item.key===selected)));fillForm();render();startTest(selected,false);notify(say('Tarjeta restablecida.','Card reset.'));});

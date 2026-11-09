@@ -160,10 +160,11 @@ def adapt_markup(raw, slug, lang):
         workspace = soup.select_one('[data-editor-dialog]')
         preview = soup.select_one('.hc-comparison')
         panel = soup.select_one('.hc-editor')
-        layout = tag('div', **{'class': 'editor-legacy-layout'})
+        layout = tag('div', **{'class': 'hc-workspace'})
         preview.insert_before(layout)
         layout.append(preview.extract()); layout.append(panel.extract())
-        frame(workspace, layout, preview, panel, soup.select_one('.hc-dialog__bar'))
+        frame(workspace, layout, preview, panel, soup.select_one('.hc-dialog__bar'),
+              workspace.select_one('[data-hc-settings]'))
     elif slug == 'iconos-animados':
         workspace = soup.select_one('.mi-workbench')
         preview = soup.select_one('.mi-preview')
@@ -289,6 +290,8 @@ def brand_markup(soup, slug, lang):
             panel.append(host)
         elif slug == 'laboratorio-3d' and (copy_section := panel.select_one('[data-lab-copy]')):
             copy_section.insert_before(host)
+        elif slug == 'tarjetas-hover' and (actions := panel.select_one('.hc-editor__actions')):
+            actions.insert_before(host)
         else:
             panel.insert(0, host)
     if slug in SLUGS[:2] and not panel.select_one('[data-social-export]'):
@@ -297,7 +300,7 @@ def brand_markup(soup, slug, lang):
         panel.append(export)
         status = soup.new_tag('p', attrs={'data-social-export-status': '', 'role': 'status'})
         panel.append(status)
-    if slug in ('tarjetas-producto', 'tarjetas-hover'):
+    if slug == 'tarjetas-producto':
         folder = ROOT / ('en/templates' if lang == 'en' else 'codigo-web/plantillas') / 'demos' / slug / 'assets'
         files = sorted(folder.glob('*.svg'))
         artwork = {f'assets/{file.name}': file.read_text(encoding='utf-8') for file in files
