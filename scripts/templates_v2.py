@@ -65,8 +65,8 @@ RESOURCES = {
     'portatil-en-perspectiva': {
         'kind': 'laptop-perspective',
         'sample_artwork': False,
-        'assets': ('laptop-perspective.webp',),
-        'license': 'Código MIT. Fuentes OFL. Procedencia de la imagen del portátil en SOURCE-NOTES.md.',
+        'assets': ('laptop-perspective.webp', 'laptop-orbit.bundle.js', 'THREE-LICENSE.txt', 'MESHOPT-LICENSE.txt'),
+        'license': 'Código MIT. Fuentes OFL. Modelo MacBook CC BY 4.0. Créditos en SOURCE-NOTES.md.',
     },
 }
 
@@ -395,11 +395,7 @@ def editor_document(raw, slug, lang, ui):
     editor.select_one('h2').decompose()
     intro = editor.find('p', recursive=False)
     intro['class'] = ['v2-editor-panel-help']
-    if kind == 'laptop-perspective':
-        intro.string = ('Carga tu MP4 o imagen y ajusta el encuadre en la vista previa.'
-                        if lang == 'es' else 'Add your MP4 or image and adjust the framing in the preview.')
-    else:
-        intro.string = ui['settingsHelp']
+    intro.string = ui['settingsHelp']
     head_title = header.select_one('.v2-eyebrow')
     head_title.name = 'h2'
     head_title['id'] = 'v2-editor-title'
@@ -412,14 +408,14 @@ def editor_document(raw, slug, lang, ui):
         text_class = {'devices': 'dv-copy-settings', 'laptop-perspective': 'lp-copy-settings'}[kind]
         text_section = soup.new_tag('details', attrs={'class': 'v2-panel-live ' + text_class})
         summary = soup.new_tag('summary')
-        summary.string = 'Textos de muestra' if lang == 'es' else 'Sample text'
+        summary.string = ui['lpSampleSettings'] if kind == 'laptop-perspective' else ('Textos de muestra' if lang == 'es' else 'Sample text')
         text_section.append(summary)
         form.wrap(text_section)
     cancel = soup.new_tag('button', attrs={'type': 'button', 'class': 'v2-text-button', 'data-editor-cancel': ''})
     cancel.string = ui['cancel']
     form.select_one('.v2-dialog-actions').insert(1, cancel)
     tip = preview.select_one('.v2-bottom>p')
-    if tip:
+    if tip and kind != 'laptop-perspective':
         help_section = soup.new_tag('details', attrs={'class': 'v2-panel-guide'})
         summary = soup.new_tag('summary')
         summary.string = 'Uso de la plantilla' if lang == 'es' else 'Using this template'
@@ -436,6 +432,15 @@ def editor_document(raw, slug, lang, ui):
         toolbar.select_one('.v2-toolbar-label').decompose()
         toolbar.insert(0, toolbar.select_one('.dv-switch').extract())
         preview.select_one('.v2-bottom').insert(0, preview.select_one('[data-device-compare]').extract())
+    if kind == 'laptop-perspective':
+        intro.decompose()
+        workspace['data-lp-workspace'] = ''
+        preview.select_one('.v2-bottom').decompose()
+        text_section.insert_after(brand_panel.extract())
+        reset = form.select_one('[data-reset]').extract()
+        reset['class'] = ['v2-text-button', 'lp-reset']
+        reset.string = ui['lpResetTemplate']
+        brand_panel.insert_after(reset)
     if kind == 'phone-prototype':
         intro.decompose()
         inspector = preview.select_one('.pp-settings').extract()
@@ -659,6 +664,12 @@ def editor_document(raw, slug, lang, ui):
             text_section.insert_before(section)
         else:
             editor.append(section)
+    if kind == 'laptop-perspective':
+        scroll = soup.new_tag('div', attrs={'class': 'lp-editor-scroll', 'data-lp-editor-scroll': ''})
+        for child in editor.find_all(recursive=False):
+            if child is not header:
+                scroll.append(child.extract())
+        editor.append(scroll)
     upload_row = preview.select_one('.v2-bottom .v2-row')
     if kind == 'profile':
         toolbar = workspace.select_one('.v2-toolbar .v2-row')
@@ -760,6 +771,12 @@ def editor_document(raw, slug, lang, ui):
         project_button = soup.new_tag('button', attrs={'type': 'button', 'class': 'v2-button v2-primary', 'data-device-project': ''})
         project_button.string = 'Download project ZIP' if lang == 'en' else 'Descargar proyecto ZIP'
         actions.append(project_button)
+    if kind == 'laptop-perspective':
+        bundle = SOURCE / 'laptop-perspective-assets/laptop-orbit.bundle.js'
+        version = hashlib.sha256(bundle.read_bytes()).hexdigest()[:12]
+        soup.head.append(soup.new_tag('script', attrs={
+            'defer': '', 'src': 'assets/laptop-orbit.bundle.js?v=' + version
+        }))
     return str(soup)
 
 
@@ -779,6 +796,7 @@ def document(slug, lang):
         ui['source'] = 'Export' if lang == 'en' else 'Exportar'
         ui['exportTitle'] = 'Save your mockup' if lang == 'en' else 'Guarda tu mockup'
         ui['local'] = 'Your files stay on this device.' if lang == 'en' else 'Tus archivos se quedan en este equipo.'
+        ui['guideText'] = tip
         ui['exportHelp'] = (
             'Download the project ZIP to keep your MP4 with the mockup. Extract it and open index.html. Use the HTML option for a still image and keep it alongside the template files.'
             if lang == 'en' else
@@ -1117,6 +1135,8 @@ def build(only=None, language=None):
                 shutil.copy2(common / name, assets / name)
             for name in resource.get('assets', ()):
                 shutil.copy2(SOURCE / f'{kind}-assets' / name, assets / name)
+            if kind == 'laptop-perspective':
+                shutil.copy2(SOURCE / 'phone-prototype-assets/museum-atrium.webp', assets / 'museum-atrium.webp')
             for name in resource.get('localized_videos', ()):
                 shutil.copy2(SOURCE / f'{kind}-assets' / f'{name}-{lang}.mp4', assets / f'{name}.mp4')
             logo = (assets / 'logo-lienzo.svg').read_text(encoding='utf-8')

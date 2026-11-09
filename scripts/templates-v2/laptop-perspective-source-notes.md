@@ -1,8 +1,24 @@
 # Notas de procedencia / Source notes
 
-Lienzo creó el código y la composición del mockup. El marco fotorrealista se generó con la herramienta integrada ImageGen y se distribuye como WebP. La plantilla incluye sus fuentes y avisos OFL. La referencia visual aportada con MD Estudio Creativo mostró cómo una proyección de cuatro esquinas encaja en una foto en perspectiva. Los archivos, dependencias y fotografía remota de esa referencia quedan fuera de este paquete.
+Lienzo creó el código y la composición del mockup. La vista fija en WebP se renderizó a partir del mismo MacBook que se usa en la órbita 3D. La plantilla incluye sus fuentes y avisos OFL. La referencia visual aportada con MD Estudio Creativo mostró cómo una proyección de cuatro esquinas encaja en una foto en perspectiva.
 
-Lienzo created the mockup code and composition. The photorealistic laptop was generated with the built-in ImageGen tool and is distributed as WebP. The package includes its fonts and OFL notices. The visual reference supplied with MD Estudio Creativo demonstrated four-corner screen projection in a perspective photo. The reference files, dependencies, and remote photo are outside this package.
+Lienzo created the mockup code and composition. The static WebP view was rendered from the same MacBook used in the 3D orbit. The package includes its fonts and OFL notices. The visual reference supplied with MD Estudio Creativo demonstrated four-corner screen projection in a perspective photo.
+
+## Vista 3D / 3D view
+
+El modelo [MacBook Pro M3 de 16 pulgadas](https://sketchfab.com/3d-models/macbook-pro-m3-16-inch-2024-8e34fc2b303144f78490007d91ff57c4) es de **jackbaeten** y se distribuye bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [William Laverty](https://github.com/william-laverty/rigged-macbook-3d/blob/main/CREDITS.md) adaptó el acabado Space Black, la bisagra y la compresión del GLB en `rigged-macbook-3d@0.2.0`. Lienzo integró la cámara, la iluminación y la proyección de contenido sobre la pantalla. El archivo local `laptop-orbit.bundle.js` incluye el GLB y Three.js 0.183.2. El aviso MIT de Three.js está en `assets/THREE-LICENSE.txt`.
+
+The 16-inch MacBook Pro M3 model is by **jackbaeten**, licensed under CC BY 4.0. William Laverty adapted the Space Black finish, hinge, and GLB compression. Lienzo integrated the camera, lighting, and custom screen projection. MacBook is a trademark of Apple Inc.
+
+El decodificador meshoptimizer de Arseny Kapoulkine se incluye con su aviso MIT en `assets/MESHOPT-LICENSE.txt`.
+
+The meshoptimizer decoder by Arseny Kapoulkine is included with its MIT notice in `assets/MESHOPT-LICENSE.txt`.
+
+## Fotografía de muestra / Sample photograph
+
+`assets/museum-atrium.webp` reutiliza una fotografía del atrio del Museo de Arte de Milwaukee ya incluida en el prototipo móvil. Carol M. Highsmith, Prints and Photographs Division, Library of Congress. [Ficha del archivo / Catalog record, LC-DIG-highsm-40194](https://www.loc.gov/item/2016631012/).
+
+`assets/museum-atrium.webp` reuses the Milwaukee Art Museum atrium photograph included in the phone prototype.
 
 ## Huellas de referencia / Reference fingerprints
 

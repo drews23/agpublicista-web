@@ -199,13 +199,13 @@
   {
     "id": "portatil-en-perspectiva",
     "title": "Portátil en perspectiva",
-    "tag": "Mockup fotorrealista",
+    "tag": "Portátil 3D interactivo",
     "author": "Lienzo",
     "source": null,
     "zip": "portatil-en-perspectiva-lienzo.zip",
-    "desc": "Presenta tu grabación MP4 o captura en la pantalla de un portátil visto en perspectiva. Ajusta el encuadre y guarda el proyecto para abrirlo sin conexión.",
-    "size": 518,
+    "desc": "Gira el portátil 360° y presenta un MP4 o una captura en su pantalla. Ajusta el encuadre y guarda el proyecto para abrirlo sin conexión.",
+    "size": 2394,
     "authorRole": "Implementación original y guía",
-    "license": "Código MIT. Fuentes OFL. Procedencia de la imagen del portátil en SOURCE-NOTES.md."
+    "license": "Código MIT. Fuentes OFL. Modelo MacBook CC BY 4.0. Créditos en SOURCE-NOTES.md."
   }
 ]

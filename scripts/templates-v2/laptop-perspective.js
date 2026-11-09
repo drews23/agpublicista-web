@@ -9,8 +9,10 @@
   const workspace = $('[data-editor-workspace]');
   workspace.dataset.editorFocusAnchor = 'workspace';
   workspace.addEventListener('lienzo:editor-panel', event => {
-    if (!event.detail.open || !matchMedia('(min-width: 960px) and (min-height: 650px)').matches) return;
-    if (workspace.getBoundingClientRect().top > 24) workspace.scrollIntoView({block: 'start', behavior: 'instant'});
+    if (!event.detail.open || workspace.dataset.editorConstrained === 'true') return;
+    if (matchMedia('(min-width: 960px) and (min-height: 420px), (min-height: 450px)').matches) {
+      workspace.scrollIntoView({block: 'start', behavior: 'instant'});
+    }
   });
   const device = $('[data-lp-device]');
   const screen = $('[data-lp-screen]');
@@ -24,13 +26,14 @@
   const remove = $('[data-lp-remove]');
   const imageInput = $('[data-lp-image-upload]');
   const videoInput = $('[data-lp-video-upload]');
+  const editorScroll = $('[data-lp-editor-scroll]');
   const transport = $('[data-lp-transport]');
   const status = message => studio.text('[data-lp-media-status]', message);
   const item = () => state.items[0];
   const videoLimit = 40 * 1024 * 1024;
   const projectVideo = 'media/laptop.mp4';
-  // Display corners in the 1536 × 1024 shell. A few pixels of bleed cover its matte.
-  const screenCorners = [[498, 38], [1456, 75], [1388, 681], [430, 591]];
+  // Display corners in the 1536 × 1024 MacBook fallback render.
+  const screenCorners = [[634.9, 101.3], [1232.7, 160.4], [1156.3, 589.9], [586.2, 475.8]];
   const speaker = {
     on: '<path d="M3 9h4l5-4v14l-5-4H3zM15 9a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12"/>',
     off: '<path d="M3 9h4l5-4v14l-5-4H3zM16 10l5 5m0-5-5 5"/>'
@@ -41,6 +44,7 @@
   let videoReady = false;
   let uploadVersion = 0;
   let candidateCheck = null;
+  let orbitScreen = null;
 
   function projectScreen() {
     const bounds = device.getBoundingClientRect();
@@ -48,7 +52,7 @@
     const width = parseFloat(style.width);
     const height = parseFloat(style.height);
     if (!(bounds.width > 0 && bounds.height > 0 && width > 0 && height > 0)) return;
-    const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = screenCorners.map(([x, y]) => [
+    const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = orbitScreen || screenCorners.map(([x, y]) => [
       x * bounds.width / 1536, y * bounds.height / 1024
     ]);
     const dx1 = x1 - x2;
@@ -294,8 +298,10 @@
     signalMedia('restore');
   });
   $('[data-lp-open-media]').addEventListener('click', event => {
+    videoInput.closest('details').open = true;
     studio.edit(0, event.currentTarget);
-    videoInput.focus();
+    if (editorScroll) editorScroll.scrollTop = 0;
+    videoInput.focus({preventScroll: editorScroll && getComputedStyle(editorScroll).overflowY === 'auto'});
   });
   studio.root.addEventListener('v2:motion', event => {
     if (event.detail.paused) video.pause();
@@ -308,6 +314,10 @@
     getVideo() { return video; },
     pause() { video.pause(); }
   });
+  window.LienzoLaptopProjection = points => {
+    orbitScreen = points;
+    projectScreen();
+  };
 
   studio.setup({
     render,
