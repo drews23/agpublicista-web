@@ -8,13 +8,14 @@ const root = path.resolve(__dirname, '../..');
 const code = fs.readFileSync(path.join(root, 'scripts/templates-v2/particles.js'), 'utf8');
 const report = [];
 
-async function fixture({fallback = false, reduced = false, imageSize = [1200, 900], framing = 'contain'} = {}) {
+async function fixture({fallback = false, reduced = false, ambient = false, imageSize = [1200, 900], framing = 'contain'} = {}) {
   let now = 0, sequence = 0, paused = reduced, callbacks, imageResolver, resizeObserver;
   let box = {left: 0, top: 0, width: 900, height: 675};
   const frames = new Map(), timers = new Map(), nodes = new Map(), calls = [], captures = [], pendingBlobs = [], downloads = [];
   const state = JSON.parse(fs.readFileSync(path.join(root, 'scripts/templates-v2/particles-state.json'), 'utf8')).es;
   state.items[0].imageData = 'data:image/png;base64,test-image';
   state.items[0].framing = framing;
+  if (!ambient) state.items[0].speed = 0;
   const defaults = structuredClone(state), ui = JSON.parse(fs.readFileSync(path.join(root, 'scripts/templates-v2/particles-ui.json'), 'utf8')).es;
   const uniforms = new Map(); let activeProgram = null;
   const gl = new Proxy({
@@ -27,7 +28,11 @@ async function fixture({fallback = false, reduced = false, imageSize = [1200, 90
     uniform1i: (location, value) => uniforms.set(location.program.id + '/' + location.name, value),
     uniform2f: (location, ...value) => uniforms.set(location.program.id + '/' + location.name, value),
     uniform3f: (location, ...value) => uniforms.set(location.program.id + '/' + location.name, value),
-    drawArrays: kind => calls.push({kind, activity: uniforms.get(activeProgram.id + '/u_activity'), scatter: uniforms.get(activeProgram.id + '/u_scatter'), mouse: uniforms.get(activeProgram.id + '/u_mouse'), resolution: uniforms.get(activeProgram.id + '/u_resolution')})
+    drawArrays(kind) {
+      const value = name => uniforms.get(activeProgram.id + '/u_' + name);
+      calls.push({kind, activity: value('activity'), ambient: value('ambient'), scatter: value('scatter'),
+        mouse: value('mouse'), momentum: value('momentum'), resolution: value('resolution')});
+    }
   }, {get(target, name) { return name in target ? target[name] : () => ({}); }});
   const ctx2d = new Proxy({}, {get: () => () => {}});
   function node(selector) {
@@ -88,21 +93,47 @@ async function fixture({fallback = false, reduced = false, imageSize = [1200, 90
 }
 
 (async () => {
+  const opening = await fixture({ambient: true});
+  const openingFrame = opening.node('[data-particle-frame]');
+  assert.equal(openingFrame.dataset.renderState, 'running');
+  assert.deepEqual(opening.calls.slice(0, 2).map(({kind, ambient, activity}) => [kind, ambient, activity]),
+    [['triangles', 1, 0], ['points', 1, 0]], 'The first image and grain passes must already be in motion without pointer input.');
+  const openingDraws = Number(openingFrame.dataset.drawCount);
+  opening.tick(12);
+  const ambientDraws = Number(openingFrame.dataset.drawCount) - openingDraws;
+  assert.ok(ambientDraws > 1 && ambientDraws < 12, 'Ambient motion uses a lower draw cadence than the input loop.');
+  opening.pause(true);
+  assert.equal(opening.frames.size, 0);
+  assert.equal(opening.calls.at(-1).ambient, 0);
+  assert.equal(opening.calls.at(-1).kind, 'triangles');
+  opening.pause(false);
+  opening.tick(3);
+  assert.equal(opening.calls.at(-1).ambient, 1);
+  assert.equal(opening.calls.at(-1).kind, 'points');
+  opening.node('[data-particle-settings]').fire('input', {target: {name: 'speed', value: '0'}});
+  opening.tick(2);
+  assert.equal(openingFrame.dataset.renderState, 'idle');
+  assert.equal(opening.frames.size, 0);
+  report.push('The first draw includes ambient motion, which throttles at rest and respects pause and zero speed.');
+
   const f = await fixture(), canvas = f.node('[data-particle-canvas]'), frame = f.node('[data-particle-frame]');
   assert.equal(frame.dataset.renderState, 'idle');
   assert.equal(f.frames.size, 0); assert.ok(f.calls.length);
-  assert.ok(f.calls.every(call => call.kind === 'triangles' && call.activity === 0 && call.scatter === 0));
+  assert.ok(f.calls.every(call => call.kind === 'triangles' && call.activity === 0 && call.ambient === 0));
   const restCount = frame.dataset.drawCount;f.tick(180);assert.equal(frame.dataset.drawCount, restCount);
-  report.push('Idle draws only the intact image and requests no continuous frames.');
+  report.push('At zero speed, the idle pass draws the intact image and requests no continuous frames.');
 
   canvas.fire('pointerenter', {pointerType: 'mouse', clientX: 450, clientY: 337});f.tick(12);
   assert.equal(frame.dataset.renderState, 'running');assert.ok(f.calls.at(-1).activity > .8);assert.equal(f.calls.at(-1).kind, 'points');
   canvas.fire('pointermove', {pointerType: 'mouse', clientX: 590, clientY: 337});f.tick(1);
+  assert.ok(f.calls.at(-1).momentum[0] > 0);
+  assert.deepEqual(f.calls.at(-2).momentum, f.calls.at(-1).momentum);
+  assert.equal(f.calls.at(-2).activity, f.calls.at(-1).activity);
   const mouse = f.calls.at(-1).mouse;canvas.fire('pointerleave');f.tick(1);
   assert.deepEqual(f.calls.at(-1).mouse, mouse, 'Reassembly must keep the last contact, without jumping off-canvas.');
   f.tick(120);assert.equal(frame.dataset.renderState, 'idle');assert.equal(f.frames.size, 0);
   assert.equal(f.calls.at(-1).kind, 'triangles');assert.equal(f.calls.at(-1).activity, 0);
-  report.push('Mouse hover activates particles; leaving restores the full image and stops the loop.');
+  report.push('The photo and grains receive the same pointer wake. Leaving restores the full image at zero speed.');
 
   f.node('[data-center-pulse]').fire('click');f.tick(12);assert.equal(f.calls.at(-1).kind, 'points');
   f.tick(120);assert.equal(frame.dataset.renderState, 'idle');assert.equal(f.frames.size, 0);
@@ -118,7 +149,7 @@ async function fixture({fallback = false, reduced = false, imageSize = [1200, 90
   report.push('Touch activates on contact and restores on release, without a phantom hover.');
 
   f.node('[data-scatter]').fire('click');f.tick(150);assert.equal(f.calls.at(-1).scatter, 1);assert.equal(f.frames.size, 1);
-  f.node('[data-scatter]').fire('click');f.tick(150);assert.equal(f.calls.at(-1).scatter, 0);assert.equal(f.frames.size, 0);
+  f.node('[data-scatter]').fire('click');f.tick(150);assert.equal(f.calls.at(-1).kind, 'triangles');assert.equal(f.frames.size, 0);
   report.push('Explicit full-image Scatter and Reassemble remain functional.');
 
   canvas.fire('pointerenter', {clientX: 400, clientY: 350});f.tick(10);f.pause(true);
@@ -133,8 +164,10 @@ async function fixture({fallback = false, reduced = false, imageSize = [1200, 90
   canvas.fire('webglcontextrestored');assert.equal(frame.dataset.renderState, 'idle');assert.equal(f.calls.at(-1).kind, 'triangles');
   report.push('Context restoration rebuilds the full image without restarting ambient particles.');
 
-  const staticFixture = await fixture({fallback: true});assert.equal(staticFixture.node('[data-particle-frame]').dataset.renderState, 'static');assert.equal(staticFixture.frames.size, 0);
-  const reduced = await fixture({reduced: true});reduced.node('[data-scatter]').fire('click');assert.equal(reduced.calls.at(-1).scatter, 1);assert.equal(reduced.frames.size, 0);
+  const staticFixture = await fixture({fallback: true, ambient: true});assert.equal(staticFixture.node('[data-particle-frame]').dataset.renderState, 'static');assert.equal(staticFixture.frames.size, 0);
+  const reduced = await fixture({reduced: true, ambient: true});
+  assert.ok(reduced.calls.every(call => call.kind === 'triangles' && call.ambient === 0));
+  reduced.node('[data-scatter]').fire('click');assert.equal(reduced.calls.at(-1).scatter, 1);assert.equal(reduced.frames.size, 0);
   reduced.node('[data-scatter]').fire('click');assert.equal(reduced.calls.at(-1).kind, 'triangles');assert.equal(reduced.frames.size, 0);
   report.push('Static fallback and reduced motion retain their explicit, non-animated behavior.');
 

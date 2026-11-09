@@ -230,6 +230,8 @@
     clone.querySelectorAll('[data-fields]').forEach(node => node.replaceChildren());
     clone.querySelectorAll('[data-error],[data-status],[data-copy-status]').forEach(node => { node.textContent = ''; });
     clone.querySelectorAll('[data-source-code]').forEach(node => { node.textContent = ''; });
+    clone.querySelectorAll('[data-device-project-status]').forEach(node => { node.textContent = ''; });
+    clone.querySelectorAll('video[src^="blob:"]').forEach(node => node.removeAttribute('src'));
     clone.querySelector('[data-v2]').classList.remove('v2-paused');
     clone.querySelector('[data-config]').textContent = JSON.stringify({...config, state}).replace(/</g, '\\u003c');
     clone.querySelectorAll('canvas').forEach(c => c.removeAttribute('style'));
@@ -261,7 +263,7 @@
     return canvas.toDataURL('image/webp', .9);
   }
   const api = {
-    root, state, defaults, ui, $, $$, icon, colors, safeURL, status, edit, download, imageFile,
+    root, state, defaults, ui, $, $$, icon, colors, safeURL, status, edit, download, imageFile, source,
     color(key, fallback) { return brand?.color(key, fallback) || colors[key] || fallback; },
     get brand() { return brand; },
     text(selector, value) { const node = $(selector); if (node) node.textContent = value; },
