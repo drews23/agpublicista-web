@@ -6,6 +6,7 @@ import importlib.util
 import json
 import re
 from bs4 import BeautifulSoup
+from english_search import PAGES
 
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / 'css/pages/template-library.css'
@@ -78,7 +79,8 @@ def enhance_template_catalog(raw, route):
         heading = card.find(['h2', 'h3'])
         heading.name = 'h3'
         heading['class'] = ['template__title']
-    title = section.h1.get_text()
+    english_copy = PAGES['/en/templates/']
+    title = english_copy['h1'] if en else section.h1.get_text()
     breadcrumb = str(section.select_one('.breadcrumbs'))
     index = 'template-categories' if en else 'categorias-plantillas'
     compare = 'compare-templates' if en else 'comparar-plantillas'
@@ -87,7 +89,7 @@ def enhance_template_catalog(raw, route):
     preview_version=('?v='+hashlib.sha256(preview_path.read_bytes()).hexdigest()[:12]) if preview_path.exists() else ''
     product_preview_path=ROOT/route.strip('/')/'demos/tarjetas-producto/preview.svg'
     product_preview_version=('?v='+hashlib.sha256(product_preview_path.read_bytes()).hexdigest()[:12]) if product_preview_path.exists() else ''
-    hero = f'''<div class="templates-head page-head catalog-hero"><div class="catalog-hero__copy"><p class="eyebrow">HTML · CSS · JAVASCRIPT</p><h1>{escape(title)}</h1><p class="catalog-hero__statement">{tr('Elige una pieza.<br>Hazla tuya.', 'Find your piece.<br>Make it yours.')}</p><p class="lede">{tr('Catorce piezas de interfaz para dar forma a tu próxima web. Explora, prueba los controles y descarga el código para adaptarlo a tu proyecto.', 'Fourteen UI templates for your next website. Explore the designs, try the controls, and download the code to make them your own.')}</p><div class="catalog-hero__actions"><a class="btn btn--primary" href="#{index}">{tr('Explorar plantillas', 'Explore templates')} <span aria-hidden="true">↓</span></a><a class="catalog-text-link" href="#{how}">{tr('Cómo empezar', 'How to get started')} <span aria-hidden="true">↗</span></a></div></div><div class="catalog-hero__art" aria-hidden="true"><span class="catalog-art__label">LIENZO / {tr('BIBLIOTECA WEB', 'WEB LIBRARY')}</span><div class="catalog-art__window catalog-art__window--back"><span class="catalog-art__bar"><i></i><i></i><i></i><span>cards.css</span></span><img src="demos/laboratorio-3d/preview.svg{preview_version}" alt="" width="600" height="320" decoding="async"></div><div class="catalog-art__window catalog-art__window--front"><span class="catalog-art__bar"><i></i><i></i><i></i><span>your-next-idea.html</span></span><img src="demos/tarjetas-producto/preview.svg{product_preview_version}" alt="" width="600" height="320" decoding="async"></div><span class="catalog-art__badge">&lt;/&gt; <span>{tr('Código para crear', 'Code to create')}</span></span></div></div>'''
+    hero = f'''<div class="templates-head page-head catalog-hero"><div class="catalog-hero__copy"><p class="eyebrow">HTML · CSS · JAVASCRIPT</p><h1>{escape(title)}</h1><p class="catalog-hero__statement">{tr('Elige una pieza.<br>Hazla tuya.', 'Find your piece.<br>Make it yours.')}</p><p class="lede">{tr('Catorce piezas de interfaz para dar forma a tu próxima web. Explora, prueba los controles y descarga el código para adaptarlo a tu proyecto.', english_copy['lede'])}</p><div class="catalog-hero__actions"><a class="btn btn--primary" href="#{index}">{tr('Explorar plantillas', 'Explore templates')} <span aria-hidden="true">↓</span></a><a class="catalog-text-link" href="#{how}">{tr('Cómo empezar', 'How to get started')} <span aria-hidden="true">↗</span></a></div></div><div class="catalog-hero__art" aria-hidden="true"><span class="catalog-art__label">LIENZO / {tr('BIBLIOTECA WEB', 'WEB LIBRARY')}</span><div class="catalog-art__window catalog-art__window--back"><span class="catalog-art__bar"><i></i><i></i><i></i><span>cards.css</span></span><img src="demos/laboratorio-3d/preview.svg{preview_version}" alt="" width="600" height="320" decoding="async"></div><div class="catalog-art__window catalog-art__window--front"><span class="catalog-art__bar"><i></i><i></i><i></i><span>your-next-idea.html</span></span><img src="demos/tarjetas-producto/preview.svg{product_preview_version}" alt="" width="600" height="320" decoding="async"></div><span class="catalog-art__badge">&lt;/&gt; <span>{tr('Código para crear', 'Code to create')}</span></span></div></div>'''
     bar = f'''<div class="templates-bar catalog-meta"><p><strong>14</strong> {tr('plantillas para personalizar', 'templates to customize')}</p><p>{tr('Gratis · Sin registro · Código incluido', 'Free · No signup · Source code included')}</p></div>'''
     links = []
     groups = []
@@ -114,18 +116,26 @@ def enhance_template_catalog(raw, route):
         data = json.loads(match.group(1))
         for node in data.get('@graph', [data]):
             if node.get('@type') in ['CollectionPage','WebPage'] and 'description' in node:
-                node['description'] = tr('14 plantillas HTML, CSS y JavaScript para probar, personalizar y descargar.', '14 HTML, CSS, and JavaScript UI templates to preview, customize, and download.')
+                node['description'] = tr('14 plantillas HTML, CSS y JavaScript para probar, personalizar y descargar.', english_copy['description'])
+                if en:
+                    node['name'] = english_copy['title'].removesuffix(' | Lienzo')
             if node.get('@type') == 'ItemList':
                 node['itemListElement'] = [{'@type':'ListItem', 'position':i, 'name':cards[slug].find('h3').get_text(' ',strip=True), 'url':'https://lienzo.tools'+route+'#'+slug} for i,slug in enumerate(expected,1)]
         return '<script type="application/ld+json">'+json.dumps(data,ensure_ascii=False,indent=2)+'</script>'
     updated = re.sub(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', schema, updated, flags=re.S)
-    # The old Twitter description still referred to only three templates.
-    description = tr('14 plantillas web HTML, CSS y JavaScript gratis: galerías, tarjetas, menús, iconos, partículas y botones. Prueba, personaliza y descarga el código.', '14 free HTML, CSS, and JavaScript UI templates: galleries, cards, menus, icons, particles, and social buttons. Preview, customize, and download the code.')
+    # Keep the English catalog's search and share copy in sync on every rebuild.
+    if en:
+        updated = re.sub(r'<title>[^<]*</title>', lambda _: '<title>' + escape(english_copy['title']) + '</title>', updated, count=1)
+    description = tr('14 plantillas web HTML, CSS y JavaScript gratis: galerías, tarjetas, menús, iconos, partículas y botones. Prueba, personaliza y descarga el código.', english_copy['description'])
     for match in reversed(list(re.finditer(r'<meta\b[^>]*>', updated))):
         meta = BeautifulSoup(match.group(), 'html.parser').meta
         if meta.get('name') in ['description', 'twitter:description'] or meta.get('property') == 'og:description':
             meta['content'] = description
-            updated = updated[:match.start()] + str(meta) + updated[match.end():]
+        elif en and (meta.get('name') == 'twitter:title' or meta.get('property') == 'og:title'):
+            meta['content'] = english_copy['title']
+        else:
+            continue
+        updated = updated[:match.start()] + str(meta) + updated[match.end():]
     css_url = '/css/pages/template-library.css?v='+hashlib.sha256(CSS.read_bytes()).hexdigest()[:12]
     link = '<link rel="stylesheet" href="'+css_url+'">'
     pattern = r'<link\b[^>]*href="/css/pages/template-library\.css[^>]*>'

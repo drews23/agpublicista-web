@@ -42,6 +42,8 @@ def apply_search_copy(soup, route):
                 if 'headline' in value:
                     value['headline'] = copy['h1']
                 value['description'] = copy['description']
+                if value.get('@type') == 'Article' and 'dateModified' in copy:
+                    value['dateModified'] = copy['dateModified']
             for item in value.values():
                 if isinstance(item, (dict, list)):
                     update_page(item)
@@ -60,16 +62,16 @@ def apply_search_copy(soup, route):
             section.append(fragment.p)
     elif route == '/en/templates/':
         # Resource builders own card headings and descriptions for all 14 pieces.
-        soup.select_one('.templates-head .lede').string = 'Explore fourteen free HTML, CSS, and JavaScript templates. Preview and customize carousels, galleries, cards, menus, icons, and visual effects before downloading the code. These are reusable interface pieces, not complete website themes.'
+        soup.select_one('.templates-head .lede').string = copy['lede']
 
     # A stable insertion point makes repeated finalization idempotent.
     extra = CONTENT / ('search-' + ('home' if route == '/en/' else route.rstrip('/').split('/')[-1]) + '.html')
     if extra.exists():
         current = soup.select_one('#resource-setup')
-        if current:
-            current.decompose()
         fragment = BeautifulSoup(extra.read_text(encoding='utf8'), 'html.parser').section
-        if route == '/en/templates/':
+        if current:
+            current.replace_with(fragment)
+        elif route == '/en/templates/':
             soup.select_one('.templates-faq').insert_before(fragment)
         else:
             download = soup.main.select_one('#download')

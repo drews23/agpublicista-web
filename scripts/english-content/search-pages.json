@@ -5,9 +5,10 @@
     "description": "Explore free sound effects, SVG icons, After Effects templates, and HTML, CSS, and JavaScript UI templates. Preview resources and check each download’s usage terms."
   },
   "/en/templates/": {
-    "title": "14 Free HTML, CSS & JavaScript Templates | Lienzo",
-    "h1": "Free HTML, CSS and JavaScript Templates",
-    "description": "14 free HTML, CSS, and JavaScript templates: carousels, galleries, cards, menus, icons, and visual effects. Preview, customize, and download the code."
+    "title": "14 Free HTML, CSS & JavaScript UI Templates | Lienzo",
+    "h1": "Free HTML, CSS, and JavaScript UI Templates",
+    "description": "Preview 14 free HTML, CSS, and JavaScript UI templates with source code. Try carousels, galleries, cards, and social buttons, then download the ZIPs.",
+    "lede": "Preview and customize fourteen UI templates for your next website. Try a gallery for your portfolio, a carousel for your products, or social buttons for your profile. Download the source code when you find a fit."
   },
   "/en/blog/after-effects-text-animation/": {
     "title": "Free After Effects Text Animation Templates | Lienzo",
@@ -17,7 +18,8 @@
   "/en/blog/ai-icons/": {
     "title": "25 Free Artificial Intelligence Icons in SVG & PNG | Lienzo",
     "h1": "25 Free Artificial Intelligence Icons in Three Styles",
-    "description": "Download 25 artificial intelligence icon concepts in flat, outline and solid styles: 75 SVG and 75 PNG files. Compare previews, customization examples and usage terms."
+    "description": "Download 25 free artificial intelligence icons in SVG and PNG, in flat, outline, and solid styles. Try the chatbot sample in both formats.",
+    "dateModified": "2026-11-08"
   },
   "/en/blog/free-transition-sound-effects/": {
     "title": "16 Free Transition Sound Effects in WAV | Lienzo",
