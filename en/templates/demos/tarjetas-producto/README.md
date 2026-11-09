@@ -8,11 +8,13 @@ Extract the complete ZIP. Open index.html directly; no server, package install, 
 
 Use Customize on a card to edit its name, description, sample USD price, optional previous price, maximum tilt (0–10 degrees), border period (4–16 seconds), and light intensity. Each card has independent settings. Finish buttons update the illustration and accent, including the detail view. Reset affects only that card. Products, prices, ratings, and reviews are illustrative, not customer evidence or a real sale.
 
+Content opens first. Expand Sample prices, Motion and light, or Your brand as needed. Hide settings keeps the values and leaves the product preview and Download HTML visible.
+
 For source edits, the JSON block data-products contains product content, features, sample ratings, price and previous price in integer cents, finish, tilt, speed, and glow. Supported keys are audio, watch, laptop; finishes are mint, amber, violet. Use nonnegative prices up to 9,999,999 cents, previous price higher than current price to display a discount, tilt 0–10, speed 4–16, glow 0–100. The script validates data on initialization. HTML is rendered with textContent for user input; exported JSON escapes markup delimiters. Brand colors derive only from the Lienzo logo and neutral black/white.
 
 ## Details and selection
 
-Click the product image to open details, view the larger illustration, choose a finish and quantity, and add to the demo. The selection groups by product AND finish, supports quantity changes/removal, and recalculates integer-cent totals. Maximum 20 units per product and finish. Editing a sample price updates existing selection lines. Favorites and selection stay in memory and reset on reload. No payment, order, shipping, user account, analytics, storage, or remote service is included.
+Click the product image to browse with the settings folded. Choose a finish beside the illustration. Details and selection contains the description, features, quantity, and the button to add it to the demo. The selection groups by product AND finish, supports quantity changes/removal, and recalculates integer-cent totals. Maximum 20 units per product and finish. Editing a sample price updates existing selection lines. Favorites and selection stay in memory and reset on reload. No payment, order, shipping, user account, analytics, storage, or remote service is included.
 
 ## Export and integration
 

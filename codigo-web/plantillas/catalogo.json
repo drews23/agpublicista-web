@@ -57,7 +57,7 @@
     "source": null,
     "zip": "tarjetas-producto-lienzo.zip",
     "desc": "Tres productos con SVG detallados, borde de luz animado e inclinación. Acabados, favoritos, vista ampliada, selección con cantidades y editor por tarjeta. Exporta HTML funcional.",
-    "size": 175,
+    "size": 197,
     "authorRole": "Implementación, ilustración y guía",
     "license": "MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   },

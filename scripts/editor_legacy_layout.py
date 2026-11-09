@@ -142,20 +142,9 @@ def adapt_markup(raw, slug, lang):
               workspace.select_one('[data-lab-settings]'))
     elif slug == 'tarjetas-producto':
         workspace = soup.select_one('[data-detail-dialog]')
-        original = soup.select_one('.pc-detail__layout')
-        layout = tag('div', **{'class': 'editor-legacy-layout'})
-        original.insert_before(layout)
-        panel = soup.select_one('.pc-editor')
-        panel['open'] = ''
-        panel.select_one('summary').decompose()
-        preview = tag('div', **{'class': 'editor-product-preview'})
-        preview.append(original.select_one('.pc-detail__visual').extract())
-        preview.append(original.select_one('[data-detail-title]').extract())
-        info = original.select_one('.pc-detail__info').extract()
-        panel.insert(0, info)
-        original.decompose()
-        layout.append(preview); layout.append(panel.extract())
-        frame(workspace, layout, preview, panel, soup.select_one('.pc-dialog__bar'))
+        frame(workspace, workspace.select_one('.pc-detail__workspace'),
+              workspace.select_one('.editor-product-preview'), workspace.select_one('.pc-editor'),
+              workspace.select_one('.pc-dialog__bar'), workspace.select_one('[data-pc-settings]'))
     elif slug == 'tarjetas-hover':
         workspace = soup.select_one('[data-editor-dialog]')
         preview = soup.select_one('.hc-comparison')
@@ -290,7 +279,7 @@ def brand_markup(soup, slug, lang):
             panel.append(host)
         elif slug == 'laboratorio-3d' and (copy_section := panel.select_one('[data-lab-copy]')):
             copy_section.insert_before(host)
-        elif slug == 'tarjetas-hover' and (actions := panel.select_one('.hc-editor__actions')):
+        elif slug in ('tarjetas-hover', 'tarjetas-producto') and (actions := panel.select_one('.hc-editor__actions,.pc-editor__actions')):
             actions.insert_before(host)
         else:
             panel.insert(0, host)

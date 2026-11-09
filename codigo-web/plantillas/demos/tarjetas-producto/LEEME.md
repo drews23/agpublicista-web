@@ -8,11 +8,13 @@ Descomprime todo el ZIP. Abre index.html directamente; no requiere servidor, paq
 
 Usa Personalizar para editar nombre, descripción, precio de ejemplo en USD, precio anterior opcional, inclinación máxima (0–10 grados), periodo del borde (4–16 segundos) e intensidad de luz. Cada tarjeta conserva sus propios ajustes. Los acabados cambian la ilustración y el acento, también en la vista ampliada. Restablecer solo afecta a esa tarjeta. Productos, precios, valoraciones y cantidades de opiniones son ilustrativos; no representan una venta ni testimonios reales.
 
+Contenido abre primero. Despliega Precios de ejemplo, Movimiento y luz o Tu marca según lo que quieras editar. Ocultar ajustes conserva los valores y deja a la vista el producto y Descargar HTML.
+
 Para editar fuentes, el bloque JSON data-products incluye contenido, características, valoraciones de ejemplo, precios enteros en centavos, acabado, inclinación, velocidad y luz. Claves admitidas: audio, watch, laptop; acabados: mint, amber, violet. Precios de 0 a 9.999.999 centavos; el precio anterior debe superar al actual para mostrar descuento; tilt 0–10, speed 4–16, glow 0–100. El script valida los datos al iniciar. El texto introducido se aplica con textContent y el JSON exportado escapa delimitadores de marcado. Colores únicamente del logo Lienzo y sus mezclas con blanco/negro neutro.
 
 ## Detalles y selección
 
-Pulsa la imagen para ampliar el producto, elegir acabado/cantidad y añadirlo a la demo. La selección agrupa por producto Y acabado, admite cantidades/retirada y calcula totales en centavos enteros. Máximo 20 unidades por producto y acabado. Cambiar el precio de ejemplo actualiza sus líneas seleccionadas. Favoritos y selección viven en memoria y se reinician al recargar. Sin pagos, pedidos, envíos, cuenta, analítica, almacenamiento ni servicio remoto.
+Pulsa la imagen para explorar el producto con los ajustes plegados. Elige el acabado junto a la ilustración. Detalles y selección reúne la descripción, las características, la cantidad y el botón para añadir a la demo. La selección agrupa por producto Y acabado, admite cantidades/retirada y calcula totales en centavos enteros. Máximo 20 unidades por producto y acabado. Cambiar el precio de ejemplo actualiza sus líneas seleccionadas. Favoritos y selección viven en memoria y se reinician al recargar. Sin pagos, pedidos, envíos, cuenta, analítica, almacenamiento ni servicio remoto.
 
 ## Exportación e integración
 

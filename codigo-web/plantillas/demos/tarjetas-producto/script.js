@@ -27,8 +27,9 @@
   const detail = document.querySelector('[data-detail-dialog]');
   const cartDialog = document.querySelector('[data-cart-dialog]');
   const codeDialog = document.querySelector('[data-code-dialog]');
-  const editor = document.querySelector('[data-editor]');
   const form = document.querySelector('[data-edit-form]');
+  const productInfo = detail.querySelector('[data-product-info]');
+  const preview = detail.querySelector('.editor-product-preview');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const fine = matchMedia('(hover:hover) and (pointer:fine)');
   const moneyFormat = new Intl.NumberFormat(en?'en-US':'es-CO',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -127,7 +128,7 @@
   function chooseFinish(key,accent) {
     if(!byKey.has(key)||!Object.hasOwn(palette,accent))return;
     byKey.get(key).accent=accent;render();
-    notify(byKey.get(key).name+': '+colorNames[accent]+'.');
+    notify(detail.open ? colorNames[accent]+'.' : byKey.get(key).name+': '+colorNames[accent]+'.');
   }
   function dialogState() {
     root.dataset.dialogOpen=String([...document.querySelectorAll('dialog')].some(dialog=>dialog.open));
@@ -136,11 +137,14 @@
   function openProduct(key,opener,customize=false) {
     if(!byKey.has(key))return;
     selected=key;quantity=1;detailOpener=opener;
-    fillForm();renderDetail();editor.open=true;
-    window.LienzoEditorWorkspace?.setOpen(editor,true,{focus:false,reason:'edit'});
-    detail.showModal();detail.scrollTop=0;dialogState();
+    fillForm();renderDetail();
+    productInfo.open=!customize;
+    window.LienzoEditorWorkspace.setOpen(form,customize);
+    if(customize)form.querySelector('[data-pc-content]').open=true;
+    detail.showModal();
+    detail.scrollTop=0;preview.scrollTop=0;form.scrollTop=0;dialogState();
     detail.querySelector('[data-detail-status]').textContent='';
-    if(customize){requestAnimationFrame(()=>{editor.scrollTop=form.offsetTop;form.querySelector('[data-name]').focus({preventScroll:true});});}
+    if(customize)form.querySelector('[data-name]').focus({preventScroll:true});
   }
   function flashAdd(button) {
     const label=button.querySelector('span');
@@ -237,7 +241,7 @@
     const url=URL.createObjectURL(blob),link=document.createElement('a');
     link.href=url;link.download='lienzo-'+(key||'objects')+'.html';document.body.append(link);link.click();link.remove();
     setTimeout(()=>URL.revokeObjectURL(url),10000);
-    notify(say('HTML creado. Consérvalo junto a CSS, JS y assets/.','HTML created. Keep it beside CSS, JS, and assets/.'));
+    notify(say('HTML descargado.','HTML downloaded.'));
   }
 
   grid.addEventListener('click',event=>{
@@ -365,7 +369,7 @@
     const visual=detail.querySelector('.pc-detail__visual'),item=byKey.get(selected);visual.classList.add('is-testing');
     visual.querySelector('img').style.setProperty('--test-tilt',item.tilt+'deg');
     clearTimeout(timers.get('detail-test'));timers.set('detail-test',setTimeout(()=>visual.classList.remove('is-testing'),1100));
-    notify(say('Prueba del producto: ','Product preview: ')+item.name+'.');
+    notify(say('Probando el efecto.','Testing the effect.'));
   });
   addEventListener('pagehide',()=>{cleanPointer();for(const timer of timers.values())clearTimeout(timer);},{once:true});
   document.addEventListener('lienzo:legacy-brand',()=>{render();window.LienzoLegacyBrand?.apply();});
