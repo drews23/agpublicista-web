@@ -8,20 +8,25 @@
   const products=JSON.parse(document.querySelector('[data-products]').textContent);
   const stage=document.querySelector('[data-track]'), previous=document.querySelector('[data-prev]'), next=document.querySelector('[data-next]');
   const dots=[...document.querySelectorAll('[data-slide]')], auras=[...document.querySelectorAll('.showcase-aura')];
-  const play=document.querySelector('[data-play]'), playLabel=play.querySelector('[data-play-label]');
+  const play=document.querySelector('[data-play]');
   const live=document.querySelector('[data-status]'), autoState=document.querySelector('[data-auto-status]');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  const speed=document.querySelector('[data-speed]'), speedOutput=document.querySelector('[data-speed-output]');
+  const speed=document.querySelector('[data-speed]'), speedOutput=document.querySelector('[data-speed-output]'), accent=document.querySelector('[data-accent]');
   const motionButton=document.querySelector('[data-motion-toggle]'), themeButton=document.querySelector('[data-theme-toggle]');
   const detail=document.querySelector('[data-detail-dialog]'), codeDialog=document.querySelector('[data-code-dialog]');
   let motion=!reduced.matches&&root.dataset.motion!=='off', wanted=false, hovering=false, dragging=false, frame=0, elapsed=0, last=0, detailOpener=null;
   const delay=6500;
   const notify=text=>{live.textContent=text;};
   const enabled=()=>motion&&!reduced.matches;
-  function theme(value){root.dataset.theme=value;themeButton.setAttribute('aria-label',value==='dark'?say('Activar tema claro','Switch to light theme'):say('Activar tema oscuro','Switch to dark theme'));themeButton.setAttribute('aria-pressed',String(value==='dark'));}
+  function theme(value){
+    root.dataset.theme=value;
+    themeButton.setAttribute('aria-label',value==='dark'?say('Activar tema claro','Switch to light theme'):say('Activar tema oscuro','Switch to dark theme'));
+    themeButton.setAttribute('aria-pressed',String(value==='dark'));
+    accent.value=getComputedStyle(root).getPropertyValue('--accent').trim();
+  }
   themeButton.addEventListener('click',()=>{theme(root.dataset.theme==='dark'?'light':'dark');if(parent!==window)parent.postMessage({type:'lienzo:theme-changed',theme:root.dataset.theme},'*');});
   addEventListener('message',event=>{if(event.source===parent&&event.data?.type==='lienzo:theme'&&['dark','light'].includes(event.data.theme))theme(event.data.theme);});
-  document.querySelector('[data-accent]').addEventListener('input',event=>root.style.setProperty('--accent',event.target.value));
+  accent.addEventListener('input',()=>root.style.setProperty('--accent',accent.value));
   function progress(swiper){
     swiper.slides.forEach((slide,i)=>{
       const p=Math.max(-2,Math.min(2,slide.progress||0)),distance=Math.min(1,Math.abs(p)),on=enabled();
@@ -100,7 +105,8 @@
     if(!instance)return;
     const running=wanted&&!paused(instance);
     root.dataset.autoplay=!wanted?'off':running?'playing':'paused';
-    autoState.textContent=!enabled()?(reduced.matches?say('Movimiento reducido','Reduced motion'):say('Efectos en pausa','Effects paused')):!wanted?say('A tu ritmo','At your pace'):running?say('Avance activo','Autoplay on'):say('En pausa','Paused');
+    const status=!enabled()?(reduced.matches?say('Movimiento reducido','Reduced motion'):say('Efectos en pausa','Effects paused')):!wanted?'':running?say('Avance activo','Autoplay on'):say('Avance en pausa','Autoplay paused');
+    if (autoState.textContent!==status) autoState.textContent=status;
     if(running)frame=requestAnimationFrame(tick);
   }
   function tick(now){
@@ -111,14 +117,13 @@
     frame=requestAnimationFrame(tick);
   }
   play.addEventListener('click',()=>{
-    wanted=!wanted;elapsed=0;play.setAttribute('aria-pressed',String(wanted));playLabel.textContent=wanted?say('Detener avance','Stop autoplay'):say('Avance automático','Autoplay');
+    wanted=!wanted;elapsed=0;play.setAttribute('aria-pressed',String(wanted));
     notify(wanted?say('Avance activado. Se pausa al interactuar o al ocultar la pestaña.','Autoplay enabled. Pauses on interaction or when the tab is hidden.'):say('Avance automático detenido.','Autoplay stopped.'));
     sync(swiper);updateAutoplay();
   });
   function motionState(){
     root.dataset.motion=enabled()?'on':'off';motionButton.disabled=reduced.matches;motionButton.setAttribute('aria-pressed',String(enabled()));
-    motionButton.setAttribute('aria-label',reduced.matches?say('Movimiento reducido del sistema','System reduced motion'):enabled()?say('Pausar efectos de profundidad','Pause depth effects'):say('Activar efectos de profundidad','Enable depth effects'));
-    if(!enabled()){wanted=false;play.setAttribute('aria-pressed','false');playLabel.textContent=say('Avance automático','Autoplay');}
+    if(!enabled()){wanted=false;play.setAttribute('aria-pressed','false');}
     play.disabled=!enabled();swiper.params.speed=enabled()?Number(speed.value):0;progress(swiper);sync(swiper);updateAutoplay();
   }
   motionButton.addEventListener('click',()=>{motion=!motion;motionState();});reduced.addEventListener('change',()=>{motion=!reduced.matches;motionState();});
@@ -146,9 +151,18 @@
   document.querySelector('[data-copy-html]').addEventListener('click',()=>{
     const clone=document.documentElement.cloneNode(true);clone.querySelector('body').removeAttribute('data-view');clone.querySelectorAll('dialog').forEach(d=>d.removeAttribute('open'));
     clone.querySelector('body').removeAttribute('data-autoplay');
-    clone.querySelector('[data-play]').setAttribute('aria-pressed','false');clone.querySelector('[data-play-label]').textContent=say('Avance automático','Autoplay');
+    clone.querySelector('[data-play]').setAttribute('aria-pressed','false');
+    clone.querySelector('[data-auto-status]').textContent='';
+    const workspace=clone.querySelector('[data-editor-workspace]');
+    const panel=workspace.querySelector('[data-editor-panel]');
+    workspace.removeAttribute('style');
+    workspace.dataset.editorCollapsed='true';
+    panel.hidden=true;
+    panel.setAttribute('inert','');
+    workspace.querySelector('[data-editor-toggle]').setAttribute('aria-expanded','false');
+    workspace.querySelector('[data-editor-toggle-label]').textContent=say('Ajustes','Settings');
     clone.querySelector('[data-speed]').setAttribute('value',speed.value);clone.querySelector('[data-speed-output]').textContent=speed.value+' ms';
-    clone.querySelector('[data-accent]').setAttribute('value',document.querySelector('[data-accent]').value);
+    clone.querySelector('[data-accent]').setAttribute('value',accent.value);
     const wrapper=clone.querySelector('.swiper-wrapper');wrapper.removeAttribute('style');clone.querySelector('[data-track]').className='showcase-stage swiper';
     clone.querySelector('[data-track]').removeAttribute('style');
     clone.querySelectorAll('.swiper-slide').forEach(slide=>{slide.setAttribute('style','--product-color:'+slide.dataset.productColor);slide.className='swiper-slide';slide.removeAttribute('aria-hidden');});

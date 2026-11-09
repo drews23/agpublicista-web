@@ -83,7 +83,7 @@
     "source": null,
     "zip": "carrusel-progreso-lienzo.zip",
     "desc": "Cuatro productos con recortes transparentes, tarjeta central y vistas laterales. Imagen, sombra, texto y fondo sincronizados al arrastrar. Incluye teclado, progreso y avance opcional.",
-    "size": 774,
+    "size": 793,
     "authorRole": "Implementación, ilustración y guía",
     "license": "MIT; Swiper 12.2.0 MIT; fuentes OFL; procedencia documentada en SOURCE-NOTES.md"
   },

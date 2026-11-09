@@ -115,18 +115,26 @@ def adapt_markup(raw, slug, lang):
         return button
 
     if slug == 'carrusel-progreso':
-        workspace = soup.main
+        toolbar = soup.select_one('.showcase-toolbar')
+        workspace = tag('div', **{'class': 'showcase-workspace',
+                                   'data-editor-focus-anchor': 'workspace',
+                                   'data-editor-collapsed': 'true'})
+        toolbar.insert_before(workspace)
+        workspace.append(toolbar.extract())
         preview = soup.select_one('.showcase')
         settings = soup.select_one('.showcase-settings')
-        layout = tag('div', **{'class': 'editor-legacy-layout'})
-        preview.insert_before(layout)
-        panel = tag('aside', **{'class': 'editor-legacy-settings'})
-        title = tag('h2'); title.string = label('Movimiento y color', 'Motion and color')
-        panel.append(title)
-        panel.append(settings.select_one('.showcase-settings__fields').extract())
-        settings.decompose()
+        layout = tag('div')
+        panel = tag('aside', hidden='', inert='', **{'aria-label': label('Ajustes del carrusel', 'Carousel settings')})
+        panel.append(settings.extract())
+        workspace.append(layout)
         layout.append(preview.extract()); layout.append(panel)
-        frame(workspace, layout, preview, panel, soup.select_one('.showcase-toolbar'))
+        button = frame(workspace, layout, preview, panel, toolbar)
+        button['aria-expanded'] = 'false'
+        button_label = tag('span', **{'data-editor-toggle-label': ''})
+        button_label.string = label('Ajustes', 'Settings')
+        button.clear()
+        button.append(button_label)
+        toolbar.select_one('.showcase-toolbar__actions').append(button.extract())
     elif slug == 'laboratorio-3d':
         workspace = soup.select_one('[data-detail-dialog]')
         frame(workspace, soup.select_one('.lab-editor'), soup.select_one('.lab-editor__preview'),
@@ -276,6 +284,8 @@ def brand_markup(soup, slug, lang):
         host = soup.new_tag('div', attrs={'data-legacy-brand': ''})
         if slug == 'carrusel-recursos' and (body := panel.select_one('.rc-editor-scroll')):
             body.select_one('[data-reset]').insert_before(host)
+        elif slug == 'carrusel-progreso':
+            panel.append(host)
         else:
             panel.insert(0, host)
     if slug in SLUGS[:2] and not panel.select_one('[data-social-export]'):
