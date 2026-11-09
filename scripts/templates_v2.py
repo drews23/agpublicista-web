@@ -43,6 +43,7 @@ RESOURCES = {
     },
     'tarjeta-perfil': {
         'kind': 'profile', 'reference': 'portfolio-card-with-dark-mode-togglekiara-sinha',
+        'assets': ('profile-cover.webp', 'profile-color.webp', 'profile-editing.webp', 'ICONS-NOTICE.txt'),
         'es': ['Tarjeta de perfil creativo', 'Tu trabajo merece una buena presentación.', 'Un perfil con identidad, proyectos, habilidades, enlaces editables y foto local opcional. Personalízalo y descarga también una tarjeta de contacto vCard.', '01 perfil', 'Contenido de ejemplo para sustituir por tu nombre, trabajo y enlaces reales.'],
         'en': ['Creative Profile Card', 'Give your work the introduction it deserves.', 'An expressive profile with projects, skills, editable links, and an optional local photo. Make it yours and download a vCard contact file.', '01 profile', 'Sample content to replace with your real name, work, and links.'],
     },
@@ -607,9 +608,66 @@ def editor_document(raw, slug, lang, ui):
             text_section.insert_before(section)
         else:
             editor.append(section)
-    profile_upload = preview.select_one('.v2-bottom .v2-row')
-    if profile_upload and profile_upload.select_one('[data-upload]'):
-        editor.append(profile_upload.extract())
+    upload_row = preview.select_one('.v2-bottom .v2-row')
+    if kind == 'profile':
+        toolbar = workspace.select_one('.v2-toolbar .v2-row')
+        bottom = preview.select_one('.v2-bottom')
+        toolbar.insert(0, bottom.select_one('[data-pause]').extract())
+        preview.insert(0, preview.select_one('.pf-preview-switch').extract())
+        form['id'] = 'pf-editor-form'
+        form.insert_after(brand_panel.extract())
+        intro.string = ui['pfEditorHelp']
+
+        field_group = form.select_one('[data-fields]')
+        actions = form.select_one('.v2-dialog-actions')
+        composition = toolbar.select_one('.pf-layout-switch').extract()
+        for group, title, view in [
+            ('portrait', 'pfEditorPortrait', 'profile'), ('identity', 'pfEditorDetails', 'profile'),
+            ('portfolio', 'pfEditorPortfolio', 'portfolio'), ('project0', 'pfEditorProject', 'projects'),
+            ('project1', 'pfEditorProject', 'projects'), ('composition', 'pfEditorComposition', 'profile'),
+        ]:
+            section = soup.new_tag('details', attrs={'class': 'v2-panel-live pf-editor-section', 'data-pf-editor-view': view})
+            summary = soup.new_tag('summary')
+            summary.string = ui[title] + (f' {int(group[-1]) + 1}' if view == 'projects' else '')
+            section.append(summary)
+            if group == 'portrait':
+                section['open'] = ''
+                upload_row['class'].append('pf-portrait-upload')
+                hint = upload_row.select_one('.v2-chip')
+                hint.name = 'p'
+                hint.attrs = {'id': 'pf-portrait-hint', 'class': 'pf-editor-note'}
+                upload_row.select_one('[data-upload]')['aria-describedby'] = hint['id']
+                section.append(upload_row.extract())
+                section.append(preview.select_one('.pf-photo-tools').extract())
+            if view == 'projects':
+                media = soup.new_tag('button', attrs={'type': 'button', 'class': 'v2-button pf-project-image-action', 'data-pf-open-project': group[-1], 'aria-haspopup': 'dialog'})
+                media.string = ui['pfEditorProjectImage']
+                section.append(media)
+            if group == 'composition':
+                section.append(composition)
+            section.append(soup.new_tag('div', attrs={'class': 'v2-fields', 'data-fields': group}))
+            actions.insert_before(section)
+        field_group.decompose()
+        bottom.decompose()
+        form.select_one('[data-editor-cancel]').string = ui['pfEditorDiscard']
+        form.select_one('[data-reset]').string = ui['pfEditorReset']
+
+        apply = form.select_one('[type=submit]').extract()
+        apply['form'] = form['id']
+        apply.string = ui['pfEditorApply']
+        header_actions = soup.new_tag('div', attrs={'class': 'pf-editor-actions'})
+        header_actions.append(apply)
+        header_actions.append(close.extract())
+        header.append(header_actions)
+        header.append(form.select_one('[data-error]').extract())
+        header.append(soup.new_tag('p', attrs={'class': 'pf-editor-feedback', 'data-pf-editor-status': '', 'data-export-empty': '', 'aria-hidden': 'true'}))
+        scroll = soup.new_tag('div', attrs={'class': 'pf-settings-body', 'data-pf-editor-scroll': ''})
+        for child in editor.find_all(recursive=False):
+            if child is not header:
+                scroll.append(child.extract())
+        editor.append(scroll)
+    elif upload_row and upload_row.select_one('[data-upload]'):
+        editor.append(upload_row.extract())
     layout.append(editor.extract())
     workspace.append(layout)
     edit = workspace.select_one('[data-edit]')
@@ -1026,7 +1084,7 @@ def build(only=None, language=None):
             guide_text = guide(slug,lang)
             dependencies = 'studio.css, studio.js, component.css, component.js'
             guide_text = guide_text.replace(dependencies, 'editor-workspace.css, editor-workspace.js, ' + dependencies)
-            if kind != 'particles':
+            if kind not in ('particles', 'profile'):
                 guide_text += ('\n\n## Stable editing workspace\n\nOpen Settings to keep the preview beside the form. Apply commits content changes; Cancel discards unapplied fields. Hiding Settings preserves those fields. Image and motion controls update immediately and are labeled separately. Keep editor-workspace.css and editor-workspace.js beside the HTML, including when using a downloaded edited HTML.\n' if lang == 'en' else '\n\n## Espacio de edición estable\n\nAbre Ajustes para conservar la vista junto al formulario. Aplicar confirma los cambios de contenido; Cancelar descarta los campos sin aplicar. Ocultar ajustes conserva esos campos. Los controles de imagen y movimiento se actualizan al instante y están identificados por separado. Conserva editor-workspace.css y editor-workspace.js junto al HTML, también al descargar un HTML editado.\n')
                 guide_text += ('\n\n## Your brand\n\nChoose your own three accent colors in Your brand. Optional surface/text colors and display/body fonts apply only to the reusable piece, while the authoring interface keeps Lienzo identity. Brand changes apply immediately and are independent of content Apply/Cancel. Local font uploads stay in the browser and are embedded in exported HTML. Use only fonts you have permission to distribute. Keep template-brand.css and template-brand.js beside full-studio HTML; individual scene/panel exports embed their current brand styles.\n' if lang == 'en' else '\n\n## Tu marca\n\nElige tus tres colores de acento en Tu marca. Los colores opcionales de superficie/texto y las fuentes de títulos/cuerpo afectan solo a la pieza reutilizable; la interfaz de edición conserva la identidad de Lienzo. La marca se actualiza al instante y es independiente de Aplicar/Cancelar contenido. Las fuentes locales permanecen en el navegador y se integran en el HTML exportado. Usa solo fuentes que tengas permiso de distribuir. Conserva template-brand.css y template-brand.js junto al HTML del estudio completo; las exportaciones de escena/panel incorporan sus estilos de marca actuales.\n')
             (demo / ('README.md' if lang=='en' else 'LEEME.md')).write_text(guide_text, encoding='utf-8')

@@ -1,0 +1,20 @@
+LIENZO — RENDERS 3D DE LA GALERÍA / 3D GALLERY RENDERS
+
+Las imágenes de muestra se prepararon a partir de los renders PNG de la galería local.
+Las copias WebP conservan el color y la transparencia de los renders.
+The sample images are based on PNG renders from the local gallery.
+The WebP copies preserve the render colors and transparency.
+
+La licencia MIT del paquete corresponde al código de la plantilla.
+The package MIT license applies to the template code.
+
+Procedencia de los renders / Render sources
+- profile-cover.webp: Mesa de dibujo / Drafting tools
+  creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip / Creative Agency 2/PNG/V1/Designing Tools.png
+  SHA-256 (PNG): a4380d3effbba22e70e3a43e4a45d6af6e0de839cf7d599cc1d2b552c22973b2
+- profile-color.webp: Cuentagotas y rueda de color / Eyedropper and color wheel
+  color-picker-tool-2026-07-22-21-12-09-utc.zip / Color Picker.png
+  SHA-256 (PNG): 0a8ec25e060d6f5943a6808b67f3674f633eaf262c6052055e48638bf50b6901
+- profile-editing.webp: Consola de edición / Editing console
+  editing-software-2026-02-08-01-44-16-utc.zip / Editing Software.png
+  SHA-256 (PNG): 4dd5efaf8cd5a46265aca9e9142b697af3b03d94c53fe6995201d0a8f32645cc

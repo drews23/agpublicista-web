@@ -5,11 +5,14 @@ Un portafolio editorial original en HTML, CSS y JavaScript. Incluye dos composic
 ## Empieza aquí
 
 1. Descomprime el ZIP y abre `index.html`.
-2. En **Ajustes**, sustituye nombre, especialidad, biografía, titular, enfoque, ubicación, habilidades, correo, sitio y los datos de cada proyecto. Solo se aceptan enlaces completos HTTP(S).
-3. Elige la composición **Editorial** o **Compacta**. Ambas conservan los proyectos y la navegación por pestañas.
-4. Usa **Cambiar retrato** para cargar una imagen PNG, JPG o WebP de hasta 8 MB. El encuadre permite ajustar posición vertical y zoom. La forma circular o cuadrada suave se elige en Ajustes.
-5. Abre **Explorar** en cada proyecto para ver su detalle, visitar el enlace configurado o cargar su propia imagen. **Restaurar ilustración** recupera el arte original de ese proyecto.
-6. Cierra el detalle y pulsa **Obtener HTML** para conservar los ajustes. Mantén el HTML editado junto a `studio.css`, `studio.js`, `component.css`, `component.js` y `assets/` del ZIP. El HTML por sí solo no incluye esas dependencias.
+2. Abre **Ajustes** y despliega **Perfil y contacto**, **Portafolio** o el proyecto que quieras editar. Pulsa **Aplicar** para actualizar los textos. Usa **Perfil / Portafolio** para cambiar lo que ves en la vista previa. Los enlaces deben ser URL completas HTTP(S).
+3. En **Retrato**, carga un PNG, JPG o WebP de hasta 8 MB, ajusta la posición y el zoom, o elige la forma del marco. En **Composición**, elige el diseño **Editorial** o **Compacta**.
+4. Usa **Editar imagen del proyecto** desde sus ajustes o **Explorar** desde la vista previa para ver el detalle y cargar una imagen. **Restaurar ilustración** recupera el arte original de ese proyecto.
+5. Cierra el detalle y oculta los ajustes para ver el resultado completo. Pulsa **Obtener HTML** para conservar los cambios. Mantén el HTML editado junto a los demás archivos y `assets/` del ZIP.
+
+La vista previa sigue visible mientras recorres los ajustes. Puedes ocultarlos y volver al borrador; **Descartar borrador** borra los cambios de formulario sin aplicar. El retrato, el encuadre y la composición se actualizan al instante.
+
+En **Tu marca** puedes usar tus colores y cargar las fuentes de tu identidad. Los archivos se procesan en tu navegador y las fuentes se incorporan al HTML exportado. Usa fuentes que tengas permiso de distribuir.
 
 ## Encuadre de las imágenes de proyecto
 
@@ -25,7 +28,7 @@ El HTML exportado conserva las fotos, el modo, el recorte y sus descripciones. S
 
 Mara Vega, su presentación y los proyectos Órbita y Forma son contenido de muestra, sin métricas, testimonios ni resultados atribuidos a clientes. Los enlaces iniciales llevan al catálogo real de Lienzo. Sustituye los datos por tu información y tus proyectos antes de publicarlo. El texto de las tres etapas del enfoque también puede adaptarse directamente en el HTML.
 
-Las ilustraciones del monograma y los dos proyectos se han creado para esta plantilla con SVG y CSS originales. No se incluyen fotografías ni retratos de terceros. El monograma se calcula a partir del nombre.
+El monograma se calcula a partir del nombre. La portada y los proyectos usan copias WebP de los renders 3D de la Galería de Favicones SVG. [Procedencia de las imágenes](assets/ICONS-NOTICE.txt).
 
 ## Interacción y accesibilidad
 
@@ -50,13 +53,3 @@ Los cambios viven en memoria hasta recargar. El HTML exportado incorpora el esta
 - `assets/`: logotipo, fuentes locales y avisos. Conserva los archivos de licencia.
 
 La plantilla es una interfaz reutilizable. No incluye alojamiento, formulario de contacto con servidor, seguimiento de visitantes ni garantía de rendimiento idéntico en todos los equipos. Código y arte nuevos de Lienzo; la referencia visual de partida no se redistribuye. Consulta `LICENSE-LIENZO.txt`, `SOURCE-NOTES.md` y los avisos de fuentes del paquete.
-
-
-## Espacio de edición estable
-
-Abre Ajustes para conservar la vista junto al formulario. Aplicar confirma los cambios de contenido; Cancelar descarta los campos sin aplicar. Ocultar ajustes conserva esos campos. Los controles de imagen y movimiento se actualizan al instante y están identificados por separado. Conserva editor-workspace.css y editor-workspace.js junto al HTML, también al descargar un HTML editado.
-
-
-## Tu marca
-
-Elige tus tres colores de acento en Tu marca. Los colores opcionales de superficie/texto y las fuentes de títulos/cuerpo afectan solo a la pieza reutilizable; la interfaz de edición conserva la identidad de Lienzo. La marca se actualiza al instante y es independiente de Aplicar/Cancelar contenido. Las fuentes locales permanecen en el navegador y se integran en el HTML exportado. Usa solo fuentes que tengas permiso de distribuir. Conserva template-brand.css y template-brand.js junto al HTML del estudio completo; las exportaciones de escena/panel incorporan sus estilos de marca actuales.

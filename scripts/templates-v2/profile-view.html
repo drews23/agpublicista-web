@@ -1,9 +1,13 @@
+<div class="v2-segmented pf-preview-switch" role="group" aria-label="{{pfPreviewMode}}">
+  <button type="button" data-pf-preview="profile" aria-pressed="true">{{pfEditorProfile}}</button>
+  <button type="button" data-pf-preview="portfolio" aria-pressed="false">{{pfEditorPortfolio}}</button>
+</div>
 <div class="pf-layout" data-pf-layout="editorial">
   <article class="pf-card" data-profile-card aria-labelledby="pf-profile-name">
     <div class="pf-cover">
       <span class="pf-demo">{{demo}}</span><span class="pf-edition" aria-hidden="true">LIENZO / 01</span>
-      <div class="pf-orbits" aria-hidden="true"><i></i><i></i><i></i><i></i><span>✳</span></div>
       <span class="pf-cover-type" data-cover-initials aria-hidden="true">MV</span>
+      <div class="pf-cover-art" aria-hidden="true"><img class="pf-library-icon" src="assets/profile-cover.webp" width="640" height="488" decoding="async" alt=""></div>
       <div class="pf-cover-caption" aria-hidden="true"><span>{{pfCoverLineOne}}<br>{{pfCoverLineTwo}}<br>{{pfCoverLineThree}}</span><span>↗</span></div>
       <div class="pf-avatar" data-avatar><span data-initials>MV</span><img data-avatar-image alt="" hidden></div>
     </div>
@@ -35,7 +39,10 @@
     </div>
   </section>
 </div>
-<div class="pf-photo-tools" data-pf-photo-tools hidden><span>{{pfFraming}}</span><label>{{pfVertical}}<input type="range" min="0" max="100" step="1" value="50" data-pf-photo-y><output data-pf-photo-y-output>50%</output></label><label>{{pfZoom}}<input type="range" min="100" max="180" step="1" value="100" data-pf-photo-zoom><output data-pf-photo-zoom-output>1×</output></label></div>
+<div class="pf-photo-tools" data-pf-photo-tools hidden role="group" aria-label="{{pfFraming}}">
+  <label for="pf-photo-y">{{pfVertical}}<output for="pf-photo-y" data-pf-photo-y-output aria-hidden="true">50%</output></label><input id="pf-photo-y" type="range" min="0" max="100" step="1" value="50" data-pf-photo-y>
+  <label for="pf-photo-zoom">{{pfZoom}}<output for="pf-photo-zoom" data-pf-photo-zoom-output aria-hidden="true">1×</output></label><input id="pf-photo-zoom" type="range" min="100" max="180" step="1" value="100" data-pf-photo-zoom>
+</div>
 <dialog class="v2-dialog pf-project-dialog" data-pf-project-dialog aria-labelledby="pf-project-dialog-title">
   <div class="v2-dialog-head"><span class="v2-eyebrow">{{pfSampleWork}}</span><button type="button" class="v2-icon-button" data-pf-close-project aria-label="{{close}}">×</button></div>
   <div class="pf-project-detail">

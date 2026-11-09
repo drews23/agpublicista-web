@@ -105,16 +105,24 @@
   reduced.addEventListener('change', motion);
   new IntersectionObserver(entries => { visible = entries[0].isIntersecting; motion(); }, {threshold: 0}).observe($('[data-stage]'));
 
+  function updateItemPicker() {
+    const select = form.elements.namedItem('item');
+    const choices = state.items.flatMap((item, index) => {
+      if (definition.isSelectable && !definition.isSelectable(item)) return [];
+      return [new Option(item.title || item.name || String(index + 1), String(index))];
+    });
+    select.replaceChildren(...choices);
+    select.value = String(state.active || 0);
+    select.closest('label').hidden = choices.length === 1;
+  }
   function fields() {
     if (!definition) return;
     editorItem = current();
     form.hidden = !editorItem;
-    if (!editorItem) { $('[data-fields]').replaceChildren(); return; }
-    const container = $('[data-fields]'); container.replaceChildren();
-    const select = form.elements.namedItem('item');
-    select.replaceChildren(...state.items.map((item, index) => new Option(item.title || item.name || String(index + 1), String(index))));
-    select.value = String(state.active || 0);
-    select.closest('label').hidden = state.items.length === 1;
+    const groups = new Map([...form.querySelectorAll('[data-fields]')].map(node => [node.dataset.fields, node]));
+    groups.forEach(node => node.replaceChildren());
+    if (!editorItem) return;
+    updateItemPicker();
     for (const field of definition.fields) {
       const label = document.createElement('label');
       label.textContent = field.label;
@@ -133,7 +141,24 @@
       }
       input.name = field.key;
       input.value = String(current()[field.key] ?? field.default ?? '');
-      label.append(input); container.append(label);
+      if (field.format) {
+        const heading = document.createElement('span');
+        heading.className = 'v2-field-heading';
+        heading.textContent = field.label;
+        const value = document.createElement('span');
+        value.setAttribute('aria-hidden', 'true');
+        heading.append(value);
+        const showValue = () => {
+          const text = field.format(Number(input.value));
+          value.textContent = text;
+          input.setAttribute('aria-valuetext', text);
+        };
+        label.replaceChildren(heading);
+        input.addEventListener('input', showValue);
+        showValue();
+      }
+      label.append(input);
+      (groups.get(field.group) || groups.get('')).append(label);
     }
     $('[data-error]').textContent = '';
     accentLabels();
@@ -172,7 +197,10 @@
   workspace.addEventListener('lienzo:editor-panel', event => {
     if (event.detail?.panel !== editor) return;
     editorToggle.textContent = event.detail.open ? ui.hideSettings : ui.edit;
-    if (event.detail.open && editorItem !== current()) fields();
+    if (event.detail.open) {
+      if (editorItem !== current()) fields();
+      else if (editorItem && definition?.isSelectable) updateItemPicker();
+    }
   });
   $('[data-editor-cancel]').addEventListener('click', () => {
     panel(false, 'cancel'); fields(); status(ui.cancelled);
@@ -183,16 +211,21 @@
     else state.items[index] = structuredClone(defaults.items[index]);
     fields(); paint(); status(ui.resetDone);
   });
-  form.addEventListener('submit', event => {
-    event.preventDefault();
+  function fieldError(input, message) {
+    const group = input.closest('details');
+    if (group) group.open = true;
+    $('[data-error]').textContent = message;
+    input.focus();
+  }
+  function applyFields() {
     const focusedName = form.contains(document.activeElement) ? document.activeElement.name : null;
     const next = {...current()};
     for (const field of definition.fields) {
       const input = form.elements.namedItem(field.key);
       let value = input.value.trim();
-      if (field.required && !value) { $('[data-error]').textContent = ui.required; input.focus(); return; }
-      if (field.url && !safeURL(value, field.fragments)) { $('[data-error]').textContent = ui.invalidURL; input.focus(); return; }
-      if (field.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { $('[data-error]').textContent = ui.invalidEmail; input.focus(); return; }
+      if (field.required && !value) return fieldError(input, ui.required);
+      if (field.url && !safeURL(value, field.fragments)) return fieldError(input, ui.invalidURL);
+      if (field.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return fieldError(input, ui.invalidEmail);
       if (field.options && !field.options.some(x => String(x[0]) === value)) return;
       if (field.type === 'range' || field.type === 'number') value = Math.min(field.max, Math.max(field.min, Number(value)));
       next[field.key] = value;
@@ -201,6 +234,15 @@
     paint();
     if (focusedName) form.elements.namedItem(focusedName)?.focus({preventScroll:true});
     status(ui.applied);
+  }
+  // The sandboxed catalog iframe blocks native form submission before the submit event.
+  [...form.elements].find(control => control.type === 'submit')?.addEventListener('click', event => {
+    event.preventDefault();
+    if (form.reportValidity()) applyFields();
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    applyFields();
   });
   [exportDialog].forEach(dialog => {
     dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
@@ -227,9 +269,11 @@
     clone.querySelectorAll('[data-editor-toggle]').forEach(button => button.setAttribute('aria-expanded', 'false'));
     clone.querySelector('[data-edit]').textContent = ui.edit;
     clone.querySelectorAll('[data-editor-preview]').forEach(node => node.removeAttribute('data-editor-too-tall'));
-    clone.querySelectorAll('[data-fields]').forEach(node => node.replaceChildren());
+    clone.querySelectorAll('[data-fields],[data-export-empty]').forEach(node => node.replaceChildren());
     clone.querySelectorAll('[data-error],[data-status],[data-copy-status]').forEach(node => { node.textContent = ''; });
     clone.querySelectorAll('[data-source-code]').forEach(node => { node.textContent = ''; });
+    clone.querySelectorAll('[data-device-project-status]').forEach(node => { node.textContent = ''; });
+    clone.querySelectorAll('video[src^="blob:"]').forEach(node => node.removeAttribute('src'));
     clone.querySelector('[data-v2]').classList.remove('v2-paused');
     clone.querySelector('[data-config]').textContent = JSON.stringify({...config, state}).replace(/</g, '\\u003c');
     clone.querySelectorAll('canvas').forEach(c => c.removeAttribute('style'));
@@ -261,7 +305,7 @@
     return canvas.toDataURL('image/webp', .9);
   }
   const api = {
-    root, state, defaults, ui, $, $$, icon, colors, safeURL, status, edit, download, imageFile,
+    root, state, defaults, ui, $, $$, icon, colors, safeURL, status, edit, download, imageFile, source,
     color(key, fallback) { return brand?.color(key, fallback) || colors[key] || fallback; },
     get brand() { return brand; },
     text(selector, value) { const node = $(selector); if (node) node.textContent = value; },

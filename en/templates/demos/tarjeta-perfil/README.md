@@ -5,11 +5,14 @@ An original editorial portfolio built with HTML, CSS, and JavaScript. It include
 ## Get started
 
 1. Extract the ZIP and open `index.html`.
-2. Open **Settings** to replace the name, role, bio, headline, approach, location, skills, email, website, and both projects. Links must be complete HTTP(S) URLs.
-3. Choose the **Editorial** or **Compact** layout. Both keep the projects and tab navigation available.
-4. Use **Change portrait** to upload a PNG, JPG, or WebP image up to 8 MB. Adjust the vertical position and zoom with the framing controls. Choose a circle or soft square in Settings.
-5. Select **Explore** on a project to open its details, follow its configured link, or upload a project image. **Restore illustration** brings back that project’s original artwork.
-6. Close the preview, then select **Get HTML** to keep your changes. Keep the edited HTML beside `studio.css`, `studio.js`, `component.css`, `component.js`, and `assets/` from the ZIP. The HTML alone does not include those dependencies.
+2. Open **Settings** and expand **Profile and contact**, **Portfolio**, or the project you want to edit. Select **Apply** to update the text. Use **Profile / Portfolio** to switch the preview. Links must be complete HTTP(S) URLs.
+3. Under **Portrait**, upload a PNG, JPG, or WebP up to 8 MB, adjust the position and zoom, or choose the frame shape. Under **Layout**, choose **Editorial** or **Compact**.
+4. Select **Edit project image** in the project settings or **Explore** in the preview to open its details and upload an image. **Restore illustration** brings back that project’s original artwork.
+5. Close the project details and hide settings to see the full result. Select **Get HTML** to keep your changes. Keep the edited HTML alongside the rest of the files and `assets/` from the ZIP.
+
+The preview stays visible while you scroll through the settings. Hide settings to keep working on your draft later, or select **Discard draft** to clear unapplied form changes. The portrait, framing, and layout update as you edit.
+
+Under **Your brand**, set your colors and upload your brand fonts. Files are processed in your browser, and fonts are embedded in the exported HTML. Only use fonts you have permission to distribute.
 
 ## Project image framing
 
@@ -25,7 +28,7 @@ Exported HTML keeps photos, framing modes, crop settings, and descriptions. It s
 
 Mara Vega, her introduction, and the Orbit and Forma projects are sample content. No client metrics, testimonials, or results are claimed. The initial links lead to the real Lienzo catalog. Replace the content with your own details and actual work before publishing. You can also adapt the three approach steps directly in the HTML.
 
-The monogram illustration and both project illustrations use original SVG and CSS created for this template. No third-party photos or portraits are included. The monogram is generated from the name.
+The monogram is generated from the name. The cover and projects use WebP copies of 3D renders from the SVG Favicon Gallery. [Image sources](assets/ICONS-NOTICE.txt).
 
 ## Interaction and accessibility
 
@@ -50,13 +53,3 @@ Changes remain in memory until you reload. Exported HTML contains the state and 
 - `assets/`: logo, local fonts, and notices. Keep the license files.
 
 This is a reusable interface. Hosting, a server-backed contact form, visitor tracking, and identical performance on every device are not included. New code and artwork are by Lienzo; the starting visual reference is not redistributed. See `LICENSE-LIENZO.txt`, `SOURCE-NOTES.md`, and the font notices included in the package.
-
-
-## Stable editing workspace
-
-Open Settings to keep the preview beside the form. Apply commits content changes; Cancel discards unapplied fields. Hiding Settings preserves those fields. Image and motion controls update immediately and are labeled separately. Keep editor-workspace.css and editor-workspace.js beside the HTML, including when using a downloaded edited HTML.
-
-
-## Your brand
-
-Choose your own three accent colors in Your brand. Optional surface/text colors and display/body fonts apply only to the reusable piece, while the authoring interface keeps Lienzo identity. Brand changes apply immediately and are independent of content Apply/Cancel. Local font uploads stay in the browser and are embedded in exported HTML. Use only fonts you have permission to distribute. Keep template-brand.css and template-brand.js beside full-studio HTML; individual scene/panel exports embed their current brand styles.
