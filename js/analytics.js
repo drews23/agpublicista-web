@@ -14,6 +14,14 @@
     'laboratorio-3d', 'tarjetas-producto', 'iconos-animados', 'carrusel-progreso',
     'tarjetas-hover', 'escenas-css', 'galeria-expandible', 'menu-indicador',
     'menu-contextual', 'imagen-particulas', 'tarjeta-perfil']);
+  const MEDIAFIRE_PACKS = new Map([
+    ['aoe4bogalij96g7', 'sonidos-transiciones-30'],
+    ['ugfpp54s5zij8te', 'sonidos-cortes-digitales-12'],
+    ['s1qpwxzt6x6xieh', 'sonidos-whooshes-impactos-10'],
+    ['w9bs9kvmrcj3ytp', 'sonidos-videojuegos-12'],
+    ['9450si56lcguwhc', 'after-effects-transiciones-titulos']
+  ]);
+  const PACK_IDS = new Set(MEDIAFIRE_PACKS.values());
   const FORMATS = new Set(['wav16', 'wav24', 'opus', 'png', 'svg']);
   const EVENTS = new Set(['resource_preview_open', 'resource_download_click',
     'tool_export_ready', 'tool_download_click', 'newsletter_request_accepted']);
@@ -66,7 +74,8 @@
   function eventData(name, input = {}) {
     if (!EVENTS.has(name)) return null;
     if (name.startsWith('resource_')) {
-      if (!RESOURCES.has(input.resource_id)) return null;
+      const id = input.resource_id;
+      if (!RESOURCES.has(id) && !(name === 'resource_download_click' && PACK_IDS.has(id))) return null;
       return { resource_id: input.resource_id };
     }
     if (name.startsWith('tool_')) {
@@ -76,6 +85,20 @@
       return { tool_id: input.tool_id, output_format: input.format };
     }
     return ['home', 'newsletter'].includes(input.placement) ? { placement: input.placement } : null;
+  }
+
+  function downloadResourceId(href, downloadable) {
+    try {
+      const url = new URL(href);
+      if (url.origin === 'https://www.mediafire.com') {
+        const file = url.pathname.match(/^\/file\/([a-z0-9]+)(?:\/|$)/);
+        return file ? MEDIAFIRE_PACKS.get(file[1]) : undefined;
+      }
+      if (downloadable && url.origin === 'https://lienzo.tools') {
+        return url.pathname.match(/^\/recursos\/descargas\/plantillas-web\/([a-z0-9-]+)-lienzo(?:-en)?\.zip$/)?.[1];
+      }
+    } catch (_) { /* Unrecognized links are outside this measurement contract. */ }
+    return undefined;
   }
 
   function createController({ context, transport, storage, now = () => Date.now(), onChange = () => {} }) {
@@ -261,20 +284,18 @@
       if (!link || event.defaultPrevented && !link.dataset.preview) return;
       if (link.dataset.preview && doc.querySelector('[data-preview-dialog]')?.open) {
         controller.track('resource_preview_open', { resource_id: link.dataset.preview });
-      } else if (link.hasAttribute('download')) {
-        if (/^\/(?:en\/tools\/audio|herramientas\/audio)\/$/.test(context.path)
-          && link.hasAttribute('data-download') && link.getAttribute('href')?.startsWith('blob:')) {
-          controller.track('tool_download_click', { tool_id: 'audio-studio', format: doc.querySelector('[data-export-format]')?.value });
-        } else {
-          try {
-            const url = new URL(link.href);
-            const match = url.pathname.match(/^\/recursos\/descargas\/plantillas-web\/([a-z0-9-]+)-lienzo(?:-en)?\.zip$/);
-            if (url.origin === 'https://lienzo.tools' && match) controller.track('resource_download_click', { resource_id: match[1] });
-          } catch (_) { /* Non-resource links are outside this measurement contract. */ }
-        }
+        return;
       }
+      const downloadable = link.hasAttribute('download');
+      if (downloadable && /^\/(?:en\/tools\/audio|herramientas\/audio)\/$/.test(context.path)
+        && link.hasAttribute('data-download') && link.getAttribute('href')?.startsWith('blob:')) {
+        controller.track('tool_download_click', { tool_id: 'audio-studio', format: doc.querySelector('[data-export-format]')?.value });
+        return;
+      }
+      const id = downloadResourceId(link.href, downloadable);
+      if (id) controller.track('resource_download_click', { resource_id: id });
     });
     controller.restore();
   }
-  return { contextFor, eventData, readChoice, createController, makeTransport, mount, ID, KEY };
+  return { contextFor, eventData, downloadResourceId, readChoice, createController, makeTransport, mount, ID, KEY };
 });

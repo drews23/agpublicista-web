@@ -42,7 +42,7 @@ def build(lang):
     footer = re.search(r"<footer\b.*?</footer>", source, re.S).group()
     other = "en" if lang == "es" else "es"
     header = header.replace(f'href="{OPTIMIZERS[other]}"', f'href="{ROUTES[other]}"')
-    script = "/js/site.js?v=1bbddead3136" if lang == "es" else "/en/assets/site.js?v=c8d4fbfb69ba"
+    script = "/js/site.js?v=1681fd2610ca" if lang == "es" else "/en/assets/site.js?v=61ede08bea2f"
     options = "".join(f'<option value="{n}"{chr(32)+"selected" if n == 3 else ""}>{n}</option>' for n in range(9))
     html = f'''<!doctype html>
 <html lang="{'en-US' if lang == 'en' else 'es'}" data-theme="dark">

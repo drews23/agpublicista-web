@@ -1,7 +1,7 @@
 // Consent/transport invariants. No browser, Google requests, or visitor data.
 const {test} = require('node:test');
 const assert = require('node:assert/strict');
-const {contextFor, eventData, readChoice, createController, makeTransport, KEY, ID} = require('../../js/analytics.js');
+const {contextFor, eventData, downloadResourceId, readChoice, createController, makeTransport, KEY, ID} = require('../../js/analytics.js');
 const now = 1793170000000;
 const canonical = 'https://lienzo.tools/herramientas/audio/';
 function setup({raw=null, live=true, hold=false, storageFails=false, loadFails=false}={}) {
@@ -78,6 +78,24 @@ test('event schemas reject arbitrary values and discard all extra content',()=>{
   assert.equal(eventData('tool_export_ready',{tool_id:'qr',format:'wav24'}),null);
   assert.equal(eventData('resource_download_click',{resource_id:'private@example.test'}),null);
   assert.equal(eventData('sign_up',{placement:'newsletter'}),null);
+});
+test('MediaFire pack links use a fixed identifier and require analytics consent',async()=>{
+  const link='https://www.mediafire.com/file/aoe4bogalij96g7/name.rar/file?private=value#private';
+  const id=downloadResourceId(link,false);
+  assert.equal(id,'sonidos-transiciones-30');
+  assert.equal(downloadResourceId(link.replace('aoe4bogalij96g7','unlisted'),false),undefined);
+  assert.equal(downloadResourceId(link.replace('www.mediafire.com','www.mediafire.com.example.test'),true),undefined);
+  const zip='https://lienzo.tools/recursos/descargas/plantillas-web/carrusel-recursos-lienzo-en.zip';
+  assert.equal(downloadResourceId(zip,false),undefined);
+  assert.equal(downloadResourceId(zip,true),'carrusel-recursos');
+  assert.equal(eventData('resource_preview_open',{resource_id:id}),null);
+  const t=setup();
+  assert.equal(t.controller.track('resource_download_click',{resource_id:id}),false);
+  await t.controller.setConsent('granted');
+  assert.equal(t.controller.track('resource_download_click',{resource_id:id,link_url:link}),true);
+  assert.deepEqual(t.calls.at(-1),['event','resource_download_click',{resource_id:id,site_language:'es'}]);
+  await t.controller.setConsent('denied');
+  assert.equal(t.controller.track('resource_download_click',{resource_id:id}),false);
 });
 test('newsletter acceptance is a request, never a confirmed subscription event',()=>{
   assert.deepEqual(eventData('newsletter_request_accepted',{placement:'home',email:'private@example.test'}),{placement:'home'});
