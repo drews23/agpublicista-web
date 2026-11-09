@@ -119,10 +119,10 @@
     "author": "Lienzo",
     "source": null,
     "zip": "galeria-expandible-lienzo.zip",
-    "desc": "Paisajes originales por capas, profundidad sutil y cinco historias que se abren a tu ritmo. Personaliza cada panel o sustituye el fondo por tu propia fotografía.",
-    "size": 264,
+    "desc": "Cinco fotografías de paisaje y arquitectura con movimiento sutil. Personaliza cada panel o sustituye el fondo por tu propia fotografía.",
+    "size": 728,
     "authorRole": "Implementación original y guía",
-    "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
+    "license": "MIT para el código; fotografías de Carol M. Highsmith con procedencia documentada; fuentes OFL."
   },
   {
     "id": "menu-indicador",

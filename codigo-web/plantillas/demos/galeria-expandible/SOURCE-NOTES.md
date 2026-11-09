@@ -1,16 +1,17 @@
-# Source notes / Notas de procedencia
+# Notas de procedencia / Source notes
 
-Visual reference / Referencia visual: expanding-flex-cards
+Lienzo desarrolló la galería en HTML, CSS y JavaScript a partir de la interacción de paneles expandibles revisada con MD Estudio Creativo. El ZIP incluye el código de Lienzo con licencia MIT y las fuentes Fraunces e Instrument Sans con sus avisos OFL.
 
-The supplied folder is kept unchanged outside this download. Its code, remote artwork, personal names, and third-party credits are not redistributed as Lienzo code. The supplied folders do not contain a license file. The MIT notice in this package applies only to the newly written Lienzo implementation and original artwork. No additional rights or authorization documents are inferred. Local fonts retain their OFL notices; sample logos retain trademark rights.
+Lienzo built the HTML, CSS, and JavaScript gallery based on the expanding panel interaction reviewed with MD Estudio Creativo. The ZIP includes Lienzo's MIT-licensed code and the OFL notices for Fraunces and Instrument Sans.
 
-La carpeta de referencia se conserva intacta fuera de esta descarga. Su código, imágenes remotas, nombres personales y créditos de terceros no se redistribuyen como código Lienzo. Las carpetas aportadas no incluyen un archivo de licencia. El aviso MIT de este paquete solo cubre la nueva implementación Lienzo y su arte original. No se presumen otros derechos ni documentos de autorización. Las fuentes locales conservan sus avisos OFL y los logos de muestra sus derechos de marca.
+## Fotografías de muestra / Sample photographs
 
-## Reference fingerprints / Huellas de referencia
+Las cinco fotos son de Carol M. Highsmith, Prints and Photographs Division, Library of Congress. El [archivo de la fotógrafa](https://www.loc.gov/pictures/collection/highsm/) documenta sus derechos de uso. Las fotos se convirtieron a WebP y se ajustó su encuadre en cada panel.
 
-- dist/index.html: 6982bd2be6237bd6a2542b4278ffa84495293d5f060f920cc10cae4b8b3f4737
-- dist/script.js: 6a87350626df972dbf77449d31e54c2845aa834a528c7ab009df7ae05cc5df6b
-- dist/style.css: f941929353ff1176abf96581efd7168d8bf6dd955688822d7f4736bcc05f4486
-- src/index.html: d7082a3c643eb6a01e629477d07ef44416bfbbc4d2bafe64fc69295f8fe864be
-- src/script.js: f68244b3f7e6439f84987a204395244b4abdf10f550090d8eae17f7baadbe033
-- src/style.scss: 7a93608669f1ac639b8107aab8822509fa99c8b363e8619b58e8f5d5888925c3
+All five photos are by Carol M. Highsmith, Prints and Photographs Division, Library of Congress. See the [photographer's archive](https://www.loc.gov/pictures/collection/highsm/) for rights information. The photos were converted to WebP and framed for each panel.
+
+1. [Yosemite, río Merced / Merced River, Yosemite](https://www.loc.gov/item/2013634700/) · LC-DIG-highsm-25254
+2. [Muir Woods](https://www.loc.gov/item/2013632553/) · LC-DIG-highsm-22096
+3. [Dunas de Killpecker / Killpecker Sand Dunes](https://www.loc.gov/item/2017688029/) · LC-DIG-highsm-38137
+4. [Pabellón Quadracci, Museo de Arte de Milwaukee / Quadracci Pavilion, Milwaukee Art Museum](https://www.loc.gov/item/2016631017/) · LC-DIG-highsm-40199
+5. [Costa de Big Sur / Big Sur coast](https://www.loc.gov/item/2011632017/) · LC-DIG-highsm-13823

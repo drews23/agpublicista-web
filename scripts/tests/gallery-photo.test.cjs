@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, '../..');
 const source = fs.readFileSync(path.join(root, 'scripts/templates-v2/gallery.js'), 'utf8');
 const prefix = source.slice(0, source.indexOf('  state.items = state.items.map(normalize);'));
 const helpers = vm.runInNewContext(prefix + 'return {sizePhoto,photoLayers,normalize,completePhoto};})();', {
-  window: {LienzoStudio: {state: {items: []}, defaults: {items: []}, $: () => null, $$: () => [], ui: {}, colors: {}}, LienzoGalleryArt() {}},
+  window: {LienzoStudio: {state: {items: []}, defaults: {items: []}, $: () => ({textContent: '{}'}), $$: () => [], ui: {}, colors: {}}},
   matchMedia: () => ({matches: false}), ResizeObserver: class {},
 });
 const near = (a, b) => assert.ok(Math.abs(a - b) < .00001, `${a} != ${b}`);
@@ -38,6 +38,14 @@ near(fit([300, 200], [0, 0])[0] / fit([300, 200], [0, 0])[1], 6 / 5);
 assert.doesNotThrow(() => helpers.sizePhoto({clientWidth: 0, clientHeight: 0, querySelector: () => null}));
 results.push('An image still decoding has a finite placeholder; hidden or missing images do not corrupt layout.');
 
+const sampleFrame = {style: {width: '240px', height: '200px'}};
+helpers.sizePhoto({
+  clientWidth: 500, clientHeight: 400, dataset: {photoFit: 'sample'},
+  querySelector: selector => selector === 'img.eg-photo' ? {} : sampleFrame,
+});
+assert.deepEqual(sampleFrame.style, {width: '', height: ''});
+results.push('Restoring the sample removes the custom crop frame so the photo fills the panel again.');
+
 const photo = {imageData: 'data:image/png;base64,AAAA', imageAlt: 'Top <edge> "visible"', imageFit: 'contain', focalX: 25, focalY: 75, zoom: 140, intensity: .65};
 const full = helpers.photoLayers(photo);
 assert.match(full, /data-photo-fit="contain"/); assert.match(full, /data-photo-still="true"/);
@@ -60,11 +68,11 @@ results.push('New photos support full framing; legacy photos retain crop intent;
 assert.equal(helpers.completePhoto(photo), true);
 assert.equal(helpers.completePhoto({...photo, imageFit: 'cover'}), false);
 assert.equal(helpers.completePhoto({...photo, imageData: ''}), false);
-results.push('Only a real full-image photo suppresses photo motion; original landscape artwork is unaffected.');
-assert.ok(source.includes("? photoLayers(item)"));
+results.push('Only a full-image custom photo suppresses photo motion.');
+assert.ok(source.includes('photoLayers(framed)'));
 assert.ok(source.includes("'const sizePhoto=' + sizePhoto.toString()"));
 const generator = fs.readFileSync(path.join(root, 'scripts/templates_v2.py'), 'utf8');
-assert.ok(generator.includes("['gallery-art.css','gallery-photo.css']"));
+assert.ok(generator.includes("(SOURCE/'gallery-photo.css').read_text"));
 results.push('Standalone downloads use the same photo markup, fit function, and shared photo CSS as the gallery.');
 
 console.log(JSON.stringify({passed: results.length, checks: results}, null, 2));

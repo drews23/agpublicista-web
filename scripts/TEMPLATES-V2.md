@@ -60,11 +60,13 @@ El cierre `final-checks.json` confirma 47 archivos idempotentes, los 506 archivo
 
 ## Mejora posterior: Galería de paneles expandibles
 
+La edición fotográfica sustituye las ilustraciones descritas en este registro histórico. Las fuentes vigentes son `scripts/templates-v2/gallery.js`, `gallery.css` y `gallery-photo.css`. Los créditos de las cinco fotos se incluyen en `gallery-source-notes.md` y en cada ZIP.
+
 Implementación local ES/en-US del 17 de octubre de 2026: cinco paisajes SVG originales con tres planos, refinamiento del valle, paleta del logo y fuentes locales. Los cinco paneles siguen disponibles en móvil; disposición auto/horizontal/vertical sin perder la preferencia al redimensionar, teclado según eje, paginación, hover optativo, editor/restablecimiento individual, foto local con encuadre/zoom/alt y cargas protegidas por identificadores por panel. Vista ampliada nativa con navegación, pausa y retorno de foco. Arte CSS activo/visible, pausa manual/reducida/fuera de vista y parallax sin bucle permanente JS.
 
 Descargar este panel genera HTML independiente con SVG o foto, estilos, fuentes y licencias en línea. Obtener HTML exporta el estudio completo y requiere los archivos vecinos del ZIP. Demos alojadas noindex y descargas sin esa directiva. Las fotos originales de Victor of Valencia y el código de la referencia no se redistribuyen. Metadatos 21st 28111/24830/9859 consultados sin incorporar código.
 
-Fuentes: scripts/templates-v2/gallery-art.js/css y gallery.js/css; contrato en scripts/GALLERY-SHOWCASE.md. Regenerar solo con python scripts/templates_v2.py --only galeria-expandible --catalog.
+Registro original: `scripts/GALLERY-SHOWCASE.md`. Regenera las dos demos y sus ZIP con `python scripts/templates_v2.py --only galeria-expandible`.
 
 QA final positivo: 48 casos responsive (24 ES y 24 EN), ocho comprobaciones funcionales, cuatro exportaciones y dos iframe, sin errores JavaScript en los reportes definitivos. Dos comprobaciones táctiles CDP y dos descargas finales desde iframe también superadas; CDP es emulación Chromium aislada, no un dispositivo físico. Teclado por eje, preferencia adaptable, hover optativo, editor/restablecimiento/foco, acento visible, URL seguras, texto inerte, pausas, intensidad cero, vista ampliada y fotos/encuadre/alt/cargas concurrentes comprobados. HTML independientes file:// con fuentes y avisos sin solicitudes externas; estudios completos con ocho dependencias locales, estado conservado y sin HTTP. Tema comprobado del catálogo hacia el iframe en claro y oscuro.
 

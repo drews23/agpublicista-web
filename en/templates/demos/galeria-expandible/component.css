@@ -1,35 +1,3 @@
-/* Motion stays inside each depth layer. The gallery owns wrapper parallax. */
-.eg-art-original{position:absolute;inset:0;overflow:hidden;background:#111;pointer-events:none;isolation:isolate}
-.eg-art-original>svg{display:block;width:100%;height:100%;overflow:hidden}
-.eg-art-original .eg-art-valley-cloud{animation:eg-art-cloud calc(29s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-valley-mist{animation:eg-art-mist calc(19s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-valley-river{animation:eg-art-river calc(8s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-forest-light{animation:eg-art-light calc(16s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-forest-fern{animation:eg-art-fern calc(11s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-forest-haze{animation:eg-art-mist calc(25s * var(--eg-speed,1)) ease-in-out calc(-7s * var(--eg-speed,1)) infinite}
-.eg-art-original .eg-art-forest-leaves{animation:eg-art-leaves calc(9s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-dunes-wind{animation:eg-art-sand calc(13s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-dunes-sheen{animation:eg-art-sheen calc(17s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-architecture-light{animation:eg-art-architecture-sun calc(22s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-coast-cloud{animation:eg-art-cloud calc(33s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-coast-current{animation:eg-art-current calc(12s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original .eg-art-coast-foam{animation:eg-art-foam calc(7s * var(--eg-speed,1)) ease-in-out infinite}
-.eg-art-original *{animation-play-state:var(--eg-art-play,paused)!important}
-
-@keyframes eg-art-cloud{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(calc(17px * var(--eg-energy,.65)));opacity:.75}}
-@keyframes eg-art-mist{0%,100%{transform:translateX(0);opacity:.8}50%{transform:translateX(calc(-20px * var(--eg-energy,.65)));opacity:1}}
-@keyframes eg-art-river{0%,100%{transform:translate(0,0);opacity:.75}50%{transform:translate(calc(2px * var(--eg-energy,.65)),calc(5px * var(--eg-energy,.65)));opacity:1}}
-@keyframes eg-art-light{0%,100%{opacity:.8;transform:translateX(0)}50%{opacity:1;transform:translateX(calc(9px * var(--eg-energy,.65)))}}
-@keyframes eg-art-fern{0%,100%{transform:rotate(0deg)}50%{transform:rotate(calc(1.2deg * var(--eg-energy,.65)))}}
-@keyframes eg-art-leaves{0%,100%{transform:rotate(0deg)}50%{transform:rotate(calc(-1.5deg * var(--eg-energy,.65)))}}
-@keyframes eg-art-sand{0%,100%{transform:translateX(0);opacity:.8}50%{transform:translateX(calc(10px * var(--eg-energy,.65)));opacity:1}}
-@keyframes eg-art-sheen{0%,100%{opacity:.65}50%{opacity:1}}
-@keyframes eg-art-architecture-sun{0%,100%{transform:translateX(0);opacity:.75}50%{transform:translateX(calc(-9px * var(--eg-energy,.65)));opacity:1}}
-@keyframes eg-art-current{0%,100%{transform:translate(0,0);opacity:.75}50%{transform:translate(calc(-4px * var(--eg-energy,.65)),calc(5px * var(--eg-energy,.65)));opacity:1}}
-@keyframes eg-art-foam{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(calc(-5px * var(--eg-energy,.65)));opacity:1}}
-
-@media(prefers-reduced-motion:reduce){.eg-art-original *{animation:none!important;transition:none!important}}
-
 /* Lienzo Landscape Gallery. Original art, readable rails, native controls. */
 [data-kind=gallery] .v2-workspace .v2-stage{padding:0;min-height:0;background:var(--page)}
 [data-kind=gallery] .v2-hero{padding-block:clamp(20px,4vh,40px) clamp(16px,3vh,28px)}
@@ -56,21 +24,13 @@
 .eg-intro p:first-child span{padding-left:15px;border-left:1px solid var(--line);font-weight:400;color:var(--muted);font-size:10px}
 .eg-intro p:last-child{text-align:right}
 .eg-panels{position:relative;display:grid;grid-template-columns:var(--eg-tracks,5.5fr 1fr 1fr 1fr 1fr);gap:10px;height:clamp(480px,44vw,580px);min-width:0;isolation:isolate;transition:grid-template-columns .65s var(--eg-ease),grid-template-rows .65s var(--eg-ease)}
-.eg-panel{position:relative;min-width:0;min-height:0;overflow:hidden;isolation:isolate;border-radius:18px;background:#14131d;color:#fff;border:1px solid color-mix(in srgb,var(--eg-accent,#8b7bff),#fff 25%);--eg-px:0px;--eg-py:0px;--eg-art-play:paused}
+.eg-panel{position:relative;min-width:0;min-height:0;overflow:hidden;isolation:isolate;border-radius:18px;background:#14131d;color:#fff;border:1px solid color-mix(in srgb,var(--eg-accent,#8b7bff),#fff 25%);--eg-art-play:paused}
 .eg-panel[data-active=true]{border-color:color-mix(in srgb,var(--eg-accent,#8b7bff),#fff 42%)}
 .eg-visual{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.eg-visual-content{position:absolute;inset:-3%;overflow:hidden;isolation:isolate}
-.eg-visual .eg-depth-back{transform:translate(calc(var(--eg-px,0px) * -.18),calc(var(--eg-py,0px) * -.18));transition:transform .7s var(--eg-ease)}
-.eg-visual .eg-depth-middle{transform:translate(calc(var(--eg-px,0px) * .35),calc(var(--eg-py,0px) * .35));transition:transform .55s var(--eg-ease)}
-.eg-visual .eg-depth-front{transform:translate(calc(var(--eg-px,0px) * .75),calc(var(--eg-py,0px) * .75));transition:transform .4s var(--eg-ease)}
-.eg-photo-depth,.eg-photo-motion{position:absolute;inset:0}
-.eg-photo-depth{transform:translate(calc(var(--eg-px,0px) * .55),calc(var(--eg-py,0px) * .55));transition:transform .45s var(--eg-ease)}
-.eg-photo{width:100%;height:100%;object-fit:cover;display:block;max-width:none;transform-origin:50% 50%}
-.eg-photo-motion{animation:eg-photo-drift calc(18s * var(--eg-speed,1)) ease-in-out infinite}
+.eg-visual-content{position:absolute;inset:0;overflow:hidden;isolation:isolate}
 /* Photography has a protected image area; captions and actions do not cover it. */
 [data-kind=gallery] .eg-panel[data-photo=true][data-active=true]{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-rows:56px minmax(0,1fr)}
 [data-kind=gallery] .eg-panel[data-photo=true][data-active=true] .eg-visual{position:relative;inset:auto;grid-row:2;grid-column:1;min-width:0;min-height:0}
-.eg-panel[data-photo=true] .eg-visual-content,.eg-focus-canvas[data-photo=true] .eg-visual-content{inset:0}
 [data-kind=gallery] .eg-panel[data-photo=true][data-active=true] .eg-shade{display:none}
 [data-kind=gallery] .eg-panel[data-photo=true][data-active=true] .eg-panel-caption{position:relative;inset:auto;grid-row:2;grid-column:2;align-self:center;max-height:100%;padding:8px 12px;transition:none;overflow-y:auto;scrollbar-width:thin;pointer-events:auto}
 [data-kind=gallery] .eg-panel[data-photo=true][data-active=true] .eg-panel-caption h2{font-size:clamp(20px,1.8vw,30px);margin-bottom:8px}
@@ -159,7 +119,6 @@
 html[data-view=thumbnail] .eg-intro,html[data-view=thumbnail] .eg-navigation,html[data-view=thumbnail] .eg-credit{display:none}
 html[data-view=thumbnail] .eg-gallery{padding:12px}
 html[data-view=thumbnail] .eg-panels{height:500px}
-@keyframes eg-photo-drift{0%,100%{transform:translate(0,0) scale(1.025)}50%{transform:translate(calc(-5px * var(--eg-energy,.65)),calc(-3px * var(--eg-energy,.65))) scale(1.045)}}
 @media(max-width:1100px){.eg-gallery{padding:20px}.eg-panel-caption{left:24px;right:24px}.eg-panel-caption h2{font-size:40px}.eg-intro p:last-child{max-width:220px}.eg-current>span:last-child{display:none}.eg-focus-caption{grid-template-columns:1fr}.eg-focus-actions{justify-content:flex-start;max-width:none}}
 @media(max-width:760px){
   [data-kind=gallery] .v2-toolbar{padding-inline:10px}
@@ -247,9 +206,9 @@ html[data-view=thumbnail] .eg-panels{height:500px}
 .eg-photo-depth[data-photo-fit]{position:absolute;inset:0;overflow:hidden;transform:none;background:var(--brand-surface,#14131d)}
 .eg-photo-frame{position:absolute;left:50%;top:50%;width:100%;height:100%;transform:translate(-50%,-50%);overflow:hidden;isolation:isolate}
 .eg-photo-float,.eg-photo-frame .eg-photo-motion{position:absolute;inset:0}
-.eg-photo-float{transform:translate(calc(var(--eg-photo-x,0) * .8%),calc(var(--eg-photo-y,0) * .8%)) scale(calc(1 + .04 * var(--eg-energy,.65)))}
+.eg-photo-float{transition:transform .45s ease-out;transform:translate(calc(var(--eg-photo-x,0) * .8%),calc(var(--eg-photo-y,0) * .8%)) scale(calc(1 + .04 * var(--eg-energy,.65)))}
 .eg-photo-frame .eg-photo{display:block;width:100%;height:100%;max-width:none;object-fit:cover;transform-origin:center}
-.eg-photo-depth[data-photo-fit=cover] .eg-photo-motion{animation:eg-photo-camera calc(18s * var(--eg-speed,1)) ease-in-out infinite;animation-play-state:var(--eg-art-play,paused)}
+.eg-photo-depth:is([data-photo-fit=cover],[data-photo-fit=sample]) .eg-photo-motion{animation:eg-photo-camera calc(18s * var(--eg-speed,1)) ease-in-out infinite;animation-play-state:var(--eg-art-play,paused)}
 .eg-photo-depth[data-photo-fit=contain] .eg-photo-float,.eg-photo-depth[data-photo-fit=contain] .eg-photo-motion,.eg-photo-depth[data-photo-still=true] .eg-photo-float,.eg-photo-depth[data-photo-still=true] .eg-photo-motion{transform:none;animation:none}
 @keyframes eg-photo-camera{0%,100%{transform:scale(1)}50%{transform:translate(-.35%,-.2%) scale(calc(1 + .025 * var(--eg-energy,.65)))}}
 @media(prefers-reduced-motion:reduce){.eg-photo-depth[data-photo-fit] *{animation:none!important;transition:none!important}}

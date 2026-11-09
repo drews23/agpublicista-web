@@ -1,5 +1,7 @@
 # Cinco mundos Lienzo
 
+> Documento histórico. La galería actual usa fotografías. Consulta [gallery-source-notes.md](gallery-source-notes.md) para sus créditos y fuentes.
+
 Cinco paisajes SVG originales para la galería de paneles expandibles. No requieren imágenes remotas, bibliotecas gráficas, WebGL, canvas ni fuentes externas. El código y las formas no proceden de las fotografías o del código de la referencia.
 
 ## API y composición

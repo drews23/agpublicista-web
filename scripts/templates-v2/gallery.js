@@ -2,8 +2,9 @@
 (() => {
   'use strict';
   const a = window.LienzoStudio;
-  if (!a || !window.LienzoGalleryArt) return;
+  if (!a) return;
   const {state, $, $$, ui, colors} = a;
+  const {galleryPhotos, galleryExport} = JSON.parse($('[data-config]').textContent);
   const gallery = $('[data-gallery]'), board = $('[data-panels]');
   const focusDialog = $('[data-gallery-focus]'), focusCanvas = $('[data-focus-canvas]'), focusArt = $('[data-focus-art]');
   const editor = $('[data-editor]'), sourceDialog = $('[data-export-dialog]');
@@ -19,11 +20,15 @@
   let pointerHost = null, pointerBox = null, pointerPosition = null;
   let focusIndex = -1, focusPaused = false, boardVisible = true, focusVisible = false, focusPhoto = null;
   const completePhoto = item => !!item.imageData && item.imageFit === 'contain';
+  const panelPhoto = (item, index) => item.imageData ? item : {...item, ...galleryPhotos[index], imageFit: 'sample'};
 
   // Shared by the live gallery and serialized verbatim into standalone downloads.
   function sizePhoto(depth) {
     const image = depth.querySelector('img.eg-photo'), frame = depth.querySelector('.eg-photo-frame');
     if (!image || !frame || !depth.clientWidth || !depth.clientHeight) return;
+    if (depth.dataset.photoFit === 'sample') {
+      frame.style.width = ''; frame.style.height = ''; return;
+    }
     const ratio = depth.dataset.photoFit === 'cover' ? 6 / 5 : (image.naturalWidth / image.naturalHeight || 6 / 5);
     const width = Math.min(depth.clientWidth, depth.clientHeight * ratio), height = width / ratio;
     frame.style.width = width + 'px'; frame.style.height = height + 'px';
@@ -31,7 +36,7 @@
   const photoObserver = new ResizeObserver(entries => entries.forEach(entry => sizePhoto(entry.target)));
   function photoLayers(item) {
     const complete = !item || item.imageFit === 'contain';
-    return '<div class="eg-photo-depth" data-photo-fit="' + (complete ? 'contain' : 'cover') + '" data-photo-still="' + String(complete || item?.intensity === 0) + '"' + (!item ? ' hidden' : '') + '><div class="eg-photo-frame"><div class="eg-photo-float"><div class="eg-photo-motion"><img class="eg-photo" alt="' + escape(item?.imageAlt || '') + '" decoding="async"' + (item ? ' src="' + escape(item.imageData) + '" style="object-fit:' + (complete ? 'contain' : 'cover') + ';object-position:' + (complete ? '50% 50%' : item.focalX + '% ' + item.focalY + '%') + ';transform:' + (complete ? 'none' : 'scale(' + item.zoom / 100 + ')') + '"' : '') + '></div></div></div></div>';
+    return '<div class="eg-photo-depth" data-photo-fit="' + (item?.imageFit || 'contain') + '" data-photo-still="' + String(complete || item?.intensity === 0) + '"><div class="eg-photo-frame"><div class="eg-photo-float"><div class="eg-photo-motion"><img class="eg-photo" alt="' + escape(item?.imageAlt || '') + '" decoding="async"' + (item ? ' src="' + escape(item.imageData) + '" style="object-fit:' + (complete ? 'contain' : 'cover') + ';object-position:' + (complete ? '50% 50%' : item.focalX + '% ' + item.focalY + '%') + ';transform:' + (complete ? 'none' : 'scale(' + item.zoom / 100 + ')') + '"' : '') + '></div></div></div></div>';
   }
 
   function normalize(item, index) {
@@ -63,10 +68,9 @@
   focusDialog.setAttribute('aria-describedby', 'eg-focus-description');
   $('[data-focus-description]').id = 'eg-focus-description';
 
-  const visual = (index, suffix) => '<div class="eg-visual-content">' + window.LienzoGalleryArt(index, suffix) +
-    photoLayers() + '</div>';
+  const visual = '<div class="eg-visual-content">' + photoLayers() + '</div>';
   board.innerHTML = state.items.map((_, index) => '<article class="eg-panel" data-panel="' + index + '" aria-labelledby="eg-title-' + index + '">' +
-    '<div class="eg-visual">' + visual(index, 'panel') + '</div><div class="eg-shade" aria-hidden="true"></div>' +
+    '<div class="eg-visual">' + visual + '</div><div class="eg-shade" aria-hidden="true"></div>' +
     '<button type="button" class="eg-select" data-select="' + index + '" aria-controls="eg-caption-' + index + '" aria-expanded="false" aria-pressed="false"><span class="eg-number">' + String(index + 1).padStart(2, '0') + '</span><span class="eg-rail-title"></span></button>' +
     '<button type="button" class="eg-expand" data-expand="' + index + '" aria-haspopup="dialog" aria-controls="' + focusDialog.id + '">' + a.icon('external') + '</button>' +
     '<div class="eg-panel-caption" id="eg-caption-' + index + '" inert><p class="eg-panel-category" data-panel-category></p><h2 id="eg-title-' + index + '"></h2><p class="eg-description" data-panel-description></p><a class="eg-project" data-panel-link target="_blank" rel="noopener noreferrer">' + escape(ui.openLink) + a.icon('arrow') + '</a></div></article>').join('');
@@ -88,7 +92,7 @@
 
   function cancelHover() { clearTimeout(hoverTimer); hoverTimer = 0; }
   function resetPointer(host = pointerHost) {
-    if (host) { host.style.setProperty('--eg-px', '0px'); host.style.setProperty('--eg-py', '0px'); host.style.setProperty('--eg-photo-x', '0'); host.style.setProperty('--eg-photo-y', '0'); }
+    if (host) { host.style.setProperty('--eg-photo-x', '0'); host.style.setProperty('--eg-photo-y', '0'); }
     if (!host || host === pointerHost) {
       cancelAnimationFrame(pointerFrame); pointerFrame = 0;
       pointerHost = null; pointerBox = null; pointerPosition = null;
@@ -114,8 +118,6 @@
       pointerFrame = 0;
       if (pointerHost !== host || !pointerPosition || !canMove(host)) { resetPointer(host); return; }
       const energy = state.items[state.active].intensity;
-      host.style.setProperty('--eg-px', clamp((pointerPosition.x - pointerBox.left) / pointerBox.width * 2 - 1, -1, 1, 0) * 11 * energy + 'px');
-      host.style.setProperty('--eg-py', clamp((pointerPosition.y - pointerBox.top) / pointerBox.height * 2 - 1, -1, 1, 0) * 8 * energy + 'px');
       host.style.setProperty('--eg-photo-x', String(clamp((pointerPosition.x - pointerBox.left) / pointerBox.width * 2 - 1, -1, 1, 0) * energy));
       host.style.setProperty('--eg-photo-y', String(clamp((pointerPosition.y - pointerBox.top) / pointerBox.height * 2 - 1, -1, 1, 0) * energy));
     });
@@ -125,20 +127,17 @@
     host.style.setProperty('--eg-accent', colors[item.accent] || colors.violet);
     host.style.setProperty('--eg-speed', String(item.duration / 12000));
     host.style.setProperty('--eg-energy', String(item.intensity));
-    host.style.setProperty('--eg-photo-zoom', String(item.zoom / 100));
-    host.dataset.still = String(item.intensity === 0 || completePhoto(item)); host.dataset.photo = String(!!item.imageData);
-    const art = host.querySelector('.eg-art-original'), depth = host.querySelector('.eg-photo-depth'), image = host.querySelector('img.eg-photo');
-    if (art) art.hidden = !!item.imageData;
-    if (depth) { depth.hidden = !item.imageData; depth.dataset.photoFit = item.imageFit; depth.dataset.photoStill = String(item.intensity === 0 || completePhoto(item)); }
-    if (image) {
-      if (item.imageData && image.getAttribute('src') !== item.imageData) image.src = item.imageData;
-      if (!item.imageData) image.removeAttribute('src');
-      image.alt = item.imageAlt;
-      image.style.objectFit = completePhoto(item) ? 'contain' : 'cover';
-      image.style.objectPosition = completePhoto(item) ? '50% 50%' : item.focalX + '% ' + item.focalY + '%';
-      image.style.transform = completePhoto(item) ? 'none' : 'scale(' + item.zoom / 100 + ')';
-      sizePhoto(depth);
-    }
+    const framed = panelPhoto(item, index), complete = completePhoto(framed);
+    host.dataset.still = String(item.intensity === 0 || complete); host.dataset.photo = String(!!item.imageData);
+    const depth = host.querySelector('.eg-photo-depth'), image = depth.querySelector('img.eg-photo');
+    depth.dataset.photoFit = framed.imageFit;
+    depth.dataset.photoStill = host.dataset.still;
+    if (image.getAttribute('src') !== framed.imageData) image.src = framed.imageData;
+    image.alt = framed.imageAlt;
+    image.style.objectFit = complete ? 'contain' : 'cover';
+    image.style.objectPosition = complete ? '50% 50%' : framed.focalX + '% ' + framed.focalY + '%';
+    image.style.transform = complete ? 'none' : 'scale(' + framed.zoom / 100 + ')';
+    sizePhoto(depth);
   }
   function link(node, href) {
     const destination = a.safeURL(href);
@@ -183,7 +182,7 @@
     if (!focusDialog.open) return;
     if (focusIndex !== state.active || !focusArt.firstElementChild) {
       if (focusPhoto) photoObserver.unobserve(focusPhoto);
-      resetPointer(); focusArt.innerHTML = '<div class="eg-visual">' + visual(state.active, 'focus') + '</div>'; focusIndex = state.active;
+      resetPointer(); focusArt.innerHTML = '<div class="eg-visual">' + visual + '</div>'; focusIndex = state.active;
       focusPhoto = focusArt.querySelector('.eg-photo-depth'); photoObserver.observe(focusPhoto);
     }
     const item = state.items[state.active];
@@ -222,7 +221,7 @@
     });
     a.text('[data-gallery-count]', String(state.active + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0'));
     for (const selector of ['[data-gallery-name]', '[data-gallery-settings-title]', '[data-gallery-photo-title]']) a.text(selector, item.title);
-    const imageLabel = loading[state.active] ? ui.loadingPhoto : item.imageData ? ui.customPhoto : ui.originalArt;
+    const imageLabel = loading[state.active] ? ui.loadingPhoto : item.imageData ? ui.customPhoto : ui.samplePhoto;
     if (imageState.textContent !== imageLabel) imageState.textContent = imageLabel;
     removeImage.hidden = !item.imageData && !loading[state.active];
     removeImage.disabled = removeImage.hidden;
@@ -374,33 +373,30 @@
 
   function downloadPanel() {
     const index = state.active, item = normalize(state.items[index], index);
-    const data = JSON.parse($('[data-config]').textContent).galleryExport;
+    const data = galleryExport;
     if (!data?.css || !data?.fonts) return;
     const accent = colors[item.accent] || colors.violet, light = document.documentElement.dataset.theme === 'light';
     const paper = light ? '#f5f3fa' : '#111018', ink = light ? '#201c2b' : '#f7f5ff';
-    const art = item.imageData
-      ? photoLayers(item)
-      : window.LienzoGalleryArt(index, 'download');
+    const framed = panelPhoto(item, index), art = photoLayers(framed);
+    const notices = framed.credit ? {...data.notices, Photography: framed.credit} : data.notices;
     const fontCSS = ['Fraunces', 'Instrument'].map(name => '@font-face{font-family:' + name + ';src:url(data:font/woff2;base64,' + data.fonts[name] + ') format("woff2");font-weight:100 900;font-display:swap}').join('\n');
     const styles = fontCSS + '\n' + data.css + '\n' + [
       '*{box-sizing:border-box}body{margin:0;padding:clamp(18px,4vw,56px);background:' + paper + ';color:' + ink + ';font:16px/1.6 Instrument,sans-serif}',
-      '.eg-export{max-width:1100px;margin:auto;--eg-accent:' + accent + ';--eg-speed:' + item.duration / 12000 + ';--eg-energy:' + item.intensity + ';--eg-art-play:running;--eg-px:0;--eg-py:0}',
+      '.eg-export{max-width:1100px;margin:auto;--eg-accent:' + accent + ';--eg-speed:' + item.duration / 12000 + ';--eg-energy:' + item.intensity + ';--eg-art-play:running}',
       '.eg-export-visual{position:relative;isolation:isolate;overflow:hidden;border-radius:22px;aspect-ratio:6/5;max-height:76vh;min-height:300px;background:#111}',
-      '.eg-export[data-photo=true] .eg-export-visual{margin-inline:auto}.eg-art-original{position:absolute;inset:0}',
-      '.eg-depth-back{transform:translate(calc(var(--eg-px,0) * -1.98px),calc(var(--eg-py,0) * -1.44px))}.eg-depth-middle{transform:translate(calc(var(--eg-px,0) * 3.85px),calc(var(--eg-py,0) * 2.8px))}.eg-depth-front{transform:translate(calc(var(--eg-px,0) * 8.25px),calc(var(--eg-py,0) * 6px))}',
       '.eg-export-visual *,.eg-export-visual *::before,.eg-export-visual *::after{animation-play-state:var(--eg-art-play,paused)!important}',
       '.eg-export-copy{padding-top:28px}.eg-export-category{font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:' + accent + ';margin:0 0 12px}h1{font-family:Fraunces,serif;font-weight:500;font-size:clamp(34px,5vw,56px);letter-spacing:normal;line-height:1.12;margin:0 0 16px;overflow-wrap:anywhere}.eg-export-copy>p:not(.eg-export-category){max-width:750px;margin:0 0 24px;opacity:.8;overflow-wrap:anywhere}',
       '.eg-export-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px}button,a{font:inherit;min-height:44px;border:1px solid ' + accent + ';border-radius:10px;background:transparent;color:inherit;padding:10px 16px;text-decoration:none;cursor:pointer}a{display:inline-flex;align-items:center}button:focus-visible,a:focus-visible{outline:3px solid ' + accent + ';outline-offset:4px}button:disabled{opacity:.65;cursor:default}footer{font-size:12px;opacity:.7;margin-top:30px}',
-      '.eg-export[data-still=true] .eg-export-visual *{animation:none!important}.eg-export[data-paused=true] .eg-depth-back,.eg-export[data-paused=true] .eg-depth-middle,.eg-export[data-paused=true] .eg-depth-front{transition:none}',
+      '.eg-export[data-still=true] .eg-export-visual *{animation:none!important}',
       '@media(prefers-reduced-motion:reduce){.eg-export-visual *,.eg-export-visual *::before,.eg-export-visual *::after{animation:none!important;transition:none!important}}@media(max-width:600px){.eg-export-visual{min-height:320px;max-height:none;aspect-ratio:4/5}}'
     ].join('\n');
     const labels = json({pause: ui.pause, resume: ui.resume});
     const script = '(()=>{"use strict";const root=document.querySelector(".eg-export"),visual=document.querySelector(".eg-export-visual"),button=document.querySelector("button"),labels=' + labels + ',energy=' + item.intensity + ',reduced=matchMedia("(prefers-reduced-motion:reduce)"),fine=matchMedia("(hover:hover) and (pointer:fine)");let paused=false,visible=true,frame=0,box=null,point=null;' +
       'const sizePhoto=' + sizePhoto.toString() + ';const depth=visual.querySelector(".eg-photo-depth");if(depth){new ResizeObserver(()=>sizePhoto(depth)).observe(depth);depth.querySelector("img").addEventListener("load",()=>sizePhoto(depth));sizePhoto(depth);}' +
-      'function reset(){cancelAnimationFrame(frame);frame=0;point=null;box=null;root.style.setProperty("--eg-px","0");root.style.setProperty("--eg-py","0");root.style.setProperty("--eg-photo-x","0");root.style.setProperty("--eg-photo-y","0");}function stopped(){return paused||reduced.matches||document.hidden||!visible||root.dataset.still==="true";}function sync(){const stop=stopped();root.style.setProperty("--eg-art-play",stop?"paused":"running");root.dataset.paused=String(stop);button.textContent=paused?labels.resume:labels.pause;button.setAttribute("aria-pressed",String(paused));button.disabled=reduced.matches||root.dataset.still==="true";if(stop)reset();}' +
-      'button.addEventListener("click",()=>{paused=!paused;sync();});visual.addEventListener("pointerenter",e=>{if(e.pointerType!=="touch"&&fine.matches&&!stopped())box=(depth?.querySelector(".eg-photo-frame")||visual).getBoundingClientRect();});visual.addEventListener("pointermove",e=>{if(e.pointerType==="touch"||!fine.matches||stopped())return;box=box||(depth?.querySelector(".eg-photo-frame")||visual).getBoundingClientRect();point={x:e.clientX,y:e.clientY};if(frame)return;frame=requestAnimationFrame(()=>{frame=0;if(stopped()||!point||!box)return;const x=Math.max(-1,Math.min(1,(point.x-box.left)/box.width*2-1)),y=Math.max(-1,Math.min(1,(point.y-box.top)/box.height*2-1));root.style.setProperty("--eg-px",String(x*energy));root.style.setProperty("--eg-py",String(y*energy));root.style.setProperty("--eg-photo-x",String(x*energy));root.style.setProperty("--eg-photo-y",String(y*energy));});});visual.addEventListener("pointerleave",reset);window.addEventListener("resize",reset,{passive:true});document.addEventListener("visibilitychange",sync);reduced.addEventListener("change",sync);fine.addEventListener("change",reset);new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();}).observe(visual);sync();})();';
+      'function reset(){cancelAnimationFrame(frame);frame=0;point=null;box=null;root.style.setProperty("--eg-photo-x","0");root.style.setProperty("--eg-photo-y","0");}function stopped(){return paused||reduced.matches||document.hidden||!visible||root.dataset.still==="true";}function sync(){const stop=stopped();root.style.setProperty("--eg-art-play",stop?"paused":"running");root.dataset.paused=String(stop);button.textContent=paused?labels.resume:labels.pause;button.setAttribute("aria-pressed",String(paused));button.disabled=reduced.matches||root.dataset.still==="true";if(stop)reset();}' +
+      'button.addEventListener("click",()=>{paused=!paused;sync();});visual.addEventListener("pointerenter",e=>{if(e.pointerType!=="touch"&&fine.matches&&!stopped())box=(depth?.querySelector(".eg-photo-frame")||visual).getBoundingClientRect();});visual.addEventListener("pointermove",e=>{if(e.pointerType==="touch"||!fine.matches||stopped())return;box=box||(depth?.querySelector(".eg-photo-frame")||visual).getBoundingClientRect();point={x:e.clientX,y:e.clientY};if(frame)return;frame=requestAnimationFrame(()=>{frame=0;if(stopped()||!point||!box)return;const x=Math.max(-1,Math.min(1,(point.x-box.left)/box.width*2-1)),y=Math.max(-1,Math.min(1,(point.y-box.top)/box.height*2-1));root.style.setProperty("--eg-photo-x",String(x*energy));root.style.setProperty("--eg-photo-y",String(y*energy));});});visual.addEventListener("pointerleave",reset);window.addEventListener("resize",reset,{passive:true});document.addEventListener("visibilitychange",sync);reduced.addEventListener("change",sync);fine.addEventListener("change",reset);new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();}).observe(visual);sync();})();';
     const destination = a.safeURL(item.href);
-    const html = '<!doctype html><html lang="' + escape(document.documentElement.lang) + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escape(item.title) + ' · Lienzo</title><style>' + styles + '</style></head><body><main class="eg-export" data-photo="' + String(!!item.imageData) + '" data-still="' + String(item.intensity === 0 || completePhoto(item)) + '"><div class="eg-export-visual">' + art + '</div><section class="eg-export-copy"><p class="eg-export-category">' + escape(item.category) + '</p><h1>' + escape(item.title) + '</h1><p>' + escape(item.description) + '</p><div class="eg-export-actions"><button type="button" aria-pressed="false">' + escape(ui.pause) + '</button>' + (destination ? '<a href="' + escape(destination) + '" target="_blank" rel="noopener noreferrer">' + escape(ui.openLink) + ' ↗</a>' : '') + '</div></section><footer>' + escape(ui.galleryStandaloneCredit) + '</footer></main><script type="application/json" data-licenses>' + json(data.notices) + '</script><script>' + script + '</script></body></html>';
+    const html = '<!doctype html><html lang="' + escape(document.documentElement.lang) + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escape(item.title) + ' · Lienzo</title><style>' + styles + '</style></head><body><main class="eg-export" data-still="' + String(item.intensity === 0 || completePhoto(item)) + '"><div class="eg-export-visual">' + art + '</div><section class="eg-export-copy"><p class="eg-export-category">' + escape(item.category) + '</p><h1>' + escape(item.title) + '</h1><p>' + escape(item.description) + '</p><div class="eg-export-actions"><button type="button" aria-pressed="false">' + escape(ui.pause) + '</button>' + (destination ? '<a href="' + escape(destination) + '" target="_blank" rel="noopener noreferrer">' + escape(ui.openLink) + ' ↗</a>' : '') + '</div></section><footer>' + escape(ui.galleryStandaloneCredit) + (framed.credit ? '<p>' + escape(framed.credit) + '</p>' : '') + '</footer></main><script type="application/json" data-licenses>' + json(notices) + '</script><script>' + script + '</script></body></html>';
     const slug = String(item.title).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 72).toLowerCase() || 'lienzo';
     a.download(a.brand?.decorateHTML(html,{selector:'.eg-export'}) || html, 'lienzo-panel-' + String(index + 1).padStart(2, '0') + '-' + slug + '.html');
     if (sourceDialog.open) a.text('[data-copy-status]', ui.galleryDownloaded);

@@ -22,8 +22,10 @@ RESOURCES = {
     },
     'galeria-expandible': {
         'kind': 'gallery', 'reference': 'expanding-flex-cards',
-        'es': ['Galería de paneles expandibles', 'Cinco mundos. Un solo lienzo.', 'Paisajes originales por capas, profundidad sutil y cinco historias que se abren a tu ritmo. Personaliza cada panel o sustituye el fondo por tu propia fotografía.', '05 paisajes', 'Abre un panel con clic o toque. Las flechas siguen la orientación de la galería. Tus ajustes se conservan al descargar el HTML.'],
-        'en': ['Expanding Panel Gallery', 'Five worlds. One canvas.', 'Original layered landscapes, subtle depth, and five stories that open at your pace. Customize each panel or bring your own photography.', '05 landscapes', 'Open a panel with a click or tap. Arrow keys follow the gallery’s orientation. Download the HTML to keep your settings.'],
+        'sample_artwork': False,
+        'license': 'MIT para el código; fotografías de Carol M. Highsmith con procedencia documentada; fuentes OFL.',
+        'es': ['Galería de paneles expandibles', 'Cinco mundos. Un solo lienzo.', 'Cinco fotografías de paisaje y arquitectura con movimiento sutil. Personaliza cada panel o sustituye el fondo por tu propia fotografía.', '05 fotografías', 'Abre un panel con clic o toque. Las flechas siguen la orientación de la galería. Tus ajustes se conservan al descargar el HTML.'],
+        'en': ['Expanding Panel Gallery', 'Five worlds. One canvas.', 'Five landscape and architecture photographs with subtle motion. Customize each panel or replace the background with your own photo.', '05 photographs', 'Open a panel with a click or tap. Arrow keys follow the gallery’s orientation. Download the HTML to keep your settings.'],
     },
     'menu-indicador': {
         'kind': 'navigation', 'reference': 'glassmorphism-menu-indicator-using-css-and-javascript-magic-menu-indicator',
@@ -158,7 +160,7 @@ def initial(kind, lang):
         items = [dict(title=t, description=descriptions[i], accent=color[i], duration=periods[i], intensity=1) for i,t in enumerate(titles)]
     elif kind == 'gallery':
         titles = tr(['Valle de luz', 'Bosque sereno', 'Dunas de ámbar', 'Arquitectura de luz', 'Marea'], ['Valley of light', 'Quiet forest', 'Amber dunes', 'Light and space', 'Tide'])
-        descriptions = tr(['La luz recorre las cumbres. El río dibuja una nueva dirección.', 'Entre la niebla y las ramas, una pausa para mirar de otra manera.', 'Capas de arena, sombras largas y formas que cambian con la luz.', 'Arcos, vacíos y perspectiva. El espacio también cuenta una historia.', 'La costa se abre al horizonte. Cada corriente deja su propio trazo.'], ['Light crosses the peaks. The river finds a new direction.', 'Between mist and branches, a pause to see things differently.', 'Layers of sand, long shadows, and shapes shaped by light.', 'Arches, open space, and perspective. A place can tell a story.', 'The coast opens to the horizon. Every current leaves its own trace.'])
+        descriptions = tr(['El río Merced refleja las montañas de Yosemite.', 'Un arroyo cruza el bosque de secuoyas en Muir Woods.', 'El viento dibuja las crestas de las dunas de Killpecker.', 'Las alas del Museo de Arte de Milwaukee se recortan contra el cielo.', 'Los acantilados de Big Sur descienden hacia el Pacífico.'], ['The Merced River reflects the mountains of Yosemite.', 'A creek runs through the redwoods of Muir Woods.', 'Wind shapes the ridges of the Killpecker Sand Dunes.', 'The wings of the Milwaukee Art Museum stand against the sky.', 'The cliffs of Big Sur descend to the Pacific.'])
         categories = tr(['Perspectiva', 'Naturaleza', 'Textura', 'Espacio', 'Horizonte'], ['Perspective', 'Nature', 'Texture', 'Space', 'Horizon'])
         items = [dict(title=t, category=categories[i], description=descriptions[i], accent=color[i], href='https://lienzo.tools/' + ('en/' if lang == 'en' else ''), imageData='', imageAlt='', imageFit='contain', focalX=50, focalY=50, zoom=100, intensity=.65, duration=12000) for i,t in enumerate(titles)]
         return dict(items=items, active=0, layout='auto', hoverPreview=False)
@@ -233,7 +235,7 @@ def controls(kind, ui):
 
 
 def component_source(kind, extension):
-    files = ([f'{kind}-art.{extension}'] if kind in ['scenes','gallery'] else []) + [f'{kind}.{extension}']
+    files = ([f'{kind}-art.{extension}'] if kind == 'scenes' else []) + [f'{kind}.{extension}']
     if kind == 'gallery' and extension == 'css':
         files.append('gallery-photo.css')
     if kind == 'devices':
@@ -272,13 +274,30 @@ def scene_translations(lang):
     return {k:v[lang=='en'] for k,v in pairs.items()}
 
 
+def gallery_photos(lang):
+    photos = [
+        ('yosemite.webp', '2013634700', 50, 54, 'El río Merced frente a las montañas de Yosemite.', 'The Merced River beneath the mountains of Yosemite.'),
+        ('muir-woods.webp', '2013632553', 50, 48, 'Secuoyas del bosque de Muir Woods, California.', 'Redwoods in Muir Woods, California.'),
+        ('killpecker-dunes.webp', '2017688029', 52, 62, 'Dunas de Killpecker bajo un cielo azul en Wyoming.', 'Killpecker Sand Dunes under a blue sky in Wyoming.'),
+        ('museum-exterior.webp', '2016631017', 50, 53, 'El pabellón blanco del Museo de Arte de Milwaukee frente al lago.', 'The white pavilion of the Milwaukee Art Museum by the lake.'),
+        ('big-sur.webp', '2011632017', 56, 49, 'Acantilados de Big Sur junto al océano Pacífico.', 'Big Sur cliffs beside the Pacific Ocean.'),
+    ]
+    return [dict(
+        imageData='data:image/webp;base64,' + base64.b64encode(
+            (SOURCE / ('phone-prototype-assets' if filename == 'museum-exterior.webp' else 'gallery-assets') / filename).read_bytes()
+        ).decode('ascii'),
+        imageAlt=en if lang == 'en' else es, focalX=x, focalY=y,
+        credit='Carol M. Highsmith, Library of Congress · https://www.loc.gov/item/' + record + '/',
+    ) for filename, record, x, y, es, en in photos]
+
+
 def gallery_translations(lang):
     pairs = {
         'auto': ('Adaptable', 'Responsive'), 'hoverPreview': ('Abrir al pasar el puntero', 'Open on hover'),
-        'galleryLabel': ('Cinco paisajes para explorar', 'Five landscapes to explore'),
-        'galleryEdition': ('ESTUDIOS DE PAISAJE / 01—05', 'LANDSCAPE STUDIES / 01—05'),
-        'galleryHint': ('Abre un paisaje. Encuentra otra perspectiva.', 'Open a landscape. Find a new perspective.'),
-        'selectPanel': ('Abrir panel', 'Open panel'), 'expandPanel': ('Ampliar paisaje', 'Expand landscape'),
+        'galleryLabel': ('Cinco fotografías para explorar', 'Five photographs to explore'),
+        'galleryEdition': ('ENSAYO FOTOGRÁFICO / 01—05', 'PHOTO ESSAY / 01—05'),
+        'galleryHint': ('Abre un panel para explorar la foto.', 'Open a panel to explore the photo.'),
+        'selectPanel': ('Abrir panel', 'Open panel'), 'expandPanel': ('Ampliar foto', 'Expand photo'),
         'previousPanel': ('Panel anterior', 'Previous panel'), 'nextPanel': ('Panel siguiente', 'Next panel'),
         'openLink': ('Abrir enlace', 'Open link'), 'category': ('Categoría', 'Category'),
         'galleryPanelPicker': ('Panel en edición', 'Panel to edit'),
@@ -286,7 +305,8 @@ def gallery_translations(lang):
         'galleryMotion': ('Movimiento', 'Motion'), 'galleryLayout': ('Disposición de la galería', 'Gallery layout'),
         'galleryTextHelp': ('Pulsa Aplicar cambios para actualizar el panel.', 'Select Apply changes to update the panel.'),
         'galleryLayoutHint': ('Oculta Ajustes para ver la disposición completa y probar la apertura con el puntero.', 'Hide Settings to see the full layout and try opening panels on hover.'),
-        'originalArt': ('Paisaje original de Lienzo', 'Original Lienzo landscape'),
+        'samplePhoto': ('Fotografía de muestra', 'Sample photograph'),
+        'removeImage': ('Restaurar foto de muestra', 'Restore sample photo'),
         'customPhoto': ('Tu foto', 'Your photo'),
         'loadingPhoto': ('Preparando imagen…', 'Preparing image…'),
         'galleryUpload': ('Cargar foto', 'Upload photo'),
@@ -303,12 +323,12 @@ def gallery_translations(lang):
         'photoFitContain': ('Imagen completa · sin recorte', 'Full image · no crop'),
         'photoFitCover': ('Rellenar 6:5 · recorte ajustable', 'Fill 6:5 · adjustable crop'),
         'fullPhotoHint': ('Selecciona Rellenar 6:5 en Imagen para activar el movimiento.', 'Choose Fill 6:5 under Image to enable motion.'),
-        'galleryCredit': ('Ilustraciones originales · SVG, CSS y JavaScript nativos', 'Original artwork · Native SVG, CSS, and JavaScript'),
+        'galleryCredit': ('Fotografías: Carol M. Highsmith · Biblioteca del Congreso de EE. UU.', 'Photography: Carol M. Highsmith · Library of Congress'),
         'galleryFocus': ('Vista ampliada', 'Expanded view'), 'downloadPanel': ('Descargar panel actual', 'Download current panel'),
         'downloadGallery': ('Descargar galería', 'Download gallery'),
-        'galleryDownloaded': ('Panel descargado: HTML independiente con ilustración o foto, fuentes y licencias.', 'Panel downloaded: standalone HTML with artwork or photo, fonts, and licenses.'),
+        'galleryDownloaded': ('Panel descargado: HTML independiente con foto, fuentes y avisos.', 'Panel downloaded: standalone HTML with photo, fonts, and notices.'),
         'galleryStandaloneCredit': ('Diseño y código: Lienzo. Conserva los avisos incluidos. Las imágenes que añadas requieren tus propios permisos de uso.', 'Design and code: Lienzo. Keep the included notices. Images you add require your own usage rights.'),
-        'photoRemoved': ('Paisaje original restaurado en este panel.', 'Original landscape restored for this panel.'),
+        'photoRemoved': ('Fotografía de muestra restaurada en este panel.', 'Sample photo restored for this panel.'),
         'hoverUnavailable': ('La previsualización al pasar requiere un ratón o trackpad.', 'Hover preview requires a mouse or trackpad.'),
     }
     return {k:v[lang=='en'] for k,v in pairs.items()}
@@ -319,7 +339,7 @@ def gallery_markup(ui):
     motion = ''.join(f'<label class="eg-range-label">{ui[label]}<span><input type="range" data-gallery-setting="{key}" min="{low}" max="{high}" step="{step}" aria-label="{ui[label]}"><output data-gallery-output="{key}"></output></span></label>' for key,label,low,high,step in [('intensity','galleryIntensity',0,1,.05),('duration','galleryDuration',8000,24000,1000)])
     return f'''<div class="eg-gallery" data-gallery>
 <div class="eg-intro"><p>LIENZO <span>{ui['galleryEdition']}</span></p><p>{ui['galleryHint']}</p></div>
-<div class="eg-panels" data-panels role="group" aria-label="{ui['galleryLabel']}"></div>
+<div class="eg-panels" data-panels data-export-empty role="group" aria-label="{ui['galleryLabel']}"></div>
 <div class="eg-navigation"><div class="eg-current"><span data-gallery-count></span><span data-gallery-name></span></div><div class="eg-pagination" role="group" aria-label="{ui['choose']}"></div><div class="eg-arrows"><button type="button" data-gallery-previous aria-label="{ui['previousPanel']}">←</button><button type="button" data-gallery-next aria-label="{ui['nextPanel']}">→</button></div></div>
 <p class="v2-sr" data-gallery-live role="status" aria-live="polite"></p>
 <p class="eg-credit">{ui['galleryCredit']}</p></div>
@@ -800,7 +820,8 @@ def document(slug, lang):
         config['sceneExport']['notices']['Lienzo'] = (common.parent/'LICENSE-LIENZO.txt').read_text(encoding='utf-8')
     if item['kind'] == 'gallery':
         common = ROOT / 'codigo-web/plantillas/demos/carrusel-recursos/assets'
-        config['galleryExport'] = dict(css='\n'.join((SOURCE/name).read_text(encoding='utf-8') for name in ['gallery-art.css','gallery-photo.css']), fonts={name:base64.b64encode((common/file).read_bytes()).decode('ascii') for name,file in [('Fraunces','fraunces.woff2'),('Instrument','instrument.woff2')]}, notices={name:(common/file).read_text(encoding='utf-8') for name,file in [('Fraunces','OFL-Fraunces.txt'),('Instrument Sans','OFL-Instrument-Sans.txt')]})
+        config['galleryPhotos'] = gallery_photos(lang)
+        config['galleryExport'] = dict(css=(SOURCE/'gallery-photo.css').read_text(encoding='utf-8'), fonts={name:base64.b64encode((common/file).read_bytes()).decode('ascii') for name,file in [('Fraunces','fraunces.woff2'),('Instrument','instrument.woff2')]}, notices={name:(common/file).read_text(encoding='utf-8') for name,file in [('Fraunces','OFL-Fraunces.txt'),('Instrument Sans','OFL-Instrument-Sans.txt')]})
         config['galleryExport']['notices']['Lienzo'] = (common.parent/'LICENSE-LIENZO.txt').read_text(encoding='utf-8')
     payload = json.dumps(config, ensure_ascii=False).replace('<', '\\u003c')
     catalog = ROUTES[lang]
