@@ -67,7 +67,7 @@ def adapt_markup(raw, slug, lang):
     if soup.select_one('[data-editor-legacy]'):
         for bar in soup.select('.editor-legacy-bar'):
             bar['data-editor-toolbar'] = ''
-        if slug in SLUGS[:2]:
+        if slug == 'botones-capas':
             soup.select_one('.editor-legacy-toggle').string = 'Settings' if en else 'Ajustes'
             soup.select_one('.editor-social-settings h2').string = 'Preview settings' if en else 'Ajustes de vista'
             for field, title in [('size', 'Size' if en else 'Tamaño'), ('gap', 'Spacing' if en else 'Separación')]:
@@ -279,6 +279,85 @@ def adapt_markup(raw, slug, lang):
     return brand_markup(soup, slug, lang)
 
 
+def glass_workspace(soup, panel, lang):
+    """Keep the social buttons and export available with the inspector closed."""
+    en = lang == 'en'
+    content = soup.select_one('.demo__content')
+    layout = content.select_one('[data-editor-layout]')
+    toolbar = content.select_one('[data-editor-toolbar]')
+    workspace = content.select_one('.glass-workspace')
+    if not workspace:
+        workspace = soup.new_tag('section', attrs={'class': 'glass-workspace', 'data-editor-workspace': '',
+                                                   'data-editor-focus-anchor': 'workspace'})
+        toolbar.insert_before(workspace)
+        workspace.append(toolbar.extract())
+        workspace.append(layout.extract())
+        del content['data-editor-workspace']
+        content.select('p.demo__text')[-1].decompose()
+    content.select_one('p.demo__text').string = (
+        'Select a sample button to try the glass effect.' if en else
+        'Selecciona un botón de muestra para probar el efecto de cristal.')
+    workspace['aria-label'] = 'Social button studio' if en else 'Editor de botones sociales'
+    workspace['data-editor-collapsed'] = 'true'
+    panel['hidden'] = ''
+    panel['inert'] = ''
+    panel['aria-labelledby'] = 'glass-layout-heading'
+    preview = workspace.select_one('[data-editor-preview]')
+    preview.name = 'section'
+    preview['aria-label'] = 'Preview' if en else 'Vista previa'
+    options = preview.select_one('.lz-social')
+    options['aria-label'] = 'Sample social buttons' if en else 'Botones sociales de ejemplo'
+    options['data-social-options'] = ''
+    for item in options.find_all('li', recursive=False):
+        control = item.select_one('a, button')
+        name = item.select_one('.lz-social__label').get_text(strip=True)
+        control.name = 'button'
+        control.attrs = {'type': 'button', 'aria-label': name, 'aria-pressed': 'false'}
+        svg = control.svg
+        if name == 'Facebook':
+            svg.clear()
+            svg.attrs = {'aria-hidden': 'true', 'viewbox': '0 0 24 24', 'fill': 'currentColor'}
+            svg.append(soup.new_tag('path', d='M13.6 22v-9h3l.5-3.5h-3.5V7.3c0-1 .4-1.7 1.8-1.7H17V2.5c-.7-.1-1.5-.2-2.4-.2-3 0-4.8 1.8-4.8 5v2.2H7v3.5h2.8v9z'))
+        elif name == 'WhatsApp':
+            svg.clear()
+            svg.attrs = {'aria-hidden': 'true', 'viewbox': '0 0 24 24', 'fill': 'none'}
+            svg.append(soup.new_tag('path', d='M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Z',
+                                    stroke='currentColor', **{'stroke-width': '1.6', 'stroke-linejoin': 'round'}))
+            svg.append(soup.new_tag('path', fill='currentColor',
+                                    d='M8.4 7c.3-.2.7-.1.9.2l1.3 2.2c.2.3.1.6-.1.8l-.8.9a8 8 0 0 0 3.2 3.2l.9-.8c.2-.2.5-.3.8-.1l2.2 1.3c.3.2.4.6.2.9-.5.9-1.5 1.4-2.5 1.2-3.5-.7-6.6-3.8-7.3-7.3-.2-1 .3-2 1.2-2.5Z'))
+    button = toolbar.select_one('[data-editor-toggle]')
+    button['aria-expanded'] = 'false'
+    button.clear()
+    toggle_label = soup.new_tag('span', attrs={'data-editor-toggle-label': ''})
+    toggle_label.string = 'Settings' if en else 'Ajustes'
+    button.append(toggle_label)
+    export = soup.select_one('[data-social-export]')
+    export.string = 'Download HTML' if en else 'Descargar HTML'
+    toolbar.append(export.extract())
+    workspace.append(soup.select_one('[data-social-export-status]').extract())
+    heading = panel.h2
+    heading['id'] = 'glass-layout-heading'
+    heading.string = 'Size and spacing' if en else 'Tamaño y separación'
+    for key, title, unit in [('size', 'Size' if en else 'Tamaño', '%'),
+                             ('gap', 'Spacing' if en else 'Separación', ' px')]:
+        field = panel.select_one('[data-social-' + key + ']')
+        field['id'] = 'glass-' + key
+        row = field.parent
+        field.extract()
+        row.clear()
+        row['for'] = field['id']
+        caption = soup.new_tag('span', attrs={'class': 'glass-field__caption'})
+        caption.append(title)
+        value = soup.new_tag('output', attrs={'for': field['id'], 'data-social-value': key, 'aria-hidden': 'true'})
+        value.string = field['value'] + unit
+        caption.append(value)
+        row.append(caption)
+        row.append(field)
+    panel.select_one('p').string = ('See the ZIP guide to add your own links.' if en else
+                                   'Consulta la guía del ZIP para añadir tus enlaces.')
+    panel.append(panel.select_one('[data-legacy-brand]').extract())
+
+
 def brand_markup(soup, slug, lang):
     """Portable palette/fonts UI, separate from per-resource content transactions."""
     panel = soup.select_one('[data-editor-panel]')
@@ -294,12 +373,14 @@ def brand_markup(soup, slug, lang):
             actions.insert_before(host)
         else:
             panel.insert(0, host)
-    if slug in SLUGS[:2] and not panel.select_one('[data-social-export]'):
+    if slug in SLUGS[:2] and not soup.select_one('[data-social-export]'):
         export = soup.new_tag('button', attrs={'type': 'button', 'class': 'editor-legacy-toggle', 'data-social-export': ''})
         export.string = 'Download my HTML' if lang == 'en' else 'Descargar mi HTML'
         panel.append(export)
         status = soup.new_tag('p', attrs={'data-social-export-status': '', 'role': 'status'})
         panel.append(status)
+    if slug == 'botones-cristal':
+        glass_workspace(soup, panel, lang)
     if slug == 'tarjetas-producto':
         folder = ROOT / ('en/templates' if lang == 'en' else 'codigo-web/plantillas') / 'demos' / slug / 'assets'
         files = sorted(folder.glob('*.svg'))
@@ -348,10 +429,10 @@ def package(dest, slug, lang):
     temporary.replace(archive)
 
 
-def build_social():
-    """Only the two existing social demos, without rebuilding the catalog."""
+def build_social(slugs=SLUGS[:2]):
+    """Build selected social demos without rebuilding the catalog."""
     for lang, route in [('es', 'codigo-web/plantillas'), ('en', 'en/templates')]:
-        for slug in SLUGS[:2]:
+        for slug in slugs:
             dest = ROOT / route / 'demos' / slug
             path = dest / 'index.html'
             path.write_text(adapt_markup(path.read_text(encoding='utf-8'), slug, lang), encoding='utf-8')

@@ -3,10 +3,10 @@
 Prepared by Lienzo · https://lienzo.tools/en/templates/
 
 ## Open and try
-Extract the entire ZIP and open index.html in a modern browser. Keep the folder structure and filenames. Rendering the template needs no installation, server, Internet connection, or remote libraries. Social and resource links open Internet pages.
+Extract the entire ZIP and open index.html in a modern browser. Keep the folder structure and filenames. Rendering the template needs no installation, server, Internet connection, or remote libraries. Select a sample button to see its active state.
 
 ## Customize
-1. Edit text and links in index.html. Sample links point to Lienzo or social sharing pages.
+1. To add a real link, replace `<button>…</button>` with `<a href="https://example.com/">…</a>`. Keep the SVG and `aria-label`, and remove `type` and `aria-pressed`.
 2. Adjust colors in the :root variables at the top of styles.css. The next block defines the light theme.
 3. Adjust spacing, sizes, and effects in the .lz-social or .carousel rules. Keep prefers-reduced-motion support.
 4. To integrate the relevant code, copy its HTML, CSS rules, and required variables. The .demo class provides the sample setting. Scope body selectors to your own container if your site already has global styles.

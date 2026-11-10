@@ -3,10 +3,10 @@
 Paquete preparado por Lienzo · https://lienzo.tools/codigo-web/plantillas/
 
 ## Abrir y probar
-Descomprime todo el ZIP y abre index.html en un navegador moderno. Conserva las carpetas y sus nombres. No requiere instalación, servidor, conexión a Internet ni librerías remotas para renderizar la plantilla. Los enlaces de redes o recursos sí abren páginas en Internet.
+Descomprime todo el ZIP y abre index.html en un navegador moderno. Conserva las carpetas y sus nombres. No requiere instalación, servidor, conexión a Internet ni librerías remotas para renderizar la plantilla. Selecciona un botón de muestra para ver su estado activo.
 
 ## Personalizar
-1. Cambia los textos y enlaces en index.html. Los enlaces de ejemplo corresponden a Lienzo o a sus opciones de compartir.
+1. Para añadir un enlace real, sustituye `<button>…</button>` por `<a href="https://ejemplo.com/">…</a>`. Conserva el SVG y `aria-label`, y retira `type` y `aria-pressed`.
 2. Cambia los colores en las variables de :root, al principio de styles.css. El segundo bloque define el tema claro.
 3. Ajusta espacios, tamaños y efectos dentro de la familia .lz-social o .carousel. La regla prefers-reduced-motion conserva la preferencia de accesibilidad.
 4. Para integrar solo el componente, copia su HTML, las reglas de su familia y las variables que utiliza. La clase .demo es el escenario de muestra. Cambia los selectores de body por los de tu contenedor si la página ya tiene estilos propios.

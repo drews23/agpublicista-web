@@ -115,3 +115,61 @@
  [data-editor-legacy] [data-editor-workspace]:not([data-editor-collapsed=true]):not([data-editor-natural=true]) [data-editor-panel]{min-height:0;max-height:100%;height:100%;overflow-y:auto;overscroll-behavior:contain}
 }
 [data-editor-legacy] [data-editor-workspace][data-editor-natural=true] [data-editor-preview]{position:relative!important;top:auto!important}
+
+/* Glass buttons: size the links themselves so focus and touch targets stay usable. */
+[data-editor-legacy="botones-cristal"] .glass-workspace{
+  --editor-panel-bg:var(--fondo);--editor-text:var(--tinta);--editor-border:var(--linea);--editor-accent:var(--violeta);
+  --glass-preview-height:clamp(254px,40vh,336px);--glass-button-base:74px;
+  margin-top:22px
+}
+.component-preview[data-editor-legacy="botones-cristal"] .glass-workspace{margin-top:0}
+.glass-workspace .editor-legacy-bar{justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:6px 0;margin:0 0 6px;background:var(--fondo)}
+.glass-workspace [data-social-export]{border-color:var(--violeta);background:color-mix(in srgb,var(--violeta) 13%,var(--fondo))}
+.glass-workspace [data-social-export]::before{content:none}
+[data-editor-legacy="botones-cristal"] .glass-workspace .editor-social-preview{
+  container:glass-preview / inline-size;
+  height:var(--glass-preview-height);min-height:0;padding:14px;
+  border:1px solid var(--linea);border-radius:20px;
+  background:radial-gradient(ellipse at 45% 70%,color-mix(in srgb,var(--violeta) 11%,transparent),transparent 72%),var(--fondo)
+}
+[data-editor-legacy="botones-cristal"] .glass-workspace .lz-social{
+  --glass-columns:5;
+  --glass-size:max(44px,calc(var(--glass-button-base) * var(--editor-social-scale,1)));
+  --glass-gap:var(--editor-social-gap,24px);
+  transform:none;
+  width:min(100%,calc(var(--glass-columns) * var(--glass-size) + (var(--glass-columns) - 1) * var(--glass-gap) + 1px));
+  justify-content:center;gap:var(--glass-gap);row-gap:12px;margin:0
+}
+.glass-workspace .lz-social li{width:var(--glass-size);min-width:0}
+.glass-workspace .lz-social :is(a,button){width:100%;height:var(--glass-size);padding:0;color:inherit}
+.glass-workspace .lz-social button[aria-pressed="true"]{border-color:var(--violeta);background:color-mix(in srgb,var(--violeta) 16%,var(--panel))}
+.glass-workspace .lz-social svg{width:clamp(22px,calc(var(--glass-size) * .41),36px);height:auto}
+.glass-workspace .lz-social__label{margin-top:6px;overflow-wrap:anywhere}
+.glass-workspace .editor-social-settings h2{margin-bottom:14px}
+[data-editor-legacy="botones-cristal"] .glass-workspace .editor-social-settings label[for^="glass-"]{gap:4px;margin:0 0 12px}
+.glass-workspace .glass-field__caption{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.glass-field__caption output{color:var(--suave);font-variant-numeric:tabular-nums}
+.glass-workspace input[type="range"]{min-height:36px;margin:0;accent-color:var(--violeta)}
+.glass-workspace [data-legacy-brand]{margin-top:14px}
+.glass-workspace [data-social-export-status]{margin:8px 0 0;color:var(--suave);font-size:12px}
+.glass-workspace [data-social-export-status]:empty{margin:0}
+@container glass-preview (max-width:620px){
+  [data-editor-legacy="botones-cristal"] .glass-workspace .lz-social{--glass-columns:3;--glass-gap:calc(var(--editor-social-gap,24px) * .7)}
+}
+@container glass-preview (max-width:340px){
+  [data-editor-legacy="botones-cristal"] .glass-workspace .lz-social{
+    --glass-button-base:55px;--glass-gap:calc(var(--editor-social-gap,24px) * .4)
+  }
+}
+@media(max-width:959px) and (min-height:420px){
+  [data-editor-legacy="botones-cristal"] .glass-workspace[data-editor-workspace]:not([data-editor-collapsed=true]):not([data-editor-natural=true]) [data-editor-layout]{
+    grid-template-rows:auto minmax(96px,1fr);gap:10px
+  }
+  [data-editor-legacy="botones-cristal"] .glass-workspace[data-editor-workspace]:not([data-editor-collapsed=true]):not([data-editor-natural=true]) [data-editor-preview]{
+    height:var(--glass-preview-height);max-height:none;overflow:visible
+  }
+}
+@media(max-height:520px){
+  [data-editor-legacy="botones-cristal"] .glass-workspace{--glass-preview-height:218px;--glass-button-base:58px}
+}
+.thumbnail-preview .glass-workspace .editor-legacy-bar{display:none}

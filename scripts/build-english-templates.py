@@ -126,10 +126,10 @@ README = '''# {title}
 Prepared by Lienzo · https://lienzo.tools/en/templates/
 
 ## Open and try
-Extract the entire ZIP and open index.html in a modern browser. Keep the folder structure and filenames. Rendering the template needs no installation, server, Internet connection, or remote libraries. Social and resource links open Internet pages.
+Extract the entire ZIP and open index.html in a modern browser. Keep the folder structure and filenames. Rendering the template needs no installation, server, Internet connection, or remote libraries. {navigation}
 
 ## Customize
-1. Edit text and links in index.html. Sample links point to Lienzo or social sharing pages.
+1. {links}
 2. Adjust colors in the :root variables at the top of styles.css. The next block defines the light theme.
 3. Adjust spacing, sizes, and effects in the .lz-social or .carousel rules. Keep prefers-reduced-motion support.
 4. To integrate the relevant code, copy its HTML, CSS rules, and required variables. The .demo class provides the sample setting. Scope body selectors to your own container if your site already has global styles.
@@ -210,7 +210,12 @@ def build():
         own = slug == 'carrusel-recursos'
         credits = ('Original carousel design, illustrations, and code by Lienzo. Built from scratch with native scrolling; it does not include code or images from the external Swiper ZIP. Hover tilt and cursor-following light use local CSS and JavaScript. Keyboard focus remains visible; touch scrolling works natively and reduced-motion preferences disable tilt.' if own else 'Lienzo adaptation: colors, content, local SVG icons, accessible labels, visible focus, reduced-motion support, and mobile layout. Remote CDN dependencies were removed and the HTML structure was corrected. Original author: ' + ('Sabiha Samha.' if slug == 'botones-cristal' else 'Nick.') + ' The original MIT notice is included unchanged.')
         demo_note = 'Carousel favorites are temporary demo state, not an account or storage service. They reset on reload. ' if own else ''
-        dest.joinpath('README.md').write_text(README.format(title=title, behavior=', carousel navigation, and temporary favorites' if own else '', original='' if own else '- LICENSE-ORIGINAL.txt: original MIT license and copyright notice; preserve it when redistributing.\n', credits=credits, demo_note=demo_note), encoding='utf-8')
+        glass = slug == 'botones-cristal'
+        navigation = 'Select a sample button to see its active state.' if glass else 'Social and resource links open Internet pages.'
+        links = ('To add a real link, replace `<button>…</button>` with `<a href="https://example.com/">…</a>`. '
+                 'Keep the SVG and `aria-label`, and remove `type` and `aria-pressed`.'
+                 if glass else 'Edit text and links in index.html. Sample links point to Lienzo or social sharing pages.')
+        dest.joinpath('README.md').write_text(README.format(title=title, behavior=', carousel navigation, and temporary favorites' if own else '', original='' if own else '- LICENSE-ORIGINAL.txt: original MIT license and copyright notice; preserve it when redistributing.\n', credits=credits, demo_note=demo_note, navigation=navigation, links=links), encoding='utf-8')
         guide_path = dest / 'README.md'
         guide_path.write_text(guide_path.read_text(encoding='utf-8') + editor_guide_note('en'), encoding='utf-8')
         zipname = slug + '-lienzo-en.zip'

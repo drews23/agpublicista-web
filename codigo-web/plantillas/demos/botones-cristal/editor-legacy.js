@@ -106,16 +106,34 @@
   }
   if (kind.startsWith('botones-')) {
     const preview = root.querySelector('.editor-social-preview .lz-social');
-    root.querySelector('[data-social-size]')?.addEventListener('input', event => {
-      preview.style.setProperty('--editor-social-scale', Number(event.target.value) / 100);
-    });
-    root.querySelector('[data-social-gap]')?.addEventListener('input', event => {
-      preview.style.setProperty('--editor-social-gap', Number(event.target.value) + 'px');
-    });
+    if (preview.hasAttribute('data-social-options')) {
+      preview.addEventListener('click', event => {
+        const button = event.target.closest('button[aria-pressed]');
+        if (!button) return;
+        const select = button.getAttribute('aria-pressed') === 'false';
+        preview.querySelector('[aria-pressed="true"]')?.setAttribute('aria-pressed', 'false');
+        button.setAttribute('aria-pressed', String(select));
+      });
+    }
+    const fields = [
+      ['size', '--editor-social-scale', value => Number(value) / 100, '%'],
+      ['gap', '--editor-social-gap', value => value + 'px', ' px']
+    ];
+    for (const [key, property, cssValue, unit] of fields) {
+      const input = root.querySelector('[data-social-' + key + ']');
+      const output = root.querySelector('[data-social-value="' + key + '"]');
+      const apply = () => {
+        preview.style.setProperty(property, cssValue(input.value));
+        if (output) output.value = input.value + unit;
+      };
+      input.addEventListener('input', apply);
+      apply();
+    }
     root.querySelector('[data-social-export]')?.addEventListener('click', () => {
       const clone = document.documentElement.cloneNode(true);
       clone.querySelector('body').classList.remove('component-preview','thumbnail-preview');
       clone.querySelector('[data-social-export-status]').textContent = '';
+      clone.querySelector('[data-social-options] [aria-pressed="true"]')?.setAttribute('aria-pressed', 'false');
       clone.querySelectorAll('input[data-social-size],input[data-social-gap]').forEach(input => {
         const name = input.hasAttribute('data-social-size')?'[data-social-size]':'[data-social-gap]';
         input.setAttribute('value', root.querySelector(name).value);
@@ -128,7 +146,5 @@
       root.querySelector('[data-social-export-status]').textContent = document.documentElement.lang.startsWith('en')
         ? 'HTML prepared. Keep it with all the ZIP files.' : 'HTML preparado. Consérvalo con todos los archivos del ZIP.';
     });
-    preview.style.setProperty('--editor-social-scale', Number(root.querySelector('[data-social-size]').value) / 100);
-    preview.style.setProperty('--editor-social-gap', Number(root.querySelector('[data-social-gap]').value) + 'px');
   }
 })();
