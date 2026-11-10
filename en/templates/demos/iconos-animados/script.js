@@ -49,9 +49,18 @@
   gallery.addEventListener('click',e=>{const tile=e.target.closest('[data-select]');if(tile)choose(tile.dataset.select);});
   gallery.addEventListener('pointerover',e=>{const tile=e.target.closest('[data-select]');if(tile&&!tile.contains(e.relatedTarget)&&e.pointerType!=='touch')play(tile,items.find(x=>x.key===tile.dataset.select));});
   gallery.addEventListener('keydown',e=>{
-    const tile=e.target.closest('[data-select]');if(!tile)return;const index=tiles.indexOf(tile),columns=getComputedStyle(gallery).gridTemplateColumns.split(' ').length;
-    const next={ArrowRight:(index+1)%tiles.length,ArrowLeft:(index+tiles.length-1)%tiles.length,ArrowDown:(index+columns)%tiles.length,ArrowUp:(index+tiles.length-columns)%tiles.length,Home:0,End:tiles.length-1}[e.key];
-    if(next===undefined)return;e.preventDefault();choose(tiles[next].dataset.select);tiles[next].focus({preventScroll:true});
+    const tile=e.target.closest('[data-select]');if(!tile)return;
+    const index=tiles.indexOf(tile);
+    const forward=(index+1)%tiles.length,back=(index+tiles.length-1)%tiles.length;
+    const next={ArrowRight:forward,ArrowLeft:back,ArrowDown:forward,ArrowUp:back,Home:0,End:tiles.length-1}[e.key];
+    if(next===undefined)return;
+    e.preventDefault();
+    const target=tiles[next];
+    choose(target.dataset.select);
+    target.focus({preventScroll:true});
+    const strip=gallery.getBoundingClientRect(), bounds=target.getBoundingClientRect();
+    if(bounds.left<strip.left)gallery.scrollLeft+=bounds.left-strip.left-3;
+    if(bounds.right>strip.right)gallery.scrollLeft+=bounds.right-strip.right+3;
   });
   document.querySelector('[data-replay]').addEventListener('click',()=>{play(live,current());notify(say('Gesto: ','Gesture: ')+current().label+'.');});
   document.querySelector('[data-tour]').addEventListener('click',()=>{clearTimers();tiles.forEach((tile,i)=>play(tile,items.find(x=>x.key===tile.dataset.select),i*65));play(live,current());notify(say('Prueba escalonada de los doce gestos.','Previewing all twelve gestures in sequence.'));});

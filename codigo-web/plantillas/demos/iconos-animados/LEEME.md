@@ -6,7 +6,7 @@ Doce dibujos SVG originales en una cuadrícula de 64 unidades, con doce gestos s
 
 Descomprime el ZIP completo y abre index.html. Sin servidor, framework, cuenta, API, almacenamiento ni red. Incluye CSS, JS, fuentes locales/OFL, doce SVG y guía. La interfaz necesita sus archivos vecinos. Cada SVG exportado sí es autónomo, sin JS ni assets externos.
 
-Cada icono conserva ajustes independientes: nombre accesible (56 caracteres), acento Lienzo (violeta/menta/ámbar), acabado línea/duotono, tamaño 24–160 px, grosor 1.2–3.6 unidades del viewBox, duración 400–1600 ms y activación al interactuar/una vez al cargar/bucle suave. Restablecer solo afecta al icono actual. Estado en memoria; se reinicia al recargar. Flechas, Inicio y Fin recorren el selector. Repetir y la prueba escalonada de la colección funcionan con toque. La activación inicial es por interacción; el bucle es opcional.
+Elige un icono y abre Ajustes. Apariencia y Movimiento agrupan los controles. Al cerrar Ajustes, la biblioteca sigue visible y conservas los cambios. Cada icono conserva ajustes independientes: nombre accesible (56 caracteres), acento Lienzo (violeta/menta/ámbar), acabado línea/duotono, tamaño 24–160 px, grosor 1.2–3.6 unidades del viewBox, duración 400–1600 ms y activación al interactuar/una vez al cargar/bucle suave. Restablecer solo afecta al icono actual. Estado en memoria; se reinicia al recargar. Flechas, Inicio y Fin recorren el selector. Repetir y la prueba escalonada de la colección funcionan con toque. La activación inicial es por interacción; el bucle es opcional.
 
 ## Exportar SVG o colección
 

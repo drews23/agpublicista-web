@@ -6,7 +6,7 @@ Twelve original 64-unit SVG drawings and twelve semantic gestures: play/ripple, 
 
 Extract the full ZIP and open index.html. No server, framework, account, API, storage, or network is needed. CSS, JS, local fonts, OFL notices, twelve SVG assets, and this guide are included. The web interface needs its neighboring files. Every exported SVG is self-contained and needs no JS or external asset.
 
-Each icon keeps independent settings: accessible label (56 characters), Lienzo accent (violet/mint/amber), outline/duotone finish, output size 24–160 px, stroke weight 1.2–3.6 viewBox units, gesture duration 400–1600 ms, and interaction/once-on-load/gentle-loop trigger. Reset affects only the selected icon. Settings stay in memory and reset on reload. Arrow keys, Home, and End navigate the icon selector. Replay and the staggered collection test also work with touch. Motion defaults to interaction; loops are opt-in.
+Choose an icon and open Settings. Appearance and Motion group the controls; closing Settings keeps your edits and leaves the library visible. Each icon keeps independent settings: accessible label (56 characters), Lienzo accent (violet/mint/amber), outline/duotone finish, output size 24–160 px, stroke weight 1.2–3.6 viewBox units, gesture duration 400–1600 ms, and interaction/once-on-load/gentle-loop trigger. Reset affects only the selected icon. Settings stay in memory and reset on reload. Arrow keys, Home, and End navigate the icon selector. Replay and the staggered collection test also work with touch. Motion defaults to interaction; loops are opt-in.
 
 ## Export SVG or the collection
 

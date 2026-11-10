@@ -156,16 +156,27 @@ def adapt_markup(raw, slug, lang):
               workspace.select_one('[data-hc-settings]'))
     elif slug == 'iconos-animados':
         workspace = soup.select_one('.mi-workbench')
-        preview = soup.select_one('.mi-preview')
+        workspace['data-editor-focus-anchor'] = 'workspace'
+        workspace['data-editor-collapsed'] = 'true'
+        toolbar = soup.select_one('.mi-toolbar')
         layout = tag('div', **{'class': 'editor-legacy-layout'})
-        bar = tag('div', **{'class': 'editor-legacy-bar'})
-        title = tag('h2'); title.string = label('Vista previa', 'Preview'); bar.append(title)
-        panel = tag('aside', **{'class': 'editor-legacy-settings'})
-        panel.append(soup.select_one('.mi-library').extract())
+        preview = tag('div', **{'class': 'mi-artboard'})
+        preview.append(soup.select_one('.mi-library').extract())
+        preview.append(soup.select_one('.mi-preview').extract())
+        panel = tag('aside', hidden='', inert='', **{
+            'class': 'editor-legacy-settings',
+            'aria-label': label('Ajustes del icono', 'Icon settings'),
+        })
         panel.append(soup.select_one('.mi-settings').extract())
         layout.append(preview.extract()); layout.append(panel)
-        workspace.append(bar); workspace.append(layout)
-        frame(workspace, layout, preview, panel, bar)
+        workspace.append(toolbar.extract()); workspace.append(layout)
+        button = frame(workspace, layout, preview, panel, toolbar)
+        button['aria-expanded'] = 'false'
+        button_label = tag('span', **{'data-editor-toggle-label': ''})
+        button_label.string = label('Ajustes', 'Settings')
+        button.clear()
+        button.append(button_label)
+        toolbar.div.append(button.extract())
     elif slug == 'carrusel-recursos':
         workspace = soup.select_one('.rc-collection')
         depth_toggle = soup.select_one('button[data-depth]')
@@ -275,7 +286,7 @@ def brand_markup(soup, slug, lang):
         host = soup.new_tag('div', attrs={'data-legacy-brand': ''})
         if slug == 'carrusel-recursos' and (body := panel.select_one('.rc-editor-scroll')):
             body.select_one('[data-reset]').insert_before(host)
-        elif slug == 'carrusel-progreso':
+        elif slug in ('carrusel-progreso', 'iconos-animados'):
             panel.append(host)
         elif slug == 'laboratorio-3d' and (copy_section := panel.select_one('[data-lab-copy]')):
             copy_section.insert_before(host)
