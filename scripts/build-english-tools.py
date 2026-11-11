@@ -125,6 +125,9 @@ SEARCH_COPY = {
  ),
 }
 GUIDE_DETAILS = {
+ 'audio/cortar': (
+  ('Trim a sound effect for your edit', 'Pick a whoosh or impact from the <a href="/en/blog/free-sound-effects/">free WAV sound effects library</a>. Open the WAV in Audio Trimmer, remove any unwanted silence, and preview the cut before exporting.'),
+ ),
  'qr': (
   ('Choose PNG or SVG', 'Use PNG for slides, social posts, or email. Choose SVG for print layouts or when the code needs to scale. Keep the clear margin around the code when placing either file.'),
   ('Test the QR code in its final layout', 'Scan the exported code at the size people will see it. For print, test a proof before ordering copies. If a logo makes the code harder to scan, reduce its size or increase contrast between the code and the background.'),
