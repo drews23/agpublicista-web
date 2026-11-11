@@ -106,6 +106,17 @@ def code_card(en):
     return f'<a class="card" href="{route}"><span class="card__tag">CSS</span><div class="card__art card__art--3d" aria-hidden="true"><img class="icono-3d" src="/assets/3d/codigo-web.webp" alt="" width="512" height="512" loading="lazy" decoding="async"></div><h3>{title}</h3><p>{desc}</p><span class="card__meta">{("7 generators · Free" if en else "7 generadores · Gratis")}</span></a>'
 
 
+def ads_card(en):
+    route = '/en/tools/ads/' if en else '/herramientas/anuncios/'
+    description = (
+        'Draft and review search ads. Preview headline and description combinations, then export your draft for Google Ads Editor.'
+        if en else
+        'Redacta y revisa anuncios de búsqueda. Previsualiza combinaciones de titulares y descripciones, y exporta el borrador para Google Ads Editor.'
+    )
+    action = 'Open ad editor' if en else 'Abrir editor de anuncios'
+    return f'<a class="card" href="{route}"><span class="card__tag">Google Ads</span><h3>Lienzo Ads Studio</h3><p>{description}</p><span class="catalog-action">{action} <span aria-hidden="true">↗</span></span></a>'
+
+
 def tool_groups(en):
     return [
         ('qr-audio', 'QR & audio' if en else 'QR y audio',
@@ -118,6 +129,9 @@ def tool_groups(en):
         ('text-css' if en else 'texto-css', 'Text & CSS' if en else 'Texto y CSS',
          'Create animated text or copy CSS styles for your website.' if en else 'Crea texto animado o copia estilos CSS para tu sitio web.',
          ['wavy-text/', '@code'] if en else ['texto-ondulado/', '@code']),
+        ('marketing', 'Marketing',
+         'Prepare responsive search ads and export a draft for review.' if en else 'Prepara anuncios adaptables de búsqueda y exporta un borrador para revisarlo.',
+         ['ads/'] if en else ['anuncios/']),
     ]
 
 
@@ -127,11 +141,12 @@ def organize_tools(en=False):
     pool = cards(element(source, tag='main'))
     base = '/en/tools/' if en else '/herramientas/'
     pool['@code'] = code_card(en)
+    pool[base+('ads/' if en else 'anuncios/')] = ads_card(en)
     # Describe exports instead of incorrectly calling QR a set of seven tools.
     pool[base+'qr/'] = re.sub(r'(<span class="card__meta">).*?(</span>)',
         r'\g<1>PNG · SVG · '+('Free' if en else 'Gratis')+r'\2', pool[base+'qr/'], flags=re.S)
     groups = tool_groups(en)
-    items = [(key, title, f'{len(routes)} '+('destinations' if en else 'opciones')) for key,title,_,routes in groups]
+    items = [(key, title, f'{len(routes)} '+(('destination' if en else 'opción') if len(routes) == 1 else ('destinations' if en else 'opciones'))) for key,title,_,routes in groups]
     body = nav(items, en)
     for key, title, desc, routes in groups:
         selected = []
