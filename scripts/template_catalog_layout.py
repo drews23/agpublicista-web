@@ -13,7 +13,7 @@ CSS = ROOT / 'css/pages/template-library.css'
 GROUPS = [
     ('carruseles', 'carousels', 'Carruseles y galerías', 'Carousels and galleries',
      'Explora recursos o presenta tus productos con movimiento.',
-     'Explore resources or present your products in motion.',
+     'Choose a filterable carousel for a portfolio or an autoplay carousel for a product showcase. Watch the <a href="https://youtu.be/sxNqk8Sc9lI" lang="en-US">step-by-step carousel tutorial</a> (Spanish audio) to see how both templates work.',
      ['carrusel-recursos', 'carrusel-progreso', 'galeria-expandible']),
     ('tarjetas', 'cards', 'Tarjetas', 'Cards',
      'Destaca una idea, presenta un producto o añade una interacción con intención.',
