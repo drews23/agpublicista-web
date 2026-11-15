@@ -25,8 +25,36 @@
   const FORMATS = new Set(['wav16', 'wav24', 'opus', 'png', 'svg']);
   const EVENTS = new Set(['resource_preview_open', 'resource_download_click',
     'tool_export_ready', 'tool_download_click', 'newsletter_request_accepted']);
-  const REFERRERS = new Set(['lienzo.tools', 'creativomarketingdigital.com', 'google.com',
-    'www.google.com', 'bing.com', 'www.bing.com', 'duckduckgo.com', 'facebook.com',
+  // Regional search domains from https://www.google.com/supported_domains.
+  const GOOGLE_REFERRERS = new Set(`
+    google.ad google.ae google.al google.am google.as google.at google.az google.ba google.be
+    google.bf google.bg google.bi google.bj google.bs google.bt google.by google.ca google.cat
+    google.cd google.cf google.cg google.ch google.ci google.cl google.cm google.cn
+    google.co.ao google.co.bw google.co.ck google.co.cr google.co.id google.co.il google.co.in
+    google.co.jp google.co.ke google.co.kr google.co.ls google.co.ma google.co.mz google.co.nz
+    google.co.th google.co.tz google.co.ug google.co.uk google.co.uz google.co.ve google.co.vi
+    google.co.za google.co.zm google.co.zw google.com google.com.af google.com.ag google.com.ar
+    google.com.au google.com.bd google.com.bh google.com.bn google.com.bo google.com.br
+    google.com.bz google.com.co google.com.cu google.com.cy google.com.do google.com.ec
+    google.com.eg google.com.et google.com.fj google.com.gh google.com.gi google.com.gt
+    google.com.hk google.com.jm google.com.kh google.com.kw google.com.lb google.com.ly
+    google.com.mm google.com.mt google.com.mx google.com.my google.com.na google.com.ng
+    google.com.ni google.com.np google.com.om google.com.pa google.com.pe google.com.pg
+    google.com.ph google.com.pk google.com.pr google.com.py google.com.qa google.com.sa
+    google.com.sb google.com.sg google.com.sl google.com.sv google.com.tj google.com.tr
+    google.com.tw google.com.ua google.com.uy google.com.vc google.com.vn google.cv google.cz
+    google.de google.dj google.dk google.dm google.dz google.ee google.es google.fi google.fm
+    google.fr google.ga google.ge google.gg google.gl google.gm google.gr google.gy google.hn
+    google.hr google.ht google.hu google.ie google.im google.iq google.is google.it google.je
+    google.jo google.kg google.ki google.kz google.la google.li google.lk google.lt google.lu
+    google.lv google.md google.me google.mg google.mk google.ml google.mn google.mu google.mv
+    google.mw google.ne google.nl google.no google.nr google.nu google.pl google.pn google.ps
+    google.pt google.ro google.rs google.ru google.rw google.sc google.se google.sh google.si
+    google.sk google.sm google.sn google.so google.sr google.st google.td google.tg google.tl
+    google.tm google.tn google.to google.tt google.vu google.ws
+  `.trim().split(/\s+/));
+  const REFERRERS = new Set(['lienzo.tools', 'creativomarketingdigital.com',
+    'bing.com', 'www.bing.com', 'duckduckgo.com', 'facebook.com',
     'www.facebook.com', 'm.facebook.com', 'l.facebook.com', 'instagram.com',
     'www.instagram.com', 'l.instagram.com', 'youtube.com', 'www.youtube.com',
     't.co', 'linkedin.com', 'www.linkedin.com', 'chatgpt.com']);
@@ -50,13 +78,17 @@
       let referral = '';
       try {
         const url = new URL(referrer);
-        if (url.protocol === 'https:' && REFERRERS.has(url.hostname)) referral = url.origin + '/';
+        const googleHost = url.hostname.replace(/^www\./, '');
+        if (url.protocol === 'https:' && !url.port
+          && (REFERRERS.has(url.hostname) || GOOGLE_REFERRERS.has(googleHost))) {
+          referral = url.origin + '/';
+        }
       } catch (_) { /* Unknown origins and referrer paths are deliberately omitted. */ }
       // Only reviewed campaign values. Never forward arbitrary queries or click IDs.
       const params = location.searchParams;
       const sources = new Set(['fb', 'ig', 'facebook', 'instagram', 'youtube', 'tiktok', 'newsletter']);
       const mediums = new Set(['paid_social', 'organic_social', 'social', 'email']);
-      const campaigns = new Set(['lienzo_recursos_mx_piloto_202610', 'reel-marca']);
+      const campaigns = new Set(['lienzo_recursos_mx_piloto_202610', 'reel-marca', 'carousel_tutorial']);
       const contents = new Set(['reel_minimalismo_45s']);
       const campaign = {};
       if (sources.has(params.get('utm_source')) && mediums.has(params.get('utm_medium'))

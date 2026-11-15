@@ -7,7 +7,7 @@
   // The local consent interface loads here; the Google tag remains blocked until permission.
   if (!document.querySelector('script[data-lienzo-analytics]')) {
     const analytics = document.createElement('script');
-    analytics.src = '/js/analytics.js?v=5ff731a38fb8';
+    analytics.src = '/js/analytics.js?v=ec2e183a08b6';
     analytics.dataset.lienzoAnalytics = '';
     analytics.defer = true;
     document.head.append(analytics);

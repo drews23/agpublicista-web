@@ -113,6 +113,30 @@ test('only reviewed campaign combinations survive; arbitrary campaign values are
   const bad=contextFor(canonical,canonical+'?utm_source=ig&utm_medium=paid_social&utm_campaign=private@example.test','');
   assert.deepEqual(bad.campaign,{});
 });
+test('carousel tutorial attribution works on both template catalogs',()=>{
+  for (const [path, language] of [['/codigo-web/plantillas/', 'es'], ['/en/templates/', 'en']]) {
+    const url = 'https://lienzo.tools' + path;
+    const tagged = url + '?utm_source=youtube&utm_medium=social&utm_campaign=carousel_tutorial&extra=private#demo';
+    const c = contextFor(url, tagged, 'https://www.youtube.com/watch?v=private');
+    assert.equal(c.language, language);
+    assert.equal(c.referral, 'https://www.youtube.com/');
+    assert.equal(c.location, url);
+    assert.deepEqual(c.campaign, {
+      campaign_source: 'youtube', campaign_medium: 'social', campaign_name: 'carousel_tutorial'
+    });
+  }
+});
+test('regional Google origins retain attribution without exposing the search query',()=>{
+  for (const path of ['/codigo-web/plantillas/', '/en/templates/']) {
+    const url = 'https://lienzo.tools' + path;
+    for (const host of ['www.google.com.mx', 'google.com.co', 'www.google.com.br', 'google.ca']) {
+      assert.equal(contextFor(url, url, 'https://' + host + '/search?q=private').referral, 'https://' + host + '/');
+    }
+    for (const referrer of ['https://google.com.mx.example.com/', 'https://fake-google.com.co/', 'https://www.google.com.mx:8443/', 'http://www.google.com.mx/']) {
+      assert.equal(contextFor(url, url, referrer).referral, '');
+    }
+  }
+});
 test('foreign canonicals and malformed routes do not enable measurement',()=>{
   assert.equal(contextFor('https://example.test/',canonical,''),null);
   assert.equal(contextFor(canonical+'?email=private',canonical,''),null);

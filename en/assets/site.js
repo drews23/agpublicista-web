@@ -7,7 +7,7 @@
   // Shared, localized consent UI; Google analytics loads only after permission.
   if (!document.querySelector('script[data-lienzo-analytics]')) {
     const analytics = document.createElement('script');
-    analytics.src = '/js/analytics.js?v=5ff731a38fb8';
+    analytics.src = '/js/analytics.js?v=ec2e183a08b6';
     analytics.dataset.lienzoAnalytics = '';
     analytics.defer = true;
     document.head.append(analytics);
