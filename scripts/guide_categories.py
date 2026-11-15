@@ -11,6 +11,15 @@ spec = importlib.util.spec_from_file_location('discovery_ranges', ROOT / 'script
 discovery = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(discovery)
 
+CAROUSEL_ROUTE = '/en/blog/html-css-javascript-carousel/'
+CAROUSEL_TITLE = 'How to Build a Carousel with HTML, CSS, and JavaScript'
+CAROUSEL_DESCRIPTION = ('Build a swipeable carousel with CSS scroll snap, keyboard navigation, and a live slide count. '
+                        'Try and download the complete HTML example.')
+WEB_DESIGN = ('diseno-web', 'web-design', 'Diseño web', 'Web design',
+              '', 'Build interface patterns with working HTML, CSS, and JavaScript examples.',
+              [], [CAROUSEL_ROUTE.rstrip('/').split('/')[-1]])
+
+
 # Each guide belongs to one category. Existing order is retained inside each group.
 GROUPS = [
     ('sonidos', 'sound-effects', 'Sonidos', 'Sound effects',
@@ -48,11 +57,19 @@ def enhance_guides(source, route):
     source = ensure_directory_card(source, route)
     en = route.startswith('/en/')
     pool = discovery.cards(source, english_catalog=en)
+    if en:
+        pool.setdefault(CAROUSEL_ROUTE, (
+            '<article class="english-catalog-card"><p class="english-catalog-label">English guide</p>'
+            f'<h3><a href="{CAROUSEL_ROUTE}">{escape(CAROUSEL_TITLE)}</a></h3>'
+            f'<p>{escape(CAROUSEL_DESCRIPTION)}</p>'
+            f'<a class="english-catalog-action" href="{CAROUSEL_ROUTE}">Read guide <span aria-hidden="true">↗</span></a>'
+            '</article>'
+        ))
     groups = []
     links = []
     assigned = []
     ordered = []
-    for es_id, en_id, es_title, en_title, es_desc, en_desc, es_slugs, en_slugs in GROUPS:
+    for es_id, en_id, es_title, en_title, es_desc, en_desc, es_slugs, en_slugs in ([*GROUPS, WEB_DESIGN] if en else GROUPS):
         key, title, desc = (en_id, en_title, en_desc) if en else (es_id, es_title, es_desc)
         expected = {route + slug + '/' for slug in (en_slugs if en else es_slugs)}
         selected = [card for path, card in pool.items() if path in expected]
@@ -83,6 +100,8 @@ def enhance_guides(source, route):
                 listing = node.get('mainEntity', {})
                 if listing.get('@type') == 'ItemList':
                     items = {item['url']: item for item in listing['itemListElement']}
+                    carousel_url = 'https://lienzo.tools' + CAROUSEL_ROUTE
+                    items.setdefault(carousel_url, {'@type': 'ListItem', 'url': carousel_url, 'name': CAROUSEL_TITLE})
                     listing['itemListElement'] = [{**items['https://lienzo.tools'+path], 'position': i} for i, path in enumerate(ordered, 1)]
             original = match[2]
             formatted = json.dumps(data, ensure_ascii=False, indent=2 if '\n' in original else None)

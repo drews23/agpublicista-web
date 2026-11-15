@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Portfolio carousel example | Lienzo</title>
+  <style>
+    :root { color-scheme: dark; font: 1rem/1.55 system-ui, sans-serif; background: #0e101a; color: #f4f4fa; }
+    body { margin: 0; }
+    .carousel { max-inline-size: 46rem; margin: auto; padding: clamp(.85rem, 4vw, 1.5rem); }
+    .carousel h1 { margin: 0 0 .7rem; font-size: clamp(1.2rem, 4vw, 1.55rem); }
+    .carousel-track {
+      position: relative;
+      display: flex;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      gap: .8rem;
+      margin: 0;
+      padding: 0 0 .45rem;
+      list-style: none;
+      scrollbar-width: thin;
+    }
+    .carousel-track > li {
+      flex: 0 0 100%;
+      min-inline-size: 0;
+      box-sizing: border-box;
+      scroll-snap-align: start;
+      padding: clamp(.8rem, 4vw, 1.25rem);
+      border: 1px solid #514a71;
+      border-radius: 1rem;
+      background: #1b1d2e;
+    }
+    .swatch { display: block; min-block-size: 6rem; border-radius: .6rem; }
+    .aurora { background: linear-gradient(115deg, #55458b, #a876ff 55%, #58d8cf); }
+    .grove { background: linear-gradient(115deg, #364c4a, #459780 55%, #c4e4a1); }
+    .ember { background: linear-gradient(115deg, #531f34, #a44652 55%, #f2a461); }
+    .carousel h2 { margin: .55rem 0 .1rem; font-size: 1.1rem; }
+    .carousel li p { margin: 0; color: #d9d7e5; }
+    .carousel-controls:not([hidden]) { display: grid; grid-template-columns: 1fr auto 1fr; gap: .5rem; align-items: center; margin-block-start: .65rem; }
+    button {
+      min-block-size: 2.75rem; border: 1px solid #9181c8; border-radius: .65rem; padding: .35rem;
+      font: inherit; color: inherit; background: #2b2447; cursor: pointer;
+    }
+    button[aria-disabled="true"] { color: #aeadbf; background: #181a27; border-color: #58566c; cursor: default; }
+    :focus-visible { outline: 2px solid #67e6d7; outline-offset: 2px; }
+    .carousel-count { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <section class="carousel" aria-labelledby="carousel-title">
+    <h1 id="carousel-title">Portfolio color studies</h1>
+    <ul class="carousel-track" role="list" tabindex="0" aria-label="Portfolio slides">
+      <li><span class="swatch aurora" aria-hidden="true"></span><h2>Aurora</h2><p>A violet and teal palette for a studio landing page.</p></li>
+      <li><span class="swatch grove" aria-hidden="true"></span><h2>Grove</h2><p>A green palette for an outdoor collection.</p></li>
+      <li><span class="swatch ember" aria-hidden="true"></span><h2>Ember</h2><p>A warm palette for a photography portfolio.</p></li>
+    </ul>
+    <div class="carousel-controls" hidden>
+      <button type="button" data-step="-1">Previous</button>
+      <span class="carousel-count" role="status" aria-atomic="true"></span>
+      <button type="button" data-step="1">Next</button>
+    </div>
+    <noscript><p>Swipe or scroll horizontally to browse the slides.</p></noscript>
+  </section>
+
+  <script>
+    (() => {
+      const track = document.querySelector('.carousel-track');
+      const slides = Array.from(track.children);
+      const controls = document.querySelector('.carousel-controls');
+      const previous = controls.querySelector('[data-step="-1"]');
+      const next = controls.querySelector('[data-step="1"]');
+      const count = controls.querySelector('.carousel-count');
+      let current = -1;
+      let waitingForFrame = false;
+
+      function offset(slide) {
+        return slide.offsetLeft - slides[0].offsetLeft;
+      }
+
+      function update() {
+        waitingForFrame = false;
+        const nearest = slides.reduce((best, slide, index) =>
+          Math.abs(offset(slide) - track.scrollLeft) < Math.abs(offset(slides[best]) - track.scrollLeft)
+            ? index : best, 0);
+        if (nearest === current) return;
+        current = nearest;
+        previous.setAttribute('aria-disabled', String(current === 0));
+        next.setAttribute('aria-disabled', String(current === slides.length - 1));
+        count.textContent = `Slide ${current + 1} of ${slides.length}`;
+      }
+
+      function move(step) {
+        update();
+        const target = Math.max(0, Math.min(current + step, slides.length - 1));
+        if (target === current) return;
+        track.scrollLeft = offset(slides[target]);
+        update();
+      }
+
+      previous.addEventListener('click', () => move(-1));
+      next.addEventListener('click', () => move(1));
+      track.addEventListener('keydown', (event) => {
+        if (event.target !== track || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        move(event.key === 'ArrowRight' ? 1 : -1);
+      });
+      track.addEventListener('scroll', () => {
+        if (!waitingForFrame) {
+          waitingForFrame = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      controls.hidden = false;
+      update();
+    })();
+  </script>
+</body>
+</html>
