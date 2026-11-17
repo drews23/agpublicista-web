@@ -53,6 +53,43 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/site.css?v=2026091401" />
+    <style>
+      .glitch-samples {
+        margin-block: 1.4rem 1.75rem;
+        padding: clamp(.85rem, 3vw, 1.25rem);
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-lg);
+        background: var(--panel);
+      }
+      .glitch-samples__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: .75rem 1rem;
+        margin-bottom: .85rem;
+      }
+      .glitch-samples__header h2 {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+      .glitch-samples__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 255px), 1fr));
+        gap: .75rem;
+      }
+      .glitch-samples__card {
+        min-width: 0;
+        padding: .85rem;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--bg-soft);
+      }
+      .glitch-samples__card h3 { margin: 0 0 .5rem; }
+      .glitch-samples__card audio { display: block; width: 100%; }
+      .glitch-samples__card p { margin: .55rem 0 0; font-size: .9rem; }
+    </style>
 
     <script type="application/ld+json">
     {
@@ -180,6 +217,31 @@
             · Actualizado el <time datetime="2026-11-08">8 de noviembre de 2026</time>
           </p>
 
+          <section class="glitch-samples" aria-labelledby="muestras">
+            <div class="glitch-samples__header">
+              <h2 id="muestras">Escucha dos muestras</h2>
+              <a class="btn btn--primary" href="https://www.mediafire.com/file/e6p1000f3olwsz6/file" target="_blank" rel="noopener">Descargar los 13 sonidos (.rar)</a>
+            </div>
+            <div class="glitch-samples__grid">
+              <div class="glitch-samples__card">
+                <h3 id="muestra-bass-glitch">Bass Glitch</h3>
+                <audio controls preload="none" aria-labelledby="muestra-bass-glitch">
+                  <source src="/assets/audio/glitch/bass-glitch.mp3" type="audio/mpeg" />
+                  <a href="/assets/audio/glitch/bass-glitch.mp3">Escuchar Bass Glitch (MP3)</a>
+                </audio>
+                <p>Marca un corte brusco de un reel. Alinea el golpe grave con el primer fotograma del nuevo plano.</p>
+              </div>
+              <div class="glitch-samples__card">
+                <h3 id="muestra-glitch-entrada">Glitch de entrada</h3>
+                <audio controls preload="none" aria-labelledby="muestra-glitch-entrada">
+                  <source src="/assets/audio/glitch/glitch-de-entrada.mp3" type="audio/mpeg" />
+                  <a href="/assets/audio/glitch/glitch-de-entrada.mp3">Escuchar Glitch de entrada (MP3)</a>
+                </audio>
+                <p>Acompaña la aparición de un logo. Haz coincidir un chasquido con el destello y recorta la cola si entra la voz.</p>
+              </div>
+            </div>
+          </section>
+
           <p class="reveal" style="--reveal-delay: 200ms">
             El glitch es el idioma sonoro de internet: esa interferencia digital que anuncia que algo
             está a punto de pasar. Bien usado, un solo <em>zap</em> convierte una intro normal en una
@@ -253,14 +315,13 @@
           </p>
 
           <h2 id="como-descargar">Cómo descargar el pack (paso a paso)</h2>
-          <p>Descarga el pack con el botón de esta entrada. El archivo está alojado en MediaFire; YouTube contiene el tutorial.</p>
+          <p>El archivo está alojado en MediaFire. El tutorial está en YouTube.</p>
           <ol>
-            <li>Pulsa el botón de descarga para abrir el archivo del pack en MediaFire.</li>
+            <li>Pulsa el botón de descarga en el <a href="#muestras">bloque de muestras</a> al inicio de la ficha.</li>
             <li>En MediaFire, descarga el archivo <code>.rar</code> indicado.</li>
             <li>Descomprime el pack e importa los sonidos en tu editor.</li>
           </ol>
           <p style="margin-top: 1.4em;">
-            <a class="btn btn--primary" href="https://www.mediafire.com/file/e6p1000f3olwsz6/file" target="_blank" rel="noopener">Descargar sonidos glitch (.rar)</a>
             <a class="btn" href="https://www.youtube.com/watch?v=d9quCogOA0Y" target="_blank" rel="noopener">Ver tutorial en YouTube</a>
           </p>
           <p>
