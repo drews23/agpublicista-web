@@ -11,9 +11,9 @@ from english_search import PAGES
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / 'css/pages/template-library.css'
 GROUPS = [
-    ('carruseles', 'carousels', 'Carruseles y galerías', 'Carousels and galleries',
+    ('carruseles', 'carousels', 'Carruseles y galerías', 'Free Carousel and Gallery Templates',
      'Explora recursos o presenta tus productos con movimiento.',
-     'Choose a filterable carousel for a portfolio or an autoplay carousel for a product showcase. Learn <a href="/en/blog/html-css-javascript-carousel/">how to build a carousel with HTML, CSS, and JavaScript</a>. Watch the <a href="https://youtu.be/sxNqk8Sc9lI" lang="en-US">step-by-step carousel tutorial</a> (Spanish audio) to see how both templates work.',
+     'Preview two free JavaScript carousel templates and an expanding photo gallery. Customize any template in your browser, then download the HTML, CSS, and JavaScript source as a ZIP.',
      ['carrusel-recursos', 'carrusel-progreso', 'galeria-expandible']),
     ('tarjetas', 'cards', 'Tarjetas', 'Cards',
      'Destaca una idea, presenta un producto o añade una interacción con intención.',
@@ -40,6 +40,16 @@ GROUPS = [
      'Show how an interface looks on screens of different sizes.',
      ['mockup-multidispositivo', 'prototipo-pantalla-movil', 'portatil-en-perspectiva']),
 ]
+EN_CAROUSEL_DESCRIPTIONS = {
+    'carrusel-progreso': 'Showcase products with drag controls, keyboard navigation, a progress indicator, and optional autoplay.',
+    'galeria-expandible': 'Display photos or projects in five expanding panels. Replace the sample images with your own.',
+}
+EN_CAROUSEL_TUTORIALS = (
+    '<p class="catalog-note">'
+    '<a href="/en/blog/html-css-javascript-carousel/">Build a carousel from scratch</a> · '
+    '<a href="https://youtu.be/sxNqk8Sc9lI">Watch the two-template walkthrough (Spanish audio)</a>'
+    '</p>'
+)
 CHOICES = {
     'carrusel-recursos': ('Explorar una colección creativa', 'Browsing a creative collection', 'Texto, enlace opcional, acento y disposición', 'Text, optional link, accent, and layout', 'HTML + CSS + JS'),
     'carrusel-progreso': ('Exhibir cuatro productos con profundidad', 'Showcasing four products with depth', 'Productos, imágenes, colores y ritmo', 'Products, images, colors, and timing', 'HTML + CSS + JS'),
@@ -82,6 +92,9 @@ def enhance_template_catalog(raw, route):
     template_count = len(expected)
     if set(cards) != set(expected):
         raise ValueError('Template category inventory changed: ' + route)
+    if en:
+        for slug, description in EN_CAROUSEL_DESCRIPTIONS.items():
+            cards[slug].select_one('.template__description').string = description
     # The category heading is h2; the existing resource title becomes h3.
     for card in cards.values():
         heading = card.find(['h2', 'h3'])
@@ -107,7 +120,8 @@ def enhance_template_catalog(raw, route):
         count = str(len(slugs)).zfill(2)
         accessible = label + ': ' + str(len(slugs)) + tr(' plantilla' if len(slugs) == 1 else ' plantillas', ' template' if len(slugs) == 1 else ' templates')
         links.append(f'<li><a href="#{key}" aria-label="{accessible}"><span class="catalog-index__number" aria-hidden="true">0{number}</span><span class="catalog-index__name">{label}</span><span class="catalog-index__count" aria-hidden="true">{count}</span><span class="catalog-index__arrow" aria-hidden="true">↗</span></a></li>')
-        groups.append(f'''<section class="catalog-group catalog-group--{number}" id="{key}" tabindex="-1" aria-labelledby="{key}-title"><div class="catalog-group__head"><span class="catalog-group__number" aria-hidden="true">0{number}</span><div><h2 id="{key}-title">{label}<span class="catalog-group__count" aria-hidden="true">{count}</span></h2><p>{description}</p></div><a href="#{index}" class="catalog-group__back">{tr('Categorías', 'Categories')} <span aria-hidden="true">↑</span></a></div><div class="templates-grid">{''.join(str(cards[slug]) for slug in slugs)}</div></section>''')
+        tutorials = EN_CAROUSEL_TUTORIALS if en and key == 'carousels' else ''
+        groups.append(f'''<section class="catalog-group catalog-group--{number}" id="{key}" tabindex="-1" aria-labelledby="{key}-title"><div class="catalog-group__head"><span class="catalog-group__number" aria-hidden="true">0{number}</span><div><h2 id="{key}-title">{label}<span class="catalog-group__count" aria-hidden="true">{count}</span></h2><p>{description}</p></div><a href="#{index}" class="catalog-group__back">{tr('Categorías', 'Categories')} <span aria-hidden="true">↑</span></a></div><div class="templates-grid">{''.join(str(cards[slug]) for slug in slugs)}</div>{tutorials}</section>''')
     nav = f'<nav class="catalog-index" id="{index}" tabindex="-1" aria-label="{tr("Explorar plantillas por categoría", "Browse templates by category")}"><div class="catalog-index__intro"><p class="eyebrow">{tr("ENCUENTRA TU PUNTO DE PARTIDA", "FIND YOUR STARTING POINT")}</p><p>{tr("¿Qué quieres crear?", "What do you want to build?")}</p></div><ul>{"".join(links)}</ul></nav>'
     rows = []
     for slug in expected:
