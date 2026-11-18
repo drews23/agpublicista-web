@@ -35,8 +35,11 @@ def enhance_document(raw, route):
     else:
         rows = [('Includes', '16 transition sound effects.'), ('Files', 'RAR archive · WAV audio files.'), ('Requires', 'An audio or video editor that supports WAV. Extract the archive before importing the files.')] if english else [('Incluye', '16 efectos de sonido para transiciones.'), ('Archivos', 'Archivo RAR · Audios WAV.'), ('Necesitas', 'Un editor de audio o video compatible con WAV. Descomprime el archivo antes de importar los sonidos.')]
     labels = ['Preview', 'Download', 'Usage terms'] if english else ['Vista previa', 'Descarga', 'Condiciones de uso']
+    shortcuts = list(zip((preview, download, terms), labels))
+    if route == '/en/blog/ai-icons/' and 'id="resource-setup"' in raw:
+        shortcuts.insert(1, ('resource-setup', 'Try a free AI icon in SVG or PNG'))
     note = 'Free download via MediaFire. Review the usage terms before using or sharing the resource.' if english else 'Descarga gratuita a través de MediaFire. Revisa las condiciones antes de usar o compartir el recurso.'
-    block = '<section class="resource-summary" aria-labelledby="resource-summary-title"><h2 id="resource-summary-title">'+title+'</h2><dl>'+''.join('<div><dt>'+a+'</dt><dd>'+b+'</dd></div>' for a,b in rows)+'</dl><nav aria-label="'+('Resource shortcuts' if english else 'Accesos al recurso')+'">'+''.join('<a href="#'+anchor+'">'+label+'</a>' for anchor,label in zip([preview,download,terms],labels))+'</nav><p>'+note+'</p></section>'
+    block = '<section class="resource-summary" aria-labelledby="resource-summary-title"><h2 id="resource-summary-title">'+title+'</h2><dl>'+''.join('<div><dt>'+a+'</dt><dd>'+b+'</dd></div>' for a,b in rows)+'</dl><nav aria-label="'+('Resource shortcuts' if english else 'Accesos al recurso')+'">'+''.join('<a href="#'+anchor+'">'+label+'</a>' for anchor,label in shortcuts)+'</nav><p>'+note+'</p></section>'
     raw = re.sub(r'<section\b(?=[^>]*\bclass="resource-summary")[^>]*>.*?</section>\s*', '', raw, flags=re.S)
     # The existing English preview section already has its permanent ID.
     if kind == 'icons':
