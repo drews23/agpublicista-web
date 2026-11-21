@@ -33,19 +33,24 @@
     demo: "Lienzo · ejemplo estéreo", mono: "Mono", stereo: "Estéreo", channels: "canales", play: "Reproducir selección", pause: "Pausar reproducción",
     same: "Sin cambios aplicados", normalizedBadge: "Normalización de pico activa", dc: "Corrección DC activa", silence: "Señal en silencio",
     unavailable: "Este navegador no permite exportar comprimido. Elige WAV.", name: "mi-audio-editado", nonfinite: "Las muestras no válidas se sustituyeron por silencio.",
-    finite: "Introduce un número finito dentro de los límites del control.", originalClock: "Original", outputClock: "Editado", playing: "Reproduciendo la selección.", paused: "Reproducción en pausa.",
+    finite: "Introduce un número finito dentro de los límites del control.", originalClock: "Original", outputClock: "Editada", playing: "Reproduciendo la selección.", paused: "Reproducción en pausa.",
     empty: "El archivo está vacío. Elige otro audio.", download: "Descargar audio", normalizedTitle: "Normalización de pico activada; pulsa para desactivar",
   };
   const $ = (name) => root.querySelector(`[data-${name}]`);
   const S = window.LienzoAudioStudio;
   const L = window.LienzoAudio;
+  const pulse = window.LienzoAudioPulse;
+  const preview = $("preview");
+  const previewSeek = $("preview-seek");
+  const previewCanvas = $("preview-canvas");
+  const timeCurrent = $("time-current");
+  const timeDuration = $("time-duration");
+  const previewProgress = $("preview-progress");
   const inputs = Object.fromEntries(["start", "end", "gain", "rate", "fade-in", "fade-out", "reverse", "mono", "remove-dc"].map((name) => [name, $(name)]));
   let context = null;
   let original = null;
   let originalAnalysis = null;
-  let processed = null;
-  let processedKey = "";
-  let processedAnalysis = null;
+  let prepared = null;
   let settings = null;
   let history = [];
   let historyIndex = -1;
@@ -63,6 +68,8 @@
   let frame = 0;
   let drawFrame = 0;
   let drag = null;
+  let scrub = null;
+  let lastPulseAt = -Infinity;
   let downloadUrl = "";
   let downloadBytes = 0;
   const mime = L?.formatoComprimidoSoportado?.() || "";
@@ -193,11 +200,10 @@
     syncHistory();
   }
   function invalidate() {
+    scrub = null;
     stop(true);
     clearDownload();
-    processed = null;
-    processedAnalysis = null;
-    processedKey = "";
+    prepared = null;
     $("peak").textContent = "—";
     $("rms").textContent = "—";
     $("change-status").textContent = text.pending;
@@ -247,8 +253,7 @@
     const duration = outputDuration();
     $("selection-duration").textContent = `${(settings.end - settings.start).toFixed(3)} s`;
     $("output-duration").textContent = clock(duration);
-    $("time-duration").textContent = clock(compare ? settings.end - settings.start : duration);
-    $("time-current").textContent = clock(offset);
+    syncPreview();
     $("zoom-output").textContent = `${zoom.toFixed(zoom % 1 ? 2 : 0)}×`;
     $("scroll").disabled = zoom === 1;
     for (const [name, key] of [["selection-start", "start"], ["selection-end", "end"]]) {
@@ -272,26 +277,25 @@
   }
   async function prepare(signal, onProgress, originalVersion = false) {
     const params = originalVersion ? { ...defaultSettings(original), start: settings.start, end: settings.end, sampleRate: "source" } : { ...settings, sampleRate: sampleRate() };
-    const key = `${revision}:${JSON.stringify(params)}`;
-    if (!originalVersion && processed && processedKey === key) { onProgress(1); return processed; }
+    const key = `${revision}:${originalVersion}:${JSON.stringify(params)}`;
+    if (prepared?.key === key) { onProgress(1); return prepared; }
     // Free the previous render before creating another; account for the source
     // retained by the editor in addition to the engine's per-operation budget.
-    processed = null; processedAnalysis = null; processedKey = "";
+    prepared = null;
     const inBytes = pcmBytes(original);
     const selectedBytes = Math.max(1, Math.round((params.end - params.start) * original.sampleRate)) * original.numberOfChannels * 4;
     const outBytes = Math.max(1, Math.round((params.end - params.start) * (params.sampleRate === "source" ? original.sampleRate : params.sampleRate) / params.rate)) * (params.mono ? 1 : original.numberOfChannels) * 4;
     memoryGuard(Math.max(inBytes + selectedBytes + outBytes * 2, inBytes + outBytes * 3));
-    const buffer = await S.render(original, params, { signal, onProgress: (n) => onProgress(n * 0.75) });
+    const output = await S.render(original, params, { signal, withPulse: true, onProgress: (n) => onProgress(n * 0.75) });
     canceled(signal);
     if (!originalVersion) {
-      const analysis = await S.analyze(buffer, { signal, onProgress: (n) => onProgress(0.75 + n * 0.25) });
+      const analysis = await S.analyze(output.buffer, { signal, onProgress: (n) => onProgress(0.75 + n * 0.25) });
       canceled(signal);
-      processed = buffer;
-      processedKey = key;
-      processedAnalysis = analysis;
       showAnalysis(analysis);
     }
-    return buffer;
+    prepared = { ...output, key, originalVersion };
+    syncPreview();
+    return prepared;
   }
   async function acceptBuffer(buffer, name, signal, progress) {
     memoryGuard(pcmBytes(original) + pcmBytes(buffer) * 2);
@@ -301,9 +305,7 @@
     clearDownload();
     originalAnalysis = analysis;
     revision++;
-    processed = null;
-    processedKey = "";
-    processedAnalysis = null;
+    prepared = null;
     settings = defaultSettings(buffer);
     history = [{ ...settings }]; historyIndex = 0;
     offset = 0; compare = false; zoom = 1; scroll = 0;
@@ -320,8 +322,10 @@
   async function load(file) {
     if (!file || task) return;
     if (!file.size || file.size > MAX_FILE) { error(file.size ? text.large : text.empty); $("file").value = ""; return; }
+    scrub = null;
     stop(true);
-    processed = null; processedKey = ""; processedAnalysis = null;
+    prepared = null;
+    syncPreview();
     clearDownload();
     await run(text.loading, async (signal, progress) => {
       await preflight(file, signal);
@@ -339,8 +343,10 @@
   }
   async function demo() {
     if (task) return;
+    scrub = null;
     stop(true);
-    processed = null; processedKey = ""; processedAnalysis = null;
+    prepared = null;
+    syncPreview();
     clearDownload();
     await run(text.analyzing, async (signal, progress) => {
       const ctx = audioContext();
@@ -366,11 +372,12 @@
     return loop ? time % playingBuffer.duration : Math.min(time, playingBuffer.duration);
   }
   function transportIcons(playing) {
-    $("play-icon").hidden = playing;
-    $("pause-icon").hidden = !playing;
+    $("play-icon").toggleAttribute("hidden", playing);
+    $("pause-icon").toggleAttribute("hidden", !playing);
     $("play").setAttribute("aria-label", playing ? text.pause : text.play);
     $("play").title = playing ? text.pause : text.play;
     $("play").setAttribute("aria-pressed", String(playing));
+    preview.toggleAttribute("data-listening", playing);
   }
   function stop(reset = false) {
     offset = reset ? 0 : playbackOffset();
@@ -378,15 +385,34 @@
     cancelAnimationFrame(frame); frame = 0;
     playingBuffer = null;
     transportIcons(false);
-    $("time-current").textContent = clock(offset);
+    updatePreview(offset, true);
     $("playhead").hidden = true;
   }
   function animate() {
     if (!source) return;
     const at = playbackOffset();
-    $("time-current").textContent = clock(at);
-    const seconds = playingOriginal ? settings.start + at : settings.reverse ? settings.end - at * settings.rate : settings.start + at * settings.rate;
-    placePlayhead(seconds);
+    updatePreview(at);
+    placePlayhead(sourcePosition(at, playingOriginal));
+    frame = requestAnimationFrame(animate);
+  }
+  function startPlayback(clip) {
+    playingBuffer = clip.buffer;
+    playingOriginal = clip.originalVersion;
+    const node = context.createBufferSource();
+    node.buffer = playingBuffer;
+    node.loop = loop;
+    node.connect(context.destination);
+    node.onended = () => {
+      if (source !== node) return;
+      stop(true);
+      status(clip.originalVersion ? text.original : text.edited);
+    };
+    startedAt = context.currentTime;
+    node.start(startedAt, offset);
+    source = node;
+    transportIcons(true);
+    updatePreview(offset, true);
+    status(clip.originalVersion ? text.original : text.edited);
     frame = requestAnimationFrame(animate);
   }
   async function play() {
@@ -397,20 +423,11 @@
     const version = compare;
     await run(text.rendering, async (signal, progress) => {
       await abortable(resume, signal);
-      const buffer = await prepare(signal, progress, version);
+      const clip = await prepare(signal, progress, version);
       canceled(signal);
       if (ctx.state !== "running") throw new Error("Audio context suspended");
-      playingBuffer = buffer;
-      playingOriginal = version;
-      if (offset >= buffer.duration) offset = 0;
-      source = ctx.createBufferSource(); source.buffer = buffer; source.loop = loop;
-      source.connect(ctx.destination);
-      source.onended = () => { stop(true); status(version ? text.original : text.edited); };
-      startedAt = ctx.currentTime;
-      source.start(0, offset);
-      transportIcons(true);
-      status(version ? text.original : text.edited);
-      frame = requestAnimationFrame(animate);
+      if (offset >= clip.buffer.duration) offset = 0;
+      startPlayback(clip);
     });
   }
   async function exportAudio() {
@@ -422,7 +439,7 @@
     stop(true);
     await run(text.rendering, async (signal, progress) => {
       if (resume) await abortable(resume, signal);
-      const buffer = await prepare(signal, (n) => progress(n * 0.5));
+      const { buffer } = await prepare(signal, (n) => progress(n * 0.5));
       canceled(signal);
       let blob;
       let extension = "wav";
@@ -465,6 +482,81 @@
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     ctx.clearRect(0, 0, width, height);
     return ctx;
+  }
+  function previewRender() {
+    return prepared?.originalVersion === compare ? prepared : null;
+  }
+  function previewDuration() {
+    return previewRender()?.buffer.duration ?? (compare && settings ? settings.end - settings.start : outputDuration());
+  }
+  function sourcePosition(at, originalVersion) {
+    const position = originalVersion ? settings.start + at :
+      settings.reverse ? settings.end - at * settings.rate : settings.start + at * settings.rate;
+    return clamp(position, settings.start, settings.end);
+  }
+  function syncPreview() {
+    if (!settings) return;
+    const clip = previewRender();
+    const duration = previewDuration();
+    const limit = compare ? 0 : Math.max(0, duration - 1 / sampleRate());
+    const fades = [
+      ["in", clip?.fadeIn ?? Math.min(settings.fadeIn, limit)],
+      ["out", clip?.fadeOut ?? Math.min(settings.fadeOut, limit)],
+    ];
+    previewSeek.max = String(duration);
+    timeDuration.textContent = clock(duration);
+    $("preview-mode").textContent = compare ? text.originalClock : text.outputClock;
+    $("preview-empty").hidden = Boolean(clip);
+    for (const [edge, seconds] of fades) {
+      preview.style.setProperty(`--preview-fade-${edge}`, `${duration > 0 ? 100 * seconds / duration : 0}%`);
+      $(`preview-${edge}-key`).hidden = seconds <= 0;
+      $(`preview-${edge}-time`).textContent = `${seconds.toFixed(2)} s`;
+    }
+    updatePreview(offset, true);
+  }
+  function updatePreview(at, force = false) {
+    const clip = previewRender();
+    const duration = previewDuration();
+    const position = clamp(at, 0, duration);
+    const fraction = duration ? 100 * position / duration : 0;
+    const progress = `${fraction.toFixed(1)}%`;
+    const value = clock(position);
+    if (timeCurrent.textContent !== value) timeCurrent.textContent = value;
+    if (previewProgress.textContent !== progress) previewProgress.textContent = progress;
+    previewSeek.style.setProperty("--preview-progress", progress);
+    if (!scrub) previewSeek.value = String(position);
+    if (!force && Math.abs(position - lastPulseAt) < 1 / 30) return;
+    lastPulseAt = position;
+    const width = previewCanvas.clientWidth;
+    const height = previewCanvas.clientHeight;
+    if (!width || !height) return;
+    const ctx = resizeCanvas(previewCanvas, width, height);
+    if (!clip || position <= 0) return;
+    const windowSpan = Math.min(duration, 3.2);
+    const windowStart = position - windowSpan;
+    for (const [from, to, color] of [
+      [0, clip.fadeIn, "rgba(177, 151, 255, .15)"],
+      [duration - clip.fadeOut, duration, "rgba(255, 189, 113, .17)"],
+    ]) {
+      const start = Math.max(from, windowStart);
+      const end = Math.min(to, position);
+      if (end <= start) continue;
+      ctx.fillStyle = color;
+      ctx.fillRect((start - windowStart) * width / windowSpan, 0, (end - start) * width / windowSpan, height);
+    }
+    pulse.paint(ctx, clip.pulse, {
+      width, height, windowStart, windowSpan, start: Math.max(0, windowStart), end: position, playing: Boolean(source),
+    });
+  }
+  function seekPreview(at) {
+    if (!original || task) return;
+    const clip = source ? previewRender() : null;
+    if (source) stop(false);
+    offset = clamp(at, 0, previewDuration());
+    updatePreview(offset, true);
+    placePlayhead(sourcePosition(offset, compare));
+    if (clip && offset < clip.buffer.duration) startPlayback(clip);
+    else if (clip) status(text.paused);
   }
   function placePlayhead(seconds) {
     const { start, span } = view();
@@ -550,6 +642,20 @@
   $("cancel").addEventListener("click", () => task?.abort());
   $("play").addEventListener("click", play);
   $("stop").addEventListener("click", () => stop(true));
+  previewSeek.addEventListener("pointerdown", (event) => {
+    if (!original || task || event.button !== 0) return;
+    scrub = { pointer: event.pointerId, resume: source ? previewRender() : null };
+    if (source) stop(false);
+  });
+  previewSeek.addEventListener("input", () => seekPreview(Number(previewSeek.value)));
+  for (const type of ["pointerup", "pointercancel"]) {
+    window.addEventListener(type, (event) => {
+      if (!scrub || scrub.pointer !== event.pointerId) return;
+      const { resume } = scrub;
+      scrub = null;
+      if (resume && !source && !task && resume === previewRender() && offset < resume.buffer.duration) startPlayback(resume);
+    });
+  }
   $("loop").addEventListener("click", () => {
     if (task) return;
     const at = playbackOffset();
@@ -595,7 +701,7 @@
   $("export-rate").addEventListener("change", () => { invalidate(); sync(); });
   $("export-format").addEventListener("change", () => {
     clearDownload();
-    if (processed && processed.sampleRate !== sampleRate()) invalidate();
+    if (prepared && !prepared.originalVersion && prepared.buffer.sampleRate !== sampleRate()) invalidate();
     sync();
   });
   $("export").addEventListener("click", exportAudio);
@@ -649,7 +755,7 @@
     else if (drag.key === "range") {
       const at = clamp(timeFromPointer(event), settings.start, settings.end);
       offset = compare ? at - settings.start : (settings.reverse ? settings.end - at : at - settings.start) / settings.rate;
-      $("time-current").textContent = clock(offset);
+      updatePreview(offset, true);
       placePlayhead(at);
     }
     drag = null;
@@ -663,10 +769,11 @@
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "z") { event.preventDefault(); $(event.shiftKey ? "redo" : "undo").click(); }
   });
   new ResizeObserver(draw).observe($("waveform"));
+  new ResizeObserver(() => updatePreview(playbackOffset(), true)).observe(previewCanvas);
   new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
   window.addEventListener("pagehide", (event) => { task?.abort(); stop(true); if (!event.persisted) { clearDownload(); if (context) context.close().catch(() => {}); } });
   if (mime) { $("opus").disabled = false; $("opus").hidden = false; }
-  if (!S || !L || !(window.AudioContext || window.webkitAudioContext) || !window.Worker) {
+  if (!S || !L || !pulse || !(window.AudioContext || window.webkitAudioContext) || !window.Worker) {
     error(text.unsupported);
     for (const name of ["choose", "demo", "replace"]) $(name).disabled = true;
   } else { stateBusy(false); status(text.ready); }

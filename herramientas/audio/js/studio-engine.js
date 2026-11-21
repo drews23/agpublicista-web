@@ -9,6 +9,7 @@
   const currentScript = document.currentScript;
   const workerResource = new URL("studio-worker.js", currentScript?.src || new URL("/herramientas/audio/js/studio-engine.js", location.href));
   if (currentScript?.dataset?.workerVersion) workerResource.searchParams.set("v", currentScript.dataset.workerVersion);
+  if (currentScript?.dataset?.pulseVersion) workerResource.searchParams.set("pulse", currentScript.dataset.pulseVersion);
   const workerUrl = workerResource.href;
   let outputContext = null;
 
@@ -154,12 +155,12 @@
     const selectionMeta = { ...meta, offset: normalized.startFrame, length: normalized.endFrame - normalized.startFrame };
     const channels = await copyInput(buffer, selectionMeta, options.signal, (value) => progress(options.onProgress, value * 0.08));
     const workerSettings = { ...normalized, startFrame: 0, endFrame: selectionMeta.length };
-    const result = await workerJob("render", { channels, sampleRate: meta.sampleRate, settings: workerSettings }, channels, { signal: options.signal, onProgress: (value) => progress(options.onProgress, 0.08 + value * 0.88) });
+    const result = await workerJob("render", { channels, sampleRate: meta.sampleRate, settings: workerSettings, withPulse: !!options.withPulse }, channels, { signal: options.signal, onProgress: (value) => progress(options.onProgress, 0.08 + value * 0.88) });
     checkAbort(options.signal);
     const output = makeBuffer(result.channels, result.length, result.sampleRate);
     checkAbort(options.signal);
     progress(options.onProgress, 1);
-    return output;
+    return options.withPulse ? { buffer: output, pulse: result.pulse, fadeIn: result.fadeIn, fadeOut: result.fadeOut } : output;
   }
 
   async function encodeWav(buffer, options = {}) {

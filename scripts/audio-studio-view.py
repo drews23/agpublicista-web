@@ -63,6 +63,8 @@ TEXT = {
         "waveform": "Forma de onda", "selection": "Selección", "selection-title": "El fragmento que conservarás", "selected": "seleccionados", "start": "Inicio", "end": "Fin", "seconds": "segundos",
         "start-label": "Inicio de la selección", "end-label": "Fin de la selección", "wave-hint": "La onda representa el original. Arrastra los extremos o introduce el tiempo exacto debajo.",
         "play": "Reproducir / pausar", "stop": "Detener", "loop": "Repetir selección", "zoom": "Zoom", "scroll": "Desplazar la vista de la onda", "position": "Posición", "duration": "Duración de salida",
+        "preview": "Preescucha de la selección", "preview-edited": "Editada", "preview-seek": "Posición de preescucha (segundos)",
+        "preview-start": "Reproduce para ver el pulso del audio.", "preview-in": "Entrada", "preview-out": "Salida",
         "signal": "Señal de salida", "peak": "Pico", "rms": "Nivel RMS", "signal-help": "Valores de la señal procesada. RMS mide energía media; no equivale a sonoridad LUFS.",
         "no-changes": "Sin cambios aplicados", "clipping": "Pico por encima de 0 dBFS", "analysis-pending": "Análisis pendiente", "inspector": "Afinar el sonido", "inspector-copy": "Escucha tus cambios antes de exportar.", "level": "Nivel", "gain": "Ganancia", "normalize": "Normalizar a −1 dBFS", "normalize-help": "Ajusta el pico de la selección. No es normalización de sonoridad.",
         "time": "Tiempo", "rate": "Velocidad", "rate-help": "La velocidad también cambia el tono, como una cinta.", "finish": "Acabado", "fade-in": "Entrada gradual", "fade-out": "Salida gradual",
@@ -81,6 +83,8 @@ TEXT = {
         "waveform": "Waveform", "selection": "Selection", "selection-title": "The part you will keep", "selected": "selected", "start": "Start", "end": "End", "seconds": "seconds",
         "start-label": "Selection start", "end-label": "Selection end", "wave-hint": "The waveform shows the original. Drag the edges or enter an exact time below.",
         "play": "Play / pause", "stop": "Stop", "loop": "Loop selection", "zoom": "Zoom", "scroll": "Scroll the waveform view", "position": "Position", "duration": "Output duration",
+        "preview": "Selection preview", "preview-edited": "Edited", "preview-seek": "Preview position (seconds)",
+        "preview-start": "Press Play to see the audio pulse.", "preview-in": "Fade in", "preview-out": "Fade out",
         "signal": "Output signal", "peak": "Peak", "rms": "RMS level", "signal-help": "Values for the processed signal. RMS measures average energy; it is not LUFS loudness.",
         "no-changes": "No changes applied", "clipping": "Peak above 0 dBFS", "analysis-pending": "Analysis pending", "inspector": "Refine your sound", "inspector-copy": "Listen to your changes before exporting.", "level": "Level", "gain": "Gain", "normalize": "Normalize to −1 dBFS", "normalize-help": "Adjusts the selection peak. This is not loudness normalization.",
         "time": "Time", "rate": "Speed", "rate-help": "Speed also changes pitch, like a tape.", "finish": "Finishing", "fade-in": "Fade in", "fade-out": "Fade out",
@@ -131,7 +135,21 @@ def render_app(lang: str) -> str:
             <div class="as-wave-head"><div><span class="as-kicker">{t['waveform']}</span><h3>{t['selection-title']}</h3></div><span class="as-selection-badge"><strong data-selection-duration>0.000 s</strong><span>{t['selected']}</span></span></div>
             <div class="as-wave-stage"><canvas class="as-ruler" data-ruler aria-hidden="true"></canvas><div class="as-waveform" data-waveform aria-label="{t['waveform']}"><canvas data-canvas aria-hidden="true"></canvas><div class="as-waveform__selection" data-selection aria-hidden="true"></div><div class="as-waveform__handle as-waveform__handle--start" data-selection-start tabindex="0" role="slider" aria-label="{t['start-label']}" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span aria-hidden="true"></span></div><div class="as-waveform__handle as-waveform__handle--end" data-selection-end tabindex="0" role="slider" aria-label="{t['end-label']}" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span aria-hidden="true"></span></div><div class="as-waveform__playhead" data-playhead aria-hidden="true" hidden></div></div></div>
 
-            <div class="as-transport"><div class="as-transport__buttons"><button class="as-play" type="button" data-play aria-label="{t['play']}" title="{t['play']}">{icon('play', 'data-play-icon')}{icon('pause', 'data-pause-icon hidden')}</button><button class="as-icon-button" type="button" data-stop aria-label="{t['stop']}" title="{t['stop']}">{icon('stop')}</button><button class="as-icon-button as-loop" type="button" data-loop aria-pressed="false" aria-label="{t['loop']}" title="{t['loop']}">{icon('loop')}</button></div><div class="as-clock"><span class="sr-only">{t['position']}</span><strong data-time-current>00:00.000</strong><span aria-hidden="true">/</span><span data-time-duration>00:00.000</span></div><span class="as-output-duration">{t['duration']}<strong data-output-duration>—</strong></span></div>
+            <div class="as-transport"><div class="as-transport__buttons"><button class="as-play" type="button" data-play aria-label="{t['play']}" title="{t['play']}">{icon('play', 'data-play-icon')}{icon('pause', 'data-pause-icon hidden')}</button><button class="as-icon-button" type="button" data-stop aria-label="{t['stop']}" title="{t['stop']}">{icon('stop')}</button><button class="as-icon-button as-loop" type="button" data-loop aria-pressed="false" aria-label="{t['loop']}" title="{t['loop']}">{icon('loop')}</button></div><span class="as-output-duration">{t['duration']}<strong data-output-duration>—</strong></span></div>
+
+            <section class="as-preview" data-preview aria-labelledby="as-preview-title">
+              <div class="as-preview__head">{icon('wave')}<h4 id="as-preview-title">{t['preview']}</h4><span data-preview-mode>{t['preview-edited']}</span></div>
+              <div class="as-preview__clock" aria-hidden="true"><strong data-time-current>00:00.000</strong><span data-preview-progress>0%</span><span data-time-duration>00:00.000</span></div>
+              <div class="as-preview__scrub">
+                <input type="range" min="0" max="0" step="0.001" value="0" data-preview-seek aria-label="{t['preview-seek']}">
+                <div class="as-preview__fade-spans" aria-hidden="true"><i data-preview-in-span></i><i data-preview-out-span></i></div>
+              </div>
+              <div class="as-preview__graph"><canvas data-preview-canvas aria-hidden="true"></canvas><p data-preview-empty>{t['preview-start']}</p></div>
+              <div class="as-preview__fades">
+                <span data-preview-in-key hidden>{t['preview-in']} <strong data-preview-in-time></strong></span>
+                <span data-preview-out-key hidden>{t['preview-out']} <strong data-preview-out-time></strong></span>
+              </div>
+            </section>
 
             <div class="as-view-controls"><label class="as-zoom">{icon('zoom')}<span>{t['zoom']}</span><input type="range" min="1" max="16" step="0.25" value="1" data-zoom><output data-zoom-output>1×</output></label><label class="as-scroll"><span class="sr-only">{t['scroll']}</span><input type="range" min="0" max="1" step="0.001" value="0" data-scroll aria-label="{t['scroll']}"></label></div>
 
@@ -178,11 +196,17 @@ def editorial(lang: str) -> str:
     if lang == "es":
         practice_title = "Un sonido para ponerlo en práctica."
         practice_intro = "Compara los packs de Lienzo y elige un WAV. Prepáralo aquí y llévalo a tu editor de video para sincronizarlo con la imagen."
-        practice_links = [("/blog/efectos-de-sonido-para-videos-gratis/", "Comparar y descargar sonidos"), ("/blog/sonidos-de-introduccion-y-desvanecimiento-gratis/", "Practicar una entrada y un cierre")]
+        practice_links = [
+            ("/blog/efectos-de-sonido-para-videos-gratis/", "Comparar y descargar sonidos"),
+            ("/blog/sonidos-de-introduccion-y-desvanecimiento-gratis/", "Practicar una entrada y un cierre"),
+        ]
     else:
         practice_title = "Put a sound to work."
         practice_intro = "Compare Lienzo sound packs and choose a WAV file. Prepare it here, then bring it into your video editor to sync it with the picture."
-        practice_links = [("/en/blog/free-sound-effects/", "Compare and download sound effects"), ("/en/blog/intro-fade-sound-effects/", "Practice an intro and a fade")]
+        practice_links = [
+            ("/en/blog/free-sound-effects/", "Compare and download sound effects"),
+            ("/en/blog/intro-fade-sound-effects/", "Practice an intro and a fade"),
+        ]
     practice_anchors = "".join(f'<a href="{path}">{label}{icon("arrow")}</a>' for path, label in practice_links)
     practice = f'<div class="as-focused" id="audio-practice"><div><h2>{practice_title}</h2><p>{practice_intro}</p></div><nav aria-label="{"Guías y sonidos para practicar" if lang == "es" else "Sound packs and practice guides"}">{practice_anchors}</nav></div>'
     cards = "".join(f'<article><span class="as-kicker">0{i + 1}</span><h3>{heading}</h3><p>{body}</p></article>' for i, (heading, body) in enumerate(steps))
@@ -258,12 +282,12 @@ def render_page(source: str, lang: str) -> str:
 
     for script in soup.find_all("script", src=True):
         source_path = script["src"].split("?")[0]
-        if source_path.endswith(("/estudio.js", "/audio-editor.js", "/audio-core.js", "/studio-engine.js", "/studio-editor.js")) or source_path in ("js/audio-editor.js", "js/audio-core.js"):
+        if source_path.endswith(("/estudio.js", "/audio-editor.js", "/audio-core.js", "/audio-pulse.js", "/studio-engine.js", "/studio-editor.js")) or source_path in ("js/audio-editor.js", "js/audio-core.js"):
             script.decompose()
     # The focused tools keep their own controllers. Only these hub pages load
     # the shared Studio engine and editor, after their localized base helpers.
     core = "/herramientas/audio/js/audio-core.js" if lang == "es" else "/en/tools/audio/js/audio-core.js"
-    for asset in (core, "/herramientas/audio/js/studio-engine.js", "/herramientas/audio/js/studio-editor.js"):
+    for asset in (core, "/js/audio-pulse.js", "/herramientas/audio/js/studio-engine.js", "/herramientas/audio/js/studio-editor.js"):
         path = ROOT / asset.lstrip("/")
         if not path.is_file():
             raise FileNotFoundError(f"Audio Studio dependency missing: {path}")
@@ -272,6 +296,7 @@ def render_page(source: str, lang: str) -> str:
         script["defer"] = ""
         if asset.endswith("/studio-engine.js"):
             script["data-worker-version"] = hashlib.sha256((ROOT / "herramientas/audio/js/studio-worker.js").read_bytes()).hexdigest()[:12]
+            script["data-pulse-version"] = hashlib.sha256((ROOT / "js/audio-pulse.js").read_bytes()).hexdigest()[:12]
         soup.body.append(script)
     update_schema(soup, lang)
     # Normalize adjacent whitespace left by removed legacy nodes on the first run.

@@ -148,8 +148,18 @@
         if (i % CHUNK === 0) report(0.8 + 0.2 * (c + i / outLength) / output.length);
       }
     }
+    const result = { channels: output.map((channel) => channel.buffer), length: outLength, sampleRate: settings.sampleRate };
+    if (data.withPulse) {
+      const asset = new URL("../../../js/audio-pulse.js", self.location.href);
+      const version = new URL(self.location.href).searchParams.get("pulse");
+      if (version) asset.searchParams.set("v", version);
+      importScripts(asset.href);
+      result.pulse = self.LienzoAudioPulse.analyze(output, settings.sampleRate, { reference: 1, rangeDb: 58 });
+      result.fadeIn = fadeInFrames / settings.sampleRate;
+      result.fadeOut = fadeOutFrames / settings.sampleRate;
+    }
     report(1);
-    return { channels: output.map((channel) => channel.buffer), length: outLength, sampleRate: settings.sampleRate };
+    return result;
   }
 
   function wav(data) {
@@ -188,7 +198,10 @@
     try {
       let result, transfer;
       if (data.operation === "analyze") { result = analyze(data); transfer = result.peaks.flatMap((channel) => [channel.min, channel.max]); }
-      else if (data.operation === "render") { result = render(data); transfer = result.channels; }
+      else if (data.operation === "render") {
+        result = render(data);
+        transfer = result.pulse ? [...result.channels, result.pulse.shape.buffer, result.pulse.hits.buffer] : result.channels;
+      }
       else if (data.operation === "wav") { result = wav(data); transfer = [result.bytes]; }
       else throw new TypeError("Unknown audio operation.");
       self.postMessage({ type: "result", result }, transfer);
