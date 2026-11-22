@@ -12,6 +12,7 @@
   });
   const length = 4;
   const rate = 44100;
+  const maxFileBytes = 25_000_000;
   const cut = bench.querySelector('[data-cue-cut]');
   const cutValue = bench.querySelector('[data-cue-cut-value]');
   const monitor = bench.querySelector('[data-cue-monitor]');
@@ -26,6 +27,9 @@
     lane,
     key: lane.dataset.cueLane,
     select: lane.querySelector('[data-cue-source]'),
+    file: lane.querySelector('[data-cue-file]'),
+    load: lane.querySelector('[data-cue-load]'),
+    fileStatus: lane.querySelector('[data-cue-file-status]'),
     delay: lane.querySelector('[data-cue-offset]'),
     gain: lane.querySelector('[data-cue-gain]'),
     delayValue: lane.querySelector('[data-cue-offset-value]'),
@@ -34,6 +38,8 @@
   }));
   const buffers = new Map();
   let context;
+  let decodeContext;
+  let fileRevision = 0;
   let playing;
   let start = 0;
   let frame = 0;
@@ -48,13 +54,18 @@
     return {
       cutAt: Number(cut.value),
       mode: bench.querySelector('[name="cue-mode"]:checked').value,
-      tracks: lanes.map(({ key, select, delay, gain }) => ({
-        key,
-        url: select.selectedOptions[0].dataset.src,
-        duration: Number(select.selectedOptions[0].dataset.duration),
-        offset: Number(delay.value),
-        gain: Number(gain.value),
-      })),
+      tracks: lanes.map(({ key, select, delay, gain, uploaded }) => {
+        const option = select.selectedOptions[0];
+        const local = option.value === 'local' ? uploaded : null;
+        return {
+          key,
+          source: local ? local.revision : option.dataset.src,
+          localBuffer: local?.buffer,
+          duration: local?.buffer.duration ?? Number(option.dataset.duration),
+          offset: Number(delay.value),
+          gain: Number(gain.value),
+        };
+      }),
     };
   }
 
@@ -129,12 +140,57 @@
     return buffers.get(url);
   }
 
+  function fileFeedback(track, message, error = false) {
+    track.fileStatus.toggleAttribute('data-error', error);
+    track.fileStatus.textContent = message;
+  }
+
+  async function loadLocal(track) {
+    const file = track.file.files[0];
+    track.file.value = '';
+    if (!file) return;
+    if (file.size > maxFileBytes) {
+      fileFeedback(track, text('El archivo supera 25 MB.', 'The file exceeds 25 MB.'), true);
+      return;
+    }
+
+    track.load.disabled = true;
+    fileFeedback(track, text('Abriendo audio…', 'Opening audio…'));
+    try {
+      decodeContext ??= new Offline(1, 1, rate);
+      const decoded = await core.decodificar(decodeContext, file);
+      const frames = Math.min(decoded.length, length * decoded.sampleRate);
+      if (!frames) throw new Error('Empty audio');
+      let buffer = decoded;
+      if (frames < decoded.length) {
+        buffer = decodeContext.createBuffer(decoded.numberOfChannels, frames, decoded.sampleRate);
+        for (let channel = 0; channel < decoded.numberOfChannels; channel++) {
+          buffer.copyToChannel(decoded.getChannelData(channel).subarray(0, frames), channel);
+        }
+      }
+      track.uploaded = { buffer, revision: ++fileRevision };
+      if (!track.localOption) {
+        track.localOption = new Option('', 'local');
+        track.select.add(track.localOption);
+      }
+      track.localOption.textContent = file.name;
+      track.select.value = 'local';
+      mixCache = null;
+      cancel();
+      fileFeedback(track, text('Archivo listo.', 'File ready.'));
+    } catch {
+      fileFeedback(track, text('No se pudo abrir el audio. Prueba otro archivo.', 'This audio could not open. Try another file.'), true);
+    } finally {
+      track.load.disabled = false;
+    }
+  }
+
   async function render(settings) {
     const { cutAt, mode } = settings;
     const tracks = settings.tracks.filter((track) => mode === 'mix' || track.key === mode);
-    const key = JSON.stringify([cutAt, tracks]);
+    const key = JSON.stringify([cutAt, tracks.map(({ key, source, offset, gain }) => [key, source, offset, gain])]);
     if (mixCache?.key === key) return mixCache.audio;
-    const sounds = await Promise.all(tracks.map((track) => sample(track.url)));
+    const sounds = await Promise.all(tracks.map((track) => track.localBuffer || sample(track.source)));
     const offline = new Offline(2, rate * length, rate);
     sounds.forEach((buffer, index) => {
       const position = cutAt + tracks[index].offset;
@@ -218,12 +274,18 @@
     return;
   }
 
+  for (const track of lanes) {
+    track.load.disabled = false;
+    track.load.addEventListener('click', () => track.file.click());
+    track.file.addEventListener('change', () => void loadLocal(track));
+  }
   play.addEventListener('click', () => {
     if (playing) cancel(text('Prueba detenida.', 'Test stopped.'));
     else void run(false);
   });
   save.addEventListener('click', () => void run(true));
   bench.addEventListener('input', (event) => {
+    if (event.target.matches('[data-cue-file]')) return;
     const compareNow = playing && event.target.name === 'cue-mode';
     cancel();
     if (compareNow) void run(false);

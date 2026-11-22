@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/css/site.css?v=2026091401" />
 <link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d">
 <link rel="stylesheet" href="/css/pages/sound-previews.css?v=56910299c38b">
-<link rel="stylesheet" href="/css/pages/sound-lab.css?v=84a5d100b81a">
+<link rel="stylesheet" href="/css/pages/sound-lab.css?v=0dfcac7cab75">
 <link rel="stylesheet" href="/css/pages/sound-lab-analysis.css?v=2a89b80f8565">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Laboratorio de sonido", "url": "https://lienzo.tools/herramientas/audio/laboratorio/", "description": "Analiza audio con onda y espectrograma, identifica sonidos, transcribe voz y compara efectos sobre un corte visual.", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "inLanguage": "es", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "USD"}}</script>
 </head>
@@ -151,7 +151,7 @@
     </section>
 <section class="sound-lab__workbench" id="corte" aria-labelledby="cut-title" data-cue-bench>
   <header class="sound-lab__heading"><div><h2 id="cut-title" tabindex="-1">Prueba el sonido en el corte</h2>
-    <p>Escucha A y B por separado o júntalas. Desplaza cada entrada respecto al cambio de plano.</p></div></header>
+    <p>Elige una muestra o carga un audio por pista. Escucha A, B o ambas y ajusta su entrada respecto al cambio de plano.</p></div></header>
   <div class="sound-lab__workgrid">
     <div class="sound-lab__preview">
       <div class="sound-lab__monitor" data-cue-monitor>
@@ -172,18 +172,29 @@
         <label><input type="radio" name="cue-mode" value="mix"><span>A + B</span></label>
       </fieldset>
       <div class="sound-lab__lane" data-cue-lane="a">
-          <label class="sound-lab__source"><span>Pista A</span><select data-cue-source><option selected value="bass-glitch" data-src="/assets/audio/glitch/bass-glitch.mp3" data-duration="2.635">Bass Glitch</option><option value="glitch-entrada" data-src="/assets/audio/glitch/glitch-de-entrada.mp3" data-duration="4.75">Glitch de entrada</option><option value="transicion-fuego" data-src="/assets/audio/previews/transicion-fuego.mp3" data-duration="4.718">Transición de Fuego 1</option><option value="intro-brillante" data-src="/assets/audio/previews/intro-brillante.mp3" data-duration="5.273">Intro Brillante</option><option value="desvanece-3" data-src="/assets/audio/previews/desvanece-3.mp3" data-duration="2.585">Desvanece 3</option><option value="el-boom" data-src="/assets/audio/previews/el-boom.mp3" data-duration="5.037">El Boom</option><option value="cuerdas-suspenso" data-src="/assets/audio/previews/cuerdas-suspenso.mp3" data-duration="11.389">Cuerdas de suspenso sinfónico</option><option value="grito-fantasma" data-src="/assets/audio/previews/grito-fantasma.mp3" data-duration="3.382">Gritos · Fantasmas 01</option><option value="terror-inquietante" data-src="/assets/audio/previews/terror-inquietante.mp3" data-duration="8.107">Terror inquietante 1</option><option value="transicion-noticias" data-src="/assets/audio/previews/transicion-noticias.mp3" data-duration="9.324">Noticias</option><option value="corte-digital-01" data-src="/assets/audio/previews/corte-digital-01.mp3" data-duration="1.508">Corte digital 01</option><option value="whoosh-futurista-01" data-src="/assets/audio/previews/whoosh-futurista-01.mp3" data-duration="5.127">Whoosh futurista 01</option><option value="apertura-cofre" data-src="/assets/audio/previews/apertura-cofre.mp3" data-duration="3.509">Apertura de cofre</option></select></label>
+          <div class="sound-lab__source">
+            <label><span>Pista A</span><select data-cue-source><option selected value="bass-glitch" data-src="/assets/audio/glitch/bass-glitch.mp3" data-duration="2.635">Bass Glitch</option><option value="glitch-entrada" data-src="/assets/audio/glitch/glitch-de-entrada.mp3" data-duration="4.75">Glitch de entrada</option><option value="transicion-fuego" data-src="/assets/audio/previews/transicion-fuego.mp3" data-duration="4.718">Transición de Fuego 1</option><option value="intro-brillante" data-src="/assets/audio/previews/intro-brillante.mp3" data-duration="5.273">Intro Brillante</option><option value="desvanece-3" data-src="/assets/audio/previews/desvanece-3.mp3" data-duration="2.585">Desvanece 3</option><option value="el-boom" data-src="/assets/audio/previews/el-boom.mp3" data-duration="5.037">El Boom</option><option value="cuerdas-suspenso" data-src="/assets/audio/previews/cuerdas-suspenso.mp3" data-duration="11.389">Cuerdas de suspenso sinfónico</option><option value="grito-fantasma" data-src="/assets/audio/previews/grito-fantasma.mp3" data-duration="3.382">Gritos · Fantasmas 01</option><option value="terror-inquietante" data-src="/assets/audio/previews/terror-inquietante.mp3" data-duration="8.107">Terror inquietante 1</option><option value="transicion-noticias" data-src="/assets/audio/previews/transicion-noticias.mp3" data-duration="9.324">Noticias</option><option value="corte-digital-01" data-src="/assets/audio/previews/corte-digital-01.mp3" data-duration="1.508">Corte digital 01</option><option value="whoosh-futurista-01" data-src="/assets/audio/previews/whoosh-futurista-01.mp3" data-duration="5.127">Whoosh futurista 01</option><option value="apertura-cofre" data-src="/assets/audio/previews/apertura-cofre.mp3" data-duration="3.509">Apertura de cofre</option></select></label>
+            <button type="button" class="sound-lab__load" data-cue-load disabled aria-label="Cargar audio en la pista A">Cargar audio</button>
+            <input type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.opus,.flac,.webm" data-cue-file hidden>
+            <p class="sound-lab__file-status" role="status" data-cue-file-status></p>
+          </div>
           <label><span>Entrada <output data-cue-offset-value>0,00 s</output></span>
           <input type="range" data-cue-offset min="-.8" max=".8" step=".02" value="0" aria-label="Entrada pista A"></label>
           <label><span>Nivel <output data-cue-gain-value>75%</output></span>
           <input type="range" data-cue-gain min="0" max="1" step=".01" value=".75" aria-label="Nivel pista A"></label>
         </div><div class="sound-lab__lane" data-cue-lane="b">
-          <label class="sound-lab__source"><span>Pista B</span><select data-cue-source><option value="bass-glitch" data-src="/assets/audio/glitch/bass-glitch.mp3" data-duration="2.635">Bass Glitch</option><option value="glitch-entrada" data-src="/assets/audio/glitch/glitch-de-entrada.mp3" data-duration="4.75">Glitch de entrada</option><option selected value="transicion-fuego" data-src="/assets/audio/previews/transicion-fuego.mp3" data-duration="4.718">Transición de Fuego 1</option><option value="intro-brillante" data-src="/assets/audio/previews/intro-brillante.mp3" data-duration="5.273">Intro Brillante</option><option value="desvanece-3" data-src="/assets/audio/previews/desvanece-3.mp3" data-duration="2.585">Desvanece 3</option><option value="el-boom" data-src="/assets/audio/previews/el-boom.mp3" data-duration="5.037">El Boom</option><option value="cuerdas-suspenso" data-src="/assets/audio/previews/cuerdas-suspenso.mp3" data-duration="11.389">Cuerdas de suspenso sinfónico</option><option value="grito-fantasma" data-src="/assets/audio/previews/grito-fantasma.mp3" data-duration="3.382">Gritos · Fantasmas 01</option><option value="terror-inquietante" data-src="/assets/audio/previews/terror-inquietante.mp3" data-duration="8.107">Terror inquietante 1</option><option value="transicion-noticias" data-src="/assets/audio/previews/transicion-noticias.mp3" data-duration="9.324">Noticias</option><option value="corte-digital-01" data-src="/assets/audio/previews/corte-digital-01.mp3" data-duration="1.508">Corte digital 01</option><option value="whoosh-futurista-01" data-src="/assets/audio/previews/whoosh-futurista-01.mp3" data-duration="5.127">Whoosh futurista 01</option><option value="apertura-cofre" data-src="/assets/audio/previews/apertura-cofre.mp3" data-duration="3.509">Apertura de cofre</option></select></label>
+          <div class="sound-lab__source">
+            <label><span>Pista B</span><select data-cue-source><option value="bass-glitch" data-src="/assets/audio/glitch/bass-glitch.mp3" data-duration="2.635">Bass Glitch</option><option value="glitch-entrada" data-src="/assets/audio/glitch/glitch-de-entrada.mp3" data-duration="4.75">Glitch de entrada</option><option selected value="transicion-fuego" data-src="/assets/audio/previews/transicion-fuego.mp3" data-duration="4.718">Transición de Fuego 1</option><option value="intro-brillante" data-src="/assets/audio/previews/intro-brillante.mp3" data-duration="5.273">Intro Brillante</option><option value="desvanece-3" data-src="/assets/audio/previews/desvanece-3.mp3" data-duration="2.585">Desvanece 3</option><option value="el-boom" data-src="/assets/audio/previews/el-boom.mp3" data-duration="5.037">El Boom</option><option value="cuerdas-suspenso" data-src="/assets/audio/previews/cuerdas-suspenso.mp3" data-duration="11.389">Cuerdas de suspenso sinfónico</option><option value="grito-fantasma" data-src="/assets/audio/previews/grito-fantasma.mp3" data-duration="3.382">Gritos · Fantasmas 01</option><option value="terror-inquietante" data-src="/assets/audio/previews/terror-inquietante.mp3" data-duration="8.107">Terror inquietante 1</option><option value="transicion-noticias" data-src="/assets/audio/previews/transicion-noticias.mp3" data-duration="9.324">Noticias</option><option value="corte-digital-01" data-src="/assets/audio/previews/corte-digital-01.mp3" data-duration="1.508">Corte digital 01</option><option value="whoosh-futurista-01" data-src="/assets/audio/previews/whoosh-futurista-01.mp3" data-duration="5.127">Whoosh futurista 01</option><option value="apertura-cofre" data-src="/assets/audio/previews/apertura-cofre.mp3" data-duration="3.509">Apertura de cofre</option></select></label>
+            <button type="button" class="sound-lab__load" data-cue-load disabled aria-label="Cargar audio en la pista B">Cargar audio</button>
+            <input type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.opus,.flac,.webm" data-cue-file hidden>
+            <p class="sound-lab__file-status" role="status" data-cue-file-status></p>
+          </div>
           <label><span>Entrada <output data-cue-offset-value>0,00 s</output></span>
           <input type="range" data-cue-offset min="-.8" max=".8" step=".02" value="0" aria-label="Entrada pista B"></label>
           <label><span>Nivel <output data-cue-gain-value>75%</output></span>
           <input type="range" data-cue-gain min="0" max="1" step=".01" value=".75" aria-label="Nivel pista B"></label>
         </div>
+      <p class="sound-lab__file-note">Hasta 25 MB por archivo. La prueba usa el inicio del audio y lo recorta al final del corte de 4 s. Los archivos se procesan en tu navegador.</p>
     </div>
   </div>
   <div class="sound-lab__timeline" data-cue-timeline aria-hidden="true">
@@ -506,7 +517,7 @@
 <script src="/js/site.js?v=f0a0e6360ed9" defer></script>
 <script src="/js/sound-previews.js?v=6e1a8da51291" defer></script>
 <script src="/herramientas/audio/js/audio-core.js?v=26b9d0289b67" defer></script>
-<script src="/js/sound-lab.js?v=1b4b167c1471" defer></script>
+<script src="/js/sound-lab.js?v=66a7d47381a0" defer></script>
 <script src="/js/audio-pulse.js?v=a18b024708a8" defer></script>
 <script src="/js/sound-lab-analysis.js?v=0a728d9ca999" defer></script>
 </body></html>

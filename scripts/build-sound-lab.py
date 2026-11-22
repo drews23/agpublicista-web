@@ -52,7 +52,12 @@ def build(english):
         options = ''.join(choices).replace(f'<option value="{selected}"', f'<option selected value="{selected}"', 1)
         lane = track.upper()
         lanes.append(f'''<div class="sound-lab__lane" data-cue-lane="{track}">
-          <label class="sound-lab__source"><span>{text('Pista', 'Track')} {lane}</span><select data-cue-source>{options}</select></label>
+          <div class="sound-lab__source">
+            <label><span>{text('Pista', 'Track')} {lane}</span><select data-cue-source>{options}</select></label>
+            <button type="button" class="sound-lab__load" data-cue-load disabled aria-label="{text('Cargar audio en la pista', 'Load audio into track')} {lane}">{text('Cargar audio', 'Load audio')}</button>
+            <input type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.opus,.flac,.webm" data-cue-file hidden>
+            <p class="sound-lab__file-status" role="status" data-cue-file-status></p>
+          </div>
           <label><span>{text('Entrada', 'Offset')} <output data-cue-offset-value>0,00 s</output></span>
           <input type="range" data-cue-offset min="-.8" max=".8" step=".02" value="0" aria-label="{text('Entrada pista', 'Track offset')} {lane}"></label>
           <label><span>{text('Nivel', 'Level')} <output data-cue-gain-value>75%</output></span>
@@ -121,7 +126,7 @@ def build(english):
 {analysis_bench(english)}
 <section class="sound-lab__workbench" id="corte" aria-labelledby="cut-title" data-cue-bench>
   <header class="sound-lab__heading"><div><h2 id="cut-title" tabindex="-1">{headline}</h2>
-    <p>{text('Escucha A y B por separado o júntalas. Desplaza cada entrada respecto al cambio de plano.', 'Listen to A and B separately or layer them. Adjust when each track starts relative to the cut.')}</p></div></header>
+    <p>{text('Elige una muestra o carga un audio por pista. Escucha A, B o ambas y ajusta su entrada respecto al cambio de plano.', 'Choose a sample or load an audio file for each track. Listen to A, B, or both and adjust when each starts relative to the cut.')}</p></div></header>
   <div class="sound-lab__workgrid">
     <div class="sound-lab__preview">
       <div class="sound-lab__monitor" data-cue-monitor>
@@ -142,6 +147,7 @@ def build(english):
         <label><input type="radio" name="cue-mode" value="mix"><span>A + B</span></label>
       </fieldset>
       {''.join(lanes)}
+      <p class="sound-lab__file-note">{text('Hasta 25 MB por archivo. La prueba usa el inicio del audio y lo recorta al final del corte de 4 s. Los archivos se procesan en tu navegador.', 'Up to 25 MB per file. The test plays from the start of each file and trims it at the end of the 4-second cut. Files are processed in your browser.')}</p>
     </div>
   </div>
   <div class="sound-lab__timeline" data-cue-timeline aria-hidden="true">
