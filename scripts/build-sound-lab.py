@@ -82,6 +82,7 @@ def build(english):
         for es_path, en_path, es_name, en_name, es_copy, en_copy in tools
     )
     deck = preview_section(english, None, None, library_url)
+    template_catalog = '/en/templates/' if english else '/codigo-web/plantillas/'
     return f'''<!doctype html>
 <html lang="{'en-US' if english else 'es'}" data-theme="dark">
 <head>
@@ -158,7 +159,11 @@ def build(english):
   <h2>{text('Edita y convierte tus archivos','Edit and convert your files')}</h2>
   <p>{text('Abre Audio Studio para editar un archivo o elige una herramienta para una tarea concreta.', 'Open Audio Studio to edit a file or choose a tool for a specific job.')}</p>
   <div class="sound-lab__tools-grid">{tool_cards}</div>
-  <p class="sound-lab__more"><a href="{library_url}">{text('Guía y descargas de efectos','Sound effects guide and downloads')}</a></p>
+  <nav class="sound-lab__more" id="plantillas-audio" aria-label="{text('Recursos de audio relacionados','Related audio resources')}">
+    <a href="{library_url}">{text('Guía y descargas de efectos','Sound effects guide and downloads')}</a>
+    <a href="{template_catalog}#reproductor-musical">{text('Reproductor musical con disco flotante','Floating Record Music Player')}</a>
+    <a href="{template_catalog}#carrusel-audio">{text('Carrusel musical de portadas apiladas','Stacked Album Cover Carousel')}</a>
+  </nav>
 </section>
 </main>
 {footer}
