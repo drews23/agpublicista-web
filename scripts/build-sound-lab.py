@@ -58,6 +58,13 @@ def build(english):
             <input type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.opus,.flac,.webm" data-cue-file hidden>
             <p class="sound-lab__file-status" role="status" data-cue-file-status></p>
           </div>
+          <fieldset class="sound-lab__fragment">
+            <legend>{text('Fragmento del archivo', 'Source segment')} <output data-cue-source-duration></output></legend>
+            <label>{text('Desde (s)', 'From (s)')}
+              <input type="number" min="0" value="0" step=".01" inputmode="decimal" data-cue-from aria-label="{text('Desde (s), pista', 'From (s), track')} {lane}"></label>
+            <label>{text('Hasta (s)', 'To (s)')}
+              <input type="number" min=".01" step=".01" inputmode="decimal" data-cue-to aria-label="{text('Hasta (s), pista', 'To (s), track')} {lane}"></label>
+          </fieldset>
           <label><span>{text('Entrada', 'Offset')} <output data-cue-offset-value>0,00 s</output></span>
           <input type="range" data-cue-offset min="-.8" max=".8" step=".02" value="0" aria-label="{text('Entrada pista', 'Track offset')} {lane}"></label>
           <label><span>{text('Nivel', 'Level')} <output data-cue-gain-value>75%</output></span>
@@ -126,7 +133,7 @@ def build(english):
 {analysis_bench(english)}
 <section class="sound-lab__workbench" id="corte" aria-labelledby="cut-title" data-cue-bench>
   <header class="sound-lab__heading"><div><h2 id="cut-title" tabindex="-1">{headline}</h2>
-    <p>{text('Elige una muestra o carga un audio por pista. Escucha A, B o ambas y ajusta su entrada respecto al cambio de plano.', 'Choose a sample or load an audio file for each track. Listen to A, B, or both and adjust when each starts relative to the cut.')}</p></div></header>
+    <p>{text('Carga un audio o elige una muestra por pista. Selecciona el fragmento, ajusta cuándo entra y escucha A, B o ambas.', 'Load an audio file or choose a sample for each track. Select its segment, set when it starts, and listen to A, B, or both.')}</p></div></header>
   <div class="sound-lab__workgrid">
     <div class="sound-lab__preview">
       <div class="sound-lab__monitor" data-cue-monitor>
@@ -138,7 +145,7 @@ def build(english):
         <button type="button" class="btn btn--primary" data-cue-play disabled>{text('Reproducir prueba','Play test')}</button>
         <button type="button" class="btn btn--ghost" data-cue-export disabled>{text('Exportar WAV','Export WAV')}</button>
       </div>
-      <p class="sound-lab__status" role="status" data-cue-status>{text('El WAV guarda los 4 s que escuchas.', 'The WAV saves the 4 seconds you hear.')}</p>
+      <p class="sound-lab__status" role="status" data-cue-status></p>
     </div>
     <div class="sound-lab__settings">
       <fieldset class="sound-lab__mode"><legend>{text('Escuchar','Listen to')}</legend>
@@ -147,7 +154,7 @@ def build(english):
         <label><input type="radio" name="cue-mode" value="mix"><span>A + B</span></label>
       </fieldset>
       {''.join(lanes)}
-      <p class="sound-lab__file-note">{text('Hasta 25 MB por archivo. La prueba usa el inicio del audio y lo recorta al final del corte de 4 s. Los archivos se procesan en tu navegador.', 'Up to 25 MB per file. The test plays from the start of each file and trims it at the end of the 4-second cut. Files are processed in your browser.')}</p>
+      <p class="sound-lab__file-note">{text('Hasta 25 MB por archivo. El audio se procesa en tu navegador.', 'Up to 25 MB per file. Audio is processed in your browser.')}</p>
     </div>
   </div>
   <div class="sound-lab__timeline" data-cue-timeline aria-hidden="true">
@@ -155,6 +162,9 @@ def build(english):
     <div class="sound-lab__bars"><span data-cue-bar="a"><b>A</b></span><span data-cue-bar="b"><b>B</b></span><i class="sound-lab__cut-marker"></i><i class="sound-lab__playhead"></i></div>
   </div>
   <div class="sound-lab__actions">
+    <label class="sound-lab__duration">{text('Duración total (s)', 'Total duration (s)')}
+      <input data-cue-duration type="number" min="2" max="30" step=".1" value="4" inputmode="decimal">
+    </label>
     <label class="sound-lab__cut"><span>{text('Cambio de plano','Cut time')} <output data-cue-cut-value>1,50 s</output></span>
       <input data-cue-cut type="range" min=".8" max="2.7" value="1.5" step=".05"></label>
   </div>

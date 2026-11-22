@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/css/site.css?v=2026091401" />
 <link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d">
 <link rel="stylesheet" href="/css/pages/sound-previews.css?v=56910299c38b">
-<link rel="stylesheet" href="/css/pages/sound-lab.css?v=0dfcac7cab75">
+<link rel="stylesheet" href="/css/pages/sound-lab.css?v=ba0eaefb43c0">
 <link rel="stylesheet" href="/css/pages/sound-lab-analysis.css?v=2a89b80f8565">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Laboratorio de sonido", "url": "https://lienzo.tools/herramientas/audio/laboratorio/", "description": "Analiza audio con onda y espectrograma, identifica sonidos, transcribe voz y compara efectos sobre un corte visual.", "applicationCategory": "MultimediaApplication", "operatingSystem": "Web", "inLanguage": "es", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "USD"}}</script>
 </head>
@@ -151,7 +151,7 @@
     </section>
 <section class="sound-lab__workbench" id="corte" aria-labelledby="cut-title" data-cue-bench>
   <header class="sound-lab__heading"><div><h2 id="cut-title" tabindex="-1">Prueba el sonido en el corte</h2>
-    <p>Elige una muestra o carga un audio por pista. Escucha A, B o ambas y ajusta su entrada respecto al cambio de plano.</p></div></header>
+    <p>Carga un audio o elige una muestra por pista. Selecciona el fragmento, ajusta cuándo entra y escucha A, B o ambas.</p></div></header>
   <div class="sound-lab__workgrid">
     <div class="sound-lab__preview">
       <div class="sound-lab__monitor" data-cue-monitor>
@@ -163,7 +163,7 @@
         <button type="button" class="btn btn--primary" data-cue-play disabled>Reproducir prueba</button>
         <button type="button" class="btn btn--ghost" data-cue-export disabled>Exportar WAV</button>
       </div>
-      <p class="sound-lab__status" role="status" data-cue-status>El WAV guarda los 4 s que escuchas.</p>
+      <p class="sound-lab__status" role="status" data-cue-status></p>
     </div>
     <div class="sound-lab__settings">
       <fieldset class="sound-lab__mode"><legend>Escuchar</legend>
@@ -178,6 +178,13 @@
             <input type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.opus,.flac,.webm" data-cue-file hidden>
             <p class="sound-lab__file-status" role="status" data-cue-file-status></p>
           </div>
+          <fieldset class="sound-lab__fragment">
+            <legend>Fragmento del archivo <output data-cue-source-duration></output></legend>
+            <label>Desde (s)
+              <input type="number" min="0" value="0" step=".01" inputmode="decimal" data-cue-from aria-label="Desde (s), pista A"></label>
+            <label>Hasta (s)
+              <input type="number" min=".01" step=".01" inputmode="decimal" data-cue-to aria-label="Hasta (s), pista A"></label>
+          </fieldset>
           <label><span>Entrada <output data-cue-offset-value>0,00 s</output></span>
           <input type="range" data-cue-offset min="-.8" max=".8" step=".02" value="0" aria-label="Entrada pista A"></label>
           <label><span>Nivel <output data-cue-gain-value>75%</output></span>
@@ -189,12 +196,19 @@
             <input type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.opus,.flac,.webm" data-cue-file hidden>
             <p class="sound-lab__file-status" role="status" data-cue-file-status></p>
           </div>
+          <fieldset class="sound-lab__fragment">
+            <legend>Fragmento del archivo <output data-cue-source-duration></output></legend>
+            <label>Desde (s)
+              <input type="number" min="0" value="0" step=".01" inputmode="decimal" data-cue-from aria-label="Desde (s), pista B"></label>
+            <label>Hasta (s)
+              <input type="number" min=".01" step=".01" inputmode="decimal" data-cue-to aria-label="Hasta (s), pista B"></label>
+          </fieldset>
           <label><span>Entrada <output data-cue-offset-value>0,00 s</output></span>
           <input type="range" data-cue-offset min="-.8" max=".8" step=".02" value="0" aria-label="Entrada pista B"></label>
           <label><span>Nivel <output data-cue-gain-value>75%</output></span>
           <input type="range" data-cue-gain min="0" max="1" step=".01" value=".75" aria-label="Nivel pista B"></label>
         </div>
-      <p class="sound-lab__file-note">Hasta 25 MB por archivo. La prueba usa el inicio del audio y lo recorta al final del corte de 4 s. Los archivos se procesan en tu navegador.</p>
+      <p class="sound-lab__file-note">Hasta 25 MB por archivo. El audio se procesa en tu navegador.</p>
     </div>
   </div>
   <div class="sound-lab__timeline" data-cue-timeline aria-hidden="true">
@@ -202,6 +216,9 @@
     <div class="sound-lab__bars"><span data-cue-bar="a"><b>A</b></span><span data-cue-bar="b"><b>B</b></span><i class="sound-lab__cut-marker"></i><i class="sound-lab__playhead"></i></div>
   </div>
   <div class="sound-lab__actions">
+    <label class="sound-lab__duration">Duración total (s)
+      <input data-cue-duration type="number" min="2" max="30" step=".1" value="4" inputmode="decimal">
+    </label>
     <label class="sound-lab__cut"><span>Cambio de plano <output data-cue-cut-value>1,50 s</output></span>
       <input data-cue-cut type="range" min=".8" max="2.7" value="1.5" step=".05"></label>
   </div>
@@ -517,7 +534,7 @@
 <script src="/js/site.js?v=f0a0e6360ed9" defer></script>
 <script src="/js/sound-previews.js?v=6e1a8da51291" defer></script>
 <script src="/herramientas/audio/js/audio-core.js?v=26b9d0289b67" defer></script>
-<script src="/js/sound-lab.js?v=66a7d47381a0" defer></script>
+<script src="/js/sound-lab.js?v=7195791f34cd" defer></script>
 <script src="/js/audio-pulse.js?v=a18b024708a8" defer></script>
 <script src="/js/sound-lab-analysis.js?v=0a728d9ca999" defer></script>
 </body></html>

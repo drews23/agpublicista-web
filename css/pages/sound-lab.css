@@ -149,7 +149,7 @@
 .sound-lab__file-status { grid-column: 1 / -1; }
 .sound-lab__file-status:empty { display: none; }
 .sound-lab__file-status[data-error] { color: #ffcf81; }
-.sound-lab__lane label, .sound-lab__cut { display: grid; min-width: 0; gap: .22rem; font-size: .8rem; }
+.sound-lab__lane label, .sound-lab__cut, .sound-lab__duration { display: grid; min-width: 0; gap: .22rem; font-size: .8rem; }
 .sound-lab__lane label > span, .sound-lab__cut > span {
   display: flex;
   flex-wrap: wrap;
@@ -161,6 +161,29 @@
 .sound-lab__lane select {
   width: 100%; min-height: 44px; padding: .4rem; border: 1px solid var(--lab-line);
   border-radius: .45rem; background: #101629; color: var(--lab-text); font: inherit;
+}
+.sound-lab__fragment {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .35rem .65rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.sound-lab__fragment legend { margin-bottom: .3rem; padding: 0; color: var(--lab-muted); font-size: .8rem; }
+.sound-lab__fragment legend output { margin-inline-start: .3rem; white-space: nowrap; }
+.sound-lab__workbench input[type="number"] {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: .4rem .5rem;
+  border: 1px solid var(--lab-line);
+  border-radius: .45rem;
+  background: #101629;
+  color: var(--lab-text);
+  font: 500 .8rem/1.2 var(--font-mono);
 }
 .sound-lab__lane input[type="range"], .sound-lab__cut input[type="range"] {
   width: 100%; min-height: 44px; margin: 0; accent-color: var(--lab-a); cursor: ew-resize;
@@ -195,8 +218,9 @@
 .sound-lab__cut-marker, .sound-lab__playhead { position: absolute; inset-block: -4px; width: 2px; }
 .sound-lab__cut-marker { left: var(--cut); background: #ffcf81; }
 .sound-lab__playhead { left: var(--playhead); background: #fff; }
-.sound-lab__actions { display: flex; justify-content: space-between; align-items: center; gap: .7rem 1rem; flex-wrap: wrap; }
-.sound-lab__cut { flex: 0 1 18rem; }
+.sound-lab__actions { display: flex; align-items: start; gap: .7rem 1rem; flex-wrap: wrap; }
+.sound-lab__duration { flex: 0 1 9rem; }
+.sound-lab__cut { flex: 1 1 12rem; max-width: 23rem; }
 .sound-lab__buttons { display: flex; flex-wrap: wrap; gap: .5rem; }
 .sound-lab__buttons .btn { min-height: 44px; }
 .sound-lab__buttons .btn--primary { background: #ddd4ff; color: #1b1630; }
@@ -220,7 +244,6 @@
 @media (max-width: 33rem) {
   .sound-lab__hero { align-items: start; }
   .sound-lab__lane { gap: .35rem .65rem; }
-  .sound-lab__cut { width: 100%; flex-basis: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sound-lab .btn { transition: none; }
