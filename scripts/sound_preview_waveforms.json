@@ -1,0 +1,54 @@
+{
+  "bass-glitch": {
+    "duration": 2.635,
+    "peaks": "pogpoappfmnfmnnorrruyvuvxsxvwiolfoq9nqwxzjmivvtphgtpjrvvrrqqrpmspgst8vtvuttg00000000000000000000"
+  },
+  "glitch-entrada": {
+    "duration": 4.75,
+    "peaks": "356788999efghdfeehgedhhjfhgigffgeeeeguztqyg3urwghffheprmvtqjkljwqtrzenuvwuviag9bd99dddbk10000000"
+  },
+  "transicion-fuego": {
+    "duration": 4.718,
+    "peaks": "flppqrqutywyzyvxvyyvuzvqppysrroqjljillhkgfedkihefghbcbaa8a99885777665444333322222222111111000000"
+  },
+  "intro-brillante": {
+    "duration": 5.273,
+    "peaks": "xwkllsuxyxuxzxussxupqozupsrvuxutrrqnmknonkgfhgffecbcccb97998766665554444333332211111111110000000"
+  },
+  "desvanece-3": {
+    "duration": 2.585,
+    "peaks": "0000000111114569bbbdgihiikmopqrutvzvsunnoklicba8666755543444333222111111111000000000000000000000"
+  },
+  "el-boom": {
+    "duration": 5.037,
+    "peaks": "zyxwtvxwqvwwtwutuvvvvvvsusstsotronmfnjmfgfhdhccbc98988586766563443554344333333222221221121110000"
+  },
+  "cuerdas-suspenso": {
+    "duration": 11.389,
+    "peaks": "00000000112223344445556677889aacbccddehinqotrrsxzvvsvyuvfgee888744542232111111110000000000000000"
+  },
+  "grito-fantasma": {
+    "duration": 3.382,
+    "peaks": "9ghnooyyswssuyzuxxutswtzxvxwtqsropstpporqoijprpqpomhjhgefehffefedbab7aaa988777575455433221100000"
+  },
+  "terror-inquietante": {
+    "duration": 8.107,
+    "peaks": "23344455666779889a9baacbeceefgligmjhlkprpprrsuqurvzvuwsononihggefdcbaa99867766655534433333322221"
+  },
+  "transicion-noticias": {
+    "duration": 9.324,
+    "peaks": "uvppkkijmlvzxpnkkjmppuqrpmljlnlwqqokgghjjhieea76543222211111111111100000000000000000000000000000"
+  },
+  "corte-digital-01": {
+    "duration": 1.508,
+    "peaks": "000000ipwuvuwvwtknmssonppvyxuspqxvhjszwskkoqvvrstorvsstmga64211111111010000000000000000000000000"
+  },
+  "whoosh-futurista-01": {
+    "duration": 5.127,
+    "peaks": "00000000000011123367beioqxyzywuzwtyvsxywxxtlrqooonnppujjkjhgiehghgdcfbebdgdecd9bd7abbaba86864432"
+  },
+  "apertura-cofre": {
+    "duration": 3.509,
+    "peaks": "jlpqtrqsxvuwywutvztronvqommmjkkiglgjghfefedeeccb9a8989888867656655544544444443333333222221111110"
+  }
+}

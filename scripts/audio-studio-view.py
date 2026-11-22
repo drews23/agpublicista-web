@@ -197,6 +197,7 @@ def editorial(lang: str) -> str:
         practice_title = "Un sonido para ponerlo en práctica."
         practice_intro = "Compara los packs de Lienzo y elige un WAV. Prepáralo aquí y llévalo a tu editor de video para sincronizarlo con la imagen."
         practice_links = [
+            ("/herramientas/audio/laboratorio/", "Probar efectos en el Laboratorio de sonido"),
             ("/blog/efectos-de-sonido-para-videos-gratis/", "Comparar y descargar sonidos"),
             ("/blog/sonidos-de-introduccion-y-desvanecimiento-gratis/", "Practicar una entrada y un cierre"),
         ]
@@ -204,6 +205,7 @@ def editorial(lang: str) -> str:
         practice_title = "Put a sound to work."
         practice_intro = "Compare Lienzo sound packs and choose a WAV file. Prepare it here, then bring it into your video editor to sync it with the picture."
         practice_links = [
+            ("/en/tools/audio/lab/", "Try effects in Audio Lab"),
             ("/en/blog/free-sound-effects/", "Compare and download sound effects"),
             ("/en/blog/intro-fade-sound-effects/", "Practice an intro and a fade"),
         ]
