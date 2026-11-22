@@ -138,6 +138,8 @@ for es,en,title,description in PAGES:
   document=about_module.render_about(document)
  from guide_categories import enhance_guides
  document=enhance_guides(document, '/en/'+en+'/')
+ from sound_previews import enhance_document as enhance_sound_previews
+ document=enhance_sound_previews(document, '/en/'+en+'/')
  target=ROOT/'en'/en/'index.html';target.parent.mkdir(parents=True,exist_ok=True);target.write_text(document,encoding='utf-8')
  alternates='\n'.join(f'<link rel="alternate" hreflang="{lang}" href="{url}">' for lang,url in [('es',ORIGIN+'/'+es+'/'),('en',canonical),('x-default',ORIGIN+'/'+es+'/')])
  if not soup.select_one('link[hreflang=en]'):source=source.replace('</head>',alternates+'\n</head>',1)

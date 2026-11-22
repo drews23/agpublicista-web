@@ -141,6 +141,8 @@ for es, en, title, description in PAGES:
     destination.parent.mkdir(parents=True, exist_ok=True)
     from article_share import enhance_document as enhance_article_share
     document = enhance_article_share(document, '/en/' + en.strip('/') + '/')
+    from sound_previews import enhance_document as enhance_sound_previews
+    document = enhance_sound_previews(document, '/en/' + en.strip('/') + '/')
     destination.write_text(document, encoding='utf-8')
     # Alter only head alternates and the navigation language switch in Spanish.
     source = re.sub(r'<!-- Lienzo language alternatives -->\s*(?:<link[^>]+hreflang=[^>]+>\s*)+', '', source)

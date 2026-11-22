@@ -52,7 +52,7 @@ def enhance_document(raw, route):
             raw = re.sub(r'(<(?:h2|section|div)\b[^>]*\bid="'+anchor+r'"[^>]*)(>)', lambda m: m[1]+('' if 'tabindex=' in m[1] else ' tabindex="-1"')+m[2], raw)
         marker = re.search(r'<(?:h2|div)\b[^>]*\bid="'+preview+r'"', raw)
     else:
-        marker = re.search(r'<section id="english-preview"|<div class="(?:video-embed|english-video)[^"]*"', raw)
+        marker = re.search(r'<section id="english-preview"|<div class="(?:video-embed|english-video|sound-demo)[^"]*"', raw)
     if marker is None:
         raise ValueError('Missing preview: '+route)
     if preview == 'vista-previa':
