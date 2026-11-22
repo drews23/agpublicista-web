@@ -39,6 +39,10 @@ GROUPS = [
      'Muestra cómo se ve una interfaz en pantallas de distintos tamaños.',
      'Show how an interface looks on screens of different sizes.',
      ['mockup-multidispositivo', 'prototipo-pantalla-movil', 'portatil-en-perspectiva']),
+    ('audio', 'audio', 'Audio', 'Audio',
+     'Escucha música en un disco flotante o explora una pila de portadas con tu propio repertorio.',
+     'Play music on a floating record or browse a cover stack with your own tracks.',
+     ['reproductor-musical', 'carrusel-audio']),
 ]
 EN_CAROUSEL_DESCRIPTIONS = {
     'carrusel-progreso': 'Showcase products with drag controls, keyboard navigation, a progress indicator, and optional autoplay.',
@@ -68,6 +72,8 @@ CHOICES = {
     'mockup-multidispositivo': ('Comparar un recorrido en portátil y móvil', 'Comparing a walkthrough on laptop and phone', 'Capturas, MP4, encuadre y pasos', 'Screenshots, MP4, framing, and action markers', 'HTML + CSS + JS'),
     'prototipo-pantalla-movil': ('Probar el recorrido de una app', 'Trying an app flow', 'Pantallas, aviso y puntos interactivos', 'Screens, notification, and hotspots', 'HTML + CSS + JS'),
     'portatil-en-perspectiva': ('Presentar una grabación en un portátil', 'Presenting a recording on a laptop', 'MP4 o imagen, encuadre y reproducción', 'MP4 or still image, framing, and playback', 'HTML + CSS + JS'),
+    'reproductor-musical': ('Mostrar una pista con portada y disco', 'Presenting a track with a cover and record', 'Música local, portada y cola', 'Local music, cover, and queue', 'HTML + CSS + JS'),
+    'carrusel-audio': ('Presentar una selección de pistas', 'Showcasing a collection of tracks', 'Archivos, orden y reproducción continua', 'Audio files, track order, and continuous playback', 'HTML + CSS + JS'),
 }
 
 
@@ -86,6 +92,8 @@ def enhance_template_catalog(raw, route):
     soup = BeautifulSoup(raw, 'html.parser')
     from templates_v2 import add_cards
     add_cards(soup, route)
+    from audio_templates import add_cards as add_audio_cards
+    add_audio_cards(soup, route)
     section = soup.select_one('.templates-section')
     cards = {card['id']: card for card in section.select('article.template')}
     expected = [slug for group in GROUPS for slug in group[-1]]
@@ -121,6 +129,10 @@ def enhance_template_catalog(raw, route):
         accessible = label + ': ' + str(len(slugs)) + tr(' plantilla' if len(slugs) == 1 else ' plantillas', ' template' if len(slugs) == 1 else ' templates')
         links.append(f'<li><a href="#{key}" aria-label="{accessible}"><span class="catalog-index__number" aria-hidden="true">0{number}</span><span class="catalog-index__name">{label}</span><span class="catalog-index__count" aria-hidden="true">{count}</span><span class="catalog-index__arrow" aria-hidden="true">↗</span></a></li>')
         tutorials = EN_CAROUSEL_TUTORIALS if en and key == 'carousels' else ''
+        if key == 'audio':
+            lab = tr('/herramientas/audio/laboratorio/', '/en/tools/audio/lab/')
+            link_label = tr('Explorar el Laboratorio de sonido', 'Explore the Audio Lab')
+            tutorials = f'<p class="catalog-note"><a href="{lab}">{link_label}</a></p>'
         groups.append(f'''<section class="catalog-group catalog-group--{number}" id="{key}" tabindex="-1" aria-labelledby="{key}-title"><div class="catalog-group__head"><span class="catalog-group__number" aria-hidden="true">0{number}</span><div><h2 id="{key}-title">{label}<span class="catalog-group__count" aria-hidden="true">{count}</span></h2><p>{description}</p></div><a href="#{index}" class="catalog-group__back">{tr('Categorías', 'Categories')} <span aria-hidden="true">↑</span></a></div><div class="templates-grid">{''.join(str(cards[slug]) for slug in slugs)}</div>{tutorials}</section>''')
     nav = f'<nav class="catalog-index" id="{index}" tabindex="-1" aria-label="{tr("Explorar plantillas por categoría", "Browse templates by category")}"><div class="catalog-index__intro"><p class="eyebrow">{tr("ENCUENTRA TU PUNTO DE PARTIDA", "FIND YOUR STARTING POINT")}</p><p>{tr("¿Qué quieres crear?", "What do you want to build?")}</p></div><ul>{"".join(links)}</ul></nav>'
     rows = []
@@ -148,7 +160,7 @@ def enhance_template_catalog(raw, route):
     # Keep the English catalog's search and share copy in sync on every rebuild.
     if en:
         updated = re.sub(r'<title>[^<]*</title>', lambda _: '<title>' + escape(english_copy['title']) + '</title>', updated, count=1)
-    description = tr(f'{template_count} plantillas web HTML, CSS y JavaScript gratis. Prueba mockups, galerías, tarjetas y menús. Personaliza y descarga el código.', english_copy['description'])
+    description = tr(f'{template_count} plantillas web HTML, CSS y JavaScript gratis. Prueba reproductores de música, carruseles, mockups y tarjetas. Descarga el código.', english_copy['description'])
     for match in reversed(list(re.finditer(r'<meta\b[^>]*>', updated))):
         meta = BeautifulSoup(match.group(), 'html.parser').meta
         if meta.get('name') in ['description', 'twitter:description'] or meta.get('property') == 'og:description':

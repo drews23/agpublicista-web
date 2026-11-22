@@ -1,0 +1,9 @@
+.music-youtube{margin:1rem auto 2rem;width:min(100%,720px);color:var(--text,#f4f2ff);}
+.music-youtube details{background:#132033;color:#f4f2ff;border:1px solid #435474;border-radius:.85rem;padding:.78rem 1rem}
+.music-youtube summary{cursor:pointer;font-weight:700}
+.music-youtube p{margin:.55rem 0;color:#cbd5ea}
+.music-youtube__actions{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.music-youtube__actions a,.music-youtube__actions button{display:inline-grid;place-items:center;min-height:44px;padding:.45rem .8rem;border:1px solid #59688a;border-radius:.5rem;background:#202f4a;color:#f4f2ff;font:inherit}
+.music-youtube__actions [hidden]{display:none}
+.music-youtube iframe{width:100%;min-height:200px;aspect-ratio:16/9;border:0;margin-top:.55rem;border-radius:.45rem;display:block}
+.music-youtube [role=status]:empty{display:none}

@@ -207,5 +207,29 @@
     "size": 2394,
     "authorRole": "Implementación original y guía",
     "license": "Código MIT. Fuentes OFL. Modelo MacBook CC BY 4.0. Créditos en SOURCE-NOTES.md."
+  },
+  {
+    "id": "reproductor-musical",
+    "title": "Reproductor musical con disco flotante",
+    "tag": "Disco, portada y transporte",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "reproductor-musical-lienzo.zip",
+    "desc": "Escucha música en un reproductor compacto con disco giratorio, ambientación por portada y panel de pista desplegable. Personaliza la cola con audio y portada propios.",
+    "size": 1744,
+    "authorRole": "Implementación original y guía",
+    "license": "Código MIT. Fuente OFL. Grabaciones acreditadas en MUSIC-CREDITS.md."
+  },
+  {
+    "id": "carrusel-audio",
+    "title": "Carrusel musical de portadas apiladas",
+    "tag": "Pila de portadas y playlist",
+    "author": "Lienzo",
+    "source": null,
+    "zip": "carrusel-audio-lienzo.zip",
+    "desc": "Recorre una pila de portadas enlazada a la lista activa. Añade música local, organiza favoritos y controla volumen, progreso y orden de reproducción.",
+    "size": 1777,
+    "authorRole": "Implementación original y guía",
+    "license": "Código MIT. Fuente OFL. Grabaciones acreditadas en MUSIC-CREDITS.md."
   }
 ]

@@ -1,0 +1,11 @@
+# Música de demostración / Demo music
+
+Las muestras son extractos de grabaciones de piano redistribuibles. Lienzo recortó las interpretaciones, añadió fundidos breves, igualó el nivel de escucha y las convirtió a MP3 estéreo a 112 kbps. Cada grabación conserva la licencia indicada aquí.
+
+These samples are excerpts from redistributable piano recordings. Lienzo trimmed the performances, added short fades, matched playback loudness, and encoded them as 112 kbps stereo MP3. Each recording retains the license shown below.
+
+- **track-1.mp3 · 0:32.** Johann Sebastian Bach, Preludio en do mayor / Prelude in C Major, BWV 846, interpretado por / performed by Kimiko Ishizaka. Extracto / Excerpt, 1.25–33.25 s. [Publicación de la intérprete / Performer release](https://kimikoishizaka.bandcamp.com/track/prelude-no-1-in-c-major-bwv-846) · [Grabación original / Original recording](https://commons.wikimedia.org/wiki/File:Kimiko_Ishizaka_-_Bach_-_Well-Tempered_Clavier,_Book_1_-_01_Prelude_No._1_in_C_major,_BWV_846.ogg) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **track-2.mp3 · 0:34.** Frédéric Chopin, Nocturno en mi bemol mayor / Nocturne in E-flat Major, Op. 9 No. 2, interpretado por / performed by Membeth. Extracto / Excerpt, 0.36–34.36 s. [Grabación publicada por su intérprete / Performer-published recording](https://commons.wikimedia.org/wiki/File:Chopin.Nocturne.Es-Dur.opus.9.2.ogg) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **track-3.mp3 · 0:36.** Erik Satie, Gymnopédie n.º 1 / Gymnopédie No. 1, arreglo e interpretación / arrangement and performance by Kevin MacLeod (incompetech.com). Extracto / Excerpt, 0–36 s. [Fuente del intérprete / Performer source](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100787) · [Registro de licencia de la grabación / Recording license record](https://commons.wikimedia.org/wiki/File:Gymnopedie_No._1_(ISRC_USUAN1100787).mp3) · [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+
+Ejemplo de reproducción en línea / Online playback example. Kimiko Ishizaka toca el preludio de Bach al comienzo del video oficial de OpenGoldberg. Kimiko Ishizaka performs Bach's prelude at the start of the official OpenGoldberg video. [YouTube](https://www.youtube.com/watch?v=nPHIZw7HZq4) · [YouTube Music](https://music.youtube.com/watch?v=nPHIZw7HZq4).

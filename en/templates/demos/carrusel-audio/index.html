@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en-US" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <title>Stacked Album Cover Carousel | Lienzo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="youtube-sample.css">
+  <link rel="stylesheet" href="preview-shell.css">
+  <script src="preview-shell.js" defer></script>
+  <script src="player.js" defer></script>
+  <script src="youtube-sample.js" defer></script>
+</head>
+<body>
+  <main class="page" data-audio-template data-stack-player>
+    <header class="intro">
+      <h1>Stacked Album Cover Carousel</h1>
+      <p>Browse a stack of covers linked to the active playlist. Add local music, organize favorites, and control volume, seeking, and playback order.</p>
+    </header>
+    <section class="stack-player" data-stack style="--stack-tone:#88ead4">
+      <img class="stack-atmosphere" data-atmosphere src="art/coast.webp" alt="" width="600" height="600" decoding="async">
+      <div class="stack-layout">
+        <div class="stack-gallery">
+          <div class="stack-deck" data-cover-deck tabindex="0" role="group" aria-label="Collection covers"
+            aria-describedby="stack-deck-hint">
+            <figure class="stack-card" data-stack-cover="1"
+          style="--offset:0;--spread:0;--depth:3">
+          <img src="art/coast.webp" alt="" width="480" height="480" draggable="false" decoding="async">
+          <figcaption><strong>Prelude in C Major</strong><span>Kimiko Ishizaka</span></figcaption>
+        </figure><figure class="stack-card" data-stack-cover="2"
+          style="--offset:1;--spread:1;--depth:2">
+          <img src="art/night.webp" alt="" width="480" height="480" draggable="false" decoding="async">
+          <figcaption><strong>Nocturne, Op. 9 No. 2</strong><span>Membeth</span></figcaption>
+        </figure><figure class="stack-card" data-stack-cover="3"
+          style="--offset:-1;--spread:1;--depth:2">
+          <img src="art/dunes.webp" alt="" width="480" height="480" draggable="false" decoding="async">
+          <figcaption><strong>Gymnopédie No. 1</strong><span>Kevin MacLeod</span></figcaption>
+        </figure>
+          </div>
+          <p class="stack-deck-hint" id="stack-deck-hint">Swipe the covers or use the arrow keys</p>
+        </div>
+        <section class="stack-library" aria-labelledby="stack-library-title">
+          <h2 id="stack-library-title">Playlist</h2>
+          <ol class="stack-playlist" data-playlist>
+            <li class="stack-track" data-stack-track="1" data-src="samples/track-1.mp3"
+          data-art="art/coast.webp" data-tone="#88ead4" data-credit="https://kimikoishizaka.bandcamp.com/track/prelude-no-1-in-c-major-bwv-846">
+          <button type="button" class="stack-track-select" data-choose aria-current="true">
+            <img src="art/coast.webp" alt="" width="48" height="48" decoding="async">
+            <span class="stack-track-copy"><strong>Prelude in C Major</strong><span>Kimiko Ishizaka</span></span>
+            <span class="stack-duration">0:32</span>
+          </button>
+          <button type="button" class="stack-favorite" data-favorite aria-pressed="false"
+            aria-label="Add to favorites · Prelude in C Major"><span aria-hidden="true">♡</span></button>
+        </li><li class="stack-track" data-stack-track="2" data-src="samples/track-2.mp3"
+          data-art="art/night.webp" data-tone="#adbcff" data-credit="https://commons.wikimedia.org/wiki/File:Chopin.Nocturne.Es-Dur.opus.9.2.ogg">
+          <button type="button" class="stack-track-select" data-choose>
+            <img src="art/night.webp" alt="" width="48" height="48" decoding="async">
+            <span class="stack-track-copy"><strong>Nocturne, Op. 9 No. 2</strong><span>Membeth</span></span>
+            <span class="stack-duration">0:34</span>
+          </button>
+          <button type="button" class="stack-favorite" data-favorite aria-pressed="false"
+            aria-label="Add to favorites · Nocturne, Op. 9 No. 2"><span aria-hidden="true">♡</span></button>
+        </li><li class="stack-track" data-stack-track="3" data-src="samples/track-3.mp3"
+          data-art="art/dunes.webp" data-tone="#ffc88a" data-credit="https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100787">
+          <button type="button" class="stack-track-select" data-choose>
+            <img src="art/dunes.webp" alt="" width="48" height="48" decoding="async">
+            <span class="stack-track-copy"><strong>Gymnopédie No. 1</strong><span>Kevin MacLeod</span></span>
+            <span class="stack-duration">0:36</span>
+          </button>
+          <button type="button" class="stack-favorite" data-favorite aria-pressed="false"
+            aria-label="Add to favorites · Gymnopédie No. 1"><span aria-hidden="true">♡</span></button>
+        </li>
+          </ol>
+        </section>
+      </div>
+      <div class="stack-transport">
+        <div class="stack-now">
+          <img data-now-art src="art/coast.webp" alt="" width="44" height="44" decoding="async">
+          <div class="stack-now-copy"><p data-current-title aria-live="polite">Prelude in C Major</p>
+          <p data-current-artist>Kimiko Ishizaka</p></div>
+          <a data-credit-link href="https://kimikoishizaka.bandcamp.com/track/prelude-no-1-in-c-major-bwv-846" rel="noopener noreferrer">Track credits</a>
+        </div>
+        <div class="stack-controls" data-transport>
+          <button type="button" class="stack-icon" data-shuffle aria-label="Shuffle" aria-pressed="false"
+            title="Shuffle"><span aria-hidden="true">⇄</span></button>
+          <button type="button" class="stack-icon" data-previous aria-label="Previous track" title="Previous track">
+            <span class="stack-glyph-previous" aria-hidden="true"></span></button>
+          <button type="button" class="stack-icon stack-play" data-play aria-label="Play" title="Play">
+            <span class="stack-glyph-play" aria-hidden="true"></span></button>
+          <button type="button" class="stack-icon" data-next aria-label="Next track" title="Next track">
+            <span class="stack-glyph-next" aria-hidden="true"></span></button>
+        </div>
+        <label class="stack-volume"><span>Volume</span>
+          <input type="range" data-volume min="0" max="1" step=".01" value=".8">
+        </label>
+        <div class="stack-position" data-timeline>
+          <span data-elapsed>0:00</span>
+          <input type="range" data-seek aria-label="Playback position" min="0" max="0" step=".05" value="0">
+          <span data-total>0:32</span>
+        </div>
+        <audio src="samples/track-1.mp3" preload="none" controls aria-label="Audio player"></audio>
+      </div>
+      <details class="stack-options">
+        <summary>Customize playlist</summary>
+        <div class="stack-tools">
+          <label class="stack-file"><span>Add music</span><input type="file" data-add accept="audio/*" multiple></label>
+          <label class="stack-file"><span>Change cover</span><input type="file" data-art
+            accept="image/jpeg,image/png,image/webp,image/avif"></label>
+          <button type="button" data-move="-1">Move earlier</button>
+          <button type="button" data-move="1">Move later</button>
+          <button type="button" data-reset>Restore collection</button>
+          <label class="stack-toggle"><input type="checkbox" data-continuous checked>Advance when a track ends</label>
+        </div>
+        <p>Local files stay available while this page is open.</p>
+      </details>
+      <p class="stack-feedback" data-feedback role="status" hidden></p>
+    </section>
+    <section id="youtube-music" class="music-youtube" data-music-youtube data-video-id="nPHIZw7HZq4">
+  <details>
+    <summary>Music example on YouTube</summary>
+    <p>Kimiko Ishizaka · Bach, BWV 846</p>
+    <div class="music-youtube__actions"><button type="button" data-music-load>Play on YouTube</button>
+    <a href="./#youtube-music" target="_blank" rel="noopener" data-music-demo hidden>Open demo with YouTube ↗</a>
+    <a href="https://music.youtube.com/watch?v=nPHIZw7HZq4" target="_blank" rel="noopener">Open in YouTube Music ↗</a></div>
+    <p role="status" data-music-status data-offline="Open the recording in YouTube Music or host the template on a website to use the embedded player."></p>
+    <div data-music-frame></div>
+  </details>
+</section>
+  </main>
+</body>
+</html>

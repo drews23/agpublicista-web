@@ -1,0 +1,16 @@
+:root[data-view="component"] .page {
+  padding-block: clamp(.75rem, 2.2vw, 1.5rem);
+}
+
+:root[data-view="component"] .intro { display: none; }
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  background: #f3f1fb;
+  color: #1d2235;
+}
+
+:root[data-theme="light"] .intro p { color: #46506a; }
+:root[data-theme="light"] :focus-visible { outline-color: #765cf1; }
+:root[data-theme="light"] :is(.record, .stack-player, .music-youtube) { color-scheme: dark; }
+:root[data-theme="light"] .record__settings { color: #f7f4fb; }

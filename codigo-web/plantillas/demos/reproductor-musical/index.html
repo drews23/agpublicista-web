@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <title>Reproductor musical con disco flotante | Lienzo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="youtube-sample.css">
+  <link rel="stylesheet" href="preview-shell.css">
+  <script src="preview-shell.js" defer></script>
+  <script src="player.js" defer></script>
+  <script src="youtube-sample.js" defer></script>
+</head>
+<body>
+  <main class="page" data-audio-template data-record-player>
+    <header class="intro">
+      <h1>Reproductor musical con disco flotante</h1>
+      <p>Escucha música en un reproductor compacto con disco giratorio, ambientación por portada y panel de pista desplegable. Personaliza la cola con audio y portada propios.</p>
+    </header>
+    <section class="record" aria-label="Reproductor musical" data-play="Reproducir" data-pause="Pausar" data-show="Mostrar información y progreso" data-hide="Ocultar información y progreso" data-local="Archivo local" data-error="No se pudo reproducir esta pista. Prueba otro archivo de audio." data-cover-error="No se pudo abrir la portada. Elige una imagen JPEG, PNG, WebP o AVIF." data-file-error="Elige un archivo de audio compatible." style="--record-tone:#b4a1ff">
+      <div class="record__stage">
+        <div class="record__ambience" aria-hidden="true">
+          <img src="covers/yosemite.webp" alt="" data-record-wash class="is-visible" decoding="async">
+          <img alt="" data-record-wash decoding="async">
+        </div>
+        <div class="record__deck">
+          <section class="record__drawer" id="record-details" aria-label="Posición de reproducción" inert>
+            <h2 data-record-title>Preludio en do mayor</h2>
+            <p data-record-artist>Kimiko Ishizaka</p>
+            <label class="record__seek">
+              <span class="record__times" aria-hidden="true"><span data-record-time>0:00</span><span data-record-total>0:32</span></span>
+              <input type="range" min="0" max="1" value="0" step=".01" aria-label="Posición de reproducción" data-record-seek disabled>
+            </label>
+          </section>
+          <div class="record__dock">
+            <div class="record__disc" aria-hidden="true">
+              <div class="record__rotor">
+                <img src="covers/yosemite.webp" alt="" width="176" height="176" data-record-art decoding="async">
+                <i class="record__spindle"></i>
+              </div>
+            </div>
+            <div class="record__transport">
+              <button class="record__button" type="button" aria-label="Pista anterior" data-record-prev><i class="record__icon record__icon--prev" aria-hidden="true"></i></button>
+              <button class="record__button record__button--play" type="button" aria-label="Reproducir" data-record-play><i class="record__icon record__icon--play" aria-hidden="true"></i></button>
+              <button class="record__button" type="button" aria-label="Pista siguiente" data-record-next><i class="record__icon record__icon--next" aria-hidden="true"></i></button>
+            </div>
+            <button class="record__information" type="button" aria-label="Mostrar información y progreso" aria-expanded="false" aria-controls="record-details" data-record-info><i aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <audio preload="none" src="samples/track-1.mp3" aria-label="Reproductor musical" controls data-record-audio></audio>
+        <span class="record__sr" data-record-announcement aria-live="polite"></span>
+      </div>
+      <details class="record__settings">
+        <summary>Lista y personalización</summary>
+        <div class="record__settings-grid">
+          <ol class="record__queue" aria-label="Lista de pistas" data-record-queue>
+            <li><button class="record__row" type="button" data-record-choice
+          data-src="samples/track-1.mp3" data-cover="covers/yosemite.webp"
+          data-title="Preludio en do mayor" data-artist="Kimiko Ishizaka" data-tone="#b4a1ff"
+          data-duration="32.0" aria-pressed="true">
+          <img src="covers/yosemite.webp" alt="" width="48" height="48" loading="lazy" decoding="async">
+          <span><strong>Preludio en do mayor</strong><small>Kimiko Ishizaka</small></span>
+          <span data-record-length>0:32</span>
+        </button></li><li><button class="record__row" type="button" data-record-choice
+          data-src="samples/track-2.mp3" data-cover="covers/muir-woods.webp"
+          data-title="Nocturno op. 9 n.º 2" data-artist="Membeth" data-tone="#82efdc"
+          data-duration="34.0" aria-pressed="false">
+          <img src="covers/muir-woods.webp" alt="" width="48" height="48" loading="lazy" decoding="async">
+          <span><strong>Nocturno op. 9 n.º 2</strong><small>Membeth</small></span>
+          <span data-record-length>0:34</span>
+        </button></li><li><button class="record__row" type="button" data-record-choice
+          data-src="samples/track-3.mp3" data-cover="covers/big-sur.webp"
+          data-title="Gymnopédie n.º 1" data-artist="Kevin MacLeod" data-tone="#ffd09b"
+          data-duration="36.0" aria-pressed="false">
+          <img src="covers/big-sur.webp" alt="" width="48" height="48" loading="lazy" decoding="async">
+          <span><strong>Gymnopédie n.º 1</strong><small>Kevin MacLeod</small></span>
+          <span data-record-length>0:36</span>
+        </button></li>
+          </ol>
+          <div class="record__customize">
+            <label class="record__file"><span>Añadir música</span><input type="file" accept="audio/*,.mp3,.wav,.m4a,.ogg,.opus,.flac,.aac,.webm,.aiff,.aif" data-record-file multiple></label>
+            <label class="record__file"><span>Cambiar portada</span><input type="file" accept="image/jpeg,image/png,image/webp,image/avif" data-record-cover></label>
+            <label class="record__volume"><span>Volumen</span><input type="range" min="0" max="1" step=".01" value="1" data-record-volume></label>
+            <button class="record__reset" type="button" data-record-reset hidden>Restaurar ejemplos</button>
+            <p>Aquí aparecen tus pistas locales mientras la página está abierta.</p>
+          </div>
+        </div>
+      </details>
+      <p class="record__status" role="status" data-record-status hidden></p>
+    </section>
+    <section id="youtube-music" class="music-youtube" data-music-youtube data-video-id="nPHIZw7HZq4">
+  <details>
+    <summary>Ejemplo musical en YouTube</summary>
+    <p>Kimiko Ishizaka · Bach, BWV 846</p>
+    <div class="music-youtube__actions"><button type="button" data-music-load>Reproducir en YouTube</button>
+    <a href="./#youtube-music" target="_blank" rel="noopener" data-music-demo hidden>Abrir demo con YouTube ↗</a>
+    <a href="https://music.youtube.com/watch?v=nPHIZw7HZq4" target="_blank" rel="noopener">Abrir en YouTube Music ↗</a></div>
+    <p role="status" data-music-status data-offline="Abre la grabación en YouTube Music o aloja la plantilla en un sitio web para usar el reproductor integrado."></p>
+    <div data-music-frame></div>
+  </details>
+</section>
+  </main>
+</body>
+</html>

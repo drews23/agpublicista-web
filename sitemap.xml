@@ -73,6 +73,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://lienzo.tools/herramientas/audio/laboratorio/</loc>
+    <lastmod>2026-11-21</lastmod>
+  </url>
+  <url>
     <loc>https://lienzo.tools/herramientas/audio/cortar/</loc>
     <lastmod>2026-11-08</lastmod>
     <changefreq>monthly</changefreq>
@@ -446,7 +450,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/codigo-web/plantillas/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -456,7 +460,7 @@
   </url>
   <url>
     <loc>https://lienzo.tools/en/templates/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
     <loc>https://lienzo.tools/en/legal/</loc>
@@ -536,6 +540,10 @@
   <url>
     <loc>https://lienzo.tools/en/tools/audio/</loc>
     <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
+    <loc>https://lienzo.tools/en/tools/audio/lab/</loc>
+    <lastmod>2026-11-21</lastmod>
   </url>
   <url>
     <loc>https://lienzo.tools/en/tools/audio/convert/</loc>
@@ -644,12 +652,4 @@
   <url><loc>https://lienzo.tools/blog/animacion-texto-after-effects-7-escenas/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://lienzo.tools/en/blog/after-effects-text-animation-7-scenes/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://lienzo.tools/en/blog/html-css-javascript-carousel/</loc><lastmod>2026-11-15</lastmod></url>
-  <url>
-    <loc>https://lienzo.tools/herramientas/audio/laboratorio/</loc>
-    <lastmod>2026-11-21</lastmod>
-  </url>
-  <url>
-    <loc>https://lienzo.tools/en/tools/audio/lab/</loc>
-    <lastmod>2026-11-21</lastmod>
-  </url>
 </urlset>
