@@ -72,3 +72,7 @@ _3d/
 !/en/templates/**
 !/en/code/components/
 !/en/code/components/**
+
+# Public stylesheets for the Spanish audio demos.
+!/codigo-web/plantillas/demos/carrusel-audio/styles.css
+!/codigo-web/plantillas/demos/reproductor-musical/styles.css
