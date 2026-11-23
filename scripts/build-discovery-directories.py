@@ -117,10 +117,28 @@ def ads_card(en):
     return f'<a class="card" href="{route}"><span class="card__tag">Google Ads</span><h3>Lienzo Ads Studio</h3><p>{description}</p><span class="catalog-action">{action} <span aria-hidden="true">↗</span></span></a>'
 
 
+def audio_lab_card(en):
+    route = '/en/tools/audio/lab/' if en else '/herramientas/audio/laboratorio/'
+    title = 'Audio Lab' if en else 'Laboratorio de sonido'
+    description = (
+        'Compare two audio tracks, view the spectrogram, and transcribe speech.'
+        if en else
+        'Compara dos pistas de audio, consulta el espectrograma y transcribe voz.'
+    )
+    action = 'Open Audio Lab' if en else 'Abrir el laboratorio'
+    return (f'<a class="card reveal" href="{route}"><span class="card__tag">Audio</span>'
+            '<div class="card__art card__art--3d" aria-hidden="true">'
+            '<img class="icono-3d" src="/assets/responsive/home/3d--sonido-glitch-256.webp" '
+            'alt="" width="256" height="256" loading="lazy" decoding="async"></div>'
+            f'<h3>{title}</h3><p>{description}</p>'
+            f'<span class="catalog-action">{action} <span aria-hidden="true">↗</span></span></a>')
+
+
 def tool_groups(en):
     return [
         ('qr-audio', 'QR & audio' if en else 'QR y audio',
-         'Add your brand to a QR code or prepare audio for your next edit.' if en else 'Personaliza un QR con tu marca o prepara el audio de tu próxima edición.', ['qr/', 'audio/']),
+         'Create QR codes, explore sound effects, and edit audio in your browser.' if en else 'Crea un QR, explora efectos y edita audio en el navegador.',
+         ['qr/', 'audio/', 'audio/lab/' if en else 'audio/laboratorio/']),
         ('color', 'Color', 'Generate palettes, extract colors from images, and test a live interface.' if en else 'Genera paletas, extrae colores de imágenes y prueba una interfaz en vivo.',
          ['palettes/', 'palettes/from-image/', 'palettes/color-territory/', 'live-colors/'] if en else ['paletas/', 'paletas/desde-imagen/', 'paletas/territorio/', 'colores-en-vivo/']),
         ('svg-favicons', 'SVG & favicons' if en else 'SVG y favicons',
@@ -142,6 +160,7 @@ def organize_tools(en=False):
     base = '/en/tools/' if en else '/herramientas/'
     pool['@code'] = code_card(en)
     pool[base+('ads/' if en else 'anuncios/')] = ads_card(en)
+    pool[base+('audio/lab/' if en else 'audio/laboratorio/')] = audio_lab_card(en)
     # Describe exports instead of incorrectly calling QR a set of seven tools.
     pool[base+'qr/'] = re.sub(r'(<span class="card__meta">).*?(</span>)',
         r'\g<1>PNG · SVG · '+('Free' if en else 'Gratis')+r'\2', pool[base+'qr/'], flags=re.S)
