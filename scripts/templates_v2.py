@@ -1135,6 +1135,8 @@ def build(only=None, language=None):
                 shutil.copy2(common / name, assets / name)
             for name in resource.get('assets', ()):
                 shutil.copy2(SOURCE / f'{kind}-assets' / name, assets / name)
+            if kind == 'devices':
+                shutil.copy2(ROOT / 'assets/3d/css-transformaciones.webp', assets / 'atlas-glass.webp')
             if kind == 'laptop-perspective':
                 shutil.copy2(SOURCE / 'phone-prototype-assets/museum-atrium.webp', assets / 'museum-atrium.webp')
             for name in resource.get('localized_videos', ()):

@@ -6,6 +6,8 @@ Lienzo created the implementation, the CSS phone frame, and the sample screens. 
 
 ## Referencias visuales / Visual references
 
+`assets/atlas-glass.webp` reutiliza el render 3D de Transformaciones CSS de Lienzo en las dos pantallas de muestra. The sample screens reuse Lienzo’s CSS Transforms 3D render.
+
 - **CSS Laptop / Mobile + Animation**. Pablo Guimera, [CodePen](https://codepen.io/pguimera/pen/xGKOjB). La copia de referencia incluye un archivo LICENSE.txt bajo MIT, con copyright de 2026. The reference copy includes a 2026 MIT license notice. Referencia para el cambio entre dispositivos. Reference for switching device views.
 - **laptop-mockup**. Referencia para la estructura de la pantalla y la base. Reference for the screen and base structure. La copia local usa una imagen remota. The local copy uses a remote image.
 - **Pure CSS laptop mockup**. Referencia para la silueta y los reflejos construidos con CSS. Reference for the CSS silhouette and highlights.
