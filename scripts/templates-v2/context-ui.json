@@ -2,8 +2,9 @@
   "es": {
     "contextResourcePicker": "Tarjeta en edición", "contextContent": "Texto", "contextLinkColor": "Enlace y color",
     "contextApply": "Aplicar", "contextSettingsHelp": "Usa Aplicar para guardar cambios de texto, enlace y color.",
-    "contextTryMenu": "Probar menú", "contextImageSection": "Imagen o icono", "contextArtwork": "Ilustración o icono prediseñado",
-    "contextArtChoices": ["Ilustración de arco", "Ilustración de capas", "Ilustración de órbita", "Icono de carpeta", "Icono de imagen", "Icono de enlace"],
+    "contextTryMenu": "Probar menú", "contextImageSection": "Imagen o icono", "contextArtwork": "Render 3D o icono",
+    "contextArtChoices": ["Degradados CSS · 3D", "Sombras CSS · 3D", "Animaciones CSS · 3D", "Icono de carpeta", "Icono de imagen", "Icono de enlace"],
+    "contextRenderFormat": "Render 3D · WebP",
     "contextUpload": "Cargar imagen", "contextRemoveImage": "Quitar imagen", "contextImageHelp": "PNG, JPG o WebP de hasta 8 MB. La imagen se aplica al instante.",
     "contextImageLoading": "Preparando imagen…", "contextImageReady": "Imagen propia aplicada.", "contextImageFormat": "Imagen propia",
     "reset": "Restaurar tarjeta", "details": "Abrir recurso", "save": "Guardar en favoritos",
@@ -14,8 +15,9 @@
   "en": {
     "contextResourcePicker": "Card to edit", "contextContent": "Text", "contextLinkColor": "Link and color",
     "contextApply": "Apply", "contextSettingsHelp": "Select Apply to save changes to text, links, and color.",
-    "contextTryMenu": "Try the menu", "contextImageSection": "Image or icon", "contextArtwork": "Preset illustration or icon",
-    "contextArtChoices": ["Arch illustration", "Layers illustration", "Orbit illustration", "Folder icon", "Image icon", "Link icon"],
+    "contextTryMenu": "Try the menu", "contextImageSection": "Image or icon", "contextArtwork": "3D render or icon",
+    "contextArtChoices": ["CSS Gradients · 3D", "CSS Shadows · 3D", "CSS Animations · 3D", "Folder icon", "Image icon", "Link icon"],
+    "contextRenderFormat": "3D render · WebP",
     "contextUpload": "Upload image", "contextRemoveImage": "Remove image", "contextImageHelp": "PNG, JPG, or WebP up to 8 MB. Image changes apply right away.",
     "contextImageLoading": "Preparing image…", "contextImageReady": "Custom image applied.", "contextImageFormat": "Custom image",
     "reset": "Reset card", "details": "Open resource", "save": "Save to favorites",

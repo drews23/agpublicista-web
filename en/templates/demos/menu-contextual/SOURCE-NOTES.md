@@ -6,6 +6,10 @@ The supplied folder is kept unchanged outside this download. Its code, remote ar
 
 La carpeta de referencia se conserva intacta fuera de esta descarga. Su código, imágenes remotas, nombres personales y créditos de terceros no se redistribuyen como código Lienzo. Las carpetas aportadas no incluyen un archivo de licencia. El aviso MIT de este paquete solo cubre la nueva implementación Lienzo y su arte original. No se presumen otros derechos ni documentos de autorización. Las fuentes locales conservan sus avisos OFL y los logos de muestra sus derechos de marca.
 
+## Renders de Lienzo / Lienzo renders
+
+La demo y el ZIP incluyen los renders locales de Degradados CSS, Sombras CSS y Animaciones CSS. The demo and ZIP bundle the local CSS Gradients, CSS Shadows, and CSS Animations renders.
+
 ## Reference fingerprints / Huellas de referencia
 
 - dist/index.html: 0accf5005e92ac8420372df61df931140e2968c20fe09f37a0574690495c56f9

@@ -6,7 +6,7 @@ Usa este componente HTML, CSS y JavaScript para reunir las acciones de cada tarj
 
 Pulsa «Probar menú» o el botón ⋯ de una tarjeta. Por ejemplo, guarda «Degradados CSS» y abre Favoritos para verla allí. También puedes abrir el menú de la tarjeta con clic derecho o Mayús + F10.
 
-Elige «Editar tarjeta» para abrir «Imagen o icono». Selecciona una ilustración o icono prediseñado, o carga una imagen PNG, JPG o WebP de hasta 8 MB. La imagen se aplica al instante. Puedes quitarla para volver al diseño prediseñado. En «Texto» y «Enlace y color», usa «Aplicar» para guardar los campos. Si ocultas el panel, puedes retomar el borrador de esos campos para la misma tarjeta.
+Elige «Editar tarjeta» para abrir «Imagen o icono». Selecciona un render 3D de Lienzo o un icono, o carga una imagen PNG, JPG o WebP de hasta 8 MB. La imagen se aplica al instante. Puedes quitarla para volver al diseño prediseñado. En «Texto» y «Enlace y color», usa «Aplicar» para guardar los campos. Si ocultas el panel, puedes retomar el borrador de esos campos para la misma tarjeta.
 
 El menú permite ampliar la vista, editar contenido, duplicar, guardar o quitar un favorito, elegir uno de los tres acentos del logo y retirar un recurso con deshacer. La colección admite seis recursos visibles. Si está llena, quita uno antes de deshacer una eliminación. El historial, los filtros y las preferencias se conservan en el HTML exportado; recargar la demo alojada reinicia la sesión.
 

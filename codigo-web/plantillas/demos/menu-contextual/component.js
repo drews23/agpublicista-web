@@ -28,23 +28,18 @@
     const value = item?.imageData;
     return typeof value === 'string' && /^data:image\/(?:webp|png|jpeg);base64,[A-Za-z0-9+/]+={0,2}$/.test(value) ? value : '';
   };
-  function artwork(index) {
-    const head = '<svg viewBox="0 0 720 540" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M30 40h32M30 40v32M690 500h-32M690 500v-32" stroke="currentColor" opacity=".24"/>';
-    const tail = '<path d="M42 482h72m8 0h18" stroke="currentColor" opacity=".48" stroke-width="2"/><text x="640" y="66" fill="currentColor" opacity=".55" font-family="Instrument,sans-serif" font-size="13">L.</text></svg>';
-    const art = [
-      '<g class="cm-art-core"><path d="M184 384V235a176 176 0 0 1 352 0v149h-72V235a104 104 0 0 0-208 0v149Z" fill="currentColor" opacity=".86"/><path d="M250 385V246a110 110 0 0 1 220 0v139" stroke="currentColor" stroke-width="2" opacity=".55"/><circle cx="360" cy="304" r="77" fill="var(--cm-art-ink)"/><circle cx="360" cy="304" r="64" stroke="currentColor" opacity=".55"/><path d="m319 345 82-82m-105 41h128" stroke="currentColor" stroke-width="2" opacity=".8"/><rect x="485" y="365" width="59" height="59" rx="29.5" fill="var(--mint)"/><path d="M485 394h59m-30-29v59" stroke="var(--cm-art-ink)" stroke-width="1.5"/></g>',
-      '<g class="cm-art-core"><g transform="translate(360 265) rotate(-19) skewX(18)"><rect x="-178" y="-100" width="356" height="250" rx="22" fill="currentColor" opacity=".12" stroke="currentColor"/><rect x="-178" y="-140" width="356" height="250" rx="22" fill="var(--cm-art-ink)" stroke="currentColor" opacity=".7"/><rect x="-178" y="-181" width="356" height="250" rx="22" fill="var(--cm-art-ink)" stroke="currentColor" stroke-width="2"/><path d="M-151-151h45m11 0h12" stroke="currentColor" opacity=".65" stroke-width="5" stroke-linecap="round"/><rect x="-148" y="-116" width="105" height="150" rx="11" fill="currentColor" opacity=".16"/><rect x="-19" y="-116" width="166" height="66" rx="11" fill="currentColor" opacity=".74"/><path d="M-17-20h142m-142 21h116m-116 21h64" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".46"/><circle cx="-94" cy="-43" r="28" stroke="currentColor" opacity=".75" stroke-width="2"/></g><circle cx="548" cy="363" r="34" fill="var(--violet)"/><path d="m535 363 9 9 16-18" stroke="var(--cm-art-ink)" stroke-width="3"/></g>',
-      '<g class="cm-art-core"><circle cx="360" cy="270" r="111" fill="currentColor" opacity=".1"/><circle cx="360" cy="270" r="88" fill="currentColor" opacity=".66"/><path d="M288 218a90 90 0 0 1 131 122" stroke="var(--cm-art-ink)" stroke-width="18" opacity=".48"/><g class="cm-orbit"><ellipse cx="360" cy="270" rx="222" ry="85" transform="rotate(-33 360 270)" stroke="currentColor" stroke-width="2"/><circle cx="180" cy="373" r="19" fill="var(--mint)"/><circle cx="545" cy="172" r="9" fill="currentColor"/></g><ellipse cx="360" cy="270" rx="220" ry="85" transform="rotate(33 360 270)" stroke="currentColor" opacity=".35"/><path d="M348 270h24m-12-12v24" stroke="var(--cm-art-ink)" stroke-width="2"/></g>'
-    ];
-    return head + art[Math.abs(Number(index) || 0) % 3] + tail;
-  }
+  const sampleRenders = ['css-degradados.webp', 'css-sombras.webp', 'css-animaciones.webp'];
+  const presetIcon = item => iconPresets[Number(item.art) - sampleRenders.length];
+
   function cardVisual(item) {
     const src = imageSource(item);
     if (src) return `<img class="cm-user-image" src="${src}" alt="" decoding="async">`;
-    const icon = iconPresets[Number(item.art) - 3];
+    const icon = presetIcon(item);
     if (icon) return '<span class="cm-art-symbol" aria-hidden="true">' + a.icon(icon) + '</span>';
-    return artwork(item.art);
+    const render = sampleRenders[Number(item.art)] || sampleRenders[0];
+    return `<img class="cm-sample-render" src="assets/${render}" width="512" height="512" alt="" decoding="async">`;
   }
+
   function syncImageControls(item) {
     $('[data-source]').disabled = imageJobs.size > 0;
     if (!item) return;
@@ -74,7 +69,8 @@
     a.text('[data-selected-title]', item.title);
     a.text('[data-selected-description]', item.description);
     a.text('[data-selected-category]', item.category);
-    a.text('[data-selected-format]', imageSource(item) ? ui.contextImageFormat : 'SVG + CSS');
+    const format = presetIcon(item) ? 'SVG + CSS' : ui.contextRenderFormat;
+    a.text('[data-selected-format]', imageSource(item) ? ui.contextImageFormat : format);
     a.text('[data-selected-accent]', ui[item.accent]);
     a.text('[data-selected-status]', item.saved ? ui.isSaved : ui.notSaved);
   }

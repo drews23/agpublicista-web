@@ -144,7 +144,7 @@
     "source": null,
     "zip": "menu-contextual-lienzo.zip",
     "desc": "Añade un botón ⋯ a las tarjetas de un catálogo, portafolio o biblioteca. Prueba cómo ver, editar, duplicar y guardar en favoritos una tarjeta.",
-    "size": 151,
+    "size": 230,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },

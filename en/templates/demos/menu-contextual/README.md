@@ -6,7 +6,7 @@ Use this HTML, CSS, and JavaScript component to group the actions for each card 
 
 Select Try the menu or use a card’s ⋯ button. For example, save CSS Gradients and switch to Favorites to see it there. You can also open a card’s menu by right-clicking it or pressing Shift + F10.
 
-Choose Edit card to open Image or icon. Pick a preset illustration or icon, or upload a PNG, JPG, or WebP image up to 8 MB. Image changes apply right away. Remove your image to return to the preset. In Text and Link and color, select Apply to save the fields. Hide the panel to return to the same card’s draft fields later.
+Choose Edit card to open Image or icon. Pick a Lienzo 3D render or an icon, or upload a PNG, JPG, or WebP image up to 8 MB. Image changes apply right away. Remove your image to return to the preset. In Text and Link and color, select Apply to save the fields. Hide the panel to return to the same card’s draft fields later.
 
 The menu can expand a preview, edit content, duplicate, save or remove a favorite, choose one of the three logo accents, and remove a resource with undo. The collection supports six visible resources. When it is full, remove one before undoing a removal. History, filters, and view preferences are kept in an exported HTML file; reloading the hosted demo starts a new session.
 

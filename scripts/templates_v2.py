@@ -34,6 +34,7 @@ RESOURCES = {
     },
     'menu-contextual': {
         'kind': 'context', 'reference': 'neon-glass-context-menustunning-glassmorphism-ui',
+        'library_assets': ('css-degradados.webp', 'css-sombras.webp', 'css-animaciones.webp'),
         'es': ['Menú contextual de recursos', 'Las acciones, justo donde hacen falta.', 'Un menú de cristal con acciones que sí funcionan: renombrar, duplicar, guardar, cambiar el acento y quitar con deshacer. También con teclado y toque.', '03 recursos', 'Clic derecho, botón de acciones o Mayús + F10 sobre una tarjeta.'],
         'en': ['Resource Context Menu', 'The right actions. Right where you need them.', 'A glass menu with working actions: rename, duplicate, save, change the accent, and remove with undo. Keyboard and touch included.', '03 resources', 'Right-click, use the actions button, or press Shift + F10 on a card.'],
     },
