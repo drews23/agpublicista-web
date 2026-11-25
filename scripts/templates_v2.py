@@ -67,6 +67,7 @@ RESOURCES = {
         'kind': 'laptop-perspective',
         'sample_artwork': False,
         'assets': ('laptop-perspective.webp', 'laptop-orbit.bundle.js', 'THREE-LICENSE.txt', 'MESHOPT-LICENSE.txt'),
+        'library_assets': ('css-tipografia.webp',),
         'license': 'Código MIT. Fuentes OFL. Modelo MacBook CC BY 4.0. Créditos en SOURCE-NOTES.md.',
     },
 }
@@ -373,6 +374,9 @@ def editor_document(raw, slug, lang, ui):
     kind = RESOURCES[slug]['kind']
     if kind == 'devices':
         soup.select_one('[data-v2]')['data-demo-version'] = device_demo_version(lang)
+    elif kind == 'laptop-perspective':
+        artwork = ROOT / 'assets/3d' / RESOURCES[slug]['library_assets'][0]
+        soup.select_one('[data-v2]')['data-demo-version'] = hashlib.sha256(artwork.read_bytes()).hexdigest()[:12]
     media_first = kind in ['devices', 'laptop-perspective']
     workspace = soup.select_one('.v2-workspace')
     workspace['data-editor-workspace'] = ''
@@ -1149,8 +1153,6 @@ def build(only=None, language=None):
                 shutil.copy2(ROOT / 'assets/3d' / name, assets / name)
             if kind == 'devices':
                 shutil.copy2(ROOT / 'assets/3d/css-transformaciones.webp', assets / 'atlas-glass.webp')
-            if kind == 'laptop-perspective':
-                shutil.copy2(SOURCE / 'phone-prototype-assets/museum-atrium.webp', assets / 'museum-atrium.webp')
             for name in resource.get('localized_videos', ()):
                 shutil.copy2(SOURCE / f'{kind}-assets' / f'{name}-{lang}.mp4', assets / f'{name}.mp4')
             logo = (assets / 'logo-lienzo.svg').read_text(encoding='utf-8')

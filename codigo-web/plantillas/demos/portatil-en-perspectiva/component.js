@@ -399,7 +399,10 @@
         'No se pudieron cargar los archivos del proyecto. Comprueba que project-files.js esté junto a index.html y vuelve a intentarlo.',
         'Could not load the project files. Check that project-files.js is beside index.html and try again.'
       )));
-      script.src = new URL(manifestName, document.baseURI).href;
+      const manifestUrl = new URL(manifestName, document.baseURI);
+      const demoVersion = studio.root.dataset.demoVersion;
+      if (demoVersion) manifestUrl.searchParams.set('v', demoVersion);
+      script.src = manifestUrl.href;
       script.onload = () => {
         script.remove();
         if (window.LienzoDeviceProjectFiles) resolve(window.LienzoDeviceProjectFiles);

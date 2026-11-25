@@ -6,16 +6,15 @@
     "lpOrbitHint": "Arrastra para girar el portátil. También puedes usar las flechas del teclado.",
     "lpOrbitLabel": "Portátil 3D. Arrastra o usa las flechas para girar. Pulsa Inicio para centrar.",
     "lpOrbitReset": "Centrar vista 3D",
-    "lpSamplePhotoAlt": "Luz natural en el atrio del Museo de Arte de Milwaukee",
     "lpImage": "Imagen",
     "lpVideo": "Video MP4",
     "lpVideoLabel": "Video en la pantalla del portátil",
     "lpImageAlt": "Captura en la pantalla del portátil",
     "lpProjectNameSample": "Prisma",
-    "lpProjectTitleSample": "La luz también diseña.",
-    "lpProjectCopySample": "Estudio de color, superficie y perspectiva.",
+    "lpProjectTitleSample": "La forma del texto.",
+    "lpProjectCopySample": "Un estudio 3D de tipografía y relieve.",
     "lpSampleKicker": "Cuaderno visual",
-    "lpSampleEdition": "Materia y luz",
+    "lpSampleEdition": "Forma y relieve",
     "lpStageKicker": "01 / PANTALLA",
     "lpStageTitle": "Tu proyecto en perspectiva.",
     "lpStageHint": "Prueba con una captura o reproduce una grabación dentro de la pantalla.",
@@ -48,7 +47,8 @@
     "lpImageRemoved": "Muestra restaurada.",
     "lpProjectName": "Nombre del proyecto",
     "lpProjectTitle": "Titular de la muestra",
-    "lpProjectCopy": "Texto de la muestra"
+    "lpProjectCopy": "Texto de la muestra",
+    "lpSampleArtAlt": "Letras en relieve sobre una pieza 3D violeta y dorada."
   },
   "en": {
     "lpStage": "Presentation stage",
@@ -57,16 +57,15 @@
     "lpOrbitHint": "Drag to orbit the laptop. You can also use the arrow keys.",
     "lpOrbitLabel": "3D laptop. Drag or use the arrow keys to orbit. Press Home to reset the view.",
     "lpOrbitReset": "Reset 3D view",
-    "lpSamplePhotoAlt": "Natural light in the Milwaukee Art Museum atrium",
     "lpImage": "Image",
     "lpVideo": "MP4 video",
     "lpVideoLabel": "Video on the laptop screen",
     "lpImageAlt": "Screenshot on the laptop screen",
     "lpProjectNameSample": "Prism",
-    "lpProjectTitleSample": "Light shapes design.",
-    "lpProjectCopySample": "A study in color, surface, and perspective.",
+    "lpProjectTitleSample": "The shape of type.",
+    "lpProjectCopySample": "A 3D study in typography and relief.",
     "lpSampleKicker": "Visual notebook",
-    "lpSampleEdition": "Matter and light",
+    "lpSampleEdition": "Form and depth",
     "lpStageKicker": "01 / SCREEN",
     "lpStageTitle": "Your project in perspective.",
     "lpStageHint": "Try a screenshot or play a recording inside the laptop screen.",
@@ -99,6 +98,7 @@
     "lpImageRemoved": "Sample restored.",
     "lpProjectName": "Project name",
     "lpProjectTitle": "Sample heading",
-    "lpProjectCopy": "Sample copy"
+    "lpProjectCopy": "Sample copy",
+    "lpSampleArtAlt": "Raised lettering on a violet and gold 3D piece."
   }
 }

@@ -209,26 +209,6 @@
   background: var(--brand-surface, #11151e);
 }
 
-.lp-sample-photo, .lp-sample::before {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.lp-sample-photo {
-  z-index: -2;
-  object-fit: cover;
-}
-
-.lp-sample::before {
-  z-index: -1;
-  background:
-    linear-gradient(90deg, var(--brand-surface, #11151e) 0%, color-mix(in srgb, var(--brand-surface, #11151e) 86%, transparent) 45%, transparent 86%),
-    linear-gradient(180deg, #11151e90, transparent 25% 75%, #11151e90);
-  content: "";
-}
-
 .lp-sample-top, .lp-sample-foot {
   display: flex;
   justify-content: space-between;
@@ -252,14 +232,31 @@
 
 .lp-sample-content {
   display: grid;
-  grid-template-columns: minmax(0, 58%);
+  grid-template-columns: minmax(0, 1.14fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(6px, 3.6cqi, 21px);
 }
 
+.lp-sample-art {
+  align-self: stretch;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #c8b5ff42;
+  border-radius: clamp(4px, 1.7cqi, 12px);
+  background: radial-gradient(ellipse at 42% 34%, #453967, #211d35 78%);
+}
+
+.lp-sample-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 7%;
+  object-fit: contain;
+}
+
 .lp-sample-content h2 {
   margin: 0 0 clamp(3px, 1.9cqi, 11px);
-  font: 480 clamp(14px, 8.6cqi, 52px) / .99 Fraunces, serif;
+  font: 480 clamp(13px, 7.5cqi, 48px) / 1.02 Fraunces, serif;
   letter-spacing: normal;
   overflow-wrap: anywhere;
 }

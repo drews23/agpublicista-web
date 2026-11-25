@@ -14,11 +14,11 @@ El decodificador meshoptimizer de Arseny Kapoulkine se incluye con su aviso MIT 
 
 The meshoptimizer decoder by Arseny Kapoulkine is included with its MIT notice in `assets/MESHOPT-LICENSE.txt`.
 
-## Fotografía de muestra / Sample photograph
+## Render de muestra / Sample render
 
-`assets/museum-atrium.webp` reutiliza una fotografía del atrio del Museo de Arte de Milwaukee ya incluida en el prototipo móvil. Carol M. Highsmith, Prints and Photographs Division, Library of Congress. [Ficha del archivo / Catalog record, LC-DIG-highsm-40194](https://www.loc.gov/item/2016631012/).
+`assets/css-tipografia.webp` es el render 3D de Tipografía CSS de la biblioteca de Lienzo. Se incluye como recurso local en ambas versiones.
 
-`assets/museum-atrium.webp` reuses the Milwaukee Art Museum atrium photograph included in the phone prototype.
+`assets/css-tipografia.webp` is Lienzo's CSS Typography 3D render. Both versions bundle it as a local asset.
 
 ## Huellas de referencia / Reference fingerprints
 
