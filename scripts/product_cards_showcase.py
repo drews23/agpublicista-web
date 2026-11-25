@@ -5,10 +5,15 @@ from html import escape
 import base64
 import hashlib
 import json
-import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'scripts/template-expansion/product-cards'
+RENDERS = SOURCE / 'renders'
+ARTWORK_NOTE = '''
+The archive attributed to Ahmod Musa and the supplied screen recording served as interaction references. Aurora One headphones, Tempo Studio watch, and Arc Notebook laptop are three fictional product concepts rendered specifically for Lienzo with ImageGen in mint, amber, and violet. The nine local transparent WebP files contain no stock samples. Prices and ratings are illustrative. MIT applies to the template code.
+
+El archivo atribuido a Ahmod Musa y la grabación aportada sirvieron como referencias de interacción. Los auriculares Aurora One, el reloj Tempo Studio y el portátil Arc Notebook son tres conceptos ficticios renderizados para Lienzo con ImageGen en menta, ámbar y violeta. Los nueve WebP transparentes son locales. Los precios y valoraciones son ilustrativos. La licencia MIT corresponde al código de la plantilla.
+'''
 PALETTE = {'mint': '#35d6c8', 'amber': '#ffb454', 'violet': '#8b7bff'}
 PRODUCTS = [
     {'key': 'audio', 'accent': 'mint', 'price': 12900, 'previous': 15900, 'rating': '4.9', 'reviews': 128,
@@ -64,7 +69,7 @@ def card(item, lang):
     old = f'<s data-previous>{money(item["previous"])}</s><span class="pc-saving" data-saving>−{round((1-item["price"]/item["previous"])*100)}%</span>' if item['previous'] else '<s data-previous hidden></s><span class="pc-saving" data-saving hidden></span>'
     return f'''<article class="pc-card" data-product="{item['key']}" style="--tone:{PALETTE[item['accent']]}" aria-label="{name}">
 <span class="pc-card__edge" aria-hidden="true"></span><div class="pc-card__surface" aria-hidden="true"></div>
-<div class="pc-card__media"><div class="pc-card__halo" aria-hidden="true"></div><div class="pc-card__floor" aria-hidden="true"></div><span class="pc-badge">{escape(item['badge'])}</span><button type="button" class="pc-round pc-favorite" data-wish aria-label="{tr('Guardar favorito: ', 'Save favorite: ')}{name}" aria-pressed="false">{icon('heart')}</button><button type="button" class="pc-art-button" data-open aria-label="{tr('Ampliar ', 'View ')}{name}"><img data-art src="assets/{item['key']}-{item['accent']}.svg" width="480" height="360" alt="{tr('Ilustración conceptual de ', 'Concept illustration of ')}{name}" fetchpriority="high"><span class="pc-art-hint">{icon('zoom')}{tr('Ver detalles', 'View details')}</span></button><span class="pc-media-index" aria-hidden="true">LIENZO OBJECTS / 0{next(i for i,p in enumerate(PRODUCTS) if p['key']==item['key'])+1}</span></div>
+<div class="pc-card__media"><div class="pc-card__halo" aria-hidden="true"></div><div class="pc-card__floor" aria-hidden="true"></div><span class="pc-badge">{escape(item['badge'])}</span><button type="button" class="pc-round pc-favorite" data-wish aria-label="{tr('Guardar favorito: ', 'Save favorite: ')}{name}" aria-pressed="false">{icon('heart')}</button><button type="button" class="pc-art-button" data-open aria-label="{tr('Ampliar ', 'View ')}{name}"><img data-art src="assets/{item['key']}-{item['accent']}.webp" width="640" height="480" alt="{tr('Render 3D de ', '3D render of ')}{name}" fetchpriority="high"><span class="pc-art-hint">{icon('zoom')}{tr('Ver detalles', 'View details')}</span></button><span class="pc-media-index" aria-hidden="true">LIENZO OBJECTS / 0{next(i for i,p in enumerate(PRODUCTS) if p['key']==item['key'])+1}</span></div>
 <div class="pc-card__body"><p class="pc-category">{escape(item['category'])}</p><h2 data-product-name>{name}</h2><p class="pc-description" data-product-description>{escape(item['description'])}</p><div class="pc-rating" aria-label="{tr('Valoración ilustrativa, no son opiniones reales', 'Illustrative rating, not real reviews')}: {item['rating']}"><span class="pc-stars" aria-hidden="true">★★★★★</span><span>{item['rating']} <span class="pc-muted">({item['reviews']})</span></span></div><div class="pc-price"><strong data-price>{money(item['price'])}</strong>{old}</div><div class="pc-variants"><div class="pc-swatches" role="group" aria-label="{tr('Color de ', 'Color for ')}{name}">{swatches(item,lang)}</div><span data-color-name>{names[item['accent']]}</span></div><button type="button" class="pc-button pc-button--accent pc-add" data-add>{icon('bag')}<span>{tr('Añadir a selección', 'Add to selection')}</span>{icon('plus')}</button><div class="pc-card__foot"><button type="button" class="pc-text-button" data-edit>{icon('sliders')}{tr('Personalizar', 'Customize')}</button><button type="button" class="pc-text-button" data-card-export aria-label="{tr('Copiar HTML de ', 'Copy HTML for ')}{name}">{icon('code')}HTML</button></div></div></article>'''
 
 
@@ -76,7 +81,7 @@ def document(lang):
     version = lambda name: hashlib.sha256((SOURCE / name).read_bytes()).hexdigest()[:12]
     title = tr('Tarjetas de producto de cristal', 'Glass Product Cards')
     return f'''<!doctype html>
-<html lang="{'en-US' if en else 'es'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>{title} | Lienzo</title><meta name="description" content="{tr('Tres tarjetas de producto con borde luminoso animado, ilustraciones vectoriales, variantes, favoritos y selección local. Personaliza y exporta HTML.', 'Three product cards with animated light borders, vector illustrations, variants, favorites, and a local selection. Customize and export HTML.')}"><link rel="icon" type="image/svg+xml" href="assets/logo-lienzo.svg"><link rel="stylesheet" href="styles.css?v={version('styles.css')}"><script src="script.js?v={version('script.js')}" defer></script></head>
+<html lang="{'en-US' if en else 'es'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>{title} | Lienzo</title><meta name="description" content="{tr('Tres tarjetas de producto con borde luminoso animado, renders 3D locales, variantes, favoritos y selección local. Personaliza y exporta HTML.', 'Three product cards with animated light borders, local 3D renders, variants, favorites, and a local selection. Customize and export HTML.')}"><link rel="icon" type="image/svg+xml" href="assets/logo-lienzo.svg"><link rel="stylesheet" href="styles.css?v={version('styles.css')}"><script src="script.js?v={version('script.js')}" defer></script></head>
 <body class="ln-products" data-template="tarjetas-producto" data-theme="dark" data-motion="on">
 <a class="pc-skip" href="#product-grid">{tr('Ir a los productos', 'Skip to products')}</a>
 <header class="pc-header pc-container"><a class="pc-brand" href="https://lienzo.tools/{'en/' if en else ''}"><img src="assets/logo-lienzo.svg" width="148" height="40" alt="Lienzo"><span>OBJECTS / DIGITAL ATELIER</span></a><a href="{'README.md' if en else 'LEEME.md'}">{tr('Guía y créditos', 'Guide and credits')} ↗</a></header>
@@ -99,7 +104,7 @@ def document(lang):
   <div class="pc-detail__workspace">
     <section class="editor-product-preview" aria-label="{tr('Vista previa del producto', 'Product preview')}">
       <div class="pc-detail__product">
-        <div class="pc-detail__visual"><img data-detail-image width="480" height="360" alt=""><span>LIENZO / OBJECT STUDY</span></div>
+        <div class="pc-detail__visual"><img data-detail-image width="640" height="480" alt=""><span>LIENZO / OBJECT STUDY</span></div>
         <div class="pc-detail__summary"><div class="pc-price"><strong data-detail-price></strong><s data-detail-previous></s><span class="pc-saving" data-detail-saving></span></div><div class="pc-variants"><div class="pc-swatches" data-detail-swatches role="group" aria-label="{tr('Acabado', 'Finish')}">{swatches(items[0],lang)}</div><span data-detail-color></span></div><button type="button" class="pc-button" data-test>{icon('layers')}{tr('Probar efecto', 'Test effect')}</button></div>
       </div>
       <details class="pc-detail__info" data-product-info>
@@ -141,27 +146,16 @@ def document(lang):
 </body></html>'''
 
 
-def artwork(key, tone):
-    """Small original SVG product studies. No emoji, stock photo, or third-party asset."""
-    defs = f'''<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".25" stop-color="#fff" stop-opacity=".55"/><stop offset=".54" stop-color="#0a0a0f"/><stop offset=".7" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#0a0a0f"/></linearGradient><linearGradient id="coat" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#fff"/><stop offset=".18" stop-color="{tone}"/><stop offset=".65" stop-color="{tone}"/><stop offset="1" stop-color="#0a0a0f"/></linearGradient><linearGradient id="dark" x1="0" y1="0" x2=".75" y2="1"><stop stop-color="#fff" stop-opacity=".22"/><stop offset=".12" stop-color="#0a0a0f"/><stop offset=".75" stop-color="#0a0a0f"/><stop offset="1" stop-color="#fff" stop-opacity=".16"/></linearGradient><linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="{tone}" stop-opacity=".36"/><stop offset=".4" stop-color="#0a0a0f"/><stop offset="1" stop-color="{tone}" stop-opacity=".15"/></linearGradient><radialGradient id="orb"><stop stop-color="#fff"/><stop offset=".45" stop-color="{tone}"/><stop offset="1" stop-color="#6e5df2"/></radialGradient>'''
-    if key == 'audio':
-        shape = '''<g transform="rotate(-16 240 180)"><path d="M133 193v-61a106 106 0 0 1 212 0v61" fill="none" stroke="url(#metal)" stroke-width="28"/><path d="M138 136a101 101 0 0 1 202 0" fill="none" stroke="url(#dark)" stroke-width="19"/><path d="M150 100c23-48 94-75 150-32" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="3"/><path d="M131 159v53m216-53v53" stroke="url(#metal)" stroke-width="18"/><g transform="rotate(8 142 215)"><rect x="102" y="154" width="66" height="129" rx="31" fill="url(#metal)"/><rect x="102" y="156" width="57" height="125" rx="28" fill="url(#coat)"/><rect x="148" y="160" width="32" height="117" rx="15" fill="url(#dark)"/><path d="M120 175c-8 19-8 65 0 82" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3"/><circle cx="126" cy="219" r="8" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.5"/></g><g transform="rotate(-8 340 213)"><rect x="308" y="155" width="66" height="128" rx="31" fill="url(#metal)"/><rect x="316" y="157" width="58" height="124" rx="28" fill="url(#coat)"/><rect x="296" y="161" width="32" height="116" rx="15" fill="url(#dark)"/><path d="M351 175c8 21 8 61 0 82" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3"/><path d="M349 212v14m-7-7h14" stroke="#fff" stroke-opacity=".65" stroke-width="2"/><circle cx="353" cy="247" r="2" fill="#fff"/></g><path d="M205 40c26-9 54-9 77-1" fill="none" stroke="#fff" stroke-opacity=".48" stroke-width="3" stroke-linecap="round"/></g>'''
-    elif key == 'watch':
-        ticks = ''.join(f'<path d="M240 103v{9 if i%3==0 else 5}" stroke="#fff" stroke-opacity=".5" stroke-width="2" transform="rotate({i*30} 240 180)"/>' for i in range(12))
-        shape = f'''<g transform="rotate(18 240 180)"><path d="M204 27h72l10 76h-92l10-76Zm-10 230h92l-10 76h-72l-10-76Z" fill="url(#coat)"/><path d="M211 30h58m-65 18h72m-74 17h76m-76 233h75m-72 17h69" stroke="#0a0a0f" stroke-opacity=".25" stroke-width="4"/><rect x="162" y="84" width="156" height="192" rx="53" fill="url(#metal)"/><rect x="168" y="90" width="144" height="180" rx="49" fill="url(#coat)"/><rect x="180" y="101" width="120" height="158" rx="40" fill="url(#dark)"/><rect x="184" y="105" width="112" height="150" rx="37" fill="url(#glass)"/><rect x="315" y="151" width="13" height="29" rx="5" fill="url(#metal)"/><path d="M319 156v19" stroke="#fff" stroke-width="2"/><circle cx="240" cy="180" r="65" fill="none" stroke="#fff" stroke-opacity=".06"/>{ticks}<path d="m212 159 28 21 29-38" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M240 180v47" stroke="{tone}" stroke-width="2"/><circle cx="240" cy="180" r="5" fill="#fff"/><path d="M211 119c-19 12-22 28-22 49" stroke="#fff" stroke-opacity=".34" stroke-width="2" fill="none"/><text x="240" y="226" text-anchor="middle" fill="#fff" fill-opacity=".65" font-family="sans-serif" font-size="8" letter-spacing="2">TEMPO</text></g>'''
-    else:
-        keys = ''.join(f'<path d="m{145+c*14+r*-4} {254+r*8}h10l-2 5h-10z" fill="#0a0a0f" fill-opacity=".75"/>' for r in range(4) for c in range(14))
-        shape = f'''<g transform="rotate(-9 240 180)"><path d="M116 58h259a11 11 0 0 1 11 11v170H105V69a11 11 0 0 1 11-11Z" fill="url(#metal)"/><path d="M120 66h250a7 7 0 0 1 7 7v158H113V73a7 7 0 0 1 7-7Z" fill="#0a0a0f"/><path d="M119 73h252v152H119z" fill="url(#glass)"/><path d="M172 224c-70-47-25-123 46-99 24 7 20 37 49 30 48-13 72-62 104-58v127Z" fill="url(#orb)"/><path d="M119 180c49 31 86 3 133-39 46-40 83-14 119 5" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/><path d="m123 74 121 0-125 94Z" fill="#fff" fill-opacity=".06"/><circle cx="245" cy="64" r="1.5" fill="#fff" fill-opacity=".55"/><path d="M105 239h281l47 57a8 8 0 0 1-7 10H64a8 8 0 0 1-7-10Z" fill="url(#metal)"/><path d="M112 244h268l39 49H70Z" fill="url(#coat)"/>{keys}<path d="M221 279h59l8 14h-74z" fill="#0a0a0f" fill-opacity=".27" stroke="#fff" stroke-opacity=".25"/><path d="M62 301h365" stroke="#fff" stroke-opacity=".8" stroke-width="2"/><path d="M228 301h36" stroke="#0a0a0f" stroke-opacity=".5" stroke-width="2"/></g>'''
-    return f'<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360"><defs>{defs}</defs>{shape}</svg>'
-
-
 def copy_assets(dest):
     copy_editor_assets(dest)
     for name in ['styles.css', 'script.js']:
         copy_editor_file(SOURCE / name, dest / name)
-    for key in ['audio', 'watch', 'laptop']:
-        for accent, tone in PALETTE.items():
-            (dest / 'assets' / f'{key}-{accent}.svg').write_text(artwork(key, tone), encoding='utf8')
+    assets = dest / 'assets'
+    for item in PRODUCTS:
+        for accent in PALETTE:
+            name = f"{item['key']}-{accent}"
+            copy_editor_file(RENDERS / f'{name}.webp', assets / f'{name}.webp')
+            (assets / f'{name}.svg').unlink(missing_ok=True)
 
 
 def thumbnail(lang='es'):
@@ -176,13 +170,13 @@ def readme(lang):
     if lang == 'en':
         return '''# Glass Product Cards — Lienzo Objects
 
-Three original product concepts with detailed local SVG artwork, a rotating light border, layered pointer tilt, finish variants, favorites, and a functional local selection.
+Three original product concepts with detailed local 3D renders, a rotating light border, layered pointer tilt, finish variants, favorites, and a functional local selection.
 
 ## Open and customize
 
-Extract the complete ZIP. Open index.html directly; no server, package install, network, API key, or framework is needed. Keep styles.css, script.js, and assets/ beside the HTML. Fonts, logo, nine product illustrations, and license notices are local.
+Extract the complete ZIP. Open index.html directly; no server, package install, network, API key, or framework is needed. Keep styles.css, script.js, and assets/ beside the HTML. Fonts, logo, nine transparent WebP product renders, and license notices are local.
 
-Use Customize on a card to edit its name, description, sample USD price, optional previous price, maximum tilt (0–10 degrees), border period (4–16 seconds), and light intensity. Each card has independent settings. Finish buttons update the illustration and accent, including the detail view. Reset affects only that card. Products, prices, ratings, and reviews are illustrative, not customer evidence or a real sale.
+Use Customize on a card to edit its name, description, sample USD price, optional previous price, maximum tilt (0–10 degrees), border period (4–16 seconds), and light intensity. Each card has independent settings. Finish buttons update the render and accent, including the detail view. Your brand applies a tint to the selected finish while retaining its texture and highlights. Reset affects only that card. Products, prices, ratings, and reviews are illustrative, not customer evidence or a real sale.
 
 Content opens first. Expand Sample prices, Motion and light, or Your brand as needed. Hide settings keeps the values and leaves the product preview and Download HTML visible.
 
@@ -204,17 +198,17 @@ The light border rotates with CSS transform, rather than recalculating a gradien
 
 ## Credits and licenses
 
-New Lienzo implementation for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied reference archive credits Ahmod Musa; the archive and screen recording were inspected, not redistributed. None of its source, emoji artwork, remote fonts, third-party marketing links, or review figures is included. Product SVGs were drawn specifically for this implementation. SOURCE-NOTES.md records provenance. LICENSE-LIENZO.txt applies to this code; fonts keep their OFL notices. MIT does not transfer trademark rights.
+New Lienzo implementation for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied reference archive credits Ahmod Musa; the archive and screen recording were inspected, not redistributed. None of its source, emoji artwork, remote fonts, third-party marketing links, or review figures is included. The product renders were generated with ImageGen for this implementation. SOURCE-NOTES.md records provenance. LICENSE-LIENZO.txt applies to this code; fonts keep their OFL notices. MIT does not transfer trademark rights.
 '''
     return '''# Tarjetas de producto de cristal — Lienzo Objects
 
-Tres conceptos originales con ilustraciones SVG locales detalladas, borde de luz rotatorio, inclinación por capas, acabados, favoritos y selección local funcional.
+Tres conceptos originales con renders 3D locales detallados, borde de luz rotatorio, inclinación por capas, acabados, favoritos y selección local funcional.
 
 ## Abrir y personalizar
 
-Descomprime todo el ZIP. Abre index.html directamente; no requiere servidor, paquetes, red, API ni framework. Conserva styles.css, script.js y assets/ junto al HTML. Incluye fuentes, logo, nueve ilustraciones de producto y sus avisos de licencia locales.
+Descomprime todo el ZIP. Abre index.html directamente; no requiere servidor, paquetes, red, API ni framework. Conserva styles.css, script.js y assets/ junto al HTML. Incluye fuentes, logo, nueve renders de producto en WebP transparente y sus avisos de licencia locales.
 
-Usa Personalizar para editar nombre, descripción, precio de ejemplo en USD, precio anterior opcional, inclinación máxima (0–10 grados), periodo del borde (4–16 segundos) e intensidad de luz. Cada tarjeta conserva sus propios ajustes. Los acabados cambian la ilustración y el acento, también en la vista ampliada. Restablecer solo afecta a esa tarjeta. Productos, precios, valoraciones y cantidades de opiniones son ilustrativos; no representan una venta ni testimonios reales.
+Usa Personalizar para editar nombre, descripción, precio de ejemplo en USD, precio anterior opcional, inclinación máxima (0–10 grados), periodo del borde (4–16 segundos) e intensidad de luz. Cada tarjeta conserva sus propios ajustes. Los acabados cambian el render y el acento, también en la vista ampliada. Tu marca aplica un tinte al acabado sin perder sus texturas y reflejos. Restablecer solo afecta a esa tarjeta. Productos, precios, valoraciones y cantidades de opiniones son ilustrativos; no representan una venta ni testimonios reales.
 
 Contenido abre primero. Despliega Precios de ejemplo, Movimiento y luz o Tu marca según lo que quieras editar. Ocultar ajustes conserva los valores y deja a la vista el producto y Descargar HTML.
 
@@ -236,5 +230,5 @@ El borde gira con CSS transform, sin recalcular el ángulo de un degradado en ca
 
 ## Créditos y licencias
 
-Implementación nueva Lienzo para la colaboración con MD Estudio Creativo identificada por el responsable: https://creativomarketingdigital.com/ . La referencia aportada acredita a Ahmod Musa; se inspeccionaron ZIP y vídeo sin redistribuirlos. No incluye su código, emojis, fuentes remotas, enlaces promocionales de terceros ni cifras de opiniones. Los SVG de producto se dibujaron para esta implementación. SOURCE-NOTES.md documenta procedencia. LICENSE-LIENZO.txt cubre este código; las fuentes conservan OFL. MIT no transfiere derechos de marca.
+Implementación nueva Lienzo para la colaboración con MD Estudio Creativo identificada por el responsable: https://creativomarketingdigital.com/ . La referencia aportada acredita a Ahmod Musa; se inspeccionaron ZIP y vídeo sin redistribuirlos. No incluye su código, emojis, fuentes remotas, enlaces promocionales de terceros ni cifras de opiniones. Los renders de producto se generaron con ImageGen para esta implementación. SOURCE-NOTES.md documenta procedencia. LICENSE-LIENZO.txt cubre este código; las fuentes conservan OFL. MIT no transfiere derechos de marca.
 '''

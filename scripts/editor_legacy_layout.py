@@ -381,16 +381,6 @@ def brand_markup(soup, slug, lang):
         panel.append(status)
     if slug == 'botones-cristal':
         glass_workspace(soup, panel, lang)
-    if slug == 'tarjetas-producto':
-        folder = ROOT / ('en/templates' if lang == 'en' else 'codigo-web/plantillas') / 'demos' / slug / 'assets'
-        files = sorted(folder.glob('*.svg'))
-        artwork = {f'assets/{file.name}': file.read_text(encoding='utf-8') for file in files
-                   if not file.name.startswith('logo') and file.name not in ('preview.svg',)}
-        payload = soup.select_one('[data-template-brand-art]')
-        if not payload:
-            payload = soup.new_tag('script', attrs={'type': 'application/json', 'data-template-brand-art': ''})
-            soup.body.append(payload)
-        payload.string = json.dumps(artwork, ensure_ascii=False).replace('<', '\\u003c')
     # Install the brand core and adapter before the resource's deferred script,
     # so initial rendering (also from a file:// export) sees the saved profile.
     filenames = ['editor-workspace.css', 'editor-workspace.js', 'editor-legacy.css',

@@ -4,7 +4,8 @@
   const root = document.body;
   const en = document.documentElement.lang.startsWith('en');
   const say = (es, us) => en ? us : es;
-  const palette = new Proxy({mint:'#35d6c8',amber:'#ffb454',violet:'#8b7bff'}, {
+  const defaultPalette = {mint:'#35d6c8',amber:'#ffb454',violet:'#8b7bff'};
+  const palette = new Proxy(defaultPalette, {
     get(values,key) { return typeof key==='string' ? window.LienzoLegacyBrand?.color(key,values[key]) || values[key] : values[key]; }
   });
   const colorNames = new Proxy({mint:say('Menta','Mint'),amber:say('Ámbar','Amber'),violet:say('Violeta','Violet')}, {
@@ -49,7 +50,24 @@
     document.querySelector('[data-detail-status]').textContent=detail.open?message:'';
     document.querySelector('[data-cart-status]').textContent=cartDialog.open?message:'';
   }
-  function asset(item,accent=item.accent) {const path='assets/'+item.key+'-'+accent+'.svg';return window.LienzoLegacyAssets?.asset(path)||path;}
+  function renderImage(image, item, accent = item.accent) {
+    const path = `assets/${item.key}-${accent}.webp`;
+    if (image.getAttribute('src') !== path) image.src = path;
+    const base = defaultPalette[accent];
+    const branded = palette[accent];
+    const format = window.LienzoTemplateBrand?.formatColor;
+    if (!format || base.toLowerCase() === branded.toLowerCase()) {
+      image.style.removeProperty('--pc-finish-filter');
+      return;
+    }
+    const hsl = color => format(color, 'hsl').slice(4, -1).split(',').map(part => parseFloat(part));
+    const [baseHue, baseSaturation, baseLightness] = hsl(base);
+    const [hue, saturation, lightness] = hsl(branded);
+    const intensity = Math.min(2, saturation / baseSaturation);
+    const brightness = clamp(lightness / baseLightness, .18, 1.8, 1);
+    image.style.setProperty('--pc-finish-filter',
+      `hue-rotate(${hue - baseHue}deg) saturate(${intensity}) brightness(${brightness})`);
+  }
   function setPrice(price,previous,saving,item) {
     price.textContent=money(item.price);
     const discount=item.previous>item.price;
@@ -65,8 +83,8 @@
     card.querySelector('[data-product-name]').textContent=item.name;
     card.querySelector('[data-product-description]').textContent=item.description;
     const image=card.querySelector('[data-art]');
-    if(image.getAttribute('src')!==asset(item))image.src=asset(item);
-    image.alt=say('Ilustración conceptual de ','Concept illustration of ')+item.name;
+    renderImage(image, item);
+    image.alt=say('Render 3D de ','3D render of ')+item.name;
     card.querySelector('[data-open]').setAttribute('aria-label',say('Ampliar ','View ')+item.name);
     card.querySelector('[data-card-export]').setAttribute('aria-label',say('Copiar HTML de ','Copy HTML for ')+item.name);
     card.querySelector('.pc-swatches').setAttribute('aria-label',say('Color de ','Color for ')+item.name);
@@ -88,8 +106,8 @@
     detail.querySelector('[data-detail-category]').textContent=item.category;
     detail.querySelector('[data-detail-description]').textContent=item.description;
     const image=detail.querySelector('[data-detail-image]');
-    if(image.getAttribute('src')!==asset(item))image.src=asset(item);
-    image.alt=say('Vista ampliada de ','Detailed illustration of ')+item.name;
+    renderImage(image, item);
+    image.alt=say('Vista ampliada de ','Detailed view of ')+item.name;
     detail.querySelector('[data-detail-color]').textContent=colorNames[item.accent];
     detail.querySelectorAll('[data-swatch]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.swatch===item.accent)));
     const features=detail.querySelector('[data-detail-features]');
@@ -173,8 +191,9 @@
       total+=item.price*line.quantity;count+=line.quantity;
       const row=document.createElement('li');row.className='pc-cart-line';row.dataset.line=lineKey;
       row.innerHTML='<img width="76" height="76" alt=""><div><h3></h3><p></p></div><strong></strong><div class="pc-cart-line__controls"><div class="pc-quantity"><button type="button" class="pc-round" data-cart-action="minus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button><output></output><button type="button" class="pc-round" data-cart-action="plus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button></div><button type="button" class="pc-cart-line__remove" data-cart-action="remove"></button></div>';
-      row.querySelector('img').src=asset(item,line.accent);
-      row.querySelector('img').alt=item.name;
+      const image = row.querySelector('img');
+      renderImage(image, item, line.accent);
+      image.alt = item.name;
       row.querySelector('h3').textContent=item.name;
       row.querySelector('p').textContent=colorNames[line.accent]+' · '+money(item.price);
       row.querySelector('strong').textContent=money(item.price*line.quantity);
@@ -225,7 +244,10 @@
     const items=(key?[byKey.get(key)]:products).map(item=>({...item,favorite:false}));
     const body=clone.querySelector('body');body.dataset.theme=root.dataset.theme;body.dataset.motion=enabled()?'on':'off';
     delete body.dataset.view;
-    clone.querySelectorAll('.pc-card[data-product]').forEach(card=>{if(key&&card.dataset.product!==key)card.remove();});
+    clone.querySelectorAll('.pc-card[data-product]').forEach(card=>{
+      if (key && card.dataset.product !== key) card.remove();
+      else renderImage(card.querySelector('[data-art]'), byKey.get(card.dataset.product));
+    });
     clone.querySelector('[data-products]').textContent=JSON.stringify(items).replace(/</g,'\\u003c');
     if(key){
       body.classList.add('pc-single');clone.querySelector('h1').textContent=items[0].name;

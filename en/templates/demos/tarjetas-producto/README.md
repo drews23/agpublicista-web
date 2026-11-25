@@ -1,12 +1,12 @@
 # Glass Product Cards — Lienzo Objects
 
-Three original product concepts with detailed local SVG artwork, a rotating light border, layered pointer tilt, finish variants, favorites, and a functional local selection.
+Three original product concepts with detailed local 3D renders, a rotating light border, layered pointer tilt, finish variants, favorites, and a functional local selection.
 
 ## Open and customize
 
-Extract the complete ZIP. Open index.html directly; no server, package install, network, API key, or framework is needed. Keep styles.css, script.js, and assets/ beside the HTML. Fonts, logo, nine product illustrations, and license notices are local.
+Extract the complete ZIP. Open index.html directly; no server, package install, network, API key, or framework is needed. Keep styles.css, script.js, and assets/ beside the HTML. Fonts, logo, nine transparent WebP product renders, and license notices are local.
 
-Use Customize on a card to edit its name, description, sample USD price, optional previous price, maximum tilt (0–10 degrees), border period (4–16 seconds), and light intensity. Each card has independent settings. Finish buttons update the illustration and accent, including the detail view. Reset affects only that card. Products, prices, ratings, and reviews are illustrative, not customer evidence or a real sale.
+Use Customize on a card to edit its name, description, sample USD price, optional previous price, maximum tilt (0–10 degrees), border period (4–16 seconds), and light intensity. Each card has independent settings. Finish buttons update the render and accent, including the detail view. Your brand applies a tint to the selected finish while retaining its texture and highlights. Reset affects only that card. Products, prices, ratings, and reviews are illustrative, not customer evidence or a real sale.
 
 Content opens first. Expand Sample prices, Motion and light, or Your brand as needed. Hide settings keeps the values and leaves the product preview and Download HTML visible.
 
@@ -28,7 +28,7 @@ The light border rotates with CSS transform, rather than recalculating a gradien
 
 ## Credits and licenses
 
-New Lienzo implementation for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied reference archive credits Ahmod Musa; the archive and screen recording were inspected, not redistributed. None of its source, emoji artwork, remote fonts, third-party marketing links, or review figures is included. Product SVGs were drawn specifically for this implementation. SOURCE-NOTES.md records provenance. LICENSE-LIENZO.txt applies to this code; fonts keep their OFL notices. MIT does not transfer trademark rights.
+New Lienzo implementation for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . The supplied reference archive credits Ahmod Musa; the archive and screen recording were inspected, not redistributed. None of its source, emoji artwork, remote fonts, third-party marketing links, or review figures is included. The product renders were generated with ImageGen for this implementation. SOURCE-NOTES.md records provenance. LICENSE-LIENZO.txt applies to this code; fonts keep their OFL notices. MIT does not transfer trademark rights.
 
 
 ## Editing workspace

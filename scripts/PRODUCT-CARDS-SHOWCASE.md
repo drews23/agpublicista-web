@@ -6,7 +6,7 @@ Mejora local del 13 de octubre de 2026 sobre `7d5c9c3`. Ese commit de carrusel y
 
 Se inspeccionaron `D:\octubre 2026\lienzo\screen-20261013-084440~2.mp4` (21,919637 s; vídeo vertical con metadatos de rotación) y el ZIP `neon-glow-glass-product-card-animated-css-property-gradient-border-no-js (2).zip`. El ZIP acredita a Ahmod Musa y contiene CSS con `@property`, degradados de borde animados, flotación, etiquetas, valoraciones, precios, variantes, favoritos y un botón de compra visual. Su JS cambia clases de variantes y favoritos; no implementa una selección de productos.
 
-La implementación nueva conserva esa jerarquía y presencia: tres tarjetas, borde luminoso, producto flotante, etiquetas, valoraciones ilustrativas, precio actual/anterior, descuento calculado y acabados. Sustituye los emojis por nueve SVG propios de auriculares, reloj y portátil; los acabados cambian tanto la ilustración como el material. No redistribuye el código, arte, cifras ni enlaces promocionales de referencia. No incorpora el pack existente de iconos 3D. Paleta limitada al logo Lienzo, blanco y negro neutro; las superficies se obtienen por mezcla. Fraunces mantiene su espaciado normal.
+La implementación nueva conserva esa jerarquía y presencia: tres tarjetas, borde luminoso, producto flotante, etiquetas, valoraciones ilustrativas, precio actual/anterior, descuento calculado y acabados. La revisión actual incorpora nueve WebP transparentes de auriculares, reloj y portátil, producidos para Lienzo con ImageGen en acabados menta, ámbar y violeta. Los controles de marca adaptan el tinte del render y los acentos de la interfaz. El ZIP incluye los renders listos para usar sin conexión. Paleta limitada al logo Lienzo, blanco y negro neutro; las superficies se obtienen por mezcla. Fraunces mantiene su espaciado normal.
 
 ## Diferencial funcional
 
@@ -22,8 +22,8 @@ Productos, características, precios, valoraciones y cifras de opiniones son eje
 
 ## Fuentes y generación
 
-- `scripts/product_cards_showcase.py`: documentos bilingües, ilustraciones SVG, guía y miniaturas.
-- `scripts/template-expansion/product-cards/`: CSS/JS y capturas WebP reales ES/en-US.
+- `scripts/product_cards_showcase.py`: documentos bilingües, distribución de los renders, guía y miniaturas.
+- `scripts/template-expansion/product-cards/`: CSS/JS, renders WebP de 640 × 480 en `renders/` y capturas ES/en-US.
 - `scripts/template-expansion/content.json`: descripción honesta en ambos idiomas.
 - `scripts/build-template-expansion.py`: delegación de HTML, assets, guía y miniatura; empaquetado y catálogos.
 - `scripts/template_catalog_layout.py`: fila de comparación acorde a la personalización real.

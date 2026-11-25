@@ -1,12 +1,12 @@
 # Tarjetas de producto de cristal — Lienzo Objects
 
-Tres conceptos originales con ilustraciones SVG locales detalladas, borde de luz rotatorio, inclinación por capas, acabados, favoritos y selección local funcional.
+Tres conceptos originales con renders 3D locales detallados, borde de luz rotatorio, inclinación por capas, acabados, favoritos y selección local funcional.
 
 ## Abrir y personalizar
 
-Descomprime todo el ZIP. Abre index.html directamente; no requiere servidor, paquetes, red, API ni framework. Conserva styles.css, script.js y assets/ junto al HTML. Incluye fuentes, logo, nueve ilustraciones de producto y sus avisos de licencia locales.
+Descomprime todo el ZIP. Abre index.html directamente; no requiere servidor, paquetes, red, API ni framework. Conserva styles.css, script.js y assets/ junto al HTML. Incluye fuentes, logo, nueve renders de producto en WebP transparente y sus avisos de licencia locales.
 
-Usa Personalizar para editar nombre, descripción, precio de ejemplo en USD, precio anterior opcional, inclinación máxima (0–10 grados), periodo del borde (4–16 segundos) e intensidad de luz. Cada tarjeta conserva sus propios ajustes. Los acabados cambian la ilustración y el acento, también en la vista ampliada. Restablecer solo afecta a esa tarjeta. Productos, precios, valoraciones y cantidades de opiniones son ilustrativos; no representan una venta ni testimonios reales.
+Usa Personalizar para editar nombre, descripción, precio de ejemplo en USD, precio anterior opcional, inclinación máxima (0–10 grados), periodo del borde (4–16 segundos) e intensidad de luz. Cada tarjeta conserva sus propios ajustes. Los acabados cambian el render y el acento, también en la vista ampliada. Tu marca aplica un tinte al acabado sin perder sus texturas y reflejos. Restablecer solo afecta a esa tarjeta. Productos, precios, valoraciones y cantidades de opiniones son ilustrativos; no representan una venta ni testimonios reales.
 
 Contenido abre primero. Despliega Precios de ejemplo, Movimiento y luz o Tu marca según lo que quieras editar. Ocultar ajustes conserva los valores y deja a la vista el producto y Descargar HTML.
 
@@ -28,7 +28,7 @@ El borde gira con CSS transform, sin recalcular el ángulo de un degradado en ca
 
 ## Créditos y licencias
 
-Implementación nueva Lienzo para la colaboración con MD Estudio Creativo identificada por el responsable: https://creativomarketingdigital.com/ . La referencia aportada acredita a Ahmod Musa; se inspeccionaron ZIP y vídeo sin redistribuirlos. No incluye su código, emojis, fuentes remotas, enlaces promocionales de terceros ni cifras de opiniones. Los SVG de producto se dibujaron para esta implementación. SOURCE-NOTES.md documenta procedencia. LICENSE-LIENZO.txt cubre este código; las fuentes conservan OFL. MIT no transfiere derechos de marca.
+Implementación nueva Lienzo para la colaboración con MD Estudio Creativo identificada por el responsable: https://creativomarketingdigital.com/ . La referencia aportada acredita a Ahmod Musa; se inspeccionaron ZIP y vídeo sin redistribuirlos. No incluye su código, emojis, fuentes remotas, enlaces promocionales de terceros ni cifras de opiniones. Los renders de producto se generaron con ImageGen para esta implementación. SOURCE-NOTES.md documenta procedencia. LICENSE-LIENZO.txt cubre este código; las fuentes conservan OFL. MIT no transfiere derechos de marca.
 
 
 ## Mesa de edición
