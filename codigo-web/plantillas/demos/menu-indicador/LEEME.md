@@ -5,7 +5,7 @@ Un componente nativo HTML, CSS y JavaScript con dos orientaciones, cinco destino
 ## Qué mejora
 
 - El indicador sólido señala el destino activo. Una segunda luz de exploración sigue el ratón o el foco sin cambiar la selección.
-- La ilustración dimensional de la portada y las miniaturas SVG son originales. No se descargan imágenes externas.
+- Inicio, Colección y Guardados muestran renders 3D originales de Lienzo. El ZIP incluye las imágenes. Consulta su [procedencia](assets/ARTWORK-NOTICE.txt).
 - Colección filtra accesos reales a recursos de Lienzo. Los corazones guardan o retiran recursos de la selección local.
 - Crear permite editar destinos por separado y descargar una configuración JSON legible.
 - Guardados muestra la selección actual y ofrece una salida útil cuando queda vacía.

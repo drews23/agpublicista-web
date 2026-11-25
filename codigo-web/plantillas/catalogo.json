@@ -108,7 +108,7 @@
     "source": null,
     "zip": "escenas-css-lienzo.zip",
     "desc": "Seis escenas de interfaz con mecanismos propios: código, velocidad, contenido vivo, dispositivos, conexiones e ideas. Personaliza cada composición y descarga una escena independiente.",
-    "size": 256,
+    "size": 262,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },
@@ -132,7 +132,7 @@
     "source": null,
     "zip": "menu-indicador-lienzo.zip",
     "desc": "Un estudio interactivo con indicador activo y exploración independientes, cinco destinos útiles, favoritos locales, filtros, iconos editables y navegación horizontal o vertical.",
-    "size": 150,
+    "size": 263,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },
@@ -168,7 +168,7 @@
     "source": null,
     "zip": "tarjeta-perfil-lienzo.zip",
     "desc": "Un portafolio editorial con monograma, retrato local con encuadre, proyectos ampliables y composición adaptable. Edita tu historia, imágenes y enlaces; exporta el HTML y tu contacto vCard.",
-    "size": 301,
+    "size": 256,
     "authorRole": "Implementación original y guía",
     "license": "MIT para código y arte nuevos; fuentes OFL; referencias documentadas por separado."
   },

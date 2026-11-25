@@ -169,7 +169,10 @@ def demo_files(locale, index):
 def add_cards(soup, route):
     locale = 'en' if route.startswith('/en/') else 'es'
     copy = COPY[locale]
-    images = ('/assets/discovery/record-player-preview.webp', '/assets/discovery/album-carousel-preview.webp')
+    images = {
+        'es': ('record-player-preview.webp', 'album-carousel-preview-es.webp'),
+        'en': ('record-player-preview-en.webp', 'album-carousel-preview.webp'),
+    }[locale]
     target = soup.select_one('.templates-section')
     for index, slug in enumerate(SLUGS):
         existing = target.select_one(f'article.template#{slug}')
@@ -181,7 +184,7 @@ def add_cards(soup, route):
         card = BeautifulSoup(f'''
 <article class="template" id="{slug}" tabindex="-1">
   <div class="template__visual" aria-hidden="true">
-    <img src="{images[index]}" alt="" loading="lazy" decoding="async" width="680" height="320" style="width:100%;height:100%;object-fit:contain">
+    <img src="/assets/discovery/{images[index]}" alt="" loading="lazy" decoding="async" width="680" height="320" style="width:100%;height:100%;object-fit:contain">
   </div>
   <div class="template__body">
     <p class="template__tag">{escape(copy['tags'][index])}</p>

@@ -28,7 +28,7 @@ Exported HTML keeps photos, framing modes, crop settings, and descriptions. It s
 
 Mara Vega, her introduction, and the Orbit and Forma projects are sample content. No client metrics, testimonials, or results are claimed. The initial links lead to the real Lienzo catalog. Replace the content with your own details and actual work before publishing. You can also adapt the three approach steps directly in the HTML.
 
-The monogram is generated from the name. The cover and projects use WebP copies of 3D renders from the SVG Favicon Gallery. [Image sources](assets/ICONS-NOTICE.txt).
+The monogram is generated from the name. The cover and projects showcase three original 3D renders created for Lienzo. [Image sources](assets/ICONS-NOTICE.txt).
 
 ## Interaction and accessibility
 

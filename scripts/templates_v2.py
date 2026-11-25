@@ -14,6 +14,19 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'scripts/templates-v2'
 REFERENCE = Path('D:/octubre 2026/lienzo/plantillas2.0')
 ROUTES = {'es': '/codigo-web/plantillas/', 'en': '/en/templates/'}
+ARTWORK_FIELDS = {
+    'profile': (
+        ('pfCoverArtwork', 'profile-cover.webp'),
+        ('pfProjectOneArtwork', 'profile-color.webp'),
+        ('pfProjectTwoArtwork', 'profile-editing.webp'),
+    ),
+    'navigation': (
+        ('navHomeArtwork', 'nav-home.webp'),
+        ('navTemplatesArtwork', 'nav-templates.webp'),
+        ('navCodeArtwork', 'nav-code.webp'),
+        ('navToolsArtwork', 'nav-tools.webp'),
+    ),
+}
 RESOURCES = {
     'escenas-css': {
         'kind': 'scenes', 'reference': '6-css-icons-pack-animation-pure-css',
@@ -29,6 +42,7 @@ RESOURCES = {
     },
     'menu-indicador': {
         'kind': 'navigation', 'reference': 'glassmorphism-menu-indicator-using-css-and-javascript-magic-menu-indicator',
+        'assets': ('nav-home.webp', 'nav-templates.webp', 'nav-code.webp', 'nav-tools.webp', 'ARTWORK-NOTICE.txt'),
         'es': ['Navegación de cristal con indicador', 'Sigue la luz. Encuentra tu lugar.', 'Un indicador de luz que acompaña cinco destinos. Etiquetas visibles, dos orientaciones, edición independiente y navegación con teclado.', '05 destinos', 'El foco explora. La selección cambia al activar un destino.'],
         'en': ['Glass Navigation Indicator', 'Follow the light. Find your place.', 'A light indicator that follows five destinations. Visible labels, two orientations, individual settings, and keyboard navigation.', '05 destinations', 'Focus explores. Activate a destination to change the selection.'],
     },
@@ -842,6 +856,10 @@ def document(slug, lang):
             'Descarga la galería completa para usarla con los archivos del ZIP, o guarda el panel actual como un HTML independiente.'
             if lang == 'es' else 'Download the full gallery to use alongside the ZIP files, or save the current panel as a standalone HTML file.'
         )
+    for key, name in ARTWORK_FIELDS.get(item['kind'], ()):
+        path = SOURCE / f"{item['kind']}-assets" / name
+        fingerprint = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+        ui[key] = f'assets/{name}?v={fingerprint}'
     config = dict(slug=slug, kind=item['kind'], lang=lang, ui=ui, state=initial(item['kind'],lang))
     if item['kind'] == 'particles':
         # The sandboxed preview and local ZIP need an origin-clean image for WebGL and PNG export.

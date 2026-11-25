@@ -1,0 +1,19 @@
+LIENZO — RENDERS 3D ORIGINALES / ORIGINAL 3D ARTWORK
+
+Renders creados para Lienzo, con transparencia y sin dependencias externas.
+Transparent renders created for Lienzo, with local source files.
+
+MIT corresponde al código. / MIT applies to the template code.
+
+- nav-home.webp: Lente cinema / Cinema lens
+  Fuente / Source: scripts/template-expansion/card-lab/renders/lente-cinema.webp (82f31dd2)
+  SHA-256: 91bc8c126de58a521758be560deed57831d2cfa80b3a9086ce351f1e318a7ebd
+- nav-templates.webp: Arc Watch ámbar / Amber Arc Watch
+  Fuente / Source: scripts/template-expansion/product-cards/renders/watch-amber.webp (1d7bcb45)
+  SHA-256: d7851e3054e470bdcf13afae4901437d48b3bcc5ba1f3917954c5f37b3f0e17e
+- nav-code.webp: Sombras CSS / CSS shadow layers
+  Fuente / Source: assets/3d/css-sombras.webp (94d553a5)
+  SHA-256: 7d453b007934586d97d0a502e32d1c871de096a8584001d179fdd2be58716972
+- nav-tools.webp: Auriculares menta / Mint headphones
+  Fuente / Source: scripts/template-expansion/product-cards/renders/audio-mint.webp (1d7bcb45)
+  SHA-256: 5be87d3455b77e2962bf20619b58ea689f1c4bde5e2cc954e23d1bbcd0b1da44

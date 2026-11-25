@@ -49,11 +49,14 @@
     container.addEventListener('load', event => { if (event.target.matches('.pf-photo-frame img')) sizeProjectPhoto(container); }, true);
   }
 
-  const projectArtwork = ['profile-color.webp', 'profile-editing.webp'];
+  const projectArtwork = [
+    ui.pfProjectOneArtwork || 'assets/profile-color.webp',
+    ui.pfProjectTwoArtwork || 'assets/profile-editing.webp',
+  ];
   function projectIcon(index) {
     const image = document.createElement('img');
     image.className = 'pf-library-icon';
-    image.src = 'assets/' + projectArtwork[index];
+    image.src = projectArtwork[index];
     image.decoding = 'async';
     image.alt = '';
     return image;

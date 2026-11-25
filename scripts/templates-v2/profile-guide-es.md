@@ -28,7 +28,7 @@ El HTML exportado conserva las fotos, el modo, el recorte y sus descripciones. S
 
 Mara Vega, su presentación y los proyectos Órbita y Forma son contenido de muestra, sin métricas, testimonios ni resultados atribuidos a clientes. Los enlaces iniciales llevan al catálogo real de Lienzo. Sustituye los datos por tu información y tus proyectos antes de publicarlo. El texto de las tres etapas del enfoque también puede adaptarse directamente en el HTML.
 
-El monograma se calcula a partir del nombre. La portada y los proyectos usan copias WebP de los renders 3D de la Galería de Favicones SVG. [Procedencia de las imágenes](assets/ICONS-NOTICE.txt).
+El monograma se calcula a partir del nombre. La portada y los proyectos muestran tres renders 3D originales creados para Lienzo. [Procedencia de las imágenes](assets/ICONS-NOTICE.txt).
 
 ## Interacción y accesibilidad
 

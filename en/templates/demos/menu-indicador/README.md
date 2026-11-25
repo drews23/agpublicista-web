@@ -5,7 +5,7 @@ A native HTML, CSS, and JavaScript component with two orientations, five editabl
 ## What is improved
 
 - A solid indicator marks the active destination. A separate preview light follows pointer or keyboard focus without changing the selection.
-- The dimensional cover illustration and SVG thumbnails are original. No external images are downloaded.
+- Home, Collection, and Saved feature original Lienzo 3D renders. The ZIP includes the images. See the [artwork sources](assets/ARTWORK-NOTICE.txt).
 - Collection filters real links to Lienzo resources. Heart buttons add or remove resources from a local shortlist.
 - Create lets you edit individual destinations and download readable JSON settings.
 - Saved shows the current shortlist and provides a useful empty state.
