@@ -5,18 +5,24 @@ from html import escape
 import base64
 import hashlib
 import json
-import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'scripts/template-expansion/card-lab'
+STUDIO_RENDERS = SOURCE / 'renders'
+LIBRARY_RENDERS = ROOT / 'assets/3d'
+ARTWORK_NOTE = '''
+The layered glass, wide cinema card, and focus deck retain the reference's interaction structure. Crystal Orb, Precision Cut, Cinema Lens, and Optical Prism are original renders generated for this template with ImageGen. CSS Shadows and Glitch are original 3D renders from the Lienzo library. The local stock gallery was consulted for visual direction. MIT applies to the template code.
+
+El cristal por capas, la tarjeta amplia de cine y la mesa de pruebas conservan la estructura de interacción de la referencia. Órbita de cristal, Corte preciso, Lente cinema y Prisma óptico son renders originales generados para esta plantilla con ImageGen. Sombras CSS y Glitch son renders 3D originales de la biblioteca de Lienzo. Se consultó la galería local de stock para orientar la selección visual. La licencia MIT corresponde al código de la plantilla.
+'''
 PALETTE = {'violet': '#8b7bff', 'mint': '#35d6c8', 'amber': '#ffb454'}
 DESIGNS = [
-    {'key': 'orb', 'accent': 'mint', 'depth': 28, 'tilt': 10, 'es': ('Órbita de cristal', 'Curvas suaves. Capas que flotan sobre una superficie de cristal.', 'Para destacar un servicio, una colección o una idea principal.'), 'en': ('Orb glass', 'Soft curves. Floating layers over a glass surface.', 'For a featured service, collection, or central idea.')},
-    {'key': 'cut', 'accent': 'violet', 'depth': 24, 'tilt': 9, 'es': ('Corte preciso', 'Una silueta angular con luz violeta y un relieve definido.', 'Para interfaces de producto, funciones y fichas de proyectos.'), 'en': ('Precision cut', 'An angular silhouette with violet light and defined relief.', 'For product interfaces, features, and project cards.')},
-    {'key': 'neo', 'accent': 'amber', 'depth': 22, 'tilt': 8, 'es': ('Relieve neón', 'Borde firme, sombra sólida y un acento que marca el ritmo.', 'Para destacar una acción, una novedad o una oferta.'), 'en': ('Neon relief', 'A crisp edge, a solid shadow, and an accent that sets the pace.', 'For a featured action, a new release, or an offer.')},
-    {'key': 'cinema', 'accent': 'mint', 'depth': 32, 'tilt': 7, 'es': ('Plano cinema', 'Un formato amplio para dar espacio a lo que quieres mostrar.', 'Para cabeceras, portafolios, vídeos y presentaciones.'), 'en': ('Cinema wide', 'A wide format that gives your content room to breathe.', 'For headers, portfolios, videos, and presentations.')},
-    {'key': 'crystal', 'accent': 'violet', 'depth': 36, 'tilt': 11, 'es': ('Prisma de luz', 'Violeta, menta y ámbar se encuentran en una superficie facetada.', 'Para proyectos creativos y piezas que necesitan protagonismo.'), 'en': ('Light prism', 'Violet, mint, and amber meet on a faceted surface.', 'For creative projects and pieces that deserve the spotlight.')},
-    {'key': 'stack', 'accent': 'violet', 'depth': 40, 'tilt': 10, 'es': ('Capas flotantes', 'Tres planos separados. Una profundidad que responde a tu movimiento.', 'Para contenidos por niveles, colecciones y sistemas visuales.'), 'en': ('Floating layers', 'Three separate planes. Depth that responds to your movement.', 'For layered content, collections, and visual systems.')},
+    {'key': 'orb', 'image': STUDIO_RENDERS / 'cristal-orbita.webp', 'accent': 'mint', 'depth': 28, 'tilt': 10, 'es': ('Órbita de cristal', 'Curvas suaves. Capas que flotan sobre una superficie de cristal.', 'Para destacar un servicio, una colección o una idea principal.'), 'en': ('Orb glass', 'Soft curves. Floating layers over a glass surface.', 'For a featured service, collection, or central idea.')},
+    {'key': 'cut', 'image': STUDIO_RENDERS / 'corte-precision.webp', 'accent': 'violet', 'depth': 24, 'tilt': 9, 'es': ('Corte preciso', 'Una silueta angular con luz violeta y un relieve definido.', 'Para interfaces de producto, funciones y fichas de proyectos.'), 'en': ('Precision cut', 'An angular silhouette with violet light and defined relief.', 'For product interfaces, features, and project cards.')},
+    {'key': 'neo', 'image': LIBRARY_RENDERS / 'sonido-glitch.webp', 'accent': 'amber', 'depth': 22, 'tilt': 8, 'es': ('Relieve neón', 'Borde firme, sombra sólida y un acento que marca el ritmo.', 'Para destacar una acción, una novedad o una oferta.'), 'en': ('Neon relief', 'A crisp edge, a solid shadow, and an accent that sets the pace.', 'For a featured action, a new release, or an offer.')},
+    {'key': 'cinema', 'image': STUDIO_RENDERS / 'lente-cinema.webp', 'accent': 'mint', 'depth': 32, 'tilt': 7, 'es': ('Plano cinema', 'Un formato amplio para dar espacio a lo que quieres mostrar.', 'Para cabeceras, portafolios, vídeos y presentaciones.'), 'en': ('Cinema wide', 'A wide format that gives your content room to breathe.', 'For headers, portfolios, videos, and presentations.')},
+    {'key': 'crystal', 'image': STUDIO_RENDERS / 'prisma-optico.webp', 'accent': 'violet', 'depth': 36, 'tilt': 11, 'es': ('Prisma de luz', 'Violeta, menta y ámbar se encuentran en una superficie facetada.', 'Para proyectos creativos y piezas que necesitan protagonismo.'), 'en': ('Light prism', 'Violet, mint, and amber meet on a faceted surface.', 'For creative projects and pieces that deserve the spotlight.')},
+    {'key': 'stack', 'image': LIBRARY_RENDERS / 'css-sombras.webp', 'accent': 'violet', 'depth': 40, 'tilt': 10, 'es': ('Capas flotantes', 'Tres planos separados. Una profundidad que responde a tu movimiento.', 'Para contenidos por niveles, colecciones y sistemas visuales.'), 'en': ('Floating layers', 'Three separate planes. Depth that responds to your movement.', 'For layered content, collections, and visual systems.')},
 ]
 ICONS = {
     'arrow': '<path d="M5 12h14m-6-6 6 6-6 6"/>',
@@ -38,14 +44,14 @@ def icon(key):
 
 
 def localized(lang):
-    return [dict(key=d['key'], accent=d['accent'], depth=d['depth'], tilt=d['tilt'], name=d[lang][0], description=d[lang][1], use=d[lang][2]) for d in DESIGNS]
+    return [dict(key=d['key'], accent=d['accent'], depth=d['depth'], tilt=d['tilt'], name=d[lang][0], description=d[lang][1], use=d[lang][2], image=d['image'].name) for d in DESIGNS]
 
 
 def card(item, index, lang, preview=False):
     tr = lambda es, en: en if lang == 'en' else es
     name = escape(item['name'])
     actions = '<p class="lab-card__signature">LIENZO / MATERIAL STUDY</p>' if preview else f'''<div class="lab-card__actions"><div class="lab-card__tools"><button type="button" class="lab-round" data-test aria-pressed="false" aria-label="{tr('Probar profundidad de', 'Test depth for')} {name}" title="{tr('Probar efecto', 'Test effect')}">{icon('layers')}</button><button type="button" class="lab-round" data-cycle aria-label="{tr('Cambiar acento de', 'Change accent for')} {name}" title="{tr('Cambiar acento', 'Change accent')}">{icon('palette')}</button><button type="button" class="lab-round" data-card-copy aria-label="{tr('Copiar HTML de', 'Copy HTML for')} {name}" title="{tr('Copiar HTML', 'Copy HTML')}">{icon('copy')}</button></div><button type="button" class="lab-card__open" data-open>{tr('Personalizar', 'Customize')}{icon('open')}</button></div>'''
-    return f'''<article class="lab-card lab-card--{item['key']}{' lab-card--preview' if preview else ''}" data-card-key="{item['key']}" style="--tone:{PALETTE[item['accent']]};--depth:{item['depth']}px;--tilt:{item['tilt']}" aria-label="{name}"><div class="lab-card__back" aria-hidden="true"></div><div class="lab-card__middle" aria-hidden="true"></div><div class="lab-card__face" aria-hidden="true"><span class="lab-card__wash"></span><span class="lab-card__shine"></span></div><div class="lab-card__relief" aria-hidden="true"><i></i><i></i><i></i><i></i><span>{icon('layers')}</span></div><div class="lab-card__content"><p class="lab-card__index"><span data-card-number>{index+1:02d}</span> / FORM STUDY</p><h3 data-card-name>{name}</h3><p class="lab-card__description" data-card-description>{escape(item['description'])}</p>{actions}</div></article>'''
+    return f'''<article class="lab-card lab-card--{item['key']}{' lab-card--preview' if preview else ''}" data-card-key="{item['key']}" style="--tone:{PALETTE[item['accent']]};--depth:{item['depth']}px;--tilt:{item['tilt']}" aria-label="{name}"><div class="lab-card__back" aria-hidden="true"></div><div class="lab-card__middle" aria-hidden="true"></div><div class="lab-card__face" aria-hidden="true"><span class="lab-card__wash"></span><span class="lab-card__shine"></span></div><div class="lab-card__relief" aria-hidden="true"><img class="lab-card__render" src="assets/{item['image']}" width="512" height="512" alt="" decoding="async" draggable="false"></div><div class="lab-card__content"><p class="lab-card__index"><span data-card-number>{index+1:02d}</span> / FORM STUDY</p><h3 data-card-name>{name}</h3><p class="lab-card__description" data-card-description>{escape(item['description'])}</p>{actions}</div></article>'''
 
 
 @editor_document('laboratorio-3d')
@@ -132,6 +138,9 @@ def document(lang):
 
 def copy_assets(destination):
     copy_editor_assets(destination)
+    for item in DESIGNS:
+        render = item['image']
+        copy_editor_file(render, destination / 'assets' / render.name)
     for name in ['styles.css', 'script.js']:
         copy_editor_file(SOURCE / name, destination / name)
 
@@ -149,10 +158,10 @@ def readme(lang):
     if lang == 'en':
         return '''# 3D Glass Card Lab — Lienzo
 
-Six distinct material studies: orb glass, precision cut, neon relief, cinema wide, light prism, and floating layers. Layered surfaces, concentric relief, a wide bento card, directional light, and a six-design focus deck preserve the supplied reference's visual and interactive structure. The implementation is new Lienzo HTML, CSS, and JavaScript.
+Six distinct material studies: orb glass, precision cut, neon relief, cinema wide, light prism, and floating layers. Original 3D renders, layered surfaces, a wide card, directional light, and a six-design focus deck preserve the supplied reference's visual and interactive structure. The implementation is new Lienzo HTML, CSS, and JavaScript.
 
 ## Open and use
-Extract the whole ZIP and open index.html. Fonts, logo, CSS, and JavaScript are local. No CDN, installation, API, backend, or build step. The standalone demo starts dark; the site preview follows its parent theme.
+Extract the whole ZIP and open index.html. Renders, fonts, logo, CSS, and JavaScript are local. No CDN, installation, API, backend, or build step. The standalone demo starts dark; the site preview follows its parent theme.
 
 Move a mouse over a card for pointer tilt. Use Test effect for a short depth demonstration, including on touchscreens and with a keyboard. Change accent cycles only through the logo's violet, mint, and amber. Copy HTML exports that card. Customize opens a native editor with live title/description, three brand accents, layer depth (0–48 px), and maximum tilt (0–14 degrees). Reset restores only the selected card. Settings apply per card and reset on reload.
 
@@ -172,10 +181,10 @@ This is a reusable UI example, not a complete store, an installable WordPress th
 '''
     return '''# Laboratorio de tarjetas 3D — Lienzo
 
-Seis estudios de material: órbita de cristal, corte preciso, relieve neón, plano cinema, prisma de luz y capas flotantes. Superficies separadas, relieves concéntricos, tarjeta panorámica, luz direccional y una mesa navegable de seis diseños recuperan la estructura visual e interactiva de la referencia. La implementación es HTML, CSS y JavaScript nuevo de Lienzo.
+Seis estudios de material: órbita de cristal, corte preciso, relieve neón, plano cinema, prisma de luz y capas flotantes. Superficies separadas, renders 3D originales, tarjeta panorámica, luz direccional y una mesa navegable de seis diseños recuperan la estructura visual e interactiva de la referencia. La implementación es HTML, CSS y JavaScript nuevo de Lienzo.
 
 ## Abrir y usar
-Descomprime el ZIP completo y abre index.html. Fuentes, logo, CSS y JavaScript son locales. Sin CDN, instalación, API, backend ni compilación. La demo independiente comienza en oscuro; la ventana del sitio sigue el tema de su padre.
+Descomprime el ZIP completo y abre index.html. Los renders, las fuentes, el logo, CSS y JavaScript son locales. Sin CDN, instalación, API, backend ni compilación. La demo independiente comienza en oscuro; la ventana del sitio sigue el tema de su padre.
 
 Mueve el ratón sobre una tarjeta para inclinarla. Probar efecto ofrece una demostración breve del relieve, también con toque o teclado. Cambiar acento alterna solo entre violeta, menta y ámbar del logo. Copiar HTML exporta esa tarjeta. Personalizar abre un editor nativo con título/descripción en vivo, tres acentos de marca, profundidad de capas (0–48 px) e inclinación máxima (0–14 grados). Restablecer recupera solo la tarjeta elegida. Los ajustes son por tarjeta y se reinician al recargar.
 

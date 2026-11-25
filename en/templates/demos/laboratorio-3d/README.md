@@ -1,9 +1,9 @@
 # 3D Glass Card Lab — Lienzo
 
-Six distinct material studies: orb glass, precision cut, neon relief, cinema wide, light prism, and floating layers. Layered surfaces, concentric relief, a wide bento card, directional light, and a six-design focus deck preserve the supplied reference's visual and interactive structure. The implementation is new Lienzo HTML, CSS, and JavaScript.
+Six distinct material studies: orb glass, precision cut, neon relief, cinema wide, light prism, and floating layers. Original 3D renders, layered surfaces, a wide card, directional light, and a six-design focus deck preserve the supplied reference's visual and interactive structure. The implementation is new Lienzo HTML, CSS, and JavaScript.
 
 ## Open and use
-Extract the whole ZIP and open index.html. Fonts, logo, CSS, and JavaScript are local. No CDN, installation, API, backend, or build step. The standalone demo starts dark; the site preview follows its parent theme.
+Extract the whole ZIP and open index.html. Renders, fonts, logo, CSS, and JavaScript are local. No CDN, installation, API, backend, or build step. The standalone demo starts dark; the site preview follows its parent theme.
 
 Move a mouse over a card for pointer tilt. Use Test effect for a short depth demonstration, including on touchscreens and with a keyboard. Change accent cycles only through the logo's violet, mint, and amber. Copy HTML exports that card. Customize opens a native editor with live title/description, three brand accents, layer depth (0–48 px), and maximum tilt (0–14 degrees). Reset restores only the selected card. Settings apply per card and reset on reload.
 

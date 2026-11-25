@@ -1,9 +1,9 @@
 # Laboratorio de tarjetas 3D — Lienzo
 
-Seis estudios de material: órbita de cristal, corte preciso, relieve neón, plano cinema, prisma de luz y capas flotantes. Superficies separadas, relieves concéntricos, tarjeta panorámica, luz direccional y una mesa navegable de seis diseños recuperan la estructura visual e interactiva de la referencia. La implementación es HTML, CSS y JavaScript nuevo de Lienzo.
+Seis estudios de material: órbita de cristal, corte preciso, relieve neón, plano cinema, prisma de luz y capas flotantes. Superficies separadas, renders 3D originales, tarjeta panorámica, luz direccional y una mesa navegable de seis diseños recuperan la estructura visual e interactiva de la referencia. La implementación es HTML, CSS y JavaScript nuevo de Lienzo.
 
 ## Abrir y usar
-Descomprime el ZIP completo y abre index.html. Fuentes, logo, CSS y JavaScript son locales. Sin CDN, instalación, API, backend ni compilación. La demo independiente comienza en oscuro; la ventana del sitio sigue el tema de su padre.
+Descomprime el ZIP completo y abre index.html. Los renders, las fuentes, el logo, CSS y JavaScript son locales. Sin CDN, instalación, API, backend ni compilación. La demo independiente comienza en oscuro; la ventana del sitio sigue el tema de su padre.
 
 Mueve el ratón sobre una tarjeta para inclinarla. Probar efecto ofrece una demostración breve del relieve, también con toque o teclado. Cambiar acento alterna solo entre violeta, menta y ámbar del logo. Copiar HTML exporta esa tarjeta. Personalizar abre un editor nativo con título/descripción en vivo, tres acentos de marca, profundidad de capas (0–48 px) e inclinación máxima (0–14 grados). Restablecer recupera solo la tarjeta elegida. Los ajustes son por tarjeta y se reinician al recargar.
 

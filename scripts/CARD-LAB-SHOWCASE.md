@@ -12,7 +12,7 @@ El ZIP de referencia `neon-glass-3d-cards-ui-lab.zip` conserva SHA-256 `cd301d59
 
 El usuario pidió emplear los colores del logo en los nuevos recursos. La fuente es `assets/logo-lienzo.svg`: violeta `#8b7bff`, violeta profundo `#6e5df2`, menta `#35d6c8`, ámbar `#ffb454` y blanco `#fff`. El negro neutro `#0a0a0f` procede del sitio. Gradientes, transparencias y superficies se derivan de esos tokens; no se introducen otros acentos. El editor ofrece tres acentos de marca, sin selector cromático libre.
 
-Corrección posterior del usuario: los iconos 3D existentes se reservan para otras plantillas que se abordarán después. Este laboratorio no los utiliza. Los relieves son geometría CSS y los pequeños SVG de los controles son dibujos funcionales de interfaz. Fraunces e Instrument Sans conservan la identidad y el espaciado normal de los títulos.
+La revisión actual sustituye los relieves decorativos por seis renders WebP. La galería local sirvió como referencia visual. Cuatro piezas fueron generadas para esta plantilla con ImageGen y dos provienen de la biblioteca original de Lienzo: Sombras CSS y Glitch. Las capas, la luz y la inclinación se calculan por CSS y JavaScript. Fraunces e Instrument Sans conservan la identidad y el espaciado normal de los títulos.
 
 ## Diferencial implementado
 
