@@ -4,14 +4,13 @@ La colección revisada con MD Estudio Creativo aportó referencias para el bloqu
 
 The collection reviewed with MD Estudio Creativo provided references for locking, unlocking, and navigating a phone. Lienzo created this implementation, its sample screens, and the phone shell. The shell was generated with ImageGen. The fonts retain their OFL notices.
 
-## Fotografías de muestra / Sample photography
+## Renders de muestra / Sample renders
 
-Fotografías de Carol M. Highsmith, Prints and Photographs Division, Library of Congress. El [catálogo del archivo](https://www.loc.gov/item/00650024/) las identifica como de dominio público. Los JPEG se convirtieron a WebP y el prototipo ajusta su encuadre según la pantalla.
+Renders locales de la biblioteca de Lienzo, encuadrados para cada pantalla. / Local renders from the Lienzo library, framed for each screen.
 
-Photographs by Carol M. Highsmith, Prints and Photographs Division, Library of Congress. The [archive record](https://www.loc.gov/item/00650024/) identifies the photographs as public domain. The JPEGs were converted to WebP and the prototype frames them to fit each screen.
-
-- `assets/museum-exterior.webp` · [Quadracci Pavilion exterior, LC-DIG-highsm-40199](https://www.loc.gov/pictures/item/2016631017/).
-- `assets/museum-atrium.webp` · [Milwaukee Art Museum atrium, LC-DIG-highsm-40194](https://www.loc.gov/item/2016631012/).
+- `assets/css-degradados.webp` · Bloqueo / Lock screen.
+- `assets/css-sombras.webp` · Inicio / Home screen.
+- `assets/css-transformaciones.webp` · Proyecto / Project screen.
 
 ## Referencias visuales / Visual references
 

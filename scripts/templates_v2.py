@@ -59,8 +59,9 @@ RESOURCES = {
     'prototipo-pantalla-movil': {
         'kind': 'phone-prototype',
         'sample_artwork': False,
-        'assets': ('phone-shell.webp', 'museum-exterior.webp', 'museum-atrium.webp'),
-        'license': 'Código MIT. Fuentes OFL. Créditos de las fotografías y del marco en SOURCE-NOTES.md.',
+        'assets': ('phone-shell.webp',),
+        'library_assets': ('css-degradados.webp', 'css-sombras.webp', 'css-transformaciones.webp'),
+        'license': 'Código MIT. Fuentes OFL. Renders de Lienzo y créditos del marco en SOURCE-NOTES.md.',
     },
     'portatil-en-perspectiva': {
         'kind': 'laptop-perspective',
@@ -1144,6 +1145,8 @@ def build(only=None, language=None):
                 shutil.copy2(common / name, assets / name)
             for name in resource.get('assets', ()):
                 shutil.copy2(SOURCE / f'{kind}-assets' / name, assets / name)
+            for name in resource.get('library_assets', ()):
+                shutil.copy2(ROOT / 'assets/3d' / name, assets / name)
             if kind == 'devices':
                 shutil.copy2(ROOT / 'assets/3d/css-transformaciones.webp', assets / 'atlas-glass.webp')
             if kind == 'laptop-perspective':

@@ -210,28 +210,28 @@
 
 .pp-lock-display {
   align-items: center;
+  isolation: isolate;
   padding: 21% 8% 9%;
   overflow: hidden;
   text-align: center;
   background:
-    radial-gradient(ellipse at 81% 56%, #8978be69, transparent 63%),
-    radial-gradient(ellipse at 24% 96%, #60ceb174, transparent 67%),
-    linear-gradient(156deg, #171b2d 13%, #303049 61%, #254344 100%);
+    radial-gradient(ellipse at 52% 47%, #443b68, transparent 57%),
+    linear-gradient(160deg, #15182c 22%, #201e35 65%, #132a30);
 }
 
-.pp-lock-display::before {
+.pp-wallpaper {
   position: absolute;
-  top: 39%;
-  left: -28%;
-  z-index: -1;
-  width: 156%;
-  aspect-ratio: 1;
-  border: 1px solid #c0f3d756;
-  border-radius: 48% 52% 54% 46%;
-  background: radial-gradient(ellipse at 65% 5%, #7bd5c655, transparent 62%);
-  box-shadow: inset 0 1px 38px #a8b5e955, 0 0 29px #568f9554;
-  transform: rotate(-35deg);
-  content: "";
+  inset: 30% 9% auto;
+  width: 82%;
+  height: 35%;
+  max-width: none;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.pp-lock[data-has-image="false"] .pp-notification {
+  top: 67%;
+  max-height: 17%;
 }
 
 .pp-lock-time {
@@ -369,71 +369,20 @@
   line-height: 1.35;
 }
 
-.pp-art {
-  position: relative;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  width: 100%;
-  min-height: 16%;
-  max-height: 43%;
-  flex: 1 1 auto;
-  overflow: hidden;
-  border: 1px solid #ffffff49;
-  border-radius: clamp(7px, 6cqi, 17px);
-  isolation: isolate;
-}
-
-.pp-art i {
-  position: absolute;
+.pp-sample-render {
   display: block;
+  width: 100%;
+  min-height: 0;
+  max-height: 61%;
+  flex: 1 1 0;
+  padding: 5%;
+  border-radius: clamp(7px, 6cqi, 17px);
+  background: radial-gradient(ellipse at 45% 37%, #50446f, #202238 76%);
+  object-fit: contain;
 }
 
-.pp-art-home {
-  background: linear-gradient(125deg, #122a2d, #34545c 65%, #6b688d);
-}
-
-.pp-art-home i {
-  width: 45%;
-  height: 75%;
-  border: 1px solid #d2f9e877;
-  border-radius: 48%;
-  background: linear-gradient(145deg, #8cb9b84f, #31395332);
-  box-shadow: inset 0 2px 10px #e0f3d930;
-  transform: rotate(39deg);
-}
-
-.pp-art-home i:first-child {
-  translate: -26% 10%;
-}
-
-.pp-art-home i:last-child {
-  translate: 26% -10%;
-}
-
-.pp-art-project {
-  min-height: 25%;
-  background: linear-gradient(150deg, #171826, #494366 72%, #856d99);
-}
-
-.pp-art-project i {
-  width: 68%;
-  aspect-ratio: 1.55;
-  border: 1px solid #e6f3e170;
-  border-radius: 9%;
-  background:
-    linear-gradient(90deg, #11151b44 2px, transparent 2px) 0 0 / 11px 100%,
-    linear-gradient(139deg, #a8dbc0c7, #8498bd72 67%, #9a8abc);
-  box-shadow: 0 8px 18px #11112047;
-  transform: skewY(-12deg) rotate(-11deg);
-}
-
-.pp-art-project i:first-child {
-  translate: -5% 16%;
-}
-
-.pp-art-project i:last-child {
-  translate: 5% -16%;
+.pp-project-content .pp-sample-render {
+  background: radial-gradient(ellipse at 39% 30%, #39465e, #151e2d 80%);
 }
 
 .pp-home-actions {
@@ -807,7 +756,7 @@
     padding-bottom: 94px;
   }
 
-  .pp-home-content .pp-art {
+  .pp-home-content .pp-sample-render {
     display: none;
   }
 

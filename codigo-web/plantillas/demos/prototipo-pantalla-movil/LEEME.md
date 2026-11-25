@@ -3,7 +3,7 @@
 Convierte pantallas de un diseño móvil en un recorrido que puedes probar con el dedo o el teclado. La muestra incluye bloqueo, inicio, proyecto y confirmación.
 
 1. Descomprime el ZIP y abre `index.html`.
-2. Prueba el recorrido de muestra. Desbloquea el teléfono, abre la ficha del Pabellón Quadracci y pulsa **Terminar recorrido**. Usa los controles de inicio y bloqueo para volver.
+2. Prueba el recorrido de muestra. Desbloquea el teléfono, abre **Cristal en perspectiva** con **Ver proyecto** y pulsa **Terminar recorrido**. Usa los controles de inicio y bloqueo para volver.
 3. Abre **Ajustes** y elige en **Pantalla** qué parte del prototipo quieres editar. Despliega **Captura** para añadir un PNG, JPG o WebP de hasta 8 MB. El navegador procesa la imagen en tu equipo.
 4. En **Texto y color** aparecen los textos de la pantalla elegida. En Bloqueo puedes activar u ocultar el aviso. Pulsa **Aplicar** para confirmar el texto y el color.
 5. En Proyecto o Confirmación, despliega **Punto interactivo** para activar el botón, ajustar su posición y elegir su destino. Prueba el salto desde el teléfono. Puedes plegar cada sección o cerrar el panel para ver el prototipo a tamaño completo.
