@@ -20,6 +20,8 @@ The package includes Lienzo code, artwork, and styles. The reference files, remo
 
 Los videos de Atlas se crearon para Lienzo a partir de cuatro pantallas de un portafolio ficticio. Cada idioma incluye su propia versión, con tiempos distintos en portátil y móvil para demostrar las marcas del recorrido. The Atlas clips were made for Lienzo from four states of a fictional portfolio. Each language has its own clips, with different timings on laptop and phone to demonstrate the walkthrough markers.
 
+Los cuatro MP4 muestran «Cristal en perspectiva» con el mismo render 3D de Lienzo que aparece en las pantallas de muestra. The four MP4s show “Glass in Perspective” using the same Lienzo 3D render as the sample screens.
+
 ## Generación del portátil / Laptop generation
 
 ImageGen integrado, con transparencia activada. La pantalla verde de registro queda cubierta por la capa editable del mockup. Built-in ImageGen with transparency enabled. The editable screen covers the green registration area.

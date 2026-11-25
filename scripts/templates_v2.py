@@ -358,11 +358,20 @@ def gallery_markup(ui):
 <dialog class="eg-focus-dialog" data-gallery-focus aria-labelledby="eg-focus-title"><div class="eg-focus-top"><span>LIENZO / {ui['galleryFocus']}</span><button type="button" data-focus-close aria-label="{ui['close']}">×</button></div><div class="eg-focus-canvas" data-focus-canvas><div data-focus-art></div><span class="eg-focus-category" data-focus-category></span></div><div class="eg-focus-caption"><div><h2 id="eg-focus-title" data-focus-title></h2><p data-focus-description></p></div><div class="eg-focus-actions"><button type="button" data-focus-previous aria-label="{ui['previousPanel']}">←</button><button type="button" data-focus-next aria-label="{ui['nextPanel']}">→</button><button type="button" data-focus-pause aria-pressed="false">{ui['pause']}</button><a data-focus-link target="_blank" rel="noopener noreferrer">{ui['openLink']} ↗</a></div></div></dialog>'''
 
 
+def device_demo_version(lang):
+    clips = SOURCE / 'devices-assets'
+    return hashlib.sha256(b''.join(
+        (clips / f'demo-{device}-{lang}.mp4').read_bytes() for device in ('laptop', 'phone')
+    )).hexdigest()[:12]
+
+
 def editor_document(raw, slug, lang, ui):
     """Dock the editor while preserving its preview and committed state."""
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(raw, 'html.parser')
     kind = RESOURCES[slug]['kind']
+    if kind == 'devices':
+        soup.select_one('[data-v2]')['data-demo-version'] = device_demo_version(lang)
     media_first = kind in ['devices', 'laptop-perspective']
     workspace = soup.select_one('.v2-workspace')
     workspace['data-editor-workspace'] = ''
