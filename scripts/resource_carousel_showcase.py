@@ -12,9 +12,17 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'scripts/template-expansion/resource-carousel'
 SLUG = 'carrusel-recursos'
+RENDERS = {
+    'audio': 'sonido-glitch.webp',
+    'motion': 'texto-ondulado.webp',
+    'web': 'css-componentes.webp',
+    'icons': 'optimizar-svg.webp',
+    'color': 'paletas.webp',
+    'space': 'css-transformaciones.webp',
+}
 ROUTES = {'es': '/codigo-web/plantillas/', 'en': '/en/templates/'}
 DESC = {
-    'es': 'Seis tarjetas de ejemplo con arte por capas, luz e inclinación. Busca, filtra y guarda favoritos; cambia entre carrusel y cuadrícula, edita cada tarjeta y exporta tu colección.',
+    'es': 'Seis tarjetas de ejemplo con renders 3D, luz e inclinación. Busca, filtra y guarda favoritos; cambia entre carrusel y cuadrícula, edita cada tarjeta y exporta tu colección.',
     'en': 'Organize a portfolio or resource library with search, filters, favorites, and a choice of carousel or grid view.',
 }
 UI = {
@@ -25,7 +33,7 @@ UI = {
 def data(lang):
     en = lang == 'en'
     rows = [
-        ('audio', 'mint', 'Pulso de medianoche', 'Midnight Pulse', 'Un estudio de ritmo y pausas.', 'A study in rhythm and pauses.', 'Una onda de muestra para presentar una pieza sonora en un portafolio.', 'A sample waveform for presenting a sound piece in a portfolio.', 'WAV / MP3'),
+        ('audio', 'mint', 'Pulso de medianoche', 'Midnight Pulse', 'Un estudio de ritmo y pausas.', 'A study in rhythm and pauses.', 'Una pieza sonora de ejemplo para un portafolio.', 'A sample sound piece for a portfolio.', 'WAV / MP3'),
         ('motion', 'violet', 'Línea de salida', 'Starting Line', 'Una frase que cobra movimiento.', 'A phrase set in motion.', 'Un estudio de tipografía en movimiento para una secuencia de apertura.', 'A motion typography study for an opening sequence.', 'MOTION'),
         ('web', 'amber', 'Estudio Horizonte', 'Horizon Studio', 'Una página para un estudio ficticio.', 'A page for a fictional studio.', 'Un fragmento de código de muestra para presentar un proyecto web.', 'A sample code fragment for presenting a web project.', 'HTML / CSS / JS'),
         ('icons', 'violet', 'Señales cotidianas', 'Everyday Signals', 'Seis símbolos para una misma interfaz.', 'Six symbols for one interface.', 'Una colección ficticia de iconos que ilustra acciones habituales.', 'A fictional icon set that illustrates common actions.', 'SVG'),
@@ -39,18 +47,10 @@ def icon(kind):
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[kind]+'</svg>'
 
 def art(key):
-    if key == 'audio':
-        bars = ''.join(f'<i style="--bar:{h}%;--delay:{i*-.075}s"></i>' for i,h in enumerate([17,28,45,34,67,90,58,38,70,100,64,35,50,72,42,24,37]))
-        return f'<div class="rc-audio rc-layer"><div class="rc-art-label">SOUND / 01 <span>STEREO</span></div><div class="rc-wave">{bars}</div><div class="rc-audio-time"><span>00:00</span><span>━━━━━━━</span><span>00:12</span></div></div><div class="rc-art-chip rc-layer-back">{icon("arrow")} .wav</div>'
-    if key == 'motion':
-        return '<div class="rc-motion-frame rc-layer"><span class="rc-motion-kicker">MAKE IT</span><strong>move.</strong><i class="rc-caret"></i><b class="rc-handle rc-handle--tl"></b><b class="rc-handle rc-handle--tr"></b><b class="rc-handle rc-handle--bl"></b><b class="rc-handle rc-handle--br"></b></div><div class="rc-motion-timeline rc-layer-back"><i></i><i></i><i></i><b></b></div><span class="rc-art-chip">TYPE / 02</span>'
-    if key == 'web':
-        return '<div class="rc-code-window rc-layer"><div class="rc-window-bar"><i></i><i></i><i></i><span>your-next-idea.html</span></div><div class="rc-code-lines"><span>&lt;section&gt;</span><span>  &lt;h1&gt;Hello, idea.&lt;/h1&gt;</span><span>  .create {</span><span>    transform: possibility;</span><span>  }</span><span>&lt;/section&gt;</span></div></div><div class="rc-brackets rc-layer-back">{ }</div>'
-    if key == 'icons':
-        return '<div class="rc-icon-tiles rc-layer">'+''.join(f'<span>{icon(k)}</span>' for k in ['heart','arrow','grid','code','sun','edit'])+'</div><span class="rc-art-chip rc-layer-back">&lt;svg&gt; / 04</span>'
-    if key == 'color':
-        return '<div class="rc-palette rc-layer"><i></i><i></i><i></i><div><span>COLOR STUDY</span><b>01 / 03</b></div></div><div class="rc-color-orbit rc-layer-back"></div><span class="rc-art-chip">#35D6C8</span>'
-    return '<div class="rc-stack rc-layer"><i></i><i></i><i><span>+</span></i></div><div class="rc-space-grid"></div><span class="rc-art-chip rc-layer-back">X / Y / Z</span>'
+    return (
+        f'<img class="rc-art-render" src="assets/{RENDERS[key]}" '
+        'width="512" height="512" alt="" decoding="async" draggable="false">'
+    )
 
 @editor_document('carrusel-recursos')
 def markup(lang):
@@ -69,7 +69,7 @@ def guide(lang):
     if lang=='en':
         return '''# Interactive Resource Carousel - Lienzo
 
-Six original resource scenes: sound, motion, web, SVG icons, color, and depth. Original HTML, CSS, JavaScript and CSS/SVG artwork. No dependencies, CDN, account, API, build step, or backend.
+Six sample cards with WebP 3D renders from the Lienzo library: sound, motion, web, SVG icons, color, and depth. Original HTML, CSS, and JavaScript. No dependencies, CDN, account, API, build step, or backend.
 
 ## Open and use
 Extract the complete ZIP and open index.html. Keep styles.css, script.js and assets/ together. Browse with native touch scrolling, mouse dragging, previous/next, the position slider, dots, or focus the rail and use arrows/Home/End. The sample cards have no destinations. Add your own link in the editor if a card needs one. Switch between carousel and grid, search, choose a category, and optionally combine it with Favorites. Favorites and edits live in memory and reset on reload; they are not the My Lienzo service.
@@ -84,11 +84,11 @@ Pointer tilt and parallax run only for a precise pointer, with a single queued a
 Source opens a complete edited HTML document, which you can copy or download. It keeps your text, links, colors, theme and controls; temporary filters/favorites reset. Place it beside styles.css, script.js and assets/ from this ZIP. HTML alone is NOT standalone. Keep the main data-resource-carousel wrapper and its controls/dialogs together. All classes are scoped with rc-. Multiple complete widgets can initialize independently with distinct IDs. A React/WordPress integration needs adaptation; this is not a complete website or installable theme.
 
 ## Credits and licenses
-New implementation and artwork by Lienzo, prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . No source code or imagery from the external Swiper reference ZIP or 21st components is redistributed. LICENSE-LIENZO.txt covers original code under MIT. Local Fraunces and Instrument Sans fonts keep their OFL notices in assets/. The sample logo retains its trademark rights. Preserve the notices when sharing.
+Implementation and library renders by Lienzo, prepared for the collaboration with MD Estudio Creativo identified by the project owner: https://creativomarketingdigital.com/ . No source code or imagery from the external Swiper reference ZIP or 21st components is redistributed. LICENSE-LIENZO.txt covers original code under MIT. Local Fraunces and Instrument Sans fonts keep their OFL notices in assets/. The sample logo retains its trademark rights. Preserve the notices when sharing.
 '''
     return '''# Carrusel de recursos creativos - Lienzo
 
-Seis escenas propias: audio, motion, web, iconos SVG, color y profundidad. HTML, CSS, JavaScript e ilustraciones CSS/SVG originales. Sin dependencias, CDN, cuenta, API, compilación ni backend.
+Seis tarjetas de ejemplo con renders 3D WebP de la biblioteca de Lienzo: audio, motion, web, iconos SVG, color y profundidad. HTML, CSS y JavaScript originales. Sin dependencias, CDN, cuenta, API, compilación ni backend.
 
 ## Abrir y usar
 Descomprime el ZIP completo y abre index.html. Conserva styles.css, script.js y assets/ juntos. Navega con desplazamiento táctil nativo, arrastre con ratón, anterior/siguiente, posición, indicadores o enfoca el carrusel y usa flechas/Inicio/Fin. Las tarjetas de ejemplo vienen sin destino. Añade tu propio enlace en el editor si una tarjeta lo necesita. Alterna carrusel/cuadrícula, busca, elige una categoría y combínala con Favoritos. Favoritos y ajustes viven en memoria y se reinician al recargar; no son el servicio Mi Lienzo.
@@ -103,7 +103,7 @@ Inclinación y paralaje solo con puntero preciso; como máximo un frame pendient
 Código abre un documento HTML completo con tus ajustes para copiar o descargar. Conserva textos, enlaces, colores, tema y controles; filtros y favoritos temporales se reinician. Ponlo junto a styles.css, script.js y assets/ del ZIP. El HTML NO es autónomo. Conserva juntos el contenedor data-resource-carousel, controles y diálogos. Clases acotadas con rc-. Varias copias completas pueden inicializarse de forma independiente con IDs distintos. React o WordPress requieren adaptación: no es un sitio completo ni un tema instalable.
 
 ## Créditos y licencias
-Implementación e ilustraciones nuevas de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . No se redistribuyen código ni imágenes del ZIP externo de referencia Swiper o de componentes de 21st. LICENSE-LIENZO.txt cubre el código original bajo MIT. Fraunces e Instrument Sans locales conservan sus avisos OFL en assets/. El logo de muestra conserva sus derechos de marca. Mantén los avisos al compartir.
+Implementación y renders de la biblioteca de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . No se redistribuyen código ni imágenes del ZIP externo de referencia Swiper o de componentes de 21st. LICENSE-LIENZO.txt cubre el código original bajo MIT. Fraunces e Instrument Sans locales conservan sus avisos OFL en assets/. El logo de muestra conserva sus derechos de marca. Mantén los avisos al compartir.
 '''
 
 def build(lang=None):
@@ -114,6 +114,9 @@ def build(lang=None):
         if language=='en':
             shutil.copytree(base/'assets',dest/'assets',dirs_exist_ok=True)
             shutil.copy2(base/'LICENSE-LIENZO.txt',dest/'LICENSE-LIENZO.txt')
+        # Use relative copies so each localized ZIP works offline.
+        for filename in RENDERS.values():
+            shutil.copy2(ROOT / 'assets/3d' / filename, dest / 'assets' / filename)
         for name in ['styles.css','script.js']:
             shutil.copy2(SOURCE/name,dest/name)
         copy_editor_assets(dest)

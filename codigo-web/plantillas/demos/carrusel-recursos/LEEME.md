@@ -1,6 +1,6 @@
 # Carrusel de recursos creativos - Lienzo
 
-Seis escenas propias: audio, motion, web, iconos SVG, color y profundidad. HTML, CSS, JavaScript e ilustraciones CSS/SVG originales. Sin dependencias, CDN, cuenta, API, compilación ni backend.
+Seis tarjetas de ejemplo con renders 3D WebP de la biblioteca de Lienzo: audio, motion, web, iconos SVG, color y profundidad. HTML, CSS y JavaScript originales. Sin dependencias, CDN, cuenta, API, compilación ni backend.
 
 ## Abrir y usar
 Descomprime el ZIP completo y abre index.html. Conserva styles.css, script.js y assets/ juntos. Navega con desplazamiento táctil nativo, arrastre con ratón, anterior/siguiente, posición, indicadores o enfoca el carrusel y usa flechas/Inicio/Fin. Las tarjetas de ejemplo vienen sin destino. Añade tu propio enlace en el editor si una tarjeta lo necesita. Alterna carrusel/cuadrícula, busca, elige una categoría y combínala con Favoritos. Favoritos y ajustes viven en memoria y se reinician al recargar; no son el servicio Mi Lienzo.
@@ -15,7 +15,7 @@ Inclinación y paralaje solo con puntero preciso; como máximo un frame pendient
 Código abre un documento HTML completo con tus ajustes para copiar o descargar. Conserva textos, enlaces, colores, tema y controles; filtros y favoritos temporales se reinician. Ponlo junto a styles.css, script.js y assets/ del ZIP. El HTML NO es autónomo. Conserva juntos el contenedor data-resource-carousel, controles y diálogos. Clases acotadas con rc-. Varias copias completas pueden inicializarse de forma independiente con IDs distintos. React o WordPress requieren adaptación: no es un sitio completo ni un tema instalable.
 
 ## Créditos y licencias
-Implementación e ilustraciones nuevas de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . No se redistribuyen código ni imágenes del ZIP externo de referencia Swiper o de componentes de 21st. LICENSE-LIENZO.txt cubre el código original bajo MIT. Fraunces e Instrument Sans locales conservan sus avisos OFL en assets/. El logo de muestra conserva sus derechos de marca. Mantén los avisos al compartir.
+Implementación y renders de la biblioteca de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . No se redistribuyen código ni imágenes del ZIP externo de referencia Swiper o de componentes de 21st. LICENSE-LIENZO.txt cubre el código original bajo MIT. Fraunces e Instrument Sans locales conservan sus avisos OFL en assets/. El logo de muestra conserva sus derechos de marca. Mantén los avisos al compartir.
 
 
 ## Mesa de edición
