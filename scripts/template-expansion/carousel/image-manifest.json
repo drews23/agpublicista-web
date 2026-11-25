@@ -1,34 +1,34 @@
 [
   {
-    "file": "sneaker-mint.webp",
-    "width": 1100,
-    "height": 825,
-    "bytes": 142460,
-    "sha256": "f95f5821c98588109e20453e089d00193e94b44ba56e3c6e2735955adaf5016c",
-    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+    "file": "paletas-imagen.webp",
+    "width": 512,
+    "height": 512,
+    "bytes": 29274,
+    "sha256": "acb92849359ee39f0fa693f0a6d3a44d06b21fb33365440033124488f4915312",
+    "origin": "assets/3d/paletas-imagen.webp"
   },
   {
-    "file": "sneaker-violet.webp",
-    "width": 1100,
-    "height": 825,
-    "bytes": 159530,
-    "sha256": "2d057e2a7a31bc1097768386fa5c38df72a27b6df2305de8ef78415449dcf516",
-    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+    "file": "css-transformaciones.webp",
+    "width": 512,
+    "height": 512,
+    "bytes": 35256,
+    "sha256": "6ac695f8c4b842e8c0dce4639eae404442dfd8ff558d276cf60dbcfab34f06b1",
+    "origin": "assets/3d/css-transformaciones.webp"
   },
   {
-    "file": "sneaker-amber.webp",
-    "width": 1100,
-    "height": 825,
-    "bytes": 145110,
-    "sha256": "1883753bc1621fffaa8376921a3c990028787f0812629f402c8efd3320ce299f",
-    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+    "file": "css-animaciones.webp",
+    "width": 512,
+    "height": 512,
+    "bytes": 38114,
+    "sha256": "cd9425c30a1d21438272d9d672f71bb950da4e78965463ee724d253c2e06f176",
+    "origin": "assets/3d/css-animaciones.webp"
   },
   {
-    "file": "sneaker-coral.webp",
-    "width": 1100,
-    "height": 825,
-    "bytes": 156670,
-    "sha256": "f380d42fc55884d1296442b3fcb23d8b6bd23dc78ffc85c7bbc20e621d5c22e0",
-    "origin": "Generated for the Lienzo fictional product showcase, with transparency; optimized encoding only."
+    "file": "sonido-transiciones.webp",
+    "width": 512,
+    "height": 512,
+    "bytes": 24106,
+    "sha256": "d4164d0d26eb9dd95b7819175247c0552e8bdfb179510da5fa4b2d214e2ca11a",
+    "origin": "assets/3d/sonido-transiciones.webp"
   }
 ]

@@ -1,6 +1,6 @@
 # Carrusel con progreso y profundidad — Lienzo Form
 
-Cuatro conceptos de calzado con recortes transparentes, tarjeta central, vistas laterales y movimiento coordinado de imagen, sombra, tarjeta, texto y fondo. Sustituye el anterior pase de escenas genéricas y recupera la estructura de exhibición de productos de la referencia.
+Cuatro renders WebP transparentes de la biblioteca 3D de Lienzo con tarjeta central, vistas laterales y movimiento coordinado de imagen, sombra, tarjeta, texto y fondo.
 
 ## Abrir
 Descomprime la carpeta completa y abre index.html. Todo es local: imágenes, fuentes, Swiper 12.2.0, CSS y JS. Sin instalación, CDN, servidor, clave API, cuenta ni compilación. La demo independiente comienza en claro; la previsualización de Lienzo sincroniza el tema con su ventana principal.
@@ -11,12 +11,12 @@ Arrastra con ratón o desliza horizontalmente. Usa anterior/siguiente, los cuatr
 ## Personalizar
 Abre Ajustes para cambiar la duración de transición (350–1400 ms), la profundidad, el avance automático o el acento de la interfaz. Los controles actualizan la vista previa en directo. Abre Tu marca para ajustar la paleta y las fuentes de la colección. Ocultar ajustes conserva los cambios durante la sesión.
 
-Sustituye assets/sneaker-*.webp por tus imágenes transparentes. Edita nombres, categorías, precios y textos alternativos en los cuatro artículos de index.html. Mantén coherente el bloque data-products del mismo documento, que alimenta el diálogo. Los precios en USD son ejemplos. Las fuentes locales son Fraunces e Instrument Sans.
+Sustituye los WebP de muestra de assets/ por tus imágenes transparentes. Edita nombres, categorías, precios y textos alternativos en los cuatro artículos de index.html. Mantén coherente el bloque data-products del mismo documento, que alimenta el diálogo. Los precios en USD son ejemplos. Las fuentes locales son Fraunces e Instrument Sans.
 
 La imagen, sombra, escala, máscaras de texto y fondo se calculan a partir del progreso de cada slide de Swiper. script.js contiene inicialización, teclado limitado al escenario, ajuste según velocidad del gesto, foco del diálogo, avance opcional, preferencias de movimiento y mensajes de tema. Conserva juntos escenario, navegación, diálogos, datos y scripts. Copiar HTML completo incluye esos controles y dependencias; no entrega un fragmento autónomo. Conserva assets/ junto al documento. El ZIP completo es la referencia de integración funcional.
 
 ## Archivos y créditos
-Implementación nueva de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . El ZIP de carrusel Swiper aportado se revisó como referencia visual y de movimiento; no se redistribuyen su código ni sus imágenes remotas de Nike. Se generaron cuatro conceptos de producto sin marcas para esta demo. Son ilustraciones de diseño, no mercancía real. Consulta SOURCE-NOTES.md y assets/LICENSE-SWIPER.txt. Código Lienzo: MIT; Swiper incluido: MIT; fuentes: OFL. Conserva esos avisos al redistribuir. Los logos conservan los derechos de marca de sus titulares.
+Implementación nueva de Lienzo para la colaboración con MD Estudio Creativo indicada por el responsable: https://creativomarketingdigital.com/ . El ZIP de carrusel Swiper aportado se revisó como referencia visual y de movimiento; no se redistribuyen su código ni sus imágenes remotas de Nike. Los cuatro renders proceden de la biblioteca 3D de Lienzo y se usan como productos de ejemplo. Consulta SOURCE-NOTES.md y assets/LICENSE-SWIPER.txt. Código Lienzo: MIT; Swiper incluido: MIT; fuentes: OFL. Conserva esos avisos al redistribuir. Los logos conservan los derechos de marca de sus titulares.
 
 ## Límites
 Ejemplo de interfaz reutilizable, no tienda completa, integración de pagos, tema instalable de WordPress ni componente React listo. React requiere adaptar marcado y ciclo de vida. Sin analítica, persistencia, cuentas, backend ni solicitudes externas. Los ajustes se reinician al recargar. Revisa tus imágenes finales y prueba tu contenido antes de integrarlo.

@@ -13,9 +13,9 @@ La implementación nueva recupera esa estructura con cuatro conceptos de calzado
 - `scripts/carousel_showcase.py`: datos de producto ES/en-US, HTML completo, guía, iconos de controles, miniatura y copia de archivos locales.
 - `scripts/template-expansion/carousel/styles.css`: composición, profundidad, temas, móvil y movimiento reducido.
 - `scripts/template-expansion/carousel/script.js`: Swiper, progreso coordinado, navegación, gestos, diálogos, avance opcional, copia y sincronización de tema.
-- `scripts/template-expansion/carousel/images/`: cuatro WebP transparentes de 1100 × 825; `image-manifest.json` documenta origen y SHA-256. Son diseños conceptuales generados para esta demo.
+- `assets/3d/`: renders WebP de 512 × 512 de paletas de imagen, transformaciones CSS, animaciones CSS y transiciones de sonido. El generador copia los cuatro renders a cada demo y el manifiesto registra su origen y SHA-256.
 - `scripts/template-expansion/carousel/vendor/`: Swiper 12.2.0 local y licencia MIT original. `vendor-manifest.json` conserva URL npm, integridad SHA-512 y SHA-256 del paquete descargado.
-- `scripts/template-expansion/carousel/preview.webp`: captura real de 800 × 450, codificada en WebP y embebida por `thumbnail()` en el SVG del catálogo.
+- `scripts/template-expansion/carousel/preview.webp` y `preview-en.webp`: capturas de 800 × 450 que `thumbnail()` incorpora al SVG del catálogo de cada idioma.
 - `scripts/template-expansion/content.json`: título, etiqueta y descripción bilingüe del recurso. `scripts/template_catalog_layout.py` mantiene la descripción y la fila del comparador coherentes.
 
 Generar con `python scripts/build-template-expansion.py --only carrusel-progreso`. La opción puede repetirse para otros recursos si una futura solicitud los incluye. No ejecutar un constructor amplio para actualizar un único recurso.

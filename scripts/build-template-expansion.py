@@ -114,7 +114,7 @@ def thumbnail(slug,lang='es'):
   return lab_thumbnail(lang)
  if slug=='carrusel-progreso':
   from carousel_showcase import thumbnail as product_thumbnail
-  return product_thumbnail()
+  return product_thumbnail(lang)
  i=list(CONTENT).index(slug);labels=['3D / SIX FORMS','PRODUCT / COLOR','SVG / 12 ICONS','SCROLL / PROGRESS','CSS / SIX EFFECTS'];colors=['#8b7bff','#35d6c8','#ffb454','#8b7bff','#ff7a68']
  blocks=''
  if i==2:
@@ -291,7 +291,9 @@ def build(only=None):
   for slug in (only or CONTENT):
    dest=ROOT/base/'demos'/slug;dest.mkdir(parents=True,exist_ok=True)
    assets=dest/'assets';assets.mkdir(exist_ok=True)
-   for p in (ROOT/'codigo-web/plantillas/demos/carrusel-recursos/assets').iterdir():shutil.copy2(p,assets/p.name)
+   shared_assets=ROOT/'codigo-web/plantillas/demos/carrusel-recursos/assets'
+   for name in ('fraunces.woff2','instrument.woff2','logo-lienzo.svg','OFL-Fraunces.txt','OFL-Instrument-Sans.txt'):
+    shutil.copy2(shared_assets/name,assets/name)
    for name in ['styles.css','script.js']:dest.joinpath(name).write_text((SOURCE/name).read_text(encoding='utf-8-sig'),encoding='utf8')
    if slug=='carrusel-progreso':
     from carousel_showcase import copy_assets
@@ -324,8 +326,8 @@ The project owner identified the materials as part of the collaboration with MD 
 El responsable del proyecto identificó los materiales como parte de la colaboración con MD Estudio Creativo. El archivo aportado se conserva intacto fuera de esta distribución. Algunos archivos contienen créditos de terceros y no incluyen licencia. Esta descarga contiene HTML/CSS/JavaScript nuevo de Lienzo e ilustraciones vectoriales locales, sin redistribuir esas fuentes. El aviso MIT de este paquete no cubre el código de referencia. No se crea ni se presume aquí un documento de autorización.
 '''
    if slug=='carrusel-progreso':
-    note=note.replace('locally drawn vector artwork','locally created product-concept artwork').replace('e ilustraciones vectoriales locales','y recortes conceptuales de producto creados para esta demo')
-    note+='\nSwiper 12.2.0 is bundled locally from the official npm package under MIT; see assets/LICENSE-SWIPER.txt. Product cutouts were generated specifically for Lienzo and do not use the reference\'s Nike images.\n\nSwiper 12.2.0 se incluye localmente desde el paquete npm oficial bajo MIT; consulta assets/LICENSE-SWIPER.txt. Los recortes de producto se generaron para Lienzo y no utilizan las imágenes Nike de la referencia.\n'
+    note=note.replace('locally drawn vector artwork','WebP renders from the Lienzo 3D library').replace('e ilustraciones vectoriales locales','y renders WebP de la biblioteca 3D de Lienzo')
+    note+='\nSwiper 12.2.0 is bundled locally from the official npm package under MIT; see assets/LICENSE-SWIPER.txt. The sample artwork comes from assets/3d in the Lienzo repository: paletas-imagen.webp, css-transformaciones.webp, css-animaciones.webp and sonido-transiciones.webp.\n\nSwiper 12.2.0 se incluye localmente desde el paquete npm oficial bajo MIT; consulta assets/LICENSE-SWIPER.txt. Los renders proceden de assets/3d en el repositorio de Lienzo: paletas-imagen.webp, css-transformaciones.webp, css-animaciones.webp y sonido-transiciones.webp.\n'
     note+='\nThe supplied visual reference credits Tim Guignard / Codocular. Its code and remote product photos are not included in this download.\n\nLa referencia visual aportada acredita a Tim Guignard / Codocular. Su código y sus fotografías remotas de producto no se incluyen en esta descarga.\n'
    if slug=='laboratorio-3d':
     note=note.replace('locally drawn vector artwork','CSS material geometry created for this demo').replace('e ilustraciones vectoriales locales','y geometría de material creada con CSS para esta demo')
