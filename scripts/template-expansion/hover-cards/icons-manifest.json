@@ -1,50 +1,50 @@
 [
   {
     "effect": "glow",
-    "archive": "GALERIA DE FAVICONES SVG/creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip",
-    "member": "Creative Agency 2/PNG/V1/Creative Power.png",
-    "sourceSha256": "99dd7413042f1bb8cedee9d85aaa7d4193f8fe7b0939ef1679ec972049c5b2cc",
+    "source": "scripts/template-expansion/card-lab/renders/cristal-orbita.webp",
+    "revision": "82f31dd2",
+    "sourceSha256": "5ac95e929f7bcacc2be7bfadb06a4db2c3793520b0275445fe1236ea68e9b1ba",
     "output": "scripts/template-expansion/hover-cards/icons/glow.webp",
-    "outputSha256": "f13c7e0ead13a33bfbb127bd32a51b54cc9b4639d9759d7ccf2f7f6aff67c6c7"
+    "outputSha256": "e0fb39f8568e6777439762262a4a5d2bbacb72fe447dae8138d1526b0bac684a"
   },
   {
     "effect": "lift",
-    "archive": "GALERIA DE FAVICONES SVG/creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip",
-    "member": "Creative Agency 2/PNG/V1/Designing Folder.png",
-    "sourceSha256": "0daa634ec5e4c389f2163009f248f6b7e60fcadd26ea3bb685846102addcd821",
+    "source": "assets/3d/css-sombras.webp",
+    "revision": "94d553a5",
+    "sourceSha256": "7d453b007934586d97d0a502e32d1c871de096a8584001d179fdd2be58716972",
     "output": "scripts/template-expansion/hover-cards/icons/lift.webp",
-    "outputSha256": "f447f7b18a6f1f2ddebcf279269cb4168818406c563eb38a96cda8bd4a390a9f"
+    "outputSha256": "4c6d4401e8930d2549b31823402c7458c34e7927d3949f4f4b89f176cfb40105"
   },
   {
     "effect": "sweep",
-    "archive": "GALERIA DE FAVICONES SVG/editing-software-2026-02-08-01-44-16-utc.zip",
-    "member": "Editing Software.png",
-    "sourceSha256": "4dd5efaf8cd5a46265aca9e9142b697af3b03d94c53fe6995201d0a8f32645cc",
+    "source": "scripts/template-expansion/card-lab/renders/corte-precision.webp",
+    "revision": "82f31dd2",
+    "sourceSha256": "43f424122de257ae77190b4e803c8dcb509917f2662ce2ee118aef3052f10e4c",
     "output": "scripts/template-expansion/hover-cards/icons/sweep.webp",
-    "outputSha256": "6f7e4bf1de61f8dcfbc3a7a25f718142fe12d6e11629235f9ed8b0f416be0baa"
+    "outputSha256": "18e37d90e304b306eed3553935f963a979e09f231008dfba502e2bf768e3d9c9"
   },
   {
     "effect": "rotate",
-    "archive": "GALERIA DE FAVICONES SVG/creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip",
-    "member": "Creative Agency 2/PNG/V1/Designing Tools.png",
-    "sourceSha256": "a4380d3effbba22e70e3a43e4a45d6af6e0de839cf7d599cc1d2b552c22973b2",
+    "source": "scripts/template-expansion/product-cards/renders/watch-violet.webp",
+    "revision": "1d7bcb45",
+    "sourceSha256": "f137b760e06833790c0aba4aed4314486f3c707f22cd7ef250b44e3cbf50e27a",
     "output": "scripts/template-expansion/hover-cards/icons/rotate.webp",
-    "outputSha256": "3b3d6070417fc139b41a1a8a7b66bd2ff954e7146b461ee167f5f058fcac03ae"
+    "outputSha256": "1f1fa439bb2e43792fbe583d4cecbd62d6ab329076ee5d1dd9a18559641ef7f6"
   },
   {
     "effect": "gradient",
-    "archive": "GALERIA DE FAVICONES SVG/color-picker-3d-icon-2026-06-08-16-11-58-utc.zip",
-    "member": "Color Picker.png",
-    "sourceSha256": "ecfc8235277d0183e07cd38cad6915a42ab28468e07ddc31417ad1ef1e6f6eae",
+    "source": "scripts/template-expansion/card-lab/renders/prisma-optico.webp",
+    "revision": "82f31dd2",
+    "sourceSha256": "affac0a245ee4921badbfd9d3b5636c85cf057932e6c90742e2a6ca19ed19da5",
     "output": "scripts/template-expansion/hover-cards/icons/gradient.webp",
-    "outputSha256": "1640fb9ee53d0f19974fad865ea600779e941f416db64f25fc8f574f1a543901"
+    "outputSha256": "9af721772cd4e7daa7b10411cf6383bc7e131e887f4c4e762e278b016c0c2dcd"
   },
   {
     "effect": "float",
-    "archive": "GALERIA DE FAVICONES SVG/creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip",
-    "member": "Creative Agency 2/PNG/V1/Cloud Media.png",
-    "sourceSha256": "e7a7b22877e315b768baff51c399e8bd2e3121bbe2f114cdbc6ae48e8f7c8f0f",
+    "source": "scripts/template-expansion/product-cards/renders/audio-amber.webp",
+    "revision": "1d7bcb45",
+    "sourceSha256": "20ce0362ac8c4973aa2ef315cbc9017d3722a8eb6413051c9c8cfcd5524073e3",
     "output": "scripts/template-expansion/hover-cards/icons/float.webp",
-    "outputSha256": "86e502a6b5dcacf684c33740a1c4ad494fbaa6e259c9dfdb0679b20c13758117"
+    "outputSha256": "ade1b66a6d291d2a878ea30df03f279c73489907b115a070b2a6fd686cac5d92"
   }
 ]

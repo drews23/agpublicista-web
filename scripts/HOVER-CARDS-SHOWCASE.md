@@ -10,7 +10,7 @@ La implementación nueva conserva todas esas capacidades en seis familias cohere
 
 ## Biblioteca 3D
 
-Los seis renders provienen de `GALERIA DE FAVICONES SVG`. `scripts/prepare-hover-icons.py` genera copias WebP transparentes con el color original. El acento del editor se aplica a la superficie de la tarjeta. `icons-manifest.json` registra archivos, miembros y huellas SHA-256. El ZIP incluye `assets/ICONS-NOTICE.txt` con la procedencia. MIT cubre el código de la plantilla.
+Los seis renders fueron creados para Lienzo y proceden de la biblioteca 3D, del Laboratorio de tarjetas 3D y de Tarjetas de producto de cristal. `scripts/prepare-hover-icons.py` genera copias WebP transparentes con el color original. El acento del editor se aplica a la superficie de la tarjeta. `icons-manifest.json` registra fuentes, revisiones y huellas SHA-256. El ZIP incluye `assets/ICONS-NOTICE.txt` con la procedencia. MIT cubre el código de la plantilla.
 
 ## Diferencial funcional
 

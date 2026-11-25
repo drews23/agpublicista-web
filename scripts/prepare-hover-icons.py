@@ -1,58 +1,58 @@
-"""Prepare optimized, transparent copies of the selected local 3D renders."""
+"""Prepare transparent WebP copies of original Lienzo 3D artwork."""
 from hashlib import sha256
-from io import BytesIO
 import json
 from pathlib import Path
-from zipfile import ZipFile
 
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'scripts/template-expansion/hover-cards'
-GALLERY = ROOT / 'GALERIA DE FAVICONES SVG'
-AGENCY = 'creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip'
+LAB = ROOT / 'scripts/template-expansion/card-lab/renders'
+PRODUCTS = ROOT / 'scripts/template-expansion/product-cards/renders'
 SELECTED = {
-    'glow': (AGENCY, 'Creative Agency 2/PNG/V1/Creative Power.png'),
-    'lift': (AGENCY, 'Creative Agency 2/PNG/V1/Designing Folder.png'),
-    'sweep': ('editing-software-2026-02-08-01-44-16-utc.zip', 'Editing Software.png'),
-    'rotate': (AGENCY, 'Creative Agency 2/PNG/V1/Designing Tools.png'),
-    'gradient': ('color-picker-3d-icon-2026-06-08-16-11-58-utc.zip', 'Color Picker.png'),
-    'float': (AGENCY, 'Creative Agency 2/PNG/V1/Cloud Media.png'),
+    'glow': (LAB / 'cristal-orbita.webp', 'Crystal orbit', '82f31dd2'),
+    'lift': (ROOT / 'assets/3d/css-sombras.webp', 'Shadow layers', '94d553a5'),
+    'sweep': (LAB / 'corte-precision.webp', 'Precision cut', '82f31dd2'),
+    'rotate': (PRODUCTS / 'watch-violet.webp', 'Violet watch', '1d7bcb45'),
+    'gradient': (LAB / 'prisma-optico.webp', 'Optical prism', '82f31dd2'),
+    'float': (PRODUCTS / 'audio-amber.webp', 'Amber headphones', '1d7bcb45'),
 }
 
 
 def build():
     manifest = []
     notice = [
-        'LIENZO — RENDERS 3D DE LA GALERÍA / 3D GALLERY RENDERS',
+        'LIENZO — RENDERS 3D ORIGINALES / ORIGINAL 3D ARTWORK',
         '',
-        'Copias WebP de los renders PNG de la galería local. Conservan color y transparencia.',
-        'WebP copies of the original local gallery renders, preserving color and transparency.',
+        'Renders creados para Lienzo. Copias WebP transparentes de los originales del proyecto.',
+        'Artwork created for Lienzo. Transparent WebP copies of the project originals.',
         '',
         'La licencia MIT corresponde al código de la plantilla.',
         'The MIT license applies to the template code.',
         '',
         'Procedencia / Sources',
     ]
-    for effect, (archive, member) in SELECTED.items():
-        with ZipFile(GALLERY / archive) as source:
-            original = source.read(member)
-        with Image.open(BytesIO(original)) as image:
+    for effect, (source, name, revision) in SELECTED.items():
+        with Image.open(source) as image:
             render = image.convert('RGBA')
-        render = render.crop(render.getbbox())
+        render = render.crop(render.getchannel('A').getbbox())
         render.thumbnail((400, 400), Image.Resampling.LANCZOS)
         output = SOURCE / 'icons' / f'{effect}.webp'
         render.save(output, 'WEBP', quality=88, method=6)
-        source_hash = sha256(original).hexdigest()
+        source_path = source.relative_to(ROOT).as_posix()
+        source_hash = sha256(source.read_bytes()).hexdigest()
         manifest.append({
             'effect': effect,
-            'archive': (GALLERY / archive).relative_to(ROOT).as_posix(),
-            'member': member,
+            'source': source_path,
+            'revision': revision,
             'sourceSha256': source_hash,
             'output': output.relative_to(ROOT).as_posix(),
             'outputSha256': sha256(output.read_bytes()).hexdigest(),
         })
-        notice.extend([f'- {output.name}: {archive} / {member}', f'  SHA-256 (PNG): {source_hash}'])
+        notice.extend([
+            f'- {output.name}: {name} — {source_path} ({revision})',
+            f'  SHA-256 (WebP): {source_hash}',
+        ])
     (SOURCE / 'icons-manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (SOURCE / 'ICONS-NOTICE.txt').write_text('\n'.join(notice) + '\n', encoding='utf-8')
 

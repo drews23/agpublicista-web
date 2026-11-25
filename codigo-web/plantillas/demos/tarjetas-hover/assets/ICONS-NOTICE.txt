@@ -1,21 +1,21 @@
-LIENZO — RENDERS 3D DE LA GALERÍA / 3D GALLERY RENDERS
+LIENZO — RENDERS 3D ORIGINALES / ORIGINAL 3D ARTWORK
 
-Copias WebP de los renders PNG de la galería local. Conservan color y transparencia.
-WebP copies of the original local gallery renders, preserving color and transparency.
+Renders creados para Lienzo. Copias WebP transparentes de los originales del proyecto.
+Artwork created for Lienzo. Transparent WebP copies of the project originals.
 
 La licencia MIT corresponde al código de la plantilla.
 The MIT license applies to the template code.
 
 Procedencia / Sources
-- glow.webp: creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip / Creative Agency 2/PNG/V1/Creative Power.png
-  SHA-256 (PNG): 99dd7413042f1bb8cedee9d85aaa7d4193f8fe7b0939ef1679ec972049c5b2cc
-- lift.webp: creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip / Creative Agency 2/PNG/V1/Designing Folder.png
-  SHA-256 (PNG): 0daa634ec5e4c389f2163009f248f6b7e60fcadd26ea3bb685846102addcd821
-- sweep.webp: editing-software-2026-02-08-01-44-16-utc.zip / Editing Software.png
-  SHA-256 (PNG): 4dd5efaf8cd5a46265aca9e9142b697af3b03d94c53fe6995201d0a8f32645cc
-- rotate.webp: creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip / Creative Agency 2/PNG/V1/Designing Tools.png
-  SHA-256 (PNG): a4380d3effbba22e70e3a43e4a45d6af6e0de839cf7d599cc1d2b552c22973b2
-- gradient.webp: color-picker-3d-icon-2026-06-08-16-11-58-utc.zip / Color Picker.png
-  SHA-256 (PNG): ecfc8235277d0183e07cd38cad6915a42ab28468e07ddc31417ad1ef1e6f6eae
-- float.webp: creative-agency-3d-icon-2024-09-13-18-46-07-utc.zip / Creative Agency 2/PNG/V1/Cloud Media.png
-  SHA-256 (PNG): e7a7b22877e315b768baff51c399e8bd2e3121bbe2f114cdbc6ae48e8f7c8f0f
+- glow.webp: Crystal orbit — scripts/template-expansion/card-lab/renders/cristal-orbita.webp (82f31dd2)
+  SHA-256 (WebP): 5ac95e929f7bcacc2be7bfadb06a4db2c3793520b0275445fe1236ea68e9b1ba
+- lift.webp: Shadow layers — assets/3d/css-sombras.webp (94d553a5)
+  SHA-256 (WebP): 7d453b007934586d97d0a502e32d1c871de096a8584001d179fdd2be58716972
+- sweep.webp: Precision cut — scripts/template-expansion/card-lab/renders/corte-precision.webp (82f31dd2)
+  SHA-256 (WebP): 43f424122de257ae77190b4e803c8dcb509917f2662ce2ee118aef3052f10e4c
+- rotate.webp: Violet watch — scripts/template-expansion/product-cards/renders/watch-violet.webp (1d7bcb45)
+  SHA-256 (WebP): f137b760e06833790c0aba4aed4314486f3c707f22cd7ef250b44e3cbf50e27a
+- gradient.webp: Optical prism — scripts/template-expansion/card-lab/renders/prisma-optico.webp (82f31dd2)
+  SHA-256 (WebP): affac0a245ee4921badbfd9d3b5636c85cf057932e6c90742e2a6ca19ed19da5
+- float.webp: Amber headphones — scripts/template-expansion/product-cards/renders/audio-amber.webp (1d7bcb45)
+  SHA-256 (WebP): 20ce0362ac8c4973aa2ef315cbc9017d3722a8eb6413051c9c8cfcd5524073e3
