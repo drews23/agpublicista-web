@@ -113,7 +113,12 @@
 <link rel="alternate" hreflang="es" href="https://lienzo.tools/blog/efectos-de-sonido-para-videos-gratis/">
 <link rel="alternate" hreflang="en" href="https://lienzo.tools/en/blog/free-sound-effects/">
 <link rel="alternate" hreflang="x-default" href="https://lienzo.tools/blog/efectos-de-sonido-para-videos-gratis/">
-<link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d"><link rel="stylesheet" href="/css/pages/article-share.css?v=7e5686adaea2"><link rel="stylesheet" href="/css/pages/sound-previews.css?v=56910299c38b"></head>
+<link rel="stylesheet" href="/css/primary-navigation.css?v=396d73d9369d"><link rel="stylesheet" href="/css/pages/article-share.css?v=7e5686adaea2"><link rel="stylesheet" href="/css/pages/sound-previews.css?v=56910299c38b"><style id="primary-navigation-focus">
+@media (max-width: 1100px) {
+  [data-unified-header] .site-nav.is-open { transition-property: opacity, transform; }
+}
+</style>
+</head>
   <body>
     <div class="glow" aria-hidden="true"></div>
     <header class="site-header" data-unified-header>
@@ -122,7 +127,79 @@
         <nav class="site-nav" id="primary-navigation" data-primary-navigation aria-label="Navegación principal"><a href="/herramientas/">Herramientas</a><a href="/codigo-web/plantillas/">Plantillas web</a><a href="/codigo-web/">Código CSS</a><a href="/recursos/">Recursos</a><a href="/blog/" aria-current="location">Guías</a></nav>
         <div style="display:flex;gap:.5rem;align-items:center"><a class="theme-btn language-switch" data-english-switch href="/en/blog/free-sound-effects/" lang="en" hreflang="en" aria-label="Switch to English" title="Switch to English" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:auto;min-width:64px;padding:0 .65rem;border-radius:999px;transform:none;flex-shrink:0;font-size:.75rem;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6.5c4 2 10 2 14 0M5 17.5c4-2 10-2 14 0"/></svg><span>EN</span></a><button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar tema">☀</button><a class="theme-btn espacio-btn" href="/mi-lienzo/" data-espacio-btn aria-label="Mi Lienzo" title="Mi Lienzo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"/></svg></a><button class="nav-toggle" type="button" aria-controls="primary-navigation" data-nav-toggle aria-expanded="false" aria-label="Abrir menú">☰</button></div>
       </div>
-    </header>
+    <script id="primary-navigation-start">
+(() => {
+  "use strict";
+  const root = document.documentElement;
+/* Navegación móvil compartida: cierre, foco y cambio de ancho. */
+  if (!document.querySelector('[data-unified-header].navigation-ready')) {
+    const nav = document.querySelector(".site-nav");
+    const navToggle = document.querySelector("[data-nav-toggle]");
+    const unifiedHeader = document.querySelector("[data-unified-header]");
+    const mobileNav = window.matchMedia(unifiedHeader ? "(max-width: 1100px)" : "(max-width: 880px)");
+    const englishNav = root.lang.startsWith("en");
+    const scrim = document.createElement("div");
+    scrim.className = "nav-scrim";
+    scrim.setAttribute("aria-hidden", "true");
+    document.body.append(scrim);
+
+    const ponerNav = (open, returnFocus = false) => {
+      if (!nav || !navToggle) return;
+      open = open && mobileNav.matches;
+      nav.classList.toggle("is-open", open);
+      scrim.classList.toggle("is-visible", open);
+      document.body.classList.toggle("is-locked", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      navToggle.setAttribute("aria-label", englishNav
+        ? (open ? "Close menu" : "Open menu")
+        : (open ? "Cerrar menú" : "Abrir menú"));
+      if (open) nav.querySelector("a[href]")?.focus();
+      else if (returnFocus) navToggle.focus();
+    };
+
+    if (nav && navToggle) {
+      ponerNav(false);
+      unifiedHeader?.classList.add("navigation-ready");
+    }
+
+    document.addEventListener("click", (event) => {
+      if (!nav || !navToggle) return;
+      if (event.target.closest("[data-nav-toggle]")) {
+        ponerNav(!nav.classList.contains("is-open"));
+        return;
+      }
+      if (!nav.classList.contains("is-open")) return;
+      if (event.target.closest(".site-nav a[href]")) ponerNav(false);
+      else if (!event.target.closest(".site-nav")) ponerNav(false, event.target === scrim);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!nav?.classList.contains("is-open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        ponerNav(false, true);
+      } else if (event.key === "Tab" && unifiedHeader) {
+        const controls = [...unifiedHeader.querySelectorAll("a[href], button:not([disabled])")]
+          .filter((element) => element.getClientRects().length && getComputedStyle(element).visibility !== "hidden");
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault(); first.focus();
+        }
+      }
+    });
+
+    mobileNav.addEventListener("change", () => {
+      const focusWasInNav = nav?.contains(document.activeElement);
+      ponerNav(false);
+      if (mobileNav.matches && focusWasInNav) navToggle?.focus();
+    });
+
+  }
+})();
+</script>
+</header>
     <main>
       <article class="section shell">
         <div class="prose">

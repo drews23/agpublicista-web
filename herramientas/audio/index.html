@@ -91,7 +91,12 @@
 <link href="https://lienzo.tools/herramientas/audio/" hreflang="es" rel="alternate"/>
 <link href="https://lienzo.tools/en/tools/audio/" hreflang="en" rel="alternate"/>
 <link href="https://lienzo.tools/herramientas/audio/" hreflang="x-default" rel="alternate"/>
-<link href="/css/primary-navigation.css?v=396d73d9369d" rel="stylesheet"/><link href="/herramientas/audio/css/studio.css?v=03dede804d35" rel="stylesheet"/></head>
+<link href="/css/primary-navigation.css?v=396d73d9369d" rel="stylesheet"/><link href="/herramientas/audio/css/studio.css?v=03dede804d35" rel="stylesheet"/><style id="primary-navigation-focus">
+@media (max-width: 1100px) {
+  [data-unified-header] .site-nav.is-open { transition-property: opacity, transform; }
+}
+</style>
+</head>
 <body class="audio-studio-page">
 <div aria-hidden="true" class="glow"></div>
 <header class="site-header" data-unified-header="">
@@ -106,6 +111,78 @@
 <a aria-label="Mi Lienzo" class="theme-btn espacio-btn" data-espacio-btn="" href="/mi-lienzo/" title="Mi Lienzo"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="14" rx="3" width="18" x="3" y="4"></rect><path d="M8 21h8M12 18v3"></path><circle class="espacio-btn__punto" cx="12" cy="11" r="3" stroke="none"></circle></svg></a><button aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú" class="nav-toggle" data-nav-toggle="" type="button">☰</button>
 </div>
 </div>
+<script id="primary-navigation-start">
+(() => {
+  "use strict";
+  const root = document.documentElement;
+/* Navegación móvil compartida: cierre, foco y cambio de ancho. */
+  if (!document.querySelector('[data-unified-header].navigation-ready')) {
+    const nav = document.querySelector(".site-nav");
+    const navToggle = document.querySelector("[data-nav-toggle]");
+    const unifiedHeader = document.querySelector("[data-unified-header]");
+    const mobileNav = window.matchMedia(unifiedHeader ? "(max-width: 1100px)" : "(max-width: 880px)");
+    const englishNav = root.lang.startsWith("en");
+    const scrim = document.createElement("div");
+    scrim.className = "nav-scrim";
+    scrim.setAttribute("aria-hidden", "true");
+    document.body.append(scrim);
+
+    const ponerNav = (open, returnFocus = false) => {
+      if (!nav || !navToggle) return;
+      open = open && mobileNav.matches;
+      nav.classList.toggle("is-open", open);
+      scrim.classList.toggle("is-visible", open);
+      document.body.classList.toggle("is-locked", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      navToggle.setAttribute("aria-label", englishNav
+        ? (open ? "Close menu" : "Open menu")
+        : (open ? "Cerrar menú" : "Abrir menú"));
+      if (open) nav.querySelector("a[href]")?.focus();
+      else if (returnFocus) navToggle.focus();
+    };
+
+    if (nav && navToggle) {
+      ponerNav(false);
+      unifiedHeader?.classList.add("navigation-ready");
+    }
+
+    document.addEventListener("click", (event) => {
+      if (!nav || !navToggle) return;
+      if (event.target.closest("[data-nav-toggle]")) {
+        ponerNav(!nav.classList.contains("is-open"));
+        return;
+      }
+      if (!nav.classList.contains("is-open")) return;
+      if (event.target.closest(".site-nav a[href]")) ponerNav(false);
+      else if (!event.target.closest(".site-nav")) ponerNav(false, event.target === scrim);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!nav?.classList.contains("is-open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        ponerNav(false, true);
+      } else if (event.key === "Tab" && unifiedHeader) {
+        const controls = [...unifiedHeader.querySelectorAll("a[href], button:not([disabled])")]
+          .filter((element) => element.getClientRects().length && getComputedStyle(element).visibility !== "hidden");
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault(); first.focus();
+        }
+      }
+    });
+
+    mobileNav.addEventListener("change", () => {
+      const focusWasInNav = nav?.contains(document.activeElement);
+      ponerNav(false);
+      if (mobileNav.matches && focusWasInNav) navToggle?.focus();
+    });
+
+  }
+})();
+</script>
 </header>
 <main id="main"><section class="shell as-intro">
 <nav aria-label="Miga de pan" class="breadcrumbs"><a href="/">Inicio</a><span aria-hidden="true">/</span><a href="/herramientas/">Herramientas</a><span aria-hidden="true">/</span><span>Editor de audio</span></nav>

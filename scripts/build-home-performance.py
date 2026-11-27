@@ -1,7 +1,7 @@
-"""Initialize the existing home menu before main content can be painted.
+"""Initialize the menu before first paint on the home and audio entry pages.
 
-The canonical menu implementation stays in js/site.js. Other pages retain
-their deferred initialization. Run after the home/content builders.
+The canonical menu implementation stays in js/site.js. Run after the
+home/content builders.
 """
 from pathlib import Path
 import hashlib
@@ -9,6 +9,17 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+AUDIO_PAGES = (
+    'blog/efectos-de-sonido-para-videos-gratis/index.html',
+    'en/blog/free-sound-effects/index.html',
+    'herramientas/audio/index.html',
+    'en/tools/audio/index.html',
+)
+MENU_FOCUS_STYLE = '''<style id="primary-navigation-focus">
+@media (max-width: 1100px) {
+  [data-unified-header] .site-nav.is-open { transition-property: opacity, transform; }
+}
+</style>'''
 
 
 def navigation(source):
@@ -17,12 +28,13 @@ def navigation(source):
     return source[start:end].strip()
 
 
-def build(check=False):
-    source = (ROOT / 'js/site.js').read_text(encoding='utf-8')
-    menu = navigation(source)
-    assert menu == navigation((ROOT / 'en/assets/site.js').read_text(encoding='utf-8'))
-    block = '<script id="home-navigation">\n(() => {\n  "use strict";\n  const root = document.documentElement;\n' + menu + '\n})();\n</script>'
+def navigation_script(menu, script_id):
     assert '</script' not in menu.lower()
+    return f'<script id="{script_id}">\n(() => {{\n  "use strict";\n  const root = document.documentElement;\n{menu}\n}})();\n</script>'
+
+
+def build_home(menu, check):
+    block = navigation_script(menu, 'home-navigation')
     for name, bundle in [('index.html', 'js/site.js'), ('en/index.html', 'en/assets/site.js')]:
         page = ROOT / name
         original = page.read_text(encoding='utf-8')
@@ -44,8 +56,33 @@ def build(check=False):
                 raise SystemExit('Regenerar inicio de portada: ' + name)
         else:
             page.write_text(html, encoding='utf-8')
-    print('ES/EN: navegación temprana, fuentes y versiones ' + ('verificadas' if check else 'generadas'))
+
+
+def build_audio(menu, check):
+    block = navigation_script(menu, 'primary-navigation-start')
+    for name in AUDIO_PAGES:
+        page = ROOT / name
+        original = page.read_text(encoding='utf-8')
+        html = re.sub(r'<script id="primary-navigation-start">.*?</script>\n', '', original, flags=re.S)
+        html = re.sub(r'<style id="primary-navigation-focus">.*?</style>\n', '', html, flags=re.S)
+        assert html.count('</header>') == 1 and 'data-unified-header' in html, name
+        # Reveal the links immediately on open so the existing focus call works.
+        html = html.replace('</head>', MENU_FOCUS_STYLE + '\n</head>', 1)
+        html = html.replace('</header>', block + '\n</header>', 1)
+        if original != html:
+            if check:
+                raise SystemExit('Regenerar inicio de navegación: ' + name)
+            page.write_text(html, encoding='utf-8')
+
+
+def build(check=False, audio_only=False):
+    menu = navigation((ROOT / 'js/site.js').read_text(encoding='utf-8'))
+    assert menu == navigation((ROOT / 'en/assets/site.js').read_text(encoding='utf-8'))
+    if not audio_only:
+        build_home(menu, check)
+    build_audio(menu, check)
+    print('ES/EN: navegación temprana ' + ('verificada' if check else 'generada'))
 
 
 if __name__ == '__main__':
-    build(check='--check' in sys.argv)
+    build(check='--check' in sys.argv, audio_only='--audio-only' in sys.argv)
