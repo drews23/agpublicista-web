@@ -1084,6 +1084,7 @@ def enhance_resources(raw, route):
         return raw
     import importlib.util
     from bs4 import BeautifulSoup
+    from audio_templates import COPY as AUDIO_COPY, SLUGS as AUDIO_SLUGS
     lang = 'en' if route.startswith('/en/') else 'es'
     tr = lambda es, en: en if lang == 'en' else es
     soup = BeautifulSoup(raw,'html.parser')
@@ -1094,8 +1095,9 @@ def enhance_resources(raw, route):
     for old in section.select('[data-template-v2-resource]'):
         old.decompose()
     grid = section.select_one('.card-grid')
-    for slug, resource in RESOURCES.items():
-        title, _, desc, _, _ = resource[lang]
+    summaries = [(slug, resource[lang][0], resource[lang][2]) for slug, resource in RESOURCES.items()]
+    summaries.extend(zip(AUDIO_SLUGS, AUDIO_COPY[lang]['names'], AUDIO_COPY[lang]['descriptions']))
+    for slug, title, desc in summaries:
         html = f'<a class="card" href="{ROUTES[lang]}#{slug}" data-template-v2-resource><span class="directory-template-format">HTML · CSS · JavaScript</span><h3>{esc(title)}</h3><p>{esc(desc)}</p><span class="catalog-action">{tr("Probar y descargar","Try and download")} ↗</span></a>'
         grid.append(BeautifulSoup(html,'html.parser').a)
     template_count = len(grid.select('a.card'))
@@ -1105,9 +1107,12 @@ def enhance_resources(raw, route):
     heading = section.select_one('.directory-group__head p' if lang=='en' else '.section-head p:not(.eyebrow)')
     if heading:
         heading.string = tr(
-            f'Explora {template_count} plantillas para carruseles, tarjetas, dispositivos y otros elementos web. Prueba las demos y descarga el código con su guía.',
-            f'Explore {template_count} templates for carousels, cards, device mockups, and other web interfaces. Try the demos and download the source code and guide.',
+            f'Explora {template_count} plantillas para carruseles, tarjetas, mockups y reproductores de música. Prueba las demos y descarga el código con su guía.',
+            f'Explore {template_count} templates for carousels, cards, device mockups, and music players. Try the demos and download the source code and guide.',
         )
+    catalog_link = section.select_one(f'a[href="{ROUTES[lang]}"]')
+    if catalog_link:
+        catalog_link.string = tr('Probar y descargar plantillas web ↗', 'Preview and download web templates ↗')
     spec = importlib.util.spec_from_file_location('v2_ranges', ROOT/'scripts/build-discovery-directories.py')
     ranges = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(ranges)
@@ -1119,13 +1124,13 @@ def enhance_resources(raw, route):
             if listing.get('@type') != 'ItemList':
                 continue
             entries = listing.setdefault('itemListElement',[])
-            for slug, resource in RESOURCES.items():
+            for slug, title, _ in summaries:
                 url = 'https://lienzo.tools'+ROUTES[lang]+'#'+slug
                 existing = next((item for item in entries if item.get('url') == url), None)
                 if existing is not None:
-                    existing['name'] = resource[lang][0]
+                    existing['name'] = title
                 else:
-                    entries.append({'@type':'ListItem','position':len(entries)+1,'name':resource[lang][0],'url':url})
+                    entries.append({'@type':'ListItem','position':len(entries)+1,'name':title,'url':url})
         return '<script type="application/ld+json">'+json.dumps(data,ensure_ascii=False,indent=2)+'</script>'
     return re.sub(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',schema,updated,flags=re.S)
 

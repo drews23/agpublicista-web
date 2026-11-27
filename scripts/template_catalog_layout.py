@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / 'css/pages/template-library.css'
 GROUPS = [
     ('carruseles', 'carousels', 'Carruseles y galerías', 'Free Carousel and Gallery Templates',
-     'Explora recursos o presenta tus productos con movimiento.',
+     'Elige un carrusel con filtros para tu portafolio, un slider con barra de progreso para mostrar productos o una galería de fotos con paneles expandibles. Prueba la plantilla y descarga el código en ZIP.',
      'Preview two free JavaScript carousel templates and an expanding photo gallery. Customize any template in your browser, then download the HTML, CSS, and JavaScript source as a ZIP.',
      ['carrusel-recursos', 'carrusel-progreso', 'galeria-expandible']),
     ('tarjetas', 'cards', 'Tarjetas', 'Cards',
@@ -37,17 +37,30 @@ GROUPS = [
      ['imagen-particulas']),
     ('dispositivos', 'devices', 'Dispositivos', 'Devices',
      'Muestra cómo se ve una interfaz en pantallas de distintos tamaños.',
-     'Show how an interface looks on screens of different sizes.',
+     'Preview your design on a laptop and phone with screenshots or MP4. Try the 360° laptop mockup to show your project from any angle.',
      ['mockup-multidispositivo', 'prototipo-pantalla-movil', 'portatil-en-perspectiva']),
     ('audio', 'audio', 'Audio', 'Audio',
      'Escucha música en un disco flotante o explora una pila de portadas con tu propio repertorio.',
-     'Play music on a floating record or browse a cover stack with your own tracks.',
+     'Try a spinning vinyl player or an album cover carousel with a playlist. Load your own audio and download the source code.',
      ['reproductor-musical', 'carrusel-audio']),
 ]
+GROUP_HEADINGS = {
+    ('es', 'carruseles'): 'Carruseles y galerías en HTML, CSS y JavaScript',
+    ('en', 'devices'): 'Device Mockup Templates',
+    ('en', 'audio'): 'HTML Music Player Templates',
+}
+ES_TITLE = 'Plantillas web gratis en HTML, CSS y JavaScript | Lienzo'
+ES_DESCRIPTION = 'Prueba plantillas web gratis de carruseles, galerías y tarjetas. Personalízalas en el navegador y descarga el código HTML, CSS y JavaScript.'
+
 EN_CAROUSEL_DESCRIPTIONS = {
     'carrusel-progreso': 'Showcase products with drag controls, keyboard navigation, a progress indicator, and optional autoplay.',
     'galeria-expandible': 'Display photos or projects in five expanding panels. Replace the sample images with your own.',
 }
+ES_CAROUSEL_TUTORIAL = (
+    '<p class="catalog-note">'
+    '<a href="https://youtu.be/sxNqk8Sc9lI">Ver tutorial de los dos carruseles</a>'
+    '</p>'
+)
 EN_CAROUSEL_TUTORIALS = (
     '<p class="catalog-note">'
     '<a href="/en/blog/html-css-javascript-carousel/">Build a carousel from scratch</a> · '
@@ -110,6 +123,8 @@ def enhance_template_catalog(raw, route):
         heading['class'] = ['template__title']
     english_copy = PAGES['/en/templates/']
     title = english_copy['h1'] if en else section.h1.get_text()
+    seo_title = tr(ES_TITLE, english_copy['title'])
+    seo_description = tr(ES_DESCRIPTION, english_copy['description'])
     breadcrumb = str(section.select_one('.breadcrumbs'))
     index = 'template-categories' if en else 'categorias-plantillas'
     compare = 'compare-templates' if en else 'comparar-plantillas'
@@ -125,15 +140,16 @@ def enhance_template_catalog(raw, route):
     for number, group in enumerate(GROUPS, 1):
         es_id, us_id, es_title, us_title, es_desc, us_desc, slugs = group
         key, label, description = (us_id, us_title, us_desc) if en else (es_id, es_title, es_desc)
+        heading = GROUP_HEADINGS.get(('en' if en else 'es', key), label)
         count = str(len(slugs)).zfill(2)
         accessible = label + ': ' + str(len(slugs)) + tr(' plantilla' if len(slugs) == 1 else ' plantillas', ' template' if len(slugs) == 1 else ' templates')
         links.append(f'<li><a href="#{key}" aria-label="{accessible}"><span class="catalog-index__number" aria-hidden="true">0{number}</span><span class="catalog-index__name">{label}</span><span class="catalog-index__count" aria-hidden="true">{count}</span><span class="catalog-index__arrow" aria-hidden="true">↗</span></a></li>')
-        tutorials = EN_CAROUSEL_TUTORIALS if en and key == 'carousels' else ''
+        tutorials = tr(ES_CAROUSEL_TUTORIAL, EN_CAROUSEL_TUTORIALS) if key in ('carruseles', 'carousels') else ''
         if key == 'audio':
             lab = tr('/herramientas/audio/laboratorio/', '/en/tools/audio/lab/')
             link_label = tr('Explorar el Laboratorio de sonido', 'Explore the Audio Lab')
             tutorials = f'<p class="catalog-note"><a href="{lab}">{link_label}</a></p>'
-        groups.append(f'''<section class="catalog-group catalog-group--{number}" id="{key}" tabindex="-1" aria-labelledby="{key}-title"><div class="catalog-group__head"><span class="catalog-group__number" aria-hidden="true">0{number}</span><div><h2 id="{key}-title">{label}<span class="catalog-group__count" aria-hidden="true">{count}</span></h2><p>{description}</p></div><a href="#{index}" class="catalog-group__back">{tr('Categorías', 'Categories')} <span aria-hidden="true">↑</span></a></div><div class="templates-grid">{''.join(str(cards[slug]) for slug in slugs)}</div>{tutorials}</section>''')
+        groups.append(f'''<section class="catalog-group catalog-group--{number}" id="{key}" tabindex="-1" aria-labelledby="{key}-title"><div class="catalog-group__head"><span class="catalog-group__number" aria-hidden="true">0{number}</span><div><h2 id="{key}-title">{escape(heading)}<span class="catalog-group__count" aria-hidden="true">{count}</span></h2><p>{description}</p></div><a href="#{index}" class="catalog-group__back">{tr('Categorías', 'Categories')} <span aria-hidden="true">↑</span></a></div><div class="templates-grid">{''.join(str(cards[slug]) for slug in slugs)}</div>{tutorials}</section>''')
     nav = f'<nav class="catalog-index" id="{index}" tabindex="-1" aria-label="{tr("Explorar plantillas por categoría", "Browse templates by category")}"><div class="catalog-index__intro"><p class="eyebrow">{tr("ENCUENTRA TU PUNTO DE PARTIDA", "FIND YOUR STARTING POINT")}</p><p>{tr("¿Qué quieres crear?", "What do you want to build?")}</p></div><ul>{"".join(links)}</ul></nav>'
     rows = []
     for slug in expected:
@@ -150,23 +166,21 @@ def enhance_template_catalog(raw, route):
         data = json.loads(match.group(1))
         for node in data.get('@graph', [data]):
             if node.get('@type') in ['CollectionPage','WebPage'] and 'description' in node:
-                node['description'] = tr(f'{template_count} plantillas HTML, CSS y JavaScript para probar, personalizar y descargar.', english_copy['description'])
+                node['description'] = seo_description
                 if en:
                     node['name'] = english_copy['title'].removesuffix(' | Lienzo')
             if node.get('@type') == 'ItemList':
                 node['itemListElement'] = [{'@type':'ListItem', 'position':i, 'name':cards[slug].find('h3').get_text(' ',strip=True), 'url':'https://lienzo.tools'+route+'#'+slug} for i,slug in enumerate(expected,1)]
         return '<script type="application/ld+json">'+json.dumps(data,ensure_ascii=False,indent=2)+'</script>'
     updated = re.sub(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', schema, updated, flags=re.S)
-    # Keep the English catalog's search and share copy in sync on every rebuild.
-    if en:
-        updated = re.sub(r'<title>[^<]*</title>', lambda _: '<title>' + escape(english_copy['title']) + '</title>', updated, count=1)
-    description = tr(f'{template_count} plantillas web HTML, CSS y JavaScript gratis. Prueba reproductores de música, carruseles, mockups y tarjetas. Descarga el código.', english_copy['description'])
+    # Keep search and share copy in sync on every rebuild.
+    updated = re.sub(r'<title>[^<]*</title>', lambda _: '<title>' + escape(seo_title) + '</title>', updated, count=1)
     for match in reversed(list(re.finditer(r'<meta\b[^>]*>', updated))):
         meta = BeautifulSoup(match.group(), 'html.parser').meta
         if meta.get('name') in ['description', 'twitter:description'] or meta.get('property') == 'og:description':
-            meta['content'] = description
-        elif en and (meta.get('name') == 'twitter:title' or meta.get('property') == 'og:title'):
-            meta['content'] = english_copy['title']
+            meta['content'] = seo_description
+        elif meta.get('name') == 'twitter:title' or meta.get('property') == 'og:title':
+            meta['content'] = seo_title
         else:
             continue
         updated = updated[:match.start()] + str(meta) + updated[match.end():]
