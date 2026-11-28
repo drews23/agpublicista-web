@@ -17,6 +17,7 @@
   window.addEventListener('resize',syncFocusMode,{passive:true});
   app.addEventListener('focusin',event=>{
     if(!event.target.closest('[data-editor-panel]'))return;
+    if(event.target.matches('input,textarea,select') && event.target.id) lastField=event.target.id;
     if(window.innerWidth<960) {
       if(!event.target.matches('input,textarea,select'))return;
       requestAnimationFrame(()=>{
@@ -51,9 +52,10 @@
     headline:'Headline',description:'Description',headlines:'Headlines',descriptions:'Descriptions',
     pin:'Position',free:'Unpinned',position:'Position',orderOptional:'Order (optional)',remove:'Remove',empty:'Your business',
     titleEmpty:'Your next ad starts here',descEmpty:'Write your headlines and descriptions. Explore how they read together right here.',
+    notStarted:'Not started',
+    headlinePrompts:['Your offer', 'A specific benefit', 'What to do next'],
     unsaved:'Unsaved draft',saved:'JSON download prepared · check the file',example:'Fictional example · editable',
     errors:'technical items to fix',ready:'Technical checks passed. Review claims and import mapping before use.',
-    exampleLoaded:'Fictional example loaded. Replace it with your business details.',
     newDraft:'New draft. No previous content is retained.',savedNotice:'JSON download prepared. Keep the file to reopen your draft.',
     imported:'Draft opened. The ad text has not been translated.',copied:'Ad text copied.',copyFailed:'Clipboard access failed. Download the JSON or review file instead.',
     csvSaved:'Paused ad CSV prepared. Review it in Ads Editor before publishing.',reportSaved:'Review file prepared.',
@@ -89,9 +91,10 @@
     headline:'Título',description:'Descripción',headlines:'Títulos',descriptions:'Descripciones',
     pin:'Posición',free:'Sin fijar',position:'Posición',orderOptional:'Orden (opcional)',remove:'Eliminar',empty:'Tu negocio',
     titleEmpty:'Tu próximo anuncio empieza aquí',descEmpty:'Escribe tus títulos y descripciones. Aquí podrás explorar cómo se leen juntos.',
+    notStarted:'Sin empezar',
+    headlinePrompts:['Qué ofreces', 'Un beneficio concreto', 'Qué hacer a continuación'],
     unsaved:'Borrador sin guardar',saved:'Descarga JSON preparada · comprueba el archivo',example:'Ejemplo ficticio · editable',
     errors:'aspectos técnicos por corregir',ready:'Comprobaciones técnicas superadas. Revisa las promesas y el mapeo antes de usarlo.',
-    exampleLoaded:'Ejemplo ficticio cargado. Sustitúyelo por los datos de tu negocio.',
     newDraft:'Borrador nuevo. El contenido anterior no se conserva.',savedNotice:'Descarga JSON preparada. Conserva el archivo para abrir tu borrador.',
     imported:'Borrador abierto. El texto del anuncio no se ha traducido.',copied:'Textos del anuncio copiados.',copyFailed:'No se pudo acceder al portapapeles. Descarga el JSON o el archivo de revisión.',
     csvSaved:'CSV con anuncio en pausa preparado. Revísalo en Ads Editor antes de publicar.',reportSaved:'Archivo de revisión preparado.',
@@ -99,7 +102,7 @@
     exportFailed:'No se pudo preparar el archivo. Revisa el borrador e inténtalo otra vez.',
     blocked:'Corrige los aspectos técnicos antes de exportar el CSV.',limit:'Se alcanzó el límite de recursos.',
     severity:{error:'Corregir',warning:'Comprobar',note:'Revisar'},
-    fields:{url:'URL final',campaign:'Campaña · solo CSV',adGroup:'Grupo de anuncios · solo CSV',path1:'Ruta visible 1',path2:'Ruta visible 2',terms:'Búsquedas',landing:'Página de destino',draft:'Borrador'},
+    fields:{url:'URL de destino',campaign:'Campaña · solo CSV',adGroup:'Grupo de anuncios · solo CSV',path1:'Ruta visible 1',path2:'Ruta visible 2',terms:'Búsquedas',landing:'Página de destino',draft:'Borrador'},
     messages:{
       INVALID_DRAFT:()=> 'La estructura del borrador no es válida. Abre un JSON válido o crea uno nuevo.',
       FINAL_URL_REQUIRED:()=> 'Añade la URL final de destino.',
@@ -128,7 +131,10 @@
   let draft = E.createDraft(lang);
   let dirty = false;
   let variant = 0;
+  let variants = [];
   let example = false;
+  let reviewRequested = false;
+  let lastField;
   let noticeTimer;
   let pendingReplacement;
   let previousFocus;
@@ -138,9 +144,11 @@
     $('ads-notice').textContent = text;
     noticeTimer = setTimeout(() => { $('ads-notice').textContent = ''; }, 6500);
   }
+  function hasAdText() {
+    return [...draft.headlines,...draft.descriptions].some(asset=>asset.text.trim());
+  }
   function hasContent() {
-    return Object.entries(draft).some(([key,v]) => key!=='language' && typeof v === 'string' && v.trim()) ||
-      [...draft.headlines,...draft.descriptions].some(a=>a.text.trim());
+    return hasAdText() || Object.entries(draft).some(([key,v]) => key!=='language' && typeof v === 'string' && v.trim());
   }
   function replaceWith(action) {
     if (!hasContent()) { action(); return; }
@@ -202,7 +210,10 @@
         top.append(label,counter);
         const input = create(kind === 'headlines' ? 'input' : 'textarea','ads-asset-text');
         input.id = id; input.value = asset.text; input.maxLength = 1000;
-        if (kind === 'headlines') input.type='text'; else input.rows = 3;
+        if (kind === 'headlines') {
+          input.type='text';
+          input.placeholder=words.headlinePrompts[index] || '';
+        } else input.rows = 3;
         input.dataset.kind=kind;input.dataset.index=String(index);
         input.setAttribute('aria-describedby',counter.id);
         const bottom = create('div','ads-asset-bottom');
@@ -224,21 +235,61 @@
       });
     }
   }
-  function editingView(focus=false) {
+  function setEditing(open) {
     const panel=$('ads-settings');
-    if(panel.hidden)window.LienzoEditorWorkspace?.setOpen(panel,true);
-    for(const name of ['context','landing','export'])$('ads-section-'+name).open=false;
-    $('ads-section-messages').open=true;
-    if(focus) {
-      const target=$('ads-descriptions-0')||$('ads-headlines-0')||app.querySelector('[data-action="add-description"]');
-      target.focus({preventScroll:true});target.scrollIntoView({block:window.innerWidth<960?'center':'nearest',behavior:'instant'});
+    const hidden=!open;
+    if(panel.hidden!==hidden) {
+      const workspace=window.LienzoEditorWorkspace;
+      if(workspace) workspace.setOpen(panel,open,{reason:'navigation'});
+      else panel.hidden=hidden;
     }
+    app.querySelector('[data-action="edit"]').setAttribute('aria-pressed',String(open));
+    app.querySelector('[data-action="preview"]').setAttribute('aria-pressed',String(!open));
+  }
+  function focusControl(target, block='nearest') {
+    target.focus({preventScroll:true});
+    target.scrollIntoView({block,behavior:'instant'});
+  }
+  function compactView() {
+    return app.dataset.editorCompact==='true'||window.innerWidth<960||window.innerHeight<420;
+  }
+  function focusInEditor(target) {
+    setEditing(true);
+    if(!target) return;
+    for(let parent=target.parentElement;parent&&parent!==app;parent=parent.parentElement) {
+      if(parent.tagName==='DETAILS') parent.open=true;
+    }
+    focusControl(target,compactView()?'center':'nearest');
+  }
+  function editingView(focus=false) {
+    setEditing(true);
+    for(const name of ['context','landing','export']) $('ads-section-'+name).open=false;
+    $('ads-section-messages').open=true;
+    if(focus) focusInEditor($('ads-descriptions-0')||$('ads-headlines-0')||app.querySelector('[data-action="add-description"]'));
+    window.LienzoEditorWorkspace?.refresh();
+  }
+  function showPreview({collapse=true, review=false}={}) {
+    if(collapse) setEditing(false);
+    const reviewPanel=$('ads-review');
+    if(review) reviewPanel.open=true;
+    focusControl(review?reviewPanel.querySelector('summary'):$('ads-preview-heading'),'start');
     window.LienzoEditorWorkspace?.refresh();
   }
   function hydrate({preferMessages=false}={}) {
+    lastField=undefined;
+    reviewRequested=false;
     app.querySelectorAll('[data-field]').forEach(input=>{input.value=draft[input.dataset.field];});
-    renderAssets();variant=0;update();
-    if(preferMessages)editingView();
+    renderAssets();variant=0;
+    if(preferMessages) editingView();
+    else {
+      setEditing(true);
+      $('ads-section-context').open=true;
+      for(const name of ['landing','messages','export']) $('ads-section-'+name).open=false;
+    }
+    $('ads-settings').scrollTop=0;
+    $('ads-preview').scrollTop=0;
+    $('ads-review').open=false;
+    update();
   }
   // Backtracking avoids an unpinned choice stealing a later pinned position.
   function combination(assets, slots, seed) {
@@ -266,9 +317,18 @@
       const available=(pinned.length?pinned:list.filter(a=>!a.pin)).filter(a=>!used.has(a.index));
       const a=available.length?available[(seed+position-1)%available.length]:null;
       if(a) {used.add(a.index);result.push(a.text);}
-      else result.push(en?`[Position ${position}]`:`[Posición ${position}]`);
+      else if(list.some(asset=>Number(asset.pin)>position)) result.push(en?`[Position ${position}]`:`[Posición ${position}]`);
     }
     return result;
+  }
+  function previewVariants() {
+    const distinct = new Map();
+    for(let seed=0;seed<30;seed++) {
+      const title=combination(draft.headlines,3,seed).join(' | ');
+      const description=combination(draft.descriptions,2,seed).join(' ');
+      distinct.set(JSON.stringify([title,description]),{title,description});
+    }
+    return [...distinct.values()];
   }
   function renderPreview() {
     let display=en?'your-business.com':'tu-negocio.com';
@@ -279,9 +339,10 @@
     const paths=[draft.path1,draft.path2].filter(p=>p.trim());
     $('ads-preview-business').textContent=draft.business.trim()||words.empty;
     $('ads-preview-url').textContent=display+(paths.length?' › '+paths.join(' › '):'');
-    $('ads-preview-title').textContent=combination(draft.headlines,3,variant).join(' | ')||words.titleEmpty;
-    $('ads-preview-description').textContent=combination(draft.descriptions,2,variant).join(' ')||words.descEmpty;
-    $('ads-variant-count').textContent=String(variant+1).padStart(2,'0');
+    const {title,description}=variants[variant];
+    $('ads-preview-title').textContent=title||words.titleEmpty;
+    $('ads-preview-description').textContent=description||words.descEmpty;
+    $('ads-variant-count').textContent=`${variant+1} / ${variants.length}`;
   }
   function fieldLabel(f) {
     if(f.field==='headlines'||f.field==='descriptions') return `${words[f.field]}${Number.isInteger(f.index)?' · '+(f.index+1):''}`;
@@ -289,17 +350,11 @@
   }
   function message(f) { return words.messages[f.code]?.(f.params)||f.code; }
   function focusFinding(f) {
-    const panel=$('ads-settings');
-    if(panel.hidden) window.LienzoEditorWorkspace?.setOpen(panel,true);
     let target=Number.isInteger(f.index)?$(`ads-${f.field}-${f.index}`):$(`ads-${f.field}`);
     if(f.field==='headlines'||f.field==='descriptions') {
-      $('ads-section-messages').open=true;
       if(!target||!target.matches('input,textarea')) target=app.querySelector(`input[data-kind="${f.field}"],textarea[data-kind="${f.field}"]`)||app.querySelector(`[data-action="add-${f.field==='headlines'?'headline':'description'}"]`);
     }
-    if(target) {
-      for(let parent=target.parentElement;parent&&parent!==app;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;
-      target.focus({preventScroll:true});target.scrollIntoView({block:window.innerWidth<960?'center':'nearest',behavior:'instant'});
-    }
+    if(target) focusInEditor(target);
   }
   function update() {
     const analysis=E.analyze(draft);
@@ -307,6 +362,15 @@
     const adFindings=analysis.findings.filter(f=>!exportOnly(f));
     const exportFindings=analysis.findings.filter(exportOnly);
     const errors=adFindings.filter(f=>f.severity==='error');
+    const hasTexts=analysis.counts.headlines+analysis.counts.descriptions>0;
+    const started=hasContent();
+    variants=previewVariants();
+    variant=Math.min(variant,variants.length-1);
+    $('ads-preview-empty').hidden=hasTexts;
+    for(const id of ['ads-preview-ad','ads-variant-label','ads-preview-note']) $(id).hidden=!hasTexts;
+    $('ads-variant-controls').hidden=variants.length<2;
+    $('ads-stats').hidden=!hasTexts&&!reviewRequested;
+    $('ads-review').hidden=!hasTexts&&!reviewRequested;
     $('ads-stat-headlines').textContent=String(analysis.counts.headlines);
     $('ads-stat-descriptions').textContent=String(analysis.counts.descriptions);
     $('ads-stat-errors').textContent=String(errors.length);
@@ -323,7 +387,10 @@
       });
     }
     app.querySelectorAll('[data-field],input[data-kind],textarea[data-kind]').forEach(input=>{
-      const invalid=errors.some(f=>Number.isInteger(f.index)?f.field===input.dataset.kind&&f.index===Number(input.dataset.index):f.field===input.dataset.field);
+      const invalid=errors.some(f=>{
+        if(f.code==='FINAL_URL_REQUIRED'&&!reviewRequested) return false;
+        return Number.isInteger(f.index)?f.field===input.dataset.kind&&f.index===Number(input.dataset.index):f.field===input.dataset.field;
+      });
       input.setAttribute('aria-invalid',String(invalid));
       if(input.dataset.kind) {
         const limit=input.dataset.kind==='headlines'?30:90;
@@ -334,10 +401,13 @@
     app.querySelector('[data-action="add-headline"]').disabled=draft.headlines.length>=15;
     app.querySelector('[data-action="add-description"]').disabled=draft.descriptions.length>=4;
     app.querySelector('[data-action="csv"]').disabled=!analysis.canExport;
-    app.querySelector('[data-action="copy"]').disabled=analysis.counts.headlines+analysis.counts.descriptions===0;
+    app.querySelector('[data-action="copy"]').disabled=!hasTexts;
+    app.querySelector('[data-action="save"]').disabled=!started;
     const csvErrors=analysis.findings.filter(f=>f.severity==='error').length;
     $('ads-export-status').textContent=csvErrors?(en?`${csvErrors} items to complete for CSV. You can still save your draft.`:`${csvErrors} requisitos por completar para CSV. Puedes guardar el borrador.`):words.ready;
-    $('ads-draft-status').textContent=example?words.example:words.unsaved;
+    const status=$('ads-draft-status');
+    const label=example?words.example:started?words.unsaved:words.notStarted;
+    if(status.textContent!==label) status.textContent=label;
     renderPreview();window.LienzoEditorWorkspace?.refresh();
     if(app.dataset.reviewDemo==='local')app.dispatchEvent(new Event('lienzo-ads-change'));
     return analysis;
@@ -375,14 +445,45 @@
       ...E.analyze(draft).findings.map(f=>`[${words.severity[f.severity]}] ${fieldLabel(f)}: ${message(f)}`),'',
       en?'Technical preparation only. Human review required. No Google approval or performance guarantee.':'Preparación técnica. Requiere revisión humana. No garantiza aprobación ni rendimiento en Google.'].join('\n');
   }
-  app.addEventListener('click',async event=>{
+  async function handleAction(event) {
     const button=event.target.closest('[data-action]');if(!button||button.disabled)return;
     const action=button.dataset.action;
-    $('ads-more').open=false;
-    if(action==='edit')return editingView(true);
-    if(action==='example') return replaceWith(()=>{draft=sample();example=true;dirty=true;hydrate({preferMessages:true});announce(words.exampleLoaded);});
-    if(action==='new') return replaceWith(()=>{draft=E.createDraft(lang);example=false;dirty=false;hydrate();announce(words.newDraft);});
-    if(action==='prev'||action==='next') {variant=(variant+(action==='next'?1:29))%30;renderPreview();return;}
+    const menu=$('ads-more');
+    if(menu.contains(button)) menu.querySelector('summary').focus({preventScroll:true});
+    menu.open=false;
+    if(action==='start') {
+      event.preventDefault();
+      app.scrollIntoView({block:'start',behavior:'instant'});
+      return focusInEditor($('ads-business'));
+    }
+    if(action==='edit') {
+      const previous=lastField&&$(lastField);
+      if(previous && button.getAttribute('aria-pressed')==='false') return focusInEditor(previous);
+      if($('ads-section-messages').open||hasAdText()) return editingView(true);
+      return focusInEditor($('ads-business'));
+    }
+    if(action==='texts') return focusInEditor($('ads-headlines-0')||app.querySelector('[data-action="add-headline"]'));
+    if(action==='preview') return showPreview();
+    if(action==='review') {
+      reviewRequested=true;
+      update();
+      return showPreview({collapse:compactView(),review:true});
+    }
+    if(action==='export-options') return focusInEditor($('ads-section-export').querySelector('summary'));
+    if(action==='example'||action==='try-sample') return replaceWith(()=>{
+      draft=sample();example=true;dirty=true;hydrate({preferMessages:true});
+      if(action==='try-sample') showPreview({collapse:compactView()});
+    });
+    if(action==='new') return replaceWith(()=>{
+      draft=E.createDraft(lang);example=false;dirty=false;hydrate();
+      focusInEditor($('ads-business'));
+      announce(words.newDraft);
+    });
+    if(action==='prev'||action==='next') {
+      variant=(variant+variants.length+(action==='next'?1:-1))%variants.length;
+      renderPreview();
+      return;
+    }
     if(action==='add-headline'||action==='add-description') {
       const kind=action==='add-headline'?'headlines':'descriptions',limit=kind==='headlines'?15:4;
       if(draft[kind].length>=limit)return announce(words.limit);
@@ -402,13 +503,22 @@
         try {await navigator.clipboard.writeText(textCopy());announce(words.copied);} catch (_) {announce(words.copyFailed);}
       }
     } catch (_) {announce(words.exportFailed);}
-  });
+  }
+  app.addEventListener('click',handleAction);
+  document.querySelector('.ads-hero').addEventListener('click',handleAction);
   $('ads-import').addEventListener('change',async event=>{
     const file=event.target.files?.[0];event.target.value='';if(!file)return;
     try {
       if(file.size>E.LIMITS.jsonBytes)throw new Error('JSON_TOO_LARGE');
       const imported=E.parseDraft(await file.text());
-      replaceWith(()=>{draft=imported;example=false;dirty=false;hydrate({preferMessages:[...draft.headlines,...draft.descriptions].some(a=>a.text.trim())});announce(words.imported);});
+      replaceWith(()=>{
+        draft=imported;example=false;dirty=false;
+        const hasTexts=hasAdText();
+        hydrate({preferMessages:hasTexts});
+        if(hasTexts) editingView(true);
+        else focusInEditor($('ads-business'));
+        announce(words.imported);
+      });
     } catch (_) {announce(words.invalidFile);}
   });
   window.addEventListener('beforeunload',event=>{

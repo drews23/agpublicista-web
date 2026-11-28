@@ -82,6 +82,19 @@ for(const lang of ['es','en']) {
       assert.equal(x.el('ads-stat-headlines').textContent,'0');
       assert.match(x.el('ads-preview-title').textContent,lang==='es'?/Tu próximo/:/Your next/);
       assert.equal(x.w.document.querySelector('[data-action="csv"]').disabled,true);
+      assert.equal(x.el('ads-review').hidden,true);
+      assert.equal(x.el('ads-section-landing').open,false);
+      assert.equal(x.el('ads-url').getAttribute('aria-invalid'),'false');
+      x.click('edit');
+      assert.equal(x.w.document.activeElement.id,'ads-business');
+      x.click('texts');
+      assert.equal(x.w.document.activeElement.id,'ads-headlines-0');
+      x.click('preview');
+      assert.equal(x.el('ads-settings').hidden,true);
+      assert.equal(x.w.document.activeElement.id,'ads-preview-heading');
+      x.click('edit');
+      assert.equal(x.el('ads-settings').hidden,false);
+      assert.equal(x.w.document.activeElement.id,'ads-headlines-0');
       x.click('example');assert.deepEqual(x.errors,[]);
       assert.equal(x.el('ads-stat-headlines').textContent,'5');
       assert.equal(x.el('ads-stat-descriptions').textContent,'2');
@@ -205,8 +218,8 @@ for(const lang of ['es','en']) {
       for(const section of ['context','landing','export'])x.el('ads-section-'+section).open=true;
       const edit=x.w.document.querySelector('[data-action="edit"]');
       assert.ok(edit.closest('[data-editor-toolbar]'));
-      assert.ok(edit.classList.contains('ads-btn--primary'));
       x.click('edit');
+      assert.equal(edit.getAttribute('aria-pressed'),'true');
       assert.equal(x.el('ads-settings').hidden,false);
       assert.equal(x.el('ads-section-messages').open,true);
       for(const section of ['context','landing','export'])assert.equal(x.el('ads-section-'+section).open,false);
@@ -221,6 +234,7 @@ for(const lang of ['es','en']) {
   });
   test(`${lang}: edit still reaches a headline when descriptions have been removed`,()=>{
     const x=setup(lang);try {
+      x.click('texts');
       while(x.w.document.querySelector('[data-action="remove"][data-kind="descriptions"]'))x.w.document.querySelector('[data-action="remove"][data-kind="descriptions"]').click();
       x.click('edit');
       assert.equal(x.w.document.activeElement.id,'ads-headlines-0');
