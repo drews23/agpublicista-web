@@ -1,0 +1,49 @@
+.house-article { max-width: 76rem; }
+.house-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+  gap: clamp(1.25rem, 4vw, 3.75rem);
+  align-items: center;
+  margin: 1.5rem 0 clamp(2rem, 5vw, 4rem);
+}
+.house-intro .eyebrow { margin: 0 0 .7rem; }
+.house-intro h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 3.8vw, 3.45rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.house-intro__description { max-width: 53ch; margin: 1rem 0 1.25rem; }
+.house-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.house-specs { margin: .8rem 0 0; font-size: .875rem; }
+.house-poster {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 1.1rem;
+  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+}
+.house-content { max-width: 48rem; margin-inline: auto; }
+.house-content #escuchar { scroll-margin-top: 7rem; }
+.house-section { margin-block: 2.75rem; }
+.house-inventory { width: 100%; border-collapse: collapse; font-size: .93rem; }
+.house-inventory td,
+.house-inventory th {
+  padding: .6rem .65rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  text-align: start;
+  vertical-align: middle;
+}
+.house-inventory td:first-child,
+.house-inventory td:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.house-inventory th[scope="row"] { font-weight: 550; }
+.house-related { display: flex; flex-wrap: wrap; column-gap: 1.15rem; row-gap: .55rem; }
+@media (max-width: 48rem) {
+  .house-hero { grid-template-columns: minmax(0, 1fr); gap: 1.05rem; }
+}
+@media (max-width: 25rem) {
+  .house-inventory td,
+  .house-inventory th { padding-inline: .4rem; }
+}
